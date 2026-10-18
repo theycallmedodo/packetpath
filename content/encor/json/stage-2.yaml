@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "encor.json.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Obiekt zagnieżdżony",
+      "skills": [
+        "json.obiekt-zagnie-d-ony"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        }
+      ],
+      "id": "encor.json.07.theory",
+      "front_md": "Obiekt zagnieżdżony",
+      "back_md": "Zagnieżdżony obiekt ma własne nawiasy klamrowe. Klucz zawierający kropkę nie tworzy automatycznie zagnieżdżenia.",
+      "example": "`{\"interface\":{\"name\":\"Gi0/0\"}}`"
+    },
+    {
+      "revision": 1,
+      "title": "Lista obiektów",
+      "skills": [
+        "json.lista-obiekt-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        }
+      ],
+      "id": "encor.json.08.theory",
+      "front_md": "Lista obiektów",
+      "back_md": "Każdy element tablicy jest tu obiektem opisującym interfejs. Pozostałe zapisy mają inną strukturę, nawet jeśli są poprawnym JSON.",
+      "example": "`{\"interfaces\":[{\"name\":\"Gi0/0\"},{\"name\":\"Gi0/1\"}]}`"
+    },
+    {
+      "revision": 1,
+      "title": "Kolejność w tablicy",
+      "skills": [
+        "json.kolejno-w-tablicy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        }
+      ],
+      "id": "encor.json.09.theory",
+      "front_md": "Kolejność w tablicy",
+      "back_md": "Tablica zachowuje kolejność. Nie zakładaj, że można dowolnie przestawiać listę akcji lub reguł.",
+      "example": "Nie; tablica jest uporządkowana, a znaczenie kolejności zależy też od modelu"
+    },
+    {
+      "revision": 1,
+      "title": "Kolejność kluczy obiektu",
+      "skills": [
+        "json.kolejno-kluczy-obiektu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        }
+      ],
+      "id": "encor.json.10.theory",
+      "front_md": "Kolejność kluczy obiektu",
+      "back_md": "Obiekt jest zbiorem par nazwa–wartość. Nie polegaj na kolejności kluczy jako mechanizmie logiki API.",
+      "example": "Tak"
+    },
+    {
+      "revision": 1,
+      "title": "Pusta lista a null",
+      "skills": [
+        "json.pusta-lista-a-null"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        }
+      ],
+      "id": "encor.json.11.theory",
+      "front_md": "Pusta lista a null",
+      "back_md": "Pusta tablica, null, pusty obiekt i pusty napis to różne wartości i typy.",
+      "example": "`{\"neighbors\":[]}`"
+    },
+    {
+      "revision": 1,
+      "title": "Escaping cytatu",
+      "skills": [
+        "json.escaping-cytatu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        }
+      ],
+      "id": "encor.json.12.theory",
+      "front_md": "Escaping cytatu",
+      "back_md": "Cudzysłowy wewnątrz napisu JSON trzeba poprzedzić backslashem. Zewnętrzne cudzysłowy nadal wyznaczają granice napisu.",
+      "example": "`{\"description\":\"Port \\\"uplink\\\"\"}`"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.json.07",
+      "revision": 1,
+      "title": "Obiekt zagnieżdżony",
+      "skills": [
+        "json.obiekt-zagnie-d-ony"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "API wymaga obiektu interface, który zawiera pole name. Wybierz właściwą strukturę.",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Zagnieżdżony obiekt ma własne nawiasy klamrowe. Klucz zawierający kropkę nie tworzy automatycznie zagnieżdżenia.",
+      "card_id": "encor.json.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "`{\"interface\":\"name=Gi0/0\"}`",
+          "feedback_md": "Zagnieżdżony obiekt ma własne nawiasy klamrowe. Klucz zawierający kropkę nie tworzy automatycznie zagnieżdżenia.",
+          "id": "A"
+        },
+        {
+          "text_md": "`{\"interface\":[\"name\",\"Gi0/0\"]}`",
+          "feedback_md": "Zagnieżdżony obiekt ma własne nawiasy klamrowe. Klucz zawierający kropkę nie tworzy automatycznie zagnieżdżenia.",
+          "id": "B"
+        },
+        {
+          "text_md": "`{\"interface.name\":\"Gi0/0\"}`",
+          "feedback_md": "Zagnieżdżony obiekt ma własne nawiasy klamrowe. Klucz zawierający kropkę nie tworzy automatycznie zagnieżdżenia.",
+          "id": "C"
+        },
+        {
+          "text_md": "`{\"interface\":{\"name\":\"Gi0/0\"}}`",
+          "feedback_md": "Zagnieżdżony obiekt ma własne nawiasy klamrowe. Klucz zawierający kropkę nie tworzy automatycznie zagnieżdżenia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.json.08",
+      "revision": 1,
+      "title": "Lista obiektów",
+      "skills": [
+        "json.lista-obiekt-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "API oczekuje interfaces jako tablicy obiektów z polem name. Wybierz strukturę.",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Każdy element tablicy jest tu obiektem opisującym interfejs. Pozostałe zapisy mają inną strukturę, nawet jeśli są poprawnym JSON.",
+      "card_id": "encor.json.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "`{\"interfaces\":{\"name\":[\"Gi0/0\",\"Gi0/1\"]}}`",
+          "feedback_md": "Każdy element tablicy jest tu obiektem opisującym interfejs. Pozostałe zapisy mają inną strukturę, nawet jeśli są poprawnym JSON.",
+          "id": "A"
+        },
+        {
+          "text_md": "`{\"interfaces\":[\"Gi0/0\",\"Gi0/1\"]}`",
+          "feedback_md": "Każdy element tablicy jest tu obiektem opisującym interfejs. Pozostałe zapisy mają inną strukturę, nawet jeśli są poprawnym JSON.",
+          "id": "B"
+        },
+        {
+          "text_md": "`{\"interfaces\":[{\"name\":\"Gi0/0\"},{\"name\":\"Gi0/1\"}]}`",
+          "feedback_md": "Każdy element tablicy jest tu obiektem opisującym interfejs. Pozostałe zapisy mają inną strukturę, nawet jeśli są poprawnym JSON.",
+          "id": "C"
+        },
+        {
+          "text_md": "`{\"interfaces\":\"Gi0/0,Gi0/1\"}`",
+          "feedback_md": "Każdy element tablicy jest tu obiektem opisującym interfejs. Pozostałe zapisy mają inną strukturę, nawet jeśli są poprawnym JSON.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.json.09",
+      "revision": 1,
+      "title": "Kolejność w tablicy",
+      "skills": [
+        "json.kolejno-w-tablicy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Czy zmiana kolejności elementów tablicy JSON zawsze zachowuje znaczenie danych?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Tablica zachowuje kolejność. Nie zakładaj, że można dowolnie przestawiać listę akcji lub reguł.",
+      "card_id": "encor.json.09.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, tablice są z definicji nieuporządkowane",
+          "feedback_md": "Tablica zachowuje kolejność. Nie zakładaj, że można dowolnie przestawiać listę akcji lub reguł.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie; tablica jest uporządkowana, a znaczenie kolejności zależy też od modelu",
+          "feedback_md": "Tablica zachowuje kolejność. Nie zakładaj, że można dowolnie przestawiać listę akcji lub reguł.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, parser zawsze sortuje elementy",
+          "feedback_md": "Tablica zachowuje kolejność. Nie zakładaj, że można dowolnie przestawiać listę akcji lub reguł.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, bo tablice nie mogą zawierać więcej niż jednego elementu",
+          "feedback_md": "Tablica zachowuje kolejność. Nie zakładaj, że można dowolnie przestawiać listę akcji lub reguł.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.json.10",
+      "revision": 1,
+      "title": "Kolejność kluczy obiektu",
+      "skills": [
+        "json.kolejno-kluczy-obiektu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "API nie nadaje dodatkowego znaczenia kolejności kluczy. Czy obiekty {\"name\":\"R1\",\"mtu\":1500} i {\"mtu\":1500,\"name\":\"R1\"} reprezentują te same pary danych?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Obiekt jest zbiorem par nazwa–wartość. Nie polegaj na kolejności kluczy jako mechanizmie logiki API.",
+      "card_id": "encor.json.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak",
+          "feedback_md": "Obiekt jest zbiorem par nazwa–wartość. Nie polegaj na kolejności kluczy jako mechanizmie logiki API.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie, pierwszy klucz zawsze jest identyfikatorem głównym",
+          "feedback_md": "Obiekt jest zbiorem par nazwa–wartość. Nie polegaj na kolejności kluczy jako mechanizmie logiki API.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie, drugi zapis zmienia typ mtu",
+          "feedback_md": "Obiekt jest zbiorem par nazwa–wartość. Nie polegaj na kolejności kluczy jako mechanizmie logiki API.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak, ale tylko gdy usuniemy cudzysłowy",
+          "feedback_md": "Obiekt jest zbiorem par nazwa–wartość. Nie polegaj na kolejności kluczy jako mechanizmie logiki API.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.json.11",
+      "revision": 1,
+      "title": "Pusta lista a null",
+      "skills": [
+        "json.pusta-lista-a-null"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "API wymaga jawnej pustej listy sąsiadów. Jaki zapis odpowiada temu wymaganiu?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Pusta tablica, null, pusty obiekt i pusty napis to różne wartości i typy.",
+      "card_id": "encor.json.11.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "`{\"neighbors\":null}`",
+          "feedback_md": "Pusta tablica, null, pusty obiekt i pusty napis to różne wartości i typy.",
+          "id": "A"
+        },
+        {
+          "text_md": "`{\"neighbors\":{}}`",
+          "feedback_md": "Pusta tablica, null, pusty obiekt i pusty napis to różne wartości i typy.",
+          "id": "B"
+        },
+        {
+          "text_md": "`{\"neighbors\":\"\"}`",
+          "feedback_md": "Pusta tablica, null, pusty obiekt i pusty napis to różne wartości i typy.",
+          "id": "C"
+        },
+        {
+          "text_md": "`{\"neighbors\":[]}`",
+          "feedback_md": "Pusta tablica, null, pusty obiekt i pusty napis to różne wartości i typy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.json.12",
+      "revision": 1,
+      "title": "Escaping cytatu",
+      "skills": [
+        "json.escaping-cytatu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Opis ma zawierać tekst Port \"uplink\" wraz z cudzysłowami. Wybierz poprawny JSON.",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Cudzysłowy wewnątrz napisu JSON trzeba poprzedzić backslashem. Zewnętrzne cudzysłowy nadal wyznaczają granice napisu.",
+      "card_id": "encor.json.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "`{\"description\":\"Port \"uplink\"\"}`",
+          "feedback_md": "Cudzysłowy wewnątrz napisu JSON trzeba poprzedzić backslashem. Zewnętrzne cudzysłowy nadal wyznaczają granice napisu.",
+          "id": "A"
+        },
+        {
+          "text_md": "`{'description':'Port \"uplink\"'}`",
+          "feedback_md": "Cudzysłowy wewnątrz napisu JSON trzeba poprzedzić backslashem. Zewnętrzne cudzysłowy nadal wyznaczają granice napisu.",
+          "id": "B"
+        },
+        {
+          "text_md": "`{\"description\":\"Port \\\"uplink\\\"\"}`",
+          "feedback_md": "Cudzysłowy wewnątrz napisu JSON trzeba poprzedzić backslashem. Zewnętrzne cudzysłowy nadal wyznaczają granice napisu.",
+          "id": "C"
+        },
+        {
+          "text_md": "`{\"description\":Port \"uplink\"}`",
+          "feedback_md": "Cudzysłowy wewnątrz napisu JSON trzeba poprzedzić backslashem. Zewnętrzne cudzysłowy nadal wyznaczają granice napisu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

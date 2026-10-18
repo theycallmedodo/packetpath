@@ -1,0 +1,445 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ipv6.stage-6",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Blokowanie ICMPv6",
+      "skills": [
+        "ipv6.blokowanie-icmpv6"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.ext.13.theory",
+      "front_md": "Blokowanie ICMPv6",
+      "back_md": "Filtrowanie ICMPv6 musi uwzględniać typy niezbędne do poprawnego działania stosu.",
+      "example": "ICMPv6 obsługuje ważne funkcje ND i komunikaty kontrolne"
+    },
+    {
+      "revision": 1,
+      "title": "RA z prefiksem bez SLAAC",
+      "skills": [
+        "ipv6.ra-z-prefiksem-bez-slaac"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.ext.14.theory",
+      "front_md": "RA z prefiksem bez SLAAC",
+      "back_md": "Należy odróżniać informację o prefiksie on-link od zgody na autonomiczną konfigurację.",
+      "example": "Nie"
+    },
+    {
+      "revision": 1,
+      "title": "Trzy widoki IPv6",
+      "skills": [
+        "ipv6.trzy-widoki-ipv6"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.ext.15.theory",
+      "front_md": "Trzy widoki IPv6",
+      "back_md": "Stan interfejsu, ND i routing sprawdzają różne warunki poprawnego przekazywania IPv6.",
+      "example": "R1# show ipv6 interface brief\nR1# show ipv6 neighbors\nR1# show ipv6 route static"
+    },
+    {
+      "revision": 1,
+      "title": "Podział /56",
+      "skills": [
+        "ipv6.podzia-56"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.ext.16.theory",
+      "front_md": "Podział /56",
+      "back_md": "64 − 56 = 8 bitów, więc można wyznaczyć 256 podsieci /64.",
+      "example": "256"
+    },
+    {
+      "revision": 1,
+      "title": "Rozdziel nowe LAN-y",
+      "skills": [
+        "ipv6.rozdziel-nowe-lan-y"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.ext.17.theory",
+      "front_md": "Rozdziel nowe LAN-y",
+      "back_md": "Różne LAN-y otrzymują różne prefiksy; samo nadanie adresów nie zastępuje globalnego routingu IPv6.",
+      "example": "R1(config)# ipv6 unicast-routing\nR1(config)# interface GigabitEthernet0/0\nR1(config-if)# ipv6 address 2001:db8:ab00:1::1/64\nR1(config-if)# exit\nR1(config)# interface GigabitEthernet0/1\nR1(config-if)# ipv6 address 2001:db8:ab00:2::1/64"
+    },
+    {
+      "revision": 1,
+      "title": "IPv4 działa, IPv6 nie",
+      "skills": [
+        "ipv6.ipv4-dzia-a-ipv6-nie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.ext.18.theory",
+      "front_md": "IPv4 działa, IPv6 nie",
+      "back_md": "Działanie jednej rodziny adresowej nie dowodzi działania drugiej.",
+      "example": "Adresację, RA/trasę domyślną, ND i routing IPv6"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ipv6.ext.13",
+      "revision": 1,
+      "title": "Blokowanie ICMPv6",
+      "skills": [
+        "ipv6.blokowanie-icmpv6"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dlaczego szerokie odrzucenie całego ICMPv6 może zepsuć nawet lokalną łączność?",
+      "hints": [
+        "Filtrowanie ICMPv6 musi uwzględniać typy niezbędne do poprawnego działania stosu."
+      ],
+      "explanation_md": "Filtrowanie ICMPv6 musi uwzględniać typy niezbędne do poprawnego działania stosu.",
+      "card_id": "ccna.ipv6.ext.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Ponieważ IPv6 jest szyfrowane przez ICMPv6",
+          "feedback_md": "ICMPv6 nie zapewnia takiego szyfrowania.",
+          "id": "A"
+        },
+        {
+          "text_md": "Ponieważ każdy HTTP jest pakietem ICMPv6",
+          "feedback_md": "HTTP korzysta z odpowiedniego transportu, nie jest ND.",
+          "id": "B"
+        },
+        {
+          "text_md": "ICMPv6 obsługuje ważne funkcje ND i komunikaty kontrolne",
+          "feedback_md": "Filtrowanie ICMPv6 musi uwzględniać typy niezbędne do poprawnego działania stosu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Ponieważ ARP używa portu ICMPv6",
+          "feedback_md": "IPv6 nie używa ARP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ipv6.ext.14",
+      "revision": 1,
+      "title": "RA z prefiksem bez SLAAC",
+      "skills": [
+        "ipv6.ra-z-prefiksem-bez-slaac"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "RA ogłasza prefiks, ale nie pozwala użyć go do autonomicznej konfiguracji adresu. Czy sam prefiks gwarantuje adres SLAAC?",
+      "hints": [
+        "Należy odróżniać informację o prefiksie on-link od zgody na autonomiczną konfigurację."
+      ],
+      "explanation_md": "Należy odróżniać informację o prefiksie on-link od zgody na autonomiczną konfigurację.",
+      "card_id": "ccna.ipv6.ext.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, każdy prefiks w RA zawsze uruchamia SLAAC",
+          "feedback_md": "Znaczenie mają flagi oraz parametry prefiksu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie",
+          "feedback_md": "Należy odróżniać informację o prefiksie on-link od zgody na autonomiczną konfigurację.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, bo wszystkie adresy tworzy DHCPv4",
+          "feedback_md": "DHCPv4 nie konfiguruje IPv6.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak, jeżeli router ma wysokie AD",
+          "feedback_md": "AD nie steruje flagami RA.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ipv6.ext.15",
+      "revision": 1,
+      "title": "Trzy widoki IPv6",
+      "skills": [
+        "ipv6.trzy-widoki-ipv6"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Pokaż skrócone interfejsy IPv6, tabelę sąsiadów oraz trasy statyczne IPv6.",
+      "hints": [
+        "Stan interfejsu, ND i routing sprawdzają różne warunki poprawnego przekazywania IPv6."
+      ],
+      "explanation_md": "Stan interfejsu, ND i routing sprawdzają różne warunki poprawnego przekazywania IPv6.",
+      "card_id": "ccna.ipv6.ext.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1# show ipv6 interface {{b0}}\nR1# show ipv6 {{b1}}\nR1# show ipv6 route {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "brief"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "neighbors"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "static"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv6.ext.16",
+      "revision": 1,
+      "title": "Podział /56",
+      "skills": [
+        "ipv6.podzia-56"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Ile podsieci /64 mieści się w jednym /56?",
+      "hints": [
+        "64 − 56 = 8 bitów, więc można wyznaczyć 256 podsieci /64."
+      ],
+      "explanation_md": "64 − 56 = 8 bitów, więc można wyznaczyć 256 podsieci /64.",
+      "card_id": "ccna.ipv6.ext.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "8",
+          "feedback_md": "Różnica ośmiu bitów daje 2^8 kombinacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "64",
+          "feedback_md": "To nie wynik różnicy długości prefiksów.",
+          "id": "B"
+        },
+        {
+          "text_md": "65536",
+          "feedback_md": "To wynik podziału /48 na /64.",
+          "id": "C"
+        },
+        {
+          "text_md": "256",
+          "feedback_md": "64 − 56 = 8 bitów, więc można wyznaczyć 256 podsieci /64.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ipv6.ext.17",
+      "revision": 1,
+      "title": "Rozdziel nowe LAN-y",
+      "skills": [
+        "ipv6.rozdziel-nowe-lan-y"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "G0/0 ma otrzymać 2001:db8:ab00:1::1/64, G0/1 adres 2001:db8:ab00:2::1/64. Włącz też globalne przekazywanie IPv6.",
+      "hints": [
+        "Różne LAN-y otrzymują różne prefiksy; samo nadanie adresów nie zastępuje globalnego routingu IPv6."
+      ],
+      "explanation_md": "Różne LAN-y otrzymują różne prefiksy; samo nadanie adresów nie zastępuje globalnego routingu IPv6.",
+      "card_id": "ccna.ipv6.ext.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config)# ipv6 {{b0}}\nR1(config)# interface GigabitEthernet0/0\nR1(config-if)# ipv6 address {{b1}}\nR1(config-if)# exit\nR1(config)# interface GigabitEthernet0/1\nR1(config-if)# ipv6 address {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "unicast-routing"
+          ],
+          "width": 17,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "ipv6_prefix",
+          "accepted": [
+            "2001:db8:ab00:1::1/64"
+          ],
+          "width": 23,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "ipv6_prefix",
+          "accepted": [
+            "2001:db8:ab00:2::1/64"
+          ],
+          "width": 23,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv6.ext.18",
+      "revision": 1,
+      "title": "IPv4 działa, IPv6 nie",
+      "skills": [
+        "ipv6.ipv4-dzia-a-ipv6-nie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dual-stack host działa po IPv4, ale po IPv6 nie dociera poza LAN. Co trzeba sprawdzić osobno?",
+      "hints": [
+        "Działanie jednej rodziny adresowej nie dowodzi działania drugiej."
+      ],
+      "explanation_md": "Działanie jednej rodziny adresowej nie dowodzi działania drugiej.",
+      "card_id": "ccna.ipv6.ext.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Uznać IPv6 za sprawne dzięki działaniu IPv4",
+          "feedback_md": "Stosy mają osobną konfigurację i tablice.",
+          "id": "A"
+        },
+        {
+          "text_md": "Adresację, RA/trasę domyślną, ND i routing IPv6",
+          "feedback_md": "Działanie jednej rodziny adresowej nie dowodzi działania drugiej.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie DNS A",
+          "feedback_md": "IPv6 wymaga również odpowiedniej drogi i parametrów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zmienić NAT IPv4 niezależnie od objawu",
+          "feedback_md": "To nie bezpośrednia diagnostyka drogi IPv6.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

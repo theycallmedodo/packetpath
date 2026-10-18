@@ -1,0 +1,541 @@
+{
+  "schema_version": 3,
+  "id": "ccna.acl.stage-6",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "ICMP echo a echo-reply",
+      "skills": [
+        "acl.icmp-echo-a-echo-reply"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.ext.13.theory",
+      "front_md": "ICMP echo a echo-reply",
+      "back_md": "Żądanie i odpowiedź mają różne typy ICMP, więc politykę trzeba zaprojektować dla obu kierunków.",
+      "example": "echo"
+    },
+    {
+      "revision": 1,
+      "title": "Brak transportu w fragmencie",
+      "skills": [
+        "acl.brak-transportu-w-fragmencie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.ext.14.theory",
+      "front_md": "Brak transportu w fragmencie",
+      "back_md": "Semantykę ACL i obsługę fragmentów należy sprawdzić dla konkretnej platformy; nie zakładać pełnych pól L4 w każdym fragmencie.",
+      "example": "Fragmenty inne niż pierwszy nie zawierają typowo nagłówka TCP"
+    },
+    {
+      "revision": 1,
+      "title": "Kontrolowany ping",
+      "skills": [
+        "acl.kontrolowany-ping"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.ext.15.theory",
+      "front_md": "Kontrolowany ping",
+      "back_md": "Niejawny deny odrzuci pozostały ruch w tym kierunku. Droga odpowiedzi wymaga osobnej oceny.",
+      "example": "R1(config)# ip access-list extended PING-ONLY\nR1(config-ext-nacl)# 10 permit icmp host 10.70.0.5 host 10.70.1.5 echo\nR1(config-ext-nacl)# exit\nR1(config)# interface GigabitEthernet0/0\nR1(config-if)# ip access-group PING-ONLY in"
+    },
+    {
+      "revision": 1,
+      "title": "Permit przed końcem",
+      "skills": [
+        "acl.permit-przed-ko-cem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.ext.16.theory",
+      "front_md": "Permit przed końcem",
+      "back_md": "Jeśli wymagasz zachowania pozostałego ruchu, musisz jawnie zaprojektować odpowiednie pozwolenia.",
+      "example": "Zostaje odrzucony przez niejawny deny"
+    },
+    {
+      "revision": 1,
+      "title": "Odepnij i zbadaj listę",
+      "skills": [
+        "acl.odepnij-i-zbadaj-list"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.ext.17.theory",
+      "front_md": "Odepnij i zbadaj listę",
+      "back_md": "Usunięcie przypisania i usunięcie definicji to różne operacje; lista może być używana także gdzie indziej.",
+      "example": "R1(config)# interface GigabitEthernet0/0\nR1(config-if)# no ip access-group TEST-IN in\nR1(config-if)# end\nR1# show ip access-lists TEST-IN"
+    },
+    {
+      "revision": 1,
+      "title": "Szeroki wildcard",
+      "skills": [
+        "acl.szeroki-wildcard"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.ext.18.theory",
+      "front_md": "Szeroki wildcard",
+      "back_md": "Pierwszy oktet musi być 10; wszystkie bity pozostałych oktetów są dowolne.",
+      "example": "Tak"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.acl.ext.13",
+      "revision": 1,
+      "title": "ICMP echo a echo-reply",
+      "skills": [
+        "acl.icmp-echo-a-echo-reply"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Chcesz dopasować żądanie ping wysyłane przez klienta. Jaki typ ICMP IPv4 odpowiada temu kierunkowi?",
+      "hints": [
+        "Żądanie i odpowiedź mają różne typy ICMP, więc politykę trzeba zaprojektować dla obu kierunków."
+      ],
+      "explanation_md": "Żądanie i odpowiedź mają różne typy ICMP, więc politykę trzeba zaprojektować dla obu kierunków.",
+      "card_id": "ccna.acl.ext.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "echo-reply",
+          "feedback_md": "To odpowiedź na żądanie.",
+          "id": "A"
+        },
+        {
+          "text_md": "time-exceeded",
+          "feedback_md": "To komunikat o przekroczeniu czasu/TTL.",
+          "id": "B"
+        },
+        {
+          "text_md": "echo",
+          "feedback_md": "Żądanie i odpowiedź mają różne typy ICMP, więc politykę trzeba zaprojektować dla obu kierunków.",
+          "id": "C"
+        },
+        {
+          "text_md": "unreachable",
+          "feedback_md": "To komunikat o nieosiągalności.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.acl.ext.14",
+      "revision": 1,
+      "title": "Brak transportu w fragmencie",
+      "skills": [
+        "acl.brak-transportu-w-fragmencie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dlaczego filtrowanie wyłącznie według portu TCP wymaga uwagi przy fragmentacji IPv4?",
+      "hints": [
+        "Semantykę ACL i obsługę fragmentów należy sprawdzić dla konkretnej platformy; nie zakładać pełnych pól L4 w każdym fragmencie."
+      ],
+      "explanation_md": "Semantykę ACL i obsługę fragmentów należy sprawdzić dla konkretnej platformy; nie zakładać pełnych pól L4 w każdym fragmencie.",
+      "card_id": "ccna.acl.ext.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Każdy fragment ma pełną nową sesję TCP",
+          "feedback_md": "Fragmentacja IP nie tworzy sesji TCP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Fragmenty inne niż pierwszy nie zawierają typowo nagłówka TCP",
+          "feedback_md": "Semantykę ACL i obsługę fragmentów należy sprawdzić dla konkretnej platformy; nie zakładać pełnych pól L4 w każdym fragmencie.",
+          "id": "B"
+        },
+        {
+          "text_md": "Fragmenty zawsze zmieniają protokół na UDP",
+          "feedback_md": "Nie zmieniają w ten sposób protokołu.",
+          "id": "C"
+        },
+        {
+          "text_md": "IPv4 nigdy nie może być fragmentowany",
+          "feedback_md": "IPv4 obsługuje fragmentację.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.acl.ext.15",
+      "revision": 1,
+      "title": "Kontrolowany ping",
+      "skills": [
+        "acl.kontrolowany-ping"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W nowej ACL PING-ONLY dopuść tylko żądania ICMP echo z 10.70.0.5 do 10.70.1.5 i zastosuj listę inbound na G0/0.",
+      "hints": [
+        "Niejawny deny odrzuci pozostały ruch w tym kierunku. Droga odpowiedzi wymaga osobnej oceny."
+      ],
+      "explanation_md": "Niejawny deny odrzuci pozostały ruch w tym kierunku. Droga odpowiedzi wymaga osobnej oceny.",
+      "card_id": "ccna.acl.ext.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config)# ip access-list extended PING-ONLY\nR1(config-ext-nacl)# 10 permit {{b0}} host 10.70.0.5 host 10.70.1.5 {{b1}}\nR1(config-ext-nacl)# exit\nR1(config)# interface GigabitEthernet0/0\nR1(config-if)# ip access-group PING-ONLY {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "icmp"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "echo"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "in"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.acl.ext.16",
+      "revision": 1,
+      "title": "Permit przed końcem",
+      "skills": [
+        "acl.permit-przed-ko-cem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Nowa ACL ma tylko permit tcp any host 192.0.2.10 eq 443. Co dzieje się z niedopasowanym ruchem IPv4 na filtrowanym wejściu?",
+      "hints": [
+        "Jeśli wymagasz zachowania pozostałego ruchu, musisz jawnie zaprojektować odpowiednie pozwolenia."
+      ],
+      "explanation_md": "Jeśli wymagasz zachowania pozostałego ruchu, musisz jawnie zaprojektować odpowiednie pozwolenia.",
+      "card_id": "ccna.acl.ext.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Jest automatycznie dopuszczony",
+          "feedback_md": "ACL nie ma domyślnego permit dla reszty.",
+          "id": "A"
+        },
+        {
+          "text_md": "Jest przekierowany do DNS",
+          "feedback_md": "ACL nie wykonuje takiego przekierowania.",
+          "id": "B"
+        },
+        {
+          "text_md": "Jest zamieniony na HTTPS",
+          "feedback_md": "Filtr nie zmienia protokołu aplikacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zostaje odrzucony przez niejawny deny",
+          "feedback_md": "Jeśli wymagasz zachowania pozostałego ruchu, musisz jawnie zaprojektować odpowiednie pozwolenia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.acl.ext.17",
+      "revision": 1,
+      "title": "Odepnij i zbadaj listę",
+      "skills": [
+        "acl.odepnij-i-zbadaj-list"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W labie zdejmij ACL TEST-IN z wejścia G0/0 bez kasowania jej definicji, a potem pokaż reguły tej listy.",
+      "hints": [
+        "Usunięcie przypisania i usunięcie definicji to różne operacje; lista może być używana także gdzie indziej."
+      ],
+      "explanation_md": "Usunięcie przypisania i usunięcie definicji to różne operacje; lista może być używana także gdzie indziej.",
+      "card_id": "ccna.acl.ext.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config)# interface GigabitEthernet0/0\nR1(config-if)# no ip {{b0}} TEST-IN {{b1}}\nR1(config-if)# end\nR1# show ip {{b2}} TEST-IN",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "access-group"
+          ],
+          "width": 14,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "in"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "access-lists"
+          ],
+          "width": 14,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.acl.ext.18",
+      "revision": 1,
+      "title": "Szeroki wildcard",
+      "skills": [
+        "acl.szeroki-wildcard"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Czy wpis źródła 10.0.0.0 0.255.255.255 obejmuje 10.250.7.9?",
+      "hints": [
+        "Pierwszy oktet musi być 10; wszystkie bity pozostałych oktetów są dowolne."
+      ],
+      "explanation_md": "Pierwszy oktet musi być 10; wszystkie bity pozostałych oktetów są dowolne.",
+      "card_id": "ccna.acl.ext.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie, tylko 10.0.0.0",
+          "feedback_md": "Pozostałe trzy oktety są ignorowane przez wildcard.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak",
+          "feedback_md": "Pierwszy oktet musi być 10; wszystkie bity pozostałych oktetów są dowolne.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie, bo ostatni oktet musi być zerem",
+          "feedback_md": "Maska wildcard nie wymaga tu zera.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tylko jeśli ma port TCP 10",
+          "feedback_md": "Źródłowy wildcard nie określa portu transportowego.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

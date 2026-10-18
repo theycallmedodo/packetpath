@@ -1,0 +1,427 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ipv6.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.ipv6.07.theory",
+      "revision": 1,
+      "title": "Neighbor Discovery",
+      "skills": [
+        "ipv6.nd"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "front_md": "Neighbor Discovery",
+      "back_md": "ND pełni kilka funkcji, w tym rozwiązywanie sąsiadów i sprawdzanie osiągalności. Nie należy bez analizy blokować całego ICMPv6.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.ipv6.08.theory",
+      "revision": 1,
+      "title": "Adres i aktywacja",
+      "skills": [
+        "ipv6.interface-state"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "front_md": "Adres i aktywacja",
+      "back_md": "Konfiguracja adresu nie gwarantuje fizycznego działania łącza. Stan administracyjny nadal ma znaczenie.",
+      "example": "R1(config-if)# ipv6 address 2001:db8:20::1/64\nR1(config-if)# no shutdown"
+    },
+    {
+      "id": "ccna.ipv6.09.theory",
+      "revision": 1,
+      "title": "Globalny i lokalny na jednym porcie",
+      "skills": [
+        "ipv6.dual-scope"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "front_md": "Globalny i lokalny na jednym porcie",
+      "back_md": "Interfejs może mieć adres o szerszym zasięgu oraz link-local. Mają różne zastosowania i zapis konfiguracyjny.",
+      "example": "R1(config-if)# ipv6 address 2001:db8:30::1/64\nR1(config-if)# ipv6 address fe80::30 link-local"
+    },
+    {
+      "id": "ccna.ipv6.10.theory",
+      "revision": 1,
+      "title": "Multicast zamiast broadcastu",
+      "skills": [
+        "ipv6.multicast"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "front_md": "Multicast zamiast broadcastu",
+      "back_md": "IPv6 rozróżnia unicast, multicast i anycast. Rozgłaszanie do określonej grupy nie jest tym samym co broadcast IPv4.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.ipv6.11.theory",
+      "revision": 1,
+      "title": "Tylko IPv6 link-local",
+      "skills": [
+        "ipv6.enable-neighbors"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "front_md": "Tylko IPv6 link-local",
+      "back_md": "`ipv6 enable` włącza przetwarzanie IPv6 i automatyczny link-local bez przydzielania adresu globalnego.",
+      "example": "R1(config-if)# ipv6 enable\nR1(config-if)# end\nR1# show ipv6 neighbors"
+    },
+    {
+      "id": "ccna.ipv6.12.theory",
+      "revision": 1,
+      "title": "Adres loopback IPv6",
+      "skills": [
+        "ipv6.loopback"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "front_md": "Adres loopback IPv6",
+      "back_md": "Prefiks /128 określa pojedynczy adres IPv6. Loopback nie wymaga fizycznego nośnika Ethernet.",
+      "example": "R1(config)# interface Loopback0\nR1(config-if)# ipv6 address 2001:db8:ffff::1/128"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ipv6.07",
+      "revision": 1,
+      "title": "Neighbor Discovery",
+      "skills": [
+        "ipv6.nd"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Który mechanizm odpowiada w IPv6 za odkrywanie adresu warstwy 2 sąsiada?",
+      "hints": [
+        "Pomyśl o NS i NA."
+      ],
+      "explanation_md": "ND pełni kilka funkcji, w tym rozwiązywanie sąsiadów i sprawdzanie osiągalności. Nie należy bez analizy blokować całego ICMPv6.",
+      "card_id": "ccna.ipv6.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "ARP bez zmian względem IPv4.",
+          "feedback_md": "ARP jest mechanizmem IPv4; IPv6 korzysta z ND."
+        },
+        {
+          "id": "B",
+          "text_md": "DHCPv6 przy każdym pakiecie.",
+          "feedback_md": "DHCPv6 nie zastępuje rozwiązywania sąsiadów na łączu."
+        },
+        {
+          "id": "C",
+          "text_md": "Neighbor Discovery wykorzystujące ICMPv6.",
+          "feedback_md": "ND używa m.in. Neighbor Solicitation i Neighbor Advertisement."
+        },
+        {
+          "id": "D",
+          "text_md": "Wyłącznie protokół routingu OSPFv3.",
+          "feedback_md": "ND działa niezależnie od wyboru protokołu routingu."
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ipv6.08",
+      "revision": 1,
+      "title": "Adres i aktywacja",
+      "skills": [
+        "ipv6.interface-state"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na G0/0 ustaw 2001:db8:20::1/64 i usuń administracyjne shutdown.",
+      "hints": [
+        "Uzupełnij jeden adres oraz całą komendę aktywacji."
+      ],
+      "explanation_md": "Konfiguracja adresu nie gwarantuje fizycznego działania łącza. Stan administracyjny nadal ma znaczenie.",
+      "card_id": "ccna.ipv6.08.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-if)# ipv6 address {{address}}\nR1(config-if)# {{enable}}",
+      "blanks": [
+        {
+          "id": "address",
+          "label": "Adres/prefiks",
+          "answer_type": "ipv6_prefix",
+          "accepted": [
+            "2001:db8:20::1/64"
+          ],
+          "width": 20,
+          "common_errors": {}
+        },
+        {
+          "id": "enable",
+          "label": "Aktywacja interfejsu",
+          "answer_type": "command",
+          "accepted": [
+            "no shutdown"
+          ],
+          "width": 14,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv6.09",
+      "revision": 1,
+      "title": "Globalny i lokalny na jednym porcie",
+      "skills": [
+        "ipv6.dual-scope"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na jednym interfejsie ustaw 2001:db8:30::1/64 i link-local fe80::30. Uzupełnij oba adresy.",
+      "hints": [
+        "Przy link-local nie dopisuj w tym polu /64."
+      ],
+      "explanation_md": "Interfejs może mieć adres o szerszym zasięgu oraz link-local. Mają różne zastosowania i zapis konfiguracyjny.",
+      "card_id": "ccna.ipv6.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-if)# ipv6 address {{global}}\nR1(config-if)# ipv6 address {{local}} link-local",
+      "blanks": [
+        {
+          "id": "global",
+          "label": "Adres z prefiksem",
+          "answer_type": "ipv6_prefix",
+          "accepted": [
+            "2001:db8:30::1/64"
+          ],
+          "width": 20,
+          "common_errors": {}
+        },
+        {
+          "id": "local",
+          "label": "Link-local",
+          "answer_type": "ipv6",
+          "accepted": [
+            "fe80::30"
+          ],
+          "width": 11,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv6.10",
+      "revision": 1,
+      "title": "Multicast zamiast broadcastu",
+      "skills": [
+        "ipv6.multicast"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Które stwierdzenie o IPv6 jest prawdziwe?",
+      "hints": [
+        "Przypomnij sobie grupy all-nodes i solicited-node."
+      ],
+      "explanation_md": "IPv6 rozróżnia unicast, multicast i anycast. Rozgłaszanie do określonej grupy nie jest tym samym co broadcast IPv4.",
+      "card_id": "ccna.ipv6.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "IPv6 ma broadcast identyczny z IPv4.",
+          "feedback_md": "IPv6 nie definiuje broadcastu tak jak IPv4."
+        },
+        {
+          "id": "B",
+          "text_md": "Każdy multicast jest wysyłany do wszystkich hostów w Internecie.",
+          "feedback_md": "Multicast ma grupy i określony zasięg."
+        },
+        {
+          "id": "C",
+          "text_md": "Multicast jest wyłącznie adresem routera domyślnego.",
+          "feedback_md": "Multicast obejmuje wiele grup, nie jedną funkcję."
+        },
+        {
+          "id": "D",
+          "text_md": "IPv6 nie używa broadcastu; odpowiednie funkcje realizuje m.in. multicast.",
+          "feedback_md": "Mechanizmy odkrywania korzystają z odpowiednich grup multicast."
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ipv6.11",
+      "revision": 1,
+      "title": "Tylko IPv6 link-local",
+      "skills": [
+        "ipv6.enable-neighbors"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na interfejsie bez adresu globalnego włącz IPv6 poleceniem ipv6 enable, a potem wyświetl tabelę sąsiadów.",
+      "hints": [
+        "Weryfikujesz sąsiadów, a nie tablicę routingu."
+      ],
+      "explanation_md": "`ipv6 enable` włącza przetwarzanie IPv6 i automatyczny link-local bez przydzielania adresu globalnego.",
+      "card_id": "ccna.ipv6.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-if)# ipv6 {{enable}}\nR1(config-if)# end\nR1# show ipv6 {{table}}",
+      "blanks": [
+        {
+          "id": "enable",
+          "label": "Włączenie IPv6 na interfejsie",
+          "answer_type": "keyword",
+          "accepted": [
+            "enable"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "table",
+          "label": "Tabela sąsiadów",
+          "answer_type": "keyword",
+          "accepted": [
+            "neighbors"
+          ],
+          "width": 12,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv6.12",
+      "revision": 1,
+      "title": "Adres loopback IPv6",
+      "skills": [
+        "ipv6.loopback"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Utwórz Loopback0 z pojedynczym adresem 2001:db8:ffff::1/128.",
+      "hints": [
+        "Nie używaj tu /64 z zadania LAN."
+      ],
+      "explanation_md": "Prefiks /128 określa pojedynczy adres IPv6. Loopback nie wymaga fizycznego nośnika Ethernet.",
+      "card_id": "ccna.ipv6.12.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# interface {{interface}}\nR1(config-if)# ipv6 address {{address}}",
+      "blanks": [
+        {
+          "id": "interface",
+          "label": "Nazwa interfejsu",
+          "answer_type": "keyword",
+          "accepted": [
+            "Loopback0"
+          ],
+          "width": 12,
+          "common_errors": {}
+        },
+        {
+          "id": "address",
+          "label": "Adres loopback",
+          "answer_type": "ipv6_prefix",
+          "accepted": [
+            "2001:db8:ffff::1/128"
+          ],
+          "width": 23,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

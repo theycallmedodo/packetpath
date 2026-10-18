@@ -1,0 +1,453 @@
+{
+  "schema_version": 3,
+  "id": "encor.netflow.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Trzy elementy FNF",
+      "skills": [
+        "netflow.trzy-elementy-fnf"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.01.theory",
+      "front_md": "Trzy elementy FNF",
+      "back_md": "Record opisuje strukturę danych. Exporter określa wysyłanie, a monitor łączy rekord z cache i opcjonalnym eksportem.",
+      "example": "Flow record"
+    },
+    {
+      "revision": 1,
+      "title": "Pola kluczowe",
+      "skills": [
+        "netflow.pola-kluczowe"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.02.theory",
+      "front_md": "Pola kluczowe",
+      "back_md": "Różne wartości pól match rozdzielają przepływy. Pola collect opisują przepływ, np. liczniki pakietów.",
+      "example": "Match tworzy klucz przepływu; collect dodaje dane niekluczowe"
+    },
+    {
+      "revision": 1,
+      "title": "Adres źródłowy w rekordzie",
+      "skills": [
+        "netflow.adres-r-d-owy-w-rekordzie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.03.theory",
+      "front_md": "Adres źródłowy w rekordzie",
+      "back_md": "Adres źródłowy jest częścią klucza; użycie destination oznaczałoby adres docelowy.",
+      "example": "flow record REC\n match ipv4 source address"
+    },
+    {
+      "revision": 1,
+      "title": "NetFlow a przechwytywanie",
+      "skills": [
+        "netflow.netflow-a-przechwytywanie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.04.theory",
+      "front_md": "NetFlow a przechwytywanie",
+      "back_md": "NetFlow opisuje komunikację i jej wielkość. Do analizy pełnej zawartości pakietów potrzebny jest przechwyt.",
+      "example": "Nie, opisują przepływy i wybrane metadane"
+    },
+    {
+      "revision": 1,
+      "title": "Adres kolektora",
+      "skills": [
+        "netflow.adres-kolektora"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.05.theory",
+      "front_md": "Adres kolektora",
+      "back_md": "Destination wskazuje odbiorcę danych telemetrycznych, a nie cel obserwowanych przepływów.",
+      "example": "flow exporter EXP\n destination 192.0.2.50"
+    },
+    {
+      "revision": 1,
+      "title": "Powiązanie elementów",
+      "skills": [
+        "netflow.powi-zanie-element-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.06.theory",
+      "front_md": "Powiązanie elementów",
+      "back_md": "Monitor określa rekord i sposób utrzymywania danych oraz może wskazywać exporter. Następnie jest przypinany do interfejsu.",
+      "example": "Flow monitor"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.netflow.01",
+      "revision": 1,
+      "title": "Trzy elementy FNF",
+      "skills": [
+        "netflow.trzy-elementy-fnf"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Który element Flexible NetFlow definiuje pola identyfikujące przepływ i zbierane dane?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Record opisuje strukturę danych. Exporter określa wysyłanie, a monitor łączy rekord z cache i opcjonalnym eksportem.",
+      "card_id": "encor.netflow.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Flow record",
+          "feedback_md": "Record opisuje strukturę danych. Exporter określa wysyłanie, a monitor łączy rekord z cache i opcjonalnym eksportem.",
+          "id": "A"
+        },
+        {
+          "text_md": "Flow exporter",
+          "feedback_md": "Record opisuje strukturę danych. Exporter określa wysyłanie, a monitor łączy rekord z cache i opcjonalnym eksportem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Adres kolektora",
+          "feedback_md": "Record opisuje strukturę danych. Exporter określa wysyłanie, a monitor łączy rekord z cache i opcjonalnym eksportem.",
+          "id": "C"
+        },
+        {
+          "text_md": "Interfejs source eksportera",
+          "feedback_md": "Record opisuje strukturę danych. Exporter określa wysyłanie, a monitor łączy rekord z cache i opcjonalnym eksportem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.netflow.02",
+      "revision": 1,
+      "title": "Pola kluczowe",
+      "skills": [
+        "netflow.pola-kluczowe"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Czym różnią się match i collect w rekordzie FNF?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Różne wartości pól match rozdzielają przepływy. Pola collect opisują przepływ, np. liczniki pakietów.",
+      "card_id": "encor.netflow.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Collect zawsze filtruje ACL, match szyfruje",
+          "feedback_md": "Różne wartości pól match rozdzielają przepływy. Pola collect opisują przepływ, np. liczniki pakietów.",
+          "id": "A"
+        },
+        {
+          "text_md": "Match jest adresem kolektora, collect portem UDP",
+          "feedback_md": "Różne wartości pól match rozdzielają przepływy. Pola collect opisują przepływ, np. liczniki pakietów.",
+          "id": "B"
+        },
+        {
+          "text_md": "Oba służą wyłącznie do zmiany DSCP",
+          "feedback_md": "Różne wartości pól match rozdzielają przepływy. Pola collect opisują przepływ, np. liczniki pakietów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Match tworzy klucz przepływu; collect dodaje dane niekluczowe",
+          "feedback_md": "Różne wartości pól match rozdzielają przepływy. Pola collect opisują przepływ, np. liczniki pakietów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.netflow.03",
+      "revision": 1,
+      "title": "Adres źródłowy w rekordzie",
+      "skills": [
+        "netflow.adres-r-d-owy-w-rekordzie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "W rekordzie REC dodaj adres źródłowy IPv4 jako pole kluczowe.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Adres źródłowy jest częścią klucza; użycie destination oznaczałoby adres docelowy.",
+      "card_id": "encor.netflow.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "flow record REC\n match ipv4 {{b0}} address",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "source"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.netflow.04",
+      "revision": 1,
+      "title": "NetFlow a przechwytywanie",
+      "skills": [
+        "netflow.netflow-a-przechwytywanie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Czy standardowe rekordy NetFlow zawierają pełny payload każdego pakietu jak przechwyt Wiresharka?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "NetFlow opisuje komunikację i jej wielkość. Do analizy pełnej zawartości pakietów potrzebny jest przechwyt.",
+      "card_id": "encor.netflow.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, każdy rekord to cały plik PCAP",
+          "feedback_md": "NetFlow opisuje komunikację i jej wielkość. Do analizy pełnej zawartości pakietów potrzebny jest przechwyt.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie, opisują przepływy i wybrane metadane",
+          "feedback_md": "NetFlow opisuje komunikację i jej wielkość. Do analizy pełnej zawartości pakietów potrzebny jest przechwyt.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, jeśli użyto UDP 2055",
+          "feedback_md": "NetFlow opisuje komunikację i jej wielkość. Do analizy pełnej zawartości pakietów potrzebny jest przechwyt.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, bo nie zawierają żadnych liczników",
+          "feedback_md": "NetFlow opisuje komunikację i jej wielkość. Do analizy pełnej zawartości pakietów potrzebny jest przechwyt.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.netflow.05",
+      "revision": 1,
+      "title": "Adres kolektora",
+      "skills": [
+        "netflow.adres-kolektora"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Exporter EXP ma wysyłać dane do kolektora 192.0.2.50.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Destination wskazuje odbiorcę danych telemetrycznych, a nie cel obserwowanych przepływów.",
+      "card_id": "encor.netflow.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "flow exporter EXP\n destination {{b0}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "192.0.2.50"
+          ],
+          "width": 12,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.netflow.06",
+      "revision": 1,
+      "title": "Powiązanie elementów",
+      "skills": [
+        "netflow.powi-zanie-element-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Który element łączy rekord, cache i exporter?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Monitor określa rekord i sposób utrzymywania danych oraz może wskazywać exporter. Następnie jest przypinany do interfejsu.",
+      "card_id": "encor.netflow.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Class-map QoS",
+          "feedback_md": "Monitor określa rekord i sposób utrzymywania danych oraz może wskazywać exporter. Następnie jest przypinany do interfejsu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Trasa domyślna",
+          "feedback_md": "Monitor określa rekord i sposób utrzymywania danych oraz może wskazywać exporter. Następnie jest przypinany do interfejsu.",
+          "id": "B"
+        },
+        {
+          "text_md": "ACL VTY",
+          "feedback_md": "Monitor określa rekord i sposób utrzymywania danych oraz może wskazywać exporter. Następnie jest przypinany do interfejsu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Flow monitor",
+          "feedback_md": "Monitor określa rekord i sposób utrzymywania danych oraz może wskazywać exporter. Następnie jest przypinany do interfejsu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

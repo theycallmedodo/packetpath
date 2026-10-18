@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "encor.sdwan.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Wybór ścieżki według progów",
+      "skills": [
+        "sdwan.wyb-r-cie-ki-wed-ug-prog-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.13.theory",
+      "front_md": "Wybór ścieżki według progów",
+      "back_md": "B ma mniejsze opóźnienie, ale przekracza próg strat. Przy podanej koniunkcji wymagań spełnia je wyłącznie A.",
+      "example": "Tylko A"
+    },
+    {
+      "revision": 1,
+      "title": "Brak ścieżki zgodnej z SLA",
+      "skills": [
+        "sdwan.brak-cie-ki-zgodnej-z-sla"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.14.theory",
+      "front_md": "Brak ścieżki zgodnej z SLA",
+      "back_md": "Trzeba sprawdzić konfigurację reakcji przy braku zgodnej ścieżki. Nie zakładaj jednego zachowania dla wszystkich polityk.",
+      "example": "Nie; zachowanie zależy m.in. od polityki fallback i trybu egzekwowania"
+    },
+    {
+      "revision": 1,
+      "title": "Control up, data down",
+      "skills": [
+        "sdwan.control-up-data-down"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.15.theory",
+      "front_md": "Control up, data down",
+      "back_md": "Control connections i data tunnels mają różne końce oraz warunki dostępności. Sprawdź transport, filtrowanie, NAT i parametry tunelu.",
+      "example": "Osiągalność control plane od drogi tunelu danych między Edge"
+    },
+    {
+      "revision": 1,
+      "title": "Manager chwilowo niedostępny",
+      "skills": [
+        "sdwan.manager-chwilowo-niedost-pny"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.16.theory",
+      "front_md": "Manager chwilowo niedostępny",
+      "back_md": "Zarządzanie i forwarding są rozdzielone. Możliwość dalszego ruchu nie oznacza braku wpływu na monitoring i zmiany konfiguracji.",
+      "example": "Sama awaria Managera nie dowodzi natychmiastowego zatrzymania istniejącego forwarding"
+    },
+    {
+      "revision": 1,
+      "title": "Certyfikaty i czas",
+      "skills": [
+        "sdwan.certyfikaty-i-czas"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.17.theory",
+      "front_md": "Certyfikaty i czas",
+      "back_md": "Osiągalność IP nie dowodzi zgodności tożsamości. Weryfikacja certyfikatów i danych organizacji jest oddzielnym etapem dołączania.",
+      "example": "Tożsamość urządzenia, certyfikaty, organizację oraz czas systemowy"
+    },
+    {
+      "revision": 1,
+      "title": "Dwa łącza, wspólna awaria",
+      "skills": [
+        "sdwan.dwa-cza-wsp-lna-awaria"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.18.theory",
+      "front_md": "Dwa łącza, wspólna awaria",
+      "back_md": "Redundancję ocenia się także pod kątem wspólnych zależności: trasy kablowej, zasilania, urządzeń i punktów wejścia do budynku.",
+      "example": "Wspólny fizyczny punkt awarii mimo dwóch transportów logicznych"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.sdwan.13",
+      "revision": 1,
+      "title": "Wybór ścieżki według progów",
+      "skills": [
+        "sdwan.wyb-r-cie-ki-wed-ug-prog-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Załóż warunek polityki: loss ≤ 1%, latency ≤ 100 ms, jitter ≤ 20 ms.\n\n| Ścieżka | Loss | Latency | Jitter |\n|---|---:|---:|---:|\n| A | 0,2% | 60 ms | 8 ms |\n| B | 2% | 25 ms | 4 ms |\n\nKtóra spełnia wszystkie warunki?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "B ma mniejsze opóźnienie, ale przekracza próg strat. Przy podanej koniunkcji wymagań spełnia je wyłącznie A.",
+      "card_id": "encor.sdwan.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tylko B",
+          "feedback_md": "B ma mniejsze opóźnienie, ale przekracza próg strat. Przy podanej koniunkcji wymagań spełnia je wyłącznie A.",
+          "id": "A"
+        },
+        {
+          "text_md": "Obie",
+          "feedback_md": "B ma mniejsze opóźnienie, ale przekracza próg strat. Przy podanej koniunkcji wymagań spełnia je wyłącznie A.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tylko A",
+          "feedback_md": "B ma mniejsze opóźnienie, ale przekracza próg strat. Przy podanej koniunkcji wymagań spełnia je wyłącznie A.",
+          "id": "C"
+        },
+        {
+          "text_md": "Żadna",
+          "feedback_md": "B ma mniejsze opóźnienie, ale przekracza próg strat. Przy podanej koniunkcji wymagań spełnia je wyłącznie A.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.sdwan.14",
+      "revision": 1,
+      "title": "Brak ścieżki zgodnej z SLA",
+      "skills": [
+        "sdwan.brak-cie-ki-zgodnej-z-sla"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Oba transporty przekroczyły progi aplikacji. Czy można bez znajomości konfiguracji stwierdzić, że ruch będzie zawsze odrzucony?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Trzeba sprawdzić konfigurację reakcji przy braku zgodnej ścieżki. Nie zakładaj jednego zachowania dla wszystkich polityk.",
+      "card_id": "encor.sdwan.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, każdy wariant SD-WAN zawsze odrzuca",
+          "feedback_md": "Trzeba sprawdzić konfigurację reakcji przy braku zgodnej ścieżki. Nie zakładaj jednego zachowania dla wszystkich polityk.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie; zachowanie zależy m.in. od polityki fallback i trybu egzekwowania",
+          "feedback_md": "Trzeba sprawdzić konfigurację reakcji przy braku zgodnej ścieżki. Nie zakładaj jednego zachowania dla wszystkich polityk.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, ponieważ BFD zawsze usuwa adresy IP",
+          "feedback_md": "Trzeba sprawdzić konfigurację reakcji przy braku zgodnej ścieżki. Nie zakładaj jednego zachowania dla wszystkich polityk.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, bo progi SLA nigdy nie wpływają na ruch",
+          "feedback_md": "Trzeba sprawdzić konfigurację reakcji przy braku zgodnej ścieżki. Nie zakładaj jednego zachowania dla wszystkich polityk.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.sdwan.15",
+      "revision": 1,
+      "title": "Control up, data down",
+      "skills": [
+        "sdwan.control-up-data-down"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Skrócony stan dydaktyczny: połączenia do Controller są up, lecz BFD do zdalnego Edge jest down. Co należy rozdzielić w diagnozie?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Control connections i data tunnels mają różne końce oraz warunki dostępności. Sprawdź transport, filtrowanie, NAT i parametry tunelu.",
+      "card_id": "encor.sdwan.15.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Osiągalność control plane od drogi tunelu danych między Edge",
+          "feedback_md": "Control connections i data tunnels mają różne końce oraz warunki dostępności. Sprawdź transport, filtrowanie, NAT i parametry tunelu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Uznać, że działający Controller dowodzi działania wszystkich tuneli",
+          "feedback_md": "Control connections i data tunnels mają różne końce oraz warunki dostępności. Sprawdź transport, filtrowanie, NAT i parametry tunelu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Sprawdzać wyłącznie GUI Managera",
+          "feedback_md": "Control connections i data tunnels mają różne końce oraz warunki dostępności. Sprawdź transport, filtrowanie, NAT i parametry tunelu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłączyć wszystkie polityki bez analizy transportu",
+          "feedback_md": "Control connections i data tunnels mają różne końce oraz warunki dostępności. Sprawdź transport, filtrowanie, NAT i parametry tunelu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.sdwan.16",
+      "revision": 1,
+      "title": "Manager chwilowo niedostępny",
+      "skills": [
+        "sdwan.manager-chwilowo-niedost-pny"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Manager jest niedostępny, a Edge mają działające tunele, zachowane trasy i połączenia sterujące. Co jest trafnym wnioskiem?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Zarządzanie i forwarding są rozdzielone. Możliwość dalszego ruchu nie oznacza braku wpływu na monitoring i zmiany konfiguracji.",
+      "card_id": "encor.sdwan.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wszystkie pakiety muszą zniknąć, bo zawsze przechodzą przez GUI",
+          "feedback_md": "Zarządzanie i forwarding są rozdzielone. Możliwość dalszego ruchu nie oznacza braku wpływu na monitoring i zmiany konfiguracji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Edge automatycznie usuwa każdy interfejs",
+          "feedback_md": "Zarządzanie i forwarding są rozdzielone. Możliwość dalszego ruchu nie oznacza braku wpływu na monitoring i zmiany konfiguracji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Overlay staje się nieszyfrowany z definicji",
+          "feedback_md": "Zarządzanie i forwarding są rozdzielone. Możliwość dalszego ruchu nie oznacza braku wpływu na monitoring i zmiany konfiguracji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Sama awaria Managera nie dowodzi natychmiastowego zatrzymania istniejącego forwarding",
+          "feedback_md": "Zarządzanie i forwarding są rozdzielone. Możliwość dalszego ruchu nie oznacza braku wpływu na monitoring i zmiany konfiguracji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.sdwan.17",
+      "revision": 1,
+      "title": "Certyfikaty i czas",
+      "skills": [
+        "sdwan.certyfikaty-i-czas"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Nowy Edge ma osiągalność IP, ale nie przechodzi uwierzytelnienia komponentów. Co jest uzasadnionym sprawdzeniem?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Osiągalność IP nie dowodzi zgodności tożsamości. Weryfikacja certyfikatów i danych organizacji jest oddzielnym etapem dołączania.",
+      "card_id": "encor.sdwan.17.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie nazwę VLAN hosta użytkownika",
+          "feedback_md": "Osiągalność IP nie dowodzi zgodności tożsamości. Weryfikacja certyfikatów i danych organizacji jest oddzielnym etapem dołączania.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłącznie zmianę metryki OSPF w każdej lokalizacji",
+          "feedback_md": "Osiągalność IP nie dowodzi zgodności tożsamości. Weryfikacja certyfikatów i danych organizacji jest oddzielnym etapem dołączania.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tożsamość urządzenia, certyfikaty, organizację oraz czas systemowy",
+          "feedback_md": "Osiągalność IP nie dowodzi zgodności tożsamości. Weryfikacja certyfikatów i danych organizacji jest oddzielnym etapem dołączania.",
+          "id": "C"
+        },
+        {
+          "text_md": "Założenie, że ping gwarantuje autoryzację",
+          "feedback_md": "Osiągalność IP nie dowodzi zgodności tożsamości. Weryfikacja certyfikatów i danych organizacji jest oddzielnym etapem dołączania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.sdwan.18",
+      "revision": 1,
+      "title": "Dwa łącza, wspólna awaria",
+      "skills": [
+        "sdwan.dwa-cza-wsp-lna-awaria"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Oddział ma dwóch operatorów, lecz oba kable biegną tą samą kanalizacją. Co nadal ogranicza odporność?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Redundancję ocenia się także pod kątem wspólnych zależności: trasy kablowej, zasilania, urządzeń i punktów wejścia do budynku.",
+      "card_id": "encor.sdwan.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Brak trzeciego koloru w nazwie interfejsu",
+          "feedback_md": "Redundancję ocenia się także pod kątem wspólnych zależności: trasy kablowej, zasilania, urządzeń i punktów wejścia do budynku.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wspólny fizyczny punkt awarii mimo dwóch transportów logicznych",
+          "feedback_md": "Redundancję ocenia się także pod kątem wspólnych zależności: trasy kablowej, zasilania, urządzeń i punktów wejścia do budynku.",
+          "id": "B"
+        },
+        {
+          "text_md": "Sam fakt zastosowania OMP",
+          "feedback_md": "Redundancję ocenia się także pod kątem wspólnych zależności: trasy kablowej, zasilania, urządzeń i punktów wejścia do budynku.",
+          "id": "C"
+        },
+        {
+          "text_md": "Niemożność segmentacji na Edge",
+          "feedback_md": "Redundancję ocenia się także pod kątem wspólnych zależności: trasy kablowej, zasilania, urządzeń i punktów wejścia do budynku.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

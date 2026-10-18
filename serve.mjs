@@ -1,0 +1,10 @@
+import http from 'node:http';
+import {readFile} from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {spawn} from 'node:child_process';
+const root=path.join(path.dirname(fileURLToPath(import.meta.url)),'dist');
+const types={'.html':'text/html; charset=utf-8','.js':'text/javascript; charset=utf-8','.css':'text/css; charset=utf-8','.svg':'image/svg+xml','.json':'application/json','.png':'image/png'};
+const server=http.createServer(async(req,res)=>{try{const pathname=decodeURIComponent(new URL(req.url,'http://localhost').pathname);const file=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));if(file!==root&&!file.startsWith(root+path.sep)){res.writeHead(403);res.end();return;}const data=await readFile(file);res.writeHead(200,{'Content-Type':types[path.extname(file)]??'application/octet-stream','Cache-Control':'no-cache'});res.end(data);}catch{res.writeHead(404);res.end('Nie znaleziono pliku.');}});
+server.on('error',err=>{console.error(err.code==='EADDRINUSE'?'Port 5173 jest zajety. Zamknij poprzednia aplikacje korzystajaca z tego portu.':err.message);process.exitCode=1;});
+server.listen(5173,'127.0.0.1',()=>{console.log('PacketPath: http://localhost:5173\nZostaw to okno otwarte. Ctrl+C zatrzymuje aplikacje.');if(process.platform==='win32')spawn('cmd.exe',['/c','start','','http://localhost:5173'],{stdio:'ignore'});});

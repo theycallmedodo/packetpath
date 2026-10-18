@@ -1,0 +1,425 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ipv6.stage-4",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "ND zamiast ARP",
+      "skills": [
+        "ipv6.nd-zamiast-arp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.ext.01.theory",
+      "front_md": "ND zamiast ARP",
+      "back_md": "Neighbor Solicitation i Advertisement są częścią ND i służą m.in. ustalaniu adresu warstwy drugiej.",
+      "example": "Przez Neighbor Discovery z ICMPv6"
+    },
+    {
+      "revision": 1,
+      "title": "Duplicate Address Detection",
+      "skills": [
+        "ipv6.duplicate-address-detection"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.ext.02.theory",
+      "front_md": "Duplicate Address Detection",
+      "back_md": "Wykrycie konfliktu uniemożliwia zwykłe użycie adresu; trzeba usunąć przyczynę duplikacji.",
+      "example": "Czy ten adres jest już używany na łączu"
+    },
+    {
+      "revision": 1,
+      "title": "Link-local next-hop",
+      "skills": [
+        "ipv6.link-local-next-hop"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.ext.03.theory",
+      "front_md": "Link-local next-hop",
+      "back_md": "Link-local ma zasięg łącza, dlatego trasa wymaga wskazania interfejsu wyjściowego.",
+      "example": "R1(config)# ipv6 route 2001:db8:200::/64 GigabitEthernet0/1 fe80::2"
+    },
+    {
+      "revision": 1,
+      "title": "SLAAC a DHCPv6",
+      "skills": [
+        "ipv6.slaac-a-dhcpv6"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.ext.04.theory",
+      "front_md": "SLAAC a DHCPv6",
+      "back_md": "RA i przydział adresu to odrębne elementy konfiguracji hosta.",
+      "example": "Z Router Advertisement"
+    },
+    {
+      "revision": 1,
+      "title": "Domyślna trasa link-local",
+      "skills": [
+        "ipv6.domy-lna-trasa-link-local"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.ext.05.theory",
+      "front_md": "Domyślna trasa link-local",
+      "back_md": "Jawny interfejs identyfikuje łącze, na którym istnieje link-local bramy.",
+      "example": "R1(config)# ipv6 route ::/0 GigabitEthernet0/0 fe80::1"
+    },
+    {
+      "revision": 1,
+      "title": "Adres ULA",
+      "skills": [
+        "ipv6.adres-ula"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.ext.06.theory",
+      "front_md": "Adres ULA",
+      "back_md": "ULA pochodzi z fc00::/7; typowo lokalnie generowane prefiksy używają fd00::/8.",
+      "example": "Unique Local Address"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ipv6.ext.01",
+      "revision": 1,
+      "title": "ND zamiast ARP",
+      "skills": [
+        "ipv6.nd-zamiast-arp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Jak IPv6 realizuje rozwiązywanie adresu sąsiada na Ethernet?",
+      "hints": [
+        "Neighbor Solicitation i Advertisement są częścią ND i służą m.in. ustalaniu adresu warstwy drugiej."
+      ],
+      "explanation_md": "Neighbor Solicitation i Advertisement są częścią ND i służą m.in. ustalaniu adresu warstwy drugiej.",
+      "card_id": "ccna.ipv6.ext.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Przez Neighbor Discovery z ICMPv6",
+          "feedback_md": "Neighbor Solicitation i Advertisement są częścią ND i służą m.in. ustalaniu adresu warstwy drugiej.",
+          "id": "A"
+        },
+        {
+          "text_md": "Przez ARP z adresem 128-bitowym",
+          "feedback_md": "IPv6 nie używa ARP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Przez obowiązkowy DNS PTR",
+          "feedback_md": "PTR nie rozwiązuje adresu warstwy drugiej.",
+          "id": "C"
+        },
+        {
+          "text_md": "Przez tablicę NAT IPv4",
+          "feedback_md": "NAT IPv4 nie jest mechanizmem IPv6 ND.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ipv6.ext.02",
+      "revision": 1,
+      "title": "Duplicate Address Detection",
+      "skills": [
+        "ipv6.duplicate-address-detection"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co sprawdza DAD przed normalnym użyciem adresu IPv6?",
+      "hints": [
+        "Wykrycie konfliktu uniemożliwia zwykłe użycie adresu; trzeba usunąć przyczynę duplikacji."
+      ],
+      "explanation_md": "Wykrycie konfliktu uniemożliwia zwykłe użycie adresu; trzeba usunąć przyczynę duplikacji.",
+      "card_id": "ccna.ipv6.ext.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Czy działa DNS dla całego Internetu",
+          "feedback_md": "DAD nie jest testem DNS.",
+          "id": "A"
+        },
+        {
+          "text_md": "Czy wybrano najlepszą trasę BGP",
+          "feedback_md": "DAD nie oblicza tras.",
+          "id": "B"
+        },
+        {
+          "text_md": "Czy adres jest z publicznej puli IPv4",
+          "feedback_md": "Dotyczy IPv6 na lokalnym łączu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Czy ten adres jest już używany na łączu",
+          "feedback_md": "Wykrycie konfliktu uniemożliwia zwykłe użycie adresu; trzeba usunąć przyczynę duplikacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ipv6.ext.03",
+      "revision": 1,
+      "title": "Link-local next-hop",
+      "skills": [
+        "ipv6.link-local-next-hop"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W labie dodaj trasę do 2001:db8:200::/64 przez fe80::2 na G0/1. Prefix celu jest wpisany; uzupełnij interfejs i next-hop.",
+      "hints": [
+        "Link-local ma zasięg łącza, dlatego trasa wymaga wskazania interfejsu wyjściowego."
+      ],
+      "explanation_md": "Link-local ma zasięg łącza, dlatego trasa wymaga wskazania interfejsu wyjściowego.",
+      "card_id": "ccna.ipv6.ext.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config)# ipv6 route 2001:db8:200::/64 {{b0}} {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "GigabitEthernet0/1"
+          ],
+          "width": 20,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "ipv6",
+          "accepted": [
+            "fe80::2"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv6.ext.04",
+      "revision": 1,
+      "title": "SLAAC a DHCPv6",
+      "skills": [
+        "ipv6.slaac-a-dhcpv6"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Skąd typowy host IPv6 dowiaduje się o routerze domyślnym?",
+      "hints": [
+        "RA i przydział adresu to odrębne elementy konfiguracji hosta."
+      ],
+      "explanation_md": "RA i przydział adresu to odrębne elementy konfiguracji hosta.",
+      "card_id": "ccna.ipv6.ext.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie z DHCPv6, tak jak bramę DHCPv4",
+          "feedback_md": "Standardowy DHCPv6 nie przekazuje bramy domyślnej jak DHCPv4.",
+          "id": "A"
+        },
+        {
+          "text_md": "Z Router Advertisement",
+          "feedback_md": "RA i przydział adresu to odrębne elementy konfiguracji hosta.",
+          "id": "B"
+        },
+        {
+          "text_md": "Z MAC źródłowego dowolnej ramki",
+          "feedback_md": "Dowolna ramka nie jest informacją o routerze.",
+          "id": "C"
+        },
+        {
+          "text_md": "Z wpisu DNS A",
+          "feedback_md": "A opisuje IPv4, nie domyślną bramę IPv6.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ipv6.ext.05",
+      "revision": 1,
+      "title": "Domyślna trasa link-local",
+      "skills": [
+        "ipv6.domy-lna-trasa-link-local"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Skieruj domyślną trasę IPv6 przez fe80::1 na G0/0. Wpisz prefiks domyślny i adres next-hop.",
+      "hints": [
+        "Jawny interfejs identyfikuje łącze, na którym istnieje link-local bramy."
+      ],
+      "explanation_md": "Jawny interfejs identyfikuje łącze, na którym istnieje link-local bramy.",
+      "card_id": "ccna.ipv6.ext.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config)# ipv6 route {{b0}} GigabitEthernet0/0 {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "ipv6_prefix",
+          "accepted": [
+            "::/0"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "ipv6",
+          "accepted": [
+            "fe80::1"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv6.ext.06",
+      "revision": 1,
+      "title": "Adres ULA",
+      "skills": [
+        "ipv6.adres-ula"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv6 — ND, SLAAC i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.9"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Do jakiego zakresu należy adres fd12:3456:789a::1?",
+      "hints": [
+        "ULA pochodzi z fc00::/7; typowo lokalnie generowane prefiksy używają fd00::/8."
+      ],
+      "explanation_md": "ULA pochodzi z fc00::/7; typowo lokalnie generowane prefiksy używają fd00::/8.",
+      "card_id": "ccna.ipv6.ext.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Link-local fe80::/10",
+          "feedback_md": "Podany adres nie zaczyna się od zakresu link-local.",
+          "id": "A"
+        },
+        {
+          "text_md": "Multicast ff00::/8",
+          "feedback_md": "Nie ma prefiksu ff.",
+          "id": "B"
+        },
+        {
+          "text_md": "Loopback ::1",
+          "feedback_md": "Podany adres nie jest ::1.",
+          "id": "C"
+        },
+        {
+          "text_md": "Unique Local Address",
+          "feedback_md": "ULA pochodzi z fc00::/7; typowo lokalnie generowane prefiksy używają fd00::/8.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

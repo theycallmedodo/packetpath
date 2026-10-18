@@ -1,0 +1,425 @@
+{
+  "schema_version": 3,
+  "id": "encor.ip-sla.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Timeout",
+      "skills": [
+        "ip-sla.timeout"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.07.theory",
+      "front_md": "Timeout",
+      "back_md": "Timeout określa czas oczekiwania na odpowiedź w milisekundach, podczas gdy frequency używa sekund.",
+      "example": "Milisekundy"
+    },
+    {
+      "revision": 1,
+      "title": "Threshold",
+      "skills": [
+        "ip-sla.threshold"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.08.theory",
+      "front_md": "Threshold",
+      "back_md": "Próg jakości i maksymalny czas oczekiwania to różne parametry. Sam threshold nie jest automatyczną zmianą routingu.",
+      "example": "Przekroczono próg, lecz odpowiedź nadeszła przed timeout"
+    },
+    {
+      "revision": 1,
+      "title": "Uruchom teraz",
+      "skills": [
+        "ip-sla.uruchom-teraz"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.09.theory",
+      "front_md": "Uruchom teraz",
+      "back_md": "Life forever określa czas życia harmonogramu, a start-time now — natychmiastowy start.",
+      "example": "ip sla schedule 10 life forever start-time now"
+    },
+    {
+      "revision": 1,
+      "title": "Statystyki operacji",
+      "skills": [
+        "ip-sla.statystyki-operacji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.10.theory",
+      "front_md": "Statystyki operacji",
+      "back_md": "Statystyki IP SLA służą do odczytu wyników pomiaru; konfiguracja i harmonogram wymagają osobnej kontroli.",
+      "example": "show ip sla statistics 10"
+    },
+    {
+      "revision": 1,
+      "title": "Jawne źródło",
+      "skills": [
+        "ip-sla.jawne-r-d-o"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.11.theory",
+      "front_md": "Jawne źródło",
+      "back_md": "Wybrany source-ip określa źródło sond. Cel musi mieć drogę powrotną do tego adresu.",
+      "example": "ip sla 20\n icmp-echo 198.51.100.10 source-ip 192.0.2.1"
+    },
+    {
+      "revision": 1,
+      "title": "Pomiar nie jest aplikacją",
+      "skills": [
+        "ip-sla.pomiar-nie-jest-aplikacj"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.12.theory",
+      "front_md": "Pomiar nie jest aplikacją",
+      "back_md": "Poszczególne warstwy wymagają własnych testów. Echo potwierdza ograniczony aspekt łączności.",
+      "example": "ICMP nie potwierdza działania TCP/TLS/HTTP"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ip-sla.07",
+      "revision": 1,
+      "title": "Timeout",
+      "skills": [
+        "ip-sla.timeout"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W konfiguracji SLA timeout 1000. Jaką jednostkę ma ta wartość?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Timeout określa czas oczekiwania na odpowiedź w milisekundach, podczas gdy frequency używa sekund.",
+      "card_id": "encor.ip-sla.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sekundy",
+          "feedback_md": "Timeout określa czas oczekiwania na odpowiedź w milisekundach, podczas gdy frequency używa sekund.",
+          "id": "A"
+        },
+        {
+          "text_md": "Bajty",
+          "feedback_md": "Timeout określa czas oczekiwania na odpowiedź w milisekundach, podczas gdy frequency używa sekund.",
+          "id": "B"
+        },
+        {
+          "text_md": "Pakiety na minutę",
+          "feedback_md": "Timeout określa czas oczekiwania na odpowiedź w milisekundach, podczas gdy frequency używa sekund.",
+          "id": "C"
+        },
+        {
+          "text_md": "Milisekundy",
+          "feedback_md": "Timeout określa czas oczekiwania na odpowiedź w milisekundach, podczas gdy frequency używa sekund.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ip-sla.08",
+      "revision": 1,
+      "title": "Threshold",
+      "skills": [
+        "ip-sla.threshold"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Operacja ma threshold 100 i timeout 1000. Odpowiedź wraca po 150 ms. Co trafnie opisuje pomiar?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Próg jakości i maksymalny czas oczekiwania to różne parametry. Sam threshold nie jest automatyczną zmianą routingu.",
+      "card_id": "encor.ip-sla.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Upłynął timeout 100 ms",
+          "feedback_md": "Próg jakości i maksymalny czas oczekiwania to różne parametry. Sam threshold nie jest automatyczną zmianą routingu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Router musi usunąć wszystkie trasy",
+          "feedback_md": "Próg jakości i maksymalny czas oczekiwania to różne parametry. Sam threshold nie jest automatyczną zmianą routingu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Przekroczono próg, lecz odpowiedź nadeszła przed timeout",
+          "feedback_md": "Próg jakości i maksymalny czas oczekiwania to różne parametry. Sam threshold nie jest automatyczną zmianą routingu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Ruch TCP jest na pewno niedostępny",
+          "feedback_md": "Próg jakości i maksymalny czas oczekiwania to różne parametry. Sam threshold nie jest automatyczną zmianą routingu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ip-sla.09",
+      "revision": 1,
+      "title": "Uruchom teraz",
+      "skills": [
+        "ip-sla.uruchom-teraz"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Operacja 10 ma ruszyć od razu i działać bez określonego końca.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Life forever określa czas życia harmonogramu, a start-time now — natychmiastowy start.",
+      "card_id": "encor.ip-sla.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "ip sla schedule 10 life {{b0}} start-time {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "forever"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "now"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ip-sla.10",
+      "revision": 1,
+      "title": "Statystyki operacji",
+      "skills": [
+        "ip-sla.statystyki-operacji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Które polecenie pokazuje wynik pomiarów operacji 10?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Statystyki IP SLA służą do odczytu wyników pomiaru; konfiguracja i harmonogram wymagają osobnej kontroli.",
+      "card_id": "encor.ip-sla.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "show ip sla statistics 10",
+          "feedback_md": "Statystyki IP SLA służą do odczytu wyników pomiaru; konfiguracja i harmonogram wymagają osobnej kontroli.",
+          "id": "A"
+        },
+        {
+          "text_md": "show spanning-tree 10",
+          "feedback_md": "Statystyki IP SLA służą do odczytu wyników pomiaru; konfiguracja i harmonogram wymagają osobnej kontroli.",
+          "id": "B"
+        },
+        {
+          "text_md": "show ip bgp 10",
+          "feedback_md": "Statystyki IP SLA służą do odczytu wyników pomiaru; konfiguracja i harmonogram wymagają osobnej kontroli.",
+          "id": "C"
+        },
+        {
+          "text_md": "show vlan 10",
+          "feedback_md": "Statystyki IP SLA służą do odczytu wyników pomiaru; konfiguracja i harmonogram wymagają osobnej kontroli.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ip-sla.11",
+      "revision": 1,
+      "title": "Jawne źródło",
+      "skills": [
+        "ip-sla.jawne-r-d-o"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Operacja 20 ma pingować 198.51.100.10 z lokalnego adresu 192.0.2.1.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Wybrany source-ip określa źródło sond. Cel musi mieć drogę powrotną do tego adresu.",
+      "card_id": "encor.ip-sla.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "ip sla 20\n icmp-echo {{b0}} source-ip {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "198.51.100.10"
+          ],
+          "width": 15,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "192.0.2.1"
+          ],
+          "width": 11,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ip-sla.12",
+      "revision": 1,
+      "title": "Pomiar nie jest aplikacją",
+      "skills": [
+        "ip-sla.pomiar-nie-jest-aplikacj"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "IP SLA ICMP Echo jest OK, ale strona HTTPS nie działa. Jaki wniosek jest poprawny?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Poszczególne warstwy wymagają własnych testów. Echo potwierdza ograniczony aspekt łączności.",
+      "card_id": "encor.ip-sla.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "HTTPS na pewno działa, bo ping odpowiada",
+          "feedback_md": "Poszczególne warstwy wymagają własnych testów. Echo potwierdza ograniczony aspekt łączności.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wszystkie certyfikaty są poprawne",
+          "feedback_md": "Poszczególne warstwy wymagają własnych testów. Echo potwierdza ograniczony aspekt łączności.",
+          "id": "B"
+        },
+        {
+          "text_md": "ICMP nie potwierdza działania TCP/TLS/HTTP",
+          "feedback_md": "Poszczególne warstwy wymagają własnych testów. Echo potwierdza ograniczony aspekt łączności.",
+          "id": "C"
+        },
+        {
+          "text_md": "Serwer DNS nigdy nie może być przyczyną",
+          "feedback_md": "Poszczególne warstwy wymagają własnych testów. Echo potwierdza ograniczony aspekt łączności.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

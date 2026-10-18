@@ -1,0 +1,362 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ospf.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ospf.network",
+      "revision": 1,
+      "title": "Wybór interfejsów",
+      "skills": [
+        "ospf.network"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        }
+      ],
+      "front_md": "Co naprawdę robi polecenie network?",
+      "back_md": "Dopasowuje **adresy IP lokalnych interfejsów**. Uruchamia na nich OSPF i przypisuje je do obszaru. To nie jest po prostu lista prefiksów do rozgłaszania.",
+      "example": "network 10.0.12.1 0.0.0.0 area 0"
+    },
+    {
+      "id": "ospf.area",
+      "revision": 1,
+      "title": "Obszar backbone",
+      "skills": [
+        "ospf.area"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        }
+      ],
+      "front_md": "Jaki numer ma obszar szkieletowy?",
+      "back_md": "Obszar backbone to **area 0**, zapisywany także jako `0.0.0.0`. Sąsiedzi na wspólnym łączu muszą mieć zgodne area ID.",
+      "example": "network 10.0.12.0 0.0.0.3 area 0"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ospf.quiz.03",
+      "revision": 1,
+      "title": "Co wybiera network?",
+      "skills": [
+        "ospf.network"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        }
+      ],
+      "type": "single_choice",
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co dopasowuje polecenie network 10.0.12.0 0.0.0.3 area 0 w konfiguracji OSPF?",
+      "hints": [
+        "Pomyśl, na których łączach router ma uruchomić protokół."
+      ],
+      "explanation_md": "Polecenie wybiera lokalne interfejsy i przypisuje je do wskazanego obszaru.",
+      "card_id": "ospf.network",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Adresy IP lokalnych interfejsów.",
+          "feedback_md": "Polecenie wybiera lokalne interfejsy i przypisuje je do wskazanego obszaru."
+        },
+        {
+          "id": "B",
+          "text_md": "Adresy MAC sąsiednich routerów.",
+          "feedback_md": "Polecenie network w OSPF nie dopasowuje adresów MAC."
+        },
+        {
+          "id": "C",
+          "text_md": "Wyłącznie router ID sąsiadów.",
+          "feedback_md": "Router ID sąsiadów nie jest tu kryterium wyboru."
+        },
+        {
+          "id": "D",
+          "text_md": "Wyłącznie trasy statyczne w RIB.",
+          "feedback_md": "To polecenie nie jest mechanizmem redystrybucji tras statycznych."
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ospf.05",
+      "revision": 2,
+      "title": "Dwa elementy polecenia",
+      "skills": [
+        "ospf.network"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        }
+      ],
+      "type": "cli_fill_blank",
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 2,
+      "platform": "IOS / IOS XE",
+      "prompt_md": "Wybierz interfejsy z **10.0.12.0/30** i przypisz je do **area 0**. Uzupełnij nazwę polecenia oraz wildcard.",
+      "template": "R1(config-router)# {{command}} 10.0.12.0 {{wildcard}} area 0",
+      "hints": [
+        "Polecenie network dopasowuje adresy lokalnych interfejsów.",
+        "Dla /30 odwróć maskę 255.255.255.252."
+      ],
+      "explanation_md": "`network 10.0.12.0 0.0.0.3 area 0` obejmuje interfejsy z tej podsieci.",
+      "card_id": "ospf.network",
+      "blanks": [
+        {
+          "id": "command",
+          "label": "Polecenie wyboru interfejsów",
+          "answer_type": "keyword",
+          "accepted": [
+            "network"
+          ],
+          "width": 12,
+          "common_errors": {}
+        },
+        {
+          "id": "wildcard",
+          "label": "Wildcard dla /30",
+          "answer_type": "ipv4",
+          "accepted": [
+            "0.0.0.3"
+          ],
+          "width": 12,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ospf.06",
+      "revision": 2,
+      "title": "Dopasowanie konkretnego adresu",
+      "skills": [
+        "ospf.network"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        }
+      ],
+      "type": "cli_fill_blank",
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 2,
+      "platform": "IOS / IOS XE",
+      "prompt_md": "Dopasuj wyłącznie **10.0.12.1** i przypisz interfejs do **area 0**. Uzupełnij adres i wildcard.",
+      "template": "R1(config-router)# network {{address}} {{wildcard}} area 0",
+      "hints": [
+        "Dopasuj wszystkie bity wskazanego adresu."
+      ],
+      "explanation_md": "Wildcard `0.0.0.0` dopasowuje dokładnie adres `10.0.12.1`.",
+      "card_id": "ospf.network",
+      "blanks": [
+        {
+          "id": "address",
+          "label": "Adres interfejsu",
+          "answer_type": "ipv4",
+          "accepted": [
+            "10.0.12.1"
+          ],
+          "width": 12,
+          "common_errors": {}
+        },
+        {
+          "id": "wildcard",
+          "label": "Wildcard pojedynczego adresu",
+          "answer_type": "ipv4",
+          "accepted": [
+            "0.0.0.0"
+          ],
+          "width": 12,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ospf.quiz.04",
+      "revision": 1,
+      "title": "Wspólne łącze, wspólny obszar",
+      "skills": [
+        "ospf.area"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        }
+      ],
+      "type": "single_choice",
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "R1 ma area 0 na łączu do R2. Które ustawienie area na tym samym łączu R2 jest zgodne?",
+      "hints": [
+        "Numer procesu może się różnić; obszar wspólnego łącza nie."
+      ],
+      "explanation_md": "Area 0 na obu końcach spełnia warunek zgodności obszaru.",
+      "card_id": "ospf.area",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "area 10",
+          "feedback_md": "Area ID na obu końcach wspólnego łącza musi być zgodne."
+        },
+        {
+          "id": "B",
+          "text_md": "area 20",
+          "feedback_md": "Area 20 różni się od area 0 na R1."
+        },
+        {
+          "id": "C",
+          "text_md": "area 0",
+          "feedback_md": "Area 0 na obu końcach spełnia warunek zgodności obszaru."
+        },
+        {
+          "id": "D",
+          "text_md": "area 1",
+          "feedback_md": "Area 1 nie jest zgodne z area 0 na R1."
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ospf.07",
+      "revision": 2,
+      "title": "Proces i backbone",
+      "skills": [
+        "ospf.area"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        }
+      ],
+      "type": "cli_fill_blank",
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 2,
+      "platform": "IOS / IOS XE",
+      "prompt_md": "Utwórz na R1 **proces 10**. Interfejsy z 10.0.12.0/30 przypisz do **obszaru backbone**.",
+      "template": "R1(config)# router ospf {{process}}\nR1(config-router)# network 10.0.12.0 0.0.0.3 area {{area}}",
+      "hints": [
+        "Numer procesu wynika z polecenia. Backbone ma ID zero."
+      ],
+      "explanation_md": "Proces `10` ma znaczenie lokalne. Area `0` (także `0.0.0.0`) to backbone.",
+      "card_id": "ospf.area",
+      "blanks": [
+        {
+          "id": "process",
+          "label": "ID procesu",
+          "answer_type": "integer",
+          "accepted": [
+            "10"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "area",
+          "label": "Obszar backbone",
+          "answer_type": "keyword",
+          "accepted": [
+            "0",
+            "0.0.0.0"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ospf.08",
+      "revision": 3,
+      "title": "Dołącz R2 do obszaru",
+      "skills": [
+        "ospf.area"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        }
+      ],
+      "type": "cli_fill_blank",
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 2,
+      "platform": "IOS / IOS XE",
+      "prompt_md": "R1 używa area 0. Na R2 uruchom **proces 20**, dopasuj wyłącznie adres **10.0.12.2** i ustaw zgodny obszar.",
+      "template": "R2(config)# router ospf 20\nR2(config-router)# network {{address}} 0.0.0.0 area {{area}}",
+      "hints": [
+        "Proces jest lokalny, ale obszar na wspólnym łączu musi być zgodny."
+      ],
+      "explanation_md": "R2 może mieć proces `20`, choć R1 ma `10`. Oba końce łącza używają area `0`.",
+      "card_id": "ospf.area",
+      "blanks": [
+        {
+          "id": "address",
+          "label": "Adres R2",
+          "answer_type": "ipv4",
+          "accepted": [
+            "10.0.12.2"
+          ],
+          "width": 12,
+          "common_errors": {}
+        },
+        {
+          "id": "area",
+          "label": "Obszar wspólnego łącza",
+          "answer_type": "keyword",
+          "accepted": [
+            "0",
+            "0.0.0.0"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

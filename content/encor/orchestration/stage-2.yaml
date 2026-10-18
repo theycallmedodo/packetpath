@@ -1,0 +1,519 @@
+{
+  "schema_version": 3,
+  "id": "encor.orchestration.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Push i pull",
+      "skills": [
+        "orchestration.push-i-pull"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.07.theory",
+      "front_md": "Push i pull",
+      "back_md": "To opis kierunku inicjowania pracy, nie automatycznie konkretnego transportu ani pełnej klasyfikacji bezpieczeństwa.",
+      "example": "Push: sterujący inicjuje wykonanie; pull: węzeł/agent pobiera żądany stan lub zadania"
+    },
+    {
+      "revision": 1,
+      "title": "Stan deklaratywny",
+      "skills": [
+        "orchestration.stan-deklaratywny"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.08.theory",
+      "front_md": "Stan deklaratywny",
+      "back_md": "Podejście deklaratywne określa rezultat. Jakość implementacji modułu i weryfikacja nadal są istotne.",
+      "example": "Skupia się na stanie docelowym, a narzędzie może porównać go ze stanem obecnym"
+    },
+    {
+      "revision": 1,
+      "title": "Idempotencja zadania",
+      "skills": [
+        "orchestration.idempotencja-zadania"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.09.theory",
+      "front_md": "Idempotencja zadania",
+      "back_md": "Idempotencja ułatwia powtarzanie automatyzacji. Nie gwarantuje jednak, że błędnie określony stan docelowy jest bezpieczny.",
+      "example": "Nie wprowadzać zbędnych zmian tego samego stanu"
+    },
+    {
+      "revision": 1,
+      "title": "Configuration drift",
+      "skills": [
+        "orchestration.configuration-drift"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.10.theory",
+      "front_md": "Configuration drift",
+      "back_md": "Drift może wynikać np. z ręcznej zmiany lub częściowego wykonania. Narzędzie powinno go wykrywać i obsługiwać zgodnie z polityką.",
+      "example": "Rozbieżność między stanem oczekiwanym a rzeczywistym"
+    },
+    {
+      "revision": 1,
+      "title": "Koszt modelu agentowego",
+      "skills": [
+        "orchestration.koszt-modelu-agentowego"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.11.theory",
+      "front_md": "Koszt modelu agentowego",
+      "back_md": "Agent może zapewniać lokalne funkcje, ale sam staje się elementem utrzymania i kontroli dostępu.",
+      "example": "Instalacja, zgodność wersji, aktualizacje i zdrowie agentów"
+    },
+    {
+      "revision": 1,
+      "title": "Sieć bez możliwości instalacji",
+      "skills": [
+        "orchestration.sie-bez-mo-liwo-ci-instalacji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.12.theory",
+      "front_md": "Sieć bez możliwości instalacji",
+      "back_md": "Brak możliwości instalacji agenta nie wyklucza automatyzacji przez udostępnione interfejsy zarządzania.",
+      "example": "Narzędzie bezagentowe lub wspierana integracja/proxy"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.orchestration.07",
+      "revision": 1,
+      "title": "Push i pull",
+      "skills": [
+        "orchestration.push-i-pull"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Które rozróżnienie modeli wykonania jest poprawne?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "To opis kierunku inicjowania pracy, nie automatycznie konkretnego transportu ani pełnej klasyfikacji bezpieczeństwa.",
+      "card_id": "encor.orchestration.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Push zawsze oznacza UDP, pull zawsze TCP",
+          "feedback_md": "To opis kierunku inicjowania pracy, nie automatycznie konkretnego transportu ani pełnej klasyfikacji bezpieczeństwa.",
+          "id": "A"
+        },
+        {
+          "text_md": "Push działa wyłącznie bez haseł",
+          "feedback_md": "To opis kierunku inicjowania pracy, nie automatycznie konkretnego transportu ani pełnej klasyfikacji bezpieczeństwa.",
+          "id": "B"
+        },
+        {
+          "text_md": "Pull oznacza ręczne pobieranie pliku przez operatora",
+          "feedback_md": "To opis kierunku inicjowania pracy, nie automatycznie konkretnego transportu ani pełnej klasyfikacji bezpieczeństwa.",
+          "id": "C"
+        },
+        {
+          "text_md": "Push: sterujący inicjuje wykonanie; pull: węzeł/agent pobiera żądany stan lub zadania",
+          "feedback_md": "To opis kierunku inicjowania pracy, nie automatycznie konkretnego transportu ani pełnej klasyfikacji bezpieczeństwa.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.orchestration.08",
+      "revision": 1,
+      "title": "Stan deklaratywny",
+      "skills": [
+        "orchestration.stan-deklaratywny"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Zadanie deklaruje, że VLAN 20 ma istnieć. Czym różni się ten zamiar od bezwarunkowego odtworzenia serii poleceń?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Podejście deklaratywne określa rezultat. Jakość implementacji modułu i weryfikacja nadal są istotne.",
+      "card_id": "encor.orchestration.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zawsze wykonuje reload po każdym uruchomieniu",
+          "feedback_md": "Podejście deklaratywne określa rezultat. Jakość implementacji modułu i weryfikacja nadal są istotne.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie wymaga odczytu ani walidacji",
+          "feedback_md": "Podejście deklaratywne określa rezultat. Jakość implementacji modułu i weryfikacja nadal są istotne.",
+          "id": "B"
+        },
+        {
+          "text_md": "Skupia się na stanie docelowym, a narzędzie może porównać go ze stanem obecnym",
+          "feedback_md": "Podejście deklaratywne określa rezultat. Jakość implementacji modułu i weryfikacja nadal są istotne.",
+          "id": "C"
+        },
+        {
+          "text_md": "Automatycznie gwarantuje brak jakichkolwiek błędów",
+          "feedback_md": "Podejście deklaratywne określa rezultat. Jakość implementacji modułu i weryfikacja nadal są istotne.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.orchestration.09",
+      "revision": 1,
+      "title": "Idempotencja zadania",
+      "skills": [
+        "orchestration.idempotencja-zadania"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Po pierwszym uruchomieniu konfiguracja już odpowiada celowi. Co powinno zrobić zadanie idempotentne przy ponowieniu?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Idempotencja ułatwia powtarzanie automatyzacji. Nie gwarantuje jednak, że błędnie określony stan docelowy jest bezpieczny.",
+      "card_id": "encor.orchestration.09.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zawsze usunąć i odtworzyć całą konfigurację",
+          "feedback_md": "Idempotencja ułatwia powtarzanie automatyzacji. Nie gwarantuje jednak, że błędnie określony stan docelowy jest bezpieczny.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie wprowadzać zbędnych zmian tego samego stanu",
+          "feedback_md": "Idempotencja ułatwia powtarzanie automatyzacji. Nie gwarantuje jednak, że błędnie określony stan docelowy jest bezpieczny.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zawsze zwiększyć numer VLAN",
+          "feedback_md": "Idempotencja ułatwia powtarzanie automatyzacji. Nie gwarantuje jednak, że błędnie określony stan docelowy jest bezpieczny.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zawsze zgłosić błąd tylko dlatego, że stan istnieje",
+          "feedback_md": "Idempotencja ułatwia powtarzanie automatyzacji. Nie gwarantuje jednak, że błędnie określony stan docelowy jest bezpieczny.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.orchestration.10",
+      "revision": 1,
+      "title": "Configuration drift",
+      "skills": [
+        "orchestration.configuration-drift"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co oznacza drift konfiguracji względem zadeklarowanego stanu?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Drift może wynikać np. z ręcznej zmiany lub częściowego wykonania. Narzędzie powinno go wykrywać i obsługiwać zgodnie z polityką.",
+      "card_id": "encor.orchestration.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Rozbieżność między stanem oczekiwanym a rzeczywistym",
+          "feedback_md": "Drift może wynikać np. z ręcznej zmiany lub częściowego wykonania. Narzędzie powinno go wykrywać i obsługiwać zgodnie z polityką.",
+          "id": "A"
+        },
+        {
+          "text_md": "Każdy wzrost RTT w sieci",
+          "feedback_md": "Drift może wynikać np. z ręcznej zmiany lub częściowego wykonania. Narzędzie powinno go wykrywać i obsługiwać zgodnie z polityką.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie zmianę adresu DHCP hosta",
+          "feedback_md": "Drift może wynikać np. z ręcznej zmiany lub częściowego wykonania. Narzędzie powinno go wykrywać i obsługiwać zgodnie z polityką.",
+          "id": "C"
+        },
+        {
+          "text_md": "Obowiązkowo awarię agenta",
+          "feedback_md": "Drift może wynikać np. z ręcznej zmiany lub częściowego wykonania. Narzędzie powinno go wykrywać i obsługiwać zgodnie z polityką.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.orchestration.11",
+      "revision": 1,
+      "title": "Koszt modelu agentowego",
+      "skills": [
+        "orchestration.koszt-modelu-agentowego"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Jaki dodatkowy obszar utrzymania zwykle pojawia się przy agentach?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Agent może zapewniać lokalne funkcje, ale sam staje się elementem utrzymania i kontroli dostępu.",
+      "card_id": "encor.orchestration.11.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Brak możliwości monitorowania",
+          "feedback_md": "Agent może zapewniać lokalne funkcje, ale sam staje się elementem utrzymania i kontroli dostępu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Obowiązkowa rezygnacja z uwierzytelnienia",
+          "feedback_md": "Agent może zapewniać lokalne funkcje, ale sam staje się elementem utrzymania i kontroli dostępu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Brak jakichkolwiek zależności programowych",
+          "feedback_md": "Agent może zapewniać lokalne funkcje, ale sam staje się elementem utrzymania i kontroli dostępu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Instalacja, zgodność wersji, aktualizacje i zdrowie agentów",
+          "feedback_md": "Agent może zapewniać lokalne funkcje, ale sam staje się elementem utrzymania i kontroli dostępu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.orchestration.12",
+      "revision": 1,
+      "title": "Sieć bez możliwości instalacji",
+      "skills": [
+        "orchestration.sie-bez-mo-liwo-ci-instalacji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Switch nie pozwala instalować zewnętrznego agenta, ale ma wspierane SSH/API. Który kierunek automatyzacji jest naturalny?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Brak możliwości instalacji agenta nie wyklucza automatyzacji przez udostępnione interfejsy zarządzania.",
+      "card_id": "encor.orchestration.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Rezygnacja z automatyzacji w każdych warunkach",
+          "feedback_md": "Brak możliwości instalacji agenta nie wyklucza automatyzacji przez udostępnione interfejsy zarządzania.",
+          "id": "A"
+        },
+        {
+          "text_md": "Instalacja dowolnego pakietu mimo braku wsparcia",
+          "feedback_md": "Brak możliwości instalacji agenta nie wyklucza automatyzacji przez udostępnione interfejsy zarządzania.",
+          "id": "B"
+        },
+        {
+          "text_md": "Narzędzie bezagentowe lub wspierana integracja/proxy",
+          "feedback_md": "Brak możliwości instalacji agenta nie wyklucza automatyzacji przez udostępnione interfejsy zarządzania.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wymiana protokołu routingu na narzędzie konfiguracji",
+          "feedback_md": "Brak możliwości instalacji agenta nie wyklucza automatyzacji przez udostępnione interfejsy zarządzania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

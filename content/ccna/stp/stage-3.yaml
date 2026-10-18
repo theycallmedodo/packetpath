@@ -1,0 +1,478 @@
+{
+  "schema_version": 3,
+  "id": "ccna.stp.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.stp.13.theory",
+      "revision": 1,
+      "title": "Alternatywna ścieżka RSTP",
+      "skills": [
+        "stp.alternate-state"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "front_md": "Alternatywna ścieżka RSTP",
+      "back_md": "RSTP oddziela rolę portu od jego stanu. Alternate zazwyczaj pozostaje discarding, dopóki nie jest potrzebny do aktywnej topologii.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.stp.14.theory",
+      "revision": 1,
+      "title": "Rozdziel root dla VLAN-ów",
+      "skills": [
+        "stp.per-vlan-root"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "front_md": "Rozdziel root dla VLAN-ów",
+      "back_md": "Instancje VLAN mogą mieć różne bridge priority. Ostateczny root zależy również od konfiguracji pozostałych switchy.",
+      "example": "SW1(config)# spanning-tree mode rapid-pvst\nSW1(config)# spanning-tree vlan 10 priority 4096\nSW1(config)# spanning-tree vlan 20 priority 8192"
+    },
+    {
+      "id": "ccna.stp.15.theory",
+      "revision": 1,
+      "title": "Pełny port końcowy",
+      "skills": [
+        "stp.edge-scenario"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        }
+      ],
+      "front_md": "Pełny port końcowy",
+      "back_md": "Konfiguracja łączy członkostwo VLAN z szybkim uruchomieniem i ochroną przed BPDU. Założenie o pojedynczym hoście jest istotne.",
+      "example": "SW1(config)# interface GigabitEthernet1/0/7\nSW1(config-if)# switchport mode access\nSW1(config-if)# switchport access vlan 10\nSW1(config-if)# spanning-tree portfast\nSW1(config-if)# spanning-tree bpduguard enable"
+    },
+    {
+      "id": "ccna.stp.16.theory",
+      "revision": 1,
+      "title": "Root port przy różnych kosztach",
+      "skills": [
+        "stp.root-port"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "front_md": "Root port przy różnych kosztach",
+      "back_md": "Porównuj całkowity root path cost. Dopiero przy remisie analizuj dalsze kryteria.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.stp.17.theory",
+      "revision": 1,
+      "title": "Root Guard na łączu w dół",
+      "skills": [
+        "stp.root-guard"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        }
+      ],
+      "front_md": "Root Guard na łączu w dół",
+      "back_md": "Root Guard przeciwdziała przejęciu roli root przez chroniony kierunek. Odebranie superior BPDU może wywołać root-inconsistent, a nie mechanizm BPDU Guard.",
+      "example": "SW1(config)# interface GigabitEthernet1/0/12\nSW1(config-if)# spanning-tree guard root\nSW1(config-if)# end\nSW1# show spanning-tree inconsistentports"
+    },
+    {
+      "id": "ccna.stp.18.theory",
+      "revision": 1,
+      "title": "Przywróć port po usunięciu przyczyny",
+      "skills": [
+        "stp.recover-edge"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        }
+      ],
+      "front_md": "Przywróć port po usunięciu przyczyny",
+      "back_md": "Po usunięciu przyczyny administracyjne wyłączenie i ponowne włączenie może przywrócić port. Bez usunięcia źródła BPDU ochrona zadziała ponownie.",
+      "example": "SW1(config)# interface GigabitEthernet1/0/7\nSW1(config-if)# shutdown\nSW1(config-if)# no shutdown\nSW1(config-if)# end"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.stp.13",
+      "revision": 1,
+      "title": "Alternatywna ścieżka RSTP",
+      "skills": [
+        "stp.alternate-state"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Port ma rolę alternate w RSTP, a podstawowy root port działa. Jaki jest typowy stan alternate portu?",
+      "hints": [
+        "Zapasowa ścieżka nie powinna tworzyć równoległej pętli."
+      ],
+      "explanation_md": "RSTP oddziela rolę portu od jego stanu. Alternate zazwyczaj pozostaje discarding, dopóki nie jest potrzebny do aktywnej topologii.",
+      "card_id": "ccna.stp.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Forwarding, bo alternate wysyła kopię każdej ramki.",
+          "feedback_md": "Duplikowanie transmisji podtrzymywałoby pętlę."
+        },
+        {
+          "id": "B",
+          "text_md": "Discarding, gotowy jako alternatywna ścieżka.",
+          "feedback_md": "Alternate jest zapasową ścieżką i nie przekazuje normalnego ruchu w tym stanie."
+        },
+        {
+          "id": "C",
+          "text_md": "Administratively down z definicji.",
+          "feedback_md": "Rola alternate nie oznacza administracyjnego shutdown."
+        },
+        {
+          "id": "D",
+          "text_md": "Err-disabled z definicji.",
+          "feedback_md": "Nie oznacza też automatycznie naruszenia zabezpieczeń."
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.stp.14",
+      "revision": 1,
+      "title": "Rozdziel root dla VLAN-ów",
+      "skills": [
+        "stp.per-vlan-root"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na SW1 ustaw Rapid PVST+, bazowy priority 4096 dla VLAN 10 i 8192 dla VLAN 20.",
+      "hints": [
+        "Każda linia priority dotyczy wskazanego VLAN-u."
+      ],
+      "explanation_md": "Instancje VLAN mogą mieć różne bridge priority. Ostateczny root zależy również od konfiguracji pozostałych switchy.",
+      "card_id": "ccna.stp.14.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# spanning-tree mode {{mode}}\nSW1(config)# spanning-tree vlan 10 priority {{p10}}\nSW1(config)# spanning-tree vlan 20 priority {{p20}}",
+      "blanks": [
+        {
+          "id": "mode",
+          "label": "Tryb",
+          "answer_type": "keyword",
+          "accepted": [
+            "rapid-pvst"
+          ],
+          "width": 13,
+          "common_errors": {}
+        },
+        {
+          "id": "p10",
+          "label": "Priorytet VLAN 10",
+          "answer_type": "integer",
+          "accepted": [
+            "4096"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "p20",
+          "label": "Priorytet VLAN 20",
+          "answer_type": "integer",
+          "accepted": [
+            "8192"
+          ],
+          "width": 7,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.stp.15",
+      "revision": 1,
+      "title": "Pełny port końcowy",
+      "skills": [
+        "stp.edge-scenario"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "G1/0/7 prowadzi tylko do PC. VLAN 10 istnieje. Ustaw access VLAN 10, PortFast i BPDU Guard.",
+      "hints": [
+        "Nie przenoś takiej konfiguracji bez analizy na uplink switcha."
+      ],
+      "explanation_md": "Konfiguracja łączy członkostwo VLAN z szybkim uruchomieniem i ochroną przed BPDU. Założenie o pojedynczym hoście jest istotne.",
+      "card_id": "ccna.stp.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# interface GigabitEthernet1/0/7\nSW1(config-if)# switchport mode {{mode}}\nSW1(config-if)# switchport access vlan {{vlan}}\nSW1(config-if)# spanning-tree {{fast}}\nSW1(config-if)# spanning-tree {{guard}} enable",
+      "blanks": [
+        {
+          "id": "mode",
+          "label": "Tryb portu",
+          "answer_type": "keyword",
+          "accepted": [
+            "access"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "vlan",
+          "label": "VLAN PC",
+          "answer_type": "integer",
+          "accepted": [
+            "10"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "fast",
+          "label": "PortFast",
+          "answer_type": "keyword",
+          "accepted": [
+            "portfast",
+            "portfast edge"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "guard",
+          "label": "BPDU Guard",
+          "answer_type": "keyword",
+          "accepted": [
+            "bpduguard"
+          ],
+          "width": 12,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.stp.16",
+      "revision": 1,
+      "title": "Root port przy różnych kosztach",
+      "skills": [
+        "stp.root-port"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Switch niebędący root ma dwie ścieżki do tego samego root. Całkowity koszt przez G1/0/1 wynosi 4, a przez G1/0/2 wynosi 19. Która ścieżka jest preferowana?",
+      "hints": [
+        "W tym przykładzie nie ma remisu kosztów."
+      ],
+      "explanation_md": "Porównuj całkowity root path cost. Dopiero przy remisie analizuj dalsze kryteria.",
+      "card_id": "ccna.stp.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Przez G1/0/2, bo koszt jest większy.",
+          "feedback_md": "Większy koszt nie jest preferowany."
+        },
+        {
+          "id": "B",
+          "text_md": "Obie jako root port tej samej instancji.",
+          "feedback_md": "W tej instancji switch wybiera jeden root port."
+        },
+        {
+          "id": "C",
+          "text_md": "Zawsze port o wyższym numerze.",
+          "feedback_md": "Numer portu nie wyprzedza różnicy kosztów."
+        },
+        {
+          "id": "D",
+          "text_md": "Przez G1/0/1, bo koszt jest niższy.",
+          "feedback_md": "Niższy całkowity koszt do tego samego root rozstrzyga wybór."
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.stp.17",
+      "revision": 1,
+      "title": "Root Guard na łączu w dół",
+      "skills": [
+        "stp.root-guard"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "G1/0/12 prowadzi do switcha dostępowego, który nie może zostać root. Włącz Root Guard, zakończ konfigurację i wyświetl porty niespójne.",
+      "hints": [
+        "Ochrona dotyczy kierunku, z którego root nie powinien nadejść."
+      ],
+      "explanation_md": "Root Guard przeciwdziała przejęciu roli root przez chroniony kierunek. Odebranie superior BPDU może wywołać root-inconsistent, a nie mechanizm BPDU Guard.",
+      "card_id": "ccna.stp.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# interface GigabitEthernet1/0/12\nSW1(config-if)# spanning-tree guard {{guard}}\nSW1(config-if)# {{finish}}\nSW1# show spanning-tree {{view}}",
+      "blanks": [
+        {
+          "id": "guard",
+          "label": "Rodzaj ochrony",
+          "answer_type": "keyword",
+          "accepted": [
+            "root"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "finish",
+          "label": "Wyjście do EXEC",
+          "answer_type": "keyword",
+          "accepted": [
+            "end"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "view",
+          "label": "Widok niespójności",
+          "answer_type": "keyword",
+          "accepted": [
+            "inconsistentports"
+          ],
+          "width": 20,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.stp.18",
+      "revision": 1,
+      "title": "Przywróć port po usunięciu przyczyny",
+      "skills": [
+        "stp.recover-edge"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Port G1/0/7 został err-disabled przez BPDU Guard. Nieautoryzowany switch już odłączono. Wykonaj shutdown/no shutdown i zakończ konfigurację.",
+      "hints": [
+        "Nie wyłączaj zabezpieczenia tylko po to, by ukryć problem."
+      ],
+      "explanation_md": "Po usunięciu przyczyny administracyjne wyłączenie i ponowne włączenie może przywrócić port. Bez usunięcia źródła BPDU ochrona zadziała ponownie.",
+      "card_id": "ccna.stp.18.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# interface GigabitEthernet1/0/7\nSW1(config-if)# {{down}}\nSW1(config-if)# {{up}}\nSW1(config-if)# {{finish}}",
+      "blanks": [
+        {
+          "id": "down",
+          "label": "Wyłącz administracyjnie",
+          "answer_type": "keyword",
+          "accepted": [
+            "shutdown"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "up",
+          "label": "Przywróć administracyjnie",
+          "answer_type": "command",
+          "accepted": [
+            "no shutdown"
+          ],
+          "width": 14,
+          "common_errors": {}
+        },
+        {
+          "id": "finish",
+          "label": "Powrót do EXEC",
+          "answer_type": "keyword",
+          "accepted": [
+            "end"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

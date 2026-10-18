@@ -1,0 +1,405 @@
+{
+  "schema_version": 3,
+  "id": "encor.ospf-multi.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Router graniczny obszaru",
+      "skills": [
+        "ospf-multi.router-graniczny-obszaru"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.01.theory",
+      "front_md": "Router graniczny obszaru",
+      "back_md": "ABR łączy obszary OSPF. ASBR wprowadza trasy zewnętrzne przez redystrybucję.",
+      "example": "ABR"
+    },
+    {
+      "revision": 1,
+      "title": "Backbone",
+      "skills": [
+        "ospf-multi.backbone"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.02.theory",
+      "front_md": "Backbone",
+      "back_md": "Ruch między obszarami opiera się na backbone area 0; normalne obszary dołączają do niego przez ABR.",
+      "example": "Area 0"
+    },
+    {
+      "revision": 1,
+      "title": "Przypisanie obszaru",
+      "skills": [
+        "ospf-multi.przypisanie-obszaru"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.03.theory",
+      "front_md": "Przypisanie obszaru",
+      "back_md": "Przypisanie interfejsowe bezpośrednio wskazuje proces i obszar OSPF.",
+      "example": "interface GigabitEthernet0/1\n ip ospf 10 area 20"
+    },
+    {
+      "revision": 1,
+      "title": "Trasa między obszarami",
+      "skills": [
+        "ospf-multi.trasa-mi-dzy-obszarami"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.04.theory",
+      "front_md": "Trasa między obszarami",
+      "back_md": "O IA oznacza inter-area. Zwykłe O oznacza trasę intra-area.",
+      "example": "Trasa OSPF z innego obszaru"
+    },
+    {
+      "revision": 1,
+      "title": "Dwa routery bez wyboru DR",
+      "skills": [
+        "ospf-multi.dwa-routery-bez-wyboru-dr"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.05.theory",
+      "front_md": "Dwa routery bez wyboru DR",
+      "back_md": "Typ point-to-point nie wybiera DR/BDR. Należy zachować spójny typ sieci między końcami.",
+      "example": "interface GigabitEthernet0/0\n ip ospf network point-to-point"
+    },
+    {
+      "revision": 1,
+      "title": "LSA typu 3",
+      "skills": [
+        "ospf-multi.lsa-typu-3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.06.theory",
+      "front_md": "LSA typu 3",
+      "back_md": "ABR opisuje osiągalność sieci innych obszarów za pomocą LSA typu 3; nie przenosi całej bazy typu 1 bez zmian.",
+      "example": "ABR"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ospf-multi.01",
+      "revision": 1,
+      "title": "Router graniczny obszaru",
+      "skills": [
+        "ospf-multi.router-graniczny-obszaru"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "R1 ma interfejs w area 0 i interfejs w normalnym area 10. Jaką rolę pełni?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "ABR łączy obszary OSPF. ASBR wprowadza trasy zewnętrzne przez redystrybucję.",
+      "card_id": "encor.ospf-multi.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "ABR",
+          "feedback_md": "ABR łączy obszary OSPF. ASBR wprowadza trasy zewnętrzne przez redystrybucję.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłącznie ASBR",
+          "feedback_md": "ABR łączy obszary OSPF. ASBR wprowadza trasy zewnętrzne przez redystrybucję.",
+          "id": "B"
+        },
+        {
+          "text_md": "Route reflector",
+          "feedback_md": "ABR łączy obszary OSPF. ASBR wprowadza trasy zewnętrzne przez redystrybucję.",
+          "id": "C"
+        },
+        {
+          "text_md": "Designated forwarder VXLAN",
+          "feedback_md": "ABR łączy obszary OSPF. ASBR wprowadza trasy zewnętrzne przez redystrybucję.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ospf-multi.02",
+      "revision": 1,
+      "title": "Backbone",
+      "skills": [
+        "ospf-multi.backbone"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Który obszar stanowi szkielet standardowej hierarchii OSPF?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Ruch między obszarami opiera się na backbone area 0; normalne obszary dołączają do niego przez ABR.",
+      "card_id": "encor.ospf-multi.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Area 1",
+          "feedback_md": "Ruch między obszarami opiera się na backbone area 0; normalne obszary dołączają do niego przez ABR.",
+          "id": "A"
+        },
+        {
+          "text_md": "Obszar o największym ID",
+          "feedback_md": "Ruch między obszarami opiera się na backbone area 0; normalne obszary dołączają do niego przez ABR.",
+          "id": "B"
+        },
+        {
+          "text_md": "Każdy obszar z DR",
+          "feedback_md": "Ruch między obszarami opiera się na backbone area 0; normalne obszary dołączają do niego przez ABR.",
+          "id": "C"
+        },
+        {
+          "text_md": "Area 0",
+          "feedback_md": "Ruch między obszarami opiera się na backbone area 0; normalne obszary dołączają do niego przez ABR.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ospf-multi.03",
+      "revision": 1,
+      "title": "Przypisanie obszaru",
+      "skills": [
+        "ospf-multi.przypisanie-obszaru"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "W procesie OSPF 10 przypisz Gi0/1 do normalnego area 20.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Przypisanie interfejsowe bezpośrednio wskazuje proces i obszar OSPF.",
+      "card_id": "encor.ospf-multi.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "interface GigabitEthernet0/1\n ip ospf 10 area {{b0}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "20"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ospf-multi.04",
+      "revision": 1,
+      "title": "Trasa między obszarami",
+      "skills": [
+        "ospf-multi.trasa-mi-dzy-obszarami"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "```text\nR1# show ip route ospf\nO IA 10.2.0.0/16 [110/20] via 192.0.2.2, 00:05:10, GigabitEthernet0/0\n```\n\nSkrócony przykład do analizy. W show ip route widzisz O IA 10.2.0.0/16. Jak odczytać IA?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "O IA oznacza inter-area. Zwykłe O oznacza trasę intra-area.",
+      "card_id": "encor.ospf-multi.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Trasa zewnętrzna typu 2",
+          "feedback_md": "O IA oznacza inter-area. Zwykłe O oznacza trasę intra-area.",
+          "id": "A"
+        },
+        {
+          "text_md": "Trasa OSPF z innego obszaru",
+          "feedback_md": "O IA oznacza inter-area. Zwykłe O oznacza trasę intra-area.",
+          "id": "B"
+        },
+        {
+          "text_md": "Bezpośrednio podłączona sieć",
+          "feedback_md": "O IA oznacza inter-area. Zwykłe O oznacza trasę intra-area.",
+          "id": "C"
+        },
+        {
+          "text_md": "Trasa statyczna do Internetu",
+          "feedback_md": "O IA oznacza inter-area. Zwykłe O oznacza trasę intra-area.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ospf-multi.05",
+      "revision": 1,
+      "title": "Dwa routery bez wyboru DR",
+      "skills": [
+        "ospf-multi.dwa-routery-bez-wyboru-dr"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Na ethernetowym łączu z dokładnie dwoma routerami ustaw po obu stronach typ OSPF point-to-point. Uzupełnij lokalne polecenie.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Typ point-to-point nie wybiera DR/BDR. Należy zachować spójny typ sieci między końcami.",
+      "card_id": "encor.ospf-multi.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "interface GigabitEthernet0/0\n ip ospf network {{b0}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "point-to-point"
+          ],
+          "width": 16,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ospf-multi.06",
+      "revision": 1,
+      "title": "LSA typu 3",
+      "skills": [
+        "ospf-multi.lsa-typu-3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Który router generuje podsumowania między obszarami OSPFv2 w postaci LSA typu 3?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "ABR opisuje osiągalność sieci innych obszarów za pomocą LSA typu 3; nie przenosi całej bazy typu 1 bez zmian.",
+      "card_id": "encor.ospf-multi.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Każdy host końcowy",
+          "feedback_md": "ABR opisuje osiągalność sieci innych obszarów za pomocą LSA typu 3; nie przenosi całej bazy typu 1 bez zmian.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tylko BDR",
+          "feedback_md": "ABR opisuje osiągalność sieci innych obszarów za pomocą LSA typu 3; nie przenosi całej bazy typu 1 bez zmian.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie router iBGP",
+          "feedback_md": "ABR opisuje osiągalność sieci innych obszarów za pomocą LSA typu 3; nie przenosi całej bazy typu 1 bez zmian.",
+          "id": "C"
+        },
+        {
+          "text_md": "ABR",
+          "feedback_md": "ABR opisuje osiągalność sieci innych obszarów za pomocą LSA typu 3; nie przenosi całej bazy typu 1 bez zmian.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

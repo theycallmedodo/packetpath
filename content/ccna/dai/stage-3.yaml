@@ -1,0 +1,515 @@
+{
+  "schema_version": 3,
+  "id": "ccna.dai.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Pusta baza po restarcie",
+      "skills": [
+        "dai.pusta-baza-po-restarcie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "id": "ccna.dai.13.theory",
+      "front_md": "Pusta baza po restarcie",
+      "back_md": "Trwałość i odbudowa bazy to element projektu ochrony, nie tylko same komendy włączające.",
+      "example": "Odtwarzanie bazy snooping i sposób ponownego nauczenia legalnych dzierżaw"
+    },
+    {
+      "revision": 1,
+      "title": "Snooping plus DAI",
+      "skills": [
+        "dai.snooping-plus-dai"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "id": "ccna.dai.14.theory",
+      "front_md": "Snooping plus DAI",
+      "back_md": "DAI wymaga wiarygodnych powiązań; przygotowanie bazy i wyjątków poprzedza wdrożenie.",
+      "example": "SW(config)# ip dhcp snooping\nSW(config)# ip dhcp snooping vlan 80\nSW(config)# ip arp inspection vlan 80"
+    },
+    {
+      "revision": 1,
+      "title": "Dwie granice zaufania",
+      "skills": [
+        "dai.dwie-granice-zaufania"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "id": "ccna.dai.15.theory",
+      "front_md": "Dwie granice zaufania",
+      "back_md": "Oba polecenia mają inny zakres działania mimo tego samego słowa trust.",
+      "example": "SW(config-if)# ip dhcp snooping trust\nSW(config-if)# ip arp inspection trust\nSW(config-if)# end\nSW# show ip arp inspection statistics"
+    },
+    {
+      "revision": 1,
+      "title": "Czy DAI filtruje IPv6?",
+      "skills": [
+        "dai.czy-dai-filtruje-ipv6"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "id": "ccna.dai.16.theory",
+      "front_md": "Czy DAI filtruje IPv6?",
+      "back_md": "DAI dotyczy ARP IPv4; nie należy utożsamiać go z ochroną całego stosu IP.",
+      "example": "Nie, ND wymaga mechanizmów właściwych IPv6"
+    },
+    {
+      "revision": 1,
+      "title": "Port klienta bez wyjątków",
+      "skills": [
+        "dai.port-klienta-bez-wyj-tk-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "id": "ccna.dai.17.theory",
+      "front_md": "Port klienta bez wyjątków",
+      "back_md": "Cofnięcie tylko jednego trust pozostawia drugą granicę zaufania bez zmiany.",
+      "example": "SW(config-if)# no ip dhcp snooping trust\nSW(config-if)# no ip arp inspection trust\nSW(config-if)# end\nSW# show ip dhcp snooping binding"
+    },
+    {
+      "revision": 1,
+      "title": "Walidacja źródłowego MAC",
+      "skills": [
+        "dai.walidacja-r-d-owego-mac"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "id": "ccna.dai.18.theory",
+      "front_md": "Walidacja źródłowego MAC",
+      "back_md": "src-mac porównuje MAC źródła ramki Ethernet z MAC nadawcy w ARP. Dodatkowe walidacje wymagają przeglądu zgodności.",
+      "example": "SW(config)# ip arp inspection vlan 100\nSW(config)# ip arp inspection validate src-mac\nSW(config)# end\nSW# show ip arp inspection statistics"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.dai.13",
+      "revision": 1,
+      "title": "Pusta baza po restarcie",
+      "skills": [
+        "dai.pusta-baza-po-restarcie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Po restarcie switcha baza snooping jest pusta, a klienci mają ważne dzierżawy. DAI odrzuca ich ARP. Co sprawdzić?",
+      "hints": [
+        "Trwałość i odbudowa bazy to element projektu ochrony, nie tylko same komendy włączające."
+      ],
+      "explanation_md": "Trwałość i odbudowa bazy to element projektu ochrony, nie tylko same komendy włączające.",
+      "card_id": "ccna.dai.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie priorytet STP",
+          "feedback_md": "STP nie odtwarza powiązań dzierżaw.",
+          "id": "A"
+        },
+        {
+          "text_md": "Czy ARP działa na TCP 443",
+          "feedback_md": "ARP nie korzysta z portów TCP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Odtwarzanie bazy snooping i sposób ponownego nauczenia legalnych dzierżaw",
+          "feedback_md": "Trwałość i odbudowa bazy to element projektu ochrony, nie tylko same komendy włączające.",
+          "id": "C"
+        },
+        {
+          "text_md": "Czy nazwa VLAN ma duże litery",
+          "feedback_md": "Nazwa nie odtwarza bindingów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.dai.14",
+      "revision": 1,
+      "title": "Snooping plus DAI",
+      "skills": [
+        "dai.snooping-plus-dai"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Włącz snooping globalnie i dla VLAN 80, następnie DAI dla tego samego VLAN-u. Trust na poprawnych uplinkach już ustawiono.",
+      "hints": [
+        "DAI wymaga wiarygodnych powiązań; przygotowanie bazy i wyjątków poprzedza wdrożenie."
+      ],
+      "explanation_md": "DAI wymaga wiarygodnych powiązań; przygotowanie bazy i wyjątków poprzedza wdrożenie.",
+      "card_id": "ccna.dai.14.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config)# ip dhcp {{b0}}\nSW(config)# ip dhcp snooping vlan {{b1}}\nSW(config)# ip arp inspection vlan {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "snooping"
+          ],
+          "width": 10,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "80"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "80"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.dai.15",
+      "revision": 1,
+      "title": "Dwie granice zaufania",
+      "skills": [
+        "dai.dwie-granice-zaufania"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Bieżący uplink jest zweryfikowany dla DHCP i ARP. Ustaw oba zaufania, a następnie pokaż statystyki DAI.",
+      "hints": [
+        "Oba polecenia mają inny zakres działania mimo tego samego słowa trust."
+      ],
+      "explanation_md": "Oba polecenia mają inny zakres działania mimo tego samego słowa trust.",
+      "card_id": "ccna.dai.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config-if)# ip dhcp snooping {{b0}}\nSW(config-if)# ip arp inspection {{b1}}\nSW(config-if)# end\nSW# show ip arp inspection {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "trust"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "trust"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "statistics"
+          ],
+          "width": 12,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.dai.16",
+      "revision": 1,
+      "title": "Czy DAI filtruje IPv6?",
+      "skills": [
+        "dai.czy-dai-filtruje-ipv6"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Czy samo DAI w VLAN 90 zabezpiecza komunikaty Neighbor Discovery IPv6?",
+      "hints": [
+        "DAI dotyczy ARP IPv4; nie należy utożsamiać go z ochroną całego stosu IP."
+      ],
+      "explanation_md": "DAI dotyczy ARP IPv4; nie należy utożsamiać go z ochroną całego stosu IP.",
+      "card_id": "ccna.dai.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, ARP i ND to ten sam protokół",
+          "feedback_md": "ND korzysta z ICMPv6, a nie ARP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, jeżeli VLAN jest trunk",
+          "feedback_md": "Tryb portu nie zmienia protokołu inspekcji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, jeśli MAC ma 48 bitów",
+          "feedback_md": "Długość MAC nie nadaje DAI obsługi ND.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, ND wymaga mechanizmów właściwych IPv6",
+          "feedback_md": "DAI dotyczy ARP IPv4; nie należy utożsamiać go z ochroną całego stosu IP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.dai.17",
+      "revision": 1,
+      "title": "Port klienta bez wyjątków",
+      "skills": [
+        "dai.port-klienta-bez-wyj-tk-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na porcie klienta cofnij oba trusty i pokaż bazę snooping.",
+      "hints": [
+        "Cofnięcie tylko jednego trust pozostawia drugą granicę zaufania bez zmiany."
+      ],
+      "explanation_md": "Cofnięcie tylko jednego trust pozostawia drugą granicę zaufania bez zmiany.",
+      "card_id": "ccna.dai.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config-if)# no ip dhcp snooping {{b0}}\nSW(config-if)# no ip arp inspection {{b1}}\nSW(config-if)# end\nSW# show ip dhcp snooping {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "trust"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "trust"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "binding"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.dai.18",
+      "revision": 1,
+      "title": "Walidacja źródłowego MAC",
+      "skills": [
+        "dai.walidacja-r-d-owego-mac"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W labie włącz DAI dla VLAN 100, dodatkową walidację src-mac i pokaż statystyki. Baza i uplinki są przygotowane.",
+      "hints": [
+        "src-mac porównuje MAC źródła ramki Ethernet z MAC nadawcy w ARP. Dodatkowe walidacje wymagają przeglądu zgodności."
+      ],
+      "explanation_md": "src-mac porównuje MAC źródła ramki Ethernet z MAC nadawcy w ARP. Dodatkowe walidacje wymagają przeglądu zgodności.",
+      "card_id": "ccna.dai.18.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config)# ip arp inspection vlan {{b0}}\nSW(config)# ip arp inspection validate {{b1}}\nSW(config)# end\nSW# show ip arp inspection {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "100"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "src-mac"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "statistics"
+          ],
+          "width": 12,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

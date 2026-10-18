@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "ccna.transport.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "TCP a UDP",
+      "skills": [
+        "transport.tcp-a-udp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.01.theory",
+      "front_md": "TCP a UDP",
+      "back_md": "TCP realizuje niezawodny transport, o ile połączenie może działać; nie gwarantuje działania aplikacji.",
+      "example": "TCP"
+    },
+    {
+      "revision": 1,
+      "title": "Handshake TCP",
+      "skills": [
+        "transport.handshake-tcp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.02.theory",
+      "front_md": "Handshake TCP",
+      "back_md": "Handshake uzgadnia numery sekwencji i potwierdza dwukierunkową komunikację TCP.",
+      "example": "SYN → SYN/ACK → ACK"
+    },
+    {
+      "revision": 1,
+      "title": "Brak handshake UDP",
+      "skills": [
+        "transport.brak-handshake-udp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.03.theory",
+      "front_md": "Brak handshake UDP",
+      "back_md": "Aplikacja nad UDP może mieć własny handshake, ale nie wynika on z samego UDP.",
+      "example": "Nie"
+    },
+    {
+      "revision": 1,
+      "title": "Numer portu",
+      "skills": [
+        "transport.numer-portu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.04.theory",
+      "front_md": "Numer portu",
+      "back_md": "Adres IP wskazuje host/interfejs, a port transportowy pomaga wskazać usługę lub proces.",
+      "example": "Punkty komunikacji aplikacji na hostach"
+    },
+    {
+      "revision": 1,
+      "title": "Kierunek odpowiedzi TCP",
+      "skills": [
+        "transport.kierunek-odpowiedzi-tcp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.05.theory",
+      "front_md": "Kierunek odpowiedzi TCP",
+      "back_md": "W kierunku powrotnym role adresów i portów są odwrócone.",
+      "example": "Źródłowy 443, docelowy 50000"
+    },
+    {
+      "revision": 1,
+      "title": "UDP i niezawodna aplikacja",
+      "skills": [
+        "transport.udp-i-niezawodna-aplikacja"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.06.theory",
+      "front_md": "UDP i niezawodna aplikacja",
+      "back_md": "Brak niezawodności w UDP nie wyklucza implementacji tych mechanizmów wyżej.",
+      "example": "Tak"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.transport.01",
+      "revision": 1,
+      "title": "TCP a UDP",
+      "skills": [
+        "transport.tcp-a-udp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Który protokół zapewnia aplikacji uporządkowany strumień bajtów z retransmisjami?",
+      "hints": [
+        "TCP realizuje niezawodny transport, o ile połączenie może działać; nie gwarantuje działania aplikacji."
+      ],
+      "explanation_md": "TCP realizuje niezawodny transport, o ile połączenie może działać; nie gwarantuje działania aplikacji.",
+      "card_id": "ccna.transport.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "TCP",
+          "feedback_md": "TCP realizuje niezawodny transport, o ile połączenie może działać; nie gwarantuje działania aplikacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "UDP",
+          "feedback_md": "UDP sam nie zapewnia kolejności ani retransmisji.",
+          "id": "B"
+        },
+        {
+          "text_md": "ARP",
+          "feedback_md": "ARP rozwiązuje adresy lokalnej warstwy drugiej.",
+          "id": "C"
+        },
+        {
+          "text_md": "ICMP",
+          "feedback_md": "ICMP przenosi komunikaty kontrolne, nie taki strumień.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.transport.02",
+      "revision": 1,
+      "title": "Handshake TCP",
+      "skills": [
+        "transport.handshake-tcp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Jaka jest typowa kolejność ustanawiania TCP?",
+      "hints": [
+        "Handshake uzgadnia numery sekwencji i potwierdza dwukierunkową komunikację TCP."
+      ],
+      "explanation_md": "Handshake uzgadnia numery sekwencji i potwierdza dwukierunkową komunikację TCP.",
+      "card_id": "ccna.transport.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "ACK → FIN → SYN",
+          "feedback_md": "FIN służy zamykaniu kierunku połączenia.",
+          "id": "A"
+        },
+        {
+          "text_md": "SYN → UDP → ACK",
+          "feedback_md": "Handshake nie przechodzi na UDP.",
+          "id": "B"
+        },
+        {
+          "text_md": "FIN → RST → ACK",
+          "feedback_md": "To nie standardowy proces ustanawiania.",
+          "id": "C"
+        },
+        {
+          "text_md": "SYN → SYN/ACK → ACK",
+          "feedback_md": "Handshake uzgadnia numery sekwencji i potwierdza dwukierunkową komunikację TCP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.transport.03",
+      "revision": 1,
+      "title": "Brak handshake UDP",
+      "skills": [
+        "transport.brak-handshake-udp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Czy UDP musi wykonać transportowy handshake przed wysłaniem pierwszego datagramu?",
+      "hints": [
+        "Aplikacja nad UDP może mieć własny handshake, ale nie wynika on z samego UDP."
+      ],
+      "explanation_md": "Aplikacja nad UDP może mieć własny handshake, ale nie wynika on z samego UDP.",
+      "card_id": "ccna.transport.03.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, identyczny jak TCP",
+          "feedback_md": "UDP nie definiuje takiego handshake.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, musi wymienić SYN/ACK",
+          "feedback_md": "Flagi te należą do TCP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie",
+          "feedback_md": "Aplikacja nad UDP może mieć własny handshake, ale nie wynika on z samego UDP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak, musi uzyskać sesję OSPF",
+          "feedback_md": "Routing i transport to inne funkcje.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.transport.04",
+      "revision": 1,
+      "title": "Numer portu",
+      "skills": [
+        "transport.numer-portu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Co pozwalają rozróżniać porty TCP/UDP?",
+      "hints": [
+        "Adres IP wskazuje host/interfejs, a port transportowy pomaga wskazać usługę lub proces."
+      ],
+      "explanation_md": "Adres IP wskazuje host/interfejs, a port transportowy pomaga wskazać usługę lub proces.",
+      "card_id": "ccna.transport.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Fizyczne gniazda switcha",
+          "feedback_md": "Port transportowy nie jest numerem gniazda Ethernet.",
+          "id": "A"
+        },
+        {
+          "text_md": "Punkty komunikacji aplikacji na hostach",
+          "feedback_md": "Adres IP wskazuje host/interfejs, a port transportowy pomaga wskazać usługę lub proces.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie VLAN-y",
+          "feedback_md": "VLAN to segmentacja warstwy drugiej.",
+          "id": "C"
+        },
+        {
+          "text_md": "Długość maski podsieci",
+          "feedback_md": "Maska nie jest portem transportowym.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.transport.05",
+      "revision": 1,
+      "title": "Kierunek odpowiedzi TCP",
+      "skills": [
+        "transport.kierunek-odpowiedzi-tcp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Klient 10.0.0.5:50000 łączy się do 192.0.2.10:443. Jakie porty ma typowa odpowiedź serwera?",
+      "hints": [
+        "W kierunku powrotnym role adresów i portów są odwrócone."
+      ],
+      "explanation_md": "W kierunku powrotnym role adresów i portów są odwrócone.",
+      "card_id": "ccna.transport.05.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Źródłowy 443, docelowy 50000",
+          "feedback_md": "W kierunku powrotnym role adresów i portów są odwrócone.",
+          "id": "A"
+        },
+        {
+          "text_md": "Źródłowy 50000, docelowy 443",
+          "feedback_md": "To kierunek klient do serwera.",
+          "id": "B"
+        },
+        {
+          "text_md": "Źródłowy 443, docelowy 443",
+          "feedback_md": "Klient użył portu 50000.",
+          "id": "C"
+        },
+        {
+          "text_md": "Źródłowy 53, docelowy 50000",
+          "feedback_md": "53 nie jest portem podanej sesji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.transport.06",
+      "revision": 1,
+      "title": "UDP i niezawodna aplikacja",
+      "skills": [
+        "transport.udp-i-niezawodna-aplikacja"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Czy aplikacja nad UDP może samodzielnie implementować potwierdzenia i ponowienia?",
+      "hints": [
+        "Brak niezawodności w UDP nie wyklucza implementacji tych mechanizmów wyżej."
+      ],
+      "explanation_md": "Brak niezawodności w UDP nie wyklucza implementacji tych mechanizmów wyżej.",
+      "card_id": "ccna.transport.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie, UDP zabrania potwierdzeń aplikacji",
+          "feedback_md": "UDP nie narzuca takiego ograniczenia.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tylko po zmianie IPv4 na IPv6",
+          "feedback_md": "Wersja IP nie jest tym warunkiem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie, bo każdy datagram musi zginąć",
+          "feedback_md": "UDP nie gwarantuje strat ani ich braku.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak",
+          "feedback_md": "Brak niezawodności w UDP nie wyklucza implementacji tych mechanizmów wyżej.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

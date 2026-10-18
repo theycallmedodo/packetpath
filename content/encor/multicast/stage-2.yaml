@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "encor.multicast.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Kontrola RPF",
+      "skills": [
+        "multicast.kontrola-rpf"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.07.theory",
+      "front_md": "Kontrola RPF",
+      "back_md": "RPF ogranicza pętle i duplikację. Kierunek nadejścia musi odpowiadać oczekiwanej ścieżce dla danego stanu multicast.",
+      "example": "Odrzucenie z powodu niezgodności RPF"
+    },
+    {
+      "revision": 1,
+      "title": "RPF w przykładzie",
+      "skills": [
+        "multicast.rpf-w-przyk-adzie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.08.theory",
+      "front_md": "RPF w przykładzie",
+      "back_md": "W tym scenariuszu wybór RPF opiera się na podanej trasie. Asymetria może powodować odrzucanie mimo poprawnego odbioru ramek na porcie.",
+      "example": "Dlaczego routing do źródła wskazuje inny interfejs niż droga nadejścia multicast"
+    },
+    {
+      "revision": 1,
+      "title": "SSM i RP",
+      "skills": [
+        "multicast.ssm-i-rp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.09.theory",
+      "front_md": "SSM i RP",
+      "back_md": "SSM buduje drzewo do wskazanego źródła. Nie potrzebuje mechanizmu odkrywania źródeł przez RP ani MSDP dla tego kanału.",
+      "example": "Nie"
+    },
+    {
+      "revision": 1,
+      "title": "Zakres SSM IPv4",
+      "skills": [
+        "multicast.zakres-ssm-ipv4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.10.theory",
+      "front_md": "Zakres SSM IPv4",
+      "back_md": "Standardowy zakres SSM to 232/8. Zakresy lokalnych grup sterujących mają inne zastosowanie.",
+      "example": "232.0.0.0/8"
+    },
+    {
+      "revision": 1,
+      "title": "IGMP a snooping",
+      "skills": [
+        "multicast.igmp-a-snooping"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.11.theory",
+      "front_md": "IGMP a snooping",
+      "back_md": "Snooping optymalizuje dystrybucję w LAN. Nie tworzy sam routingu multicast pomiędzy sieciami.",
+      "example": "Obserwuje komunikaty IGMP, by ograniczać rozsyłanie multicast do odpowiednich portów"
+    },
+    {
+      "revision": 1,
+      "title": "Przełączenie na SPT",
+      "skills": [
+        "multicast.prze-czenie-na-spt"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.12.theory",
+      "front_md": "Przełączenie na SPT",
+      "back_md": "SPT jest drzewem do konkretnego źródła. Jego droga może różnić się od drogi przez RP.",
+      "example": "Droga danych może ominąć RP"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.multicast.07",
+      "revision": 1,
+      "title": "Kontrola RPF",
+      "skills": [
+        "multicast.kontrola-rpf"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dla strumienia (S,G) router oczekuje pakietów na interfejsie wyznaczonym przez RPF do źródła S. Pakiet przychodzi innym interfejsem. Typowy skutek?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "RPF ogranicza pętle i duplikację. Kierunek nadejścia musi odpowiadać oczekiwanej ścieżce dla danego stanu multicast.",
+      "card_id": "encor.multicast.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Przekazanie każdym portem bez kontroli",
+          "feedback_md": "RPF ogranicza pętle i duplikację. Kierunek nadejścia musi odpowiadać oczekiwanej ścieżce dla danego stanu multicast.",
+          "id": "A"
+        },
+        {
+          "text_md": "Automatyczne przestawienie wszystkich tras unicast",
+          "feedback_md": "RPF ogranicza pętle i duplikację. Kierunek nadejścia musi odpowiadać oczekiwanej ścieżce dla danego stanu multicast.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zmiana grupy G na adres broadcast",
+          "feedback_md": "RPF ogranicza pętle i duplikację. Kierunek nadejścia musi odpowiadać oczekiwanej ścieżce dla danego stanu multicast.",
+          "id": "C"
+        },
+        {
+          "text_md": "Odrzucenie z powodu niezgodności RPF",
+          "feedback_md": "RPF ogranicza pętle i duplikację. Kierunek nadejścia musi odpowiadać oczekiwanej ścieżce dla danego stanu multicast.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.multicast.08",
+      "revision": 1,
+      "title": "RPF w przykładzie",
+      "skills": [
+        "multicast.rpf-w-przyk-adzie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Załóż brak specjalnej tablicy RPF i statycznych mroute. Trasa do S=10.10.10.10 prowadzi przez Gi0/0. Pakiety (S,G) wpływają Gi0/1. Co sprawdzić?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "W tym scenariuszu wybór RPF opiera się na podanej trasie. Asymetria może powodować odrzucanie mimo poprawnego odbioru ramek na porcie.",
+      "card_id": "encor.multicast.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie adres DNS odbiorcy",
+          "feedback_md": "W tym scenariuszu wybór RPF opiera się na podanej trasie. Asymetria może powodować odrzucanie mimo poprawnego odbioru ramek na porcie.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłącznie lokalny priorytet STP odbiorcy",
+          "feedback_md": "W tym scenariuszu wybór RPF opiera się na podanej trasie. Asymetria może powodować odrzucanie mimo poprawnego odbioru ramek na porcie.",
+          "id": "B"
+        },
+        {
+          "text_md": "Dlaczego routing do źródła wskazuje inny interfejs niż droga nadejścia multicast",
+          "feedback_md": "W tym scenariuszu wybór RPF opiera się na podanej trasie. Asymetria może powodować odrzucanie mimo poprawnego odbioru ramek na porcie.",
+          "id": "C"
+        },
+        {
+          "text_md": "Czy grupa ma ten sam numer co VLAN",
+          "feedback_md": "W tym scenariuszu wybór RPF opiera się na podanej trasie. Asymetria może powodować odrzucanie mimo poprawnego odbioru ramek na porcie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.multicast.09",
+      "revision": 1,
+      "title": "SSM i RP",
+      "skills": [
+        "multicast.ssm-i-rp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dla natywnego SSM odbiorca zna źródło, a router obsługuje IGMPv3. Czy kanał SSM potrzebuje RP do odkrycia źródła?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "SSM buduje drzewo do wskazanego źródła. Nie potrzebuje mechanizmu odkrywania źródeł przez RP ani MSDP dla tego kanału.",
+      "card_id": "encor.multicast.09.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, zawsze",
+          "feedback_md": "SSM buduje drzewo do wskazanego źródła. Nie potrzebuje mechanizmu odkrywania źródeł przez RP ani MSDP dla tego kanału.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie",
+          "feedback_md": "SSM buduje drzewo do wskazanego źródła. Nie potrzebuje mechanizmu odkrywania źródeł przez RP ani MSDP dla tego kanału.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tylko gdy źródło używa adresu prywatnego",
+          "feedback_md": "SSM buduje drzewo do wskazanego źródła. Nie potrzebuje mechanizmu odkrywania źródeł przez RP ani MSDP dla tego kanału.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tylko gdy odbiorca jest w innym VLAN-ie",
+          "feedback_md": "SSM buduje drzewo do wskazanego źródła. Nie potrzebuje mechanizmu odkrywania źródeł przez RP ani MSDP dla tego kanału.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.multicast.10",
+      "revision": 1,
+      "title": "Zakres SSM IPv4",
+      "skills": [
+        "multicast.zakres-ssm-ipv4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Jaki jest standardowy zakres IPv4 SSM używany przez ip pim ssm default w IOS?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Standardowy zakres SSM to 232/8. Zakresy lokalnych grup sterujących mają inne zastosowanie.",
+      "card_id": "encor.multicast.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "232.0.0.0/8",
+          "feedback_md": "Standardowy zakres SSM to 232/8. Zakresy lokalnych grup sterujących mają inne zastosowanie.",
+          "id": "A"
+        },
+        {
+          "text_md": "224.0.0.0/24",
+          "feedback_md": "Standardowy zakres SSM to 232/8. Zakresy lokalnych grup sterujących mają inne zastosowanie.",
+          "id": "B"
+        },
+        {
+          "text_md": "239.255.255.0/24",
+          "feedback_md": "Standardowy zakres SSM to 232/8. Zakresy lokalnych grup sterujących mają inne zastosowanie.",
+          "id": "C"
+        },
+        {
+          "text_md": "240.0.0.0/4",
+          "feedback_md": "Standardowy zakres SSM to 232/8. Zakresy lokalnych grup sterujących mają inne zastosowanie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.multicast.11",
+      "revision": 1,
+      "title": "IGMP a snooping",
+      "skills": [
+        "multicast.igmp-a-snooping"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co robi IGMP snooping na switchu L2?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Snooping optymalizuje dystrybucję w LAN. Nie tworzy sam routingu multicast pomiędzy sieciami.",
+      "card_id": "encor.multicast.11.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zastępuje PIM w routingu między podsieciami",
+          "feedback_md": "Snooping optymalizuje dystrybucję w LAN. Nie tworzy sam routingu multicast pomiędzy sieciami.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyznacza RP przez BGP",
+          "feedback_md": "Snooping optymalizuje dystrybucję w LAN. Nie tworzy sam routingu multicast pomiędzy sieciami.",
+          "id": "B"
+        },
+        {
+          "text_md": "Szyfruje pakiety grupowe",
+          "feedback_md": "Snooping optymalizuje dystrybucję w LAN. Nie tworzy sam routingu multicast pomiędzy sieciami.",
+          "id": "C"
+        },
+        {
+          "text_md": "Obserwuje komunikaty IGMP, by ograniczać rozsyłanie multicast do odpowiednich portów",
+          "feedback_md": "Snooping optymalizuje dystrybucję w LAN. Nie tworzy sam routingu multicast pomiędzy sieciami.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.multicast.12",
+      "revision": 1,
+      "title": "Przełączenie na SPT",
+      "skills": [
+        "multicast.prze-czenie-na-spt"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W PIM-SM odbiorczy router przeszedł z drzewa współdzielonego na shortest-path tree do źródła. Co może się zmienić?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "SPT jest drzewem do konkretnego źródła. Jego droga może różnić się od drogi przez RP.",
+      "card_id": "encor.multicast.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Grupa multicast staje się adresem unicast",
+          "feedback_md": "SPT jest drzewem do konkretnego źródła. Jego droga może różnić się od drogi przez RP.",
+          "id": "A"
+        },
+        {
+          "text_md": "IGMP musi zostać wyłączone na odbiorcy",
+          "feedback_md": "SPT jest drzewem do konkretnego źródła. Jego droga może różnić się od drogi przez RP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Droga danych może ominąć RP",
+          "feedback_md": "SPT jest drzewem do konkretnego źródła. Jego droga może różnić się od drogi przez RP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Cały ruch przechodzi obowiązkowo przez wszystkie RP",
+          "feedback_md": "SPT jest drzewem do konkretnego źródła. Jego droga może różnić się od drogi przez RP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

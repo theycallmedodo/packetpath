@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "encor.sdwan.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Płaszczyzna zarządzania",
+      "skills": [
+        "sdwan.p-aszczyzna-zarz-dzania"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.01.theory",
+      "front_md": "Płaszczyzna zarządzania",
+      "back_md": "Manager udostępnia zarządzanie, konfigurację i monitoring. Nie należy utożsamiać jego roli z przekazywaniem każdego pakietu użytkownika.",
+      "example": "SD-WAN Manager, dawniej vManage"
+    },
+    {
+      "revision": 1,
+      "title": "Płaszczyzna sterowania",
+      "skills": [
+        "sdwan.p-aszczyzna-sterowania"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.02.theory",
+      "front_md": "Płaszczyzna sterowania",
+      "back_md": "Controller realizuje funkcje sterowania overlay. WAN Edge pozostaje węzłem przesyłającym ruch użytkowników.",
+      "example": "SD-WAN Controller, dawniej vSmart"
+    },
+    {
+      "revision": 1,
+      "title": "Rola Validator",
+      "skills": [
+        "sdwan.rola-validator"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.03.theory",
+      "front_md": "Rola Validator",
+      "back_md": "Validator pomaga w początkowym zestawieniu overlay. Jego rola nie oznacza obowiązkowego tranzytu danych użytkowników.",
+      "example": "Wspomaganie orkiestracji, uwierzytelnienia i odnalezienia komponentów sterujących"
+    },
+    {
+      "revision": 1,
+      "title": "Gdzie płyną dane",
+      "skills": [
+        "sdwan.gdzie-p-yn-dane"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.04.theory",
+      "front_md": "Gdzie płyną dane",
+      "back_md": "Edge kończą transporty i tunele oraz przekazują ruch zgodnie z trasami i politykami. Kontroler nie musi być hopem danych.",
+      "example": "WAN Edge"
+    },
+    {
+      "revision": 1,
+      "title": "Protokół OMP",
+      "skills": [
+        "sdwan.protok-omp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.05.theory",
+      "front_md": "Protokół OMP",
+      "back_md": "OMP działa w płaszczyźnie sterowania między odpowiednimi komponentami SD-WAN. Nie jest protokołem routingu hostów użytkowników.",
+      "example": "Do wymiany informacji overlay, m.in. tras i TLOC"
+    },
+    {
+      "revision": 1,
+      "title": "Underlay SD-WAN",
+      "skills": [
+        "sdwan.underlay-sd-wan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.06.theory",
+      "front_md": "Underlay SD-WAN",
+      "back_md": "Underlay transportuje pakiety pomiędzy końcami overlay. Sieć może korzystać z różnych rodzajów transportu i operatorów.",
+      "example": "Osiągalność IP wymaganych końców i komponentów"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.sdwan.01",
+      "revision": 1,
+      "title": "Płaszczyzna zarządzania",
+      "skills": [
+        "sdwan.p-aszczyzna-zarz-dzania"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Który komponent Cisco Catalyst SD-WAN odpowiada głównie za centralne zarządzanie i monitoring?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Manager udostępnia zarządzanie, konfigurację i monitoring. Nie należy utożsamiać jego roli z przekazywaniem każdego pakietu użytkownika.",
+      "card_id": "encor.sdwan.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "SD-WAN Manager, dawniej vManage",
+          "feedback_md": "Manager udostępnia zarządzanie, konfigurację i monitoring. Nie należy utożsamiać jego roli z przekazywaniem każdego pakietu użytkownika.",
+          "id": "A"
+        },
+        {
+          "text_md": "SD-WAN Validator, dawniej vBond",
+          "feedback_md": "Manager udostępnia zarządzanie, konfigurację i monitoring. Nie należy utożsamiać jego roli z przekazywaniem każdego pakietu użytkownika.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie WAN Edge",
+          "feedback_md": "Manager udostępnia zarządzanie, konfigurację i monitoring. Nie należy utożsamiać jego roli z przekazywaniem każdego pakietu użytkownika.",
+          "id": "C"
+        },
+        {
+          "text_md": "Każdy serwer DHCP w oddziale",
+          "feedback_md": "Manager udostępnia zarządzanie, konfigurację i monitoring. Nie należy utożsamiać jego roli z przekazywaniem każdego pakietu użytkownika.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.sdwan.02",
+      "revision": 1,
+      "title": "Płaszczyzna sterowania",
+      "skills": [
+        "sdwan.p-aszczyzna-sterowania"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Który komponent SD-WAN dystrybuuje informacje routingu overlay i polityki control plane?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Controller realizuje funkcje sterowania overlay. WAN Edge pozostaje węzłem przesyłającym ruch użytkowników.",
+      "card_id": "encor.sdwan.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Manager jako obowiązkowy hop wszystkich pakietów",
+          "feedback_md": "Controller realizuje funkcje sterowania overlay. WAN Edge pozostaje węzłem przesyłającym ruch użytkowników.",
+          "id": "A"
+        },
+        {
+          "text_md": "Serwer NTP operatora",
+          "feedback_md": "Controller realizuje funkcje sterowania overlay. WAN Edge pozostaje węzłem przesyłającym ruch użytkowników.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie fizyczny modem transportowy",
+          "feedback_md": "Controller realizuje funkcje sterowania overlay. WAN Edge pozostaje węzłem przesyłającym ruch użytkowników.",
+          "id": "C"
+        },
+        {
+          "text_md": "SD-WAN Controller, dawniej vSmart",
+          "feedback_md": "Controller realizuje funkcje sterowania overlay. WAN Edge pozostaje węzłem przesyłającym ruch użytkowników.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.sdwan.03",
+      "revision": 1,
+      "title": "Rola Validator",
+      "skills": [
+        "sdwan.rola-validator"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Za co odpowiada SD-WAN Validator, dawniej vBond, podczas dołączania urządzeń?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Validator pomaga w początkowym zestawieniu overlay. Jego rola nie oznacza obowiązkowego tranzytu danych użytkowników.",
+      "card_id": "encor.sdwan.03.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Stałe przekazywanie wszystkich danych klientów",
+          "feedback_md": "Validator pomaga w początkowym zestawieniu overlay. Jego rola nie oznacza obowiązkowego tranzytu danych użytkowników.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zastąpienie każdego next hop transportowego",
+          "feedback_md": "Validator pomaga w początkowym zestawieniu overlay. Jego rola nie oznacza obowiązkowego tranzytu danych użytkowników.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wspomaganie orkiestracji, uwierzytelnienia i odnalezienia komponentów sterujących",
+          "feedback_md": "Validator pomaga w początkowym zestawieniu overlay. Jego rola nie oznacza obowiązkowego tranzytu danych użytkowników.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wymuszenie jednego operatora MPLS",
+          "feedback_md": "Validator pomaga w początkowym zestawieniu overlay. Jego rola nie oznacza obowiązkowego tranzytu danych użytkowników.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.sdwan.04",
+      "revision": 1,
+      "title": "Gdzie płyną dane",
+      "skills": [
+        "sdwan.gdzie-p-yn-dane"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Które urządzenia realizują data plane overlay SD-WAN dla ruchu między oddziałami?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Edge kończą transporty i tunele oraz przekazują ruch zgodnie z trasami i politykami. Kontroler nie musi być hopem danych.",
+      "card_id": "encor.sdwan.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie Manager",
+          "feedback_md": "Edge kończą transporty i tunele oraz przekazują ruch zgodnie z trasami i politykami. Kontroler nie musi być hopem danych.",
+          "id": "A"
+        },
+        {
+          "text_md": "WAN Edge",
+          "feedback_md": "Edge kończą transporty i tunele oraz przekazują ruch zgodnie z trasami i politykami. Kontroler nie musi być hopem danych.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie Validator",
+          "feedback_md": "Edge kończą transporty i tunele oraz przekazują ruch zgodnie z trasami i politykami. Kontroler nie musi być hopem danych.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłącznie stacje administracyjne",
+          "feedback_md": "Edge kończą transporty i tunele oraz przekazują ruch zgodnie z trasami i politykami. Kontroler nie musi być hopem danych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.sdwan.05",
+      "revision": 1,
+      "title": "Protokół OMP",
+      "skills": [
+        "sdwan.protok-omp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Do czego służy Overlay Management Protocol w Cisco SD-WAN?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "OMP działa w płaszczyźnie sterowania między odpowiednimi komponentami SD-WAN. Nie jest protokołem routingu hostów użytkowników.",
+      "card_id": "encor.sdwan.05.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Do wymiany informacji overlay, m.in. tras i TLOC",
+          "feedback_md": "OMP działa w płaszczyźnie sterowania między odpowiednimi komponentami SD-WAN. Nie jest protokołem routingu hostów użytkowników.",
+          "id": "A"
+        },
+        {
+          "text_md": "Do zestawiania sąsiedztwa STP na każdym porcie",
+          "feedback_md": "OMP działa w płaszczyźnie sterowania między odpowiednimi komponentami SD-WAN. Nie jest protokołem routingu hostów użytkowników.",
+          "id": "B"
+        },
+        {
+          "text_md": "Do rozwiązywania nazw hostów",
+          "feedback_md": "OMP działa w płaszczyźnie sterowania między odpowiednimi komponentami SD-WAN. Nie jest protokołem routingu hostów użytkowników.",
+          "id": "C"
+        },
+        {
+          "text_md": "Do zastąpienia wszystkich protokołów LAN hosta",
+          "feedback_md": "OMP działa w płaszczyźnie sterowania między odpowiednimi komponentami SD-WAN. Nie jest protokołem routingu hostów użytkowników.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.sdwan.06",
+      "revision": 1,
+      "title": "Underlay SD-WAN",
+      "skills": [
+        "sdwan.underlay-sd-wan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Co musi dostarczyć underlay, aby overlay mógł funkcjonować?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Underlay transportuje pakiety pomiędzy końcami overlay. Sieć może korzystać z różnych rodzajów transportu i operatorów.",
+      "card_id": "encor.sdwan.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Znajomość każdego prefiksu użytkownika overlay",
+          "feedback_md": "Underlay transportuje pakiety pomiędzy końcami overlay. Sieć może korzystać z różnych rodzajów transportu i operatorów.",
+          "id": "A"
+        },
+        {
+          "text_md": "Identyczny VLAN na wszystkich oddziałach",
+          "feedback_md": "Underlay transportuje pakiety pomiędzy końcami overlay. Sieć może korzystać z różnych rodzajów transportu i operatorów.",
+          "id": "B"
+        },
+        {
+          "text_md": "Jeden wspólny operator dla wszystkich łączy",
+          "feedback_md": "Underlay transportuje pakiety pomiędzy końcami overlay. Sieć może korzystać z różnych rodzajów transportu i operatorów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Osiągalność IP wymaganych końców i komponentów",
+          "feedback_md": "Underlay transportuje pakiety pomiędzy końcami overlay. Sieć może korzystać z różnych rodzajów transportu i operatorów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

@@ -1,0 +1,473 @@
+{
+  "schema_version": 3,
+  "id": "encor.netflow.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Kierunek obserwacji",
+      "skills": [
+        "netflow.kierunek-obserwacji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.07.theory",
+      "front_md": "Kierunek obserwacji",
+      "back_md": "Input odnosi się do punktu obserwacji przepływów na interfejsie. Nie jest kierunkiem wysyłania rekordów eksportera.",
+      "example": "Wchodzący do routera przez Gi0/0"
+    },
+    {
+      "revision": 1,
+      "title": "Cache bez kolektora",
+      "skills": [
+        "netflow.cache-bez-kolektora"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.08.theory",
+      "front_md": "Cache bez kolektora",
+      "back_md": "Lokalny cache i eksport są rozdzielone. Brak eksportera nie oznacza automatycznie braku lokalnych danych.",
+      "example": "Tak, eksport jest osobnym elementem"
+    },
+    {
+      "revision": 1,
+      "title": "Rekord i exporter",
+      "skills": [
+        "netflow.rekord-i-exporter"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.09.theory",
+      "front_md": "Rekord i exporter",
+      "back_md": "Monitor odwołuje się do istniejących nazw. Definicja monitora nie oznacza jeszcze przypięcia do interfejsu.",
+      "example": "flow monitor MON\n record REC\n exporter EXP"
+    },
+    {
+      "revision": 1,
+      "title": "Dwa przepływy czy jeden",
+      "skills": [
+        "netflow.dwa-przep-ywy-czy-jeden"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.10.theory",
+      "front_md": "Dwa przepływy czy jeden",
+      "back_md": "Rozdział wynika z pól match. Aby odróżniać porty, należy uwzględnić je w kluczu odpowiedniego rekordu.",
+      "example": "Mogą trafić do tego samego wpisu przepływu"
+    },
+    {
+      "revision": 1,
+      "title": "Port i wersja eksportu",
+      "skills": [
+        "netflow.port-i-wersja-eksportu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.11.theory",
+      "front_md": "Port i wersja eksportu",
+      "back_md": "Port musi odpowiadać konfiguracji kolektora. NetFlow v9 korzysta z szablonów opisujących rekordy.",
+      "example": "flow exporter EXP\n destination 192.0.2.50\n transport udp 2055\n export-protocol netflow-v9"
+    },
+    {
+      "revision": 1,
+      "title": "Active timeout",
+      "skills": [
+        "netflow.active-timeout"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.12.theory",
+      "front_md": "Active timeout",
+      "back_md": "Active timeout ogranicza czas oczekiwania na dane o trwającym przepływie. Nie steruje sesją aplikacji użytkownika.",
+      "example": "Okresowe raportowanie danych mimo dalszego trwania ruchu"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.netflow.07",
+      "revision": 1,
+      "title": "Kierunek obserwacji",
+      "skills": [
+        "netflow.kierunek-obserwacji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na Gi0/0 skonfigurowano ip flow monitor MON input. Który ruch obserwuje ten punkt?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Input odnosi się do punktu obserwacji przepływów na interfejsie. Nie jest kierunkiem wysyłania rekordów eksportera.",
+      "card_id": "encor.netflow.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tylko eksport wychodzący do kolektora",
+          "feedback_md": "Input odnosi się do punktu obserwacji przepływów na interfejsie. Nie jest kierunkiem wysyłania rekordów eksportera.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłącznie ruch wytworzony przez CPU",
+          "feedback_md": "Input odnosi się do punktu obserwacji przepływów na interfejsie. Nie jest kierunkiem wysyłania rekordów eksportera.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tylko pakiety opuszczające Gi0/0",
+          "feedback_md": "Input odnosi się do punktu obserwacji przepływów na interfejsie. Nie jest kierunkiem wysyłania rekordów eksportera.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wchodzący do routera przez Gi0/0",
+          "feedback_md": "Input odnosi się do punktu obserwacji przepływów na interfejsie. Nie jest kierunkiem wysyłania rekordów eksportera.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.netflow.08",
+      "revision": 1,
+      "title": "Cache bez kolektora",
+      "skills": [
+        "netflow.cache-bez-kolektora"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Czy monitor bez przypisanego eksportera może gromadzić dane w lokalnym cache na wspieranej platformie?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Lokalny cache i eksport są rozdzielone. Brak eksportera nie oznacza automatycznie braku lokalnych danych.",
+      "card_id": "encor.netflow.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie, cache istnieje wyłącznie na kolektorze",
+          "feedback_md": "Lokalny cache i eksport są rozdzielone. Brak eksportera nie oznacza automatycznie braku lokalnych danych.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, ale tylko dane DNS",
+          "feedback_md": "Lokalny cache i eksport są rozdzielone. Brak eksportera nie oznacza automatycznie braku lokalnych danych.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, eksport jest osobnym elementem",
+          "feedback_md": "Lokalny cache i eksport są rozdzielone. Brak eksportera nie oznacza automatycznie braku lokalnych danych.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, każdy rekord musi być zaszyfrowany",
+          "feedback_md": "Lokalny cache i eksport są rozdzielone. Brak eksportera nie oznacza automatycznie braku lokalnych danych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.netflow.09",
+      "revision": 1,
+      "title": "Rekord i exporter",
+      "skills": [
+        "netflow.rekord-i-exporter"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Istnieją rekord REC i exporter EXP. Powiąż je z monitorem MON.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Monitor odwołuje się do istniejących nazw. Definicja monitora nie oznacza jeszcze przypięcia do interfejsu.",
+      "card_id": "encor.netflow.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "flow monitor MON\n record {{b0}}\n exporter {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "identifier",
+          "accepted": [
+            "REC"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "identifier",
+          "accepted": [
+            "EXP"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.netflow.10",
+      "revision": 1,
+      "title": "Dwa przepływy czy jeden",
+      "skills": [
+        "netflow.dwa-przep-ywy-czy-jeden"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Klucz rekordu zawiera tylko IPv4 source i destination. Dwie rozmowy mają te same IP, lecz różne porty TCP. Przy tym kluczu:",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Rozdział wynika z pól match. Aby odróżniać porty, należy uwzględnić je w kluczu odpowiedniego rekordu.",
+      "card_id": "encor.netflow.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Mogą trafić do tego samego wpisu przepływu",
+          "feedback_md": "Rozdział wynika z pól match. Aby odróżniać porty, należy uwzględnić je w kluczu odpowiedniego rekordu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zawsze muszą utworzyć dwa wpisy",
+          "feedback_md": "Rozdział wynika z pól match. Aby odróżniać porty, należy uwzględnić je w kluczu odpowiedniego rekordu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Port kolektora automatycznie je rozdziela",
+          "feedback_md": "Rozdział wynika z pól match. Aby odróżniać porty, należy uwzględnić je w kluczu odpowiedniego rekordu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Każdy pakiet tworzy trwały osobny rekord",
+          "feedback_md": "Rozdział wynika z pól match. Aby odróżniać porty, należy uwzględnić je w kluczu odpowiedniego rekordu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.netflow.11",
+      "revision": 1,
+      "title": "Port i wersja eksportu",
+      "skills": [
+        "netflow.port-i-wersja-eksportu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Kolektor nasłuchuje na UDP 2055 i oczekuje NetFlow v9. Uzupełnij exporter.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Port musi odpowiadać konfiguracji kolektora. NetFlow v9 korzysta z szablonów opisujących rekordy.",
+      "card_id": "encor.netflow.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "flow exporter EXP\n destination 192.0.2.50\n transport udp {{b0}}\n export-protocol {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "2055"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "netflow-v9"
+          ],
+          "width": 12,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.netflow.12",
+      "revision": 1,
+      "title": "Active timeout",
+      "skills": [
+        "netflow.active-timeout"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Jaki jest cel active timeout dla długotrwałego przepływu w typowym cache normal?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Active timeout ogranicza czas oczekiwania na dane o trwającym przepływie. Nie steruje sesją aplikacji użytkownika.",
+      "card_id": "encor.netflow.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zamknięcie sesji TCP użytkownika",
+          "feedback_md": "Active timeout ogranicza czas oczekiwania na dane o trwającym przepływie. Nie steruje sesją aplikacji użytkownika.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłączenie interfejsu po czasie",
+          "feedback_md": "Active timeout ogranicza czas oczekiwania na dane o trwającym przepływie. Nie steruje sesją aplikacji użytkownika.",
+          "id": "B"
+        },
+        {
+          "text_md": "Okresowe raportowanie danych mimo dalszego trwania ruchu",
+          "feedback_md": "Active timeout ogranicza czas oczekiwania na dane o trwającym przepływie. Nie steruje sesją aplikacji użytkownika.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wymuszenie odświeżenia DHCP",
+          "feedback_md": "Active timeout ogranicza czas oczekiwania na dane o trwającym przepływie. Nie steruje sesją aplikacji użytkownika.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

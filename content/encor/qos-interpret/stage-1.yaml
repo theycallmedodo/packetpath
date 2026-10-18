@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "encor.qos-interpret.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Klasyfikacja",
+      "skills": [
+        "qos-interpret.klasyfikacja"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.01.theory",
+      "front_md": "Klasyfikacja",
+      "back_md": "Match klasyfikuje istniejące oznaczenie. Samo dopasowanie nie jest znakowaniem ani kolejką priorytetową.",
+      "example": "Dopasowuje pakiety oznaczone EF"
+    },
+    {
+      "revision": 1,
+      "title": "DSCP EF",
+      "skills": [
+        "qos-interpret.dscp-ef"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.02.theory",
+      "front_md": "DSCP EF",
+      "back_md": "EF ma DSCP 46. Wartość IP precedence 5 nie jest tym samym sześciobitowym polem.",
+      "example": "46"
+    },
+    {
+      "revision": 1,
+      "title": "Klasa domyślna",
+      "skills": [
+        "qos-interpret.klasa-domy-lna"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.03.theory",
+      "front_md": "Klasa domyślna",
+      "back_md": "Class-default obejmuje pozostały ruch. Nie oznacza konkretnego VLAN-u ani automatycznie ruchu głosowego.",
+      "example": "Ruch nieprzypisany do wcześniejszych klas polityki"
+    },
+    {
+      "revision": 1,
+      "title": "Kierunek polityki",
+      "skills": [
+        "qos-interpret.kierunek-polityki"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.04.theory",
+      "front_md": "Kierunek polityki",
+      "back_md": "Output odnosi się do kierunku wyjściowego tego interfejsu. Input klasyfikuje kierunek wejściowy.",
+      "example": "Wysyłany przez Gi0/0"
+    },
+    {
+      "revision": 1,
+      "title": "Marking",
+      "skills": [
+        "qos-interpret.marking"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.05.theory",
+      "front_md": "Marking",
+      "back_md": "Set oznacza pakiety, ale samo znakowanie nie zapewnia pasma ani priorytetu w dalszej sieci.",
+      "example": "Ustawienie znacznika DSCP pasujących pakietów"
+    },
+    {
+      "revision": 1,
+      "title": "Ograniczenie QoS",
+      "skills": [
+        "qos-interpret.ograniczenie-qos"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.06.theory",
+      "front_md": "Ograniczenie QoS",
+      "back_md": "QoS zarządza obsługą ruchu i stratami. Nie zwiększa przepustowości medium.",
+      "example": "Nie, zarządza wykorzystaniem istniejących zasobów"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.qos-interpret.01",
+      "revision": 1,
+      "title": "Klasyfikacja",
+      "skills": [
+        "qos-interpret.klasyfikacja"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Co robi match ip dscp ef w class-map?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Match klasyfikuje istniejące oznaczenie. Samo dopasowanie nie jest znakowaniem ani kolejką priorytetową.",
+      "card_id": "encor.qos-interpret.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Dopasowuje pakiety oznaczone EF",
+          "feedback_md": "Match klasyfikuje istniejące oznaczenie. Samo dopasowanie nie jest znakowaniem ani kolejką priorytetową.",
+          "id": "A"
+        },
+        {
+          "text_md": "Szyfruje pakiety EF",
+          "feedback_md": "Match klasyfikuje istniejące oznaczenie. Samo dopasowanie nie jest znakowaniem ani kolejką priorytetową.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zmienia MTU na 46",
+          "feedback_md": "Match klasyfikuje istniejące oznaczenie. Samo dopasowanie nie jest znakowaniem ani kolejką priorytetową.",
+          "id": "C"
+        },
+        {
+          "text_md": "Automatycznie ustawia DSCP każdego pakietu",
+          "feedback_md": "Match klasyfikuje istniejące oznaczenie. Samo dopasowanie nie jest znakowaniem ani kolejką priorytetową.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.qos-interpret.02",
+      "revision": 1,
+      "title": "DSCP EF",
+      "skills": [
+        "qos-interpret.dscp-ef"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Jaką wartość dziesiętną ma DSCP Expedited Forwarding?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "EF ma DSCP 46. Wartość IP precedence 5 nie jest tym samym sześciobitowym polem.",
+      "card_id": "encor.qos-interpret.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "5",
+          "feedback_md": "EF ma DSCP 46. Wartość IP precedence 5 nie jest tym samym sześciobitowym polem.",
+          "id": "A"
+        },
+        {
+          "text_md": "0",
+          "feedback_md": "EF ma DSCP 46. Wartość IP precedence 5 nie jest tym samym sześciobitowym polem.",
+          "id": "B"
+        },
+        {
+          "text_md": "63",
+          "feedback_md": "EF ma DSCP 46. Wartość IP precedence 5 nie jest tym samym sześciobitowym polem.",
+          "id": "C"
+        },
+        {
+          "text_md": "46",
+          "feedback_md": "EF ma DSCP 46. Wartość IP precedence 5 nie jest tym samym sześciobitowym polem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.qos-interpret.03",
+      "revision": 1,
+      "title": "Klasa domyślna",
+      "skills": [
+        "qos-interpret.klasa-domy-lna"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "W policy-map istnieją VOICE i class-default. Który ruch trafia do class-default?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Class-default obejmuje pozostały ruch. Nie oznacza konkretnego VLAN-u ani automatycznie ruchu głosowego.",
+      "card_id": "encor.qos-interpret.03.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie pakiety VLAN 1",
+          "feedback_md": "Class-default obejmuje pozostały ruch. Nie oznacza konkretnego VLAN-u ani automatycznie ruchu głosowego.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tylko ARP",
+          "feedback_md": "Class-default obejmuje pozostały ruch. Nie oznacza konkretnego VLAN-u ani automatycznie ruchu głosowego.",
+          "id": "B"
+        },
+        {
+          "text_md": "Ruch nieprzypisany do wcześniejszych klas polityki",
+          "feedback_md": "Class-default obejmuje pozostały ruch. Nie oznacza konkretnego VLAN-u ani automatycznie ruchu głosowego.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wszystkie pakiety niezależnie od wcześniejszego dopasowania",
+          "feedback_md": "Class-default obejmuje pozostały ruch. Nie oznacza konkretnego VLAN-u ani automatycznie ruchu głosowego.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.qos-interpret.04",
+      "revision": 1,
+      "title": "Kierunek polityki",
+      "skills": [
+        "qos-interpret.kierunek-polityki"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Na Gi0/0 jest service-policy output WAN. Który ruch podlega tej polityce?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Output odnosi się do kierunku wyjściowego tego interfejsu. Input klasyfikuje kierunek wejściowy.",
+      "card_id": "encor.qos-interpret.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Odbierany przez Gi0/0",
+          "feedback_md": "Output odnosi się do kierunku wyjściowego tego interfejsu. Input klasyfikuje kierunek wejściowy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wysyłany przez Gi0/0",
+          "feedback_md": "Output odnosi się do kierunku wyjściowego tego interfejsu. Input klasyfikuje kierunek wejściowy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tylko lokalne logi",
+          "feedback_md": "Output odnosi się do kierunku wyjściowego tego interfejsu. Input klasyfikuje kierunek wejściowy.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłącznie sesje SSH do routera",
+          "feedback_md": "Output odnosi się do kierunku wyjściowego tego interfejsu. Input klasyfikuje kierunek wejściowy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.qos-interpret.05",
+      "revision": 1,
+      "title": "Marking",
+      "skills": [
+        "qos-interpret.marking"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "W klasie policy-map skonfigurowano set dscp af31. Jaki jest bezpośredni efekt?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Set oznacza pakiety, ale samo znakowanie nie zapewnia pasma ani priorytetu w dalszej sieci.",
+      "card_id": "encor.qos-interpret.05.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Ustawienie znacznika DSCP pasujących pakietów",
+          "feedback_md": "Set oznacza pakiety, ale samo znakowanie nie zapewnia pasma ani priorytetu w dalszej sieci.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zagwarantowanie 31 Mb/s",
+          "feedback_md": "Set oznacza pakiety, ale samo znakowanie nie zapewnia pasma ani priorytetu w dalszej sieci.",
+          "id": "B"
+        },
+        {
+          "text_md": "Utworzenie 31 kolejek sprzętowych",
+          "feedback_md": "Set oznacza pakiety, ale samo znakowanie nie zapewnia pasma ani priorytetu w dalszej sieci.",
+          "id": "C"
+        },
+        {
+          "text_md": "Szyfrowanie ruchu klasy",
+          "feedback_md": "Set oznacza pakiety, ale samo znakowanie nie zapewnia pasma ani priorytetu w dalszej sieci.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.qos-interpret.06",
+      "revision": 1,
+      "title": "Ograniczenie QoS",
+      "skills": [
+        "qos-interpret.ograniczenie-qos"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Czy konfiguracja QoS może stworzyć dodatkową fizyczną przepustowość przeciążonego łącza?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "QoS zarządza obsługą ruchu i stratami. Nie zwiększa przepustowości medium.",
+      "card_id": "encor.qos-interpret.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, przez DSCP 63",
+          "feedback_md": "QoS zarządza obsługą ruchu i stratami. Nie zwiększa przepustowości medium.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, przez zmianę nazwy policy-map",
+          "feedback_md": "QoS zarządza obsługą ruchu i stratami. Nie zwiększa przepustowości medium.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, każdy class-map podwaja pasmo",
+          "feedback_md": "QoS zarządza obsługą ruchu i stratami. Nie zwiększa przepustowości medium.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, zarządza wykorzystaniem istniejących zasobów",
+          "feedback_md": "QoS zarządza obsługą ruchu i stratami. Nie zwiększa przepustowości medium.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

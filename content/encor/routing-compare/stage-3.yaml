@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "encor.routing-compare.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Feasible successor a awaria",
+      "skills": [
+        "routing-compare.feasible-successor-a-awaria"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.13.theory",
+      "front_md": "Feasible successor a awaria",
+      "back_md": "DUAL może wykorzystać wcześniej znaną zapasową ścieżkę spełniającą warunek, bez pełnego poszukiwania przez zapytania.",
+      "example": "Możliwa szybka zmiana na znaną bezpętlową drogę"
+    },
+    {
+      "revision": 1,
+      "title": "Brak feasible successor",
+      "skills": [
+        "routing-compare.brak-feasible-successor"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.14.theory",
+      "front_md": "Brak feasible successor",
+      "back_md": "Active dotyczy obliczania konkretnej trasy przez DUAL. Nie należy mylić tego stanu ze stanem sesji BGP Active.",
+      "example": "Przejście trasy w Active i wysłanie zapytań"
+    },
+    {
+      "revision": 1,
+      "title": "Variance z ograniczeniem",
+      "skills": [
+        "routing-compare.variance-z-ograniczeniem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.15.theory",
+      "front_md": "Variance z ograniczeniem",
+      "back_md": "Sama metryka mieszcząca się w mnożniku nie wystarcza. Kandydat musi też spełnić feasibility condition.",
+      "example": "RD 1200 nie spełnia RD < FD 1000"
+    },
+    {
+      "revision": 1,
+      "title": "Koszty OSPF na dwóch drogach",
+      "skills": [
+        "routing-compare.koszty-ospf-na-dw-ch-drogach"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.16.theory",
+      "front_md": "Koszty OSPF na dwóch drogach",
+      "back_md": "OSPF sumuje koszty wzdłuż ścieżki. Najniższy koszt pojedynczego pierwszego łącza nie przesądza wyboru.",
+      "example": "A, koszt 30"
+    },
+    {
+      "revision": 1,
+      "title": "External EIGRP kontra OSPF",
+      "skills": [
+        "routing-compare.external-eigrp-kontra-ospf"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.17.theory",
+      "front_md": "External EIGRP kontra OSPF",
+      "back_md": "Niższa odległość administracyjna wygrywa dla tego samego prefiksu. External EIGRP ma inne domyślne AD niż internal EIGRP.",
+      "example": "OSPF"
+    },
+    {
+      "revision": 1,
+      "title": "Najdłuższy prefiks",
+      "skills": [
+        "routing-compare.najd-u-szy-prefiks"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.18.theory",
+      "front_md": "Najdłuższy prefiks",
+      "back_md": "Forwarding wybiera najbardziej szczegółową pasującą trasę. AD służy do wyboru źródła dla tego samego prefiksu.",
+      "example": "Najdłuższy prefiks: /24"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.routing-compare.13",
+      "revision": 1,
+      "title": "Feasible successor a awaria",
+      "skills": [
+        "routing-compare.feasible-successor-a-awaria"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Successor znika, a istnieje feasible successor. Jaka jest korzyść?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "DUAL może wykorzystać wcześniej znaną zapasową ścieżkę spełniającą warunek, bez pełnego poszukiwania przez zapytania.",
+      "card_id": "encor.routing-compare.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wymóg restartu wszystkich routerów",
+          "feedback_md": "DUAL może wykorzystać wcześniej znaną zapasową ścieżkę spełniającą warunek, bez pełnego poszukiwania przez zapytania.",
+          "id": "A"
+        },
+        {
+          "text_md": "Automatyczne przejście na OSPF",
+          "feedback_md": "DUAL może wykorzystać wcześniej znaną zapasową ścieżkę spełniającą warunek, bez pełnego poszukiwania przez zapytania.",
+          "id": "B"
+        },
+        {
+          "text_md": "Możliwa szybka zmiana na znaną bezpętlową drogę",
+          "feedback_md": "DUAL może wykorzystać wcześniej znaną zapasową ścieżkę spełniającą warunek, bez pełnego poszukiwania przez zapytania.",
+          "id": "C"
+        },
+        {
+          "text_md": "Konieczność zmiany AS",
+          "feedback_md": "DUAL może wykorzystać wcześniej znaną zapasową ścieżkę spełniającą warunek, bez pełnego poszukiwania przez zapytania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.routing-compare.14",
+      "revision": 1,
+      "title": "Brak feasible successor",
+      "skills": [
+        "routing-compare.brak-feasible-successor"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Trasa EIGRP traci successor i nie ma feasible successor. Jakie zachowanie może nastąpić?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Active dotyczy obliczania konkretnej trasy przez DUAL. Nie należy mylić tego stanu ze stanem sesji BGP Active.",
+      "card_id": "encor.routing-compare.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wybranie dowolnego sąsiada bez kontroli pętli",
+          "feedback_md": "Active dotyczy obliczania konkretnej trasy przez DUAL. Nie należy mylić tego stanu ze stanem sesji BGP Active.",
+          "id": "A"
+        },
+        {
+          "text_md": "Przejście trasy w Active i wysłanie zapytań",
+          "feedback_md": "Active dotyczy obliczania konkretnej trasy przez DUAL. Nie należy mylić tego stanu ze stanem sesji BGP Active.",
+          "id": "B"
+        },
+        {
+          "text_md": "Natychmiastowy wybór DR",
+          "feedback_md": "Active dotyczy obliczania konkretnej trasy przez DUAL. Nie należy mylić tego stanu ze stanem sesji BGP Active.",
+          "id": "C"
+        },
+        {
+          "text_md": "Obowiązkowe wyłączenie całego procesu",
+          "feedback_md": "Active dotyczy obliczania konkretnej trasy przez DUAL. Nie należy mylić tego stanu ze stanem sesji BGP Active.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.routing-compare.15",
+      "revision": 1,
+      "title": "Variance z ograniczeniem",
+      "skills": [
+        "routing-compare.variance-z-ograniczeniem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "FD najlepszej trasy to 1000, variance 2. Kandydat ma całkowitą metrykę 1800, ale RD 1200. Dlaczego nie wystarczy limit variance?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Sama metryka mieszcząca się w mnożniku nie wystarcza. Kandydat musi też spełnić feasibility condition.",
+      "card_id": "encor.routing-compare.15.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "RD 1200 nie spełnia RD < FD 1000",
+          "feedback_md": "Sama metryka mieszcząca się w mnożniku nie wystarcza. Kandydat musi też spełnić feasibility condition.",
+          "id": "A"
+        },
+        {
+          "text_md": "1800 jest większe od 2000",
+          "feedback_md": "Sama metryka mieszcząca się w mnożniku nie wystarcza. Kandydat musi też spełnić feasibility condition.",
+          "id": "B"
+        },
+        {
+          "text_md": "Variance dotyczy tylko OSPF",
+          "feedback_md": "Sama metryka mieszcząca się w mnożniku nie wystarcza. Kandydat musi też spełnić feasibility condition.",
+          "id": "C"
+        },
+        {
+          "text_md": "Kandydat musi mieć identyczny router ID",
+          "feedback_md": "Sama metryka mieszcząca się w mnożniku nie wystarcza. Kandydat musi też spełnić feasibility condition.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.routing-compare.16",
+      "revision": 1,
+      "title": "Koszty OSPF na dwóch drogach",
+      "skills": [
+        "routing-compare.koszty-ospf-na-dw-ch-drogach"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Droga A ma koszty interfejsów 10 + 20, a B 5 + 40. Pozostałe warunki wyboru są takie same. Co wybierze OSPF?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "OSPF sumuje koszty wzdłuż ścieżki. Najniższy koszt pojedynczego pierwszego łącza nie przesądza wyboru.",
+      "card_id": "encor.routing-compare.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "B, koszt 45",
+          "feedback_md": "OSPF sumuje koszty wzdłuż ścieżki. Najniższy koszt pojedynczego pierwszego łącza nie przesądza wyboru.",
+          "id": "A"
+        },
+        {
+          "text_md": "B, bo pierwszy link ma koszt 5",
+          "feedback_md": "OSPF sumuje koszty wzdłuż ścieżki. Najniższy koszt pojedynczego pierwszego łącza nie przesądza wyboru.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zawsze drogę z większą przepustowością ostatniego linku",
+          "feedback_md": "OSPF sumuje koszty wzdłuż ścieżki. Najniższy koszt pojedynczego pierwszego łącza nie przesądza wyboru.",
+          "id": "C"
+        },
+        {
+          "text_md": "A, koszt 30",
+          "feedback_md": "OSPF sumuje koszty wzdłuż ścieżki. Najniższy koszt pojedynczego pierwszego łącza nie przesądza wyboru.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.routing-compare.17",
+      "revision": 1,
+      "title": "External EIGRP kontra OSPF",
+      "skills": [
+        "routing-compare.external-eigrp-kontra-ospf"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Ten sam /24 ma trasę external EIGRP z AD 170 i OSPF z AD 110. Która wygra w RIB przy tych AD?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Niższa odległość administracyjna wygrywa dla tego samego prefiksu. External EIGRP ma inne domyślne AD niż internal EIGRP.",
+      "card_id": "encor.routing-compare.17.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "External EIGRP",
+          "feedback_md": "Niższa odległość administracyjna wygrywa dla tego samego prefiksu. External EIGRP ma inne domyślne AD niż internal EIGRP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Trasa z dłuższą nazwą protokołu",
+          "feedback_md": "Niższa odległość administracyjna wygrywa dla tego samego prefiksu. External EIGRP ma inne domyślne AD niż internal EIGRP.",
+          "id": "B"
+        },
+        {
+          "text_md": "OSPF",
+          "feedback_md": "Niższa odległość administracyjna wygrywa dla tego samego prefiksu. External EIGRP ma inne domyślne AD niż internal EIGRP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie można wybrać żadnej",
+          "feedback_md": "Niższa odległość administracyjna wygrywa dla tego samego prefiksu. External EIGRP ma inne domyślne AD niż internal EIGRP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.routing-compare.18",
+      "revision": 1,
+      "title": "Najdłuższy prefiks",
+      "skills": [
+        "routing-compare.najd-u-szy-prefiks"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "RIB zawiera OSPF 10.1.0.0/16 i EIGRP 10.1.2.0/24. Pakiet jest do 10.1.2.9. Co rozstrzyga lookup?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Forwarding wybiera najbardziej szczegółową pasującą trasę. AD służy do wyboru źródła dla tego samego prefiksu.",
+      "card_id": "encor.routing-compare.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie porównanie AD obu wpisów",
+          "feedback_md": "Forwarding wybiera najbardziej szczegółową pasującą trasę. AD służy do wyboru źródła dla tego samego prefiksu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Najdłuższy prefiks: /24",
+          "feedback_md": "Forwarding wybiera najbardziej szczegółową pasującą trasę. AD służy do wyboru źródła dla tego samego prefiksu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie koszt OSPF",
+          "feedback_md": "Forwarding wybiera najbardziej szczegółową pasującą trasę. AD służy do wyboru źródła dla tego samego prefiksu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Losowanie protokołu",
+          "feedback_md": "Forwarding wybiera najbardziej szczegółową pasującą trasę. AD służy do wyboru źródła dla tego samego prefiksu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

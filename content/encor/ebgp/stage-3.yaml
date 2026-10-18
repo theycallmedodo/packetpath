@@ -1,0 +1,445 @@
+{
+  "schema_version": 3,
+  "id": "encor.ebgp.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Brak dokładnej trasy",
+      "skills": [
+        "ebgp.brak-dok-adnej-trasy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "id": "encor.ebgp.13.theory",
+      "front_md": "Brak dokładnej trasy",
+      "back_md": "Trasa nadrzędna /16 nie spełnia warunku dokładnego dopasowania wpisu network /24.",
+      "example": "Brakuje dokładnej trasy 10.44.1.0/24 w RIB"
+    },
+    {
+      "revision": 1,
+      "title": "Local preference przed AS_PATH",
+      "skills": [
+        "ebgp.local-preference-przed-as-path"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "id": "encor.ebgp.14.theory",
+      "front_md": "Local preference przed AS_PATH",
+      "back_md": "Większy local preference wygrywa przed porównaniem długości AS_PATH.",
+      "example": "A"
+    },
+    {
+      "revision": 1,
+      "title": "Pierwszy peering z ISP",
+      "skills": [
+        "ebgp.pierwszy-peering-z-isp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "id": "encor.ebgp.15.theory",
+      "front_md": "Pierwszy peering z ISP",
+      "back_md": "Bezpośredni eBGP wymaga poprawnego remote-as. Ogłoszenie network opiera się na istniejącym dokładnym prefiksie.",
+      "example": "router bgp 64520\n neighbor 203.0.113.2 remote-as 64530\n network 10.60.0.0 mask 255.255.0.0"
+    },
+    {
+      "revision": 1,
+      "title": "Nieosiągalny next hop",
+      "skills": [
+        "ebgp.nieosi-galny-next-hop"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "id": "encor.ebgp.16.theory",
+      "front_md": "Nieosiągalny next hop",
+      "back_md": "Algorytm wybiera spośród poprawnych ścieżek. Wyższy atrybut nie naprawia nieosiągalnego next hop.",
+      "example": "Nieosiągalny next hop dyskwalifikuje ścieżkę"
+    },
+    {
+      "revision": 1,
+      "title": "Dwa łącza eBGP",
+      "skills": [
+        "ebgp.dwa-cza-ebgp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "id": "encor.ebgp.17.theory",
+      "front_md": "Dwa łącza eBGP",
+      "back_md": "Dla wspólnych poprawnych prefiksów wyższy weight preferuje pierwszego peera wyłącznie na tym routerze.",
+      "example": "router bgp 65010\n neighbor 192.0.2.2 remote-as 65020\n neighbor 192.0.2.2 weight 150\n neighbor 198.51.100.2 remote-as 65030\n neighbor 198.51.100.2 weight 50"
+    },
+    {
+      "revision": 1,
+      "title": "MED z jednego AS",
+      "skills": [
+        "ebgp.med-z-jednego-as"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "id": "encor.ebgp.18.theory",
+      "front_md": "MED z jednego AS",
+      "back_md": "Przy porównywalnych ścieżkach z tego samego sąsiedniego AS mniejszy MED jest preferowany.",
+      "example": "MED 20"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ebgp.13",
+      "revision": 1,
+      "title": "Brak dokładnej trasy",
+      "skills": [
+        "ebgp.brak-dok-adnej-trasy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "RIB ma tylko 10.44.0.0/16. Skonfigurowano network 10.44.1.0 mask 255.255.255.0. Dlaczego /24 nie jest originowane?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Trasa nadrzędna /16 nie spełnia warunku dokładnego dopasowania wpisu network /24.",
+      "card_id": "encor.ebgp.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "BGP zabrania adresów prywatnych",
+          "feedback_md": "Trasa nadrzędna /16 nie spełnia warunku dokładnego dopasowania wpisu network /24.",
+          "id": "A"
+        },
+        {
+          "text_md": "Network automatycznie dzieli /16 na /24",
+          "feedback_md": "Trasa nadrzędna /16 nie spełnia warunku dokładnego dopasowania wpisu network /24.",
+          "id": "B"
+        },
+        {
+          "text_md": "Brakuje dokładnej trasy 10.44.1.0/24 w RIB",
+          "feedback_md": "Trasa nadrzędna /16 nie spełnia warunku dokładnego dopasowania wpisu network /24.",
+          "id": "C"
+        },
+        {
+          "text_md": "Maska musi być wildcard",
+          "feedback_md": "Trasa nadrzędna /16 nie spełnia warunku dokładnego dopasowania wpisu network /24.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ebgp.14",
+      "revision": 1,
+      "title": "Local preference przed AS_PATH",
+      "skills": [
+        "ebgp.local-preference-przed-as-path"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Obie trasy mają weight 0 i nie są lokalne. A: local-pref 200, AS_PATH długości 4. B: local-pref 100, AS_PATH długości 1. Co wybierze router?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Większy local preference wygrywa przed porównaniem długości AS_PATH.",
+      "card_id": "encor.ebgp.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "B",
+          "feedback_md": "Większy local preference wygrywa przed porównaniem długości AS_PATH.",
+          "id": "A"
+        },
+        {
+          "text_md": "A",
+          "feedback_md": "Większy local preference wygrywa przed porównaniem długości AS_PATH.",
+          "id": "B"
+        },
+        {
+          "text_md": "Losowo A lub B",
+          "feedback_md": "Większy local preference wygrywa przed porównaniem długości AS_PATH.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zawsze obie",
+          "feedback_md": "Większy local preference wygrywa przed porównaniem długości AS_PATH.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ebgp.15",
+      "revision": 1,
+      "title": "Pierwszy peering z ISP",
+      "skills": [
+        "ebgp.pierwszy-peering-z-isp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "R1: AS 64520, R2: 203.0.113.2 w AS 64530. W RIB jest 10.60.0.0/16. Uzupełnij lokalny AS, zdalny AS i maskę ogłoszenia.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Bezpośredni eBGP wymaga poprawnego remote-as. Ogłoszenie network opiera się na istniejącym dokładnym prefiksie.",
+      "card_id": "encor.ebgp.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "router bgp {{b0}}\n neighbor 203.0.113.2 remote-as {{b1}}\n network 10.60.0.0 mask {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "64520"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "64530"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "255.255.0.0"
+          ],
+          "width": 13,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.16",
+      "revision": 1,
+      "title": "Nieosiągalny next hop",
+      "skills": [
+        "ebgp.nieosi-galny-next-hop"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Ścieżka ma najwyższy local-pref, lecz jej next hop jest nieosiągalny. Druga ścieżka jest poprawna. Co należy uwzględnić?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Algorytm wybiera spośród poprawnych ścieżek. Wyższy atrybut nie naprawia nieosiągalnego next hop.",
+      "card_id": "encor.ebgp.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Local-pref zawsze wymusza instalację",
+          "feedback_md": "Algorytm wybiera spośród poprawnych ścieżek. Wyższy atrybut nie naprawia nieosiągalnego next hop.",
+          "id": "A"
+        },
+        {
+          "text_md": "BGP naprawi next hop przez ARP w całym Internecie",
+          "feedback_md": "Algorytm wybiera spośród poprawnych ścieżek. Wyższy atrybut nie naprawia nieosiągalnego next hop.",
+          "id": "B"
+        },
+        {
+          "text_md": "MED zastąpi brak osiągalności",
+          "feedback_md": "Algorytm wybiera spośród poprawnych ścieżek. Wyższy atrybut nie naprawia nieosiągalnego next hop.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nieosiągalny next hop dyskwalifikuje ścieżkę",
+          "feedback_md": "Algorytm wybiera spośród poprawnych ścieżek. Wyższy atrybut nie naprawia nieosiągalnego next hop.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ebgp.17",
+      "revision": 1,
+      "title": "Dwa łącza eBGP",
+      "skills": [
+        "ebgp.dwa-cza-ebgp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W AS 65010 ustaw lokalny weight 150 dla peera 192.0.2.2 w AS 65020 i weight 50 dla peera 198.51.100.2 w AS 65030. Uzupełnij zdalne AS i wyższy weight.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Dla wspólnych poprawnych prefiksów wyższy weight preferuje pierwszego peera wyłącznie na tym routerze.",
+      "card_id": "encor.ebgp.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "router bgp 65010\n neighbor 192.0.2.2 remote-as {{b0}}\n neighbor 192.0.2.2 weight {{b1}}\n neighbor 198.51.100.2 remote-as {{b2}}\n neighbor 198.51.100.2 weight 50",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "65020"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "150"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "65030"
+          ],
+          "width": 7,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.18",
+      "revision": 1,
+      "title": "MED z jednego AS",
+      "skills": [
+        "ebgp.med-z-jednego-as"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dwie ścieżki od tego samego sąsiedniego AS są równe we wcześniejszych kryteriach. MED wynosi 20 i 80. Jaki jest wybór przy domyślnym porównaniu MED?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Przy porównywalnych ścieżkach z tego samego sąsiedniego AS mniejszy MED jest preferowany.",
+      "card_id": "encor.ebgp.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "MED 80",
+          "feedback_md": "Przy porównywalnych ścieżkach z tego samego sąsiedniego AS mniejszy MED jest preferowany.",
+          "id": "A"
+        },
+        {
+          "text_md": "MED 20",
+          "feedback_md": "Przy porównywalnych ścieżkach z tego samego sąsiedniego AS mniejszy MED jest preferowany.",
+          "id": "B"
+        },
+        {
+          "text_md": "Większy local router-id niezależnie od MED",
+          "feedback_md": "Przy porównywalnych ścieżkach z tego samego sąsiedniego AS mniejszy MED jest preferowany.",
+          "id": "C"
+        },
+        {
+          "text_md": "MED jest zawsze ignorowany",
+          "feedback_md": "Przy porównywalnych ścieżkach z tego samego sąsiedniego AS mniejszy MED jest preferowany.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

@@ -1,0 +1,405 @@
+{
+  "schema_version": 3,
+  "id": "encor.gre.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Cel GRE",
+      "skills": [
+        "gre.cel-gre"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.01.theory",
+      "front_md": "Cel GRE",
+      "back_md": "GRE przenosi pakiet wewnętrzny w pakiecie zewnętrznym. Sam nie zapewnia poufności.",
+      "example": "Enkapsulację pakietów w tunelu"
+    },
+    {
+      "revision": 1,
+      "title": "Numer protokołu",
+      "skills": [
+        "gre.numer-protoko-u"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.02.theory",
+      "front_md": "Numer protokołu",
+      "back_md": "GRE używa numeru protokołu IP 47; nie jest to port TCP lub UDP. UDP 500 wiąże się z IKE.",
+      "example": "47"
+    },
+    {
+      "revision": 1,
+      "title": "Cel tunelu",
+      "skills": [
+        "gre.cel-tunelu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.03.theory",
+      "front_md": "Cel tunelu",
+      "back_md": "Destination wskazuje osiągalny adres zewnętrzny drugiego końca, nie adres jego interfejsu Tunnel.",
+      "example": "interface Tunnel0\n tunnel source 192.0.2.1\n tunnel destination 198.51.100.2"
+    },
+    {
+      "revision": 1,
+      "title": "Underlay",
+      "skills": [
+        "gre.underlay"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.04.theory",
+      "front_md": "Underlay",
+      "back_md": "Underlay dostarcza pakiety do outer destination. Nie musi znać sieci przenoszonych wewnątrz tunelu.",
+      "example": "Musi istnieć osiągalność zewnętrznego celu tunelu"
+    },
+    {
+      "revision": 1,
+      "title": "Jawny tryb GRE IPv4",
+      "skills": [
+        "gre.jawny-tryb-gre-ipv4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.05.theory",
+      "front_md": "Jawny tryb GRE IPv4",
+      "back_md": "tunnel mode gre ip określa klasyczny GRE przez IPv4. Tryb i obsługę funkcji należy sprawdzić dla platformy.",
+      "example": "interface Tunnel0\n tunnel mode gre ip"
+    },
+    {
+      "revision": 1,
+      "title": "Adres wewnętrzny",
+      "skills": [
+        "gre.adres-wewn-trzny"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.06.theory",
+      "front_md": "Adres wewnętrzny",
+      "back_md": "Adres interfejsu Tunnel należy do logicznego łącza; tunnel source wskazuje zewnętrzny punkt enkapsulacji.",
+      "example": "10.255.0.1"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.gre.01",
+      "revision": 1,
+      "title": "Cel GRE",
+      "skills": [
+        "gre.cel-gre"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Dwie wyspy routingu mają komunikować się przez sieć pośrednią IP. Co zapewnia zwykły GRE?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "GRE przenosi pakiet wewnętrzny w pakiecie zewnętrznym. Sam nie zapewnia poufności.",
+      "card_id": "encor.gre.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Enkapsulację pakietów w tunelu",
+          "feedback_md": "GRE przenosi pakiet wewnętrzny w pakiecie zewnętrznym. Sam nie zapewnia poufności.",
+          "id": "A"
+        },
+        {
+          "text_md": "Domyślne szyfrowanie AES",
+          "feedback_md": "GRE przenosi pakiet wewnętrzny w pakiecie zewnętrznym. Sam nie zapewnia poufności.",
+          "id": "B"
+        },
+        {
+          "text_md": "Automatyczne uwierzytelnienie certyfikatem",
+          "feedback_md": "GRE przenosi pakiet wewnętrzny w pakiecie zewnętrznym. Sam nie zapewnia poufności.",
+          "id": "C"
+        },
+        {
+          "text_md": "Gwarantowane pasmo",
+          "feedback_md": "GRE przenosi pakiet wewnętrzny w pakiecie zewnętrznym. Sam nie zapewnia poufności.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.gre.02",
+      "revision": 1,
+      "title": "Numer protokołu",
+      "skills": [
+        "gre.numer-protoko-u"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "ACL między końcami ma dopuścić zwykły GRE przez IPv4. Który numer protokołu IP jest istotny?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "GRE używa numeru protokołu IP 47; nie jest to port TCP lub UDP. UDP 500 wiąże się z IKE.",
+      "card_id": "encor.gre.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "TCP 47",
+          "feedback_md": "GRE używa numeru protokołu IP 47; nie jest to port TCP lub UDP. UDP 500 wiąże się z IKE.",
+          "id": "A"
+        },
+        {
+          "text_md": "UDP 500",
+          "feedback_md": "GRE używa numeru protokołu IP 47; nie jest to port TCP lub UDP. UDP 500 wiąże się z IKE.",
+          "id": "B"
+        },
+        {
+          "text_md": "89",
+          "feedback_md": "GRE używa numeru protokołu IP 47; nie jest to port TCP lub UDP. UDP 500 wiąże się z IKE.",
+          "id": "C"
+        },
+        {
+          "text_md": "47",
+          "feedback_md": "GRE używa numeru protokołu IP 47; nie jest to port TCP lub UDP. UDP 500 wiąże się z IKE.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.gre.03",
+      "revision": 1,
+      "title": "Cel tunelu",
+      "skills": [
+        "gre.cel-tunelu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "R1 ma outer IP 192.0.2.1, R2 198.51.100.2. Uzupełnij destination na R1.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Destination wskazuje osiągalny adres zewnętrzny drugiego końca, nie adres jego interfejsu Tunnel.",
+      "card_id": "encor.gre.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "interface Tunnel0\n tunnel source 192.0.2.1\n tunnel destination {{b0}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "198.51.100.2"
+          ],
+          "width": 14,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.gre.04",
+      "revision": 1,
+      "title": "Underlay",
+      "skills": [
+        "gre.underlay"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Jaki warunek musi spełniać routing fizycznej sieci dla utworzenia działającego GRE?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Underlay dostarcza pakiety do outer destination. Nie musi znać sieci przenoszonych wewnątrz tunelu.",
+      "card_id": "encor.gre.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Musi znać wszystkie prefiksy klientów",
+          "feedback_md": "Underlay dostarcza pakiety do outer destination. Nie musi znać sieci przenoszonych wewnątrz tunelu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Musi istnieć osiągalność zewnętrznego celu tunelu",
+          "feedback_md": "Underlay dostarcza pakiety do outer destination. Nie musi znać sieci przenoszonych wewnątrz tunelu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Musi uruchamiać ten sam proces OSPF co overlay",
+          "feedback_md": "Underlay dostarcza pakiety do outer destination. Nie musi znać sieci przenoszonych wewnątrz tunelu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Musi być jednym VLAN-em",
+          "feedback_md": "Underlay dostarcza pakiety do outer destination. Nie musi znać sieci przenoszonych wewnątrz tunelu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.gre.05",
+      "revision": 1,
+      "title": "Jawny tryb GRE IPv4",
+      "skills": [
+        "gre.jawny-tryb-gre-ipv4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Ustaw jawnie klasyczny punkt-punkt GRE przez IPv4.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "tunnel mode gre ip określa klasyczny GRE przez IPv4. Tryb i obsługę funkcji należy sprawdzić dla platformy.",
+      "card_id": "encor.gre.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "interface Tunnel0\n tunnel mode {{b0}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "gre ip"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.gre.06",
+      "revision": 1,
+      "title": "Adres wewnętrzny",
+      "skills": [
+        "gre.adres-wewn-trzny"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Na Tunnel0 jest 10.255.0.1/30, source 192.0.2.1. Który adres jest częścią sieci overlay?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Adres interfejsu Tunnel należy do logicznego łącza; tunnel source wskazuje zewnętrzny punkt enkapsulacji.",
+      "card_id": "encor.gre.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "192.0.2.1",
+          "feedback_md": "Adres interfejsu Tunnel należy do logicznego łącza; tunnel source wskazuje zewnętrzny punkt enkapsulacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Oba zawsze są adresami underlay",
+          "feedback_md": "Adres interfejsu Tunnel należy do logicznego łącza; tunnel source wskazuje zewnętrzny punkt enkapsulacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Żaden — GRE nie ma overlay",
+          "feedback_md": "Adres interfejsu Tunnel należy do logicznego łącza; tunnel source wskazuje zewnętrzny punkt enkapsulacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "10.255.0.1",
+          "feedback_md": "Adres interfejsu Tunnel należy do logicznego łącza; tunnel source wskazuje zewnętrzny punkt enkapsulacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

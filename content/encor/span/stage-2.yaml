@@ -1,0 +1,473 @@
+{
+  "schema_version": 3,
+  "id": "encor.span.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "RSPAN transport",
+      "skills": [
+        "span.rspan-transport"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.07.theory",
+      "front_md": "RSPAN transport",
+      "back_md": "RSPAN używa specjalnego VLAN-u transportującego monitorowane ramki po dozwolonych trunkach.",
+      "example": "Przez dedykowany VLAN RSPAN w sieci L2"
+    },
+    {
+      "revision": 1,
+      "title": "ERSPAN transport",
+      "skills": [
+        "span.erspan-transport"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.08.theory",
+      "front_md": "ERSPAN transport",
+      "back_md": "ERSPAN może przenosić kopie przez L3 dzięki enkapsulacji. Obsługa źródła i celu zależy od sprzętu i wersji.",
+      "example": "Enkapsulacja GRE/IP"
+    },
+    {
+      "revision": 1,
+      "title": "Lokalna para portów",
+      "skills": [
+        "span.lokalna-para-port-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.09.theory",
+      "front_md": "Lokalna para portów",
+      "back_md": "Źródło określa obserwowaną ścieżkę, destination port analizatora. Nie należy odwracać tych ról.",
+      "example": "monitor session 3 source interface GigabitEthernet1/0/3 both\nmonitor session 3 destination interface GigabitEthernet1/0/24"
+    },
+    {
+      "revision": 1,
+      "title": "Wydajność analizatora",
+      "skills": [
+        "span.wydajno-analizatora"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.10.theory",
+      "front_md": "Wydajność analizatora",
+      "back_md": "Suma kopiowanego ruchu może przewyższyć wydajność portu lub zasobów SPAN. Brak pakietu w przechwycie nie zawsze dowodzi braku w sieci.",
+      "example": "Kopie mogą być tracone przez oversubscription"
+    },
+    {
+      "revision": 1,
+      "title": "Specjalny VLAN",
+      "skills": [
+        "span.specjalny-vlan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.11.theory",
+      "front_md": "Specjalny VLAN",
+      "back_md": "Remote-span nadaje VLAN-owi rolę transportu monitorowanych ramek. Trunki na ścieżce muszą dopuszczać ten VLAN.",
+      "example": "vlan 900\n remote-span"
+    },
+    {
+      "revision": 1,
+      "title": "Port analizatora",
+      "skills": [
+        "span.port-analizatora"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.12.theory",
+      "front_md": "Port analizatora",
+      "back_md": "Port docelowy SPAN jest przeznaczony dla analizatora. Nie zakładaj standardowego zachowania portu produkcyjnego.",
+      "example": "Nie; ma specjalną rolę i ograniczenia forwarding zależne od platformy"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.span.07",
+      "revision": 1,
+      "title": "RSPAN transport",
+      "skills": [
+        "span.rspan-transport"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Jak RSPAN przenosi kopie pomiędzy switchami?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "RSPAN używa specjalnego VLAN-u transportującego monitorowane ramki po dozwolonych trunkach.",
+      "card_id": "encor.span.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie przez TCP 179",
+          "feedback_md": "RSPAN używa specjalnego VLAN-u transportującego monitorowane ramki po dozwolonych trunkach.",
+          "id": "A"
+        },
+        {
+          "text_md": "Przez NAT overload",
+          "feedback_md": "RSPAN używa specjalnego VLAN-u transportującego monitorowane ramki po dozwolonych trunkach.",
+          "id": "B"
+        },
+        {
+          "text_md": "Przez zapytania DNS",
+          "feedback_md": "RSPAN używa specjalnego VLAN-u transportującego monitorowane ramki po dozwolonych trunkach.",
+          "id": "C"
+        },
+        {
+          "text_md": "Przez dedykowany VLAN RSPAN w sieci L2",
+          "feedback_md": "RSPAN używa specjalnego VLAN-u transportującego monitorowane ramki po dozwolonych trunkach.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.span.08",
+      "revision": 1,
+      "title": "ERSPAN transport",
+      "skills": [
+        "span.erspan-transport"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co umożliwia transport ERSPAN przez routowaną sieć?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "ERSPAN może przenosić kopie przez L3 dzięki enkapsulacji. Obsługa źródła i celu zależy od sprzętu i wersji.",
+      "card_id": "encor.span.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wymóg wspólnego VLAN-u na całej trasie",
+          "feedback_md": "ERSPAN może przenosić kopie przez L3 dzięki enkapsulacji. Obsługa źródła i celu zależy od sprzętu i wersji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sam port access bez IP",
+          "feedback_md": "ERSPAN może przenosić kopie przez L3 dzięki enkapsulacji. Obsługa źródła i celu zależy od sprzętu i wersji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Enkapsulacja GRE/IP",
+          "feedback_md": "ERSPAN może przenosić kopie przez L3 dzięki enkapsulacji. Obsługa źródła i celu zależy od sprzętu i wersji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłącznie zmiana DSCP",
+          "feedback_md": "ERSPAN może przenosić kopie przez L3 dzięki enkapsulacji. Obsługa źródła i celu zależy od sprzętu i wersji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.span.09",
+      "revision": 1,
+      "title": "Lokalna para portów",
+      "skills": [
+        "span.lokalna-para-port-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Sesja 3: źródło Gi1/0/3 w obu kierunkach, analizator Gi1/0/24. Uzupełnij oba porty.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Źródło określa obserwowaną ścieżkę, destination port analizatora. Nie należy odwracać tych ról.",
+      "card_id": "encor.span.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "monitor session 3 source interface {{b0}} both\nmonitor session 3 destination interface {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "GigabitEthernet1/0/3"
+          ],
+          "width": 22,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "GigabitEthernet1/0/24"
+          ],
+          "width": 23,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.span.10",
+      "revision": 1,
+      "title": "Wydajność analizatora",
+      "skills": [
+        "span.wydajno-analizatora"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dwa źródła po 1 Gb/s wysyłają pełny ruch do portu destination 1 Gb/s. Co może się stać?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Suma kopiowanego ruchu może przewyższyć wydajność portu lub zasobów SPAN. Brak pakietu w przechwycie nie zawsze dowodzi braku w sieci.",
+      "card_id": "encor.span.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Kopie mogą być tracone przez oversubscription",
+          "feedback_md": "Suma kopiowanego ruchu może przewyższyć wydajność portu lub zasobów SPAN. Brak pakietu w przechwycie nie zawsze dowodzi braku w sieci.",
+          "id": "A"
+        },
+        {
+          "text_md": "Port destination automatycznie stanie się 2 Gb/s",
+          "feedback_md": "Suma kopiowanego ruchu może przewyższyć wydajność portu lub zasobów SPAN. Brak pakietu w przechwycie nie zawsze dowodzi braku w sieci.",
+          "id": "B"
+        },
+        {
+          "text_md": "SPAN zatrzyma cały ruch produkcyjny do 1 Gb/s",
+          "feedback_md": "Suma kopiowanego ruchu może przewyższyć wydajność portu lub zasobów SPAN. Brak pakietu w przechwycie nie zawsze dowodzi braku w sieci.",
+          "id": "C"
+        },
+        {
+          "text_md": "Kopie są zawsze bezstratne",
+          "feedback_md": "Suma kopiowanego ruchu może przewyższyć wydajność portu lub zasobów SPAN. Brak pakietu w przechwycie nie zawsze dowodzi braku w sieci.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.span.11",
+      "revision": 1,
+      "title": "Specjalny VLAN",
+      "skills": [
+        "span.specjalny-vlan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Utwórz VLAN 900 jako RSPAN VLAN. Wpisz ID i polecenie trybu VLAN.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Remote-span nadaje VLAN-owi rolę transportu monitorowanych ramek. Trunki na ścieżce muszą dopuszczać ten VLAN.",
+      "card_id": "encor.span.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "vlan {{b0}}\n {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "900"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "remote-span"
+          ],
+          "width": 13,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.span.12",
+      "revision": 1,
+      "title": "Port analizatora",
+      "skills": [
+        "span.port-analizatora"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Czy dedykowany destination local SPAN należy traktować jak zwykły port dostępu dla użytkownika?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Port docelowy SPAN jest przeznaczony dla analizatora. Nie zakładaj standardowego zachowania portu produkcyjnego.",
+      "card_id": "encor.span.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, zawsze zachowuje wszystkie zwykłe funkcje",
+          "feedback_md": "Port docelowy SPAN jest przeznaczony dla analizatora. Nie zakładaj standardowego zachowania portu produkcyjnego.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, automatycznie jest routed port",
+          "feedback_md": "Port docelowy SPAN jest przeznaczony dla analizatora. Nie zakładaj standardowego zachowania portu produkcyjnego.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie; ma specjalną rolę i ograniczenia forwarding zależne od platformy",
+          "feedback_md": "Port docelowy SPAN jest przeznaczony dla analizatora. Nie zakładaj standardowego zachowania portu produkcyjnego.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, ponieważ nie może przesyłać kopii",
+          "feedback_md": "Port docelowy SPAN jest przeznaczony dla analizatora. Nie zakładaj standardowego zachowania portu produkcyjnego.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

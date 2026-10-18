@@ -1,0 +1,473 @@
+{
+  "schema_version": 3,
+  "id": "encor.copp.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Policer odrzucający wszystko",
+      "skills": [
+        "copp.policer-odrzucaj-cy-wszystko"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.07.theory",
+      "front_md": "Policer odrzucający wszystko",
+      "back_md": "Zarówno conform, jak i exceed mają drop. Niski ruch nie jest wyjątkiem, jeśli polityka go sklasyfikuje w tej klasie.",
+      "example": "Żaden w ramach obu zadeklarowanych kategorii"
+    },
+    {
+      "revision": 1,
+      "title": "SNMP agent odpowiada lokalnie",
+      "skills": [
+        "copp.snmp-agent-odpowiada-lokalnie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.08.theory",
+      "front_md": "SNMP agent odpowiada lokalnie",
+      "back_md": "Konfiguracja agenta nie omija wcześniejszej ochrony control plane. Skoreluj przyrost liczników z testem z konkretnego źródła.",
+      "example": "Zapytania trafiają do CPU przez klasę, która je odrzuca"
+    },
+    {
+      "revision": 1,
+      "title": "Limit z dopuszczeniem",
+      "skills": [
+        "copp.limit-z-dopuszczeniem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.09.theory",
+      "front_md": "Limit z dopuszczeniem",
+      "back_md": "Conform transmit pozwala na ruch mieszczący się w warunkach policera, exceed drop odrzuca nadmiar. Stawka jest założeniem labu, nie uniwersalnym doborem.",
+      "example": "policy-map PM-LAB\n class MGMT\n  police 64000 8000 conform-action transmit exceed-action drop"
+    },
+    {
+      "revision": 1,
+      "title": "Właściwe źródło SNMP",
+      "skills": [
+        "copp.w-a-ciwe-r-d-o-snmp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.10.theory",
+      "front_md": "Właściwe źródło SNMP",
+      "back_md": "ACL widzi adresy w miejscu klasyfikacji. Trzeba ustalić rzeczywiste źródło na routerze, a nie tylko adres aplikacji przed NAT.",
+      "example": "Nie dopasuje źródła po NAT"
+    },
+    {
+      "revision": 1,
+      "title": "Para class-map i policy-map",
+      "skills": [
+        "copp.para-class-map-i-policy-map"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.11.theory",
+      "front_md": "Para class-map i policy-map",
+      "back_md": "Nazwy muszą łączyć właściwe obiekty. Błędne wskazanie klasy może skierować ruch do innego fragmentu polityki.",
+      "example": "class-map match-any CM-MGMT\n match access-group name MGMT-SRC\nexit\npolicy-map PM-MGMT\n class CM-MGMT\n  police 64000 8000 conform-action transmit exceed-action drop"
+    },
+    {
+      "revision": 1,
+      "title": "Bps a pps",
+      "skills": [
+        "copp.bps-a-pps"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.12.theory",
+      "front_md": "Bps a pps",
+      "back_md": "Policery mogą operować na bitach lub pakietach na sekundę. Wsparcie i jednostki należy sprawdzić dla konkretnej platformy.",
+      "example": "Jednostki są różne; liczba pakietów zależy także od ich wielkości"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.copp.07",
+      "revision": 1,
+      "title": "Policer odrzucający wszystko",
+      "skills": [
+        "copp.policer-odrzucaj-cy-wszystko"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W klasie jest police 8000 1000 conform-action drop exceed-action drop. Który dopasowany ruch przejdzie?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Zarówno conform, jak i exceed mają drop. Niski ruch nie jest wyjątkiem, jeśli polityka go sklasyfikuje w tej klasie.",
+      "card_id": "encor.copp.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Ruch poniżej 8000 bit/s",
+          "feedback_md": "Zarówno conform, jak i exceed mają drop. Niski ruch nie jest wyjątkiem, jeśli polityka go sklasyfikuje w tej klasie.",
+          "id": "A"
+        },
+        {
+          "text_md": "Pierwsze 1000 pakietów zawsze",
+          "feedback_md": "Zarówno conform, jak i exceed mają drop. Niski ruch nie jest wyjątkiem, jeśli polityka go sklasyfikuje w tej klasie.",
+          "id": "B"
+        },
+        {
+          "text_md": "Cały SNMP po poprawnym haśle",
+          "feedback_md": "Zarówno conform, jak i exceed mają drop. Niski ruch nie jest wyjątkiem, jeśli polityka go sklasyfikuje w tej klasie.",
+          "id": "C"
+        },
+        {
+          "text_md": "Żaden w ramach obu zadeklarowanych kategorii",
+          "feedback_md": "Zarówno conform, jak i exceed mają drop. Niski ruch nie jest wyjątkiem, jeśli polityka go sklasyfikuje w tej klasie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.copp.08",
+      "revision": 1,
+      "title": "SNMP agent odpowiada lokalnie",
+      "skills": [
+        "copp.snmp-agent-odpowiada-lokalnie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "SNMP agent jest skonfigurowany, lecz Zabbix zdalnie nie dostaje odpowiedzi. Co może tłumaczyć rosnący licznik drop klasy SNMP w CoPP?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Konfiguracja agenta nie omija wcześniejszej ochrony control plane. Skoreluj przyrost liczników z testem z konkretnego źródła.",
+      "card_id": "encor.copp.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "CoPP automatycznie poprawia community",
+          "feedback_md": "Konfiguracja agenta nie omija wcześniejszej ochrony control plane. Skoreluj przyrost liczników z testem z konkretnego źródła.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zabbix musi być w tej samej podsieci L2",
+          "feedback_md": "Konfiguracja agenta nie omija wcześniejszej ochrony control plane. Skoreluj przyrost liczników z testem z konkretnego źródła.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zapytania trafiają do CPU przez klasę, która je odrzuca",
+          "feedback_md": "Konfiguracja agenta nie omija wcześniejszej ochrony control plane. Skoreluj przyrost liczników z testem z konkretnego źródła.",
+          "id": "C"
+        },
+        {
+          "text_md": "Każdy drop oznacza uszkodzony kabel",
+          "feedback_md": "Konfiguracja agenta nie omija wcześniejszej ochrony control plane. Skoreluj przyrost liczników z testem z konkretnego źródła.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.copp.09",
+      "revision": 1,
+      "title": "Limit z dopuszczeniem",
+      "skills": [
+        "copp.limit-z-dopuszczeniem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W labie dla klasy MGMT ustaw policer 64000 bit/s z burst 8000 B: zgodny ruch przepuszczaj, nadmiar odrzucaj.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Conform transmit pozwala na ruch mieszczący się w warunkach policera, exceed drop odrzuca nadmiar. Stawka jest założeniem labu, nie uniwersalnym doborem.",
+      "card_id": "encor.copp.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "policy-map PM-LAB\n class MGMT\n  police 64000 8000 conform-action {{b0}} exceed-action {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "transmit"
+          ],
+          "width": 10,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "drop"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.copp.10",
+      "revision": 1,
+      "title": "Właściwe źródło SNMP",
+      "skills": [
+        "copp.w-a-ciwe-r-d-o-snmp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "ACL klasy ALLOW dopuszcza 192.0.2.10, lecz rzeczywiste zapytania Zabbixa po NAT mają source 198.51.100.10. Co się stanie z dopasowaniem tej reguły?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "ACL widzi adresy w miejscu klasyfikacji. Trzeba ustalić rzeczywiste źródło na routerze, a nie tylko adres aplikacji przed NAT.",
+      "card_id": "encor.copp.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie dopasuje źródła po NAT",
+          "feedback_md": "ACL widzi adresy w miejscu klasyfikacji. Trzeba ustalić rzeczywiste źródło na routerze, a nie tylko adres aplikacji przed NAT.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dopasuje nazwę hosta Zabbix niezależnie od IP",
+          "feedback_md": "ACL widzi adresy w miejscu klasyfikacji. Trzeba ustalić rzeczywiste źródło na routerze, a nie tylko adres aplikacji przed NAT.",
+          "id": "B"
+        },
+        {
+          "text_md": "Automatycznie cofnie translację",
+          "feedback_md": "ACL widzi adresy w miejscu klasyfikacji. Trzeba ustalić rzeczywiste źródło na routerze, a nie tylko adres aplikacji przed NAT.",
+          "id": "C"
+        },
+        {
+          "text_md": "Dopasuje każdy pakiet UDP 161",
+          "feedback_md": "ACL widzi adresy w miejscu klasyfikacji. Trzeba ustalić rzeczywiste źródło na routerze, a nie tylko adres aplikacji przed NAT.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.copp.11",
+      "revision": 1,
+      "title": "Para class-map i policy-map",
+      "skills": [
+        "copp.para-class-map-i-policy-map"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Istnieją ACL MGMT-SRC i class-map CM-MGMT. Uzupełnij odwołanie ACL w klasie i nazwę klasy w polityce.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Nazwy muszą łączyć właściwe obiekty. Błędne wskazanie klasy może skierować ruch do innego fragmentu polityki.",
+      "card_id": "encor.copp.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "class-map match-any CM-MGMT\n match access-group name {{b0}}\nexit\npolicy-map PM-MGMT\n class {{b1}}\n  police 64000 8000 conform-action transmit exceed-action drop",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "identifier",
+          "accepted": [
+            "MGMT-SRC"
+          ],
+          "width": 10,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "identifier",
+          "accepted": [
+            "CM-MGMT"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.copp.12",
+      "revision": 1,
+      "title": "Bps a pps",
+      "skills": [
+        "copp.bps-a-pps"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dlaczego nie należy bezpośrednio kopiować wartości 64000 z policera bps do policera pps?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Policery mogą operować na bitach lub pakietach na sekundę. Wsparcie i jednostki należy sprawdzić dla konkretnej platformy.",
+      "card_id": "encor.copp.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Pps i bps są zawsze równoważne",
+          "feedback_md": "Policery mogą operować na bitach lub pakietach na sekundę. Wsparcie i jednostki należy sprawdzić dla konkretnej platformy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Pps oznacza bajty na sekundę",
+          "feedback_md": "Policery mogą operować na bitach lub pakietach na sekundę. Wsparcie i jednostki należy sprawdzić dla konkretnej platformy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Jednostki są różne; liczba pakietów zależy także od ich wielkości",
+          "feedback_md": "Policery mogą operować na bitach lub pakietach na sekundę. Wsparcie i jednostki należy sprawdzić dla konkretnej platformy.",
+          "id": "C"
+        },
+        {
+          "text_md": "Bps jest numerem DSCP",
+          "feedback_md": "Policery mogą operować na bitach lub pakietach na sekundę. Wsparcie i jednostki należy sprawdzić dla konkretnej platformy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

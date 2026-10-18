@@ -1,0 +1,387 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ipv6.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.ipv6.01.theory",
+      "revision": 1,
+      "title": "Zapis IPv6",
+      "skills": [
+        "ipv6.notation"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "front_md": "Zapis IPv6",
+      "back_md": "IPv6 ma osiem 16-bitowych hekstetów. `::` zastępuje jeden ciąg zerowych hekstetów i może wystąpić najwyżej raz w adresie.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.ipv6.02.theory",
+      "revision": 1,
+      "title": "Włącz routing IPv6",
+      "skills": [
+        "ipv6.forwarding"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "front_md": "Włącz routing IPv6",
+      "back_md": "Adres na interfejsie i globalne przekazywanie IPv6 to odrębne ustawienia. `ipv6 unicast-routing` włącza routing unicast.",
+      "example": "R1(config)# ipv6 unicast-routing"
+    },
+    {
+      "id": "ccna.ipv6.03.theory",
+      "revision": 1,
+      "title": "Prefiks LAN",
+      "skills": [
+        "ipv6.address-config"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "front_md": "Prefiks LAN",
+      "back_md": "W poleceniu IPv6 długość prefiksu zapisujesz po ukośniku. Nie używasz dziesiętnej maski IPv4.",
+      "example": "R1(config-if)# ipv6 address 2001:db8:10::1/64"
+    },
+    {
+      "id": "ccna.ipv6.04.theory",
+      "revision": 1,
+      "title": "Zasięg link-local",
+      "skills": [
+        "ipv6.link-local-scope"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "front_md": "Zasięg link-local",
+      "back_md": "Link-local służy komunikacji na danym łączu, np. pomiędzy sąsiadami. Ten sam zapis adresu może wystąpić na różnych łączach.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.ipv6.05.theory",
+      "revision": 1,
+      "title": "Jawny link-local",
+      "skills": [
+        "ipv6.manual-link-local"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "front_md": "Jawny link-local",
+      "back_md": "Ręcznie wybrany link-local zastępuje automatycznie generowany na tym interfejsie. Musi być unikatowy na wspólnym łączu.",
+      "example": "R1(config-if)# ipv6 address fe80::1 link-local"
+    },
+    {
+      "id": "ccna.ipv6.06.theory",
+      "revision": 1,
+      "title": "Przegląd interfejsów IPv6",
+      "skills": [
+        "ipv6.verify-interface"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "front_md": "Przegląd interfejsów IPv6",
+      "back_md": "IPv4 i IPv6 mają odrębne komendy weryfikacyjne. `show ipv6 interface brief` pokazuje adresy IPv6 i stany.",
+      "example": "R1# show ipv6 interface brief"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ipv6.01",
+      "revision": 1,
+      "title": "Zapis IPv6",
+      "skills": [
+        "ipv6.notation"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Który zapis reprezentuje ten sam adres co 2001:0db8:0000:0000:0000:0000:0000:0001?",
+      "hints": [
+        "Rozwiń każdą propozycję do ośmiu hekstetów."
+      ],
+      "explanation_md": "IPv6 ma osiem 16-bitowych hekstetów. `::` zastępuje jeden ciąg zerowych hekstetów i może wystąpić najwyżej raz w adresie.",
+      "card_id": "ccna.ipv6.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "2001:db8::1",
+          "feedback_md": "Usunięto zera wiodące i skompresowano jeden ciąg zerowych hekstetów."
+        },
+        {
+          "id": "B",
+          "text_md": "2001:db8:1::",
+          "feedback_md": "Jedynka zajmuje inny hekstet."
+        },
+        {
+          "id": "C",
+          "text_md": "2001::db8:1",
+          "feedback_md": "db8 znalazłoby się w innym miejscu adresu."
+        },
+        {
+          "id": "D",
+          "text_md": "2001:db8::10",
+          "feedback_md": "Ostatni hekstet 10 nie jest równy 1."
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ipv6.02",
+      "revision": 1,
+      "title": "Włącz routing IPv6",
+      "skills": [
+        "ipv6.forwarding"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Router ma przekazywać pakiety IPv6 między interfejsami. Uzupełnij globalną komendę.",
+      "hints": [
+        "Słowo zawiera typ ruchu i funkcję routingu."
+      ],
+      "explanation_md": "Adres na interfejsie i globalne przekazywanie IPv6 to odrębne ustawienia. `ipv6 unicast-routing` włącza routing unicast.",
+      "card_id": "ccna.ipv6.02.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# ipv6 {{feature}}",
+      "blanks": [
+        {
+          "id": "feature",
+          "label": "Przekazywanie unicast IPv6",
+          "answer_type": "keyword",
+          "accepted": [
+            "unicast-routing"
+          ],
+          "width": 18,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv6.03",
+      "revision": 1,
+      "title": "Prefiks LAN",
+      "skills": [
+        "ipv6.address-config"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Przypisz G0/0 adres 2001:db8:10::1 z długością prefiksu 64. Wpisz cały adres z prefiksem.",
+      "hints": [
+        "Zapis obejmuje adres interfejsu, nie tylko sieć."
+      ],
+      "explanation_md": "W poleceniu IPv6 długość prefiksu zapisujesz po ukośniku. Nie używasz dziesiętnej maski IPv4.",
+      "card_id": "ccna.ipv6.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-if)# ipv6 address {{address}}",
+      "blanks": [
+        {
+          "id": "address",
+          "label": "Adres IPv6 z prefiksem",
+          "answer_type": "ipv6_prefix",
+          "accepted": [
+            "2001:db8:10::1/64"
+          ],
+          "width": 20,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv6.04",
+      "revision": 1,
+      "title": "Zasięg link-local",
+      "skills": [
+        "ipv6.link-local-scope"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Router odbiera pakiet skierowany do adresu link-local sąsiada. Czy powinien przekazać taki adres docelowy przez inne łącze?",
+      "hints": [
+        "Nazwa wskazuje ograniczenie zasięgu."
+      ],
+      "explanation_md": "Link-local służy komunikacji na danym łączu, np. pomiędzy sąsiadami. Ten sam zapis adresu może wystąpić na różnych łączach.",
+      "card_id": "ccna.ipv6.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Tak, jeśli ma trasę domyślną.",
+          "feedback_md": "Trasa domyślna nie rozszerza zasięgu link-local."
+        },
+        {
+          "id": "B",
+          "text_md": "Nie, link-local ma zasięg pojedynczego łącza.",
+          "feedback_md": "Adresy link-local nie są routowane między łączami."
+        },
+        {
+          "id": "C",
+          "text_md": "Tak, jeśli prefix-length wynosi 64.",
+          "feedback_md": "Długość prefiksu nie zmienia tego zasięgu."
+        },
+        {
+          "id": "D",
+          "text_md": "Tak, jeśli odbiorca używa tego samego router ID.",
+          "feedback_md": "Router ID protokołu routingu nie nadaje link-local zasięgu globalnego."
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ipv6.05",
+      "revision": 1,
+      "title": "Jawny link-local",
+      "skills": [
+        "ipv6.manual-link-local"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Ustaw na interfejsie ręczny adres fe80::1. Uzupełnij końcowy parametr, bez prefiksu.",
+      "hints": [
+        "Nie oznaczasz go jako global."
+      ],
+      "explanation_md": "Ręcznie wybrany link-local zastępuje automatycznie generowany na tym interfejsie. Musi być unikatowy na wspólnym łączu.",
+      "card_id": "ccna.ipv6.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-if)# ipv6 address fe80::1 {{scope}}",
+      "blanks": [
+        {
+          "id": "scope",
+          "label": "Rodzaj adresu",
+          "answer_type": "keyword",
+          "accepted": [
+            "link-local"
+          ],
+          "width": 13,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv6.06",
+      "revision": 1,
+      "title": "Przegląd interfejsów IPv6",
+      "skills": [
+        "ipv6.verify-interface"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Wyświetl skrócone zestawienie adresów i stanów interfejsów IPv6.",
+      "hints": [
+        "Szukasz tego samego słowa skróconego widoku co przy IPv4."
+      ],
+      "explanation_md": "IPv4 i IPv6 mają odrębne komendy weryfikacyjne. `show ipv6 interface brief` pokazuje adresy IPv6 i stany.",
+      "card_id": "ccna.ipv6.06.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1# show ipv6 interface {{view}}",
+      "blanks": [
+        {
+          "id": "view",
+          "label": "Widok skrócony",
+          "answer_type": "keyword",
+          "accepted": [
+            "brief"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

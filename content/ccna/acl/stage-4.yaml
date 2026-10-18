@@ -1,0 +1,521 @@
+{
+  "schema_version": 3,
+  "id": "ccna.acl.stage-4",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Reguła zasłonięta",
+      "skills": [
+        "acl.regu-a-zas-oni-ta"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.ext.01.theory",
+      "front_md": "Reguła zasłonięta",
+      "back_md": "Pierwsze dopasowanie kończy ocenę pakietu; szerokie permit może zasłonić szczegółowy zakaz.",
+      "example": "Nie, pasujący ruch został już dopuszczony przez wpis 10"
+    },
+    {
+      "revision": 1,
+      "title": "TCP established",
+      "skills": [
+        "acl.tcp-established"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.ext.02.theory",
+      "front_md": "TCP established",
+      "back_md": "Dopasowanie flag nie potwierdza, że pakiet należy do legalnej, wcześniej śledzonej sesji.",
+      "example": "Ustawienie bitu ACK lub RST"
+    },
+    {
+      "revision": 1,
+      "title": "Ponumeruj od nowa",
+      "skills": [
+        "acl.ponumeruj-od-nowa"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.ext.03.theory",
+      "front_md": "Ponumeruj od nowa",
+      "back_md": "Resequence zmienia numery, zachowując porządek wpisów; ułatwia dalsze wstawianie.",
+      "example": "R1(config)# ip access-list resequence WEB 100 10"
+    },
+    {
+      "revision": 1,
+      "title": "Źródłowy port odpowiedzi",
+      "skills": [
+        "acl.r-d-owy-port-odpowiedzi"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.ext.04.theory",
+      "front_md": "Źródłowy port odpowiedzi",
+      "back_md": "Kierunek ruchu odwraca role adresów i portów; trzeba czytać konkretny pakiet.",
+      "example": "Po adresie źródłowym, przed adresem docelowym"
+    },
+    {
+      "revision": 1,
+      "title": "DNS do jednego resolvera",
+      "skills": [
+        "acl.dns-do-jednego-resolvera"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.ext.05.theory",
+      "front_md": "DNS do jednego resolvera",
+      "back_md": "Dopasowujemy port docelowy zapytania. Pełna polityka DNS powinna rozważyć także TCP zgodnie z wymaganiami.",
+      "example": "R1(config-ext-nacl)# 10 permit udp 10.20.0.0 0.0.0.255 host 192.0.2.53 eq 53"
+    },
+    {
+      "revision": 1,
+      "title": "Wildcard nie jest maską",
+      "skills": [
+        "acl.wildcard-nie-jest-mask"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.ext.06.theory",
+      "front_md": "Wildcard nie jest maską",
+      "back_md": "Wildcard jest bitowym dopełnieniem maski dla tego ciągłego prefiksu.",
+      "example": "0.0.1.255"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.acl.ext.01",
+      "revision": 1,
+      "title": "Reguła zasłonięta",
+      "skills": [
+        "acl.regu-a-zas-oni-ta"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "ACL zawiera 10 permit ip any any, a potem 20 deny tcp any host 10.0.0.10 eq 22. Czy drugi wpis zablokuje SSH do tego hosta?",
+      "hints": [
+        "Pierwsze dopasowanie kończy ocenę pakietu; szerokie permit może zasłonić szczegółowy zakaz."
+      ],
+      "explanation_md": "Pierwsze dopasowanie kończy ocenę pakietu; szerokie permit może zasłonić szczegółowy zakaz.",
+      "card_id": "ccna.acl.ext.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie, pasujący ruch został już dopuszczony przez wpis 10",
+          "feedback_md": "Pierwsze dopasowanie kończy ocenę pakietu; szerokie permit może zasłonić szczegółowy zakaz.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, deny zawsze wygrywa z permit",
+          "feedback_md": "ACL stosuje kolejność, nie globalne pierwszeństwo deny.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, wyższy numer sekwencji ma priorytet",
+          "feedback_md": "Niższy numer jest sprawdzany wcześniej.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tylko jeśli host odpowiada pingiem",
+          "feedback_md": "ICMP nie zmienia zasady pierwszego dopasowania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.acl.ext.02",
+      "revision": 1,
+      "title": "TCP established",
+      "skills": [
+        "acl.tcp-established"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co sprawdza klasyczne słowo established w rozszerzonej ACL IPv4 dla TCP?",
+      "hints": [
+        "Dopasowanie flag nie potwierdza, że pakiet należy do legalnej, wcześniej śledzonej sesji."
+      ],
+      "explanation_md": "Dopasowanie flag nie potwierdza, że pakiet należy do legalnej, wcześniej śledzonej sesji.",
+      "card_id": "ccna.acl.ext.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Pełną tabelę stanów wszystkich sesji",
+          "feedback_md": "Nie jest pełnym stateful firewallem.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zakończenie uwierzytelniania SSH",
+          "feedback_md": "ACL nie rozumie takiego stanu aplikacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Czy ruch używa UDP",
+          "feedback_md": "To opcja dla TCP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Ustawienie bitu ACK lub RST",
+          "feedback_md": "Dopasowanie flag nie potwierdza, że pakiet należy do legalnej, wcześniej śledzonej sesji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.acl.ext.03",
+      "revision": 1,
+      "title": "Ponumeruj od nowa",
+      "skills": [
+        "acl.ponumeruj-od-nowa"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "ACL WEB ma być ponumerowana od 100 z odstępem 10, bez zmiany kolejności reguł.",
+      "hints": [
+        "Resequence zmienia numery, zachowując porządek wpisów; ułatwia dalsze wstawianie."
+      ],
+      "explanation_md": "Resequence zmienia numery, zachowując porządek wpisów; ułatwia dalsze wstawianie.",
+      "card_id": "ccna.acl.ext.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config)# ip access-list resequence WEB {{b0}} {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "100"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "10"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.acl.ext.04",
+      "revision": 1,
+      "title": "Źródłowy port odpowiedzi",
+      "skills": [
+        "acl.r-d-owy-port-odpowiedzi"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Serwer odpowiada z TCP 443 do efemerycznego portu klienta. W którym miejscu ACL wpisujesz eq 443, aby sprawdzić port serwera w odpowiedzi?",
+      "hints": [
+        "Kierunek ruchu odwraca role adresów i portów; trzeba czytać konkretny pakiet."
+      ],
+      "explanation_md": "Kierunek ruchu odwraca role adresów i portów; trzeba czytać konkretny pakiet.",
+      "card_id": "ccna.acl.ext.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie po adresie docelowym",
+          "feedback_md": "W odpowiedzi serwer ma port źródłowy 443.",
+          "id": "A"
+        },
+        {
+          "text_md": "Po adresie źródłowym, przed adresem docelowym",
+          "feedback_md": "Kierunek ruchu odwraca role adresów i portów; trzeba czytać konkretny pakiet.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zamiast wildcard źródła",
+          "feedback_md": "Wildcard dopasowuje adres, nie port.",
+          "id": "C"
+        },
+        {
+          "text_md": "Przed słowem tcp",
+          "feedback_md": "Składnia portu znajduje się przy odpowiedniej stronie adresowej.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.acl.ext.05",
+      "revision": 1,
+      "title": "DNS do jednego resolvera",
+      "skills": [
+        "acl.dns-do-jednego-resolvera"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W nazwanej ACL zezwól na UDP z 10.20.0.0/24 do 192.0.2.53, docelowy port 53. Wpisz wildcard i port.",
+      "hints": [
+        "Dopasowujemy port docelowy zapytania. Pełna polityka DNS powinna rozważyć także TCP zgodnie z wymaganiami."
+      ],
+      "explanation_md": "Dopasowujemy port docelowy zapytania. Pełna polityka DNS powinna rozważyć także TCP zgodnie z wymaganiami.",
+      "card_id": "ccna.acl.ext.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config-ext-nacl)# 10 permit udp 10.20.0.0 {{b0}} host 192.0.2.53 eq {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "ipv4",
+          "accepted": [
+            "0.0.0.255"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "53"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.acl.ext.06",
+      "revision": 1,
+      "title": "Wildcard nie jest maską",
+      "skills": [
+        "acl.wildcard-nie-jest-mask"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Który wildcard obejmuje dokładnie 10.8.0.0/23?",
+      "hints": [
+        "Wildcard jest bitowym dopełnieniem maski dla tego ciągłego prefiksu."
+      ],
+      "explanation_md": "Wildcard jest bitowym dopełnieniem maski dla tego ciągłego prefiksu.",
+      "card_id": "ccna.acl.ext.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "255.255.254.0",
+          "feedback_md": "To maska podsieci, nie wildcard.",
+          "id": "A"
+        },
+        {
+          "text_md": "0.0.0.255",
+          "feedback_md": "Ten wildcard obejmuje tylko /24, czyli połowę wymaganego zakresu.",
+          "id": "B"
+        },
+        {
+          "text_md": "0.0.3.255",
+          "feedback_md": "To zakres odpowiadający /22 przy prawidłowej granicy.",
+          "id": "C"
+        },
+        {
+          "text_md": "0.0.1.255",
+          "feedback_md": "Wildcard jest bitowym dopełnieniem maski dla tego ciągłego prefiksu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

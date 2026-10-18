@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "encor.multicast.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa źródła, jedna grupa",
+      "skills": [
+        "multicast.dwa-r-d-a-jedna-grupa"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.13.theory",
+      "front_md": "Dwa źródła, jedna grupa",
+      "back_md": "W SSM grupę rozpatruje się razem ze źródłem. Wspólny adres G nie oznacza zgody na wszystkich nadawców.",
+      "example": "Para (192.0.2.10,232.1.1.1)"
+    },
+    {
+      "revision": 1,
+      "title": "Brak zainteresowanych interfejsów",
+      "skills": [
+        "multicast.brak-zainteresowanych-interfejs-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.14.theory",
+      "front_md": "Brak zainteresowanych interfejsów",
+      "back_md": "Poprawne wejście nie wystarcza. Do replikacji potrzebne są właściwe stany i zainteresowanie odbiorców na wyjściach.",
+      "example": "Nie ma aktywnego interfejsu wyjściowego dla tego stanu"
+    },
+    {
+      "revision": 1,
+      "title": "Rola MSDP",
+      "skills": [
+        "multicast.rola-msdp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.15.theory",
+      "front_md": "Rola MSDP",
+      "back_md": "MSDP służy odkrywaniu źródeł w odpowiednich projektach ASM. Nie zastępuje zwykłej płaszczyzny przesyłania danych PIM.",
+      "example": "Do wymiany informacji o aktywnych źródłach multicast między peerami, np. RP"
+    },
+    {
+      "revision": 1,
+      "title": "Bidir-PIM",
+      "skills": [
+        "multicast.bidir-pim"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.16.theory",
+      "front_md": "Bidir-PIM",
+      "back_md": "Bidir-PIM jest zaprojektowany do ruchu wielu źródeł po drzewie współdzielonym. DF pomaga zapobiegać pętlom przy przekazywaniu w stronę RP.",
+      "example": "Używa dwukierunkowego drzewa współdzielonego i mechanizmu designated forwarder"
+    },
+    {
+      "revision": 1,
+      "title": "IGMPv2 w sieci SSM",
+      "skills": [
+        "multicast.igmpv2-w-sieci-ssm"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.17.theory",
+      "front_md": "IGMPv2 w sieci SSM",
+      "back_md": "IGMPv2 zgłasza grupę, ale nie źródło. Natywna subskrypcja SSM wymaga informacji o S, chyba że dostarcza ją jawny mechanizm mapowania.",
+      "example": "Przekazania routerowi żądanego źródła, np. przez IGMPv3"
+    },
+    {
+      "revision": 1,
+      "title": "RPF a odbiorca",
+      "skills": [
+        "multicast.rpf-a-odbiorca"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.18.theory",
+      "front_md": "RPF a odbiorca",
+      "back_md": "Dla wskazanego drzewa źródłowego analizuj drogę do S. Dla drzewa współdzielonego istotny jest kontekst drogi do RP.",
+      "example": "RPF dla tego stanu odnosi się do źródła S, a nie adresu odbiorcy"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.multicast.13",
+      "revision": 1,
+      "title": "Dwa źródła, jedna grupa",
+      "skills": [
+        "multicast.dwa-r-d-a-jedna-grupa"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Odbiorca IGMPv3 INCLUDE chce tylko S1=192.0.2.10 dla G=232.1.1.1. S2=192.0.2.20 także nadaje do G. Co powinno określać subskrypcję SSM?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "W SSM grupę rozpatruje się razem ze źródłem. Wspólny adres G nie oznacza zgody na wszystkich nadawców.",
+      "card_id": "encor.multicast.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sama grupa, bez rozróżnienia nadawcy",
+          "feedback_md": "W SSM grupę rozpatruje się razem ze źródłem. Wspólny adres G nie oznacza zgody na wszystkich nadawców.",
+          "id": "A"
+        },
+        {
+          "text_md": "Każdy adres źródłowy w tej samej podsieci",
+          "feedback_md": "W SSM grupę rozpatruje się razem ze źródłem. Wspólny adres G nie oznacza zgody na wszystkich nadawców.",
+          "id": "B"
+        },
+        {
+          "text_md": "Para (192.0.2.10,232.1.1.1)",
+          "feedback_md": "W SSM grupę rozpatruje się razem ze źródłem. Wspólny adres G nie oznacza zgody na wszystkich nadawców.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłącznie adres MAC najbliższego routera",
+          "feedback_md": "W SSM grupę rozpatruje się razem ze źródłem. Wspólny adres G nie oznacza zgody na wszystkich nadawców.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.multicast.14",
+      "revision": 1,
+      "title": "Brak zainteresowanych interfejsów",
+      "skills": [
+        "multicast.brak-zainteresowanych-interfejs-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Skrócony stan dydaktyczny:\n```text\n(192.0.2.10, 239.1.1.1)\n Incoming interface: GigabitEthernet0/0\n Outgoing interface list: Null\n```\nRPF jest poprawne. Dlaczego router może nie przekazywać strumienia dalej?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Poprawne wejście nie wystarcza. Do replikacji potrzebne są właściwe stany i zainteresowanie odbiorców na wyjściach.",
+      "card_id": "encor.multicast.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Każda lista Null oznacza awarię fizyczną wejścia",
+          "feedback_md": "Poprawne wejście nie wystarcza. Do replikacji potrzebne są właściwe stany i zainteresowanie odbiorców na wyjściach.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie ma aktywnego interfejsu wyjściowego dla tego stanu",
+          "feedback_md": "Poprawne wejście nie wystarcza. Do replikacji potrzebne są właściwe stany i zainteresowanie odbiorców na wyjściach.",
+          "id": "B"
+        },
+        {
+          "text_md": "Grupa 239.1.1.1 nigdy nie jest multicast",
+          "feedback_md": "Poprawne wejście nie wystarcza. Do replikacji potrzebne są właściwe stany i zainteresowanie odbiorców na wyjściach.",
+          "id": "C"
+        },
+        {
+          "text_md": "Router musi wysłać dane wszystkimi portami",
+          "feedback_md": "Poprawne wejście nie wystarcza. Do replikacji potrzebne są właściwe stany i zainteresowanie odbiorców na wyjściach.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.multicast.15",
+      "revision": 1,
+      "title": "Rola MSDP",
+      "skills": [
+        "multicast.rola-msdp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Do czego służą komunikaty Source-Active w MSDP w środowisku ASM?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "MSDP służy odkrywaniu źródeł w odpowiednich projektach ASM. Nie zastępuje zwykłej płaszczyzny przesyłania danych PIM.",
+      "card_id": "encor.multicast.15.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Do wymiany informacji o aktywnych źródłach multicast między peerami, np. RP",
+          "feedback_md": "MSDP służy odkrywaniu źródeł w odpowiednich projektach ASM. Nie zastępuje zwykłej płaszczyzny przesyłania danych PIM.",
+          "id": "A"
+        },
+        {
+          "text_md": "Do transportu całego strumienia multicast jako tunel danych",
+          "feedback_md": "MSDP służy odkrywaniu źródeł w odpowiednich projektach ASM. Nie zastępuje zwykłej płaszczyzny przesyłania danych PIM.",
+          "id": "B"
+        },
+        {
+          "text_md": "Do rejestracji hosta jako odbiorcy IGMP",
+          "feedback_md": "MSDP służy odkrywaniu źródeł w odpowiednich projektach ASM. Nie zastępuje zwykłej płaszczyzny przesyłania danych PIM.",
+          "id": "C"
+        },
+        {
+          "text_md": "Do automatycznej zmiany wszystkich adresów grup",
+          "feedback_md": "MSDP służy odkrywaniu źródeł w odpowiednich projektach ASM. Nie zastępuje zwykłej płaszczyzny przesyłania danych PIM.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.multicast.16",
+      "revision": 1,
+      "title": "Bidir-PIM",
+      "skills": [
+        "multicast.bidir-pim"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Które stwierdzenie opisuje bidirectional PIM?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Bidir-PIM jest zaprojektowany do ruchu wielu źródeł po drzewie współdzielonym. DF pomaga zapobiegać pętlom przy przekazywaniu w stronę RP.",
+      "card_id": "encor.multicast.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Buduje obowiązkowo osobny SPT dla każdego źródła",
+          "feedback_md": "Bidir-PIM jest zaprojektowany do ruchu wielu źródeł po drzewie współdzielonym. DF pomaga zapobiegać pętlom przy przekazywaniu w stronę RP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wymaga IGMPv3 INCLUDE dla każdej grupy",
+          "feedback_md": "Bidir-PIM jest zaprojektowany do ruchu wielu źródeł po drzewie współdzielonym. DF pomaga zapobiegać pętlom przy przekazywaniu w stronę RP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zamienia wszystkie źródła w serwery RP",
+          "feedback_md": "Bidir-PIM jest zaprojektowany do ruchu wielu źródeł po drzewie współdzielonym. DF pomaga zapobiegać pętlom przy przekazywaniu w stronę RP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Używa dwukierunkowego drzewa współdzielonego i mechanizmu designated forwarder",
+          "feedback_md": "Bidir-PIM jest zaprojektowany do ruchu wielu źródeł po drzewie współdzielonym. DF pomaga zapobiegać pętlom przy przekazywaniu w stronę RP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.multicast.17",
+      "revision": 1,
+      "title": "IGMPv2 w sieci SSM",
+      "skills": [
+        "multicast.igmpv2-w-sieci-ssm"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Aplikacja wymaga kanału (S,G), lecz host wysyła wyłącznie IGMPv2. Nie skonfigurowano SSM mapping ani mechanizmu zastępczego. Czego brakuje?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "IGMPv2 zgłasza grupę, ale nie źródło. Natywna subskrypcja SSM wymaga informacji o S, chyba że dostarcza ją jawny mechanizm mapowania.",
+      "card_id": "encor.multicast.17.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie większego MTU na porcie odbiorcy",
+          "feedback_md": "IGMPv2 zgłasza grupę, ale nie źródło. Natywna subskrypcja SSM wymaga informacji o S, chyba że dostarcza ją jawny mechanizm mapowania.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tylko zmiany source MAC hosta",
+          "feedback_md": "IGMPv2 zgłasza grupę, ale nie źródło. Natywna subskrypcja SSM wymaga informacji o S, chyba że dostarcza ją jawny mechanizm mapowania.",
+          "id": "B"
+        },
+        {
+          "text_md": "Przekazania routerowi żądanego źródła, np. przez IGMPv3",
+          "feedback_md": "IGMPv2 zgłasza grupę, ale nie źródło. Natywna subskrypcja SSM wymaga informacji o S, chyba że dostarcza ją jawny mechanizm mapowania.",
+          "id": "C"
+        },
+        {
+          "text_md": "Obowiązkowo dodatkowego RP dla SSM",
+          "feedback_md": "IGMPv2 zgłasza grupę, ale nie źródło. Natywna subskrypcja SSM wymaga informacji o S, chyba że dostarcza ją jawny mechanizm mapowania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.multicast.18",
+      "revision": 1,
+      "title": "RPF a odbiorca",
+      "skills": [
+        "multicast.rpf-a-odbiorca"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W stanie drzewa źródłowego (S,G) operator sprawdza trasę unicast wyłącznie do odbiorcy. Dlaczego to nie wystarcza do oceny RPF?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Dla wskazanego drzewa źródłowego analizuj drogę do S. Dla drzewa współdzielonego istotny jest kontekst drogi do RP.",
+      "card_id": "encor.multicast.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "RPF zawsze sprawdza tylko najbliższy serwer DNS",
+          "feedback_md": "Dla wskazanego drzewa źródłowego analizuj drogę do S. Dla drzewa współdzielonego istotny jest kontekst drogi do RP.",
+          "id": "A"
+        },
+        {
+          "text_md": "RPF dla tego stanu odnosi się do źródła S, a nie adresu odbiorcy",
+          "feedback_md": "Dla wskazanego drzewa źródłowego analizuj drogę do S. Dla drzewa współdzielonego istotny jest kontekst drogi do RP.",
+          "id": "B"
+        },
+        {
+          "text_md": "RPF nie korzysta z żadnego kierunku routingu",
+          "feedback_md": "Dla wskazanego drzewa źródłowego analizuj drogę do S. Dla drzewa współdzielonego istotny jest kontekst drogi do RP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Adres odbiorcy musi być identyczny z grupą G",
+          "feedback_md": "Dla wskazanego drzewa źródłowego analizuj drogę do S. Dla drzewa współdzielonego istotny jest kontekst drogi do RP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

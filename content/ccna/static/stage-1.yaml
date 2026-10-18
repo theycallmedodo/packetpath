@@ -1,0 +1,387 @@
+{
+  "schema_version": 3,
+  "id": "ccna.static.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.static.01.theory",
+      "revision": 1,
+      "title": "Longest prefix match",
+      "skills": [
+        "static.lpm"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "front_md": "Longest prefix match",
+      "back_md": "Podczas przekazywania pakietu wygrywa najdłuższy pasujący prefiks w tablicy. Nie porównuj wtedy AD tras o różnych długościach prefiksu zamiast LPM.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.static.02.theory",
+      "revision": 1,
+      "title": "Trasa do sieci",
+      "skills": [
+        "static.network-route"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "front_md": "Trasa do sieci",
+      "back_md": "Maska przy ip route opisuje cel, a nie sieć łącza z next-hopem.",
+      "example": "R1(config)# ip route 192.168.20.0 255.255.255.0 10.0.0.2"
+    },
+    {
+      "id": "ccna.static.03.theory",
+      "revision": 1,
+      "title": "Default IPv4",
+      "skills": [
+        "static.default"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "front_md": "Default IPv4",
+      "back_md": "Default IPv4 to 0.0.0.0/0, zapisane jako adres 0.0.0.0 oraz maska 0.0.0.0.",
+      "example": "R1(config)# ip route 0.0.0.0 0.0.0.0 192.0.2.1"
+    },
+    {
+      "id": "ccna.static.04.theory",
+      "revision": 1,
+      "title": "Domyślna AD statycznej",
+      "skills": [
+        "static.ad"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "front_md": "Domyślna AD statycznej",
+      "back_md": "AD służy do porównania wiarygodności źródeł tras do tego samego prefiksu. Mniejsza wartość jest preferowana.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.static.05.theory",
+      "revision": 1,
+      "title": "Trasa do jednego hosta",
+      "skills": [
+        "static.host-route"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "front_md": "Trasa do jednego hosta",
+      "back_md": "IPv4 host route ma prefiks /32. Jest bardziej szczegółowa od trasy całej podsieci.",
+      "example": "R1(config)# ip route 192.168.20.55 255.255.255.255 10.0.0.2"
+    },
+    {
+      "id": "ccna.static.06.theory",
+      "revision": 1,
+      "title": "Weryfikacja statycznych",
+      "skills": [
+        "static.verify"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "front_md": "Weryfikacja statycznych",
+      "back_md": "Obecność komendy w konfiguracji nie zawsze oznacza instalację w tablicy routingu. Weryfikuj także osiągalność next-hopu.",
+      "example": "R1# show ip route static"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.static.01",
+      "revision": 1,
+      "title": "Longest prefix match",
+      "skills": [
+        "static.lpm"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.2"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "W tablicy są trasy 10.0.0.0/8, 10.1.0.0/16 i 0.0.0.0/0. Która pasuje najlepiej do 10.1.2.3?",
+      "hints": [
+        "Najpierw porównaj długość dopasowania."
+      ],
+      "explanation_md": "Podczas przekazywania pakietu wygrywa najdłuższy pasujący prefiks w tablicy. Nie porównuj wtedy AD tras o różnych długościach prefiksu zamiast LPM.",
+      "card_id": "ccna.static.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "10.0.0.0/8",
+          "feedback_md": "/8 pasuje, ale jest mniej szczegółowe niż /16."
+        },
+        {
+          "id": "B",
+          "text_md": "0.0.0.0/0",
+          "feedback_md": "Default jest najmniej szczegółowe."
+        },
+        {
+          "id": "C",
+          "text_md": "Wszystkie zawsze tworzą ECMP",
+          "feedback_md": "Różne pasujące długości prefiksów nie oznaczają ECMP."
+        },
+        {
+          "id": "D",
+          "text_md": "10.1.0.0/16",
+          "feedback_md": "Najdłuższy pasujący prefiks to /16."
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.static.02",
+      "revision": 1,
+      "title": "Trasa do sieci",
+      "skills": [
+        "static.network-route"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Dodaj trasę do 192.168.20.0/24 przez osiągalny next-hop 10.0.0.2. Uzupełnij maskę.",
+      "hints": [
+        "Nie używaj wildcarda."
+      ],
+      "explanation_md": "Maska przy ip route opisuje cel, a nie sieć łącza z next-hopem.",
+      "card_id": "ccna.static.02.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# ip route 192.168.20.0 {{mask}} 10.0.0.2",
+      "blanks": [
+        {
+          "id": "mask",
+          "label": "Maska sieci docelowej",
+          "answer_type": "ipv4",
+          "accepted": [
+            "255.255.255.0"
+          ],
+          "width": 16,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.static.03",
+      "revision": 1,
+      "title": "Default IPv4",
+      "skills": [
+        "static.default"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Uzupełnij adres sieci docelowej w trasie domyślnej przez 192.0.2.1.",
+      "hints": [
+        "Ta trasa pasuje do każdego IPv4, gdy nie ma bardziej szczegółowej."
+      ],
+      "explanation_md": "Default IPv4 to 0.0.0.0/0, zapisane jako adres 0.0.0.0 oraz maska 0.0.0.0.",
+      "card_id": "ccna.static.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# ip route {{destination}} 0.0.0.0 192.0.2.1",
+      "blanks": [
+        {
+          "id": "destination",
+          "label": "Cel default",
+          "answer_type": "ipv4",
+          "accepted": [
+            "0.0.0.0"
+          ],
+          "width": 10,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.static.04",
+      "revision": 1,
+      "title": "Domyślna AD statycznej",
+      "skills": [
+        "static.ad"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.1.e"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Jaka jest standardowa domyślna administrative distance zwykłej trasy statycznej w Cisco IOS?",
+      "hints": [
+        "Trasa statyczna jest zwykle preferowana nad typowym IGP."
+      ],
+      "explanation_md": "AD służy do porównania wiarygodności źródeł tras do tego samego prefiksu. Mniejsza wartość jest preferowana.",
+      "card_id": "ccna.static.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "1",
+          "feedback_md": "Zwykła trasa statyczna ma domyślnie AD 1."
+        },
+        {
+          "id": "B",
+          "text_md": "90",
+          "feedback_md": "90 to typowa AD wewnętrznego EIGRP."
+        },
+        {
+          "id": "C",
+          "text_md": "110",
+          "feedback_md": "110 to typowa AD OSPF."
+        },
+        {
+          "id": "D",
+          "text_md": "120",
+          "feedback_md": "120 to typowa AD RIP."
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.static.05",
+      "revision": 1,
+      "title": "Trasa do jednego hosta",
+      "skills": [
+        "static.host-route"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Skieruj tylko host 192.168.20.55 przez 10.0.0.2. Uzupełnij maskę host route.",
+      "hints": [
+        "Wszystkie bity adresu mają być znaczące."
+      ],
+      "explanation_md": "IPv4 host route ma prefiks /32. Jest bardziej szczegółowa od trasy całej podsieci.",
+      "card_id": "ccna.static.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# ip route 192.168.20.55 {{mask}} 10.0.0.2",
+      "blanks": [
+        {
+          "id": "mask",
+          "label": "Maska pojedynczego hosta",
+          "answer_type": "ipv4",
+          "accepted": [
+            "255.255.255.255"
+          ],
+          "width": 18,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.static.06",
+      "revision": 1,
+      "title": "Weryfikacja statycznych",
+      "skills": [
+        "static.verify"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Wyświetl w tablicy routingu IPv4 trasy typu static.",
+      "hints": [
+        "Szukasz tras statycznych, a nie wszystkich connected."
+      ],
+      "explanation_md": "Obecność komendy w konfiguracji nie zawsze oznacza instalację w tablicy routingu. Weryfikuj także osiągalność next-hopu.",
+      "card_id": "ccna.static.06.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1# show ip route {{type}}",
+      "blanks": [
+        {
+          "id": "type",
+          "label": "Typ źródła tras",
+          "answer_type": "keyword",
+          "accepted": [
+            "static"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

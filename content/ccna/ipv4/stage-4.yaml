@@ -1,0 +1,473 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ipv4.stage-4",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Podział /24 na /28",
+      "skills": [
+        "ipv4.podzia-24-na-28"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.ext.01.theory",
+      "front_md": "Podział /24 na /28",
+      "back_md": "Na identyfikację podsieci przeznaczono dodatkowe cztery bity: 2^4 = 16.",
+      "example": "16"
+    },
+    {
+      "revision": 1,
+      "title": "Granica /23",
+      "skills": [
+        "ipv4.granica-23"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.ext.02.theory",
+      "front_md": "Granica /23",
+      "back_md": "Maska /23 obejmuje dwa kolejne zakresy /24, tutaj trzeci oktet 6–7.",
+      "example": "172.16.6.0"
+    },
+    {
+      "revision": 1,
+      "title": "Interfejs w dużym LAN",
+      "skills": [
+        "ipv4.interfejs-w-du-ym-lan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.ext.03.theory",
+      "front_md": "Interfejs w dużym LAN",
+      "back_md": "Blok /22 ma 1024 adresy; typowy pierwszy host jest o jeden większy od adresu sieci.",
+      "example": "R1(config-if)# ip address 10.44.8.1 255.255.252.0"
+    },
+    {
+      "revision": 1,
+      "title": "Nieprawidłowa brama",
+      "skills": [
+        "ipv4.nieprawid-owa-brama"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.ext.04.theory",
+      "front_md": "Nieprawidłowa brama",
+      "back_md": "Podsieć .128/25 kończy się broadcastem .255.",
+      "example": "192.168.5.255"
+    },
+    {
+      "revision": 1,
+      "title": "Łącze /31",
+      "skills": [
+        "ipv4.cze-31"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.ext.05.theory",
+      "front_md": "Łącze /31",
+      "back_md": "Na obsługiwanym łączu /31 oba adresy służą końcom łącza; nie odejmuje się sieci i broadcastu jak w zwykłym LAN.",
+      "example": "R1(config-if)# ip address 192.0.2.11 255.255.255.254"
+    },
+    {
+      "revision": 1,
+      "title": "VLSM i kolejność",
+      "skills": [
+        "ipv4.vlsm-i-kolejno"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.ext.06.theory",
+      "front_md": "VLSM i kolejność",
+      "back_md": "Największe bloki jako pierwsze ułatwiają unikanie nakładania i fragmentacji przestrzeni adresowej.",
+      "example": "Przydzielać od największej wymaganej podsieci"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ipv4.ext.01",
+      "revision": 1,
+      "title": "Podział /24 na /28",
+      "skills": [
+        "ipv4.podzia-24-na-28"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Ile rozłącznych podsieci /28 mieści się w jednym /24?",
+      "hints": [
+        "Na identyfikację podsieci przeznaczono dodatkowe cztery bity: 2^4 = 16."
+      ],
+      "explanation_md": "Na identyfikację podsieci przeznaczono dodatkowe cztery bity: 2^4 = 16.",
+      "card_id": "ccna.ipv4.ext.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "16",
+          "feedback_md": "Na identyfikację podsieci przeznaczono dodatkowe cztery bity: 2^4 = 16.",
+          "id": "A"
+        },
+        {
+          "text_md": "4",
+          "feedback_md": "Różnica czterech bitów oznacza 2^4, nie cztery podsieci.",
+          "id": "B"
+        },
+        {
+          "text_md": "8",
+          "feedback_md": "Osiem odpowiada różnicy trzech bitów.",
+          "id": "C"
+        },
+        {
+          "text_md": "32",
+          "feedback_md": "Trzydzieści dwa odpowiada różnicy pięciu bitów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ipv4.ext.02",
+      "revision": 1,
+      "title": "Granica /23",
+      "skills": [
+        "ipv4.granica-23"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Jaki adres sieci ma host 172.16.7.200/23?",
+      "hints": [
+        "Maska /23 obejmuje dwa kolejne zakresy /24, tutaj trzeci oktet 6–7."
+      ],
+      "explanation_md": "Maska /23 obejmuje dwa kolejne zakresy /24, tutaj trzeci oktet 6–7.",
+      "card_id": "ccna.ipv4.ext.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "172.16.7.0",
+          "feedback_md": "/23 zaczyna blok na parzystym trzecim oktecie.",
+          "id": "A"
+        },
+        {
+          "text_md": "172.16.7.128",
+          "feedback_md": "To granica /25, nie /23.",
+          "id": "B"
+        },
+        {
+          "text_md": "172.16.8.0",
+          "feedback_md": "Ten adres należy do następnego bloku /23.",
+          "id": "C"
+        },
+        {
+          "text_md": "172.16.6.0",
+          "feedback_md": "Maska /23 obejmuje dwa kolejne zakresy /24, tutaj trzeci oktet 6–7.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ipv4.ext.03",
+      "revision": 1,
+      "title": "Interfejs w dużym LAN",
+      "skills": [
+        "ipv4.interfejs-w-du-ym-lan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Przypisz pierwszy użyteczny adres sieci 10.44.8.0/22 i właściwą maskę.",
+      "hints": [
+        "Blok /22 ma 1024 adresy; typowy pierwszy host jest o jeden większy od adresu sieci."
+      ],
+      "explanation_md": "Blok /22 ma 1024 adresy; typowy pierwszy host jest o jeden większy od adresu sieci.",
+      "card_id": "ccna.ipv4.ext.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config-if)# ip address {{b0}} {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "ipv4",
+          "accepted": [
+            "10.44.8.1"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "ipv4",
+          "accepted": [
+            "255.255.252.0"
+          ],
+          "width": 15,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv4.ext.04",
+      "revision": 1,
+      "title": "Nieprawidłowa brama",
+      "skills": [
+        "ipv4.nieprawid-owa-brama"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "PC ma 192.168.5.129/25. Która propozycja jest adresem broadcast jego podsieci i nie może być zwykłą bramą?",
+      "hints": [
+        "Podsieć .128/25 kończy się broadcastem .255."
+      ],
+      "explanation_md": "Podsieć .128/25 kończy się broadcastem .255.",
+      "card_id": "ccna.ipv4.ext.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "192.168.5.130",
+          "feedback_md": "To użyteczny adres hosta w tej podsieci.",
+          "id": "A"
+        },
+        {
+          "text_md": "192.168.5.255",
+          "feedback_md": "Podsieć .128/25 kończy się broadcastem .255.",
+          "id": "B"
+        },
+        {
+          "text_md": "192.168.5.200",
+          "feedback_md": "To użyteczny adres hosta w tej podsieci.",
+          "id": "C"
+        },
+        {
+          "text_md": "192.168.5.254",
+          "feedback_md": "To ostatni użyteczny adres, nie broadcast.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ipv4.ext.05",
+      "revision": 1,
+      "title": "Łącze /31",
+      "skills": [
+        "ipv4.cze-31"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Obie strony obsługują /31 na łączu point-to-point. Peer ma 192.0.2.10/31. Ustaw drugi adres i maskę.",
+      "hints": [
+        "Na obsługiwanym łączu /31 oba adresy służą końcom łącza; nie odejmuje się sieci i broadcastu jak w zwykłym LAN."
+      ],
+      "explanation_md": "Na obsługiwanym łączu /31 oba adresy służą końcom łącza; nie odejmuje się sieci i broadcastu jak w zwykłym LAN.",
+      "card_id": "ccna.ipv4.ext.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config-if)# ip address {{b0}} {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "ipv4",
+          "accepted": [
+            "192.0.2.11"
+          ],
+          "width": 12,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "ipv4",
+          "accepted": [
+            "255.255.255.254"
+          ],
+          "width": 17,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv4.ext.06",
+      "revision": 1,
+      "title": "VLSM i kolejność",
+      "skills": [
+        "ipv4.vlsm-i-kolejno"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Masz przydzielić podsieci na 100, 50 i 20 hostów z jednego /24. Jaka strategia upraszcza poprawne wyrównanie bloków?",
+      "hints": [
+        "Największe bloki jako pierwsze ułatwiają unikanie nakładania i fragmentacji przestrzeni adresowej."
+      ],
+      "explanation_md": "Największe bloki jako pierwsze ułatwiają unikanie nakładania i fragmentacji przestrzeni adresowej.",
+      "card_id": "ccna.ipv4.ext.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zawsze zaczynać od najmniejszej bez kontroli wyrównania",
+          "feedback_md": "Może utrudnić pozostawienie dużego spójnego bloku.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nadać wszystkim tę samą podsieć",
+          "feedback_md": "To nie rozdziela wymaganych sieci.",
+          "id": "B"
+        },
+        {
+          "text_md": "Użyć /30 dla każdej grupy",
+          "feedback_md": "/30 nie pomieści tych liczb hostów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Przydzielać od największej wymaganej podsieci",
+          "feedback_md": "Największe bloki jako pierwsze ułatwiają unikanie nakładania i fragmentacji przestrzeni adresowej.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

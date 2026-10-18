@@ -1,0 +1,435 @@
+{
+  "schema_version": 3,
+  "id": "ccna.portsecurity.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.portsecurity.01.theory",
+      "revision": 1,
+      "title": "Co ogranicza Port Security?",
+      "skills": [
+        "portsecurity.01"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "front_md": "Co ogranicza Port Security?",
+      "back_md": "Port Security kontroluje dopuszczone źródłowe adresy MAC na porcie.",
+      "example": "Źródłowe adresy MAC"
+    },
+    {
+      "id": "ccna.portsecurity.02.theory",
+      "revision": 1,
+      "title": "Włącz ochronę portu",
+      "skills": [
+        "portsecurity.02"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "front_md": "Włącz ochronę portu",
+      "back_md": "Sama konfiguracja limitu nie zastępuje włączenia mechanizmu.",
+      "example": "SW1(config-if)# switchport port-security"
+    },
+    {
+      "id": "ccna.portsecurity.03.theory",
+      "revision": 1,
+      "title": "Limit dwóch źródeł",
+      "skills": [
+        "portsecurity.03"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "front_md": "Limit dwóch źródeł",
+      "back_md": "Limit dotyczy liczby dopuszczonych adresów, nie liczby pakietów.",
+      "example": "SW1(config-if)# switchport port-security maximum 2"
+    },
+    {
+      "id": "ccna.portsecurity.04.theory",
+      "revision": 1,
+      "title": "Domyślne naruszenie",
+      "skills": [
+        "portsecurity.04"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "front_md": "Domyślne naruszenie",
+      "back_md": "Domyślny shutdown powoduje error-disable przy naruszeniu.",
+      "example": "shutdown"
+    },
+    {
+      "id": "ccna.portsecurity.05.theory",
+      "revision": 1,
+      "title": "Nauka sticky",
+      "skills": [
+        "portsecurity.05"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "front_md": "Nauka sticky",
+      "back_md": "Nauczone sticky MAC są dodawane do running-config.",
+      "example": "SW1(config-if)# switchport port-security mac-address sticky"
+    },
+    {
+      "id": "ccna.portsecurity.06.theory",
+      "revision": 1,
+      "title": "Restrict zamiast shutdown",
+      "skills": [
+        "portsecurity.06"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "front_md": "Restrict zamiast shutdown",
+      "back_md": "Restrict utrzymuje port aktywny, odrzuca niedozwolony ruch i zwiększa licznik naruszeń.",
+      "example": "SW1(config-if)# switchport port-security violation restrict"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.portsecurity.01",
+      "revision": 1,
+      "title": "Co ogranicza Port Security?",
+      "skills": [
+        "portsecurity.01"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Na jakiej informacji opiera się podstawowe ograniczenie Port Security?",
+      "hints": [
+        "Port Security kontroluje dopuszczone źródłowe adresy MAC na porcie."
+      ],
+      "explanation_md": "Port Security kontroluje dopuszczone źródłowe adresy MAC na porcie.",
+      "card_id": "ccna.portsecurity.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Źródłowe adresy MAC",
+          "feedback_md": "Secure MAC określają dopuszczone źródła ramek."
+        },
+        {
+          "id": "B",
+          "text_md": "Wyłącznie docelowy adres IP",
+          "feedback_md": "To nie jest kryterium Port Security."
+        },
+        {
+          "id": "C",
+          "text_md": "Nazwy użytkowników SSH",
+          "feedback_md": "To mechanizm uwierzytelniania dostępu administracyjnego."
+        },
+        {
+          "id": "D",
+          "text_md": "Numery procesów OSPF",
+          "feedback_md": "Nie identyfikują źródeł ramek Ethernet."
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.portsecurity.02",
+      "revision": 1,
+      "title": "Włącz ochronę portu",
+      "skills": [
+        "portsecurity.02"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Port jest już statycznym access. Włącz Port Security.",
+      "hints": [
+        "Sama konfiguracja limitu nie zastępuje włączenia mechanizmu."
+      ],
+      "explanation_md": "Sama konfiguracja limitu nie zastępuje włączenia mechanizmu.",
+      "card_id": "ccna.portsecurity.02.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco Catalyst IOS / IOS XE — składnia z zadania",
+      "template": "SW1(config-if)# switchport {{b0}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "port-security"
+          ],
+          "width": 15,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.portsecurity.03",
+      "revision": 1,
+      "title": "Limit dwóch źródeł",
+      "skills": [
+        "portsecurity.03"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Port Security jest aktywne. Ustaw maksimum dwóch secure MAC.",
+      "hints": [
+        "Limit dotyczy liczby dopuszczonych adresów, nie liczby pakietów."
+      ],
+      "explanation_md": "Limit dotyczy liczby dopuszczonych adresów, nie liczby pakietów.",
+      "card_id": "ccna.portsecurity.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco Catalyst IOS / IOS XE — składnia z zadania",
+      "template": "SW1(config-if)# switchport port-security maximum {{b0}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "2"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.portsecurity.04",
+      "revision": 1,
+      "title": "Domyślne naruszenie",
+      "skills": [
+        "portsecurity.04"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Jaki jest domyślny tryb violation w omawianym Catalyst IOS?",
+      "hints": [
+        "Domyślny shutdown powoduje error-disable przy naruszeniu."
+      ],
+      "explanation_md": "Domyślny shutdown powoduje error-disable przy naruszeniu.",
+      "card_id": "ccna.portsecurity.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "protect",
+          "feedback_md": "Protect wymaga jawnego ustawienia."
+        },
+        {
+          "id": "B",
+          "text_md": "restrict",
+          "feedback_md": "Restrict nie jest ustawieniem domyślnym."
+        },
+        {
+          "id": "C",
+          "text_md": "monitor-only",
+          "feedback_md": "To nie jest jeden z trzech podstawowych trybów."
+        },
+        {
+          "id": "D",
+          "text_md": "shutdown",
+          "feedback_md": "To domyślny tryb Port Security."
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.portsecurity.05",
+      "revision": 1,
+      "title": "Nauka sticky",
+      "skills": [
+        "portsecurity.05"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Włącz sticky learning na porcie z aktywnym Port Security.",
+      "hints": [
+        "Nauczone sticky MAC są dodawane do running-config."
+      ],
+      "explanation_md": "Nauczone sticky MAC są dodawane do running-config.",
+      "card_id": "ccna.portsecurity.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco Catalyst IOS / IOS XE — składnia z zadania",
+      "template": "SW1(config-if)# switchport port-security mac-address {{b0}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "sticky"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.portsecurity.06",
+      "revision": 1,
+      "title": "Restrict zamiast shutdown",
+      "skills": [
+        "portsecurity.06"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Odrzucaj niedozwolone źródła z rejestrowaniem naruszeń, bez wyłączenia całego portu. Wybierz tryb.",
+      "hints": [
+        "Restrict utrzymuje port aktywny, odrzuca niedozwolony ruch i zwiększa licznik naruszeń."
+      ],
+      "explanation_md": "Restrict utrzymuje port aktywny, odrzuca niedozwolony ruch i zwiększa licznik naruszeń.",
+      "card_id": "ccna.portsecurity.06.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco Catalyst IOS / IOS XE — składnia z zadania",
+      "template": "SW1(config-if)# switchport port-security violation {{b0}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "restrict"
+          ],
+          "width": 10,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,521 @@
+{
+  "schema_version": 3,
+  "id": "ccna.nat.stage-4",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "NAT nie jest routingiem",
+      "skills": [
+        "nat.nat-nie-jest-routingiem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/221481-8605-13.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13779-clear-nat-comments.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/218012-troubleshoot-network-address-translation.html"
+        }
+      ],
+      "id": "ccna.nat.ext.01.theory",
+      "front_md": "NAT nie jest routingiem",
+      "back_md": "Translacja i wybór drogi są odrębnymi warunkami łączności.",
+      "example": "Nie"
+    },
+    {
+      "revision": 1,
+      "title": "NAT nie jest firewallem",
+      "skills": [
+        "nat.nat-nie-jest-firewallem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/221481-8605-13.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13779-clear-nat-comments.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/218012-troubleshoot-network-address-translation.html"
+        }
+      ],
+      "id": "ccna.nat.ext.02.theory",
+      "front_md": "NAT nie jest firewallem",
+      "back_md": "Dostęp do publikowanej usługi kontroluje się odpowiednią polityką, nie samą zmianą adresu.",
+      "example": "Nie"
+    },
+    {
+      "revision": 1,
+      "title": "Statyczny port HTTPS",
+      "skills": [
+        "nat.statyczny-port-https"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/221481-8605-13.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13779-clear-nat-comments.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/218012-troubleshoot-network-address-translation.html"
+        }
+      ],
+      "id": "ccna.nat.ext.03.theory",
+      "front_md": "Statyczny port HTTPS",
+      "back_md": "Pierwszy port należy do inside local, a drugi do reprezentacji inside global w tej komendzie.",
+      "example": "R1(config)# ip nat inside source static tcp 10.0.10.10 443 203.0.113.10 8443"
+    },
+    {
+      "revision": 1,
+      "title": "Odpowiedź do adresu globalnego",
+      "skills": [
+        "nat.odpowied-do-adresu-globalnego"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/221481-8605-13.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13779-clear-nat-comments.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/218012-troubleshoot-network-address-translation.html"
+        }
+      ],
+      "id": "ccna.nat.ext.04.theory",
+      "front_md": "Odpowiedź do adresu globalnego",
+      "back_md": "Wpis NAT nie pomoże, jeśli odpowiedź nie przejdzie przez właściwy punkt translacji.",
+      "example": "Ruch powrotny musi dotrzeć do właściwego urządzenia NAT"
+    },
+    {
+      "revision": 1,
+      "title": "PAT na pulę",
+      "skills": [
+        "nat.pat-na-pul"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/221481-8605-13.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13779-clear-nat-comments.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/218012-troubleshoot-network-address-translation.html"
+        }
+      ],
+      "id": "ccna.nat.ext.05.theory",
+      "front_md": "PAT na pulę",
+      "back_md": "Overload umożliwia rozróżnianie translacji m.in. portami, zamiast wymagać osobnego adresu dla każdego hosta.",
+      "example": "R1(config)# ip nat inside source list 15 pool PUBLIC overload"
+    },
+    {
+      "revision": 1,
+      "title": "Różne sesje jednego hosta",
+      "skills": [
+        "nat.r-ne-sesje-jednego-hosta"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/221481-8605-13.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13779-clear-nat-comments.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/218012-troubleshoot-network-address-translation.html"
+        }
+      ],
+      "id": "ccna.nat.ext.06.theory",
+      "front_md": "Różne sesje jednego hosta",
+      "back_md": "Liczba translacji nie jest po prostu liczbą hostów w LAN-ie.",
+      "example": "Tak"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.nat.ext.01",
+      "revision": 1,
+      "title": "NAT nie jest routingiem",
+      "skills": [
+        "nat.nat-nie-jest-routingiem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/221481-8605-13.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13779-clear-nat-comments.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/218012-troubleshoot-network-address-translation.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Czy samo skonfigurowanie NAT zapewnia trasę do zewnętrznego serwera?",
+      "hints": [
+        "Translacja i wybór drogi są odrębnymi warunkami łączności."
+      ],
+      "explanation_md": "Translacja i wybór drogi są odrębnymi warunkami łączności.",
+      "card_id": "ccna.nat.ext.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie",
+          "feedback_md": "Translacja i wybór drogi są odrębnymi warunkami łączności.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, NAT zawsze dodaje domyślną trasę",
+          "feedback_md": "Konfiguracja translacji nie jest konfiguracją routingu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, jeśli ACL ma permit any",
+          "feedback_md": "Selektor NAT nie tworzy drogi do celu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak, gdy użyto overload",
+          "feedback_md": "PAT również wymaga poprawnego przekazywania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.nat.ext.02",
+      "revision": 1,
+      "title": "NAT nie jest firewallem",
+      "skills": [
+        "nat.nat-nie-jest-firewallem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/221481-8605-13.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13779-clear-nat-comments.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/218012-troubleshoot-network-address-translation.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Czy statyczne mapowanie NAT 1:1 samo jest kompletną polityką bezpieczeństwa dla serwera?",
+      "hints": [
+        "Dostęp do publikowanej usługi kontroluje się odpowiednią polityką, nie samą zmianą adresu."
+      ],
+      "explanation_md": "Dostęp do publikowanej usługi kontroluje się odpowiednią polityką, nie samą zmianą adresu.",
+      "card_id": "ccna.nat.ext.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, każda translacja uwierzytelnia użytkownika",
+          "feedback_md": "NAT nie jest authentication.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, wszystkie niebezpieczne porty są automatycznie rozpoznane",
+          "feedback_md": "NAT nie zna pełnej polityki aplikacyjnej.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, NAT automatycznie włącza inspekcję stanową",
+          "feedback_md": "Zależy to od osobnych funkcji urządzenia.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie",
+          "feedback_md": "Dostęp do publikowanej usługi kontroluje się odpowiednią polityką, nie samą zmianą adresu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.nat.ext.03",
+      "revision": 1,
+      "title": "Statyczny port HTTPS",
+      "skills": [
+        "nat.statyczny-port-https"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/221481-8605-13.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13779-clear-nat-comments.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/218012-troubleshoot-network-address-translation.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W klasycznym IOS inside source static TCP opublikuj 10.0.10.10:443 pod 203.0.113.10:8443. Adresy wpisano; uzupełnij porty.",
+      "hints": [
+        "Pierwszy port należy do inside local, a drugi do reprezentacji inside global w tej komendzie."
+      ],
+      "explanation_md": "Pierwszy port należy do inside local, a drugi do reprezentacji inside global w tej komendzie.",
+      "card_id": "ccna.nat.ext.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config)# ip nat inside source static tcp 10.0.10.10 {{b0}} 203.0.113.10 {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "443"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "8443"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.nat.ext.04",
+      "revision": 1,
+      "title": "Odpowiedź do adresu globalnego",
+      "skills": [
+        "nat.odpowied-do-adresu-globalnego"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/221481-8605-13.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13779-clear-nat-comments.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/218012-troubleshoot-network-address-translation.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Serwer zewnętrzny odpowiada do inside global klienta. Jaki warunek jest konieczny poza samym wpisem translacji?",
+      "hints": [
+        "Wpis NAT nie pomoże, jeśli odpowiedź nie przejdzie przez właściwy punkt translacji."
+      ],
+      "explanation_md": "Wpis NAT nie pomoże, jeśli odpowiedź nie przejdzie przez właściwy punkt translacji.",
+      "card_id": "ccna.nat.ext.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Każdy router w Internecie musi znać prywatny adres klienta",
+          "feedback_md": "Zewnętrzna droga korzysta z adresu globalnego.",
+          "id": "A"
+        },
+        {
+          "text_md": "Ruch powrotny musi dotrzeć do właściwego urządzenia NAT",
+          "feedback_md": "Wpis NAT nie pomoże, jeśli odpowiedź nie przejdzie przez właściwy punkt translacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Klient musi mieć to samo MAC co serwer",
+          "feedback_md": "MAC ma znaczenie lokalne dla łącza.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wszystkie urządzenia muszą mieć tę samą maskę",
+          "feedback_md": "Nie jest to wymaganie między zdalnymi sieciami.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.nat.ext.05",
+      "revision": 1,
+      "title": "PAT na pulę",
+      "skills": [
+        "nat.pat-na-pul"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/221481-8605-13.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13779-clear-nat-comments.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/218012-troubleshoot-network-address-translation.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Istnieją ACL 15 i pula PUBLIC. Włącz inside source NAT z tej listy do puli z możliwością współdzielenia adresów.",
+      "hints": [
+        "Overload umożliwia rozróżnianie translacji m.in. portami, zamiast wymagać osobnego adresu dla każdego hosta."
+      ],
+      "explanation_md": "Overload umożliwia rozróżnianie translacji m.in. portami, zamiast wymagać osobnego adresu dla każdego hosta.",
+      "card_id": "ccna.nat.ext.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config)# ip nat inside source list {{b0}} pool PUBLIC {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "15"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "overload"
+          ],
+          "width": 10,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.nat.ext.06",
+      "revision": 1,
+      "title": "Różne sesje jednego hosta",
+      "skills": [
+        "nat.r-ne-sesje-jednego-hosta"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/221481-8605-13.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/13779-clear-nat-comments.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NAT — translacje i droga powrotna",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-address-translation-nat/218012-troubleshoot-network-address-translation.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Czy jeden host może mieć wiele wpisów PAT dla różnych sesji?",
+      "hints": [
+        "Liczba translacji nie jest po prostu liczbą hostów w LAN-ie."
+      ],
+      "explanation_md": "Liczba translacji nie jest po prostu liczbą hostów w LAN-ie.",
+      "card_id": "ccna.nat.ext.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie, PAT zawsze ma dokładnie jeden wpis na hosta",
+          "feedback_md": "Wpisy mogą rozróżniać protokół i porty.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tylko jeśli zmieni adres MAC",
+          "feedback_md": "To nie warunek różnych sesji transportowych.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie, bo wszystkie sesje używają jednego portu",
+          "feedback_md": "Porty i cele mogą się różnić.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak",
+          "feedback_md": "Liczba translacji nie jest po prostu liczbą hostów w LAN-ie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

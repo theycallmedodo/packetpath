@@ -1,0 +1,525 @@
+{
+  "schema_version": 3,
+  "id": "ccna.portsecurity.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.portsecurity.13.theory",
+      "revision": 1,
+      "title": "Trzecie urządzenie",
+      "skills": [
+        "portsecurity.13"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "front_md": "Trzecie urządzenie",
+      "back_md": "Osiągnięty limit blokuje nowe niedozwolone źródło; dotychczasowe dopuszczone źródła mogą działać.",
+      "example": "Ramka zostanie odrzucona, port pozostanie aktywny"
+    },
+    {
+      "id": "ccna.portsecurity.14.theory",
+      "revision": 1,
+      "title": "Nowy port stanowiska",
+      "skills": [
+        "portsecurity.14"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "front_md": "Nowy port stanowiska",
+      "back_md": "Sticky uczy źródło obecne na porcie, więc kontroluj urządzenie podłączone podczas nauki.",
+      "example": "SW1(config-if)# switchport mode access\nSW1(config-if)# switchport port-security\nSW1(config-if)# switchport port-security maximum 1\nSW1(config-if)# switchport port-security mac-address sticky"
+    },
+    {
+      "id": "ccna.portsecurity.15.theory",
+      "revision": 1,
+      "title": "Jawna polityka dla dwóch MAC",
+      "skills": [
+        "portsecurity.15"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "front_md": "Jawna polityka dla dwóch MAC",
+      "back_md": "Tryb restrict pozwala zachować łączność znanych urządzeń podczas odrzucania obcych źródeł.",
+      "example": "SW1(config-if)# switchport port-security\nSW1(config-if)# switchport port-security maximum 2\nSW1(config-if)# switchport port-security violation restrict"
+    },
+    {
+      "id": "ccna.portsecurity.16.theory",
+      "revision": 1,
+      "title": "Secure-up nie oznacza 802.1X",
+      "skills": [
+        "portsecurity.16"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "front_md": "Secure-up nie oznacza 802.1X",
+      "back_md": "Kontrola MAC nie zastępuje uwierzytelniania tożsamości użytkownika ani urządzenia.",
+      "example": "Nie, to kontrola MAC, nie dowód uwierzytelnienia"
+    },
+    {
+      "id": "ccna.portsecurity.17.theory",
+      "revision": 1,
+      "title": "Napraw i zweryfikuj interfejs",
+      "skills": [
+        "portsecurity.17"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "front_md": "Napraw i zweryfikuj interfejs",
+      "back_md": "Weryfikacja po naprawie pozwala odróżnić trwały powrót od ponownego naruszenia.",
+      "example": "SW1(config)# interface GigabitEthernet1/0/7\nSW1(config-if)# shutdown\nSW1(config-if)# no shutdown\nSW1(config-if)# end\nSW1# show port-security interface GigabitEthernet1/0/7"
+    },
+    {
+      "id": "ccna.portsecurity.18.theory",
+      "revision": 1,
+      "title": "Zmień politykę i sprawdź",
+      "skills": [
+        "portsecurity.18"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "front_md": "Zmień politykę i sprawdź",
+      "back_md": "Obniżając limit, trzeba uwzględnić już istniejące secure MAC; tu ich liczba odpowiada limitowi.",
+      "example": "SW1(config)# interface GigabitEthernet1/0/8\nSW1(config-if)# switchport port-security maximum 2\nSW1(config-if)# switchport port-security violation restrict\nSW1(config-if)# end\nSW1# show port-security interface GigabitEthernet1/0/8"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.portsecurity.13",
+      "revision": 1,
+      "title": "Trzecie urządzenie",
+      "skills": [
+        "portsecurity.13"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Maksimum wynosi 2, dwa secure MAC są już nauczone, tryb restrict. Nadchodzi ramka z trzeciego, nieznanego źródła. Co nastąpi?",
+      "hints": [
+        "Osiągnięty limit blokuje nowe niedozwolone źródło; dotychczasowe dopuszczone źródła mogą działać."
+      ],
+      "explanation_md": "Osiągnięty limit blokuje nowe niedozwolone źródło; dotychczasowe dopuszczone źródła mogą działać.",
+      "card_id": "ccna.portsecurity.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Najstarszy secure MAC zawsze zostanie zastąpiony",
+          "feedback_md": "Nie jest to automatyczna zasada zastępowania wpisów."
+        },
+        {
+          "id": "B",
+          "text_md": "Port natychmiast przejdzie w error-disable",
+          "feedback_md": "To typowa reakcja shutdown, nie restrict."
+        },
+        {
+          "id": "C",
+          "text_md": "Wszystkie trzy MAC zostaną dopuszczone",
+          "feedback_md": "Limit dwóch nie pozwala na to."
+        },
+        {
+          "id": "D",
+          "text_md": "Ramka zostanie odrzucona, port pozostanie aktywny",
+          "feedback_md": "Restrict ogranicza niedozwolone źródło bez wyłączenia portu."
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.portsecurity.14",
+      "revision": 1,
+      "title": "Nowy port stanowiska",
+      "skills": [
+        "portsecurity.14"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Skonfiguruj statyczny access, włącz Port Security, limit 1 i sticky. VLAN jest już przypisany.",
+      "hints": [
+        "Sticky uczy źródło obecne na porcie, więc kontroluj urządzenie podłączone podczas nauki."
+      ],
+      "explanation_md": "Sticky uczy źródło obecne na porcie, więc kontroluj urządzenie podłączone podczas nauki.",
+      "card_id": "ccna.portsecurity.14.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco Catalyst IOS / IOS XE — składnia z zadania",
+      "template": "SW1(config-if)# switchport mode {{b0}}\nSW1(config-if)# switchport {{b1}}\nSW1(config-if)# switchport port-security maximum {{b2}}\nSW1(config-if)# switchport port-security mac-address {{b3}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "access"
+          ],
+          "width": 8,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "port-security"
+          ],
+          "width": 15,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "1"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b3",
+          "label": "Luka 4",
+          "answer_type": "command",
+          "accepted": [
+            "sticky"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.portsecurity.15",
+      "revision": 1,
+      "title": "Jawna polityka dla dwóch MAC",
+      "skills": [
+        "portsecurity.15"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na statycznym access włącz ochronę, limit 2 oraz restrict.",
+      "hints": [
+        "Tryb restrict pozwala zachować łączność znanych urządzeń podczas odrzucania obcych źródeł."
+      ],
+      "explanation_md": "Tryb restrict pozwala zachować łączność znanych urządzeń podczas odrzucania obcych źródeł.",
+      "card_id": "ccna.portsecurity.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco Catalyst IOS / IOS XE — składnia z zadania",
+      "template": "SW1(config-if)# switchport {{b0}}\nSW1(config-if)# switchport port-security maximum {{b1}}\nSW1(config-if)# switchport port-security violation {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "port-security"
+          ],
+          "width": 15,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "2"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "restrict"
+          ],
+          "width": 10,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.portsecurity.16",
+      "revision": 1,
+      "title": "Secure-up nie oznacza 802.1X",
+      "skills": [
+        "portsecurity.16"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Port ma secure-up i znany MAC. Czy to dowodzi uwierzytelnienia użytkownika hasłem lub certyfikatem?",
+      "hints": [
+        "Kontrola MAC nie zastępuje uwierzytelniania tożsamości użytkownika ani urządzenia."
+      ],
+      "explanation_md": "Kontrola MAC nie zastępuje uwierzytelniania tożsamości użytkownika ani urządzenia.",
+      "card_id": "ccna.portsecurity.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Nie, to kontrola MAC, nie dowód uwierzytelnienia",
+          "feedback_md": "Znany MAC nie jest certyfikatem tożsamości."
+        },
+        {
+          "id": "B",
+          "text_md": "Tak, sticky sprawdza hasło",
+          "feedback_md": "Sticky uczy MAC, nie hasło."
+        },
+        {
+          "id": "C",
+          "text_md": "Tak, restrict wykonuje 802.1X",
+          "feedback_md": "Restrict określa reakcję na naruszenie."
+        },
+        {
+          "id": "D",
+          "text_md": "Tak, każdy access używa certyfikatu",
+          "feedback_md": "Tryb access nie oznacza włączenia uwierzytelniania."
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.portsecurity.17",
+      "revision": 1,
+      "title": "Napraw i zweryfikuj interfejs",
+      "skills": [
+        "portsecurity.17"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Przyczyna naruszenia na G1/0/7 usunięta. Podnieś port cyklem shutdown/no shutdown i pokaż jego Port Security.",
+      "hints": [
+        "Weryfikacja po naprawie pozwala odróżnić trwały powrót od ponownego naruszenia."
+      ],
+      "explanation_md": "Weryfikacja po naprawie pozwala odróżnić trwały powrót od ponownego naruszenia.",
+      "card_id": "ccna.portsecurity.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco Catalyst IOS / IOS XE — składnia z zadania",
+      "template": "SW1(config)# interface GigabitEthernet1/0/7\nSW1(config-if)# {{b0}}\nSW1(config-if)# {{b1}}\nSW1(config-if)# end\nSW1# show {{b2}} interface GigabitEthernet1/0/7",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "shutdown"
+          ],
+          "width": 10,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "no shutdown"
+          ],
+          "width": 13,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "port-security"
+          ],
+          "width": 15,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.portsecurity.18",
+      "revision": 1,
+      "title": "Zmień politykę i sprawdź",
+      "skills": [
+        "portsecurity.18"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Port G1/0/8 jest chroniony, ma dwa poprawne secure MAC. Ustaw limit 2, restrict i sprawdź stan tego portu.",
+      "hints": [
+        "Obniżając limit, trzeba uwzględnić już istniejące secure MAC; tu ich liczba odpowiada limitowi."
+      ],
+      "explanation_md": "Obniżając limit, trzeba uwzględnić już istniejące secure MAC; tu ich liczba odpowiada limitowi.",
+      "card_id": "ccna.portsecurity.18.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco Catalyst IOS / IOS XE — składnia z zadania",
+      "template": "SW1(config)# interface GigabitEthernet1/0/8\nSW1(config-if)# switchport port-security maximum {{b0}}\nSW1(config-if)# switchport port-security violation {{b1}}\nSW1(config-if)# end\nSW1# show port-security {{b2}} GigabitEthernet1/0/8",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "2"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "restrict"
+          ],
+          "width": 10,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "interface"
+          ],
+          "width": 11,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,430 @@
+{
+  "schema_version": 3,
+  "id": "ccna.monitoring.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.monitoring.07.theory",
+      "revision": 1,
+      "title": "Próg logging trap warnings",
+      "skills": [
+        "monitoring.syslog-threshold"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "front_md": "Próg logging trap warnings",
+      "back_md": "Próg severity obejmuje wskazany poziom i zdarzenia o wyższej pilności, czyli niższych numerach.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.monitoring.08.theory",
+      "revision": 1,
+      "title": "NTP: serwer i źródło",
+      "skills": [
+        "monitoring.ntp-source"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        }
+      ],
+      "front_md": "NTP: serwer i źródło",
+      "back_md": "Stabilny adres źródłowy ułatwia polityki dostępu. Wymaga poprawnej drogi powrotnej, nie tylko aktywnego loopbacka.",
+      "example": "R1(config)# ntp server 192.0.2.123\nR1(config)# ntp source Loopback0"
+    },
+    {
+      "id": "ccna.monitoring.09.theory",
+      "revision": 1,
+      "title": "Syslog: cel i poziom",
+      "skills": [
+        "monitoring.syslog-policy"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "front_md": "Syslog: cel i poziom",
+      "back_md": "Ta konfiguracja obejmuje severity 0–4. Słowo trap w tym poleceniu dotyczy progu wysyłki syslog, nie jest samo konfiguracją pułapek SNMP.",
+      "example": "R1(config)# logging host 192.0.2.50\nR1(config)# logging trap warnings"
+    },
+    {
+      "id": "ccna.monitoring.10.theory",
+      "revision": 1,
+      "title": "Polling a trap",
+      "skills": [
+        "monitoring.poll-vs-trap"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "front_md": "Polling a trap",
+      "back_md": "Polling zbiera dane na żądanie managera; powiadomienia wychodzą od agenta. SNMP inform różni się od trap m.in. potwierdzaniem odbioru.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.monitoring.11.theory",
+      "revision": 1,
+      "title": "Lokalny bufor logów",
+      "skills": [
+        "monitoring.buffer"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "front_md": "Lokalny bufor logów",
+      "back_md": "Bufor lokalny i zdalny serwer to odrębne miejsca zapisu. Bufor o skończonym rozmiarze nie jest trwałym archiwum wszystkich zdarzeń.",
+      "example": "R1(config)# logging buffered 16384 informational"
+    },
+    {
+      "id": "ccna.monitoring.12.theory",
+      "revision": 1,
+      "title": "Sprawdź relacje NTP",
+      "skills": [
+        "monitoring.ntp-verify"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        }
+      ],
+      "front_md": "Sprawdź relacje NTP",
+      "back_md": "Lista skojarzeń i stan lokalny pomagają rozróżnić konfigurację sąsiada od faktycznej synchronizacji.",
+      "example": "R1# show ntp associations\nR1# show ntp status"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.monitoring.07",
+      "revision": 1,
+      "title": "Próg logging trap warnings",
+      "skills": [
+        "monitoring.syslog-threshold"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Przy logging trap warnings które poziomy syslog są wysyłane do zdalnego serwera?",
+      "hints": [
+        "Warnings to 4; kierunek porównania jest ważny."
+      ],
+      "explanation_md": "Próg severity obejmuje wskazany poziom i zdarzenia o wyższej pilności, czyli niższych numerach.",
+      "card_id": "ccna.monitoring.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Tylko 4",
+          "feedback_md": "Próg obejmuje także zdarzenia poważniejsze niż warnings."
+        },
+        {
+          "id": "B",
+          "text_md": "0, 1, 2, 3 i 4",
+          "feedback_md": "Wysyłane są poziom 4 i numery niższe."
+        },
+        {
+          "id": "C",
+          "text_md": "4, 5, 6 i 7",
+          "feedback_md": "Wyższe numery są mniej pilne i nie mieszczą się w tym progu."
+        },
+        {
+          "id": "D",
+          "text_md": "Wyłącznie 7",
+          "feedback_md": "Debugging ma numer 7 i jest poza tym progiem."
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.monitoring.08",
+      "revision": 1,
+      "title": "NTP: serwer i źródło",
+      "skills": [
+        "monitoring.ntp-source"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Użyj NTP 192.0.2.123 i istniejącego, osiągalnego Loopback0 jako źródła pakietów. Serwer ma trasę powrotną do tego adresu.",
+      "hints": [
+        "Źródło pakietów to adres interfejsu, nie adres serwera."
+      ],
+      "explanation_md": "Stabilny adres źródłowy ułatwia polityki dostępu. Wymaga poprawnej drogi powrotnej, nie tylko aktywnego loopbacka.",
+      "card_id": "ccna.monitoring.08.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# ntp server {{server}}\nR1(config)# ntp source {{interface}}",
+      "blanks": [
+        {
+          "id": "server",
+          "label": "Serwer czasu",
+          "answer_type": "ipv4",
+          "accepted": [
+            "192.0.2.123"
+          ],
+          "width": 14,
+          "common_errors": {}
+        },
+        {
+          "id": "interface",
+          "label": "Interfejs źródłowy",
+          "answer_type": "keyword",
+          "accepted": [
+            "Loopback0",
+            "Loopback 0"
+          ],
+          "width": 12,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.monitoring.09",
+      "revision": 1,
+      "title": "Syslog: cel i poziom",
+      "skills": [
+        "monitoring.syslog-policy"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Wyślij syslog do 192.0.2.50, ograniczając próg do warnings. Uzupełnij cel oraz nazwę poziomu.",
+      "hints": [
+        "Nie myl dwóch znaczeń słowa trap w różnych komendach."
+      ],
+      "explanation_md": "Ta konfiguracja obejmuje severity 0–4. Słowo trap w tym poleceniu dotyczy progu wysyłki syslog, nie jest samo konfiguracją pułapek SNMP.",
+      "card_id": "ccna.monitoring.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# logging host {{server}}\nR1(config)# logging trap {{level}}",
+      "blanks": [
+        {
+          "id": "server",
+          "label": "Serwer logów",
+          "answer_type": "ipv4",
+          "accepted": [
+            "192.0.2.50"
+          ],
+          "width": 13,
+          "common_errors": {}
+        },
+        {
+          "id": "level",
+          "label": "Próg warnings",
+          "answer_type": "keyword",
+          "accepted": [
+            "warnings",
+            "4"
+          ],
+          "width": 11,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.monitoring.10",
+      "revision": 1,
+      "title": "Polling a trap",
+      "skills": [
+        "monitoring.poll-vs-trap"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co odróżnia typowy SNMP trap od odczytu pollingiem?",
+      "hints": [
+        "Zastanów się, kto rozpoczyna wymianę."
+      ],
+      "explanation_md": "Polling zbiera dane na żądanie managera; powiadomienia wychodzą od agenta. SNMP inform różni się od trap m.in. potwierdzaniem odbioru.",
+      "card_id": "ccna.monitoring.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Trap wymaga, by manager wysłał GET dla każdego zdarzenia.",
+          "feedback_md": "To polling jest inicjowany zapytaniem managera."
+        },
+        {
+          "id": "B",
+          "text_md": "Polling i trap są zawsze identycznym pakietem.",
+          "feedback_md": "To różne operacje i kierunki inicjacji."
+        },
+        {
+          "id": "C",
+          "text_md": "Trap jest inicjowany przez agenta po zdarzeniu, bez osobnego GET dla tego zdarzenia.",
+          "feedback_md": "Agent może wysłać powiadomienie o zdarzeniu."
+        },
+        {
+          "id": "D",
+          "text_md": "Trap automatycznie zmienia konfigurację urządzenia.",
+          "feedback_md": "Powiadomienie nie oznacza operacji zapisu konfiguracji."
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.monitoring.11",
+      "revision": 1,
+      "title": "Lokalny bufor logów",
+      "skills": [
+        "monitoring.buffer"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Ustaw bufor logów na 16384 bajty i próg informational.",
+      "hints": [
+        "Informational ma poziom 6."
+      ],
+      "explanation_md": "Bufor lokalny i zdalny serwer to odrębne miejsca zapisu. Bufor o skończonym rozmiarze nie jest trwałym archiwum wszystkich zdarzeń.",
+      "card_id": "ccna.monitoring.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# logging buffered {{size}} {{level}}",
+      "blanks": [
+        {
+          "id": "size",
+          "label": "Rozmiar bufora",
+          "answer_type": "integer",
+          "accepted": [
+            "16384"
+          ],
+          "width": 8,
+          "common_errors": {}
+        },
+        {
+          "id": "level",
+          "label": "Poziom informational",
+          "answer_type": "keyword",
+          "accepted": [
+            "informational",
+            "6"
+          ],
+          "width": 16,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.monitoring.12",
+      "revision": 1,
+      "title": "Sprawdź relacje NTP",
+      "skills": [
+        "monitoring.ntp-verify"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Wyświetl listę skojarzeń NTP, a potem stan synchronizacji.",
+      "hints": [
+        "Dwie komendy pokazują różne perspektywy tej samej usługi."
+      ],
+      "explanation_md": "Lista skojarzeń i stan lokalny pomagają rozróżnić konfigurację sąsiada od faktycznej synchronizacji.",
+      "card_id": "ccna.monitoring.12.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1# show ntp {{relations}}\nR1# show ntp {{state}}",
+      "blanks": [
+        {
+          "id": "relations",
+          "label": "Skojarzenia NTP",
+          "answer_type": "keyword",
+          "accepted": [
+            "associations"
+          ],
+          "width": 15,
+          "common_errors": {}
+        },
+        {
+          "id": "state",
+          "label": "Stan zegara",
+          "answer_type": "keyword",
+          "accepted": [
+            "status"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

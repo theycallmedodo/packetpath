@@ -1,0 +1,427 @@
+{
+  "schema_version": 3,
+  "id": "ccna.vlan.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.vlan.07.theory",
+      "revision": 1,
+      "title": "Dodawanie bez nadpisania",
+      "skills": [
+        "vlan.allowed-add"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "front_md": "Dodawanie bez nadpisania",
+      "back_md": "Lista allowed ogranicza przenoszone VLAN-y. Modyfikator **add** rozszerza listę; podanie listy bez modyfikatora ją zastępuje.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.vlan.08.theory",
+      "revision": 1,
+      "title": "Nazwij VLAN",
+      "skills": [
+        "vlan.vlan-name"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        }
+      ],
+      "front_md": "Nazwij VLAN",
+      "back_md": "Numer identyfikuje VLAN w ruchu 802.1Q; nazwa służy administratorowi.",
+      "example": "SW1(config)# vlan 30\nSW1(config-vlan)# name VOICE"
+    },
+    {
+      "id": "ccna.vlan.09.theory",
+      "revision": 1,
+      "title": "Access w dwóch krokach",
+      "skills": [
+        "vlan.access-complete"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        }
+      ],
+      "front_md": "Access w dwóch krokach",
+      "back_md": "Wymuszenie access i przypisanie VLAN-u są potrzebne do jednoznacznej konfiguracji portu użytkownika.",
+      "example": "SW1(config)# interface GigabitEthernet1/0/5\nSW1(config-if)# switchport mode access\nSW1(config-if)# switchport access vlan 10"
+    },
+    {
+      "id": "ccna.vlan.10.theory",
+      "revision": 1,
+      "title": "Native VLAN mismatch",
+      "skills": [
+        "vlan.native-mismatch"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "front_md": "Native VLAN mismatch",
+      "back_md": "Native VLAN powinien być zgodny po obu stronach trunku. Niezgodność może błędnie klasyfikować ruch nietagowany.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.vlan.11.theory",
+      "revision": 1,
+      "title": "Trunk i native",
+      "skills": [
+        "vlan.native-config"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "front_md": "Trunk i native",
+      "back_md": "Native VLAN to osobny parametr trunku. Ustaw go zgodnie z sąsiadem.",
+      "example": "SW1(config-if)# switchport mode trunk\nSW1(config-if)# switchport trunk native vlan 99"
+    },
+    {
+      "id": "ccna.vlan.12.theory",
+      "revision": 1,
+      "title": "Rozszerz listę allowed",
+      "skills": [
+        "vlan.incremental-change"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "front_md": "Rozszerz listę allowed",
+      "back_md": "`add 30` rozszerza istniejący zbiór; samo `30` zastąpiłoby go.",
+      "example": "SW1(config-if)# switchport trunk allowed vlan add 30"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.vlan.07",
+      "revision": 1,
+      "title": "Dodawanie bez nadpisania",
+      "skills": [
+        "vlan.allowed-add"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Trunk dopuszcza VLAN-y 10 i 20. Która komenda doda VLAN 30, zachowując istniejącą listę?",
+      "hints": [
+        "Poszukaj słowa oznaczającego dodanie do istniejącej listy."
+      ],
+      "explanation_md": "Lista allowed ogranicza przenoszone VLAN-y. Modyfikator **add** rozszerza listę; podanie listy bez modyfikatora ją zastępuje.",
+      "card_id": "ccna.vlan.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "switchport trunk allowed vlan 30",
+          "feedback_md": "Bez add zastępujesz listę dozwolonych VLAN-ów."
+        },
+        {
+          "id": "B",
+          "text_md": "switchport trunk native vlan 30",
+          "feedback_md": "Native VLAN nie rozszerza listy allowed."
+        },
+        {
+          "id": "C",
+          "text_md": "switchport access vlan 30",
+          "feedback_md": "To przypisanie VLAN-u access, a nie rozszerzenie trunku."
+        },
+        {
+          "id": "D",
+          "text_md": "switchport trunk allowed vlan add 30",
+          "feedback_md": "Słowo add rozszerza istniejącą listę."
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.vlan.08",
+      "revision": 1,
+      "title": "Nazwij VLAN",
+      "skills": [
+        "vlan.vlan-name"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Utwórz VLAN 30 i nadaj mu dokładnie nazwę VOICE.",
+      "hints": [
+        "Numer i nazwa mają różne role."
+      ],
+      "explanation_md": "Numer identyfikuje VLAN w ruchu 802.1Q; nazwa służy administratorowi.",
+      "card_id": "ccna.vlan.08.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# vlan {{id}}\nSW1(config-vlan)# name {{name}}",
+      "blanks": [
+        {
+          "id": "id",
+          "label": "Numer VLAN",
+          "answer_type": "integer",
+          "accepted": [
+            "30"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "name",
+          "label": "Nazwa VLAN",
+          "answer_type": "keyword",
+          "accepted": [
+            "VOICE"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.09",
+      "revision": 1,
+      "title": "Access w dwóch krokach",
+      "skills": [
+        "vlan.access-complete"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Port G1/0/5 do komputera ma używać VLAN-u 10. Uzupełnij tryb i numer. VLAN 10 istnieje.",
+      "hints": [
+        "To port końcowy, nie uplink."
+      ],
+      "explanation_md": "Wymuszenie access i przypisanie VLAN-u są potrzebne do jednoznacznej konfiguracji portu użytkownika.",
+      "card_id": "ccna.vlan.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# interface GigabitEthernet1/0/5\nSW1(config-if)# switchport mode {{mode}}\nSW1(config-if)# switchport access vlan {{id}}",
+      "blanks": [
+        {
+          "id": "mode",
+          "label": "Tryb portu",
+          "answer_type": "keyword",
+          "accepted": [
+            "access"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "id",
+          "label": "VLAN PC",
+          "answer_type": "integer",
+          "accepted": [
+            "10"
+          ],
+          "width": 5,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.10",
+      "revision": 1,
+      "title": "Native VLAN mismatch",
+      "skills": [
+        "vlan.native-mismatch"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "SW1 ma native VLAN 99, SW2 native VLAN 1 na wspólnym trunku. Co należy zrobić według spójnego planu zakładającego native VLAN 99?",
+      "hints": [
+        "Zachowaj trunk, popraw niespójny parametr."
+      ],
+      "explanation_md": "Native VLAN powinien być zgodny po obu stronach trunku. Niezgodność może błędnie klasyfikować ruch nietagowany.",
+      "card_id": "ccna.vlan.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Ustawić oba porty jako access VLAN 99.",
+          "feedback_md": "Zmieniłoby to funkcję łącza zamiast poprawić trunk."
+        },
+        {
+          "id": "B",
+          "text_md": "Ustawić native VLAN 99 także na SW2.",
+          "feedback_md": "Spójne ustawienie native VLAN eliminuje tę niezgodność."
+        },
+        {
+          "id": "C",
+          "text_md": "Wyłączyć STP dla wszystkich VLAN-ów.",
+          "feedback_md": "Wyłączenie STP nie naprawia planu native VLAN."
+        },
+        {
+          "id": "D",
+          "text_md": "Usunąć znaczniki 802.1Q z każdego VLAN-u.",
+          "feedback_md": "Trunk nadal potrzebuje rozróżniać VLAN-y."
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.vlan.11",
+      "revision": 1,
+      "title": "Trunk i native",
+      "skills": [
+        "vlan.native-config"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na uplinku wymuś trunk i native VLAN 99. VLAN 99 istnieje. Nie zmieniaj tutaj listy allowed.",
+      "hints": [
+        "Pierwsza linia ustawia tryb, druga VLAN ruchu native."
+      ],
+      "explanation_md": "Native VLAN to osobny parametr trunku. Ustaw go zgodnie z sąsiadem.",
+      "card_id": "ccna.vlan.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config-if)# switchport mode {{mode}}\nSW1(config-if)# switchport trunk native vlan {{native}}",
+      "blanks": [
+        {
+          "id": "mode",
+          "label": "Tryb uplinku",
+          "answer_type": "keyword",
+          "accepted": [
+            "trunk"
+          ],
+          "width": 8,
+          "common_errors": {}
+        },
+        {
+          "id": "native",
+          "label": "Native VLAN",
+          "answer_type": "integer",
+          "accepted": [
+            "99"
+          ],
+          "width": 5,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.12",
+      "revision": 1,
+      "title": "Rozszerz listę allowed",
+      "skills": [
+        "vlan.incremental-change"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Uplink przenosi VLAN-y 10 i 20. Dodaj istniejący VLAN 30 bez usuwania poprzednich.",
+      "hints": [
+        "Nie używaj remove ani gołej listy."
+      ],
+      "explanation_md": "`add 30` rozszerza istniejący zbiór; samo `30` zastąpiłoby go.",
+      "card_id": "ccna.vlan.12.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config-if)# switchport trunk allowed vlan {{operation}} {{id}}",
+      "blanks": [
+        {
+          "id": "operation",
+          "label": "Operacja na liście",
+          "answer_type": "keyword",
+          "accepted": [
+            "add"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "id",
+          "label": "Dodawany VLAN",
+          "answer_type": "integer",
+          "accepted": [
+            "30"
+          ],
+          "width": 5,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

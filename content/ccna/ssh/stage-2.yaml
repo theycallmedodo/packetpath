@@ -1,0 +1,428 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ssh.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.ssh.07.theory",
+      "revision": 1,
+      "title": "VTY a console",
+      "skills": [
+        "ssh.vty"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "front_md": "VTY a console",
+      "back_md": "Linie console i VTY mają różne role. Zmiana ustawień konsoli nie musi zmienić zasad logowania przez sieć.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.ssh.08.theory",
+      "revision": 1,
+      "title": "Spójna para ustawień VTY",
+      "skills": [
+        "ssh.vty-settings"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "front_md": "Spójna para ustawień VTY",
+      "back_md": "Pierwsza linia wybiera bazę kont, druga protokół transportowy. Obie powinny odpowiadać temu samemu planowi dostępu.",
+      "example": "R1(config-line)# login local\nR1(config-line)# transport input ssh"
+    },
+    {
+      "id": "ccna.ssh.09.theory",
+      "revision": 1,
+      "title": "Timeout bezczynności",
+      "skills": [
+        "ssh.idle-timeout"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "front_md": "Timeout bezczynności",
+      "back_md": "Exec-timeout ogranicza czas bezczynności sesji EXEC. Nie jest to czas wymiany kluczy ani blokady logowania.",
+      "example": "R1(config-line)# exec-timeout 5 30"
+    },
+    {
+      "id": "ccna.ssh.10.theory",
+      "revision": 1,
+      "title": "Skąd wolno zarządzać?",
+      "skills": [
+        "ssh.access-class"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "front_md": "Skąd wolno zarządzać?",
+      "back_md": "Ograniczanie źródeł zarządzania to osobna kontrola obok uwierzytelniania. ACL musi dopuszczać rzeczywistą stację administratora.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.ssh.11.theory",
+      "revision": 1,
+      "title": "Przypnij istniejącą ACL do VTY",
+      "skills": [
+        "ssh.vty-acl"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "front_md": "Przypnij istniejącą ACL do VTY",
+      "back_md": "Access-class i ip access-group dotyczą różnych miejsc egzekwowania polityki. Tutaj chronisz linie VTY.",
+      "example": "R1(config-line)# access-class VTY-MGMT in"
+    },
+    {
+      "id": "ccna.ssh.12.theory",
+      "revision": 1,
+      "title": "Nazwa i domena w klasycznym labie SSH",
+      "skills": [
+        "ssh.identity"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "front_md": "Nazwa i domena w klasycznym labie SSH",
+      "back_md": "W klasycznym przepływie tworzenia domyślnego klucza RSA nazwa i domena identyfikują urządzenie. Nowsze warianty z etykietami kluczy mogą mieć inne wymagania.",
+      "example": "Router(config)# hostname R1\nR1(config)# ip domain-name lab.example"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ssh.07",
+      "revision": 1,
+      "title": "VTY a console",
+      "skills": [
+        "ssh.vty"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Która część konfiguracji odpowiada za wirtualne linie używane przez zdalne sesje terminalowe?",
+      "hints": [
+        "Szukasz linii wirtualnych, a nie fizycznej konsoli."
+      ],
+      "explanation_md": "Linie console i VTY mają różne role. Zmiana ustawień konsoli nie musi zmienić zasad logowania przez sieć.",
+      "card_id": "ccna.ssh.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "line vty",
+          "feedback_md": "VTY obsługuje wirtualne sesje terminalowe."
+        },
+        {
+          "id": "B",
+          "text_md": "interface Loopback0",
+          "feedback_md": "Loopback to interfejs logiczny, nie linia terminalowa."
+        },
+        {
+          "id": "C",
+          "text_md": "router ospf",
+          "feedback_md": "Proces OSPF nie jest mechanizmem logowania."
+        },
+        {
+          "id": "D",
+          "text_md": "line console 0",
+          "feedback_md": "Console dotyczy konsoli lokalnej."
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ssh.08",
+      "revision": 1,
+      "title": "Spójna para ustawień VTY",
+      "skills": [
+        "ssh.vty-settings"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "AAA nie jest włączone, konto lokalne i serwer SSH już istnieją. Na VTY użyj lokalnych kont i dopuść wyłącznie SSH.",
+      "hints": [
+        "Nie myl login local z transport input local."
+      ],
+      "explanation_md": "Pierwsza linia wybiera bazę kont, druga protokół transportowy. Obie powinny odpowiadać temu samemu planowi dostępu.",
+      "card_id": "ccna.ssh.08.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-line)# login {{auth}}\nR1(config-line)# transport input {{transport}}",
+      "blanks": [
+        {
+          "id": "auth",
+          "label": "Uwierzytelnianie",
+          "answer_type": "keyword",
+          "accepted": [
+            "local"
+          ],
+          "width": 8,
+          "common_errors": {}
+        },
+        {
+          "id": "transport",
+          "label": "Protokół",
+          "answer_type": "keyword",
+          "accepted": [
+            "ssh"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ssh.09",
+      "revision": 1,
+      "title": "Timeout bezczynności",
+      "skills": [
+        "ssh.idle-timeout"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na VTY ustaw zakończenie sesji po dokładnie 5 minutach i 30 sekundach bezczynności.",
+      "hints": [
+        "Parametry podajesz w kolejności minuty, sekundy."
+      ],
+      "explanation_md": "Exec-timeout ogranicza czas bezczynności sesji EXEC. Nie jest to czas wymiany kluczy ani blokady logowania.",
+      "card_id": "ccna.ssh.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-line)# exec-timeout {{minutes}} {{seconds}}",
+      "blanks": [
+        {
+          "id": "minutes",
+          "label": "Minuty",
+          "answer_type": "integer",
+          "accepted": [
+            "5"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "seconds",
+          "label": "Sekundy",
+          "answer_type": "integer",
+          "accepted": [
+            "30"
+          ],
+          "width": 5,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ssh.10",
+      "revision": 1,
+      "title": "Skąd wolno zarządzać?",
+      "skills": [
+        "ssh.access-class"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Do routera ma logować się tylko podsieć zarządzająca 10.99.0.0/24. Które podejście bezpośrednio ogranicza źródła dostępu do VTY?",
+      "hints": [
+        "Szukasz filtra linii terminalowych, a nie interfejsowego ip access-group."
+      ],
+      "explanation_md": "Ograniczanie źródeł zarządzania to osobna kontrola obok uwierzytelniania. ACL musi dopuszczać rzeczywistą stację administratora.",
+      "card_id": "ccna.ssh.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Ustawienie opisu interfejsu WAN.",
+          "feedback_md": "Opis jest dokumentacją, nie filtrem logowania."
+        },
+        {
+          "id": "B",
+          "text_md": "Zmiana hostname na MGMT.",
+          "feedback_md": "Hostname nie ogranicza adresów klientów."
+        },
+        {
+          "id": "C",
+          "text_md": "Samo ustawienie exec-timeout 5 0.",
+          "feedback_md": "Timeout nie wybiera dozwolonych źródeł."
+        },
+        {
+          "id": "D",
+          "text_md": "ACL źródeł zastosowana przez access-class in na VTY.",
+          "feedback_md": "Access-class na VTY ogranicza dostęp terminalowy z określonych źródeł."
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ssh.11",
+      "revision": 1,
+      "title": "Przypnij istniejącą ACL do VTY",
+      "skills": [
+        "ssh.vty-acl"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Istnieje standardowa ACL VTY-MGMT dopuszczająca źródła zarządzające. Zastosuj ją na wejściu wybranych linii VTY.",
+      "hints": [
+        "Nie wpisuj nazwy interfejsu w miejscu ACL."
+      ],
+      "explanation_md": "Access-class i ip access-group dotyczą różnych miejsc egzekwowania polityki. Tutaj chronisz linie VTY.",
+      "card_id": "ccna.ssh.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-line)# access-class {{acl}} {{direction}}",
+      "blanks": [
+        {
+          "id": "acl",
+          "label": "Nazwa ACL",
+          "answer_type": "identifier",
+          "accepted": [
+            "VTY-MGMT"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "direction",
+          "label": "Kierunek sesji przychodzących",
+          "answer_type": "keyword",
+          "accepted": [
+            "in"
+          ],
+          "width": 5,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ssh.12",
+      "revision": 1,
+      "title": "Nazwa i domena w klasycznym labie SSH",
+      "skills": [
+        "ssh.identity"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W laboratorium używamy klasycznej konfiguracji RSA bez własnej etykiety klucza. Ustaw hostname R1 i domenę lab.example. Uzupełnij słowa poleceń.",
+      "hints": [
+        "To nie jest konfiguracja serwera DNS ani rekordu DNS."
+      ],
+      "explanation_md": "W klasycznym przepływie tworzenia domyślnego klucza RSA nazwa i domena identyfikują urządzenie. Nowsze warianty z etykietami kluczy mogą mieć inne wymagania.",
+      "card_id": "ccna.ssh.12.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "Router(config)# {{name_command}} R1\nR1(config)# ip {{domain_command}} lab.example",
+      "blanks": [
+        {
+          "id": "name_command",
+          "label": "Nazwa urządzenia",
+          "answer_type": "keyword",
+          "accepted": [
+            "hostname"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "domain_command",
+          "label": "Nazwa domeny",
+          "answer_type": "keyword",
+          "accepted": [
+            "domain-name",
+            "domain name"
+          ],
+          "width": 14,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

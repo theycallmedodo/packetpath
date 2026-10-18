@@ -1,0 +1,427 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ipv4.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.ipv4.07.theory",
+      "revision": 1,
+      "title": "Broadcast w /28",
+      "skills": [
+        "ipv4.broadcast"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "front_md": "Broadcast w /28",
+      "back_md": "/28 daje blok **16 adresów**. Dla sieci .32 następna sieć to .48, więc broadcast to .47.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.ipv4.08.theory",
+      "revision": 1,
+      "title": "Pierwszy host i maska",
+      "skills": [
+        "ipv4.first-host"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "front_md": "Pierwszy host i maska",
+      "back_md": "Blok /26 ma 64 adresy. Dla .64/26 pierwszy host to .65; maska kończy się oktetem 192.",
+      "example": "R1(config-if)# ip address 192.168.20.65 255.255.255.192"
+    },
+    {
+      "id": "ccna.ipv4.09.theory",
+      "revision": 1,
+      "title": "Ostatni host i maska",
+      "skills": [
+        "ipv4.last-host"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "front_md": "Ostatni host i maska",
+      "back_md": "Broadcast tej podsieci to .47, więc ostatni host to .46. Maska /28 to 255.255.255.240.",
+      "example": "R1(config-if)# ip address 172.16.4.46 255.255.255.240"
+    },
+    {
+      "id": "ccna.ipv4.10.theory",
+      "revision": 1,
+      "title": "Dwa hosty w jednej podsieci",
+      "skills": [
+        "ipv4.same-subnet"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "front_md": "Dwa hosty w jednej podsieci",
+      "back_md": "Adres .130/26 należy do sieci .128/26. Hosty mają adresy **.129–.190**.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.ipv4.11.theory",
+      "revision": 1,
+      "title": "Loopback do identyfikacji",
+      "skills": [
+        "ipv4.loopback"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "front_md": "Loopback do identyfikacji",
+      "back_md": "Loopback jest interfejsem logicznym. /32 wskazuje pojedynczy adres IPv4.",
+      "example": "R1(config)# interface Loopback0\nR1(config-if)# ip address 10.255.0.1 255.255.255.255"
+    },
+    {
+      "id": "ccna.ipv4.12.theory",
+      "revision": 1,
+      "title": "Opis i stan",
+      "skills": [
+        "ipv4.interface-hygiene"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "front_md": "Opis i stan",
+      "back_md": "Opis pomaga rozpoznawać łącza, ale nie zmienia adresacji. `no shutdown` dotyczy stanu administracyjnego.",
+      "example": "R1(config-if)# description DO_R2\nR1(config-if)# no shutdown"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ipv4.07",
+      "revision": 1,
+      "title": "Broadcast w /28",
+      "skills": [
+        "ipv4.broadcast"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Jaki jest broadcast podsieci 172.16.4.32/28?",
+      "hints": [
+        "Broadcast jest o jeden mniejszy od początku następnej podsieci."
+      ],
+      "explanation_md": "/28 daje blok **16 adresów**. Dla sieci .32 następna sieć to .48, więc broadcast to .47.",
+      "card_id": "ccna.ipv4.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "172.16.4.31",
+          "feedback_md": ".31 kończy poprzedni blok."
+        },
+        {
+          "id": "B",
+          "text_md": "172.16.4.32",
+          "feedback_md": ".32 jest adresem sieci."
+        },
+        {
+          "id": "C",
+          "text_md": "172.16.4.46",
+          "feedback_md": ".46 jest ostatnim adresem hosta."
+        },
+        {
+          "id": "D",
+          "text_md": "172.16.4.47",
+          "feedback_md": "Blok .32–.47 kończy się broadcastem .47."
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ipv4.08",
+      "revision": 1,
+      "title": "Pierwszy host i maska",
+      "skills": [
+        "ipv4.first-host"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na interfejsie LAN ustaw pierwszy adres hosta podsieci 192.168.20.64/26 oraz odpowiadającą maskę.",
+      "hints": [
+        "Adres hosta jest o jeden większy od adresu sieci."
+      ],
+      "explanation_md": "Blok /26 ma 64 adresy. Dla .64/26 pierwszy host to .65; maska kończy się oktetem 192.",
+      "card_id": "ccna.ipv4.08.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-if)# ip address {{host}} {{mask}}",
+      "blanks": [
+        {
+          "id": "host",
+          "label": "Pierwszy host",
+          "answer_type": "ipv4",
+          "accepted": [
+            "192.168.20.65"
+          ],
+          "width": 16,
+          "common_errors": {}
+        },
+        {
+          "id": "mask",
+          "label": "Maska /26",
+          "answer_type": "ipv4",
+          "accepted": [
+            "255.255.255.192"
+          ],
+          "width": 18,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv4.09",
+      "revision": 1,
+      "title": "Ostatni host i maska",
+      "skills": [
+        "ipv4.last-host"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Ustaw ostatni adres hosta podsieci 172.16.4.32/28 i maskę /28.",
+      "hints": [
+        "Nie przypisuj broadcastu do interfejsu."
+      ],
+      "explanation_md": "Broadcast tej podsieci to .47, więc ostatni host to .46. Maska /28 to 255.255.255.240.",
+      "card_id": "ccna.ipv4.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-if)# ip address {{host}} {{mask}}",
+      "blanks": [
+        {
+          "id": "host",
+          "label": "Ostatni host",
+          "answer_type": "ipv4",
+          "accepted": [
+            "172.16.4.46"
+          ],
+          "width": 14,
+          "common_errors": {}
+        },
+        {
+          "id": "mask",
+          "label": "Maska /28",
+          "answer_type": "ipv4",
+          "accepted": [
+            "255.255.255.240"
+          ],
+          "width": 18,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv4.10",
+      "revision": 1,
+      "title": "Dwa hosty w jednej podsieci",
+      "skills": [
+        "ipv4.same-subnet"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Który adres może być hostem w tej samej podsieci /26 co 192.168.1.130?",
+      "hints": [
+        "Najpierw znajdź blok, potem wyklucz sieć i broadcast."
+      ],
+      "explanation_md": "Adres .130/26 należy do sieci .128/26. Hosty mają adresy **.129–.190**.",
+      "card_id": "ccna.ipv4.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "192.168.1.129",
+          "feedback_md": ".129 jest hostem w bloku .128–.191."
+        },
+        {
+          "id": "B",
+          "text_md": "192.168.1.127",
+          "feedback_md": ".127 należy do poprzedniego bloku i jest jego broadcastem."
+        },
+        {
+          "id": "C",
+          "text_md": "192.168.1.191",
+          "feedback_md": ".191 to broadcast rozpatrywanej podsieci."
+        },
+        {
+          "id": "D",
+          "text_md": "192.168.1.192",
+          "feedback_md": ".192 to adres następnej sieci /26."
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ipv4.11",
+      "revision": 1,
+      "title": "Loopback do identyfikacji",
+      "skills": [
+        "ipv4.loopback"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Utwórz interfejs Loopback0, a następnie ustaw adres 10.255.0.1/32. Uzupełnij typ/numer interfejsu i maskę.",
+      "hints": [
+        "W masce /32 wszystkie bity należą do prefiksu."
+      ],
+      "explanation_md": "Loopback jest interfejsem logicznym. /32 wskazuje pojedynczy adres IPv4.",
+      "card_id": "ccna.ipv4.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# interface {{interface}}\nR1(config-if)# ip address 10.255.0.1 {{mask}}",
+      "blanks": [
+        {
+          "id": "interface",
+          "label": "Interfejs logiczny",
+          "answer_type": "keyword",
+          "accepted": [
+            "Loopback0"
+          ],
+          "width": 12,
+          "common_errors": {}
+        },
+        {
+          "id": "mask",
+          "label": "Maska /32",
+          "answer_type": "ipv4",
+          "accepted": [
+            "255.255.255.255"
+          ],
+          "width": 18,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv4.12",
+      "revision": 1,
+      "title": "Opis i stan",
+      "skills": [
+        "ipv4.interface-hygiene"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na już zaadresowanym interfejsie wpisz opis DO_R2 i usuń administracyjne shutdown. Uzupełnij słowa kluczowe.",
+      "hints": [
+        "Jedna linia dokumentuje, druga aktywuje."
+      ],
+      "explanation_md": "Opis pomaga rozpoznawać łącza, ale nie zmienia adresacji. `no shutdown` dotyczy stanu administracyjnego.",
+      "card_id": "ccna.ipv4.12.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-if)# {{describe}} DO_R2\nR1(config-if)# {{negation}} shutdown",
+      "blanks": [
+        {
+          "id": "describe",
+          "label": "Polecenie opisu",
+          "answer_type": "keyword",
+          "accepted": [
+            "description"
+          ],
+          "width": 14,
+          "common_errors": {}
+        },
+        {
+          "id": "negation",
+          "label": "Negacja wyłączenia",
+          "answer_type": "keyword",
+          "accepted": [
+            "no"
+          ],
+          "width": 5,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

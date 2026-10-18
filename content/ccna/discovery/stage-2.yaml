@@ -1,0 +1,475 @@
+{
+  "schema_version": 3,
+  "id": "ccna.discovery.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.discovery.07.theory",
+      "revision": 1,
+      "title": "Odbiór bez nadawania",
+      "skills": [
+        "discovery.07"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "front_md": "Odbiór bez nadawania",
+      "back_md": "Nadawanie i odbieranie LLDP są sterowane oddzielnie.",
+      "example": "Odbieranie ogłoszeń sąsiada bez własnych ogłoszeń"
+    },
+    {
+      "id": "ccna.discovery.08.theory",
+      "revision": 1,
+      "title": "LLDP w obie strony",
+      "skills": [
+        "discovery.08"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "front_md": "LLDP w obie strony",
+      "back_md": "Obie funkcje są potrzebne do dwustronnej wymiany ogłoszeń.",
+      "example": "SW1(config-if)# lldp transmit\nSW1(config-if)# lldp receive"
+    },
+    {
+      "id": "ccna.discovery.09.theory",
+      "revision": 1,
+      "title": "CDP od urządzenia do portu",
+      "skills": [
+        "discovery.09"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "front_md": "CDP od urządzenia do portu",
+      "back_md": "Warunek globalny i interfejsowy muszą pozwalać na działanie protokołu.",
+      "example": "SW1(config)# cdp run\nSW1(config)# interface GigabitEthernet1/0/1\nSW1(config-if)# cdp enable"
+    },
+    {
+      "id": "ccna.discovery.10.theory",
+      "revision": 1,
+      "title": "Lokalny czy zdalny port",
+      "skills": [
+        "discovery.10"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "front_md": "Lokalny czy zdalny port",
+      "back_md": "Kolumna Port ID dotyczy portu ogłaszanego przez sąsiada.",
+      "example": "Gi0/1"
+    },
+    {
+      "id": "ccna.discovery.11.theory",
+      "revision": 1,
+      "title": "Cichy odbiorca LLDP",
+      "skills": [
+        "discovery.11"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "front_md": "Cichy odbiorca LLDP",
+      "back_md": "Zmiana transmit nie blokuje odbioru, jeśli receive pozostaje włączone.",
+      "example": "SW1(config-if)# no lldp transmit\nSW1(config-if)# lldp receive"
+    },
+    {
+      "id": "ccna.discovery.12.theory",
+      "revision": 1,
+      "title": "Porównanie protokołów",
+      "skills": [
+        "discovery.12"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "front_md": "Porównanie protokołów",
+      "back_md": "Brak wpisu w jednym protokole nie dowodzi braku fizycznego sąsiada.",
+      "example": "SW1# show cdp neighbors detail\nSW1# show lldp neighbors detail"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.discovery.07",
+      "revision": 1,
+      "title": "Odbiór bez nadawania",
+      "skills": [
+        "discovery.07"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na porcie ustawiono no lldp transmit, a lldp receive jest aktywne. Co jest możliwe?",
+      "hints": [
+        "Nadawanie i odbieranie LLDP są sterowane oddzielnie."
+      ],
+      "explanation_md": "Nadawanie i odbieranie LLDP są sterowane oddzielnie.",
+      "card_id": "ccna.discovery.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Odbieranie ogłoszeń sąsiada bez własnych ogłoszeń",
+          "feedback_md": "Wyłączono transmit, ale nie receive."
+        },
+        {
+          "id": "B",
+          "text_md": "Tylko nadawanie",
+          "feedback_md": "To odwrotność podanych ustawień."
+        },
+        {
+          "id": "C",
+          "text_md": "Żadna komunikacja Ethernet",
+          "feedback_md": "Wyłączenie LLDP nie wyłącza portu."
+        },
+        {
+          "id": "D",
+          "text_md": "Automatyczne wyłączenie CDP",
+          "feedback_md": "CDP ma niezależną konfigurację."
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.discovery.08",
+      "revision": 1,
+      "title": "LLDP w obie strony",
+      "skills": [
+        "discovery.08"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na bieżącym porcie włącz osobno nadawanie i odbiór LLDP; globalne LLDP już działa.",
+      "hints": [
+        "Obie funkcje są potrzebne do dwustronnej wymiany ogłoszeń."
+      ],
+      "explanation_md": "Obie funkcje są potrzebne do dwustronnej wymiany ogłoszeń.",
+      "card_id": "ccna.discovery.08.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco Catalyst IOS / IOS XE — składnia z zadania",
+      "template": "SW1(config-if)# lldp {{b0}}\nSW1(config-if)# lldp {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "transmit"
+          ],
+          "width": 10,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "receive"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.discovery.09",
+      "revision": 1,
+      "title": "CDP od urządzenia do portu",
+      "skills": [
+        "discovery.09"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Włącz globalny CDP oraz CDP na G1/0/1.",
+      "hints": [
+        "Warunek globalny i interfejsowy muszą pozwalać na działanie protokołu."
+      ],
+      "explanation_md": "Warunek globalny i interfejsowy muszą pozwalać na działanie protokołu.",
+      "card_id": "ccna.discovery.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco Catalyst IOS / IOS XE — składnia z zadania",
+      "template": "SW1(config)# cdp {{b0}}\nSW1(config)# interface GigabitEthernet1/0/1\nSW1(config-if)# cdp {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "run"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "enable"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.discovery.10",
+      "revision": 1,
+      "title": "Lokalny czy zdalny port",
+      "skills": [
+        "discovery.10"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W tabeli CDP: Local Intrfce = Gi1/0/2, Port ID = Gi0/1. Do którego portu sąsiada prowadzi kabel?",
+      "hints": [
+        "Kolumna Port ID dotyczy portu ogłaszanego przez sąsiada."
+      ],
+      "explanation_md": "Kolumna Port ID dotyczy portu ogłaszanego przez sąsiada.",
+      "card_id": "ccna.discovery.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Gi1/0/2",
+          "feedback_md": "To interfejs lokalnego przełącznika."
+        },
+        {
+          "id": "B",
+          "text_md": "Vlan1",
+          "feedback_md": "Taki port nie wynika z tego wpisu."
+        },
+        {
+          "id": "C",
+          "text_md": "Nie da się odczytać z tabeli",
+          "feedback_md": "Wpis zawiera zdalny identyfikator portu."
+        },
+        {
+          "id": "D",
+          "text_md": "Gi0/1",
+          "feedback_md": "To zdalny Port ID z ogłoszenia."
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.discovery.11",
+      "revision": 1,
+      "title": "Cichy odbiorca LLDP",
+      "skills": [
+        "discovery.11"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na porcie odbieraj LLDP, ale nie wysyłaj własnych ogłoszeń. Globalne LLDP jest włączone.",
+      "hints": [
+        "Zmiana transmit nie blokuje odbioru, jeśli receive pozostaje włączone."
+      ],
+      "explanation_md": "Zmiana transmit nie blokuje odbioru, jeśli receive pozostaje włączone.",
+      "card_id": "ccna.discovery.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco Catalyst IOS / IOS XE — składnia z zadania",
+      "template": "SW1(config-if)# no lldp {{b0}}\nSW1(config-if)# lldp {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "transmit"
+          ],
+          "width": 10,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "receive"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.discovery.12",
+      "revision": 1,
+      "title": "Porównanie protokołów",
+      "skills": [
+        "discovery.12"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Wyświetl szczegółowe listy sąsiadów obu protokołów: najpierw CDP, potem LLDP.",
+      "hints": [
+        "Brak wpisu w jednym protokole nie dowodzi braku fizycznego sąsiada."
+      ],
+      "explanation_md": "Brak wpisu w jednym protokole nie dowodzi braku fizycznego sąsiada.",
+      "card_id": "ccna.discovery.12.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco Catalyst IOS / IOS XE — składnia z zadania",
+      "template": "SW1# show {{b0}} neighbors detail\nSW1# show {{b1}} neighbors detail",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "cdp"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "lldp"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

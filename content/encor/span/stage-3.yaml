@@ -1,0 +1,493 @@
+{
+  "schema_version": 3,
+  "id": "encor.span.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Brakuje jednej strony rozmowy",
+      "skills": [
+        "span.brakuje-jednej-strony-rozmowy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.13.theory",
+      "front_md": "Brakuje jednej strony rozmowy",
+      "back_md": "Rx nie obejmuje tx źródłowego portu. Dla obu kierunków należy odpowiednio zmienić konfigurację.",
+      "example": "Wybrano tylko kierunek ingress"
+    },
+    {
+      "revision": 1,
+      "title": "RSPAN przez trunk",
+      "skills": [
+        "span.rspan-przez-trunk"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.14.theory",
+      "front_md": "RSPAN przez trunk",
+      "back_md": "RSPAN wymaga transportu swojego VLAN-u między źródłem i odbiorcą. Sama definicja VLAN nie zapewnia tranzytu.",
+      "example": "Dopuścić także VLAN 900 na właściwej ścieżce trunk"
+    },
+    {
+      "revision": 1,
+      "title": "Źródło RSPAN",
+      "skills": [
+        "span.r-d-o-rspan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.15.theory",
+      "front_md": "Źródło RSPAN",
+      "back_md": "Sesja źródłowa RSPAN wysyła kopie do VLAN-u transportowego; switch docelowy odbiera je w osobnej lokalnej konfiguracji.",
+      "example": "monitor session 1 source interface GigabitEthernet1/0/5 both\nmonitor session 1 destination remote vlan 900"
+    },
+    {
+      "revision": 1,
+      "title": "ERSPAN nie jest VPN",
+      "skills": [
+        "span.erspan-nie-jest-vpn"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.16.theory",
+      "front_md": "ERSPAN nie jest VPN",
+      "back_md": "Monitorowane dane mogą być wrażliwe. Enkapsulacja nie daje sama poufności; wymagane zabezpieczenia wynikają z projektu.",
+      "example": "Nie, GRE nie szyfruje payloadu"
+    },
+    {
+      "revision": 1,
+      "title": "Odbiornik RSPAN",
+      "skills": [
+        "span.odbiornik-rspan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.17.theory",
+      "front_md": "Odbiornik RSPAN",
+      "back_md": "Po stronie odbiorcy źródłem jest remote VLAN. Numer sesji jest lokalny i nie musi być taki sam jak na switchu źródłowym.",
+      "example": "monitor session 2 source remote vlan 900\nmonitor session 2 destination interface GigabitEthernet1/0/24"
+    },
+    {
+      "revision": 1,
+      "title": "Pusty przechwyt ERSPAN",
+      "skills": [
+        "span.pusty-przechwyt-erspan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.18.theory",
+      "front_md": "Pusty przechwyt ERSPAN",
+      "back_md": "Kopie ERSPAN są pakietami transportowanymi przez sieć. Potrzebują routingu, odpowiedniej MTU i dopuszczenia przez polityki.",
+      "example": "Najpierw trzeba naprawić transport IP do odbiorcy"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.span.13",
+      "revision": 1,
+      "title": "Brakuje jednej strony rozmowy",
+      "skills": [
+        "span.brakuje-jednej-strony-rozmowy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "```text\nmonitor session 1 source interface GigabitEthernet1/0/5 rx\nmonitor session 1 destination interface GigabitEthernet1/0/24\n```\n\nSkrócony przykład do analizy. Sesja obserwuje source interface Gi1/0/5 rx. W przechwycie brakuje ramek wysyłanych przez switch tym portem. Dlaczego?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Rx nie obejmuje tx źródłowego portu. Dla obu kierunków należy odpowiednio zmienić konfigurację.",
+      "card_id": "encor.span.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "SPAN nigdy nie obsługuje egress",
+          "feedback_md": "Rx nie obejmuje tx źródłowego portu. Dla obu kierunków należy odpowiednio zmienić konfigurację.",
+          "id": "A"
+        },
+        {
+          "text_md": "Analyzer musi mieć taki sam MAC jak klient",
+          "feedback_md": "Rx nie obejmuje tx źródłowego portu. Dla obu kierunków należy odpowiednio zmienić konfigurację.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wybrano tylko kierunek ingress",
+          "feedback_md": "Rx nie obejmuje tx źródłowego portu. Dla obu kierunków należy odpowiednio zmienić konfigurację.",
+          "id": "C"
+        },
+        {
+          "text_md": "VLAN 1 zawsze blokuje odpowiedzi",
+          "feedback_md": "Rx nie obejmuje tx źródłowego portu. Dla obu kierunków należy odpowiednio zmienić konfigurację.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.span.14",
+      "revision": 1,
+      "title": "RSPAN przez trunk",
+      "skills": [
+        "span.rspan-przez-trunk"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "VLAN 900 jest remote-span na switchach, lecz trunk pomiędzy nimi dopuszcza tylko 10,20. Co poprawić?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "RSPAN wymaga transportu swojego VLAN-u między źródłem i odbiorcą. Sama definicja VLAN nie zapewnia tranzytu.",
+      "card_id": "encor.span.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zmienić numer AS na 900",
+          "feedback_md": "RSPAN wymaga transportu swojego VLAN-u między źródłem i odbiorcą. Sama definicja VLAN nie zapewnia tranzytu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dopuścić także VLAN 900 na właściwej ścieżce trunk",
+          "feedback_md": "RSPAN wymaga transportu swojego VLAN-u między źródłem i odbiorcą. Sama definicja VLAN nie zapewnia tranzytu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Ustawić każdy port jako destination",
+          "feedback_md": "RSPAN wymaga transportu swojego VLAN-u między źródłem i odbiorcą. Sama definicja VLAN nie zapewnia tranzytu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłączyć wszystkie VLAN-y użytkowników",
+          "feedback_md": "RSPAN wymaga transportu swojego VLAN-u między źródłem i odbiorcą. Sama definicja VLAN nie zapewnia tranzytu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.span.15",
+      "revision": 1,
+      "title": "Źródło RSPAN",
+      "skills": [
+        "span.r-d-o-rspan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na switchu źródłowym VLAN 900 jest już remote-span. Sesja 1 kopiuje oba kierunki Gi1/0/5 do zdalnego VLAN-u 900.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Sesja źródłowa RSPAN wysyła kopie do VLAN-u transportowego; switch docelowy odbiera je w osobnej lokalnej konfiguracji.",
+      "card_id": "encor.span.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "monitor session 1 source interface {{b0}} {{b1}}\nmonitor session 1 destination remote vlan {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "GigabitEthernet1/0/5"
+          ],
+          "width": 22,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "both"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "900"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.span.16",
+      "revision": 1,
+      "title": "ERSPAN nie jest VPN",
+      "skills": [
+        "span.erspan-nie-jest-vpn"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Czy sama enkapsulacja ERSPAN chroni poufność zawartości przechwytywanych pakietów?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Monitorowane dane mogą być wrażliwe. Enkapsulacja nie daje sama poufności; wymagane zabezpieczenia wynikają z projektu.",
+      "card_id": "encor.span.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, każda kopia ma AES-256",
+          "feedback_md": "Monitorowane dane mogą być wrażliwe. Enkapsulacja nie daje sama poufności; wymagane zabezpieczenia wynikają z projektu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, jeśli numer sesji jest nieznany",
+          "feedback_md": "Monitorowane dane mogą być wrażliwe. Enkapsulacja nie daje sama poufności; wymagane zabezpieczenia wynikają z projektu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, port UDP automatycznie szyfruje",
+          "feedback_md": "Monitorowane dane mogą być wrażliwe. Enkapsulacja nie daje sama poufności; wymagane zabezpieczenia wynikają z projektu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, GRE nie szyfruje payloadu",
+          "feedback_md": "Monitorowane dane mogą być wrażliwe. Enkapsulacja nie daje sama poufności; wymagane zabezpieczenia wynikają z projektu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.span.17",
+      "revision": 1,
+      "title": "Odbiornik RSPAN",
+      "skills": [
+        "span.odbiornik-rspan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na switchu docelowym sesja 2 pobiera kopie z RSPAN VLAN 900 i kieruje je do Gi1/0/24. Uzupełnij rodzaj źródła, VLAN i port.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Po stronie odbiorcy źródłem jest remote VLAN. Numer sesji jest lokalny i nie musi być taki sam jak na switchu źródłowym.",
+      "card_id": "encor.span.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "monitor session 2 source {{b0}} vlan {{b1}}\nmonitor session 2 destination interface {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "remote"
+          ],
+          "width": 8,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "900"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "GigabitEthernet1/0/24"
+          ],
+          "width": 23,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.span.18",
+      "revision": 1,
+      "title": "Pusty przechwyt ERSPAN",
+      "skills": [
+        "span.pusty-przechwyt-erspan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Konfiguracja ERSPAN wygląda spójnie, ale zewnętrzny destination IP nie jest osiągalny. Co to oznacza?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Kopie ERSPAN są pakietami transportowanymi przez sieć. Potrzebują routingu, odpowiedniej MTU i dopuszczenia przez polityki.",
+      "card_id": "encor.span.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "GRE automatycznie znajdzie cel bez routingu",
+          "feedback_md": "Kopie ERSPAN są pakietami transportowanymi przez sieć. Potrzebują routingu, odpowiedniej MTU i dopuszczenia przez polityki.",
+          "id": "A"
+        },
+        {
+          "text_md": "Najpierw trzeba naprawić transport IP do odbiorcy",
+          "feedback_md": "Kopie ERSPAN są pakietami transportowanymi przez sieć. Potrzebują routingu, odpowiedniej MTU i dopuszczenia przez polityki.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wystarczy zmienić nazwę sesji",
+          "feedback_md": "Kopie ERSPAN są pakietami transportowanymi przez sieć. Potrzebują routingu, odpowiedniej MTU i dopuszczenia przez polityki.",
+          "id": "C"
+        },
+        {
+          "text_md": "Analizator odbiera mimo braku osiągalności",
+          "feedback_md": "Kopie ERSPAN są pakietami transportowanymi przez sieć. Potrzebują routingu, odpowiedniej MTU i dopuszczenia przez polityki.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

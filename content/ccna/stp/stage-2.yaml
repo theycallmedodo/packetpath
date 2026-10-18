@@ -1,0 +1,428 @@
+{
+  "schema_version": 3,
+  "id": "ccna.stp.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.stp.07.theory",
+      "revision": 1,
+      "title": "STP czy MAC?",
+      "skills": [
+        "stp.mac-tiebreak"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "front_md": "STP czy MAC?",
+      "back_md": "Po remisie priorytetu i rozszerzenia VLAN o wyborze decyduje MAC mostu.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.stp.08.theory",
+      "revision": 1,
+      "title": "Root primary dla VLAN",
+      "skills": [
+        "stp.root-macro"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "front_md": "Root primary dla VLAN",
+      "back_md": "Makro root primary dobiera priorytet, aby switch stał się root w bieżących warunkach. Nie jest wieczystą gwarancją wyboru przy każdej przyszłej zmianie.",
+      "example": "SW1(config)# spanning-tree vlan 20 root primary"
+    },
+    {
+      "id": "ccna.stp.09.theory",
+      "revision": 1,
+      "title": "Chroniony port hosta",
+      "skills": [
+        "stp.edge-protection"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        }
+      ],
+      "front_md": "Chroniony port hosta",
+      "back_md": "PortFast przyspiesza start; BPDU Guard zabezpiecza założenie, że port nie prowadzi do innego mostu.",
+      "example": "SW1(config-if)# spanning-tree portfast\nSW1(config-if)# spanning-tree bpduguard enable"
+    },
+    {
+      "id": "ccna.stp.10.theory",
+      "revision": 1,
+      "title": "Odebrano BPDU",
+      "skills": [
+        "stp.errdisable"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        }
+      ],
+      "front_md": "Odebrano BPDU",
+      "back_md": "Err-disabled jest skutkiem zadziałania ochrony. Przed przywróceniem portu należy ustalić i usunąć źródło BPDU.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.stp.11.theory",
+      "revision": 1,
+      "title": "Weryfikuj instancję",
+      "skills": [
+        "stp.verify-instance"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "front_md": "Weryfikuj instancję",
+      "back_md": "`show spanning-tree vlan 30` pokazuje root, role i stany portów danej instancji.",
+      "example": "SW1# show spanning-tree vlan 30"
+    },
+    {
+      "id": "ccna.stp.12.theory",
+      "revision": 1,
+      "title": "Koszt portu",
+      "skills": [
+        "stp.port-cost"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "front_md": "Koszt portu",
+      "back_md": "Koszt uczestniczy w wyborze ścieżki do root. Mniejszy całkowity koszt jest preferowany przed późniejszymi kryteriami remisu.",
+      "example": "SW1(config-if)# spanning-tree vlan 10 cost 20000"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.stp.07",
+      "revision": 1,
+      "title": "STP czy MAC?",
+      "skills": [
+        "stp.mac-tiebreak"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W tym samym VLAN-ie dwa switche mają identyczny priority. SW1 ma MAC 0000.0000.0010, SW2 0000.0000.0020. Kto ma niższy bridge ID?",
+      "hints": [
+        "Porównaj szesnastkowe końcówki 0010 i 0020."
+      ],
+      "explanation_md": "Po remisie priorytetu i rozszerzenia VLAN o wyborze decyduje MAC mostu.",
+      "card_id": "ccna.stp.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "SW1",
+          "feedback_md": "Przy równych pozostałych składnikach mniejszy MAC daje niższy bridge ID."
+        },
+        {
+          "id": "B",
+          "text_md": "SW2",
+          "feedback_md": "MAC SW2 jest większy."
+        },
+        {
+          "id": "C",
+          "text_md": "Oba mają taki sam bridge ID",
+          "feedback_md": "MAC jest częścią bridge ID, więc identyfikatory się różnią."
+        },
+        {
+          "id": "D",
+          "text_md": "Nie można porównać bez kosztu portu",
+          "feedback_md": "Koszt ścieżki nie jest potrzebny do porównania tych bridge ID."
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.stp.08",
+      "revision": 1,
+      "title": "Root primary dla VLAN",
+      "skills": [
+        "stp.root-macro"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dla VLAN-u 20 użyj makra root primary. Uzupełnij numer VLAN-u i rolę.",
+      "hints": [
+        "Polecenie dotyczy jednej wskazanej instancji VLAN."
+      ],
+      "explanation_md": "Makro root primary dobiera priorytet, aby switch stał się root w bieżących warunkach. Nie jest wieczystą gwarancją wyboru przy każdej przyszłej zmianie.",
+      "card_id": "ccna.stp.08.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# spanning-tree vlan {{vlan}} root {{role}}",
+      "blanks": [
+        {
+          "id": "vlan",
+          "label": "VLAN instancji",
+          "answer_type": "integer",
+          "accepted": [
+            "20"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "role",
+          "label": "Rola root",
+          "answer_type": "keyword",
+          "accepted": [
+            "primary"
+          ],
+          "width": 10,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.stp.09",
+      "revision": 1,
+      "title": "Chroniony port hosta",
+      "skills": [
+        "stp.edge-protection"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na porcie access do pojedynczego hosta włącz PortFast i BPDU Guard. Wpisz brakujące nazwy funkcji.",
+      "hints": [
+        "Te dwie funkcje uzupełniają się."
+      ],
+      "explanation_md": "PortFast przyspiesza start; BPDU Guard zabezpiecza założenie, że port nie prowadzi do innego mostu.",
+      "card_id": "ccna.stp.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config-if)# spanning-tree {{fast}}\nSW1(config-if)# spanning-tree {{guard}} enable",
+      "blanks": [
+        {
+          "id": "fast",
+          "label": "Szybkie uruchomienie portu",
+          "answer_type": "keyword",
+          "accepted": [
+            "portfast",
+            "portfast edge"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "guard",
+          "label": "Ochrona BPDU",
+          "answer_type": "keyword",
+          "accepted": [
+            "bpduguard"
+          ],
+          "width": 12,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.stp.10",
+      "revision": 1,
+      "title": "Odebrano BPDU",
+      "skills": [
+        "stp.errdisable"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Port ma skonfigurowane spanning-tree bpduguard enable. Odbiera BPDU. Jaka jest oczekiwana reakcja?",
+      "hints": [
+        "Ochrona ma odciąć nieoczekiwany most."
+      ],
+      "explanation_md": "Err-disabled jest skutkiem zadziałania ochrony. Przed przywróceniem portu należy ustalić i usunąć źródło BPDU.",
+      "card_id": "ccna.stp.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Port zostanie tylko tymczasowo alternate.",
+          "feedback_md": "BPDU Guard nie wybiera roli alternate jako reakcji ochronnej."
+        },
+        {
+          "id": "B",
+          "text_md": "Port przejdzie w root-inconsistent wyłącznie przy superior BPDU.",
+          "feedback_md": "To opis innego mechanizmu: Root Guard."
+        },
+        {
+          "id": "C",
+          "text_md": "Port przejdzie w err-disabled.",
+          "feedback_md": "BPDU Guard wyłącza ochronnie port po odebraniu BPDU."
+        },
+        {
+          "id": "D",
+          "text_md": "Port zignoruje BPDU i pozostanie forwarding.",
+          "feedback_md": "BPDU Guard nie polega na ignorowaniu odebranego BPDU."
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.stp.11",
+      "revision": 1,
+      "title": "Weryfikuj instancję",
+      "skills": [
+        "stp.verify-instance"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Wyświetl stan STP wyłącznie dla VLAN-u 30. Uzupełnij słowo wyboru instancji i numer.",
+      "hints": [
+        "Nie wybierasz tu interfejsu ani procesu OSPF."
+      ],
+      "explanation_md": "`show spanning-tree vlan 30` pokazuje root, role i stany portów danej instancji.",
+      "card_id": "ccna.stp.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1# show spanning-tree {{selector}} {{id}}",
+      "blanks": [
+        {
+          "id": "selector",
+          "label": "Wybór VLAN-u",
+          "answer_type": "keyword",
+          "accepted": [
+            "vlan"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "id",
+          "label": "Numer instancji",
+          "answer_type": "integer",
+          "accepted": [
+            "30"
+          ],
+          "width": 5,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.stp.12",
+      "revision": 1,
+      "title": "Koszt portu",
+      "skills": [
+        "stp.port-cost"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dla VLAN-u 10 ustaw na bieżącym interfejsie jawny koszt STP 20000.",
+      "hints": [
+        "Nie zmieniasz priority mostu, tylko koszt portu."
+      ],
+      "explanation_md": "Koszt uczestniczy w wyborze ścieżki do root. Mniejszy całkowity koszt jest preferowany przed późniejszymi kryteriami remisu.",
+      "card_id": "ccna.stp.12.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config-if)# spanning-tree vlan {{vlan}} cost {{cost}}",
+      "blanks": [
+        {
+          "id": "vlan",
+          "label": "VLAN",
+          "answer_type": "integer",
+          "accepted": [
+            "10"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "cost",
+          "label": "Koszt ścieżki",
+          "answer_type": "integer",
+          "accepted": [
+            "20000"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

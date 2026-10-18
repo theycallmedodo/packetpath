@@ -1,0 +1,473 @@
+{
+  "schema_version": 3,
+  "id": "ccna.aaa.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "RADIUS i transport",
+      "skills": [
+        "aaa.radius-i-transport"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.aaa.07.theory",
+      "front_md": "RADIUS i transport",
+      "back_md": "Dla klasycznego RADIUS typowo używa się UDP 1812/1813; istnieją inne warianty i starsze porty.",
+      "example": "1812 i 1813"
+    },
+    {
+      "revision": 1,
+      "title": "TACACS+",
+      "skills": [
+        "aaa.tacacs"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.aaa.08.theory",
+      "front_md": "TACACS+",
+      "back_md": "Przy diagnostyce rozróżniaj serwer, protokół i wymagany transport.",
+      "example": "TCP 49"
+    },
+    {
+      "revision": 1,
+      "title": "TACACS+ z fallbackiem",
+      "skills": [
+        "aaa.tacacs-z-fallbackiem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.aaa.09.theory",
+      "front_md": "TACACS+ z fallbackiem",
+      "back_md": "Fallback do kolejnej metody zwykle zachodzi przy błędzie/niedostępności poprzedniej, nie przy jawnym odrzuceniu hasła.",
+      "example": "R1(config)# aaa authentication login MGMT group tacacs+ local"
+    },
+    {
+      "revision": 1,
+      "title": "Reject a timeout",
+      "skills": [
+        "aaa.reject-a-timeout"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.aaa.10.theory",
+      "front_md": "Reject a timeout",
+      "back_md": "Polityka fallbacku nie służy do omijania negatywnej decyzji działającego serwera.",
+      "example": "Nie, jawne odrzucenie nie jest tym samym co niedostępność"
+    },
+    {
+      "revision": 1,
+      "title": "RADIUS i lokalny zapas",
+      "skills": [
+        "aaa.radius-i-lokalny-zapas"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.aaa.11.theory",
+      "front_md": "RADIUS i lokalny zapas",
+      "back_md": "Fallback musi być przetestowany przy rzeczywistej utracie dostępności serwera, nie tylko przy błędnym haśle.",
+      "example": "R1(config)# aaa authentication login REMOTE group radius local"
+    },
+    {
+      "revision": 1,
+      "title": "Login nie oznacza pełnych praw",
+      "skills": [
+        "aaa.login-nie-oznacza-pe-nych-praw"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.aaa.12.theory",
+      "front_md": "Login nie oznacza pełnych praw",
+      "back_md": "Udane authentication nie gwarantuje pozwolenia na każdą operację.",
+      "example": "Autoryzację i poziom uprawnień"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.aaa.07",
+      "revision": 1,
+      "title": "RADIUS i transport",
+      "skills": [
+        "aaa.radius-i-transport"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Która para portów jest typowa dla klasycznego RADIUS authentication/accounting po UDP?",
+      "hints": [
+        "Dla klasycznego RADIUS typowo używa się UDP 1812/1813; istnieją inne warianty i starsze porty."
+      ],
+      "explanation_md": "Dla klasycznego RADIUS typowo używa się UDP 1812/1813; istnieją inne warianty i starsze porty.",
+      "card_id": "ccna.aaa.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "22 i 23",
+          "feedback_md": "To typowe porty SSH i Telnet.",
+          "id": "A"
+        },
+        {
+          "text_md": "80 i 443",
+          "feedback_md": "To porty HTTP i HTTPS.",
+          "id": "B"
+        },
+        {
+          "text_md": "49 i 179",
+          "feedback_md": "49 kojarzy się z TACACS+, a 179 z BGP.",
+          "id": "C"
+        },
+        {
+          "text_md": "1812 i 1813",
+          "feedback_md": "Dla klasycznego RADIUS typowo używa się UDP 1812/1813; istnieją inne warianty i starsze porty.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.aaa.08",
+      "revision": 1,
+      "title": "TACACS+",
+      "skills": [
+        "aaa.tacacs"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Jaki transport i port jest typowy dla klasycznego TACACS+?",
+      "hints": [
+        "Przy diagnostyce rozróżniaj serwer, protokół i wymagany transport."
+      ],
+      "explanation_md": "Przy diagnostyce rozróżniaj serwer, protokół i wymagany transport.",
+      "card_id": "ccna.aaa.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "UDP 53",
+          "feedback_md": "To typowy DNS, nie TACACS+.",
+          "id": "A"
+        },
+        {
+          "text_md": "TCP 443",
+          "feedback_md": "To zwykle HTTPS.",
+          "id": "B"
+        },
+        {
+          "text_md": "TCP 49",
+          "feedback_md": "Przy diagnostyce rozróżniaj serwer, protokół i wymagany transport.",
+          "id": "C"
+        },
+        {
+          "text_md": "UDP 1812",
+          "feedback_md": "To typowy RADIUS authentication.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.aaa.09",
+      "revision": 1,
+      "title": "TACACS+ z fallbackiem",
+      "skills": [
+        "aaa.tacacs-z-fallbackiem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W labie serwery TACACS+ oraz konto lokalne są przygotowane. Lista MGMT ma próbować grupy tacacs+, a przy niedostępności serwerów — bazy lokalnej.",
+      "hints": [
+        "Fallback do kolejnej metody zwykle zachodzi przy błędzie/niedostępności poprzedniej, nie przy jawnym odrzuceniu hasła."
+      ],
+      "explanation_md": "Fallback do kolejnej metody zwykle zachodzi przy błędzie/niedostępności poprzedniej, nie przy jawnym odrzuceniu hasła.",
+      "card_id": "ccna.aaa.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config)# aaa authentication login MGMT group {{b0}} {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "tacacs+"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "local"
+          ],
+          "width": 7,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.aaa.10",
+      "revision": 1,
+      "title": "Reject a timeout",
+      "skills": [
+        "aaa.reject-a-timeout"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Serwer AAA odpowiada jawnym odrzuceniem uwierzytelnienia. Czy lista group tacacs+ local powinna automatycznie pozwolić spróbować lokalnego hasła?",
+      "hints": [
+        "Polityka fallbacku nie służy do omijania negatywnej decyzji działającego serwera."
+      ],
+      "explanation_md": "Polityka fallbacku nie służy do omijania negatywnej decyzji działającego serwera.",
+      "card_id": "ccna.aaa.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie, jawne odrzucenie nie jest tym samym co niedostępność",
+          "feedback_md": "Polityka fallbacku nie służy do omijania negatywnej decyzji działającego serwera.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, local zawsze omija decyzję serwera",
+          "feedback_md": "To błędna interpretacja fallbacku.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, jeśli nazwa konta jest krótka",
+          "feedback_md": "Długość nazwy nie zmienia reguły.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak, bo TACACS+ działa bez sesji TCP",
+          "feedback_md": "TACACS+ używa TCP; nie wyjaśnia to fallbacku.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.aaa.11",
+      "revision": 1,
+      "title": "RADIUS i lokalny zapas",
+      "skills": [
+        "aaa.radius-i-lokalny-zapas"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Przygotowana grupa radius ma być pierwszą metodą, local zapasem w nazwanej liście REMOTE.",
+      "hints": [
+        "Fallback musi być przetestowany przy rzeczywistej utracie dostępności serwera, nie tylko przy błędnym haśle."
+      ],
+      "explanation_md": "Fallback musi być przetestowany przy rzeczywistej utracie dostępności serwera, nie tylko przy błędnym haśle.",
+      "card_id": "ccna.aaa.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config)# aaa authentication login REMOTE group {{b0}} {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "radius"
+          ],
+          "width": 8,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "local"
+          ],
+          "width": 7,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.aaa.12",
+      "revision": 1,
+      "title": "Login nie oznacza pełnych praw",
+      "skills": [
+        "aaa.login-nie-oznacza-pe-nych-praw"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Użytkownik poprawnie się zalogował, ale nie może wykonać komendy. Który obszar sprawdzić?",
+      "hints": [
+        "Udane authentication nie gwarantuje pozwolenia na każdą operację."
+      ],
+      "explanation_md": "Udane authentication nie gwarantuje pozwolenia na każdą operację.",
+      "card_id": "ccna.aaa.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie retransmisje SYN",
+          "feedback_md": "Sesja logowania już działa, a odmowa może być polityką.",
+          "id": "A"
+        },
+        {
+          "text_md": "Od razu wyłączyć accounting",
+          "feedback_md": "Rejestracja działań nie jest oczywistą przyczyną odmowy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Autoryzację i poziom uprawnień",
+          "feedback_md": "Udane authentication nie gwarantuje pozwolenia na każdą operację.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zmienić VLAN wszystkich użytkowników",
+          "feedback_md": "Nie jest celowaną kontrolą uprawnień.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

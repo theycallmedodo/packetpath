@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "ccna.transport.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "ACK kolejnego bajtu",
+      "skills": [
+        "transport.ack-kolejnego-bajtu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.07.theory",
+      "front_md": "ACK kolejnego bajtu",
+      "back_md": "ACK zwykle wskazuje następny oczekiwany numer sekwencji: 1000 + 100.",
+      "example": "1100"
+    },
+    {
+      "revision": 1,
+      "title": "SYN zajmuje numer",
+      "skills": [
+        "transport.syn-zajmuje-numer"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.08.theory",
+      "front_md": "SYN zajmuje numer",
+      "back_md": "Flaga SYN jest potwierdzana przez dodanie jednego do jej numeru sekwencji.",
+      "example": "701"
+    },
+    {
+      "revision": 1,
+      "title": "Odbiorca i okno",
+      "skills": [
+        "transport.odbiorca-i-okno"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.09.theory",
+      "front_md": "Odbiorca i okno",
+      "back_md": "Flow control chroni odbiorcę; przeciążenie sieci jest osobnym problemem.",
+      "example": "Informuje o przestrzeni, którą odbiorca może przyjąć"
+    },
+    {
+      "revision": 1,
+      "title": "MSS a MTU",
+      "skills": [
+        "transport.mss-a-mtu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.10.theory",
+      "front_md": "MSS a MTU",
+      "back_md": "MSS nie obejmuje nagłówków IP/TCP i nie jest tym samym co MTU.",
+      "example": "Maksymalny rozmiar danych TCP w segmencie, deklarowany przez stronę"
+    },
+    {
+      "revision": 1,
+      "title": "FIN kontra RST",
+      "skills": [
+        "transport.fin-kontra-rst"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.11.theory",
+      "front_md": "FIN kontra RST",
+      "back_md": "RST należy interpretować wraz z kierunkiem i kontekstem: może go wysłać host lub urządzenie pośrednie.",
+      "example": "RST"
+    },
+    {
+      "revision": 1,
+      "title": "ACK nie potwierdza aplikacji",
+      "skills": [
+        "transport.ack-nie-potwierdza-aplikacji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.12.theory",
+      "front_md": "ACK nie potwierdza aplikacji",
+      "back_md": "Potwierdzenie transportowe nie zastępuje odpowiedzi ani potwierdzenia operacji aplikacyjnej.",
+      "example": "Nie"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.transport.07",
+      "revision": 1,
+      "title": "ACK kolejnego bajtu",
+      "skills": [
+        "transport.ack-kolejnego-bajtu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "TCP otrzymał 100 bajtów zaczynając od sekwencji 1000, bez luk i bez SYN/FIN. Jaki kolejny numer potwierdza?",
+      "hints": [
+        "ACK zwykle wskazuje następny oczekiwany numer sekwencji: 1000 + 100."
+      ],
+      "explanation_md": "ACK zwykle wskazuje następny oczekiwany numer sekwencji: 1000 + 100.",
+      "card_id": "ccna.transport.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "1099",
+          "feedback_md": "To numer ostatniego odebranego bajtu, nie następnego oczekiwanego.",
+          "id": "A"
+        },
+        {
+          "text_md": "1001",
+          "feedback_md": "To odpowiadałoby jednemu bajtowi przestrzeni sekwencji.",
+          "id": "B"
+        },
+        {
+          "text_md": "2000",
+          "feedback_md": "Nie wynika z podanej długości segmentu.",
+          "id": "C"
+        },
+        {
+          "text_md": "1100",
+          "feedback_md": "ACK zwykle wskazuje następny oczekiwany numer sekwencji: 1000 + 100.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.transport.08",
+      "revision": 1,
+      "title": "SYN zajmuje numer",
+      "skills": [
+        "transport.syn-zajmuje-numer"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Klient wysyła SYN z SEQ=700 bez danych. Jakiego ACK oczekuje w SYN/ACK?",
+      "hints": [
+        "Flaga SYN jest potwierdzana przez dodanie jednego do jej numeru sekwencji."
+      ],
+      "explanation_md": "Flaga SYN jest potwierdzana przez dodanie jednego do jej numeru sekwencji.",
+      "card_id": "ccna.transport.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "700",
+          "feedback_md": "SYN zajmuje jedno miejsce w przestrzeni sekwencji.",
+          "id": "A"
+        },
+        {
+          "text_md": "702",
+          "feedback_md": "Bez danych SYN zużywa jedno, nie dwa miejsca.",
+          "id": "B"
+        },
+        {
+          "text_md": "701",
+          "feedback_md": "Flaga SYN jest potwierdzana przez dodanie jednego do jej numeru sekwencji.",
+          "id": "C"
+        },
+        {
+          "text_md": "0",
+          "feedback_md": "ACK nie zeruje automatycznie przestrzeni sekwencji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.transport.09",
+      "revision": 1,
+      "title": "Odbiorca i okno",
+      "skills": [
+        "transport.odbiorca-i-okno"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Czemu służy advertised receive window TCP?",
+      "hints": [
+        "Flow control chroni odbiorcę; przeciążenie sieci jest osobnym problemem."
+      ],
+      "explanation_md": "Flow control chroni odbiorcę; przeciążenie sieci jest osobnym problemem.",
+      "card_id": "ccna.transport.09.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wskazuje tylko szybkość fizycznego portu",
+          "feedback_md": "Okno nie jest stałą przepustowością Ethernet.",
+          "id": "A"
+        },
+        {
+          "text_md": "Informuje o przestrzeni, którą odbiorca może przyjąć",
+          "feedback_md": "Flow control chroni odbiorcę; przeciążenie sieci jest osobnym problemem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wybiera numer VLAN-u",
+          "feedback_md": "Nie dotyczy segmentacji L2.",
+          "id": "C"
+        },
+        {
+          "text_md": "Gwarantuje brak przeciążenia całej ścieżki",
+          "feedback_md": "Flow control odbiorcy nie zastępuje congestion control.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.transport.10",
+      "revision": 1,
+      "title": "MSS a MTU",
+      "skills": [
+        "transport.mss-a-mtu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co określa TCP MSS?",
+      "hints": [
+        "MSS nie obejmuje nagłówków IP/TCP i nie jest tym samym co MTU."
+      ],
+      "explanation_md": "MSS nie obejmuje nagłówków IP/TCP i nie jest tym samym co MTU.",
+      "card_id": "ccna.transport.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Maksymalny rozmiar danych TCP w segmencie, deklarowany przez stronę",
+          "feedback_md": "MSS nie obejmuje nagłówków IP/TCP i nie jest tym samym co MTU.",
+          "id": "A"
+        },
+        {
+          "text_md": "Cały rozmiar ramki Ethernet wraz z FCS",
+          "feedback_md": "To nie wielkość MSS.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie rozmiar nagłówka IP",
+          "feedback_md": "MSS dotyczy danych TCP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Liczbę wszystkich sesji routera",
+          "feedback_md": "To nie limit liczby połączeń.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.transport.11",
+      "revision": 1,
+      "title": "FIN kontra RST",
+      "skills": [
+        "transport.fin-kontra-rst"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Która flaga TCP jest kojarzona z nagłym przerwaniem/resetem połączenia?",
+      "hints": [
+        "RST należy interpretować wraz z kierunkiem i kontekstem: może go wysłać host lub urządzenie pośrednie."
+      ],
+      "explanation_md": "RST należy interpretować wraz z kierunkiem i kontekstem: może go wysłać host lub urządzenie pośrednie.",
+      "card_id": "ccna.transport.11.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "FIN",
+          "feedback_md": "FIN oznacza uporządkowane zakończenie nadawania w danym kierunku.",
+          "id": "A"
+        },
+        {
+          "text_md": "SYN",
+          "feedback_md": "SYN służy synchronizacji przy ustanawianiu.",
+          "id": "B"
+        },
+        {
+          "text_md": "ACK",
+          "feedback_md": "ACK potwierdza dane i sam nie oznacza resetu.",
+          "id": "C"
+        },
+        {
+          "text_md": "RST",
+          "feedback_md": "RST należy interpretować wraz z kierunkiem i kontekstem: może go wysłać host lub urządzenie pośrednie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.transport.12",
+      "revision": 1,
+      "title": "ACK nie potwierdza aplikacji",
+      "skills": [
+        "transport.ack-nie-potwierdza-aplikacji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Serwer potwierdził bajty TCP. Czy to dowodzi zapisania transakcji w bazie danych?",
+      "hints": [
+        "Potwierdzenie transportowe nie zastępuje odpowiedzi ani potwierdzenia operacji aplikacyjnej."
+      ],
+      "explanation_md": "Potwierdzenie transportowe nie zastępuje odpowiedzi ani potwierdzenia operacji aplikacyjnej.",
+      "card_id": "ccna.transport.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, ACK jest potwierdzeniem SQL commit",
+          "feedback_md": "TCP nie zna semantyki transakcji aplikacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, jeśli port to 443",
+          "feedback_md": "Port nie zmienia zakresu potwierdzenia TCP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie",
+          "feedback_md": "Potwierdzenie transportowe nie zastępuje odpowiedzi ani potwierdzenia operacji aplikacyjnej.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak, każdy ACK zawiera odpowiedź aplikacji",
+          "feedback_md": "ACK może nie mieć danych aplikacyjnych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

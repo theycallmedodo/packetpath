@@ -1,0 +1,488 @@
+{
+  "schema_version": 3,
+  "id": "ccna.etherchannel.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.etherchannel.13.theory",
+      "revision": 1,
+      "title": "Jeden przepływ i dwa łącza",
+      "skills": [
+        "etherchannel.hashing"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "front_md": "Jeden przepływ i dwa łącza",
+      "back_md": "Testuj różne przepływy i obserwuj rozkład. Hash zależy od platformy i skonfigurowanych pól wejściowych.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.etherchannel.14.theory",
+      "revision": 1,
+      "title": "Dwa porty LACP access",
+      "skills": [
+        "etherchannel.access-bundle"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "front_md": "Dwa porty LACP access",
+      "back_md": "Zakres interfejsów pozwala nadać członkom spójną konfigurację. Ustawienia sąsiada muszą być zgodne.",
+      "example": "SW1(config)# interface range GigabitEthernet1/0/1 - 2\nSW1(config-if-range)# switchport mode access\nSW1(config-if-range)# switchport access vlan 10\nSW1(config-if-range)# channel-group 1 mode active"
+    },
+    {
+      "id": "ccna.etherchannel.15.theory",
+      "revision": 1,
+      "title": "Trunk LACP od początku",
+      "skills": [
+        "etherchannel.trunk-bundle"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "front_md": "Trunk LACP od początku",
+      "back_md": "Kanał L2 trunk przenosi wspólny zbiór VLAN-ów. Nie wystarczy samo przypisanie channel-group przy sprzecznych konfiguracjach.",
+      "example": "SW1(config)# interface range GigabitEthernet1/0/3 - 4\nSW1(config-if-range)# switchport mode trunk\nSW1(config-if-range)# switchport trunk allowed vlan 10,20\nSW1(config-if-range)# channel-group 2 mode active"
+    },
+    {
+      "id": "ccna.etherchannel.16.theory",
+      "revision": 1,
+      "title": "Flaga P w summary",
+      "skills": [
+        "etherchannel.read-output"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "front_md": "Flaga P w summary",
+      "back_md": "Interpretuj symbole zgodnie z legendą konkretnego polecenia. Podobne litery w różnych kontekstach nie zawsze znaczą to samo.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.etherchannel.17.theory",
+      "revision": 1,
+      "title": "Napraw passive/passive",
+      "skills": [
+        "etherchannel.fix-passive"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "front_md": "Napraw passive/passive",
+      "back_md": "Jedna strona active wystarcza do rozpoczęcia negocjacji z passive, pod warunkiem zgodności pozostałych ustawień.",
+      "example": "SW1(config)# interface range GigabitEthernet1/0/5 - 6\nSW1(config-if-range)# channel-group 3 mode active\nSW1(config-if-range)# end\nSW1# show etherchannel summary"
+    },
+    {
+      "id": "ccna.etherchannel.18.theory",
+      "revision": 1,
+      "title": "Zmiana wspólnej polityki trunku",
+      "skills": [
+        "etherchannel.logical-policy"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "front_md": "Zmiana wspólnej polityki trunku",
+      "back_md": "Zmiana bez add świadomie zastępuje listę allowed. Przy pracach operacyjnych trzeba uwzględnić także zgodność drugiego końca.",
+      "example": "SW1(config)# interface Port-channel4\nSW1(config-if)# switchport trunk allowed vlan 10,20,99\nSW1(config-if)# switchport trunk native vlan 99"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.etherchannel.13",
+      "revision": 1,
+      "title": "Jeden przepływ i dwa łącza",
+      "skills": [
+        "etherchannel.hashing"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Agregacja ma dwa łącza 1 Gb/s. Jedna sesja TCP osiąga około 1 Gb/s. Czy sam ten wynik dowodzi awarii?",
+      "hints": [
+        "Pojedynczy przepływ i suma wielu przepływów to różne pomiary."
+      ],
+      "explanation_md": "Testuj różne przepływy i obserwuj rozkład. Hash zależy od platformy i skonfigurowanych pól wejściowych.",
+      "card_id": "ccna.etherchannel.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Tak, pojedyncza sesja zawsze musi osiągać 2 Gb/s.",
+          "feedback_md": "Sumaryczna przepustowość nie gwarantuje jej dla jednej sesji."
+        },
+        {
+          "id": "B",
+          "text_md": "Tak, EtherChannel działa wyłącznie powyżej 10 Gb/s.",
+          "feedback_md": "EtherChannel może działać na łączach 1 Gb/s."
+        },
+        {
+          "id": "C",
+          "text_md": "Tak, LACP dzieli każdą ramkę po połowie na dwa przewody.",
+          "feedback_md": "Rozkład nie polega na dzieleniu pojedynczej ramki między przewody."
+        },
+        {
+          "id": "D",
+          "text_md": "Nie, hash może przypisać cały przepływ do jednego członka.",
+          "feedback_md": "To normalne przy rozkładzie per przepływ."
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.etherchannel.14",
+      "revision": 1,
+      "title": "Dwa porty LACP access",
+      "skills": [
+        "etherchannel.access-bundle"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "G1/0/1–2 mają połączyć SW1 ze zgodnym sąsiadem w access VLAN 10. VLAN istnieje, porty mają zgodną prędkość. Skonfiguruj grupę 1 LACP active.",
+      "hints": [
+        "Nie używaj portfast na takim połączeniu między switchami."
+      ],
+      "explanation_md": "Zakres interfejsów pozwala nadać członkom spójną konfigurację. Ustawienia sąsiada muszą być zgodne.",
+      "card_id": "ccna.etherchannel.14.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# interface range GigabitEthernet1/0/1 - 2\nSW1(config-if-range)# switchport mode {{mode}}\nSW1(config-if-range)# switchport access vlan {{vlan}}\nSW1(config-if-range)# channel-group {{group}} mode {{lacp}}",
+      "blanks": [
+        {
+          "id": "mode",
+          "label": "Tryb L2",
+          "answer_type": "keyword",
+          "accepted": [
+            "access"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "vlan",
+          "label": "VLAN kanału",
+          "answer_type": "integer",
+          "accepted": [
+            "10"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "group",
+          "label": "Grupa",
+          "answer_type": "integer",
+          "accepted": [
+            "1"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "lacp",
+          "label": "LACP inicjujący",
+          "answer_type": "keyword",
+          "accepted": [
+            "active"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.etherchannel.15",
+      "revision": 1,
+      "title": "Trunk LACP od początku",
+      "skills": [
+        "etherchannel.trunk-bundle"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na zgodnych G1/0/3–4 zbuduj trunk grupy 2 z LACP active, allowed dokładnie 10,20. Po obu stronach native VLAN pozostaje domyślnie zgodny.",
+      "hints": [
+        "Cztery luki opisują tryb, zakres ruchu, grupę i negocjację."
+      ],
+      "explanation_md": "Kanał L2 trunk przenosi wspólny zbiór VLAN-ów. Nie wystarczy samo przypisanie channel-group przy sprzecznych konfiguracjach.",
+      "card_id": "ccna.etherchannel.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# interface range GigabitEthernet1/0/3 - 4\nSW1(config-if-range)# switchport mode {{mode}}\nSW1(config-if-range)# switchport trunk allowed vlan {{vlans}}\nSW1(config-if-range)# channel-group {{group}} mode {{lacp}}",
+      "blanks": [
+        {
+          "id": "mode",
+          "label": "Tryb członków",
+          "answer_type": "keyword",
+          "accepted": [
+            "trunk"
+          ],
+          "width": 8,
+          "common_errors": {}
+        },
+        {
+          "id": "vlans",
+          "label": "Lista rosnąca bez spacji",
+          "answer_type": "keyword",
+          "accepted": [
+            "10,20"
+          ],
+          "width": 8,
+          "common_errors": {}
+        },
+        {
+          "id": "group",
+          "label": "Numer kanału",
+          "answer_type": "integer",
+          "accepted": [
+            "2"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "lacp",
+          "label": "Tryb LACP",
+          "answer_type": "keyword",
+          "accepted": [
+            "active"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.etherchannel.16",
+      "revision": 1,
+      "title": "Flaga P w summary",
+      "skills": [
+        "etherchannel.read-output"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Legenda show etherchannel summary na tym urządzeniu podaje P = bundled in port-channel. Przy G1/0/1 widzisz (P). Co to znaczy?",
+      "hints": [
+        "Odpowiedź wynika z podanej legendy, nie ze skojarzenia z nazwą trybu."
+      ],
+      "explanation_md": "Interpretuj symbole zgodnie z legendą konkretnego polecenia. Podobne litery w różnych kontekstach nie zawsze znaczą to samo.",
+      "card_id": "ccna.etherchannel.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Port działa wyłącznie jako passive.",
+          "feedback_md": "W tej legendzie P nie oznacza trybu passive."
+        },
+        {
+          "id": "B",
+          "text_md": "Port jest przyłączony do logicznego kanału.",
+          "feedback_md": "Legenda wskazuje aktywne przyłączenie członka."
+        },
+        {
+          "id": "C",
+          "text_md": "Port jest administracyjnie shutdown.",
+          "feedback_md": "Stan shutdown ma inne oznaczenie."
+        },
+        {
+          "id": "D",
+          "text_md": "Port jest tylko kandydatem bez zestawienia.",
+          "feedback_md": "Bundled oznacza więcej niż samą konfigurację kandydata."
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.etherchannel.17",
+      "revision": 1,
+      "title": "Napraw passive/passive",
+      "skills": [
+        "etherchannel.fix-passive"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Grupa 3 ma na obu końcach LACP passive. Członkowie to G1/0/5–6. Na SW1 przełącz całą grupę członków na active i zweryfikuj summary. Platforma pozwala zmienić tryb istniejącej grupy tym poleceniem.",
+      "hints": [
+        "Zmieniasz oba lokalne porty członkowskie."
+      ],
+      "explanation_md": "Jedna strona active wystarcza do rozpoczęcia negocjacji z passive, pod warunkiem zgodności pozostałych ustawień.",
+      "card_id": "ccna.etherchannel.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# interface range GigabitEthernet1/0/5 - 6\nSW1(config-if-range)# channel-group {{group}} mode {{mode}}\nSW1(config-if-range)# end\nSW1# show etherchannel {{view}}",
+      "blanks": [
+        {
+          "id": "group",
+          "label": "Istniejąca grupa",
+          "answer_type": "integer",
+          "accepted": [
+            "3"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "mode",
+          "label": "Nowy tryb",
+          "answer_type": "keyword",
+          "accepted": [
+            "active"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "view",
+          "label": "Widok stanu",
+          "answer_type": "keyword",
+          "accepted": [
+            "summary"
+          ],
+          "width": 10,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.etherchannel.18",
+      "revision": 1,
+      "title": "Zmiana wspólnej polityki trunku",
+      "skills": [
+        "etherchannel.logical-policy"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Port-channel4 ma przenosić dokładnie VLAN-y 10,20,99, native 99. Wpisz nazwę interfejsu, listę rosnącą bez spacji i native. Członkowie wspierają propagację tych ustawień.",
+      "hints": [
+        "W tym zadaniu zastąpienie listy jest zamierzone."
+      ],
+      "explanation_md": "Zmiana bez add świadomie zastępuje listę allowed. Przy pracach operacyjnych trzeba uwzględnić także zgodność drugiego końca.",
+      "card_id": "ccna.etherchannel.18.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# interface {{interface}}\nSW1(config-if)# switchport trunk allowed vlan {{vlans}}\nSW1(config-if)# switchport trunk native vlan {{native}}",
+      "blanks": [
+        {
+          "id": "interface",
+          "label": "Interfejs kanału",
+          "answer_type": "keyword",
+          "accepted": [
+            "Port-channel4",
+            "Port-channel 4"
+          ],
+          "width": 16,
+          "common_errors": {}
+        },
+        {
+          "id": "vlans",
+          "label": "Dokładna lista",
+          "answer_type": "keyword",
+          "accepted": [
+            "10,20,99"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "native",
+          "label": "Native VLAN",
+          "answer_type": "integer",
+          "accepted": [
+            "99"
+          ],
+          "width": 5,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

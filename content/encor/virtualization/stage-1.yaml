@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "encor.virtualization.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Hypervisor typu 1",
+      "skills": [
+        "virtualization.hypervisor-typu-1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        }
+      ],
+      "id": "encor.virtualization.01.theory",
+      "front_md": "Hypervisor typu 1",
+      "back_md": "Typ 1 zarządza sprzętem bez warstwy hostującego systemu operacyjnego typowej dla typu 2.",
+      "example": "Bezpośrednio na sprzęcie hosta"
+    },
+    {
+      "revision": 1,
+      "title": "Hypervisor typu 2",
+      "skills": [
+        "virtualization.hypervisor-typu-2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        }
+      ],
+      "id": "encor.virtualization.02.theory",
+      "front_md": "Hypervisor typu 2",
+      "back_md": "Typ 2 działa nad systemem hosta. To rozróżnienie architektury, a nie liczby maszyn wirtualnych.",
+      "example": "Typ 2"
+    },
+    {
+      "revision": 1,
+      "title": "Interfejs VM",
+      "skills": [
+        "virtualization.interfejs-vm"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        }
+      ],
+      "id": "encor.virtualization.03.theory",
+      "front_md": "Interfejs VM",
+      "back_md": "vNIC łączy system gościa z wirtualną siecią. Może być przyłączony do portu wirtualnego switcha.",
+      "example": "Wirtualnego interfejsu sieciowego gościa"
+    },
+    {
+      "revision": 1,
+      "title": "Wirtualny switch",
+      "skills": [
+        "virtualization.wirtualny-switch"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        }
+      ],
+      "id": "encor.virtualization.04.theory",
+      "front_md": "Wirtualny switch",
+      "back_md": "Wirtualny switch może realizować lokalne przełączanie pomiędzy portami gości, zależnie od polityki i projektu.",
+      "example": "Przełączanie ruchu między VM bez wyjścia na fizyczny uplink"
+    },
+    {
+      "revision": 1,
+      "title": "Uplink hosta",
+      "skills": [
+        "virtualization.uplink-hosta"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        }
+      ],
+      "id": "encor.virtualization.05.theory",
+      "front_md": "Uplink hosta",
+      "back_md": "Uplink zapewnia drogę między światem wirtualnym i fizyczną siecią. Segmenty i VLAN-y muszą być spójne.",
+      "example": "Do połączenia wirtualnej sieci z siecią zewnętrzną"
+    },
+    {
+      "revision": 1,
+      "title": "Izolacja VM",
+      "skills": [
+        "virtualization.izolacja-vm"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        }
+      ],
+      "id": "encor.virtualization.06.theory",
+      "front_md": "Izolacja VM",
+      "back_md": "Rozdział może wynikać z VLAN-ów, port groups, wirtualnych switchy i polityk. Wspólny sprzęt nie narzuca wspólnego L2.",
+      "example": "Nie, mogą należeć do różnych segmentów i polityk"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.virtualization.01",
+      "revision": 1,
+      "title": "Hypervisor typu 1",
+      "skills": [
+        "virtualization.hypervisor-typu-1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Gdzie działa hypervisor typu 1?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Typ 1 zarządza sprzętem bez warstwy hostującego systemu operacyjnego typowej dla typu 2.",
+      "card_id": "encor.virtualization.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Bezpośrednio na sprzęcie hosta",
+          "feedback_md": "Typ 1 zarządza sprzętem bez warstwy hostującego systemu operacyjnego typowej dla typu 2.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłącznie wewnątrz przeglądarki",
+          "feedback_md": "Typ 1 zarządza sprzętem bez warstwy hostującego systemu operacyjnego typowej dla typu 2.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zawsze jako aplikacja na desktopowym OS",
+          "feedback_md": "Typ 1 zarządza sprzętem bez warstwy hostującego systemu operacyjnego typowej dla typu 2.",
+          "id": "C"
+        },
+        {
+          "text_md": "W polu nagłówka Ethernet",
+          "feedback_md": "Typ 1 zarządza sprzętem bez warstwy hostującego systemu operacyjnego typowej dla typu 2.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.virtualization.02",
+      "revision": 1,
+      "title": "Hypervisor typu 2",
+      "skills": [
+        "virtualization.hypervisor-typu-2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Laborant uruchamia VM w aplikacji na swoim systemie desktopowym. Jaki typ hypervisora opisuje ten model?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Typ 2 działa nad systemem hosta. To rozróżnienie architektury, a nie liczby maszyn wirtualnych.",
+      "card_id": "encor.virtualization.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Typ 1 z definicji",
+          "feedback_md": "Typ 2 działa nad systemem hosta. To rozróżnienie architektury, a nie liczby maszyn wirtualnych.",
+          "id": "A"
+        },
+        {
+          "text_md": "VTEP",
+          "feedback_md": "Typ 2 działa nad systemem hosta. To rozróżnienie architektury, a nie liczby maszyn wirtualnych.",
+          "id": "B"
+        },
+        {
+          "text_md": "ABR",
+          "feedback_md": "Typ 2 działa nad systemem hosta. To rozróżnienie architektury, a nie liczby maszyn wirtualnych.",
+          "id": "C"
+        },
+        {
+          "text_md": "Typ 2",
+          "feedback_md": "Typ 2 działa nad systemem hosta. To rozróżnienie architektury, a nie liczby maszyn wirtualnych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.virtualization.03",
+      "revision": 1,
+      "title": "Interfejs VM",
+      "skills": [
+        "virtualization.interfejs-vm"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Jaką rolę pełni vNIC w maszynie wirtualnej?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "vNIC łączy system gościa z wirtualną siecią. Może być przyłączony do portu wirtualnego switcha.",
+      "card_id": "encor.virtualization.03.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tablicy routingu BGP",
+          "feedback_md": "vNIC łączy system gościa z wirtualną siecią. Może być przyłączony do portu wirtualnego switcha.",
+          "id": "A"
+        },
+        {
+          "text_md": "Fizycznego zasilacza",
+          "feedback_md": "vNIC łączy system gościa z wirtualną siecią. Może być przyłączony do portu wirtualnego switcha.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wirtualnego interfejsu sieciowego gościa",
+          "feedback_md": "vNIC łączy system gościa z wirtualną siecią. Może być przyłączony do portu wirtualnego switcha.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłącznie kopii zapasowej VM",
+          "feedback_md": "vNIC łączy system gościa z wirtualną siecią. Może być przyłączony do portu wirtualnego switcha.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.virtualization.04",
+      "revision": 1,
+      "title": "Wirtualny switch",
+      "skills": [
+        "virtualization.wirtualny-switch"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Dwie VM na jednym hoście są w tym samym segmencie vSwitch. Co może odbywać się lokalnie?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Wirtualny switch może realizować lokalne przełączanie pomiędzy portami gości, zależnie od polityki i projektu.",
+      "card_id": "encor.virtualization.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Każdy pakiet musi przejść przez Internet",
+          "feedback_md": "Wirtualny switch może realizować lokalne przełączanie pomiędzy portami gości, zależnie od polityki i projektu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Przełączanie ruchu między VM bez wyjścia na fizyczny uplink",
+          "feedback_md": "Wirtualny switch może realizować lokalne przełączanie pomiędzy portami gości, zależnie od polityki i projektu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Każdy pakiet wymaga MPLS",
+          "feedback_md": "Wirtualny switch może realizować lokalne przełączanie pomiędzy portami gości, zależnie od polityki i projektu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Żaden ruch, bo vSwitch nie ma tablicy MAC",
+          "feedback_md": "Wirtualny switch może realizować lokalne przełączanie pomiędzy portami gości, zależnie od polityki i projektu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.virtualization.05",
+      "revision": 1,
+      "title": "Uplink hosta",
+      "skills": [
+        "virtualization.uplink-hosta"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Do czego służy fizyczny uplink vSwitcha?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Uplink zapewnia drogę między światem wirtualnym i fizyczną siecią. Segmenty i VLAN-y muszą być spójne.",
+      "card_id": "encor.virtualization.05.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Do połączenia wirtualnej sieci z siecią zewnętrzną",
+          "feedback_md": "Uplink zapewnia drogę między światem wirtualnym i fizyczną siecią. Segmenty i VLAN-y muszą być spójne.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłącznie do nadania RAM maszynie",
+          "feedback_md": "Uplink zapewnia drogę między światem wirtualnym i fizyczną siecią. Segmenty i VLAN-y muszą być spójne.",
+          "id": "B"
+        },
+        {
+          "text_md": "Do tworzenia OSPF area 0 w każdym gościu",
+          "feedback_md": "Uplink zapewnia drogę między światem wirtualnym i fizyczną siecią. Segmenty i VLAN-y muszą być spójne.",
+          "id": "C"
+        },
+        {
+          "text_md": "Do automatycznego szyfrowania dysków",
+          "feedback_md": "Uplink zapewnia drogę między światem wirtualnym i fizyczną siecią. Segmenty i VLAN-y muszą być spójne.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.virtualization.06",
+      "revision": 1,
+      "title": "Izolacja VM",
+      "skills": [
+        "virtualization.izolacja-vm"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Czy umieszczenie dwóch VM na jednym hoście oznacza automatycznie ten sam segment L2?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Rozdział może wynikać z VLAN-ów, port groups, wirtualnych switchy i polityk. Wspólny sprzęt nie narzuca wspólnego L2.",
+      "card_id": "encor.virtualization.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, zawsze",
+          "feedback_md": "Rozdział może wynikać z VLAN-ów, port groups, wirtualnych switchy i polityk. Wspólny sprzęt nie narzuca wspólnego L2.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, jeśli mają różne adresy MAC",
+          "feedback_md": "Rozdział może wynikać z VLAN-ów, port groups, wirtualnych switchy i polityk. Wspólny sprzęt nie narzuca wspólnego L2.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie, bo VM nie obsługuje Ethernet",
+          "feedback_md": "Rozdział może wynikać z VLAN-ów, port groups, wirtualnych switchy i polityk. Wspólny sprzęt nie narzuca wspólnego L2.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, mogą należeć do różnych segmentów i polityk",
+          "feedback_md": "Rozdział może wynikać z VLAN-ów, port groups, wirtualnych switchy i polityk. Wspólny sprzęt nie narzuca wspólnego L2.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

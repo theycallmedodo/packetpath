@@ -1,0 +1,427 @@
+{
+  "schema_version": 3,
+  "id": "ccna.static.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.static.07.theory",
+      "revision": 1,
+      "title": "Floating static za OSPF",
+      "skills": [
+        "static.floating"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "front_md": "Floating static za OSPF",
+      "back_md": "Floating static ma AD większe niż preferowane źródło do tego samego prefiksu. Musi nadal spełniać warunki instalacji.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.static.08.theory",
+      "revision": 1,
+      "title": "Default: maska i next-hop",
+      "skills": [
+        "static.default-parameters"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "front_md": "Default: maska i next-hop",
+      "back_md": "Default nie zastępuje tras bardziej szczegółowych. Jest wykorzystywany, gdy nic dokładniejszego nie pasuje.",
+      "example": "R1(config)# ip route 0.0.0.0 0.0.0.0 192.0.2.1"
+    },
+    {
+      "id": "ccna.static.09.theory",
+      "revision": 1,
+      "title": "Floating do konkretnej sieci",
+      "skills": [
+        "static.floating-config"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "front_md": "Floating do konkretnej sieci",
+      "back_md": "Wyższe AD ustawia preferencję. Samo floating static nie bada działania całego Internetu za sąsiadem.",
+      "example": "R1(config)# ip route 10.20.0.0 255.255.0.0 198.51.100.2 200"
+    },
+    {
+      "id": "ccna.static.10.theory",
+      "revision": 1,
+      "title": "Dokładniejsza trasa a default",
+      "skills": [
+        "static.lpm-vs-ad"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "front_md": "Dokładniejsza trasa a default",
+      "back_md": "Oddziel wybór tras do RIB od wyszukiwania prefiksu dla pakietu. LPM decyduje między /24 a /0.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.static.11.theory",
+      "revision": 1,
+      "title": "Statyczna IPv6",
+      "skills": [
+        "static.ipv6-static"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "front_md": "Statyczna IPv6",
+      "back_md": "IPv6 route zapisuje cel jako prefiks z długością. Globalny next-hop musi dać się rozwiązać do ścieżki wyjścia.",
+      "example": "R1(config)# ipv6 route 2001:db8:20::/64 2001:db8:12::2"
+    },
+    {
+      "id": "ccna.static.12.theory",
+      "revision": 1,
+      "title": "Default IPv6",
+      "skills": [
+        "static.ipv6-default"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "front_md": "Default IPv6",
+      "back_md": "Default IPv6 ma prefiks ::/0. Podobnie jak w IPv4 ustępuje bardziej szczegółowym trasom.",
+      "example": "R1(config)# ipv6 route ::/0 2001:db8:12::2"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.static.07",
+      "revision": 1,
+      "title": "Floating static za OSPF",
+      "skills": [
+        "static.floating"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "OSPF dostarcza 10.20.0.0/16 z AD 110. Która AD statycznej do tego samego prefiksu sprawi, że będzie zapasowa, przy osiągalnym next-hopie?",
+      "hints": [
+        "Wybierz wartość większą od 110."
+      ],
+      "explanation_md": "Floating static ma AD większe niż preferowane źródło do tego samego prefiksu. Musi nadal spełniać warunki instalacji.",
+      "card_id": "ccna.static.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "1",
+          "feedback_md": "1 spowoduje preferowanie static nad OSPF."
+        },
+        {
+          "id": "B",
+          "text_md": "90",
+          "feedback_md": "90 jest niższe od 110."
+        },
+        {
+          "id": "C",
+          "text_md": "200",
+          "feedback_md": "200 jest większe od 110, więc OSPF pozostaje preferowany."
+        },
+        {
+          "id": "D",
+          "text_md": "100",
+          "feedback_md": "100 jest niższe od 110."
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.static.08",
+      "revision": 1,
+      "title": "Default: maska i next-hop",
+      "skills": [
+        "static.default-parameters"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Ustaw IPv4 default przez 192.0.2.1. Next-hop jest bezpośrednio osiągalny.",
+      "hints": [
+        "Maska trasy domyślnej ma zero znaczących bitów."
+      ],
+      "explanation_md": "Default nie zastępuje tras bardziej szczegółowych. Jest wykorzystywany, gdy nic dokładniejszego nie pasuje.",
+      "card_id": "ccna.static.08.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# ip route 0.0.0.0 {{mask}} {{next}}",
+      "blanks": [
+        {
+          "id": "mask",
+          "label": "Maska default",
+          "answer_type": "ipv4",
+          "accepted": [
+            "0.0.0.0"
+          ],
+          "width": 10,
+          "common_errors": {}
+        },
+        {
+          "id": "next",
+          "label": "Router następnego skoku",
+          "answer_type": "ipv4",
+          "accepted": [
+            "192.0.2.1"
+          ],
+          "width": 12,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.static.09",
+      "revision": 1,
+      "title": "Floating do konkretnej sieci",
+      "skills": [
+        "static.floating-config"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dodaj zapas do 10.20.0.0/16 przez 198.51.100.2 z AD dokładnie 200. Podstawową trasę zapewnia OSPF.",
+      "hints": [
+        "Uzupełnij next-hop i zadaną wartość AD."
+      ],
+      "explanation_md": "Wyższe AD ustawia preferencję. Samo floating static nie bada działania całego Internetu za sąsiadem.",
+      "card_id": "ccna.static.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# ip route 10.20.0.0 255.255.0.0 {{next}} {{ad}}",
+      "blanks": [
+        {
+          "id": "next",
+          "label": "Zapasowy next-hop",
+          "answer_type": "ipv4",
+          "accepted": [
+            "198.51.100.2"
+          ],
+          "width": 15,
+          "common_errors": {}
+        },
+        {
+          "id": "ad",
+          "label": "Dystans zapasu",
+          "answer_type": "integer",
+          "accepted": [
+            "200"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.static.10",
+      "revision": 1,
+      "title": "Dokładniejsza trasa a default",
+      "skills": [
+        "static.lpm-vs-ad"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.2"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Default static ma AD 1, a trasa OSPF 10.10.10.0/24 ma AD 110. Obie są w tablicy. Gdzie trafi pakiet do 10.10.10.8?",
+      "hints": [
+        "Porównujesz dwie różne długości prefiksu."
+      ],
+      "explanation_md": "Oddziel wybór tras do RIB od wyszukiwania prefiksu dla pakietu. LPM decyduje między /24 a /0.",
+      "card_id": "ccna.static.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Zawsze default, bo ma niższe AD.",
+          "feedback_md": "AD nie zastępuje longest prefix match między różnymi prefiksami."
+        },
+        {
+          "id": "B",
+          "text_md": "Przez trasę OSPF /24, bo jest bardziej szczegółowa.",
+          "feedback_md": "/24 wygrywa dopasowanie z /0."
+        },
+        {
+          "id": "C",
+          "text_md": "Do obu tras po połowie, bo obie pasują.",
+          "feedback_md": "To nie jest przypadek równych ścieżek do tego samego prefiksu."
+        },
+        {
+          "id": "D",
+          "text_md": "Zostanie odrzucony przez konflikt AD.",
+          "feedback_md": "Dwie takie trasy mogą poprawnie współistnieć."
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.static.11",
+      "revision": 1,
+      "title": "Statyczna IPv6",
+      "skills": [
+        "static.ipv6-static"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dodaj trasę do 2001:db8:20::/64 przez osiągalny globalny next-hop 2001:db8:12::2.",
+      "hints": [
+        "Nie używaj dziesiętnej maski IPv4."
+      ],
+      "explanation_md": "IPv6 route zapisuje cel jako prefiks z długością. Globalny next-hop musi dać się rozwiązać do ścieżki wyjścia.",
+      "card_id": "ccna.static.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# ipv6 route {{prefix}} {{next}}",
+      "blanks": [
+        {
+          "id": "prefix",
+          "label": "Prefiks docelowy",
+          "answer_type": "ipv6_prefix",
+          "accepted": [
+            "2001:db8:20::/64"
+          ],
+          "width": 19,
+          "common_errors": {}
+        },
+        {
+          "id": "next",
+          "label": "Next-hop IPv6",
+          "answer_type": "ipv6",
+          "accepted": [
+            "2001:db8:12::2"
+          ],
+          "width": 17,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.static.12",
+      "revision": 1,
+      "title": "Default IPv6",
+      "skills": [
+        "static.ipv6-default"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing statyczny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-ip-prot-indep-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dodaj trasę domyślną IPv6 przez osiągalny next-hop 2001:db8:12::2.",
+      "hints": [
+        "Długość dopasowania wynosi zero."
+      ],
+      "explanation_md": "Default IPv6 ma prefiks ::/0. Podobnie jak w IPv4 ustępuje bardziej szczegółowym trasom.",
+      "card_id": "ccna.static.12.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# ipv6 route {{default}} {{next}}",
+      "blanks": [
+        {
+          "id": "default",
+          "label": "Prefiks domyślny",
+          "answer_type": "ipv6_prefix",
+          "accepted": [
+            "::/0"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "next",
+          "label": "Globalny next-hop",
+          "answer_type": "ipv6",
+          "accepted": [
+            "2001:db8:12::2"
+          ],
+          "width": 17,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

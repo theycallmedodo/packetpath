@@ -1,0 +1,405 @@
+{
+  "schema_version": 3,
+  "id": "encor.vrf.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Izolacja klientów",
+      "skills": [
+        "vrf.izolacja-klient-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.01.theory",
+      "front_md": "Izolacja klientów",
+      "back_md": "VRF tworzy niezależny kontekst routingu. Nakładające się adresy mogą istnieć w różnych VRF.",
+      "example": "VRF"
+    },
+    {
+      "revision": 1,
+      "title": "VRF-lite",
+      "skills": [
+        "vrf.vrf-lite"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.02.theory",
+      "front_md": "VRF-lite",
+      "back_md": "Oddzielne tablice VRF nie wymagają same w sobie MPLS. VRF-lite może korzystać z oddzielnych interfejsów L3.",
+      "example": "VRF-lite może działać bez MPLS"
+    },
+    {
+      "revision": 1,
+      "title": "Nowy kontekst",
+      "skills": [
+        "vrf.nowy-kontekst"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.03.theory",
+      "front_md": "Nowy kontekst",
+      "back_md": "Nazwa VRF identyfikuje kontekst. address-family ipv4 włącza rodzinę adresową tej definicji.",
+      "example": "vrf definition BLUE\n address-family ipv4\n exit-address-family"
+    },
+    {
+      "revision": 1,
+      "title": "Brak domyślnego przecieku",
+      "skills": [
+        "vrf.brak-domy-lnego-przecieku"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.04.theory",
+      "front_md": "Brak domyślnego przecieku",
+      "back_md": "Izolacja jest podstawą VRF. Komunikacja między kontekstami wymaga jawnego mechanizmu i polityki.",
+      "example": "Nie"
+    },
+    {
+      "revision": 1,
+      "title": "Przypisanie interfejsu",
+      "skills": [
+        "vrf.przypisanie-interfejsu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.05.theory",
+      "front_md": "Przypisanie interfejsu",
+      "back_md": "vrf forwarding umieszcza interfejs w tablicy VRF. Konfigurację IP należy wykonywać po przypisaniu VRF.",
+      "example": "interface GigabitEthernet0/1\n vrf forwarding BLUE\n ip address 10.1.0.1 255.255.255.0"
+    },
+    {
+      "revision": 1,
+      "title": "Odczyt tablicy BLUE",
+      "skills": [
+        "vrf.odczyt-tablicy-blue"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.06.theory",
+      "front_md": "Odczyt tablicy BLUE",
+      "back_md": "show ip route bez wskazania VRF dotyczy tablicy globalnej, a nie wszystkich kontekstów.",
+      "example": "show ip route vrf BLUE"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.vrf.01",
+      "revision": 1,
+      "title": "Izolacja klientów",
+      "skills": [
+        "vrf.izolacja-klient-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Dwaj klienci używają 10.0.0.0/24 na tym samym routerze. Co pozwala utrzymać oddzielne tablice routingu?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "VRF tworzy niezależny kontekst routingu. Nakładające się adresy mogą istnieć w różnych VRF.",
+      "card_id": "encor.vrf.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "VRF",
+          "feedback_md": "VRF tworzy niezależny kontekst routingu. Nakładające się adresy mogą istnieć w różnych VRF.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sam opis interfejsu",
+          "feedback_md": "VRF tworzy niezależny kontekst routingu. Nakładające się adresy mogą istnieć w różnych VRF.",
+          "id": "B"
+        },
+        {
+          "text_md": "Samo zwiększenie MTU",
+          "feedback_md": "VRF tworzy niezależny kontekst routingu. Nakładające się adresy mogą istnieć w różnych VRF.",
+          "id": "C"
+        },
+        {
+          "text_md": "Sam hostname",
+          "feedback_md": "VRF tworzy niezależny kontekst routingu. Nakładające się adresy mogą istnieć w różnych VRF.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.vrf.02",
+      "revision": 1,
+      "title": "VRF-lite",
+      "skills": [
+        "vrf.vrf-lite"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Co odróżnia zastosowanie VRF-lite od wymogu uruchomienia MPLS w rdzeniu?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Oddzielne tablice VRF nie wymagają same w sobie MPLS. VRF-lite może korzystać z oddzielnych interfejsów L3.",
+      "card_id": "encor.vrf.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "VRF-lite zawsze wymaga LDP",
+          "feedback_md": "Oddzielne tablice VRF nie wymagają same w sobie MPLS. VRF-lite może korzystać z oddzielnych interfejsów L3.",
+          "id": "A"
+        },
+        {
+          "text_md": "VRF-lite jest tylko VLAN-em",
+          "feedback_md": "Oddzielne tablice VRF nie wymagają same w sobie MPLS. VRF-lite może korzystać z oddzielnych interfejsów L3.",
+          "id": "B"
+        },
+        {
+          "text_md": "VRF-lite usuwa potrzebę routingu",
+          "feedback_md": "Oddzielne tablice VRF nie wymagają same w sobie MPLS. VRF-lite może korzystać z oddzielnych interfejsów L3.",
+          "id": "C"
+        },
+        {
+          "text_md": "VRF-lite może działać bez MPLS",
+          "feedback_md": "Oddzielne tablice VRF nie wymagają same w sobie MPLS. VRF-lite może korzystać z oddzielnych interfejsów L3.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.vrf.03",
+      "revision": 1,
+      "title": "Nowy kontekst",
+      "skills": [
+        "vrf.nowy-kontekst"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Utwórz VRF o dokładnej nazwie BLUE w składni vrf definition.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Nazwa VRF identyfikuje kontekst. address-family ipv4 włącza rodzinę adresową tej definicji.",
+      "card_id": "encor.vrf.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "vrf definition {{b0}}\n address-family ipv4\n exit-address-family",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "identifier",
+          "accepted": [
+            "BLUE"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.vrf.04",
+      "revision": 1,
+      "title": "Brak domyślnego przecieku",
+      "skills": [
+        "vrf.brak-domy-lnego-przecieku"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "BLUE i RED mają kompletne trasy we własnych tablicach. Bez route leaking czy trasy automatycznie stają się wspólne?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Izolacja jest podstawą VRF. Komunikacja między kontekstami wymaga jawnego mechanizmu i polityki.",
+      "card_id": "encor.vrf.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, jeśli numery VLAN są kolejne",
+          "feedback_md": "Izolacja jest podstawą VRF. Komunikacja między kontekstami wymaga jawnego mechanizmu i polityki.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie",
+          "feedback_md": "Izolacja jest podstawą VRF. Komunikacja między kontekstami wymaga jawnego mechanizmu i polityki.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, po ping do 127.0.0.1",
+          "feedback_md": "Izolacja jest podstawą VRF. Komunikacja między kontekstami wymaga jawnego mechanizmu i polityki.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak, jeśli mają ten sam RD",
+          "feedback_md": "Izolacja jest podstawą VRF. Komunikacja między kontekstami wymaga jawnego mechanizmu i polityki.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.vrf.05",
+      "revision": 1,
+      "title": "Przypisanie interfejsu",
+      "skills": [
+        "vrf.przypisanie-interfejsu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Istnieje VRF BLUE. Przypisz do niego Gi0/1 przed nadaniem adresu IP.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "vrf forwarding umieszcza interfejs w tablicy VRF. Konfigurację IP należy wykonywać po przypisaniu VRF.",
+      "card_id": "encor.vrf.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "interface GigabitEthernet0/1\n vrf forwarding {{b0}}\n ip address 10.1.0.1 255.255.255.0",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "identifier",
+          "accepted": [
+            "BLUE"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.vrf.06",
+      "revision": 1,
+      "title": "Odczyt tablicy BLUE",
+      "skills": [
+        "vrf.odczyt-tablicy-blue"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Które polecenie pokazuje tablicę IPv4 konkretnego VRF BLUE?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "show ip route bez wskazania VRF dotyczy tablicy globalnej, a nie wszystkich kontekstów.",
+      "card_id": "encor.vrf.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "show vlan BLUE",
+          "feedback_md": "show ip route bez wskazania VRF dotyczy tablicy globalnej, a nie wszystkich kontekstów.",
+          "id": "A"
+        },
+        {
+          "text_md": "show ip arp global-only",
+          "feedback_md": "show ip route bez wskazania VRF dotyczy tablicy globalnej, a nie wszystkich kontekstów.",
+          "id": "B"
+        },
+        {
+          "text_md": "show spanning-tree BLUE",
+          "feedback_md": "show ip route bez wskazania VRF dotyczy tablicy globalnej, a nie wszystkich kontekstów.",
+          "id": "C"
+        },
+        {
+          "text_md": "show ip route vrf BLUE",
+          "feedback_md": "show ip route bez wskazania VRF dotyczy tablicy globalnej, a nie wszystkich kontekstów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

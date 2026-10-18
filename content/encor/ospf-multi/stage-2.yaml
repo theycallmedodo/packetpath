@@ -1,0 +1,425 @@
+{
+  "schema_version": 3,
+  "id": "encor.ospf-multi.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa procesy lokalne",
+      "skills": [
+        "ospf-multi.dwa-procesy-lokalne"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.07.theory",
+      "front_md": "Dwa procesy lokalne",
+      "back_md": "Process ID nie musi zgadzać się między routerami. Obszar i wymagane parametry sąsiedztwa muszą być zgodne.",
+      "example": "Nie, ID procesu ma znaczenie lokalne"
+    },
+    {
+      "revision": 1,
+      "title": "Agregacja na ABR",
+      "skills": [
+        "ospf-multi.agregacja-na-abr"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.08.theory",
+      "front_md": "Agregacja na ABR",
+      "back_md": "Cztery kolejne /24 od granicy trzeciego oktetu 0 mieszczą się dokładnie w /22.",
+      "example": "10.10.0.0/22"
+    },
+    {
+      "revision": 1,
+      "title": "Konfiguracja area range",
+      "skills": [
+        "ospf-multi.konfiguracja-area-range"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.09.theory",
+      "front_md": "Konfiguracja area range",
+      "back_md": "area range wskazuje obszar źródłowy agregowanych sieci i maskę podsieci, nie wildcard.",
+      "example": "router ospf 10\n area 10 range 10.10.0.0 255.255.252.0"
+    },
+    {
+      "revision": 1,
+      "title": "Pasywny LAN",
+      "skills": [
+        "ospf-multi.pasywny-lan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.10.theory",
+      "front_md": "Pasywny LAN",
+      "back_md": "Passive-interface zatrzymuje Hello i sąsiedztwo na LAN; nie usuwa automatycznie ogłaszanego prefiksu.",
+      "example": "Sieć może być ogłaszana, ale interfejs nie zestawia sąsiedztwa"
+    },
+    {
+      "revision": 1,
+      "title": "Zezwól tylko na tranzyt",
+      "skills": [
+        "ospf-multi.zezw-l-tylko-na-tranzyt"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.11.theory",
+      "front_md": "Zezwól tylko na tranzyt",
+      "back_md": "Domyślna pasywność ogranicza sąsiedztwa do jawnie dopuszczonych łączy tranzytowych.",
+      "example": "router ospf 10\n passive-interface default\n no passive-interface GigabitEthernet0/0"
+    },
+    {
+      "revision": 1,
+      "title": "OSPFv3 i router ID",
+      "skills": [
+        "ospf-multi.ospfv3-i-router-id"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.12.theory",
+      "front_md": "OSPFv3 i router ID",
+      "back_md": "Router ID OSPFv3 pozostaje 32-bitowy. Zapis jak IPv4 nie wymaga uruchomienia IPv4 na interfejsach.",
+      "example": "32-bitowa wartość zapisana jak IPv4"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ospf-multi.07",
+      "revision": 1,
+      "title": "Dwa procesy lokalne",
+      "skills": [
+        "ospf-multi.dwa-procesy-lokalne"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na wspólnym łączu R1 używa procesu OSPF 10, a R2 procesu 99. Pozostałe parametry są zgodne. Czy różne process ID blokują sąsiedztwo OSPFv2?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Process ID nie musi zgadzać się między routerami. Obszar i wymagane parametry sąsiedztwa muszą być zgodne.",
+      "card_id": "encor.ospf-multi.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, zawsze",
+          "feedback_md": "Process ID nie musi zgadzać się między routerami. Obszar i wymagane parametry sąsiedztwa muszą być zgodne.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tylko w area 0",
+          "feedback_md": "Process ID nie musi zgadzać się między routerami. Obszar i wymagane parametry sąsiedztwa muszą być zgodne.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tylko przy typie point-to-point",
+          "feedback_md": "Process ID nie musi zgadzać się między routerami. Obszar i wymagane parametry sąsiedztwa muszą być zgodne.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, ID procesu ma znaczenie lokalne",
+          "feedback_md": "Process ID nie musi zgadzać się między routerami. Obszar i wymagane parametry sąsiedztwa muszą być zgodne.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ospf-multi.08",
+      "revision": 1,
+      "title": "Agregacja na ABR",
+      "skills": [
+        "ospf-multi.agregacja-na-abr"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Area 10 ma sieci 10.10.0.0/24 do 10.10.3.0/24. Jaka jest najmniejsza pojedyncza agregacja obejmująca dokładnie te cztery sieci?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Cztery kolejne /24 od granicy trzeciego oktetu 0 mieszczą się dokładnie w /22.",
+      "card_id": "encor.ospf-multi.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "10.10.0.0/23",
+          "feedback_md": "Cztery kolejne /24 od granicy trzeciego oktetu 0 mieszczą się dokładnie w /22.",
+          "id": "A"
+        },
+        {
+          "text_md": "10.10.0.0/21",
+          "feedback_md": "Cztery kolejne /24 od granicy trzeciego oktetu 0 mieszczą się dokładnie w /22.",
+          "id": "B"
+        },
+        {
+          "text_md": "10.10.0.0/22",
+          "feedback_md": "Cztery kolejne /24 od granicy trzeciego oktetu 0 mieszczą się dokładnie w /22.",
+          "id": "C"
+        },
+        {
+          "text_md": "10.10.1.0/22",
+          "feedback_md": "Cztery kolejne /24 od granicy trzeciego oktetu 0 mieszczą się dokładnie w /22.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ospf-multi.09",
+      "revision": 1,
+      "title": "Konfiguracja area range",
+      "skills": [
+        "ospf-multi.konfiguracja-area-range"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na ABR procesu 10 agreguj sieci z area 10 do 10.10.0.0/22, ogłaszając podsumowanie innym obszarom.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "area range wskazuje obszar źródłowy agregowanych sieci i maskę podsieci, nie wildcard.",
+      "card_id": "encor.ospf-multi.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "router ospf 10\n area {{b0}} range 10.10.0.0 {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "10"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "255.255.252.0"
+          ],
+          "width": 15,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ospf-multi.10",
+      "revision": 1,
+      "title": "Pasywny LAN",
+      "skills": [
+        "ospf-multi.pasywny-lan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "LAN z użytkownikami jest objęty OSPF i ma passive-interface. Co jest prawdą?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Passive-interface zatrzymuje Hello i sąsiedztwo na LAN; nie usuwa automatycznie ogłaszanego prefiksu.",
+      "card_id": "encor.ospf-multi.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sieć może być ogłaszana, ale interfejs nie zestawia sąsiedztwa",
+          "feedback_md": "Passive-interface zatrzymuje Hello i sąsiedztwo na LAN; nie usuwa automatycznie ogłaszanego prefiksu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sieć zawsze znika z OSPF",
+          "feedback_md": "Passive-interface zatrzymuje Hello i sąsiedztwo na LAN; nie usuwa automatycznie ogłaszanego prefiksu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Interfejs administracyjnie się wyłącza",
+          "feedback_md": "Passive-interface zatrzymuje Hello i sąsiedztwo na LAN; nie usuwa automatycznie ogłaszanego prefiksu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Router wysyła Hello, ale ignoruje tylko LSA",
+          "feedback_md": "Passive-interface zatrzymuje Hello i sąsiedztwo na LAN; nie usuwa automatycznie ogłaszanego prefiksu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ospf-multi.11",
+      "revision": 1,
+      "title": "Zezwól tylko na tranzyt",
+      "skills": [
+        "ospf-multi.zezw-l-tylko-na-tranzyt"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W procesie 10 ustaw domyślnie wszystkie interfejsy jako passive, lecz aktywuj Hello na Gi0/0.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Domyślna pasywność ogranicza sąsiedztwa do jawnie dopuszczonych łączy tranzytowych.",
+      "card_id": "encor.ospf-multi.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "router ospf 10\n passive-interface {{b0}}\n no passive-interface {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "default"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "GigabitEthernet0/0"
+          ],
+          "width": 20,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ospf-multi.12",
+      "revision": 1,
+      "title": "OSPFv3 i router ID",
+      "skills": [
+        "ospf-multi.ospfv3-i-router-id"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Router działa wyłącznie z IPv6. Jaki format ma router ID OSPFv3?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Router ID OSPFv3 pozostaje 32-bitowy. Zapis jak IPv4 nie wymaga uruchomienia IPv4 na interfejsach.",
+      "card_id": "encor.ospf-multi.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "128-bitowy adres IPv6",
+          "feedback_md": "Router ID OSPFv3 pozostaje 32-bitowy. Zapis jak IPv4 nie wymaga uruchomienia IPv4 na interfejsach.",
+          "id": "A"
+        },
+        {
+          "text_md": "48-bitowy MAC",
+          "feedback_md": "Router ID OSPFv3 pozostaje 32-bitowy. Zapis jak IPv4 nie wymaga uruchomienia IPv4 na interfejsach.",
+          "id": "B"
+        },
+        {
+          "text_md": "32-bitowa wartość zapisana jak IPv4",
+          "feedback_md": "Router ID OSPFv3 pozostaje 32-bitowy. Zapis jak IPv4 nie wymaga uruchomienia IPv4 na interfejsach.",
+          "id": "C"
+        },
+        {
+          "text_md": "Numer AS w notacji asdot",
+          "feedback_md": "Router ID OSPFv3 pozostaje 32-bitowy. Zapis jak IPv4 nie wymaga uruchomienia IPv4 na interfejsach.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

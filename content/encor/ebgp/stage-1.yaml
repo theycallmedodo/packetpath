@@ -1,0 +1,405 @@
+{
+  "schema_version": 3,
+  "id": "encor.ebgp.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Granica AS",
+      "skills": [
+        "ebgp.granica-as"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "id": "encor.ebgp.01.theory",
+      "front_md": "Granica AS",
+      "back_md": "eBGP łączy różne systemy autonomiczne; iBGP działa wewnątrz jednego AS.",
+      "example": "eBGP"
+    },
+    {
+      "revision": 1,
+      "title": "Transport BGP",
+      "skills": [
+        "ebgp.transport-bgp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "id": "encor.ebgp.02.theory",
+      "front_md": "Transport BGP",
+      "back_md": "BGP używa TCP z portem serwera 179. Osiągalność ICMP nie dowodzi dostępności TCP.",
+      "example": "TCP 179"
+    },
+    {
+      "revision": 1,
+      "title": "Zdalny system autonomiczny",
+      "skills": [
+        "ebgp.zdalny-system-autonomiczny"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "id": "encor.ebgp.03.theory",
+      "front_md": "Zdalny system autonomiczny",
+      "back_md": "remote-as wskazuje AS sąsiada, a nie lokalnego routera.",
+      "example": "router bgp 65001\n neighbor 192.0.2.2 remote-as 65002"
+    },
+    {
+      "revision": 1,
+      "title": "Stan Established",
+      "skills": [
+        "ebgp.stan-established"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "id": "encor.ebgp.04.theory",
+      "front_md": "Stan Established",
+      "back_md": "Liczba prefiksów zastępuje nazwę stanu, gdy sesja BGP jest zestawiona.",
+      "example": "Sesja Established i 12 odebranych prefiksów"
+    },
+    {
+      "revision": 1,
+      "title": "Dokładna maska network",
+      "skills": [
+        "ebgp.dok-adna-maska-network"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "id": "encor.ebgp.05.theory",
+      "front_md": "Dokładna maska network",
+      "back_md": "Polecenie network wymaga odpowiadającej mu trasy o dokładnie zgodnym prefiksie i masce w RIB.",
+      "example": "router bgp 65001\n network 10.20.0.0 mask 255.255.0.0"
+    },
+    {
+      "revision": 1,
+      "title": "BGP to nie odkrywanie",
+      "skills": [
+        "ebgp.bgp-to-nie-odkrywanie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "id": "encor.ebgp.06.theory",
+      "front_md": "BGP to nie odkrywanie",
+      "back_md": "Typowa sesja eBGP wymaga konfiguracji neighbor oraz zgodnych AS i osiągalności transportu.",
+      "example": "Sąsiada należy jawnie skonfigurować"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ebgp.01",
+      "revision": 1,
+      "title": "Granica AS",
+      "skills": [
+        "ebgp.granica-as"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "R1 należy do AS 65001, R2 do AS 65002. Jaki typ sesji BGP zestawiają?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "eBGP łączy różne systemy autonomiczne; iBGP działa wewnątrz jednego AS.",
+      "card_id": "encor.ebgp.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "eBGP",
+          "feedback_md": "eBGP łączy różne systemy autonomiczne; iBGP działa wewnątrz jednego AS.",
+          "id": "A"
+        },
+        {
+          "text_md": "iBGP",
+          "feedback_md": "eBGP łączy różne systemy autonomiczne; iBGP działa wewnątrz jednego AS.",
+          "id": "B"
+        },
+        {
+          "text_md": "OSPF inter-area",
+          "feedback_md": "eBGP łączy różne systemy autonomiczne; iBGP działa wewnątrz jednego AS.",
+          "id": "C"
+        },
+        {
+          "text_md": "EIGRP internal",
+          "feedback_md": "eBGP łączy różne systemy autonomiczne; iBGP działa wewnątrz jednego AS.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ebgp.02",
+      "revision": 1,
+      "title": "Transport BGP",
+      "skills": [
+        "ebgp.transport-bgp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "ACL przepuszcza ping, ale blokuje transport sesji BGP. Który ruch musi dopuścić między peerami?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "BGP używa TCP z portem serwera 179. Osiągalność ICMP nie dowodzi dostępności TCP.",
+      "card_id": "encor.ebgp.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "UDP 179",
+          "feedback_md": "BGP używa TCP z portem serwera 179. Osiągalność ICMP nie dowodzi dostępności TCP.",
+          "id": "A"
+        },
+        {
+          "text_md": "IP protocol 89",
+          "feedback_md": "BGP używa TCP z portem serwera 179. Osiągalność ICMP nie dowodzi dostępności TCP.",
+          "id": "B"
+        },
+        {
+          "text_md": "UDP 520",
+          "feedback_md": "BGP używa TCP z portem serwera 179. Osiągalność ICMP nie dowodzi dostępności TCP.",
+          "id": "C"
+        },
+        {
+          "text_md": "TCP 179",
+          "feedback_md": "BGP używa TCP z portem serwera 179. Osiągalność ICMP nie dowodzi dostępności TCP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ebgp.03",
+      "revision": 1,
+      "title": "Zdalny system autonomiczny",
+      "skills": [
+        "ebgp.zdalny-system-autonomiczny"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "R1 w AS 65001 ma bezpośredniego sąsiada 192.0.2.2 w AS 65002. Uzupełnij numer zdalnego AS.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "remote-as wskazuje AS sąsiada, a nie lokalnego routera.",
+      "card_id": "encor.ebgp.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "router bgp 65001\n neighbor 192.0.2.2 remote-as {{b0}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "65002"
+          ],
+          "width": 7,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.04",
+      "revision": 1,
+      "title": "Stan Established",
+      "skills": [
+        "ebgp.stan-established"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "```text\nR1# show ip bgp summary\nNeighbor        V    AS     MsgRcvd MsgSent Up/Down  State/PfxRcd\n192.0.2.2       4    65002  120     118     00:30:00 12\n```\n\nSkrócony przykład do analizy. W show ip bgp summary kolumna State/PfxRcd zawiera liczbę 12. Co to oznacza?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Liczba prefiksów zastępuje nazwę stanu, gdy sesja BGP jest zestawiona.",
+      "card_id": "encor.ebgp.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sesja Idle od 12 sekund",
+          "feedback_md": "Liczba prefiksów zastępuje nazwę stanu, gdy sesja BGP jest zestawiona.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sesja Established i 12 odebranych prefiksów",
+          "feedback_md": "Liczba prefiksów zastępuje nazwę stanu, gdy sesja BGP jest zestawiona.",
+          "id": "B"
+        },
+        {
+          "text_md": "Numer zdalnego AS wynosi 12",
+          "feedback_md": "Liczba prefiksów zastępuje nazwę stanu, gdy sesja BGP jest zestawiona.",
+          "id": "C"
+        },
+        {
+          "text_md": "Dokładnie 12 błędów TCP",
+          "feedback_md": "Liczba prefiksów zastępuje nazwę stanu, gdy sesja BGP jest zestawiona.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ebgp.05",
+      "revision": 1,
+      "title": "Dokładna maska network",
+      "skills": [
+        "ebgp.dok-adna-maska-network"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "W RIB istnieje 10.20.0.0/16. Rozgłoś dokładnie ten prefiks przez BGP.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Polecenie network wymaga odpowiadającej mu trasy o dokładnie zgodnym prefiksie i masce w RIB.",
+      "card_id": "encor.ebgp.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "router bgp 65001\n network 10.20.0.0 mask {{b0}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "255.255.0.0"
+          ],
+          "width": 13,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.06",
+      "revision": 1,
+      "title": "BGP to nie odkrywanie",
+      "skills": [
+        "ebgp.bgp-to-nie-odkrywanie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Interfejsy dwóch routerów są up/up i mają adresy w jednym /30. Dlaczego samo to nie tworzy sesji BGP?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Typowa sesja eBGP wymaga konfiguracji neighbor oraz zgodnych AS i osiągalności transportu.",
+      "card_id": "encor.ebgp.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "BGP wymaga wyboru DR",
+          "feedback_md": "Typowa sesja eBGP wymaga konfiguracji neighbor oraz zgodnych AS i osiągalności transportu.",
+          "id": "A"
+        },
+        {
+          "text_md": "BGP zawsze wymaga area 0",
+          "feedback_md": "Typowa sesja eBGP wymaga konfiguracji neighbor oraz zgodnych AS i osiągalności transportu.",
+          "id": "B"
+        },
+        {
+          "text_md": "BGP działa tylko na loopbackach",
+          "feedback_md": "Typowa sesja eBGP wymaga konfiguracji neighbor oraz zgodnych AS i osiągalności transportu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Sąsiada należy jawnie skonfigurować",
+          "feedback_md": "Typowa sesja eBGP wymaga konfiguracji neighbor oraz zgodnych AS i osiągalności transportu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

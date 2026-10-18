@@ -1,0 +1,493 @@
+{
+  "schema_version": 3,
+  "id": "ccna.vlan.stage-5",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "SVI down przy no shutdown",
+      "skills": [
+        "vlan.svi-down-przy-no-shutdown"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.ext.07.theory",
+      "front_md": "SVI down przy no shutdown",
+      "back_md": "Samo no shutdown nie spełnia wszystkich warunków operacyjnego stanu SVI.",
+      "example": "Line protocol SVI pozostaje down"
+    },
+    {
+      "revision": 1,
+      "title": "Allowed nie tworzy VLAN-u",
+      "skills": [
+        "vlan.allowed-nie-tworzy-vlan-u"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.ext.08.theory",
+      "front_md": "Allowed nie tworzy VLAN-u",
+      "back_md": "Lista dozwolonych VLAN-ów nie zastępuje utworzenia VLAN-u w lokalnej bazie.",
+      "example": "Istnienie i aktywność VLAN 40"
+    },
+    {
+      "revision": 1,
+      "title": "SVI dla użytkowników",
+      "skills": [
+        "vlan.svi-dla-u-ytkownik-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.ext.09.theory",
+      "front_md": "SVI dla użytkowników",
+      "back_md": "Routing między SVI wymaga obsługi L3 i włączenia routingu; stan SVI zależy również od VLAN-u.",
+      "example": "SW(config)# ip routing\nSW(config)# interface Vlan30\nSW(config-if)# ip address 192.168.30.1 255.255.255.0\nSW(config-if)# no shutdown"
+    },
+    {
+      "revision": 1,
+      "title": "Zarządzanie L2",
+      "skills": [
+        "vlan.zarz-dzanie-l2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.ext.10.theory",
+      "front_md": "Zarządzanie L2",
+      "back_md": "Brama zarządzania switcha L2 i routing między VLAN-ami to różne funkcje.",
+      "example": "Wskazuje bramę dla ruchu IP samego switcha poza lokalną podsieć"
+    },
+    {
+      "revision": 1,
+      "title": "Zarządzanie bez routingu",
+      "skills": [
+        "vlan.zarz-dzanie-bez-routingu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.ext.11.theory",
+      "front_md": "Zarządzanie bez routingu",
+      "back_md": "SVI umożliwia zarządzanie IP, a brama służy dotarciu poza jego podsieć.",
+      "example": "SW(config)# interface Vlan99\nSW(config-if)# ip address 10.99.0.2 255.255.255.0\nSW(config-if)# no shutdown\nSW(config-if)# exit\nSW(config)# ip default-gateway 10.99.0.1"
+    },
+    {
+      "revision": 1,
+      "title": "VLAN a podsieć",
+      "skills": [
+        "vlan.vlan-a-podsie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.ext.12.theory",
+      "front_md": "VLAN a podsieć",
+      "back_md": "Przejrzyste mapowanie VLAN–podsieć ułatwia routing i diagnostykę; sam numer VLAN nie definiuje IP.",
+      "example": "VLAN-y rozdzielają domeny L2, a komunikacja między nimi wymaga odpowiedniej funkcji L3"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.vlan.ext.07",
+      "revision": 1,
+      "title": "SVI down przy no shutdown",
+      "skills": [
+        "vlan.svi-down-przy-no-shutdown"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "VLAN istnieje, SVI ma no shutdown, ale brak aktywnego portu forwarding w tym VLAN-ie. Przy standardowym autostate co może się dziać?",
+      "hints": [
+        "Samo no shutdown nie spełnia wszystkich warunków operacyjnego stanu SVI."
+      ],
+      "explanation_md": "Samo no shutdown nie spełnia wszystkich warunków operacyjnego stanu SVI.",
+      "card_id": "ccna.vlan.ext.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "SVI zawsze musi być up",
+          "feedback_md": "Autostate uwzględnia stan portów VLAN-u.",
+          "id": "A"
+        },
+        {
+          "text_md": "VLAN zmienia numer automatycznie",
+          "feedback_md": "To nie efekt autostate.",
+          "id": "B"
+        },
+        {
+          "text_md": "Switch usuwa wszystkie adresy MAC globalnie",
+          "feedback_md": "Nie jest to konieczny skutek.",
+          "id": "C"
+        },
+        {
+          "text_md": "Line protocol SVI pozostaje down",
+          "feedback_md": "Samo no shutdown nie spełnia wszystkich warunków operacyjnego stanu SVI.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.vlan.ext.08",
+      "revision": 1,
+      "title": "Allowed nie tworzy VLAN-u",
+      "skills": [
+        "vlan.allowed-nie-tworzy-vlan-u"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dodano VLAN 40 do allowed trunku, ale VLAN 40 nie istnieje lokalnie. Co jeszcze trzeba zapewnić?",
+      "hints": [
+        "Lista dozwolonych VLAN-ów nie zastępuje utworzenia VLAN-u w lokalnej bazie."
+      ],
+      "explanation_md": "Lista dozwolonych VLAN-ów nie zastępuje utworzenia VLAN-u w lokalnej bazie.",
+      "card_id": "ccna.vlan.ext.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tylko zmianę hasła enable",
+          "feedback_md": "Nie tworzy VLAN-u.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zwiększenie router ID",
+          "feedback_md": "Nie wpływa na bazę VLAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "Istnienie i aktywność VLAN 40",
+          "feedback_md": "Lista dozwolonych VLAN-ów nie zastępuje utworzenia VLAN-u w lokalnej bazie.",
+          "id": "C"
+        },
+        {
+          "text_md": "Usunięcie 802.1Q z trunku",
+          "feedback_md": "Zniszczyłoby wymagany transport VLAN-ów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.vlan.ext.09",
+      "revision": 1,
+      "title": "SVI dla użytkowników",
+      "skills": [
+        "vlan.svi-dla-u-ytkownik-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na switchu L3 istnieje aktywny VLAN 30. Włącz routing IPv4, nadaj SVI adres 192.168.30.1/24 i administracyjnie je podnieś.",
+      "hints": [
+        "Routing między SVI wymaga obsługi L3 i włączenia routingu; stan SVI zależy również od VLAN-u."
+      ],
+      "explanation_md": "Routing między SVI wymaga obsługi L3 i włączenia routingu; stan SVI zależy również od VLAN-u.",
+      "card_id": "ccna.vlan.ext.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config)# ip {{b0}}\nSW(config)# interface Vlan30\nSW(config-if)# ip address {{b1}} 255.255.255.0\nSW(config-if)# {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "routing"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "ipv4",
+          "accepted": [
+            "192.168.30.1"
+          ],
+          "width": 14,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "no shutdown"
+          ],
+          "width": 13,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.ext.10",
+      "revision": 1,
+      "title": "Zarządzanie L2",
+      "skills": [
+        "vlan.zarz-dzanie-l2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Switch działa z wyłączonym ip routing i ma SVI zarządzania. Jaką funkcję pełni ip default-gateway?",
+      "hints": [
+        "Brama zarządzania switcha L2 i routing między VLAN-ami to różne funkcje."
+      ],
+      "explanation_md": "Brama zarządzania switcha L2 i routing między VLAN-ami to różne funkcje.",
+      "card_id": "ccna.vlan.ext.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wskazuje bramę dla ruchu IP samego switcha poza lokalną podsieć",
+          "feedback_md": "Brama zarządzania switcha L2 i routing między VLAN-ami to różne funkcje.",
+          "id": "A"
+        },
+        {
+          "text_md": "Routuje automatycznie między wszystkimi VLAN-ami",
+          "feedback_md": "To nie włącza routingu użytkowników.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zmienia bramę każdego PC przez ARP",
+          "feedback_md": "Nie konfiguruje bram hostów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wybiera root STP",
+          "feedback_md": "Nie jest parametrem STP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.vlan.ext.11",
+      "revision": 1,
+      "title": "Zarządzanie bez routingu",
+      "skills": [
+        "vlan.zarz-dzanie-bez-routingu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Switch L2 ma aktywny VLAN 99 i wyłączone ip routing. Ustaw SVI 10.99.0.2/24, podnieś je i wskaż bramę 10.99.0.1.",
+      "hints": [
+        "SVI umożliwia zarządzanie IP, a brama służy dotarciu poza jego podsieć."
+      ],
+      "explanation_md": "SVI umożliwia zarządzanie IP, a brama służy dotarciu poza jego podsieć.",
+      "card_id": "ccna.vlan.ext.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config)# interface Vlan99\nSW(config-if)# ip address {{b0}} 255.255.255.0\nSW(config-if)# {{b1}}\nSW(config-if)# exit\nSW(config)# ip default-gateway {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "ipv4",
+          "accepted": [
+            "10.99.0.2"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "no shutdown"
+          ],
+          "width": 13,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "ipv4",
+          "accepted": [
+            "10.99.0.1"
+          ],
+          "width": 11,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.ext.12",
+      "revision": 1,
+      "title": "VLAN a podsieć",
+      "skills": [
+        "vlan.vlan-a-podsie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dlaczego w typowym projekcie przypisuje się różne podsieci IP do różnych VLAN-ów użytkowników?",
+      "hints": [
+        "Przejrzyste mapowanie VLAN–podsieć ułatwia routing i diagnostykę; sam numer VLAN nie definiuje IP."
+      ],
+      "explanation_md": "Przejrzyste mapowanie VLAN–podsieć ułatwia routing i diagnostykę; sam numer VLAN nie definiuje IP.",
+      "card_id": "ccna.vlan.ext.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Bo numer VLAN musi równać się ostatniemu oktetowi IP",
+          "feedback_md": "Nie ma takiego wymogu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Bo 802.1Q przenosi maskę IPv4",
+          "feedback_md": "Tag VLAN nie przenosi maski podsieci.",
+          "id": "B"
+        },
+        {
+          "text_md": "VLAN-y rozdzielają domeny L2, a komunikacja między nimi wymaga odpowiedniej funkcji L3",
+          "feedback_md": "Przejrzyste mapowanie VLAN–podsieć ułatwia routing i diagnostykę; sam numer VLAN nie definiuje IP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Bo każdy VLAN wymaga publicznego IP",
+          "feedback_md": "VLAN może używać adresacji prywatnej.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

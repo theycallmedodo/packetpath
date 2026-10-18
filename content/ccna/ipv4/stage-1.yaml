@@ -1,0 +1,387 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ipv4.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.ipv4.01.theory",
+      "revision": 1,
+      "title": "Ile hostów mieści /26?",
+      "skills": [
+        "ipv4.host-count"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "front_md": "Ile hostów mieści /26?",
+      "back_md": "Dla zwykłej podsieci /26 pozostaje **6 bitów hosta**. Liczba adresów wynosi 2⁶, a liczba adresów hostów 2⁶ − 2. Reguła nie jest stosowana tak samo do /31 i /32.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.ipv4.02.theory",
+      "revision": 1,
+      "title": "Maska interfejsu /24",
+      "skills": [
+        "ipv4.netmask"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "front_md": "Maska interfejsu /24",
+      "back_md": "Maska **/24** ma 24 jedynki i 8 zer. W poleceniu `ip address` używasz maski podsieci, nie wildcarda.",
+      "example": "R1(config-if)# ip address 192.168.10.1 255.255.255.0"
+    },
+    {
+      "id": "ccna.ipv4.03.theory",
+      "revision": 1,
+      "title": "Podnieś interfejs",
+      "skills": [
+        "ipv4.admin-state"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "front_md": "Podnieś interfejs",
+      "back_md": "`no shutdown` usuwa administracyjne wyłączenie interfejsu. Nie gwarantuje fizycznego linku ani osiągalności hosta.",
+      "example": "R1(config-if)# no shutdown"
+    },
+    {
+      "id": "ccna.ipv4.04.theory",
+      "revision": 1,
+      "title": "Adres sieci /27",
+      "skills": [
+        "ipv4.network-boundary"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "front_md": "Adres sieci /27",
+      "back_md": "Przy /27 blok ma **32 adresy**. Granice to .0, .32, .64, .96… Adres .77 leży w bloku .64–.95.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.ipv4.05.theory",
+      "revision": 1,
+      "title": "Adres drugiego końca /30",
+      "skills": [
+        "ipv4.p2p-host"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "front_md": "Adres drugiego końca /30",
+      "back_md": "W podsieci 10.0.0.0/30 adresy hostów to **.1 i .2**; .0 jest siecią, a .3 broadcastem.",
+      "example": "R2(config-if)# ip address 10.0.0.2 255.255.255.252"
+    },
+    {
+      "id": "ccna.ipv4.06.theory",
+      "revision": 1,
+      "title": "Szybki przegląd interfejsów",
+      "skills": [
+        "ipv4.verification"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "front_md": "Szybki przegląd interfejsów",
+      "back_md": "`show ip interface brief` pomaga szybko znaleźć adres i stan interfejsu. Nie wyświetla pełnej maski w tej tabeli.",
+      "example": "R1# show ip interface brief"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ipv4.01",
+      "revision": 1,
+      "title": "Ile hostów mieści /26?",
+      "skills": [
+        "ipv4.host-count"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Ile adresów dla hostów ma zwykła podsieć IPv4 /26, po wyłączeniu adresu sieci i broadcastu?",
+      "hints": [
+        "Policz bity pozostające po prefiksie."
+      ],
+      "explanation_md": "Dla zwykłej podsieci /26 pozostaje **6 bitów hosta**. Liczba adresów wynosi 2⁶, a liczba adresów hostów 2⁶ − 2. Reguła nie jest stosowana tak samo do /31 i /32.",
+      "card_id": "ccna.ipv4.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "30",
+          "feedback_md": "30 hostów odpowiada /27."
+        },
+        {
+          "id": "B",
+          "text_md": "62",
+          "feedback_md": "6 bitów hosta daje 64 adresy, z czego 62 są użytkowe."
+        },
+        {
+          "id": "C",
+          "text_md": "64",
+          "feedback_md": "64 to liczba wszystkich adresów, łącznie z siecią i broadcastem."
+        },
+        {
+          "id": "D",
+          "text_md": "126",
+          "feedback_md": "126 hostów odpowiada /25."
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ipv4.02",
+      "revision": 1,
+      "title": "Maska interfejsu /24",
+      "skills": [
+        "ipv4.netmask"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Ustaw na G0/0 adres 192.168.10.1/24. Uzupełnij maskę w zapisie dziesiętnym.",
+      "hints": [
+        "Trzy pełne oktety części sieciowej."
+      ],
+      "explanation_md": "Maska **/24** ma 24 jedynki i 8 zer. W poleceniu `ip address` używasz maski podsieci, nie wildcarda.",
+      "card_id": "ccna.ipv4.02.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-if)# ip address 192.168.10.1 {{mask}}",
+      "blanks": [
+        {
+          "id": "mask",
+          "label": "Maska /24",
+          "answer_type": "ipv4",
+          "accepted": [
+            "255.255.255.0"
+          ],
+          "width": 16,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv4.03",
+      "revision": 1,
+      "title": "Podnieś interfejs",
+      "skills": [
+        "ipv4.admin-state"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Interfejs G0/0 ma poprawny adres, ale jest administracyjnie wyłączony. Uzupełnij słowo znoszące shutdown.",
+      "hints": [
+        "IOS używa tego samego słowa do negacji wielu ustawień."
+      ],
+      "explanation_md": "`no shutdown` usuwa administracyjne wyłączenie interfejsu. Nie gwarantuje fizycznego linku ani osiągalności hosta.",
+      "card_id": "ccna.ipv4.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-if)# {{negation}} shutdown",
+      "blanks": [
+        {
+          "id": "negation",
+          "label": "Negacja polecenia",
+          "answer_type": "keyword",
+          "accepted": [
+            "no"
+          ],
+          "width": 5,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv4.04",
+      "revision": 1,
+      "title": "Adres sieci /27",
+      "skills": [
+        "ipv4.network-boundary"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Do której podsieci /27 należy adres 192.168.10.77?",
+      "hints": [
+        "Znajdź wielokrotności 32 otaczające 77."
+      ],
+      "explanation_md": "Przy /27 blok ma **32 adresy**. Granice to .0, .32, .64, .96… Adres .77 leży w bloku .64–.95.",
+      "card_id": "ccna.ipv4.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "192.168.10.0/27",
+          "feedback_md": "Zakres tej podsieci kończy się na .31."
+        },
+        {
+          "id": "B",
+          "text_md": "192.168.10.32/27",
+          "feedback_md": "Zakres tej podsieci kończy się na .63."
+        },
+        {
+          "id": "C",
+          "text_md": "192.168.10.64/27",
+          "feedback_md": "Zakres .64–.95 zawiera adres .77."
+        },
+        {
+          "id": "D",
+          "text_md": "192.168.10.96/27",
+          "feedback_md": "Ta podsieć zaczyna się dopiero od .96."
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ipv4.05",
+      "revision": 1,
+      "title": "Adres drugiego końca /30",
+      "skills": [
+        "ipv4.p2p-host"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Łącze ma podsieć 10.0.0.0/30. R1 używa 10.0.0.1. Przypisz R2 drugi i ostatni adres hosta.",
+      "hints": [
+        "Oddziel adres sieci i broadcast od dwóch hostów."
+      ],
+      "explanation_md": "W podsieci 10.0.0.0/30 adresy hostów to **.1 i .2**; .0 jest siecią, a .3 broadcastem.",
+      "card_id": "ccna.ipv4.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R2(config-if)# ip address {{host}} 255.255.255.252",
+      "blanks": [
+        {
+          "id": "host",
+          "label": "Drugi host w /30",
+          "answer_type": "ipv4",
+          "accepted": [
+            "10.0.0.2"
+          ],
+          "width": 11,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ipv4.06",
+      "revision": 1,
+      "title": "Szybki przegląd interfejsów",
+      "skills": [
+        "ipv4.verification"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Uzupełnij końcówkę polecenia pokazującego skróconą tabelę interfejsów, adresów i stanów.",
+      "hints": [
+        "Szukasz krótkiego zestawienia."
+      ],
+      "explanation_md": "`show ip interface brief` pomaga szybko znaleźć adres i stan interfejsu. Nie wyświetla pełnej maski w tej tabeli.",
+      "card_id": "ccna.ipv4.06.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1# show ip interface {{format}}",
+      "blanks": [
+        {
+          "id": "format",
+          "label": "Skrócony format",
+          "answer_type": "keyword",
+          "accepted": [
+            "brief"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

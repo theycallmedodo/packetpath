@@ -1,0 +1,445 @@
+{
+  "schema_version": 3,
+  "id": "encor.ospf-multi.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Diagnoza 2-WAY",
+      "skills": [
+        "ospf-multi.diagnoza-2-way"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.13.theory",
+      "front_md": "Diagnoza 2-WAY",
+      "back_md": "DROTHER nie tworzą pełnej adjacencji między sobą w sieci broadcast. FULL jest wymagane z DR/BDR.",
+      "example": "To prawidłowe zachowanie"
+    },
+    {
+      "revision": 1,
+      "title": "Filtr prefix-list na ABR",
+      "skills": [
+        "ospf-multi.filtr-prefix-list-na-abr"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.14.theory",
+      "front_md": "Filtr prefix-list na ABR",
+      "back_md": "Kierunek in jest względem obszaru. Filtr dotyczy międzyobszarowych prefiksów typu 3, nie filtrowania pakietów danych.",
+      "example": "Na ogłoszenia wchodzące do area 20"
+    },
+    {
+      "revision": 1,
+      "title": "Dwa normalne obszary",
+      "skills": [
+        "ospf-multi.dwa-normalne-obszary"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.15.theory",
+      "front_md": "Dwa normalne obszary",
+      "back_md": "Router z interfejsami w backbone i innym obszarze pełni rolę ABR; typ sieci konfiguruje się per interfejs.",
+      "example": "interface GigabitEthernet0/0\n ip ospf 10 area 0\n ip ospf network point-to-point\ninterface GigabitEthernet0/1\n ip ospf 10 area 30"
+    },
+    {
+      "revision": 1,
+      "title": "Stan EXSTART",
+      "skills": [
+        "ospf-multi.stan-exstart"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.16.theory",
+      "front_md": "Stan EXSTART",
+      "back_md": "Niezgodność MTU jest typową przyczyną problemów z wymianą DBD. Należy usunąć przyczynę, a nie zakładać błąd process ID.",
+      "example": "Niezgodność MTU i negocjację DBD"
+    },
+    {
+      "revision": 1,
+      "title": "OSPFv3 w klasycznej składni",
+      "skills": [
+        "ospf-multi.ospfv3-w-klasycznej-sk-adni"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.17.theory",
+      "front_md": "OSPFv3 w klasycznej składni",
+      "back_md": "Klasyczna składnia OSPFv3 włącza protokół na interfejsie poleceniem ipv6 ospf; nie używa IPv4 network wildcard.",
+      "example": "ipv6 unicast-routing\nipv6 router ospf 20\n router-id 1.1.1.1\ninterface GigabitEthernet0/0\n ipv6 ospf 20 area 0"
+    },
+    {
+      "revision": 1,
+      "title": "Agregat i dziura",
+      "skills": [
+        "ospf-multi.agregat-i-dziura"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.ospf-multi.18.theory",
+      "front_md": "Agregat i dziura",
+      "back_md": "Agregacja ukrywa szczegóły. Istniejące składowe mogą utrzymywać podsumowanie obejmujące nieosiągalny fragment.",
+      "example": "Agregat może pozostać mimo niedostępności części zakresu"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ospf-multi.13",
+      "revision": 1,
+      "title": "Diagnoza 2-WAY",
+      "skills": [
+        "ospf-multi.diagnoza-2-way"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "```text\nNeighbor ID     Pri State       Interface\n2.2.2.2           1 2WAY/DROTHER GigabitEthernet0/0\n3.3.3.3           1 FULL/DR      GigabitEthernet0/0\n4.4.4.4           1 FULL/BDR     GigabitEthernet0/0\n```\n\nSkrócony przykład do analizy. W sieci broadcast dwa routery DROTHER widzą się w stanie 2-WAY; oba mają FULL z DR i BDR. Jak to ocenić?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "DROTHER nie tworzą pełnej adjacencji między sobą w sieci broadcast. FULL jest wymagane z DR/BDR.",
+      "card_id": "encor.ospf-multi.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "To zawsze awaria MTU",
+          "feedback_md": "DROTHER nie tworzą pełnej adjacencji między sobą w sieci broadcast. FULL jest wymagane z DR/BDR.",
+          "id": "A"
+        },
+        {
+          "text_md": "Należy ustawić wszystkim priorytet 255",
+          "feedback_md": "DROTHER nie tworzą pełnej adjacencji między sobą w sieci broadcast. FULL jest wymagane z DR/BDR.",
+          "id": "B"
+        },
+        {
+          "text_md": "To prawidłowe zachowanie",
+          "feedback_md": "DROTHER nie tworzą pełnej adjacencji między sobą w sieci broadcast. FULL jest wymagane z DR/BDR.",
+          "id": "C"
+        },
+        {
+          "text_md": "OSPF nie obsługuje trzech routerów w LAN",
+          "feedback_md": "DROTHER nie tworzą pełnej adjacencji między sobą w sieci broadcast. FULL jest wymagane z DR/BDR.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ospf-multi.14",
+      "revision": 1,
+      "title": "Filtr prefix-list na ABR",
+      "skills": [
+        "ospf-multi.filtr-prefix-list-na-abr"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "ABR używa area 20 filter-list prefix BLOCK in. W jakim kierunku działa ten filtr LSA typu 3?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Kierunek in jest względem obszaru. Filtr dotyczy międzyobszarowych prefiksów typu 3, nie filtrowania pakietów danych.",
+      "card_id": "encor.ospf-multi.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Na pakiety użytkowników wychodzące z Gi0/0",
+          "feedback_md": "Kierunek in jest względem obszaru. Filtr dotyczy międzyobszarowych prefiksów typu 3, nie filtrowania pakietów danych.",
+          "id": "A"
+        },
+        {
+          "text_md": "Na ogłoszenia wchodzące do area 20",
+          "feedback_md": "Kierunek in jest względem obszaru. Filtr dotyczy międzyobszarowych prefiksów typu 3, nie filtrowania pakietów danych.",
+          "id": "B"
+        },
+        {
+          "text_md": "Na wszystkie LSA typu 1 wewnątrz area 20",
+          "feedback_md": "Kierunek in jest względem obszaru. Filtr dotyczy międzyobszarowych prefiksów typu 3, nie filtrowania pakietów danych.",
+          "id": "C"
+        },
+        {
+          "text_md": "Na sesje TCP do routera",
+          "feedback_md": "Kierunek in jest względem obszaru. Filtr dotyczy międzyobszarowych prefiksów typu 3, nie filtrowania pakietów danych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ospf-multi.15",
+      "revision": 1,
+      "title": "Dwa normalne obszary",
+      "skills": [
+        "ospf-multi.dwa-normalne-obszary"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Proces 10: Gi0/0 jest w area 0, Gi0/1 w area 30. Ustaw na Gi0/0 typ point-to-point.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Router z interfejsami w backbone i innym obszarze pełni rolę ABR; typ sieci konfiguruje się per interfejs.",
+      "card_id": "encor.ospf-multi.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "interface GigabitEthernet0/0\n ip ospf 10 area {{b0}}\n ip ospf network {{b1}}\ninterface GigabitEthernet0/1\n ip ospf 10 area {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "0"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "point-to-point"
+          ],
+          "width": 16,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "30"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ospf-multi.16",
+      "revision": 1,
+      "title": "Stan EXSTART",
+      "skills": [
+        "ospf-multi.stan-exstart"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Sąsiedzi na łączu OSPF pozostają w EXSTART/EXCHANGE. Obszar i Hello są zgodne, MTU wynosi 1500 i 1400. Co sprawdzić w pierwszej kolejności?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Niezgodność MTU jest typową przyczyną problemów z wymianą DBD. Należy usunąć przyczynę, a nie zakładać błąd process ID.",
+      "card_id": "encor.ospf-multi.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Numer lokalnego procesu",
+          "feedback_md": "Niezgodność MTU jest typową przyczyną problemów z wymianą DBD. Należy usunąć przyczynę, a nie zakładać błąd process ID.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wartość TCP MSS dla sesji BGP",
+          "feedback_md": "Niezgodność MTU jest typową przyczyną problemów z wymianą DBD. Należy usunąć przyczynę, a nie zakładać błąd process ID.",
+          "id": "B"
+        },
+        {
+          "text_md": "DNS routerów",
+          "feedback_md": "Niezgodność MTU jest typową przyczyną problemów z wymianą DBD. Należy usunąć przyczynę, a nie zakładać błąd process ID.",
+          "id": "C"
+        },
+        {
+          "text_md": "Niezgodność MTU i negocjację DBD",
+          "feedback_md": "Niezgodność MTU jest typową przyczyną problemów z wymianą DBD. Należy usunąć przyczynę, a nie zakładać błąd process ID.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ospf-multi.17",
+      "revision": 1,
+      "title": "OSPFv3 w klasycznej składni",
+      "skills": [
+        "ospf-multi.ospfv3-w-klasycznej-sk-adni"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Użyj klasycznej składni IOS XE ipv6 router ospf. Proces 20, router-id 1.1.1.1; Gi0/0 ma już IPv6 i należy do area 0.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Klasyczna składnia OSPFv3 włącza protokół na interfejsie poleceniem ipv6 ospf; nie używa IPv4 network wildcard.",
+      "card_id": "encor.ospf-multi.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "ipv6 unicast-routing\nipv6 router ospf {{b0}}\n router-id {{b1}}\ninterface GigabitEthernet0/0\n ipv6 ospf 20 area {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "20"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "1.1.1.1"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "0"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ospf-multi.18",
+      "revision": 1,
+      "title": "Agregat i dziura",
+      "skills": [
+        "ospf-multi.agregat-i-dziura"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — OSPF — obszary, agregacja i OSPFv3",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "ABR ogłasza 10.10.0.0/22, ale jedna z czterech sieci /24 jest niedostępna, a pozostałe nadal istnieją. Jaki jest skutek agregacji?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Agregacja ukrywa szczegóły. Istniejące składowe mogą utrzymywać podsumowanie obejmujące nieosiągalny fragment.",
+      "card_id": "encor.ospf-multi.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Agregat zawsze znika w całości",
+          "feedback_md": "Agregacja ukrywa szczegóły. Istniejące składowe mogą utrzymywać podsumowanie obejmujące nieosiągalny fragment.",
+          "id": "A"
+        },
+        {
+          "text_md": "Agregat może pozostać mimo niedostępności części zakresu",
+          "feedback_md": "Agregacja ukrywa szczegóły. Istniejące składowe mogą utrzymywać podsumowanie obejmujące nieosiągalny fragment.",
+          "id": "B"
+        },
+        {
+          "text_md": "OSPF tworzy brakującą podsieć",
+          "feedback_md": "Agregacja ukrywa szczegóły. Istniejące składowe mogą utrzymywać podsumowanie obejmujące nieosiągalny fragment.",
+          "id": "C"
+        },
+        {
+          "text_md": "Cały area 0 przechodzi w passive",
+          "feedback_md": "Agregacja ukrywa szczegóły. Istniejące składowe mogą utrzymywać podsumowanie obejmujące nieosiągalny fragment.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

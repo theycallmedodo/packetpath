@@ -1,0 +1,473 @@
+{
+  "schema_version": 3,
+  "id": "encor.eem.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Timer watchdog",
+      "skills": [
+        "eem.timer-watchdog"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.07.theory",
+      "front_md": "Timer watchdog",
+      "back_md": "Watchdog timer służy do okresowego wyzwalania. Rzeczywiste wykonanie zależy też od dostępności zasobów i czasu akcji.",
+      "example": "Cykliczne uruchamianie co około 60 sekund"
+    },
+    {
+      "revision": 1,
+      "title": "Kolejność akcji",
+      "skills": [
+        "eem.kolejno-akcji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.08.theory",
+      "front_md": "Kolejność akcji",
+      "back_md": "EEM porządkuje akcje po etykietach. Przy większej liczbie akcji stosuj spójne dopełnienie, np. 01.0, 02.0, 10.0.",
+      "example": "Są sortowane jako etykiety; nie należy zakładać zwykłego porządku liczb dziesiętnych"
+    },
+    {
+      "revision": 1,
+      "title": "Ręczny logger",
+      "skills": [
+        "eem.r-czny-logger"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.09.theory",
+      "front_md": "Ręczny logger",
+      "back_md": "Event none i akcja syslog tworzą prosty applet do kontrolowanego sprawdzenia mechanizmu EEM.",
+      "example": "event manager applet MANUAL\n event none\n action 1.0 syslog msg \"Started\""
+    },
+    {
+      "revision": 1,
+      "title": "Akcja CLI",
+      "skills": [
+        "eem.akcja-cli"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.10.theory",
+      "front_md": "Akcja CLI",
+      "back_md": "CLI action wykonuje polecenie, ale wykorzystanie lub zapis wyniku wymaga odpowiednich dalszych akcji.",
+      "example": "Wykonuje wskazane polecenie CLI w kontekście appletu"
+    },
+    {
+      "revision": 1,
+      "title": "Cykliczny znacznik",
+      "skills": [
+        "eem.cykliczny-znacznik"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.11.theory",
+      "front_md": "Cykliczny znacznik",
+      "back_md": "Timer definiuje interwał, a syslog msg treść. Nie jest to pomiar dostępności innego urządzenia.",
+      "example": "event manager applet HEARTBEAT\n event timer watchdog time 300\n action 1.0 syslog msg \"Alive\""
+    },
+    {
+      "revision": 1,
+      "title": "Uprawnienia EEM",
+      "skills": [
+        "eem.uprawnienia-eem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.12.theory",
+      "front_md": "Uprawnienia EEM",
+      "back_md": "Akcje EEM podlegają kontekstowi uprawnień i konfiguracji AAA. Należy nadać wymagany zakres, a nie zakładać nieograniczone prawa.",
+      "example": "Tożsamość sesji EEM i autoryzację wymaganych poleceń"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.eem.07",
+      "revision": 1,
+      "title": "Timer watchdog",
+      "skills": [
+        "eem.timer-watchdog"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Applet ma event timer watchdog time 60. Jaki jest zamysł takiego wyzwalacza?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Watchdog timer służy do okresowego wyzwalania. Rzeczywiste wykonanie zależy też od dostępności zasobów i czasu akcji.",
+      "card_id": "encor.eem.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Uruchomienie wyłącznie po 60 restartach",
+          "feedback_md": "Watchdog timer służy do okresowego wyzwalania. Rzeczywiste wykonanie zależy też od dostępności zasobów i czasu akcji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłączenie urządzenia po 60 pakietach",
+          "feedback_md": "Watchdog timer służy do okresowego wyzwalania. Rzeczywiste wykonanie zależy też od dostępności zasobów i czasu akcji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Dopasowanie DSCP 60",
+          "feedback_md": "Watchdog timer służy do okresowego wyzwalania. Rzeczywiste wykonanie zależy też od dostępności zasobów i czasu akcji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Cykliczne uruchamianie co około 60 sekund",
+          "feedback_md": "Watchdog timer służy do okresowego wyzwalania. Rzeczywiste wykonanie zależy też od dostępności zasobów i czasu akcji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.eem.08",
+      "revision": 1,
+      "title": "Kolejność akcji",
+      "skills": [
+        "eem.kolejno-akcji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dlaczego etykiety akcji warto pisać spójnie, np. 1.0, 2.0, 3.0?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "EEM porządkuje akcje po etykietach. Przy większej liczbie akcji stosuj spójne dopełnienie, np. 01.0, 02.0, 10.0.",
+      "card_id": "encor.eem.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Są numerami interfejsów",
+          "feedback_md": "EEM porządkuje akcje po etykietach. Przy większej liczbie akcji stosuj spójne dopełnienie, np. 01.0, 02.0, 10.0.",
+          "id": "A"
+        },
+        {
+          "text_md": "Są priorytetami pakietów DSCP",
+          "feedback_md": "EEM porządkuje akcje po etykietach. Przy większej liczbie akcji stosuj spójne dopełnienie, np. 01.0, 02.0, 10.0.",
+          "id": "B"
+        },
+        {
+          "text_md": "Są sortowane jako etykiety; nie należy zakładać zwykłego porządku liczb dziesiętnych",
+          "feedback_md": "EEM porządkuje akcje po etykietach. Przy większej liczbie akcji stosuj spójne dopełnienie, np. 01.0, 02.0, 10.0.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nigdy nie wpływają na kolejność",
+          "feedback_md": "EEM porządkuje akcje po etykietach. Przy większej liczbie akcji stosuj spójne dopełnienie, np. 01.0, 02.0, 10.0.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.eem.09",
+      "revision": 1,
+      "title": "Ręczny logger",
+      "skills": [
+        "eem.r-czny-logger"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Applet MANUAL ma być uruchamiany ręcznie i zapisywać komunikat Started. Uzupełnij detektor i typ akcji.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Event none i akcja syslog tworzą prosty applet do kontrolowanego sprawdzenia mechanizmu EEM.",
+      "card_id": "encor.eem.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "event manager applet MANUAL\n event {{b0}}\n action 1.0 {{b1}} msg \"Started\"",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "none"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "syslog"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.eem.10",
+      "revision": 1,
+      "title": "Akcja CLI",
+      "skills": [
+        "eem.akcja-cli"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co robi action 2.0 cli command \"show ip interface brief\"?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "CLI action wykonuje polecenie, ale wykorzystanie lub zapis wyniku wymaga odpowiednich dalszych akcji.",
+      "card_id": "encor.eem.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wykonuje wskazane polecenie CLI w kontekście appletu",
+          "feedback_md": "CLI action wykonuje polecenie, ale wykorzystanie lub zapis wyniku wymaga odpowiednich dalszych akcji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Automatycznie publikuje wynik w Internecie",
+          "feedback_md": "CLI action wykonuje polecenie, ale wykorzystanie lub zapis wyniku wymaga odpowiednich dalszych akcji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zmienia adresy wszystkich interfejsów",
+          "feedback_md": "CLI action wykonuje polecenie, ale wykorzystanie lub zapis wyniku wymaga odpowiednich dalszych akcji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wysyła polecenie przez BGP",
+          "feedback_md": "CLI action wykonuje polecenie, ale wykorzystanie lub zapis wyniku wymaga odpowiednich dalszych akcji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.eem.11",
+      "revision": 1,
+      "title": "Cykliczny znacznik",
+      "skills": [
+        "eem.cykliczny-znacznik"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Applet HEARTBEAT ma co 300 sekund wpisywać Alive do syslog.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Timer definiuje interwał, a syslog msg treść. Nie jest to pomiar dostępności innego urządzenia.",
+      "card_id": "encor.eem.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "event manager applet HEARTBEAT\n event timer watchdog time {{b0}}\n action 1.0 syslog msg \"{{b1}}\"",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "300"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "identifier",
+          "accepted": [
+            "Alive"
+          ],
+          "width": 7,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.eem.12",
+      "revision": 1,
+      "title": "Uprawnienia EEM",
+      "skills": [
+        "eem.uprawnienia-eem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Applet z akcją CLI działa na labie bez AAA, ale nie w środowisku z autoryzacją poleceń. Co trzeba sprawdzić?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Akcje EEM podlegają kontekstowi uprawnień i konfiguracji AAA. Należy nadać wymagany zakres, a nie zakładać nieograniczone prawa.",
+      "card_id": "encor.eem.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie numer VLAN",
+          "feedback_md": "Akcje EEM podlegają kontekstowi uprawnień i konfiguracji AAA. Należy nadać wymagany zakres, a nie zakładać nieograniczone prawa.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłącznie MAC analizatora",
+          "feedback_md": "Akcje EEM podlegają kontekstowi uprawnień i konfiguracji AAA. Należy nadać wymagany zakres, a nie zakładać nieograniczone prawa.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tożsamość sesji EEM i autoryzację wymaganych poleceń",
+          "feedback_md": "Akcje EEM podlegają kontekstowi uprawnień i konfiguracji AAA. Należy nadać wymagany zakres, a nie zakładać nieograniczone prawa.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zmienić wszystkie hasła bez analizy",
+          "feedback_md": "Akcje EEM podlegają kontekstowi uprawnień i konfiguracji AAA. Należy nadać wymagany zakres, a nie zakładać nieograniczone prawa.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

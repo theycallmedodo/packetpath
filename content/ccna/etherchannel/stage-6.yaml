@@ -1,0 +1,445 @@
+{
+  "schema_version": 3,
+  "id": "ccna.etherchannel.stage-6",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Stan suspended",
+      "skills": [
+        "etherchannel.stan-suspended"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.ext.13.theory",
+      "front_md": "Stan suspended",
+      "back_md": "Oceniaj stan operacyjny oraz legendę konkretnego outputu, nie tylko obecność konfiguracji.",
+      "example": "Sprawdzić przyczynę zawieszenia, zgodność i negocjację"
+    },
+    {
+      "revision": 1,
+      "title": "Różna lista VLAN",
+      "skills": [
+        "etherchannel.r-na-lista-vlan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.ext.14.theory",
+      "front_md": "Różna lista VLAN",
+      "back_md": "Niespójne parametry warstwy drugiej mogą uniemożliwiać prawidłowe włączenie członka.",
+      "example": "Spójność konfiguracji członków i Port-channel"
+    },
+    {
+      "revision": 1,
+      "title": "Rozszerz bez nadpisania",
+      "skills": [
+        "etherchannel.rozszerz-bez-nadpisania"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.ext.15.theory",
+      "front_md": "Rozszerz bez nadpisania",
+      "back_md": "Zmiana powinna obejmować uzgodniony transport na obu końcach; komenda add chroni dotychczasową listę.",
+      "example": "SW(config-if)# switchport trunk allowed vlan add 70\nSW(config-if)# end\nSW# show etherchannel summary\nSW# show interfaces trunk"
+    },
+    {
+      "revision": 1,
+      "title": "Konfiguracja a operacyjność",
+      "skills": [
+        "etherchannel.konfiguracja-a-operacyjno"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.ext.16.theory",
+      "front_md": "Konfiguracja a operacyjność",
+      "back_md": "Dostępną przepustowość oceniaj na podstawie faktycznie dołączonych portów.",
+      "example": "Jeden"
+    },
+    {
+      "revision": 1,
+      "title": "Kontrola po awarii",
+      "skills": [
+        "etherchannel.kontrola-po-awarii"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.ext.17.theory",
+      "front_md": "Kontrola po awarii",
+      "back_md": "Po awarii trzeba potwierdzić zarówno wiązkę, jak i logiczną ścieżkę L2.",
+      "example": "SW# show etherchannel summary\nSW# show lacp neighbor\nSW# show spanning-tree vlan 80"
+    },
+    {
+      "revision": 1,
+      "title": "Haszowanie a test",
+      "skills": [
+        "etherchannel.haszowanie-a-test"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.ext.18.theory",
+      "front_md": "Haszowanie a test",
+      "back_md": "Pomiar musi uwzględniać algorytm rozdziału, liczbę przepływów i ograniczenia końców testu.",
+      "example": "Wiele niezależnych przepływów z uwzględnieniem pól używanych przez hash"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.etherchannel.ext.13",
+      "revision": 1,
+      "title": "Stan suspended",
+      "skills": [
+        "etherchannel.stan-suspended"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Członek widnieje jako suspended. Co należy zrobić przed przyjęciem, że przenosi ruch w wiązce?",
+      "hints": [
+        "Oceniaj stan operacyjny oraz legendę konkretnego outputu, nie tylko obecność konfiguracji."
+      ],
+      "explanation_md": "Oceniaj stan operacyjny oraz legendę konkretnego outputu, nie tylko obecność konfiguracji.",
+      "card_id": "ccna.etherchannel.ext.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Doliczyć jego pełne pasmo do dostępnego",
+          "feedback_md": "Skonfigurowany port nie musi być operacyjnym członkiem.",
+          "id": "A"
+        },
+        {
+          "text_md": "Usunąć wszystkie pozostałe porty",
+          "feedback_md": "To nie celowana diagnoza.",
+          "id": "B"
+        },
+        {
+          "text_md": "Sprawdzić przyczynę zawieszenia, zgodność i negocjację",
+          "feedback_md": "Oceniaj stan operacyjny oraz legendę konkretnego outputu, nie tylko obecność konfiguracji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Uznać, że suspended oznacza idealny stan",
+          "feedback_md": "Nazwa wskazuje stan wymagający interpretacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.etherchannel.ext.14",
+      "revision": 1,
+      "title": "Różna lista VLAN",
+      "skills": [
+        "etherchannel.r-na-lista-vlan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Jeden członek ma inną listę allowed niż reszta. Co należy zweryfikować?",
+      "hints": [
+        "Niespójne parametry warstwy drugiej mogą uniemożliwiać prawidłowe włączenie członka."
+      ],
+      "explanation_md": "Niespójne parametry warstwy drugiej mogą uniemożliwiać prawidłowe włączenie członka.",
+      "card_id": "ccna.etherchannel.ext.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tylko hasło użytkownika SSH",
+          "feedback_md": "Nie naprawia parametrów trunku.",
+          "id": "A"
+        },
+        {
+          "text_md": "Spójność konfiguracji członków i Port-channel",
+          "feedback_md": "Niespójne parametry warstwy drugiej mogą uniemożliwiać prawidłowe włączenie członka.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie DNS telefonu",
+          "feedback_md": "Nie jest wskazaną przyczyną agregacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Czy klient ma tyle RAM co switch",
+          "feedback_md": "To nie wymaganie EtherChannel.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.etherchannel.ext.15",
+      "revision": 1,
+      "title": "Rozszerz bez nadpisania",
+      "skills": [
+        "etherchannel.rozszerz-bez-nadpisania"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na Port-channel4 dodaj VLAN 70 do allowed bez usuwania innych, pokaż skrót wiązek i trunki.",
+      "hints": [
+        "Zmiana powinna obejmować uzgodniony transport na obu końcach; komenda add chroni dotychczasową listę."
+      ],
+      "explanation_md": "Zmiana powinna obejmować uzgodniony transport na obu końcach; komenda add chroni dotychczasową listę.",
+      "card_id": "ccna.etherchannel.ext.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config-if)# switchport trunk allowed vlan {{b0}} 70\nSW(config-if)# end\nSW# show etherchannel {{b1}}\nSW# show interfaces {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "add"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "summary"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "trunk"
+          ],
+          "width": 7,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.etherchannel.ext.16",
+      "revision": 1,
+      "title": "Konfiguracja a operacyjność",
+      "skills": [
+        "etherchannel.konfiguracja-a-operacyjno"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Running-config pokazuje channel-group na dwóch portach, ale summary tylko jeden bundled. Ile aktywnych członków można potwierdzić tym wynikiem?",
+      "hints": [
+        "Dostępną przepustowość oceniaj na podstawie faktycznie dołączonych portów."
+      ],
+      "explanation_md": "Dostępną przepustowość oceniaj na podstawie faktycznie dołączonych portów.",
+      "card_id": "ccna.etherchannel.ext.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Dwa, bo konfiguracja zawsze oznacza działanie",
+          "feedback_md": "Stan administracyjny nie gwarantuje operacyjnego.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zero, bo wiązka wymaga zawsze czterech portów",
+          "feedback_md": "Nie ma takiego ogólnego wymogu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nieograniczoną liczbę",
+          "feedback_md": "Liczba członków jest konkretna i ograniczona.",
+          "id": "C"
+        },
+        {
+          "text_md": "Jeden",
+          "feedback_md": "Dostępną przepustowość oceniaj na podstawie faktycznie dołączonych portów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.etherchannel.ext.17",
+      "revision": 1,
+      "title": "Kontrola po awarii",
+      "skills": [
+        "etherchannel.kontrola-po-awarii"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Po utracie członka sprawdź summary, sąsiadów LACP oraz STP VLAN 80.",
+      "hints": [
+        "Po awarii trzeba potwierdzić zarówno wiązkę, jak i logiczną ścieżkę L2."
+      ],
+      "explanation_md": "Po awarii trzeba potwierdzić zarówno wiązkę, jak i logiczną ścieżkę L2.",
+      "card_id": "ccna.etherchannel.ext.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW# show etherchannel {{b0}}\nSW# show lacp {{b1}}\nSW# show spanning-tree vlan {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "summary"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "neighbor"
+          ],
+          "width": 10,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "80"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.etherchannel.ext.18",
+      "revision": 1,
+      "title": "Haszowanie a test",
+      "skills": [
+        "etherchannel.haszowanie-a-test"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Jeden test TCP nie wykorzystuje sumy przepustowości czterech członków. Jaki test lepiej bada agregat?",
+      "hints": [
+        "Pomiar musi uwzględniać algorytm rozdziału, liczbę przepływów i ograniczenia końców testu."
+      ],
+      "explanation_md": "Pomiar musi uwzględniać algorytm rozdziału, liczbę przepływów i ograniczenia końców testu.",
+      "card_id": "ccna.etherchannel.ext.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie ten sam pojedynczy przepływ dłużej",
+          "feedback_md": "Może nadal trafiać na ten sam członek.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wiele niezależnych przepływów z uwzględnieniem pól używanych przez hash",
+          "feedback_md": "Pomiar musi uwzględniać algorytm rozdziału, liczbę przepływów i ograniczenia końców testu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Ping z identycznymi parametrami raz dziennie",
+          "feedback_md": "Nie mierzy sumarycznej przepustowości wiązki.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zmiana numeru Port-channel bez pomiarów",
+          "feedback_md": "Numer logiczny nie gwarantuje innego rozkładu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

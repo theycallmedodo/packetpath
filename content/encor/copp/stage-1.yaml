@@ -1,0 +1,453 @@
+{
+  "schema_version": 3,
+  "id": "encor.copp.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Cel ochrony",
+      "skills": [
+        "copp.cel-ochrony"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.01.theory",
+      "front_md": "Cel ochrony",
+      "back_md": "CoPP kontroluje ruch do płaszczyzny sterowania. Nie jest uniwersalną polityką kolejkowania ruchu klientów.",
+      "example": "Zasoby płaszczyzny sterowania urządzenia"
+    },
+    {
+      "revision": 1,
+      "title": "Ruch do routera",
+      "skills": [
+        "copp.ruch-do-routera"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.02.theory",
+      "front_md": "Ruch do routera",
+      "back_md": "Zapytanie do agenta SNMP routera angażuje jego usługi zarządzania. Typowy tranzyt może być obsługiwany w dataplane.",
+      "example": "Zapytanie SNMP do adresu samego routera"
+    },
+    {
+      "revision": 1,
+      "title": "Klasa CoPP",
+      "skills": [
+        "copp.klasa-copp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.03.theory",
+      "front_md": "Klasa CoPP",
+      "back_md": "Class-map odwołuje się do ACL klasyfikującej ruch. Akcja transmit/drop należy do policy-map.",
+      "example": "class-map match-any CM-SNMP\n match access-group name SNMP-SOURCES"
+    },
+    {
+      "revision": 1,
+      "title": "ACL klasyfikująca",
+      "skills": [
+        "copp.acl-klasyfikuj-ca"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.04.theory",
+      "front_md": "ACL klasyfikująca",
+      "back_md": "W MQC ACL pełni rolę klasyfikatora. Ostateczne działanie wynika z dopasowanej klasy i polityki, nie z intuicji ACL na interfejsie.",
+      "example": "Brak dopasowania do tej klasy, nie samodzielny drop pakietu"
+    },
+    {
+      "revision": 1,
+      "title": "Przypięcie do control plane",
+      "skills": [
+        "copp.przypi-cie-do-control-plane"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.05.theory",
+      "front_md": "Przypięcie do control plane",
+      "back_md": "Input control-plane dotyczy pakietów kierowanych do płaszczyzny sterowania. Nie jest to service-policy output na porcie WAN.",
+      "example": "control-plane\n service-policy input PM-COPP"
+    },
+    {
+      "revision": 1,
+      "title": "Odczyt liczników",
+      "skills": [
+        "copp.odczyt-licznik-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.06.theory",
+      "front_md": "Odczyt liczników",
+      "back_md": "Liczniki polityki control-plane pomagają połączyć objaw z klasyfikacją oraz odrzuceniami. Dostępne szczegóły zależą od platformy.",
+      "example": "show policy-map control-plane"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.copp.01",
+      "revision": 1,
+      "title": "Cel ochrony",
+      "skills": [
+        "copp.cel-ochrony"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Co przede wszystkim chroni Control Plane Policing?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "CoPP kontroluje ruch do płaszczyzny sterowania. Nie jest uniwersalną polityką kolejkowania ruchu klientów.",
+      "card_id": "encor.copp.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zasoby płaszczyzny sterowania urządzenia",
+          "feedback_md": "CoPP kontroluje ruch do płaszczyzny sterowania. Nie jest uniwersalną polityką kolejkowania ruchu klientów.",
+          "id": "A"
+        },
+        {
+          "text_md": "Przepustowość każdego klienta na dowolnym egress",
+          "feedback_md": "CoPP kontroluje ruch do płaszczyzny sterowania. Nie jest uniwersalną polityką kolejkowania ruchu klientów.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zasilacze przed spadkiem napięcia",
+          "feedback_md": "CoPP kontroluje ruch do płaszczyzny sterowania. Nie jest uniwersalną polityką kolejkowania ruchu klientów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Poufność całego ruchu tranzytowego",
+          "feedback_md": "CoPP kontroluje ruch do płaszczyzny sterowania. Nie jest uniwersalną polityką kolejkowania ruchu klientów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.copp.02",
+      "revision": 1,
+      "title": "Ruch do routera",
+      "skills": [
+        "copp.ruch-do-routera"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Który przykład typowo dotyczy płaszczyzny sterowania lub zarządzania routera?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Zapytanie do agenta SNMP routera angażuje jego usługi zarządzania. Typowy tranzyt może być obsługiwany w dataplane.",
+      "card_id": "encor.copp.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zwykły pakiet klienta przełączany sprzętowo między portami",
+          "feedback_md": "Zapytanie do agenta SNMP routera angażuje jego usługi zarządzania. Typowy tranzyt może być obsługiwany w dataplane.",
+          "id": "A"
+        },
+        {
+          "text_md": "Każdy pakiet HTTPS w Internecie",
+          "feedback_md": "Zapytanie do agenta SNMP routera angażuje jego usługi zarządzania. Typowy tranzyt może być obsługiwany w dataplane.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie ramka z nieznanym adresem źródłowym",
+          "feedback_md": "Zapytanie do agenta SNMP routera angażuje jego usługi zarządzania. Typowy tranzyt może być obsługiwany w dataplane.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zapytanie SNMP do adresu samego routera",
+          "feedback_md": "Zapytanie do agenta SNMP routera angażuje jego usługi zarządzania. Typowy tranzyt może być obsługiwany w dataplane.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.copp.03",
+      "revision": 1,
+      "title": "Klasa CoPP",
+      "skills": [
+        "copp.klasa-copp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "W klasycznym MQC utwórz klasę CM-SNMP dopasowującą istniejącą ACL SNMP-SOURCES.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Class-map odwołuje się do ACL klasyfikującej ruch. Akcja transmit/drop należy do policy-map.",
+      "card_id": "encor.copp.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "class-map match-any CM-SNMP\n match access-group name {{b0}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "identifier",
+          "accepted": [
+            "SNMP-SOURCES"
+          ],
+          "width": 14,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.copp.04",
+      "revision": 1,
+      "title": "ACL klasyfikująca",
+      "skills": [
+        "copp.acl-klasyfikuj-ca"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "ACL używana wyłącznie w match access-group ma wpis deny. Co oznacza on w tej roli?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "W MQC ACL pełni rolę klasyfikatora. Ostateczne działanie wynika z dopasowanej klasy i polityki, nie z intuicji ACL na interfejsie.",
+      "card_id": "encor.copp.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zawsze natychmiastowy drop niezależnie od policy-map",
+          "feedback_md": "W MQC ACL pełni rolę klasyfikatora. Ostateczne działanie wynika z dopasowanej klasy i polityki, nie z intuicji ACL na interfejsie.",
+          "id": "A"
+        },
+        {
+          "text_md": "Brak dopasowania do tej klasy, nie samodzielny drop pakietu",
+          "feedback_md": "W MQC ACL pełni rolę klasyfikatora. Ostateczne działanie wynika z dopasowanej klasy i polityki, nie z intuicji ACL na interfejsie.",
+          "id": "B"
+        },
+        {
+          "text_md": "Automatyczne permit w każdej kolejnej klasie",
+          "feedback_md": "W MQC ACL pełni rolę klasyfikatora. Ostateczne działanie wynika z dopasowanej klasy i polityki, nie z intuicji ACL na interfejsie.",
+          "id": "C"
+        },
+        {
+          "text_md": "Przeniesienie pakietu do VLAN 1",
+          "feedback_md": "W MQC ACL pełni rolę klasyfikatora. Ostateczne działanie wynika z dopasowanej klasy i polityki, nie z intuicji ACL na interfejsie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.copp.05",
+      "revision": 1,
+      "title": "Przypięcie do control plane",
+      "skills": [
+        "copp.przypi-cie-do-control-plane"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Na routerze IOS XE wspierającym klasyczny CoPP przypnij istniejącą PM-COPP w kierunku wejściowym.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Input control-plane dotyczy pakietów kierowanych do płaszczyzny sterowania. Nie jest to service-policy output na porcie WAN.",
+      "card_id": "encor.copp.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "control-plane\n service-policy {{b0}} PM-COPP",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "input"
+          ],
+          "width": 7,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.copp.06",
+      "revision": 1,
+      "title": "Odczyt liczników",
+      "skills": [
+        "copp.odczyt-licznik-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Które polecenie pomaga sprawdzić trafienia i działania klasycznej polityki CoPP?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Liczniki polityki control-plane pomagają połączyć objaw z klasyfikacją oraz odrzuceniami. Dostępne szczegóły zależą od platformy.",
+      "card_id": "encor.copp.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "show vlan brief",
+          "feedback_md": "Liczniki polityki control-plane pomagają połączyć objaw z klasyfikacją oraz odrzuceniami. Dostępne szczegóły zależą od platformy.",
+          "id": "A"
+        },
+        {
+          "text_md": "show interfaces trunk",
+          "feedback_md": "Liczniki polityki control-plane pomagają połączyć objaw z klasyfikacją oraz odrzuceniami. Dostępne szczegóły zależą od platformy.",
+          "id": "B"
+        },
+        {
+          "text_md": "show ip nat translations",
+          "feedback_md": "Liczniki polityki control-plane pomagają połączyć objaw z klasyfikacją oraz odrzuceniami. Dostępne szczegóły zależą od platformy.",
+          "id": "C"
+        },
+        {
+          "text_md": "show policy-map control-plane",
+          "feedback_md": "Liczniki polityki control-plane pomagają połączyć objaw z klasyfikacją oraz odrzuceniami. Dostępne szczegóły zależą od platformy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

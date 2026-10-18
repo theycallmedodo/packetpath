@@ -1,0 +1,519 @@
+{
+  "schema_version": 3,
+  "id": "encor.time-sync.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Wybrane źródło",
+      "skills": [
+        "time-sync.wybrane-r-d-o"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.07.theory",
+      "front_md": "Wybrane źródło",
+      "back_md": "Gwiazdka identyfikuje system peer. Inne oznaczenia, np. samo ~, mogą dotyczyć konfiguracji, a nie wyboru.",
+      "example": "Wybrane źródło synchronizacji systemu"
+    },
+    {
+      "revision": 1,
+      "title": "Reach 377",
+      "skills": [
+        "time-sync.reach-377"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.08.theory",
+      "front_md": "Reach 377",
+      "back_md": "Reach jest rejestrem bitowym prezentowanym ósemkowo. 377 octal odpowiada ośmiu jedynkom, a nie licznikowi czasu.",
+      "example": "Ósemkowa maska wskazująca sukces ostatnich ośmiu prób"
+    },
+    {
+      "revision": 1,
+      "title": "Reach 0",
+      "skills": [
+        "time-sync.reach-0"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.09.theory",
+      "front_md": "Reach 0",
+      "back_md": "Brak udanych prób wymaga diagnozy ścieżki i parametrów. Pojedynczy odczyt tuż po starcie nie wystarcza do oceny trwałej awarii.",
+      "example": "Osiągalność, UDP 123, ACL, źródło zapytań i odpowiedzi serwera"
+    },
+    {
+      "revision": 1,
+      "title": "Jawne źródło NTP",
+      "skills": [
+        "time-sync.jawne-r-d-o-ntp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.10.theory",
+      "front_md": "Jawne źródło NTP",
+      "back_md": "Jawne źródło zmienia adres używany przez klienta. Trasa powrotna i dozwolone źródła muszą odpowiadać temu wyborowi.",
+      "example": "Osiągalność powrotną oraz ACL dla adresu Loopback0"
+    },
+    {
+      "revision": 1,
+      "title": "Lokalny master",
+      "skills": [
+        "time-sync.lokalny-master"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.11.theory",
+      "front_md": "Lokalny master",
+      "back_md": "Lokalne źródło może pomóc zachować wspólny czas w odciętej sieci, ale samo nie zapewnia poprawności względem UTC.",
+      "example": "Może udostępniać lokalny zegar bez wiarygodnego zewnętrznego odniesienia"
+    },
+    {
+      "revision": 1,
+      "title": "Prefer nie naprawia źródła",
+      "skills": [
+        "time-sync.prefer-nie-naprawia-r-d-a"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.12.theory",
+      "front_md": "Prefer nie naprawia źródła",
+      "back_md": "Prefer wpływa na preferencję wśród odpowiednich źródeł. Nie powinien być traktowany jako obejście wszystkich warunków synchronizacji.",
+      "example": "Nie; nadal obowiązują mechanizmy sprawdzania i wyboru źródeł"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.time-sync.07",
+      "revision": 1,
+      "title": "Wybrane źródło",
+      "skills": [
+        "time-sync.wybrane-r-d-o"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W typowym show ntp associations przy adresie źródła widnieje *. Co oznacza ta flaga według legendy polecenia?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Gwiazdka identyfikuje system peer. Inne oznaczenia, np. samo ~, mogą dotyczyć konfiguracji, a nie wyboru.",
+      "card_id": "encor.time-sync.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Dowolny skonfigurowany serwer, zawsze niesprawny",
+          "feedback_md": "Gwiazdka identyfikuje system peer. Inne oznaczenia, np. samo ~, mogą dotyczyć konfiguracji, a nie wyboru.",
+          "id": "A"
+        },
+        {
+          "text_md": "Adres wykluczony z wyboru",
+          "feedback_md": "Gwiazdka identyfikuje system peer. Inne oznaczenia, np. samo ~, mogą dotyczyć konfiguracji, a nie wyboru.",
+          "id": "B"
+        },
+        {
+          "text_md": "Brak odpowiedzi od ostatnich ośmiu prób",
+          "feedback_md": "Gwiazdka identyfikuje system peer. Inne oznaczenia, np. samo ~, mogą dotyczyć konfiguracji, a nie wyboru.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wybrane źródło synchronizacji systemu",
+          "feedback_md": "Gwiazdka identyfikuje system peer. Inne oznaczenia, np. samo ~, mogą dotyczyć konfiguracji, a nie wyboru.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.time-sync.08",
+      "revision": 1,
+      "title": "Reach 377",
+      "skills": [
+        "time-sync.reach-377"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Pole reach w show ntp associations ma 377. Jak je interpretować?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Reach jest rejestrem bitowym prezentowanym ósemkowo. 377 octal odpowiada ośmiu jedynkom, a nie licznikowi czasu.",
+      "card_id": "encor.time-sync.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "377 milisekund opóźnienia",
+          "feedback_md": "Reach jest rejestrem bitowym prezentowanym ósemkowo. 377 octal odpowiada ośmiu jedynkom, a nie licznikowi czasu.",
+          "id": "A"
+        },
+        {
+          "text_md": "377 odebranych pakietów od restartu",
+          "feedback_md": "Reach jest rejestrem bitowym prezentowanym ósemkowo. 377 octal odpowiada ośmiu jedynkom, a nie licznikowi czasu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Ósemkowa maska wskazująca sukces ostatnich ośmiu prób",
+          "feedback_md": "Reach jest rejestrem bitowym prezentowanym ósemkowo. 377 octal odpowiada ośmiu jedynkom, a nie licznikowi czasu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Liczba sekund do zmiany serwera",
+          "feedback_md": "Reach jest rejestrem bitowym prezentowanym ósemkowo. 377 octal odpowiada ośmiu jedynkom, a nie licznikowi czasu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.time-sync.09",
+      "revision": 1,
+      "title": "Reach 0",
+      "skills": [
+        "time-sync.reach-0"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Nowa asocjacja przez dłuższy czas ma reach 0. Co warto sprawdzić?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Brak udanych prób wymaga diagnozy ścieżki i parametrów. Pojedynczy odczyt tuż po starcie nie wystarcza do oceny trwałej awarii.",
+      "card_id": "encor.time-sync.09.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie zwiększyć lokalną strefę o godzinę",
+          "feedback_md": "Brak udanych prób wymaga diagnozy ścieżki i parametrów. Pojedynczy odczyt tuż po starcie nie wystarcza do oceny trwałej awarii.",
+          "id": "A"
+        },
+        {
+          "text_md": "Osiągalność, UDP 123, ACL, źródło zapytań i odpowiedzi serwera",
+          "feedback_md": "Brak udanych prób wymaga diagnozy ścieżki i parametrów. Pojedynczy odczyt tuż po starcie nie wystarcza do oceny trwałej awarii.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie zmienić opis interfejsu",
+          "feedback_md": "Brak udanych prób wymaga diagnozy ścieżki i parametrów. Pojedynczy odczyt tuż po starcie nie wystarcza do oceny trwałej awarii.",
+          "id": "C"
+        },
+        {
+          "text_md": "Uznać pewną pełną synchronizację",
+          "feedback_md": "Brak udanych prób wymaga diagnozy ścieżki i parametrów. Pojedynczy odczyt tuż po starcie nie wystarcza do oceny trwałej awarii.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.time-sync.10",
+      "revision": 1,
+      "title": "Jawne źródło NTP",
+      "skills": [
+        "time-sync.jawne-r-d-o-ntp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Konfiguracja zawiera ntp source Loopback0. Co trzeba uwzględnić po stronie serwera i sieci?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Jawne źródło zmienia adres używany przez klienta. Trasa powrotna i dozwolone źródła muszą odpowiadać temu wyborowi.",
+      "card_id": "encor.time-sync.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Osiągalność powrotną oraz ACL dla adresu Loopback0",
+          "feedback_md": "Jawne źródło zmienia adres używany przez klienta. Trasa powrotna i dozwolone źródła muszą odpowiadać temu wyborowi.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłącznie adres fizyczny interfejsu WAN",
+          "feedback_md": "Jawne źródło zmienia adres używany przez klienta. Trasa powrotna i dozwolone źródła muszą odpowiadać temu wyborowi.",
+          "id": "B"
+        },
+        {
+          "text_md": "NTP zawsze ignoruje polecenie source",
+          "feedback_md": "Jawne źródło zmienia adres używany przez klienta. Trasa powrotna i dozwolone źródła muszą odpowiadać temu wyborowi.",
+          "id": "C"
+        },
+        {
+          "text_md": "Loopback musi należeć do VLAN 1",
+          "feedback_md": "Jawne źródło zmienia adres używany przez klienta. Trasa powrotna i dozwolone źródła muszą odpowiadać temu wyborowi.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.time-sync.11",
+      "revision": 1,
+      "title": "Lokalny master",
+      "skills": [
+        "time-sync.lokalny-master"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dlaczego ntp master nie jest dowodem, że router zna poprawny czas UTC?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Lokalne źródło może pomóc zachować wspólny czas w odciętej sieci, ale samo nie zapewnia poprawności względem UTC.",
+      "card_id": "encor.time-sync.11.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zawsze łączy się automatycznie z GPS",
+          "feedback_md": "Lokalne źródło może pomóc zachować wspólny czas w odciętej sieci, ale samo nie zapewnia poprawności względem UTC.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zawsze pobiera czas z DNS",
+          "feedback_md": "Lokalne źródło może pomóc zachować wspólny czas w odciętej sieci, ale samo nie zapewnia poprawności względem UTC.",
+          "id": "B"
+        },
+        {
+          "text_md": "Każdy master ma gwarantowaną dokładność atomową",
+          "feedback_md": "Lokalne źródło może pomóc zachować wspólny czas w odciętej sieci, ale samo nie zapewnia poprawności względem UTC.",
+          "id": "C"
+        },
+        {
+          "text_md": "Może udostępniać lokalny zegar bez wiarygodnego zewnętrznego odniesienia",
+          "feedback_md": "Lokalne źródło może pomóc zachować wspólny czas w odciętej sieci, ale samo nie zapewnia poprawności względem UTC.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.time-sync.12",
+      "revision": 1,
+      "title": "Prefer nie naprawia źródła",
+      "skills": [
+        "time-sync.prefer-nie-naprawia-r-d-a"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Serwer oznaczono prefer, ale dostarcza niewiarygodne lub nieprawidłowe dane. Czy prefer gwarantuje jego bezwarunkowy wybór?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Prefer wpływa na preferencję wśród odpowiednich źródeł. Nie powinien być traktowany jako obejście wszystkich warunków synchronizacji.",
+      "card_id": "encor.time-sync.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, prefer wyłącza każdą kontrolę NTP",
+          "feedback_md": "Prefer wpływa na preferencję wśród odpowiednich źródeł. Nie powinien być traktowany jako obejście wszystkich warunków synchronizacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, prefer zastępuje uwierzytelnienie",
+          "feedback_md": "Prefer wpływa na preferencję wśród odpowiednich źródeł. Nie powinien być traktowany jako obejście wszystkich warunków synchronizacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie; nadal obowiązują mechanizmy sprawdzania i wyboru źródeł",
+          "feedback_md": "Prefer wpływa na preferencję wśród odpowiednich źródeł. Nie powinien być traktowany jako obejście wszystkich warunków synchronizacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, bo prefer dotyczy wyłącznie strefy czasu",
+          "feedback_md": "Prefer wpływa na preferencję wśród odpowiednich źródeł. Nie powinien być traktowany jako obejście wszystkich warunków synchronizacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

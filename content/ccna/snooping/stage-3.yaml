@@ -1,0 +1,515 @@
+{
+  "schema_version": 3,
+  "id": "ccna.snooping.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Brak DHCP po wdrożeniu",
+      "skills": [
+        "snooping.brak-dhcp-po-wdro-eniu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "id": "ccna.snooping.13.theory",
+      "front_md": "Brak DHCP po wdrożeniu",
+      "back_md": "Rozpoznanie kierunku odpowiedzi serwera pozwala naprawić konfigurację bez znoszenia całej ochrony.",
+      "example": "Zweryfikować uplink i nadać mu właściwe zaufanie"
+    },
+    {
+      "revision": 1,
+      "title": "Pełne wdrożenie snooping",
+      "skills": [
+        "snooping.pe-ne-wdro-enie-snooping"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "id": "ccna.snooping.14.theory",
+      "front_md": "Pełne wdrożenie snooping",
+      "back_md": "Najpierw określ zakres VLAN oraz granicę zaufania, a potem weryfikuj przydzielanie adresów.",
+      "example": "SW(config)# ip dhcp snooping\nSW(config)# ip dhcp snooping vlan 50\nSW(config)# interface GigabitEthernet1/0/24\nSW(config-if)# ip dhcp snooping trust"
+    },
+    {
+      "revision": 1,
+      "title": "Port klienta po zmianie roli",
+      "skills": [
+        "snooping.port-klienta-po-zmianie-roli"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "id": "ccna.snooping.15.theory",
+      "front_md": "Port klienta po zmianie roli",
+      "back_md": "Niski limit należy dobierać do ruchu danego portu; nie kopiować go bezmyślnie na agregujący uplink.",
+      "example": "SW(config-if)# no ip dhcp snooping trust\nSW(config-if)# ip dhcp snooping limit rate 10\nSW(config-if)# end\nSW# show ip dhcp snooping binding"
+    },
+    {
+      "revision": 1,
+      "title": "Opcja 82",
+      "skills": [
+        "snooping.opcja-82"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "id": "ccna.snooping.16.theory",
+      "front_md": "Opcja 82",
+      "back_md": "Opcja 82 niesie informacje o punkcie przyłączenia; zgodność polityk należy sprawdzić przed jej wyłączaniem.",
+      "example": "Politykę serwera i obsługę informacji relay/option 82"
+    },
+    {
+      "revision": 1,
+      "title": "Dwa wejścia serwera",
+      "skills": [
+        "snooping.dwa-wej-cia-serwera"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "id": "ccna.snooping.17.theory",
+      "front_md": "Dwa wejścia serwera",
+      "back_md": "Zaufanie musi obejmować każdą legalną drogę wejścia odpowiedzi serwera.",
+      "example": "SW(config)# interface GigabitEthernet1/0/23\nSW(config-if)# ip dhcp snooping trust\nSW(config-if)# exit\nSW(config)# interface GigabitEthernet1/0/24\nSW(config-if)# ip dhcp snooping trust\nSW(config-if)# end\nSW# show ip dhcp snooping"
+    },
+    {
+      "revision": 1,
+      "title": "Kontrolowane wycofanie",
+      "skills": [
+        "snooping.kontrolowane-wycofanie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "id": "ccna.snooping.18.theory",
+      "front_md": "Kontrolowane wycofanie",
+      "back_md": "Wycofanie zakresu i pozostałe ustawienia interfejsów należy rozpatrywać osobno.",
+      "example": "SW(config)# no ip dhcp snooping vlan 70\nSW(config)# interface GigabitEthernet1/0/7\nSW(config-if)# no ip dhcp snooping trust\nSW(config-if)# end\nSW# show ip dhcp snooping"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.snooping.13",
+      "revision": 1,
+      "title": "Brak DHCP po wdrożeniu",
+      "skills": [
+        "snooping.brak-dhcp-po-wdro-eniu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Klienci przestali dostawać adresy tuż po włączeniu snooping. Legalne OFFER wracają uplinkiem oznaczonym untrusted. Co naprawić?",
+      "hints": [
+        "Rozpoznanie kierunku odpowiedzi serwera pozwala naprawić konfigurację bez znoszenia całej ochrony."
+      ],
+      "explanation_md": "Rozpoznanie kierunku odpowiedzi serwera pozwala naprawić konfigurację bez znoszenia całej ochrony.",
+      "card_id": "ccna.snooping.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nadać trust wszystkim klientom",
+          "feedback_md": "To otwiera drogę nielegalnym serwerom.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zwiększyć metrykę OSPF",
+          "feedback_md": "Problem jest na granicy zaufania DHCP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zweryfikować uplink i nadać mu właściwe zaufanie",
+          "feedback_md": "Rozpoznanie kierunku odpowiedzi serwera pozwala naprawić konfigurację bez znoszenia całej ochrony.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłączyć maskę podsieci",
+          "feedback_md": "Maska nie jest takim przełącznikiem konfiguracji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.snooping.14",
+      "revision": 1,
+      "title": "Pełne wdrożenie snooping",
+      "skills": [
+        "snooping.pe-ne-wdro-enie-snooping"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Włącz snooping dla VLAN 50. G1/0/24 to zweryfikowany uplink serwera; inne porty pozostają untrusted.",
+      "hints": [
+        "Najpierw określ zakres VLAN oraz granicę zaufania, a potem weryfikuj przydzielanie adresów."
+      ],
+      "explanation_md": "Najpierw określ zakres VLAN oraz granicę zaufania, a potem weryfikuj przydzielanie adresów.",
+      "card_id": "ccna.snooping.14.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config)# ip dhcp {{b0}}\nSW(config)# ip dhcp snooping vlan {{b1}}\nSW(config)# interface GigabitEthernet1/0/24\nSW(config-if)# ip dhcp snooping {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "snooping"
+          ],
+          "width": 10,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "50"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "trust"
+          ],
+          "width": 7,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.snooping.15",
+      "revision": 1,
+      "title": "Port klienta po zmianie roli",
+      "skills": [
+        "snooping.port-klienta-po-zmianie-roli"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na G1/0/8 cofnij trust, ustaw 10 pps i po odnowieniu DHCP sprawdź binding.",
+      "hints": [
+        "Niski limit należy dobierać do ruchu danego portu; nie kopiować go bezmyślnie na agregujący uplink."
+      ],
+      "explanation_md": "Niski limit należy dobierać do ruchu danego portu; nie kopiować go bezmyślnie na agregujący uplink.",
+      "card_id": "ccna.snooping.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config-if)# no ip dhcp snooping {{b0}}\nSW(config-if)# ip dhcp snooping limit rate {{b1}}\nSW(config-if)# end\nSW# show ip dhcp snooping {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "trust"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "10"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "binding"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.snooping.16",
+      "revision": 1,
+      "title": "Opcja 82",
+      "skills": [
+        "snooping.opcja-82"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Po wdrożeniu snooping serwer odrzuca żądania zawierające opcję 82. Co sprawdzić?",
+      "hints": [
+        "Opcja 82 niesie informacje o punkcie przyłączenia; zgodność polityk należy sprawdzić przed jej wyłączaniem."
+      ],
+      "explanation_md": "Opcja 82 niesie informacje o punkcie przyłączenia; zgodność polityk należy sprawdzić przed jej wyłączaniem.",
+      "card_id": "ccna.snooping.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tylko kolor diody portu",
+          "feedback_md": "Link up nie rozstrzyga obsługi opcji DHCP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wartość router ID BGP",
+          "feedback_md": "Nie steruje formatem żądania DHCP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Czy klient zna numer AS",
+          "feedback_md": "Klient DHCP nie musi znać AS.",
+          "id": "C"
+        },
+        {
+          "text_md": "Politykę serwera i obsługę informacji relay/option 82",
+          "feedback_md": "Opcja 82 niesie informacje o punkcie przyłączenia; zgodność polityk należy sprawdzić przed jej wyłączaniem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.snooping.17",
+      "revision": 1,
+      "title": "Dwa wejścia serwera",
+      "skills": [
+        "snooping.dwa-wej-cia-serwera"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Snooping działa dla VLAN 60. G1/0/23 i 24 są zweryfikowanymi drogami legalnych odpowiedzi. Oznacz oba i pokaż stan snooping.",
+      "hints": [
+        "Zaufanie musi obejmować każdą legalną drogę wejścia odpowiedzi serwera."
+      ],
+      "explanation_md": "Zaufanie musi obejmować każdą legalną drogę wejścia odpowiedzi serwera.",
+      "card_id": "ccna.snooping.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config)# interface GigabitEthernet1/0/23\nSW(config-if)# ip dhcp snooping {{b0}}\nSW(config-if)# exit\nSW(config)# interface GigabitEthernet1/0/24\nSW(config-if)# ip dhcp snooping {{b1}}\nSW(config-if)# end\nSW# show ip dhcp {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "trust"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "trust"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "snooping"
+          ],
+          "width": 10,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.snooping.18",
+      "revision": 1,
+      "title": "Kontrolowane wycofanie",
+      "skills": [
+        "snooping.kontrolowane-wycofanie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Wyłącz snooping tylko w VLAN 70, cofnij niepotrzebny trust na G1/0/7 i pokaż stan funkcji.",
+      "hints": [
+        "Wycofanie zakresu i pozostałe ustawienia interfejsów należy rozpatrywać osobno."
+      ],
+      "explanation_md": "Wycofanie zakresu i pozostałe ustawienia interfejsów należy rozpatrywać osobno.",
+      "card_id": "ccna.snooping.18.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config)# no ip dhcp snooping vlan {{b0}}\nSW(config)# interface GigabitEthernet1/0/7\nSW(config-if)# no ip dhcp snooping {{b1}}\nSW(config-if)# end\nSW# show ip dhcp {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "70"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "trust"
+          ],
+          "width": 7,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "snooping"
+          ],
+          "width": 10,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

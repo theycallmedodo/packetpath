@@ -1,0 +1,387 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ssh.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.ssh.01.theory",
+      "revision": 1,
+      "title": "SSH zamiast Telnet",
+      "skills": [
+        "ssh.purpose"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "front_md": "SSH zamiast Telnet",
+      "back_md": "Szyfrowanie transportu nie zastępuje silnego uwierzytelniania ani ograniczenia źródeł administracji.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.ssh.02.theory",
+      "revision": 1,
+      "title": "Tylko SSH na VTY",
+      "skills": [
+        "ssh.transport"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "front_md": "Tylko SSH na VTY",
+      "back_md": "Transport input określa akceptowane protokoły zdalne na tych liniach. Nie tworzy użytkownika ani kluczy serwera.",
+      "example": "R1(config-line)# transport input ssh"
+    },
+    {
+      "id": "ccna.ssh.03.theory",
+      "revision": 1,
+      "title": "Lokalna baza użytkowników",
+      "skills": [
+        "ssh.login-local"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "front_md": "Lokalna baza użytkowników",
+      "back_md": "Login local odwołuje się do kont lokalnych. To inny model niż samo hasło password na linii.",
+      "example": "R1(config-line)# login local"
+    },
+    {
+      "id": "ccna.ssh.04.theory",
+      "revision": 1,
+      "title": "Dlaczego samo transport input nie wystarcza?",
+      "skills": [
+        "ssh.auth-vs-transport"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "front_md": "Dlaczego samo transport input nie wystarcza?",
+      "back_md": "Konfigurację dostępu rozpatruj warstwowo: łączność, serwer SSH, transport VTY i uwierzytelnianie.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.ssh.05.theory",
+      "revision": 1,
+      "title": "Wersja SSH",
+      "skills": [
+        "ssh.version"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "front_md": "Wersja SSH",
+      "back_md": "W tym laboratorium wymagamy SSHv2. To ustawienie nie aktualizuje systemu ani algorytmów całej platformy.",
+      "example": "R1(config)# ip ssh version 2"
+    },
+    {
+      "id": "ccna.ssh.06.theory",
+      "revision": 1,
+      "title": "Stan serwera SSH",
+      "skills": [
+        "ssh.verify-server"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "front_md": "Stan serwera SSH",
+      "back_md": "`show ip ssh` pomaga zweryfikować stan i parametry SSH. Sama komenda konfiguracji VTY nie dowodzi gotowości serwera.",
+      "example": "R1# show ip ssh"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ssh.01",
+      "revision": 1,
+      "title": "SSH zamiast Telnet",
+      "skills": [
+        "ssh.purpose"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Jaka istotna cecha odróżnia SSH od zwykłego Telnetu przy zdalnej administracji?",
+      "hints": [
+        "Rozróżnij poufność kanału od prawa dostępu."
+      ],
+      "explanation_md": "Szyfrowanie transportu nie zastępuje silnego uwierzytelniania ani ograniczenia źródeł administracji.",
+      "card_id": "ccna.ssh.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "SSH nie potrzebuje żadnej drogi IP.",
+          "feedback_md": "SSH nadal wymaga łączności sieciowej."
+        },
+        {
+          "id": "B",
+          "text_md": "SSH zapewnia szyfrowany kanał sesji.",
+          "feedback_md": "SSH chroni transmisję sesji kryptograficznie."
+        },
+        {
+          "id": "C",
+          "text_md": "SSH automatycznie dopuszcza każdego użytkownika.",
+          "feedback_md": "Uwierzytelnianie nadal jest potrzebne."
+        },
+        {
+          "id": "D",
+          "text_md": "SSH działa wyłącznie na konsoli szeregowej.",
+          "feedback_md": "SSH jest protokołem sieciowym, nie wyłącznie konsolą szeregową."
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ssh.02",
+      "revision": 1,
+      "title": "Tylko SSH na VTY",
+      "skills": [
+        "ssh.transport"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Na już wybranych liniach VTY dopuść wyłącznie SSH jako transport wejściowy.",
+      "hints": [
+        "Nie wpisuj all ani telnet."
+      ],
+      "explanation_md": "Transport input określa akceptowane protokoły zdalne na tych liniach. Nie tworzy użytkownika ani kluczy serwera.",
+      "card_id": "ccna.ssh.02.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-line)# transport input {{protocol}}",
+      "blanks": [
+        {
+          "id": "protocol",
+          "label": "Dozwolony protokół",
+          "answer_type": "keyword",
+          "accepted": [
+            "ssh"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ssh.03",
+      "revision": 1,
+      "title": "Lokalna baza użytkowników",
+      "skills": [
+        "ssh.login-local"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "AAA nie jest włączone. Na liniach VTY użyj uwierzytelniania lokalną bazą username.",
+      "hints": [
+        "Uwierzytelnienie ma użyć username skonfigurowanego globalnie."
+      ],
+      "explanation_md": "Login local odwołuje się do kont lokalnych. To inny model niż samo hasło password na linii.",
+      "card_id": "ccna.ssh.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config-line)# login {{database}}",
+      "blanks": [
+        {
+          "id": "database",
+          "label": "Baza kont",
+          "answer_type": "keyword",
+          "accepted": [
+            "local"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ssh.04",
+      "revision": 1,
+      "title": "Dlaczego samo transport input nie wystarcza?",
+      "skills": [
+        "ssh.auth-vs-transport"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Skonfigurowano transport input ssh, ale brak mechanizmu uwierzytelniania użytkownika. Który wniosek jest prawidłowy?",
+      "hints": [
+        "Dopuszczony protokół nie wskazuje jeszcze, kto może się zalogować."
+      ],
+      "explanation_md": "Konfigurację dostępu rozpatruj warstwowo: łączność, serwer SSH, transport VTY i uwierzytelnianie.",
+      "card_id": "ccna.ssh.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Transport input automatycznie tworzy konto admin.",
+          "feedback_md": "Ta komenda nie tworzy kont."
+        },
+        {
+          "id": "B",
+          "text_md": "VTY zacznie korzystać z hasła interfejsu VLAN.",
+          "feedback_md": "Interfejs VLAN nie dostarcza takiego hasła linii."
+        },
+        {
+          "id": "C",
+          "text_md": "Trzeba skonfigurować odpowiednie uwierzytelnianie, np. login local i konto.",
+          "feedback_md": "Wybór transportu i uwierzytelnianie są odrębnymi elementami."
+        },
+        {
+          "id": "D",
+          "text_md": "Należy zastąpić SSH przez Telnet, żeby login był możliwy.",
+          "feedback_md": "Telnet nie rozwiązuje braku kont i obniża ochronę transportu."
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ssh.05",
+      "revision": 1,
+      "title": "Wersja SSH",
+      "skills": [
+        "ssh.version"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Wymuś SSH wersji 2.",
+      "hints": [
+        "Wpisz numer wersji, nie numer portu TCP."
+      ],
+      "explanation_md": "W tym laboratorium wymagamy SSHv2. To ustawienie nie aktualizuje systemu ani algorytmów całej platformy.",
+      "card_id": "ccna.ssh.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# ip ssh version {{version}}",
+      "blanks": [
+        {
+          "id": "version",
+          "label": "Wersja protokołu",
+          "answer_type": "integer",
+          "accepted": [
+            "2"
+          ],
+          "width": 5,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.ssh.06",
+      "revision": 1,
+      "title": "Stan serwera SSH",
+      "skills": [
+        "ssh.verify-server"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Wyświetl podstawowe parametry serwera SSH IOS.",
+      "hints": [
+        "To nie show ssh, które ma inne zastosowanie."
+      ],
+      "explanation_md": "`show ip ssh` pomaga zweryfikować stan i parametry SSH. Sama komenda konfiguracji VTY nie dowodzi gotowości serwera.",
+      "card_id": "ccna.ssh.06.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1# show ip {{service}}",
+      "blanks": [
+        {
+          "id": "service",
+          "label": "Usługa zarządzania",
+          "answer_type": "keyword",
+          "accepted": [
+            "ssh"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

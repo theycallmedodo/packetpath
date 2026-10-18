@@ -1,0 +1,519 @@
+{
+  "schema_version": 3,
+  "id": "encor.time-sync.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "PTP grandmaster",
+      "skills": [
+        "time-sync.ptp-grandmaster"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.13.theory",
+      "front_md": "PTP grandmaster",
+      "back_md": "Grandmaster jest odniesieniem dla hierarchii PTP. Wybór i własności źródła zależą od profilu i konfiguracji.",
+      "example": "Głównego źródła czasu dla tej domeny"
+    },
+    {
+      "revision": 1,
+      "title": "Boundary clock",
+      "skills": [
+        "time-sync.boundary-clock"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.14.theory",
+      "front_md": "Boundary clock",
+      "back_md": "Boundary clock uczestniczy w synchronizacji i tworzy kolejne relacje na swoich portach. Nie jest tylko zwykłym mostem.",
+      "example": "Synchronizuje się do źródła upstream i dostarcza czas dalej przez inne porty PTP"
+    },
+    {
+      "revision": 1,
+      "title": "Transparent clock",
+      "skills": [
+        "time-sync.transparent-clock"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.15.theory",
+      "front_md": "Transparent clock",
+      "back_md": "Transparent clock pomaga kompensować opóźnienie przejścia. Szczegóły korekcji zależą m.in. od trybu i profilu PTP.",
+      "example": "Uwzględnianie czasu przebywania komunikatu w urządzeniu w odpowiedniej korekcji"
+    },
+    {
+      "revision": 1,
+      "title": "Domena i profil PTP",
+      "skills": [
+        "time-sync.domena-i-profil-ptp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.16.theory",
+      "front_md": "Domena i profil PTP",
+      "back_md": "Do współpracy potrzeba zgodnego projektu domeny, profilu, transportu i mechanizmu opóźnienia. Sam routing to za mało.",
+      "example": "Osiągalność IP nie zapewnia zgodności parametrów protokołu czasu"
+    },
+    {
+      "revision": 1,
+      "title": "Asymetria ścieżki",
+      "skills": [
+        "time-sync.asymetria-cie-ki"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.17.theory",
+      "front_md": "Asymetria ścieżki",
+      "back_md": "Asymetria może wprowadzać błąd w szacowaniu czasu. Projekt precyzyjnej synchronizacji uwzględnia ścieżkę i możliwości sprzętu.",
+      "example": "Mechanizm wyznaczania offsetu może opierać się na założeniu lub kompensacji symetrii"
+    },
+    {
+      "revision": 1,
+      "title": "Nie gwarantuj precyzji z nazwy",
+      "skills": [
+        "time-sync.nie-gwarantuj-precyzji-z-nazwy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.18.theory",
+      "front_md": "Nie gwarantuj precyzji z nazwy",
+      "back_md": "PTP umożliwia precyzyjne projekty, ale konkretny poziom dokładności wymaga zgodnego wdrożenia i pomiaru.",
+      "example": "Nie; wynik zależy od sprzętu, profilu, topologii, opóźnień i źródła"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.time-sync.13",
+      "revision": 1,
+      "title": "PTP grandmaster",
+      "skills": [
+        "time-sync.ptp-grandmaster"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Jaką rolę ma grandmaster w domenie PTP?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Grandmaster jest odniesieniem dla hierarchii PTP. Wybór i własności źródła zależą od profilu i konfiguracji.",
+      "card_id": "encor.time-sync.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie kolektora logów NTP",
+          "feedback_md": "Grandmaster jest odniesieniem dla hierarchii PTP. Wybór i własności źródła zależą od profilu i konfiguracji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Routera wybierającego trasy BGP",
+          "feedback_md": "Grandmaster jest odniesieniem dla hierarchii PTP. Wybór i własności źródła zależą od profilu i konfiguracji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Głównego źródła czasu dla tej domeny",
+          "feedback_md": "Grandmaster jest odniesieniem dla hierarchii PTP. Wybór i własności źródła zależą od profilu i konfiguracji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zawsze transparent clock bez własnego odniesienia",
+          "feedback_md": "Grandmaster jest odniesieniem dla hierarchii PTP. Wybór i własności źródła zależą od profilu i konfiguracji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.time-sync.14",
+      "revision": 1,
+      "title": "Boundary clock",
+      "skills": [
+        "time-sync.boundary-clock"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Co robi boundary clock PTP w typowej hierarchii?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Boundary clock uczestniczy w synchronizacji i tworzy kolejne relacje na swoich portach. Nie jest tylko zwykłym mostem.",
+      "card_id": "encor.time-sync.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tylko kopiuje pakiety bez udziału zegara",
+          "feedback_md": "Boundary clock uczestniczy w synchronizacji i tworzy kolejne relacje na swoich portach. Nie jest tylko zwykłym mostem.",
+          "id": "A"
+        },
+        {
+          "text_md": "Synchronizuje się do źródła upstream i dostarcza czas dalej przez inne porty PTP",
+          "feedback_md": "Boundary clock uczestniczy w synchronizacji i tworzy kolejne relacje na swoich portach. Nie jest tylko zwykłym mostem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zawsze konwertuje PTP na routing statyczny",
+          "feedback_md": "Boundary clock uczestniczy w synchronizacji i tworzy kolejne relacje na swoich portach. Nie jest tylko zwykłym mostem.",
+          "id": "C"
+        },
+        {
+          "text_md": "Działa wyłącznie jako odbiorca bez portów downstream",
+          "feedback_md": "Boundary clock uczestniczy w synchronizacji i tworzy kolejne relacje na swoich portach. Nie jest tylko zwykłym mostem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.time-sync.15",
+      "revision": 1,
+      "title": "Transparent clock",
+      "skills": [
+        "time-sync.transparent-clock"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Jaki jest istotny cel transparent clock PTP?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Transparent clock pomaga kompensować opóźnienie przejścia. Szczegóły korekcji zależą m.in. od trybu i profilu PTP.",
+      "card_id": "encor.time-sync.15.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Uwzględnianie czasu przebywania komunikatu w urządzeniu w odpowiedniej korekcji",
+          "feedback_md": "Transparent clock pomaga kompensować opóźnienie przejścia. Szczegóły korekcji zależą m.in. od trybu i profilu PTP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zastąpienie każdego grandmastera bez wyboru",
+          "feedback_md": "Transparent clock pomaga kompensować opóźnienie przejścia. Szczegóły korekcji zależą m.in. od trybu i profilu PTP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Usuwanie całego nagłówka Ethernet",
+          "feedback_md": "Transparent clock pomaga kompensować opóźnienie przejścia. Szczegóły korekcji zależą m.in. od trybu i profilu PTP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zmiana UDP 123 na SSH 830",
+          "feedback_md": "Transparent clock pomaga kompensować opóźnienie przejścia. Szczegóły korekcji zależą m.in. od trybu i profilu PTP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.time-sync.16",
+      "revision": 1,
+      "title": "Domena i profil PTP",
+      "skills": [
+        "time-sync.domena-i-profil-ptp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dwa urządzenia są osiągalne IP, ale używają niezgodnych domen/profili PTP. Co może wyjaśniać brak wspólnej synchronizacji?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Do współpracy potrzeba zgodnego projektu domeny, profilu, transportu i mechanizmu opóźnienia. Sam routing to za mało.",
+      "card_id": "encor.time-sync.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Każdy ping automatycznie uzgadnia profil PTP",
+          "feedback_md": "Do współpracy potrzeba zgodnego projektu domeny, profilu, transportu i mechanizmu opóźnienia. Sam routing to za mało.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wystarczy zmienić strefę czasową Windows",
+          "feedback_md": "Do współpracy potrzeba zgodnego projektu domeny, profilu, transportu i mechanizmu opóźnienia. Sam routing to za mało.",
+          "id": "B"
+        },
+        {
+          "text_md": "PTP nie korzysta z żadnego kontekstu domeny",
+          "feedback_md": "Do współpracy potrzeba zgodnego projektu domeny, profilu, transportu i mechanizmu opóźnienia. Sam routing to za mało.",
+          "id": "C"
+        },
+        {
+          "text_md": "Osiągalność IP nie zapewnia zgodności parametrów protokołu czasu",
+          "feedback_md": "Do współpracy potrzeba zgodnego projektu domeny, profilu, transportu i mechanizmu opóźnienia. Sam routing to za mało.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.time-sync.17",
+      "revision": 1,
+      "title": "Asymetria ścieżki",
+      "skills": [
+        "time-sync.asymetria-cie-ki"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dlaczego różne opóźnienia w dwóch kierunkach mogą pogarszać estymację czasu?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Asymetria może wprowadzać błąd w szacowaniu czasu. Projekt precyzyjnej synchronizacji uwzględnia ścieżkę i możliwości sprzętu.",
+      "card_id": "encor.time-sync.17.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Stratum zawsze staje się numerem VLAN",
+          "feedback_md": "Asymetria może wprowadzać błąd w szacowaniu czasu. Projekt precyzyjnej synchronizacji uwzględnia ścieżkę i możliwości sprzętu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Każdy pakiet traci adres MAC",
+          "feedback_md": "Asymetria może wprowadzać błąd w szacowaniu czasu. Projekt precyzyjnej synchronizacji uwzględnia ścieżkę i możliwości sprzętu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Mechanizm wyznaczania offsetu może opierać się na założeniu lub kompensacji symetrii",
+          "feedback_md": "Asymetria może wprowadzać błąd w szacowaniu czasu. Projekt precyzyjnej synchronizacji uwzględnia ścieżkę i możliwości sprzętu.",
+          "id": "C"
+        },
+        {
+          "text_md": "NTP i PTP mierzą tylko przepustowość",
+          "feedback_md": "Asymetria może wprowadzać błąd w szacowaniu czasu. Projekt precyzyjnej synchronizacji uwzględnia ścieżkę i możliwości sprzętu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.time-sync.18",
+      "revision": 1,
+      "title": "Nie gwarantuj precyzji z nazwy",
+      "skills": [
+        "time-sync.nie-gwarantuj-precyzji-z-nazwy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Firma uruchomiła PTP na przypadkowej sieci bez weryfikacji timestampingu i profilu. Czy sama nazwa PTP gwarantuje dokładność submikrosekundową?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "PTP umożliwia precyzyjne projekty, ale konkretny poziom dokładności wymaga zgodnego wdrożenia i pomiaru.",
+      "card_id": "encor.time-sync.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, na każdym urządzeniu i przy dowolnym obciążeniu",
+          "feedback_md": "PTP umożliwia precyzyjne projekty, ale konkretny poziom dokładności wymaga zgodnego wdrożenia i pomiaru.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie; wynik zależy od sprzętu, profilu, topologii, opóźnień i źródła",
+          "feedback_md": "PTP umożliwia precyzyjne projekty, ale konkretny poziom dokładności wymaga zgodnego wdrożenia i pomiaru.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, jeśli serwer ma niski adres IP",
+          "feedback_md": "PTP umożliwia precyzyjne projekty, ale konkretny poziom dokładności wymaga zgodnego wdrożenia i pomiaru.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, ponieważ PTP nigdy nie może być precyzyjniejsze od zegara ręcznego",
+          "feedback_md": "PTP umożliwia precyzyjne projekty, ale konkretny poziom dokładności wymaga zgodnego wdrożenia i pomiaru.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

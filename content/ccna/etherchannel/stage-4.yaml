@@ -1,0 +1,425 @@
+{
+  "schema_version": 3,
+  "id": "ccna.etherchannel.stage-4",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Lokalny numer grupy",
+      "skills": [
+        "etherchannel.lokalny-numer-grupy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.ext.01.theory",
+      "front_md": "Lokalny numer grupy",
+      "back_md": "Numer lokalnej grupy odróżnia interfejsy logiczne na urządzeniu, nie jest uniwersalnym ID obu końców.",
+      "example": "Nie, numery grup są lokalne"
+    },
+    {
+      "revision": 1,
+      "title": "Active plus passive",
+      "skills": [
+        "etherchannel.active-plus-passive"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.ext.02.theory",
+      "front_md": "Active plus passive",
+      "back_md": "Co najmniej jedna strona musi inicjować wymianę LACP.",
+      "example": "Tak"
+    },
+    {
+      "revision": 1,
+      "title": "Od pasywnego do aktywnego",
+      "skills": [
+        "etherchannel.od-pasywnego-do-aktywnego"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.ext.03.theory",
+      "front_md": "Od pasywnego do aktywnego",
+      "back_md": "Active inicjuje negocjację; nie naprawia automatycznie pozostałych niezgodności członków.",
+      "example": "SW(config-if)# channel-group 8 mode active"
+    },
+    {
+      "revision": 1,
+      "title": "LACP a PAgP",
+      "skills": [
+        "etherchannel.lacp-a-pagp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.ext.04.theory",
+      "front_md": "LACP a PAgP",
+      "back_md": "Tryby desirable/auto to PAgP, active/passive to LACP; trzeba uzgodnić protokół.",
+      "example": "Użyto różnych protokołów negocjacji"
+    },
+    {
+      "revision": 1,
+      "title": "Dwa członki access",
+      "skills": [
+        "etherchannel.dwa-cz-onki-access"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.ext.05.theory",
+      "front_md": "Dwa członki access",
+      "back_md": "Członkowie muszą mieć spójną konfigurację VLAN i agregacji.",
+      "example": "SW(config-if-range)# switchport access vlan 30\nSW(config-if-range)# channel-group 3 mode active"
+    },
+    {
+      "revision": 1,
+      "title": "Statyczne on",
+      "skills": [
+        "etherchannel.statyczne-on"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.ext.06.theory",
+      "front_md": "Statyczne on",
+      "back_md": "Agregacja statyczna wymaga szczególnie starannej zgodności obu końców i okablowania.",
+      "example": "Brak negocjacji może nie wykryć błędnego połączenia tak jak protokół agregacji"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.etherchannel.ext.01",
+      "revision": 1,
+      "title": "Lokalny numer grupy",
+      "skills": [
+        "etherchannel.lokalny-numer-grupy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "SW1 używa channel-group 1, a SW2 channel-group 7. Pozostałe parametry LACP są zgodne. Czy sama różnica numerów musi blokować agregację?",
+      "hints": [
+        "Numer lokalnej grupy odróżnia interfejsy logiczne na urządzeniu, nie jest uniwersalnym ID obu końców."
+      ],
+      "explanation_md": "Numer lokalnej grupy odróżnia interfejsy logiczne na urządzeniu, nie jest uniwersalnym ID obu końców.",
+      "card_id": "ccna.etherchannel.ext.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie, numery grup są lokalne",
+          "feedback_md": "Numer lokalnej grupy odróżnia interfejsy logiczne na urządzeniu, nie jest uniwersalnym ID obu końców.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, numer zawsze musi być identyczny po obu stronach",
+          "feedback_md": "Lokalny identyfikator Port-channel nie jest obowiązkowo wspólny.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, tylko grupa 1 obsługuje LACP",
+          "feedback_md": "Inne numery mogą obsługiwać LACP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, bo LACP w ogóle nie sprawdza partnera",
+          "feedback_md": "LACP negocjuje parametry i partnera, tylko nie wymaga tej samej lokalnej numeracji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.etherchannel.ext.02",
+      "revision": 1,
+      "title": "Active plus passive",
+      "skills": [
+        "etherchannel.active-plus-passive"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Czy para LACP active/passive może utworzyć agregację przy zgodnych pozostałych ustawieniach?",
+      "hints": [
+        "Co najmniej jedna strona musi inicjować wymianę LACP."
+      ],
+      "explanation_md": "Co najmniej jedna strona musi inicjować wymianę LACP.",
+      "card_id": "ccna.etherchannel.ext.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie, wymagane zawsze active/active",
+          "feedback_md": "Jedna strona active może zainicjować negocjację.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie, passive oznacza shutdown",
+          "feedback_md": "Passive nie jest wyłączeniem portu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, ale to PAgP",
+          "feedback_md": "Active/passive należą do LACP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak",
+          "feedback_md": "Co najmniej jedna strona musi inicjować wymianę LACP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.etherchannel.ext.03",
+      "revision": 1,
+      "title": "Od pasywnego do aktywnego",
+      "skills": [
+        "etherchannel.od-pasywnego-do-aktywnego"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W labie G1/0/1 ma należeć do LACP 8 jako active. Uzupełnij numer grupy i tryb; zgodność konfiguracji oraz możliwość zmiany trybu sprawdzono.",
+      "hints": [
+        "Active inicjuje negocjację; nie naprawia automatycznie pozostałych niezgodności członków."
+      ],
+      "explanation_md": "Active inicjuje negocjację; nie naprawia automatycznie pozostałych niezgodności członków.",
+      "card_id": "ccna.etherchannel.ext.03.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config-if)# channel-group {{b0}} mode {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "8"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "active"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.etherchannel.ext.04",
+      "revision": 1,
+      "title": "LACP a PAgP",
+      "skills": [
+        "etherchannel.lacp-a-pagp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na jednej stronie mode desirable, na drugiej mode active. Co jest niezgodne?",
+      "hints": [
+        "Tryby desirable/auto to PAgP, active/passive to LACP; trzeba uzgodnić protokół."
+      ],
+      "explanation_md": "Tryby desirable/auto to PAgP, active/passive to LACP; trzeba uzgodnić protokół.",
+      "card_id": "ccna.etherchannel.ext.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie liczba liter w hostname",
+          "feedback_md": "Nie jest parametrem negocjacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Użyto różnych protokołów negocjacji",
+          "feedback_md": "Tryby desirable/auto to PAgP, active/passive to LACP; trzeba uzgodnić protokół.",
+          "id": "B"
+        },
+        {
+          "text_md": "Oba końce są LACP passive",
+          "feedback_md": "Desirable należy do PAgP, active do LACP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zawsze tylko maska IPv4",
+          "feedback_md": "Problem wskazany dotyczy agregacji L2.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.etherchannel.ext.05",
+      "revision": 1,
+      "title": "Dwa członki access",
+      "skills": [
+        "etherchannel.dwa-cz-onki-access"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Zakres G1/0/1–2 jest już statycznym access o zgodnych parametrach. Przypisz VLAN 30 i LACP grupę 3 w trybie active.",
+      "hints": [
+        "Członkowie muszą mieć spójną konfigurację VLAN i agregacji."
+      ],
+      "explanation_md": "Członkowie muszą mieć spójną konfigurację VLAN i agregacji.",
+      "card_id": "ccna.etherchannel.ext.05.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config-if-range)# switchport access vlan {{b0}}\nSW(config-if-range)# channel-group {{b1}} mode active",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "30"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "3"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.etherchannel.ext.06",
+      "revision": 1,
+      "title": "Statyczne on",
+      "skills": [
+        "etherchannel.statyczne-on"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EtherChannel — członkowie i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Jakie ryzyko niesie mode on przy niespójnej konfiguracji drugiego końca?",
+      "hints": [
+        "Agregacja statyczna wymaga szczególnie starannej zgodności obu końców i okablowania."
+      ],
+      "explanation_md": "Agregacja statyczna wymaga szczególnie starannej zgodności obu końców i okablowania.",
+      "card_id": "ccna.etherchannel.ext.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "On zawsze szyfruje ramki",
+          "feedback_md": "To nie funkcja szyfrowania.",
+          "id": "A"
+        },
+        {
+          "text_md": "On automatycznie uruchamia LACP",
+          "feedback_md": "On oznacza agregację statyczną.",
+          "id": "B"
+        },
+        {
+          "text_md": "On wymusza jeden identyczny kabel",
+          "feedback_md": "Nie oznacza tego rodzaju ograniczenia.",
+          "id": "C"
+        },
+        {
+          "text_md": "Brak negocjacji może nie wykryć błędnego połączenia tak jak protokół agregacji",
+          "feedback_md": "Agregacja statyczna wymaga szczególnie starannej zgodności obu końców i okablowania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

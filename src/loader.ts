@@ -1,0 +1,5 @@
+import{catalogSchema,packSchema,type Catalog,type Pack,type Stage}from'./schema';
+const cache=new Map<string,Pack>();
+async function json(url:string,signal?:AbortSignal){const r=await fetch(url,{signal});if(!r.ok)throw Error(`Nie udało się pobrać treści (HTTP ${r.status}).`);return r.json();}
+export async function loadCatalog(signal?:AbortSignal):Promise<Catalog>{return catalogSchema.parse(await json('/content/catalog.json',signal));}
+export async function loadStage(stage:Stage,signal?:AbortSignal):Promise<Pack>{const key=stage.pack_url+'@'+stage.pack_revision;const hit=cache.get(key);if(hit){cache.delete(key);cache.set(key,hit);return hit;}const pack=packSchema.parse(await json(`${stage.pack_url}?v=${stage.pack_revision}`,signal));if(pack.id!==stage.id||pack.revision!==stage.pack_revision||pack.tasks.length!==stage.task_count)throw Error('Paczka nie pasuje do wersji katalogu. Odśwież aplikację.');cache.set(key,pack);while(cache.size>2)cache.delete(cache.keys().next().value!);return pack;}

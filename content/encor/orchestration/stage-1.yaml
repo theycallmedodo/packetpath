@@ -1,0 +1,519 @@
+{
+  "schema_version": 3,
+  "id": "encor.orchestration.stage-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Agent na celu",
+      "skills": [
+        "orchestration.agent-na-celu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.01.theory",
+      "front_md": "Agent na celu",
+      "back_md": "Agent jest elementem architektury narzędzia. Jego obsługa wymaga uwzględnienia instalacji, wersji i uprawnień.",
+      "example": "Oprogramowanie agenta uczestniczy w wykonywaniu zadań na zarządzanym węźle"
+    },
+    {
+      "revision": 1,
+      "title": "Agentless",
+      "skills": [
+        "orchestration.agentless"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.02.theory",
+      "front_md": "Agentless",
+      "back_md": "Narzędzie nadal potrzebuje kontrolera, transportu i dostępu, np. SSH lub API. Brak agenta nie oznacza braku wymagań.",
+      "example": "Nie wymaga dedykowanego agenta Ansible na urządzeniu docelowym"
+    },
+    {
+      "revision": 1,
+      "title": "Przykłady architektur",
+      "skills": [
+        "orchestration.przyk-ady-architektur"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.03.theory",
+      "front_md": "Przykłady architektur",
+      "back_md": "To typowe modele, nie zakaz innych trybów i integracji. Konkretną platformę i sposób połączenia trzeba sprawdzić.",
+      "example": "Ansible — agentless; Puppet/Chef — często agentowe"
+    },
+    {
+      "revision": 1,
+      "title": "Rola inventory",
+      "skills": [
+        "orchestration.rola-inventory"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.04.theory",
+      "front_md": "Rola inventory",
+      "back_md": "Inventory wyznacza cele i kontekst wykonania. Błędna grupa hostów może skierować poprawną zmianę na niewłaściwe urządzenia.",
+      "example": "Określenia zarządzanych hostów, grup i powiązanych zmiennych"
+    },
+    {
+      "revision": 1,
+      "title": "Playbook",
+      "skills": [
+        "orchestration.playbook"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.05.theory",
+      "front_md": "Playbook",
+      "back_md": "Playbook organizuje automatyzację. Użyte moduły i dane decydują o konkretnych działaniach.",
+      "example": "Opisuje zadania i ich wykonanie dla wskazanych hostów"
+    },
+    {
+      "revision": 1,
+      "title": "Transport agentless",
+      "skills": [
+        "orchestration.transport-agentless"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.06.theory",
+      "front_md": "Transport agentless",
+      "back_md": "Agentless nie eliminuje wymagań dostępu. Można używać prywatnych sieci zarządzania i kontrolowanych polityk.",
+      "example": "Wspierany interfejs zarządzania i odpowiednie uprawnienia"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.orchestration.01",
+      "revision": 1,
+      "title": "Agent na celu",
+      "skills": [
+        "orchestration.agent-na-celu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Co charakteryzuje typowy model agentowy zarządzania konfiguracją?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Agent jest elementem architektury narzędzia. Jego obsługa wymaga uwzględnienia instalacji, wersji i uprawnień.",
+      "card_id": "encor.orchestration.01.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Oprogramowanie agenta uczestniczy w wykonywaniu zadań na zarządzanym węźle",
+          "feedback_md": "Agent jest elementem architektury narzędzia. Jego obsługa wymaga uwzględnienia instalacji, wersji i uprawnień.",
+          "id": "A"
+        },
+        {
+          "text_md": "Brak jakiegokolwiek oprogramowania zarządzającego",
+          "feedback_md": "Agent jest elementem architektury narzędzia. Jego obsługa wymaga uwzględnienia instalacji, wersji i uprawnień.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wymóg ręcznego wklejania każdego polecenia",
+          "feedback_md": "Agent jest elementem architektury narzędzia. Jego obsługa wymaga uwzględnienia instalacji, wersji i uprawnień.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłącznie protokół routingu dynamicznego",
+          "feedback_md": "Agent jest elementem architektury narzędzia. Jego obsługa wymaga uwzględnienia instalacji, wersji i uprawnień.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.orchestration.02",
+      "revision": 1,
+      "title": "Agentless",
+      "skills": [
+        "orchestration.agentless"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Co oznacza agentless w kontekście Ansible dla wspieranych urządzeń sieciowych?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Narzędzie nadal potrzebuje kontrolera, transportu i dostępu, np. SSH lub API. Brak agenta nie oznacza braku wymagań.",
+      "card_id": "encor.orchestration.02.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie wymaga żadnego dostępu sieciowego",
+          "feedback_md": "Narzędzie nadal potrzebuje kontrolera, transportu i dostępu, np. SSH lub API. Brak agenta nie oznacza braku wymagań.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie wymaga uwierzytelnienia",
+          "feedback_md": "Narzędzie nadal potrzebuje kontrolera, transportu i dostępu, np. SSH lub API. Brak agenta nie oznacza braku wymagań.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie wymaga żadnego narzędzia po stronie sterującej",
+          "feedback_md": "Narzędzie nadal potrzebuje kontrolera, transportu i dostępu, np. SSH lub API. Brak agenta nie oznacza braku wymagań.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie wymaga dedykowanego agenta Ansible na urządzeniu docelowym",
+          "feedback_md": "Narzędzie nadal potrzebuje kontrolera, transportu i dostępu, np. SSH lub API. Brak agenta nie oznacza braku wymagań.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.orchestration.03",
+      "revision": 1,
+      "title": "Przykłady architektur",
+      "skills": [
+        "orchestration.przyk-ady-architektur"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Które zestawienie opisuje typowe wdrożenia?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "To typowe modele, nie zakaz innych trybów i integracji. Konkretną platformę i sposób połączenia trzeba sprawdzić.",
+      "card_id": "encor.orchestration.03.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Ansible — zawsze agent na każdym switchu; Puppet — wyłącznie CSV",
+          "feedback_md": "To typowe modele, nie zakaz innych trybów i integracji. Konkretną platformę i sposób połączenia trzeba sprawdzić.",
+          "id": "A"
+        },
+        {
+          "text_md": "Każde narzędzie musi instalować ten sam agent",
+          "feedback_md": "To typowe modele, nie zakaz innych trybów i integracji. Konkretną platformę i sposób połączenia trzeba sprawdzić.",
+          "id": "B"
+        },
+        {
+          "text_md": "Ansible — agentless; Puppet/Chef — często agentowe",
+          "feedback_md": "To typowe modele, nie zakaz innych trybów i integracji. Konkretną platformę i sposób połączenia trzeba sprawdzić.",
+          "id": "C"
+        },
+        {
+          "text_md": "Puppet i Chef to protokoły data plane",
+          "feedback_md": "To typowe modele, nie zakaz innych trybów i integracji. Konkretną platformę i sposób połączenia trzeba sprawdzić.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.orchestration.04",
+      "revision": 1,
+      "title": "Rola inventory",
+      "skills": [
+        "orchestration.rola-inventory"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Do czego służy inventory w typowym workflow Ansible?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Inventory wyznacza cele i kontekst wykonania. Błędna grupa hostów może skierować poprawną zmianę na niewłaściwe urządzenia.",
+      "card_id": "encor.orchestration.04.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie przechowywania rekordów NetFlow",
+          "feedback_md": "Inventory wyznacza cele i kontekst wykonania. Błędna grupa hostów może skierować poprawną zmianę na niewłaściwe urządzenia.",
+          "id": "A"
+        },
+        {
+          "text_md": "Określenia zarządzanych hostów, grup i powiązanych zmiennych",
+          "feedback_md": "Inventory wyznacza cele i kontekst wykonania. Błędna grupa hostów może skierować poprawną zmianę na niewłaściwe urządzenia.",
+          "id": "B"
+        },
+        {
+          "text_md": "Automatycznego przydzielania numerów AS wszystkim hostom",
+          "feedback_md": "Inventory wyznacza cele i kontekst wykonania. Błędna grupa hostów może skierować poprawną zmianę na niewłaściwe urządzenia.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zastąpienia protokołu SSH",
+          "feedback_md": "Inventory wyznacza cele i kontekst wykonania. Błędna grupa hostów może skierować poprawną zmianę na niewłaściwe urządzenia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.orchestration.05",
+      "revision": 1,
+      "title": "Playbook",
+      "skills": [
+        "orchestration.playbook"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Jaką rolę pełni playbook Ansible?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Playbook organizuje automatyzację. Użyte moduły i dane decydują o konkretnych działaniach.",
+      "card_id": "encor.orchestration.05.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Opisuje zadania i ich wykonanie dla wskazanych hostów",
+          "feedback_md": "Playbook organizuje automatyzację. Użyte moduły i dane decydują o konkretnych działaniach.",
+          "id": "A"
+        },
+        {
+          "text_md": "Jest wyłącznie kopią tablicy routingu",
+          "feedback_md": "Playbook organizuje automatyzację. Użyte moduły i dane decydują o konkretnych działaniach.",
+          "id": "B"
+        },
+        {
+          "text_md": "Jest formatem klucza TLS",
+          "feedback_md": "Playbook organizuje automatyzację. Użyte moduły i dane decydują o konkretnych działaniach.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zawsze oznacza pojedyncze polecenie systemowe",
+          "feedback_md": "Playbook organizuje automatyzację. Użyte moduły i dane decydują o konkretnych działaniach.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.orchestration.06",
+      "revision": 1,
+      "title": "Transport agentless",
+      "skills": [
+        "orchestration.transport-agentless"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 1,
+      "prompt_md": "Który warunek nadal jest potrzebny w modelu bezagentowym?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Agentless nie eliminuje wymagań dostępu. Można używać prywatnych sieci zarządzania i kontrolowanych polityk.",
+      "card_id": "encor.orchestration.06.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Obowiązkowo publiczny adres każdego urządzenia",
+          "feedback_md": "Agentless nie eliminuje wymagań dostępu. Można używać prywatnych sieci zarządzania i kontrolowanych polityk.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłączone wszystkie ACL",
+          "feedback_md": "Agentless nie eliminuje wymagań dostępu. Można używać prywatnych sieci zarządzania i kontrolowanych polityk.",
+          "id": "B"
+        },
+        {
+          "text_md": "Identyczny producent wszystkich serwerów aplikacyjnych",
+          "feedback_md": "Agentless nie eliminuje wymagań dostępu. Można używać prywatnych sieci zarządzania i kontrolowanych polityk.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wspierany interfejs zarządzania i odpowiednie uprawnienia",
+          "feedback_md": "Agentless nie eliminuje wymagań dostępu. Można używać prywatnych sieci zarządzania i kontrolowanych polityk.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

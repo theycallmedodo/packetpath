@@ -1,0 +1,563 @@
+{
+  "schema_version": 3,
+  "id": "ccna.fhrp.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Arytmetyka trackingu",
+      "skills": [
+        "fhrp.arytmetyka-trackingu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.13.theory",
+      "front_md": "Arytmetyka trackingu",
+      "back_md": "120 − 30 = 90, więc R2 ma wyższy priorytet i przy poprawnym działaniu grupy może przejąć active.",
+      "example": "90"
+    },
+    {
+      "revision": 1,
+      "title": "Brama preferowana",
+      "skills": [
+        "fhrp.brama-preferowana"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.14.theory",
+      "front_md": "Brama preferowana",
+      "back_md": "Indywidualny adres interfejsu i wspólny VIP pozostają odrębne.",
+      "example": "R1(config-if)# standby 30 ip 10.30.0.1\nR1(config-if)# standby 30 priority 120\nR1(config-if)# standby 30 preempt"
+    },
+    {
+      "revision": 1,
+      "title": "Śledź fizyczny uplink",
+      "skills": [
+        "fhrp.led-fizyczny-uplink"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.15.theory",
+      "front_md": "Śledź fizyczny uplink",
+      "back_md": "Śledzenie line-protocol wykrywa stan interfejsu; nie musi wykryć awarii dalej w sieci.",
+      "example": "R1(config)# track 7 interface GigabitEthernet0/1 line-protocol\nR1(config-track)# exit\nR1(config)# interface GigabitEthernet0/0\nR1(config-if)# standby 40 track 7 decrement 25"
+    },
+    {
+      "revision": 1,
+      "title": "Dwie aktywne bramy",
+      "skills": [
+        "fhrp.dwie-aktywne-bramy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.16.theory",
+      "front_md": "Dwie aktywne bramy",
+      "back_md": "Brak wymiany komunikatów lub niezgodność grupy może prowadzić do równoczesnego przekonania o roli active.",
+      "example": "Łączność L2 oraz zgodność wersji i parametrów grupy"
+    },
+    {
+      "revision": 1,
+      "title": "Zapas z możliwością przejęcia",
+      "skills": [
+        "fhrp.zapas-z-mo-liwo-ci-przej-cia"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.17.theory",
+      "front_md": "Zapas z możliwością przejęcia",
+      "back_md": "Zapas z preempt może przejąć rolę, gdy tracking obniży priorytet głównego routera poniżej jego wartości.",
+      "example": "R2(config-if)# standby 50 ip 10.50.0.1\nR2(config-if)# standby 50 priority 100\nR2(config-if)# standby 50 preempt\nR2(config-if)# end\nR2# show standby brief"
+    },
+    {
+      "revision": 1,
+      "title": "Przygotowanie po restarcie",
+      "skills": [
+        "fhrp.przygotowanie-po-restarcie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.18.theory",
+      "front_md": "Przygotowanie po restarcie",
+      "back_md": "Przejęcie należy oceniać razem z gotowością routingu i interfejsów.",
+      "example": "R1(config-if)# standby 60 priority 130\nR1(config-if)# standby 60 preempt delay minimum 45\nR1(config-if)# end\nR1# show standby brief"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.fhrp.13",
+      "revision": 1,
+      "title": "Arytmetyka trackingu",
+      "skills": [
+        "fhrp.arytmetyka-trackingu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "R1 ma priority 120, decrement 30, R2 priority 100 i preempt. Track R1 przechodzi down. Który priorytet ma teraz R1?",
+      "hints": [
+        "120 − 30 = 90, więc R2 ma wyższy priorytet i przy poprawnym działaniu grupy może przejąć active."
+      ],
+      "explanation_md": "120 − 30 = 90, więc R2 ma wyższy priorytet i przy poprawnym działaniu grupy może przejąć active.",
+      "card_id": "ccna.fhrp.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "150",
+          "feedback_md": "Decrement odejmuje, a nie dodaje.",
+          "id": "A"
+        },
+        {
+          "text_md": "100",
+          "feedback_md": "Nie jest automatycznie równany do priorytetu R2.",
+          "id": "B"
+        },
+        {
+          "text_md": "90",
+          "feedback_md": "120 − 30 = 90, więc R2 ma wyższy priorytet i przy poprawnym działaniu grupy może przejąć active.",
+          "id": "C"
+        },
+        {
+          "text_md": "30",
+          "feedback_md": "To wielkość obniżki, nie wynik.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.fhrp.14",
+      "revision": 1,
+      "title": "Brama preferowana",
+      "skills": [
+        "fhrp.brama-preferowana"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Interfejs ma 10.30.0.2/24. Ustaw VIP 10.30.0.1 grupy 30, priorytet 120 i preempt.",
+      "hints": [
+        "Indywidualny adres interfejsu i wspólny VIP pozostają odrębne."
+      ],
+      "explanation_md": "Indywidualny adres interfejsu i wspólny VIP pozostają odrębne.",
+      "card_id": "ccna.fhrp.14.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config-if)# standby 30 ip {{b0}}\nR1(config-if)# standby 30 priority {{b1}}\nR1(config-if)# standby 30 {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "ipv4",
+          "accepted": [
+            "10.30.0.1"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "120"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "preempt"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.fhrp.15",
+      "revision": 1,
+      "title": "Śledź fizyczny uplink",
+      "skills": [
+        "fhrp.led-fizyczny-uplink"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Utwórz track 7 dla line-protocol G0/1. Na istniejącej grupie 40 interfejsu G0/0 ustaw obniżkę 25.",
+      "hints": [
+        "Śledzenie line-protocol wykrywa stan interfejsu; nie musi wykryć awarii dalej w sieci."
+      ],
+      "explanation_md": "Śledzenie line-protocol wykrywa stan interfejsu; nie musi wykryć awarii dalej w sieci.",
+      "card_id": "ccna.fhrp.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config)# track {{b0}} interface GigabitEthernet0/1 {{b1}}\nR1(config-track)# exit\nR1(config)# interface GigabitEthernet0/0\nR1(config-if)# standby 40 track 7 decrement {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "7"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "line-protocol"
+          ],
+          "width": 15,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "25"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.fhrp.16",
+      "revision": 1,
+      "title": "Dwie aktywne bramy",
+      "skills": [
+        "fhrp.dwie-aktywne-bramy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Oba routery tej samej grupy pokazują active. Jaką kontrolę wykonać w pierwszej kolejności?",
+      "hints": [
+        "Brak wymiany komunikatów lub niezgodność grupy może prowadzić do równoczesnego przekonania o roli active."
+      ],
+      "explanation_md": "Brak wymiany komunikatów lub niezgodność grupy może prowadzić do równoczesnego przekonania o roli active.",
+      "card_id": "ccna.fhrp.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zmienić IP wszystkich hostów na adres broadcast",
+          "feedback_md": "To zepsuje konfigurację klientów.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłączyć preempt na hostach",
+          "feedback_md": "Hosty nie konfigurują HSRP preempt.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zwiększyć numer grupy losowo na jednym routerze",
+          "feedback_md": "Rozdzieliłoby to konfiguracje zamiast uzgodnić grupę.",
+          "id": "C"
+        },
+        {
+          "text_md": "Łączność L2 oraz zgodność wersji i parametrów grupy",
+          "feedback_md": "Brak wymiany komunikatów lub niezgodność grupy może prowadzić do równoczesnego przekonania o roli active.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.fhrp.17",
+      "revision": 1,
+      "title": "Zapas z możliwością przejęcia",
+      "skills": [
+        "fhrp.zapas-z-mo-liwo-ci-przej-cia"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na G0/0 R2 ma IP 10.50.0.3/24. Dla grupy 50 ustaw VIP 10.50.0.1, priorytet 100, preempt i pokaż tabelę.",
+      "hints": [
+        "Zapas z preempt może przejąć rolę, gdy tracking obniży priorytet głównego routera poniżej jego wartości."
+      ],
+      "explanation_md": "Zapas z preempt może przejąć rolę, gdy tracking obniży priorytet głównego routera poniżej jego wartości.",
+      "card_id": "ccna.fhrp.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R2(config-if)# standby 50 ip {{b0}}\nR2(config-if)# standby 50 priority {{b1}}\nR2(config-if)# standby 50 {{b2}}\nR2(config-if)# end\nR2# show standby brief",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "ipv4",
+          "accepted": [
+            "10.50.0.1"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "100"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "preempt"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.fhrp.18",
+      "revision": 1,
+      "title": "Przygotowanie po restarcie",
+      "skills": [
+        "fhrp.przygotowanie-po-restarcie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W grupie 60 ustaw priority 130, opóźnij preempt minimum 45 s i wyświetl skrócony stan.",
+      "hints": [
+        "Przejęcie należy oceniać razem z gotowością routingu i interfejsów."
+      ],
+      "explanation_md": "Przejęcie należy oceniać razem z gotowością routingu i interfejsów.",
+      "card_id": "ccna.fhrp.18.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "R1(config-if)# standby 60 priority {{b0}}\nR1(config-if)# standby 60 preempt delay minimum {{b1}}\nR1(config-if)# end\nR1# show standby {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "130"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "45"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "brief"
+          ],
+          "width": 7,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

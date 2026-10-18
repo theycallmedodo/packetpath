@@ -1,0 +1,521 @@
+{
+  "schema_version": 3,
+  "id": "encor.fhrp.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Awaria Active bez preempt",
+      "skills": [
+        "fhrp.awaria-active-bez-preempt"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.07.theory",
+      "front_md": "Awaria Active bez preempt",
+      "back_md": "Preempt dotyczy wyparcia nadal aktywnego routera. Wykryta utrata Active pozwala Standby przejąć jego rolę.",
+      "example": "Nie; przejęcie po utracie Active jest innym mechanizmem niż preemption"
+    },
+    {
+      "revision": 1,
+      "title": "Uplink padł, LAN działa",
+      "skills": [
+        "fhrp.uplink-pad-lan-dzia-a"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.08.theory",
+      "front_md": "Uplink padł, LAN działa",
+      "back_md": "FHRP nie ocenia sam wszystkich zależności usługi. Tracking może powiązać wybór bramy ze stanem istotnego łącza lub obiektu.",
+      "example": "Może pozostać Active mimo braku użytecznej ścieżki WAN"
+    },
+    {
+      "revision": 1,
+      "title": "Tracking z dekrementem",
+      "skills": [
+        "fhrp.tracking-z-dekrementem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.09.theory",
+      "front_md": "Tracking z dekrementem",
+      "back_md": "Track odwołuje się do wcześniej utworzonego obiektu. Decrement odejmuje określoną wartość od priorytetu.",
+      "example": "interface Vlan20\n standby 20 track 7 decrement 30"
+    },
+    {
+      "revision": 1,
+      "title": "Obliczenie skutecznego priorytetu",
+      "skills": [
+        "fhrp.obliczenie-skutecznego-priorytetu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.10.theory",
+      "front_md": "Obliczenie skutecznego priorytetu",
+      "back_md": "Po spadku obiektu R1 ma 120 − 30 = 90. R2 z preempt może przejąć rolę przy spełnieniu pozostałych warunków.",
+      "example": "R2: 100 wobec 90 na R1"
+    },
+    {
+      "revision": 1,
+      "title": "VRRP IPv4 — klasyczna składnia",
+      "skills": [
+        "fhrp.vrrp-ipv4-klasyczna-sk-adnia"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.11.theory",
+      "front_md": "VRRP IPv4 — klasyczna składnia",
+      "back_md": "Polecenia dotyczą wskazanej klasycznej składni. Nowsza składnia address-family VRRPv3 wymaga osobnego kontekstu i nie jest tu używana.",
+      "example": "interface Vlan30\n vrrp 30 ip 10.30.0.1\n vrrp 30 priority 110"
+    },
+    {
+      "revision": 1,
+      "title": "Właściciel adresu VRRP",
+      "skills": [
+        "fhrp.w-a-ciciel-adresu-vrrp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.12.theory",
+      "front_md": "Właściciel adresu VRRP",
+      "back_md": "Właściciel adresu ma szczególny status i priority 255. Nie należy utożsamiać tej wartości z domyślnym priorytetem zwykłego uczestnika.",
+      "example": "255"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.fhrp.07",
+      "revision": 1,
+      "title": "Awaria Active bez preempt",
+      "skills": [
+        "fhrp.awaria-active-bez-preempt"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Aktywny router HSRP całkowicie przestaje wysyłać Hello. Czy brak preempt na Standby uniemożliwia mu przejęcie po wygaśnięciu hold time?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Preempt dotyczy wyparcia nadal aktywnego routera. Wykryta utrata Active pozwala Standby przejąć jego rolę.",
+      "card_id": "encor.fhrp.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, zawsze",
+          "feedback_md": "Preempt dotyczy wyparcia nadal aktywnego routera. Wykryta utrata Active pozwala Standby przejąć jego rolę.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, chyba że host zmieni adres IP",
+          "feedback_md": "Preempt dotyczy wyparcia nadal aktywnego routera. Wykryta utrata Active pozwala Standby przejąć jego rolę.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie, ponieważ grupa zawsze miała dwóch Active",
+          "feedback_md": "Preempt dotyczy wyparcia nadal aktywnego routera. Wykryta utrata Active pozwala Standby przejąć jego rolę.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie; przejęcie po utracie Active jest innym mechanizmem niż preemption",
+          "feedback_md": "Preempt dotyczy wyparcia nadal aktywnego routera. Wykryta utrata Active pozwala Standby przejąć jego rolę.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.fhrp.08",
+      "revision": 1,
+      "title": "Uplink padł, LAN działa",
+      "skills": [
+        "fhrp.uplink-pad-lan-dzia-a"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Router Active stracił wyjście WAN, lecz LAN i Hello HSRP nadal działają. Bez trackingu co może się stać?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "FHRP nie ocenia sam wszystkich zależności usługi. Tracking może powiązać wybór bramy ze stanem istotnego łącza lub obiektu.",
+      "card_id": "encor.fhrp.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Musi zawsze automatycznie oddać rolę",
+          "feedback_md": "FHRP nie ocenia sam wszystkich zależności usługi. Tracking może powiązać wybór bramy ze stanem istotnego łącza lub obiektu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Hosty automatycznie wykryją numer nowego AS",
+          "feedback_md": "FHRP nie ocenia sam wszystkich zależności usługi. Tracking może powiązać wybór bramy ze stanem istotnego łącza lub obiektu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Może pozostać Active mimo braku użytecznej ścieżki WAN",
+          "feedback_md": "FHRP nie ocenia sam wszystkich zależności usługi. Tracking może powiązać wybór bramy ze stanem istotnego łącza lub obiektu.",
+          "id": "C"
+        },
+        {
+          "text_md": "HSRP samo odbuduje dowolny WAN",
+          "feedback_md": "FHRP nie ocenia sam wszystkich zależności usługi. Tracking może powiązać wybór bramy ze stanem istotnego łącza lub obiektu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.fhrp.09",
+      "revision": 1,
+      "title": "Tracking z dekrementem",
+      "skills": [
+        "fhrp.tracking-z-dekrementem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W grupie HSRP 20 śledź istniejący obiekt 7 i obniż priority o 30 po jego awarii.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Track odwołuje się do wcześniej utworzonego obiektu. Decrement odejmuje określoną wartość od priorytetu.",
+      "card_id": "encor.fhrp.09.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "interface Vlan20\n standby 20 track {{b0}} decrement {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "7"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "30"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.fhrp.10",
+      "revision": 1,
+      "title": "Obliczenie skutecznego priorytetu",
+      "skills": [
+        "fhrp.obliczenie-skutecznego-priorytetu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "R1: priority 120, decrement 30 dla obiektu down. R2: priority 100 i preempt. Przy sprawnym LAN który router ma wyższy skuteczny priorytet?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Po spadku obiektu R1 ma 120 − 30 = 90. R2 z preempt może przejąć rolę przy spełnieniu pozostałych warunków.",
+      "card_id": "encor.fhrp.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "R2: 100 wobec 90 na R1",
+          "feedback_md": "Po spadku obiektu R1 ma 120 − 30 = 90. R2 z preempt może przejąć rolę przy spełnieniu pozostałych warunków.",
+          "id": "A"
+        },
+        {
+          "text_md": "R1: 120 wobec 100 na R2",
+          "feedback_md": "Po spadku obiektu R1 ma 120 − 30 = 90. R2 z preempt może przejąć rolę przy spełnieniu pozostałych warunków.",
+          "id": "B"
+        },
+        {
+          "text_md": "R1: 150 wobec 100 na R2",
+          "feedback_md": "Po spadku obiektu R1 ma 120 − 30 = 90. R2 z preempt może przejąć rolę przy spełnieniu pozostałych warunków.",
+          "id": "C"
+        },
+        {
+          "text_md": "Remis 100 do 100",
+          "feedback_md": "Po spadku obiektu R1 ma 120 − 30 = 90. R2 z preempt może przejąć rolę przy spełnieniu pozostałych warunków.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.fhrp.11",
+      "revision": 1,
+      "title": "VRRP IPv4 — klasyczna składnia",
+      "skills": [
+        "fhrp.vrrp-ipv4-klasyczna-sk-adnia"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na platformie wspierającej klasyczną interfejsową składnię VRRP IPv4 ustaw grupę 30, VIP 10.30.0.1 i priority 110. Adres fizyczny już istnieje.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Polecenia dotyczą wskazanej klasycznej składni. Nowsza składnia address-family VRRPv3 wymaga osobnego kontekstu i nie jest tu używana.",
+      "card_id": "encor.fhrp.11.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "interface Vlan30\n vrrp 30 ip {{b0}}\n vrrp 30 priority {{b1}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "10.30.0.1"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "110"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.fhrp.12",
+      "revision": 1,
+      "title": "Właściciel adresu VRRP",
+      "skills": [
+        "fhrp.w-a-ciciel-adresu-vrrp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Router VRRP jest właścicielem adresu IP używanego jako VIP. Jaki specjalny priorytet jest z tym związany?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Właściciel adresu ma szczególny status i priority 255. Nie należy utożsamiać tej wartości z domyślnym priorytetem zwykłego uczestnika.",
+      "card_id": "encor.fhrp.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "100",
+          "feedback_md": "Właściciel adresu ma szczególny status i priority 255. Nie należy utożsamiać tej wartości z domyślnym priorytetem zwykłego uczestnika.",
+          "id": "A"
+        },
+        {
+          "text_md": "0",
+          "feedback_md": "Właściciel adresu ma szczególny status i priority 255. Nie należy utożsamiać tej wartości z domyślnym priorytetem zwykłego uczestnika.",
+          "id": "B"
+        },
+        {
+          "text_md": "255",
+          "feedback_md": "Właściciel adresu ma szczególny status i priority 255. Nie należy utożsamiać tej wartości z domyślnym priorytetem zwykłego uczestnika.",
+          "id": "C"
+        },
+        {
+          "text_md": "1",
+          "feedback_md": "Właściciel adresu ma szczególny status i priority 255. Nie należy utożsamiać tej wartości z domyślnym priorytetem zwykłego uczestnika.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "encor.sdaccess.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Ruch wewnętrzny działa, zewnętrzny nie",
+      "skills": [
+        "sdaccess.ruch-wewn-trzny-dzia-a-zewn-trzny-nie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.13.theory",
+      "front_md": "Ruch wewnętrzny działa, zewnętrzny nie",
+      "back_md": "Działanie wewnątrz nie potwierdza granicy zewnętrznej. Diagnozuj dalszą ścieżkę i powrót, zachowując kontekst VN.",
+      "example": "Border, routing zewnętrzny, drogę powrotną i polityki"
+    },
+    {
+      "revision": 1,
+      "title": "Małe pakiety działają",
+      "skills": [
+        "sdaccess.ma-e-pakiety-dzia-aj"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.14.theory",
+      "front_md": "Małe pakiety działają",
+      "back_md": "Underlay musi uwzględniać narzut overlay. Sama osiągalność pingiem o małym rozmiarze nie weryfikuje pełnej ścieżki MTU.",
+      "example": "Enkapsulacja VXLAN zwiększa rozmiar transportowanego pakietu"
+    },
+    {
+      "revision": 1,
+      "title": "Przeniesienie endpointu",
+      "skills": [
+        "sdaccess.przeniesienie-endpointu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.15.theory",
+      "front_md": "Przeniesienie endpointu",
+      "back_md": "Control plane musi odzwierciedlać lokalizację endpointu, aby zdalne węzły kierowały ruch do aktualnego miejsca przyłączenia.",
+      "example": "Mapowanie endpointu na właściwy locator/edge"
+    },
+    {
+      "revision": 1,
+      "title": "SGT nie jest szyfrowaniem",
+      "skills": [
+        "sdaccess.sgt-nie-jest-szyfrowaniem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.16.theory",
+      "front_md": "SGT nie jest szyfrowaniem",
+      "back_md": "Etykietowanie i egzekwowanie dostępu to inne funkcje niż szyfrowanie. Poufność wymaga odpowiednich mechanizmów projektu.",
+      "example": "Nie; identyfikuje grupę dla polityki, nie szyfruje danych"
+    },
+    {
+      "revision": 1,
+      "title": "Integracja z tradycyjną siecią",
+      "skills": [
+        "sdaccess.integracja-z-tradycyjn-sieci"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.17.theory",
+      "front_md": "Integracja z tradycyjną siecią",
+      "back_md": "Fabric nie usuwa potrzeby projektu styku z istniejącą infrastrukturą. Trzeba określić zasięg sieci i polityk na granicy.",
+      "example": "Połączenie graniczne, routing i zachowanie segmentacji/polityk między domenami"
+    },
+    {
+      "revision": 1,
+      "title": "Łączenie ról",
+      "skills": [
+        "sdaccess.czenie-r-l"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.18.theory",
+      "front_md": "Łączenie ról",
+      "back_md": "Role logiczne nie narzucają zawsze osobnych urządzeń. Projekty typu fabric-in-a-box wymagają sprawdzenia wsparcia, skali i odporności.",
+      "example": "Nie; wspierane projekty mogą łączyć role, z uwzględnieniem platformy i skali"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.sdaccess.13",
+      "revision": 1,
+      "title": "Ruch wewnętrzny działa, zewnętrzny nie",
+      "skills": [
+        "sdaccess.ruch-wewn-trzny-dzia-a-zewn-trzny-nie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Endpointy komunikują się wewnątrz VN, ale nie z serwerem poza fabric. Który obszar sprawdzić jako kolejny?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Działanie wewnątrz nie potwierdza granicy zewnętrznej. Diagnozuj dalszą ścieżkę i powrót, zachowując kontekst VN.",
+      "card_id": "encor.sdaccess.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie wymianę kabli wszystkich edge",
+          "feedback_md": "Działanie wewnątrz nie potwierdza granicy zewnętrznej. Diagnozuj dalszą ścieżkę i powrót, zachowując kontekst VN.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłącznie nazwę profilu GUI",
+          "feedback_md": "Działanie wewnątrz nie potwierdza granicy zewnętrznej. Diagnozuj dalszą ścieżkę i powrót, zachowując kontekst VN.",
+          "id": "B"
+        },
+        {
+          "text_md": "Border, routing zewnętrzny, drogę powrotną i polityki",
+          "feedback_md": "Działanie wewnątrz nie potwierdza granicy zewnętrznej. Diagnozuj dalszą ścieżkę i powrót, zachowując kontekst VN.",
+          "id": "C"
+        },
+        {
+          "text_md": "Uznać pełną awarię LISP mimo działającego ruchu wewnątrz",
+          "feedback_md": "Działanie wewnątrz nie potwierdza granicy zewnętrznej. Diagnozuj dalszą ścieżkę i powrót, zachowując kontekst VN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.sdaccess.14",
+      "revision": 1,
+      "title": "Małe pakiety działają",
+      "skills": [
+        "sdaccess.ma-e-pakiety-dzia-aj"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Duże pakiety między edge zawodzą, małe przechodzą. Podczas migracji zachowano zbyt małe MTU na części underlay. Dlaczego to istotne?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Underlay musi uwzględniać narzut overlay. Sama osiągalność pingiem o małym rozmiarze nie weryfikuje pełnej ścieżki MTU.",
+      "card_id": "encor.sdaccess.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "LISP automatycznie kompresuje każdy pakiet do MTU",
+          "feedback_md": "Underlay musi uwzględniać narzut overlay. Sama osiągalność pingiem o małym rozmiarze nie weryfikuje pełnej ścieżki MTU.",
+          "id": "A"
+        },
+        {
+          "text_md": "Enkapsulacja VXLAN zwiększa rozmiar transportowanego pakietu",
+          "feedback_md": "Underlay musi uwzględniać narzut overlay. Sama osiągalność pingiem o małym rozmiarze nie weryfikuje pełnej ścieżki MTU.",
+          "id": "B"
+        },
+        {
+          "text_md": "SGT zawsze usuwa nagłówek IP",
+          "feedback_md": "Underlay musi uwzględniać narzut overlay. Sama osiągalność pingiem o małym rozmiarze nie weryfikuje pełnej ścieżki MTU.",
+          "id": "C"
+        },
+        {
+          "text_md": "Anycast gateway gwarantuje nieograniczone MTU",
+          "feedback_md": "Underlay musi uwzględniać narzut overlay. Sama osiągalność pingiem o małym rozmiarze nie weryfikuje pełnej ścieżki MTU.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.sdaccess.15",
+      "revision": 1,
+      "title": "Przeniesienie endpointu",
+      "skills": [
+        "sdaccess.przeniesienie-endpointu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Endpoint przechodzi z jednego edge na drugi w obrębie poprawnie skonfigurowanego fabric. Co musi odpowiadać nowej lokalizacji?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Control plane musi odzwierciedlać lokalizację endpointu, aby zdalne węzły kierowały ruch do aktualnego miejsca przyłączenia.",
+      "card_id": "encor.sdaccess.15.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Mapowanie endpointu na właściwy locator/edge",
+          "feedback_md": "Control plane musi odzwierciedlać lokalizację endpointu, aby zdalne węzły kierowały ruch do aktualnego miejsca przyłączenia.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wymiana wszystkich switchy intermediate",
+          "feedback_md": "Control plane musi odzwierciedlać lokalizację endpointu, aby zdalne węzły kierowały ruch do aktualnego miejsca przyłączenia.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zmiana wszystkich VN na wspólny VLAN",
+          "feedback_md": "Control plane musi odzwierciedlać lokalizację endpointu, aby zdalne węzły kierowały ruch do aktualnego miejsca przyłączenia.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłączenie rozproszonej bramy",
+          "feedback_md": "Control plane musi odzwierciedlać lokalizację endpointu, aby zdalne węzły kierowały ruch do aktualnego miejsca przyłączenia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.sdaccess.16",
+      "revision": 1,
+      "title": "SGT nie jest szyfrowaniem",
+      "skills": [
+        "sdaccess.sgt-nie-jest-szyfrowaniem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Pakiety mają przypisaną grupę bezpieczeństwa SGT. Czy sama etykieta zapewnia poufność payloadu?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Etykietowanie i egzekwowanie dostępu to inne funkcje niż szyfrowanie. Poufność wymaga odpowiednich mechanizmów projektu.",
+      "card_id": "encor.sdaccess.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, każda SGT jest kluczem AES",
+          "feedback_md": "Etykietowanie i egzekwowanie dostępu to inne funkcje niż szyfrowanie. Poufność wymaga odpowiednich mechanizmów projektu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, jeśli numer SGT przekracza 100",
+          "feedback_md": "Etykietowanie i egzekwowanie dostępu to inne funkcje niż szyfrowanie. Poufność wymaga odpowiednich mechanizmów projektu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, jeśli endpoint jest w tej samej VN",
+          "feedback_md": "Etykietowanie i egzekwowanie dostępu to inne funkcje niż szyfrowanie. Poufność wymaga odpowiednich mechanizmów projektu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie; identyfikuje grupę dla polityki, nie szyfruje danych",
+          "feedback_md": "Etykietowanie i egzekwowanie dostępu to inne funkcje niż szyfrowanie. Poufność wymaga odpowiednich mechanizmów projektu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.sdaccess.17",
+      "revision": 1,
+      "title": "Integracja z tradycyjną siecią",
+      "skills": [
+        "sdaccess.integracja-z-tradycyjn-sieci"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Firma wdraża SD-Access częściowo, zachowując tradycyjną sieć kampusową. Co trzeba jawnie zaprojektować?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Fabric nie usuwa potrzeby projektu styku z istniejącą infrastrukturą. Trzeba określić zasięg sieci i polityk na granicy.",
+      "card_id": "encor.sdaccess.17.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Założyć, że wszystkie VLAN-y automatycznie stają się VN",
+          "feedback_md": "Fabric nie usuwa potrzeby projektu styku z istniejącą infrastrukturą. Trzeba określić zasięg sieci i polityk na granicy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Założyć, że Catalyst Center przeniesie każdą politykę bez mapowania",
+          "feedback_md": "Fabric nie usuwa potrzeby projektu styku z istniejącą infrastrukturą. Trzeba określić zasięg sieci i polityk na granicy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Połączenie graniczne, routing i zachowanie segmentacji/polityk między domenami",
+          "feedback_md": "Fabric nie usuwa potrzeby projektu styku z istniejącą infrastrukturą. Trzeba określić zasięg sieci i polityk na granicy.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłącznie zmienić nazwy switchy",
+          "feedback_md": "Fabric nie usuwa potrzeby projektu styku z istniejącą infrastrukturą. Trzeba określić zasięg sieci i polityk na granicy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.sdaccess.18",
+      "revision": 1,
+      "title": "Łączenie ról",
+      "skills": [
+        "sdaccess.czenie-r-l"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Czy role edge, border i control plane muszą zawsze znajdować się na trzech osobnych fizycznych urządzeniach?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Role logiczne nie narzucają zawsze osobnych urządzeń. Projekty typu fabric-in-a-box wymagają sprawdzenia wsparcia, skali i odporności.",
+      "card_id": "encor.sdaccess.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, bez wyjątków",
+          "feedback_md": "Role logiczne nie narzucają zawsze osobnych urządzeń. Projekty typu fabric-in-a-box wymagają sprawdzenia wsparcia, skali i odporności.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie; wspierane projekty mogą łączyć role, z uwzględnieniem platformy i skali",
+          "feedback_md": "Role logiczne nie narzucają zawsze osobnych urządzeń. Projekty typu fabric-in-a-box wymagają sprawdzenia wsparcia, skali i odporności.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie, bo control plane zawsze działa na każdym hoście",
+          "feedback_md": "Role logiczne nie narzucają zawsze osobnych urządzeń. Projekty typu fabric-in-a-box wymagają sprawdzenia wsparcia, skali i odporności.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak, ponieważ VXLAN nie obsługuje routingu",
+          "feedback_md": "Role logiczne nie narzucają zawsze osobnych urządzeń. Projekty typu fabric-in-a-box wymagają sprawdzenia wsparcia, skali i odporności.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

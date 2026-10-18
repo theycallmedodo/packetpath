@@ -1,0 +1,423 @@
+{
+  "schema_version": 3,
+  "id": "encor.virtualization.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Cel VXLAN",
+      "skills": [
+        "virtualization.cel-vxlan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        }
+      ],
+      "id": "encor.virtualization.07.theory",
+      "front_md": "Cel VXLAN",
+      "back_md": "VXLAN enkapsuluje ramki w transport IP/UDP, pozwalając tworzyć logiczne segmenty ponad underlay L3.",
+      "example": "Przenoszenie segmentów L2 przez sieć L3"
+    },
+    {
+      "revision": 1,
+      "title": "VTEP",
+      "skills": [
+        "virtualization.vtep"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        }
+      ],
+      "id": "encor.virtualization.08.theory",
+      "front_md": "VTEP",
+      "back_md": "VXLAN Tunnel Endpoint jest końcem tunelu. Może być realizowany sprzętowo lub programowo.",
+      "example": "VTEP"
+    },
+    {
+      "revision": 1,
+      "title": "Identyfikator segmentu",
+      "skills": [
+        "virtualization.identyfikator-segmentu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        }
+      ],
+      "id": "encor.virtualization.09.theory",
+      "front_md": "Identyfikator segmentu",
+      "back_md": "24-bitowy VNI daje większą przestrzeń identyfikatorów niż 12-bitowy identyfikator VLAN.",
+      "example": "24 bity"
+    },
+    {
+      "revision": 1,
+      "title": "Underlay VXLAN",
+      "skills": [
+        "virtualization.underlay-vxlan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        }
+      ],
+      "id": "encor.virtualization.10.theory",
+      "front_md": "Underlay VXLAN",
+      "back_md": "Overlay wymaga transportu między końcami. Za małe MTU lub brak routingu może uszkodzić komunikację mimo poprawnych VNI.",
+      "example": "Osiągalność IP i odpowiednią MTU dla enkapsulacji"
+    },
+    {
+      "revision": 1,
+      "title": "EID w LISP",
+      "skills": [
+        "virtualization.eid-w-lisp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "id": "encor.virtualization.11.theory",
+      "front_md": "EID w LISP",
+      "back_md": "LISP rozdziela identyfikator endpointu EID i lokalizator routingu RLOC, by oddzielić tożsamość od położenia.",
+      "example": "Endpoint, oddzielony logicznie od lokalizacji routingu"
+    },
+    {
+      "revision": 1,
+      "title": "RLOC w LISP",
+      "skills": [
+        "virtualization.rloc-w-lisp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "id": "encor.virtualization.12.theory",
+      "front_md": "RLOC w LISP",
+      "back_md": "RLOC umożliwia dotarcie przez underlay do odpowiedniego węzła. System mapowania wiąże EID z RLOC.",
+      "example": "Lokalizację routowalną używaną do transportu do końca tunelu"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.virtualization.07",
+      "revision": 1,
+      "title": "Cel VXLAN",
+      "skills": [
+        "virtualization.cel-vxlan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co przede wszystkim umożliwia VXLAN w overlay?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "VXLAN enkapsuluje ramki w transport IP/UDP, pozwalając tworzyć logiczne segmenty ponad underlay L3.",
+      "card_id": "encor.virtualization.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zastąpienie każdego protokołu routingu",
+          "feedback_md": "VXLAN enkapsuluje ramki w transport IP/UDP, pozwalając tworzyć logiczne segmenty ponad underlay L3.",
+          "id": "A"
+        },
+        {
+          "text_md": "Szyfrowanie AES z definicji",
+          "feedback_md": "VXLAN enkapsuluje ramki w transport IP/UDP, pozwalając tworzyć logiczne segmenty ponad underlay L3.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie tunelowanie pojedynczego hosta bez MAC",
+          "feedback_md": "VXLAN enkapsuluje ramki w transport IP/UDP, pozwalając tworzyć logiczne segmenty ponad underlay L3.",
+          "id": "C"
+        },
+        {
+          "text_md": "Przenoszenie segmentów L2 przez sieć L3",
+          "feedback_md": "VXLAN enkapsuluje ramki w transport IP/UDP, pozwalając tworzyć logiczne segmenty ponad underlay L3.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.virtualization.08",
+      "revision": 1,
+      "title": "VTEP",
+      "skills": [
+        "virtualization.vtep"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Który element wykonuje enkapsulację i dekapsulację VXLAN?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "VXLAN Tunnel Endpoint jest końcem tunelu. Może być realizowany sprzętowo lub programowo.",
+      "card_id": "encor.virtualization.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "ABR OSPF",
+          "feedback_md": "VXLAN Tunnel Endpoint jest końcem tunelu. Może być realizowany sprzętowo lub programowo.",
+          "id": "A"
+        },
+        {
+          "text_md": "Serwer DNS jako obowiązkowa rola",
+          "feedback_md": "VXLAN Tunnel Endpoint jest końcem tunelu. Może być realizowany sprzętowo lub programowo.",
+          "id": "B"
+        },
+        {
+          "text_md": "VTEP",
+          "feedback_md": "VXLAN Tunnel Endpoint jest końcem tunelu. Może być realizowany sprzętowo lub programowo.",
+          "id": "C"
+        },
+        {
+          "text_md": "DR BGP",
+          "feedback_md": "VXLAN Tunnel Endpoint jest końcem tunelu. Może być realizowany sprzętowo lub programowo.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.virtualization.09",
+      "revision": 1,
+      "title": "Identyfikator segmentu",
+      "skills": [
+        "virtualization.identyfikator-segmentu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Jaką szerokość ma pole VNI w VXLAN?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "24-bitowy VNI daje większą przestrzeń identyfikatorów niż 12-bitowy identyfikator VLAN.",
+      "card_id": "encor.virtualization.09.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "12 bitów",
+          "feedback_md": "24-bitowy VNI daje większą przestrzeń identyfikatorów niż 12-bitowy identyfikator VLAN.",
+          "id": "A"
+        },
+        {
+          "text_md": "24 bity",
+          "feedback_md": "24-bitowy VNI daje większą przestrzeń identyfikatorów niż 12-bitowy identyfikator VLAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "6 bitów",
+          "feedback_md": "24-bitowy VNI daje większą przestrzeń identyfikatorów niż 12-bitowy identyfikator VLAN.",
+          "id": "C"
+        },
+        {
+          "text_md": "128 bitów",
+          "feedback_md": "24-bitowy VNI daje większą przestrzeń identyfikatorów niż 12-bitowy identyfikator VLAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.virtualization.10",
+      "revision": 1,
+      "title": "Underlay VXLAN",
+      "skills": [
+        "virtualization.underlay-vxlan"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co musi zapewniać underlay między VTEP-ami?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Overlay wymaga transportu między końcami. Za małe MTU lub brak routingu może uszkodzić komunikację mimo poprawnych VNI.",
+      "card_id": "encor.virtualization.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Osiągalność IP i odpowiednią MTU dla enkapsulacji",
+          "feedback_md": "Overlay wymaga transportu między końcami. Za małe MTU lub brak routingu może uszkodzić komunikację mimo poprawnych VNI.",
+          "id": "A"
+        },
+        {
+          "text_md": "Identyczny lokalny numer portu dostępowego",
+          "feedback_md": "Overlay wymaga transportu między końcami. Za małe MTU lub brak routingu może uszkodzić komunikację mimo poprawnych VNI.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wspólny process ID OSPF",
+          "feedback_md": "Overlay wymaga transportu między końcami. Za małe MTU lub brak routingu może uszkodzić komunikację mimo poprawnych VNI.",
+          "id": "C"
+        },
+        {
+          "text_md": "Identyczne adresy MAC wszystkich hostów",
+          "feedback_md": "Overlay wymaga transportu między końcami. Za małe MTU lub brak routingu może uszkodzić komunikację mimo poprawnych VNI.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.virtualization.11",
+      "revision": 1,
+      "title": "EID w LISP",
+      "skills": [
+        "virtualization.eid-w-lisp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.a"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co identyfikuje EID w modelu LISP?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "LISP rozdziela identyfikator endpointu EID i lokalizator routingu RLOC, by oddzielić tożsamość od położenia.",
+      "card_id": "encor.virtualization.11.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zawsze fizyczny port switcha",
+          "feedback_md": "LISP rozdziela identyfikator endpointu EID i lokalizator routingu RLOC, by oddzielić tożsamość od położenia.",
+          "id": "A"
+        },
+        {
+          "text_md": "Numer VLAN transportowego",
+          "feedback_md": "LISP rozdziela identyfikator endpointu EID i lokalizator routingu RLOC, by oddzielić tożsamość od położenia.",
+          "id": "B"
+        },
+        {
+          "text_md": "Hasło do tunelu",
+          "feedback_md": "LISP rozdziela identyfikator endpointu EID i lokalizator routingu RLOC, by oddzielić tożsamość od położenia.",
+          "id": "C"
+        },
+        {
+          "text_md": "Endpoint, oddzielony logicznie od lokalizacji routingu",
+          "feedback_md": "LISP rozdziela identyfikator endpointu EID i lokalizator routingu RLOC, by oddzielić tożsamość od położenia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.virtualization.12",
+      "revision": 1,
+      "title": "RLOC w LISP",
+      "skills": [
+        "virtualization.rloc-w-lisp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.a"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co opisuje RLOC?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "RLOC umożliwia dotarcie przez underlay do odpowiedniego węzła. System mapowania wiąże EID z RLOC.",
+      "card_id": "encor.virtualization.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tylko nazwę użytkownika",
+          "feedback_md": "RLOC umożliwia dotarcie przez underlay do odpowiedniego węzła. System mapowania wiąże EID z RLOC.",
+          "id": "A"
+        },
+        {
+          "text_md": "Maskę wildcard każdego EID",
+          "feedback_md": "RLOC umożliwia dotarcie przez underlay do odpowiedniego węzła. System mapowania wiąże EID z RLOC.",
+          "id": "B"
+        },
+        {
+          "text_md": "Lokalizację routowalną używaną do transportu do końca tunelu",
+          "feedback_md": "RLOC umożliwia dotarcie przez underlay do odpowiedniego węzła. System mapowania wiąże EID z RLOC.",
+          "id": "C"
+        },
+        {
+          "text_md": "Rozmiar tablicy ARP",
+          "feedback_md": "RLOC umożliwia dotarcie przez underlay do odpowiedniego węzła. System mapowania wiąże EID z RLOC.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

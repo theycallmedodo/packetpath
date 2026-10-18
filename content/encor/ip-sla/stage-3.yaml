@@ -1,0 +1,445 @@
+{
+  "schema_version": 3,
+  "id": "encor.ip-sla.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Wynik Timeout",
+      "skills": [
+        "ip-sla.wynik-timeout"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.13.theory",
+      "front_md": "Wynik Timeout",
+      "back_md": "Brak odpowiedzi ma wiele przyczyn. Sprawdź ścieżkę, ACL, źródło i obciążenie przed wskazaniem uszkodzenia.",
+      "example": "Nie; możliwe są też filtracja, brak trasy lub problem powrotu"
+    },
+    {
+      "revision": 1,
+      "title": "Źródło i routing powrotny",
+      "skills": [
+        "ip-sla.r-d-o-i-routing-powrotny"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.14.theory",
+      "front_md": "Źródło i routing powrotny",
+      "back_md": "Inne źródło może oznaczać inną ścieżkę powrotną i inne dopasowanie ACL. Porównuj testy z tym samym źródłem.",
+      "example": "Brak trasy powrotnej do jawnego źródła"
+    },
+    {
+      "revision": 1,
+      "title": "Kompletna sonda",
+      "skills": [
+        "ip-sla.kompletna-sonda"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.15.theory",
+      "front_md": "Kompletna sonda",
+      "back_md": "Parametry mają różne jednostki. Timeout 1 s jest krótszy od odstępu 10 s między pomiarami.",
+      "example": "ip sla 30\n icmp-echo 203.0.113.10\n timeout 1000\n frequency 10\nexit\nip sla schedule 30 life forever start-time now"
+    },
+    {
+      "revision": 1,
+      "title": "Jedna próbka to za mało",
+      "skills": [
+        "ip-sla.jedna-pr-bka-to-za-ma-o"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.16.theory",
+      "front_md": "Jedna próbka to za mało",
+      "back_md": "Pomiary aktywne trzeba interpretować w czasie. Pojedynczy skok nie opisuje całego rozkładu ani przyczyny problemu.",
+      "example": "Analizować serię pomiarów, częstość odchyleń i kontekst"
+    },
+    {
+      "revision": 1,
+      "title": "Sonda z kontrolą źródła",
+      "skills": [
+        "ip-sla.sonda-z-kontrol-r-d-a"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.17.theory",
+      "front_md": "Sonda z kontrolą źródła",
+      "back_md": "Jawne źródło zapewnia powtarzalny punkt pomiarowy. Konfiguracja wymaga osiągalności celu i drogi powrotnej.",
+      "example": "ip sla 40\n icmp-echo 10.90.0.10 source-ip 10.8.0.1\n frequency 60\nexit\nip sla schedule 40 life forever start-time now"
+    },
+    {
+      "revision": 1,
+      "title": "Pomiar a failover",
+      "skills": [
+        "ip-sla.pomiar-a-failover"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.18.theory",
+      "front_md": "Pomiar a failover",
+      "back_md": "Pomiar, śledzenie obiektu i decyzja routingu są oddzielnymi elementami. Samo SLA nie zmienia dowolnej trasy.",
+      "example": "Nie; potrzebne jest jawne powiązanie z trackingiem i polityką routingu"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ip-sla.13",
+      "revision": 1,
+      "title": "Wynik Timeout",
+      "skills": [
+        "ip-sla.wynik-timeout"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "```text\nR1# show ip sla statistics 10\nIPSLA operation id: 10\nLatest RTT: NoConnection/Busy/Timeout\nLatest operation return code: Timeout\n```\n\nSkrócony przykład do analizy. SLA zwraca Timeout. Czy dowodzi to awarii samego routera docelowego?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Brak odpowiedzi ma wiele przyczyn. Sprawdź ścieżkę, ACL, źródło i obciążenie przed wskazaniem uszkodzenia.",
+      "card_id": "encor.ip-sla.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, zawsze oznacza uszkodzony CPU",
+          "feedback_md": "Brak odpowiedzi ma wiele przyczyn. Sprawdź ścieżkę, ACL, źródło i obciążenie przed wskazaniem uszkodzenia.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, zawsze oznacza brak zasilania",
+          "feedback_md": "Brak odpowiedzi ma wiele przyczyn. Sprawdź ścieżkę, ACL, źródło i obciążenie przed wskazaniem uszkodzenia.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie; możliwe są też filtracja, brak trasy lub problem powrotu",
+          "feedback_md": "Brak odpowiedzi ma wiele przyczyn. Sprawdź ścieżkę, ACL, źródło i obciążenie przed wskazaniem uszkodzenia.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, ponieważ timeout oznacza sukces",
+          "feedback_md": "Brak odpowiedzi ma wiele przyczyn. Sprawdź ścieżkę, ACL, źródło i obciążenie przed wskazaniem uszkodzenia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ip-sla.14",
+      "revision": 1,
+      "title": "Źródło i routing powrotny",
+      "skills": [
+        "ip-sla.r-d-o-i-routing-powrotny"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Ping zwykły działa, lecz SLA ze source-ip Loopback0 nie. Cel nie ma trasy do loopbacka. Co wyjaśnia różnicę?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Inne źródło może oznaczać inną ścieżkę powrotną i inne dopasowanie ACL. Porównuj testy z tym samym źródłem.",
+      "card_id": "encor.ip-sla.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "IP SLA zabrania loopbacków",
+          "feedback_md": "Inne źródło może oznaczać inną ścieżkę powrotną i inne dopasowanie ACL. Porównuj testy z tym samym źródłem.",
+          "id": "A"
+        },
+        {
+          "text_md": "Brak trasy powrotnej do jawnego źródła",
+          "feedback_md": "Inne źródło może oznaczać inną ścieżkę powrotną i inne dopasowanie ACL. Porównuj testy z tym samym źródłem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Frequency musi wynosić numer loopbacka",
+          "feedback_md": "Inne źródło może oznaczać inną ścieżkę powrotną i inne dopasowanie ACL. Porównuj testy z tym samym źródłem.",
+          "id": "C"
+        },
+        {
+          "text_md": "ICMP może działać tylko z VLAN 1",
+          "feedback_md": "Inne źródło może oznaczać inną ścieżkę powrotną i inne dopasowanie ACL. Porównuj testy z tym samym źródłem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ip-sla.15",
+      "revision": 1,
+      "title": "Kompletna sonda",
+      "skills": [
+        "ip-sla.kompletna-sonda"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Operacja 30: cel 203.0.113.10, timeout 1000 ms, frequency 10 s. Start od razu na zawsze jest podany.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Parametry mają różne jednostki. Timeout 1 s jest krótszy od odstępu 10 s między pomiarami.",
+      "card_id": "encor.ip-sla.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "ip sla 30\n icmp-echo {{b0}}\n timeout {{b1}}\n frequency {{b2}}\nexit\nip sla schedule 30 life forever start-time now",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "203.0.113.10"
+          ],
+          "width": 14,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "1000"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "10"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ip-sla.16",
+      "revision": 1,
+      "title": "Jedna próbka to za mało",
+      "skills": [
+        "ip-sla.jedna-pr-bka-to-za-ma-o"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Jeden pomiar RTT wyniósł 200 ms, pozostałe 20 ms. Jak najlepiej oceniać jakość?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Pomiary aktywne trzeba interpretować w czasie. Pojedynczy skok nie opisuje całego rozkładu ani przyczyny problemu.",
+      "card_id": "encor.ip-sla.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Uznawać jedną próbkę za stałe RTT sieci",
+          "feedback_md": "Pomiary aktywne trzeba interpretować w czasie. Pojedynczy skok nie opisuje całego rozkładu ani przyczyny problemu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zmienić wszystkie AS w BGP",
+          "feedback_md": "Pomiary aktywne trzeba interpretować w czasie. Pojedynczy skok nie opisuje całego rozkładu ani przyczyny problemu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Pomijać wszystkie odchylenia bez sprawdzenia",
+          "feedback_md": "Pomiary aktywne trzeba interpretować w czasie. Pojedynczy skok nie opisuje całego rozkładu ani przyczyny problemu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Analizować serię pomiarów, częstość odchyleń i kontekst",
+          "feedback_md": "Pomiary aktywne trzeba interpretować w czasie. Pojedynczy skok nie opisuje całego rozkładu ani przyczyny problemu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ip-sla.17",
+      "revision": 1,
+      "title": "Sonda z kontrolą źródła",
+      "skills": [
+        "ip-sla.sonda-z-kontrol-r-d-a"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Operacja 40 ma cel 10.90.0.10, źródło 10.8.0.1 i częstotliwość 60 s. Oba adresy są w globalnym kontekście routingu.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Jawne źródło zapewnia powtarzalny punkt pomiarowy. Konfiguracja wymaga osiągalności celu i drogi powrotnej.",
+      "card_id": "encor.ip-sla.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "ip sla 40\n icmp-echo {{b0}} source-ip {{b1}}\n frequency {{b2}}\nexit\nip sla schedule 40 life forever start-time now",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "10.90.0.10"
+          ],
+          "width": 12,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "10.8.0.1"
+          ],
+          "width": 10,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "60"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ip-sla.18",
+      "revision": 1,
+      "title": "Pomiar a failover",
+      "skills": [
+        "ip-sla.pomiar-a-failover"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Czy sama operacja ICMP Echo automatycznie przełączy trasę statyczną po awarii celu?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Pomiar, śledzenie obiektu i decyzja routingu są oddzielnymi elementami. Samo SLA nie zmienia dowolnej trasy.",
+      "card_id": "encor.ip-sla.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, wszystkie statyki są śledzone automatycznie",
+          "feedback_md": "Pomiar, śledzenie obiektu i decyzja routingu są oddzielnymi elementami. Samo SLA nie zmienia dowolnej trasy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie; potrzebne jest jawne powiązanie z trackingiem i polityką routingu",
+          "feedback_md": "Pomiar, śledzenie obiektu i decyzja routingu są oddzielnymi elementami. Samo SLA nie zmienia dowolnej trasy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, SLA zawsze uruchamia OSPF",
+          "feedback_md": "Pomiar, śledzenie obiektu i decyzja routingu są oddzielnymi elementami. Samo SLA nie zmienia dowolnej trasy.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, bo SLA nie może współpracować z trackingiem",
+          "feedback_md": "Pomiar, śledzenie obiektu i decyzja routingu są oddzielnymi elementami. Samo SLA nie zmienia dowolnej trasy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

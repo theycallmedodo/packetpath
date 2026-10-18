@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "encor.qos-interpret.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Licznik klasy jest zerowy",
+      "skills": [
+        "qos-interpret.licznik-klasy-jest-zerowy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.13.theory",
+      "front_md": "Licznik klasy jest zerowy",
+      "back_md": "Klasyfikacja zależy od faktycznego DSCP na punkcie zastosowania polityki. Sprawdź znakowanie oraz kierunek.",
+      "example": "Ruch nie spełnia kryterium klasy"
+    },
+    {
+      "revision": 1,
+      "title": "Polityka istnieje, ale nie działa",
+      "skills": [
+        "qos-interpret.polityka-istnieje-ale-nie-dzia-a"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.14.theory",
+      "front_md": "Polityka istnieje, ale nie działa",
+      "back_md": "Definicja polityki jest oddzielna od jej zastosowania. Potrzebne jest powiązanie z odpowiednim punktem i kierunkiem.",
+      "example": "Zdefiniowana polityka nie jest jeszcze zastosowana na interfejsie"
+    },
+    {
+      "revision": 1,
+      "title": "Obliczenie udziału",
+      "skills": [
+        "qos-interpret.obliczenie-udzia-u"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.15.theory",
+      "front_md": "Obliczenie udziału",
+      "back_md": "25% z 20 Mb/s to 5 Mb/s. To obliczenie rezerwacji przy podanej podstawie, a nie zawsze twardy limit.",
+      "example": "5 Mb/s"
+    },
+    {
+      "revision": 1,
+      "title": "Dwa narzędzia razem",
+      "skills": [
+        "qos-interpret.dwa-narz-dzia-razem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.16.theory",
+      "front_md": "Dwa narzędzia razem",
+      "back_md": "Hierarchiczna polityka może najpierw ograniczyć tempo do usługi operatora, a następnie rozdzielać zasoby między klasy.",
+      "example": "Dopasowanie tempa do usługi i podział obsługi między klasy"
+    },
+    {
+      "revision": 1,
+      "title": "Drop precedence AF",
+      "skills": [
+        "qos-interpret.drop-precedence-af"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.17.theory",
+      "front_md": "Drop precedence AF",
+      "back_md": "W AFxy druga cyfra oznacza drop precedence. AF33 ma większą skłonność do odrzucenia niż AF31 w odpowiedniej polityce.",
+      "example": "AF33"
+    },
+    {
+      "revision": 1,
+      "title": "Nie utożsamiaj oznaczenia z obsługą",
+      "skills": [
+        "qos-interpret.nie-uto-samiaj-oznaczenia-z-obs-ug"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.18.theory",
+      "front_md": "Nie utożsamiaj oznaczenia z obsługą",
+      "back_md": "Do realizacji QoS potrzebna jest spójna polityka na kolejnych węzłach. Oznaczenie opisuje żądaną klasę, nie wymusza samo gwarancji.",
+      "example": "Sam znacznik nie gwarantuje niskiego opóźnienia"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.qos-interpret.13",
+      "revision": 1,
+      "title": "Licznik klasy jest zerowy",
+      "skills": [
+        "qos-interpret.licznik-klasy-jest-zerowy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "```text\nclass-map match-all VOICE\n match ip dscp ef\n!\nClass-map: VOICE (match-all)\n  0 packets, 0 bytes\n  Match: ip dscp ef (46)\n```\n\nSkrócony przykład do analizy. show policy-map interface pokazuje zero trafień VOICE. Telefon wysyła DSCP 0, a klasa dopasowuje tylko EF. Najbardziej bezpośrednia przyczyna?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Klasyfikacja zależy od faktycznego DSCP na punkcie zastosowania polityki. Sprawdź znakowanie oraz kierunek.",
+      "card_id": "encor.qos-interpret.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zbyt krótka nazwa VOICE",
+          "feedback_md": "Klasyfikacja zależy od faktycznego DSCP na punkcie zastosowania polityki. Sprawdź znakowanie oraz kierunek.",
+          "id": "A"
+        },
+        {
+          "text_md": "OSPF area 0 blokuje QoS",
+          "feedback_md": "Klasyfikacja zależy od faktycznego DSCP na punkcie zastosowania polityki. Sprawdź znakowanie oraz kierunek.",
+          "id": "B"
+        },
+        {
+          "text_md": "Ruch nie spełnia kryterium klasy",
+          "feedback_md": "Klasyfikacja zależy od faktycznego DSCP na punkcie zastosowania polityki. Sprawdź znakowanie oraz kierunek.",
+          "id": "C"
+        },
+        {
+          "text_md": "Każdy pakiet automatycznie przechodzi do LLQ",
+          "feedback_md": "Klasyfikacja zależy od faktycznego DSCP na punkcie zastosowania polityki. Sprawdź znakowanie oraz kierunek.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.qos-interpret.14",
+      "revision": 1,
+      "title": "Polityka istnieje, ale nie działa",
+      "skills": [
+        "qos-interpret.polityka-istnieje-ale-nie-dzia-a"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Running-config ma class-map i policy-map, lecz żaden interfejs nie ma service-policy. Jaki wniosek?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Definicja polityki jest oddzielna od jej zastosowania. Potrzebne jest powiązanie z odpowiednim punktem i kierunkiem.",
+      "card_id": "encor.qos-interpret.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Polityka automatycznie działa wszędzie",
+          "feedback_md": "Definicja polityki jest oddzielna od jej zastosowania. Potrzebne jest powiązanie z odpowiednim punktem i kierunkiem.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zdefiniowana polityka nie jest jeszcze zastosowana na interfejsie",
+          "feedback_md": "Definicja polityki jest oddzielna od jej zastosowania. Potrzebne jest powiązanie z odpowiednim punktem i kierunkiem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nazwa policy-map aktywuje ją globalnie",
+          "feedback_md": "Definicja polityki jest oddzielna od jej zastosowania. Potrzebne jest powiązanie z odpowiednim punktem i kierunkiem.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wystarczy zapisać startup-config",
+          "feedback_md": "Definicja polityki jest oddzielna od jej zastosowania. Potrzebne jest powiązanie z odpowiednim punktem i kierunkiem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.qos-interpret.15",
+      "revision": 1,
+      "title": "Obliczenie udziału",
+      "skills": [
+        "qos-interpret.obliczenie-udzia-u"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dla zadania efektywna podstawa bandwidth percent wynosi 20 Mb/s. Klasa ma bandwidth percent 25. Ile wynosi jej rezerwacja?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "25% z 20 Mb/s to 5 Mb/s. To obliczenie rezerwacji przy podanej podstawie, a nie zawsze twardy limit.",
+      "card_id": "encor.qos-interpret.15.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "5 Mb/s",
+          "feedback_md": "25% z 20 Mb/s to 5 Mb/s. To obliczenie rezerwacji przy podanej podstawie, a nie zawsze twardy limit.",
+          "id": "A"
+        },
+        {
+          "text_md": "25 Mb/s",
+          "feedback_md": "25% z 20 Mb/s to 5 Mb/s. To obliczenie rezerwacji przy podanej podstawie, a nie zawsze twardy limit.",
+          "id": "B"
+        },
+        {
+          "text_md": "0,8 Mb/s",
+          "feedback_md": "25% z 20 Mb/s to 5 Mb/s. To obliczenie rezerwacji przy podanej podstawie, a nie zawsze twardy limit.",
+          "id": "C"
+        },
+        {
+          "text_md": "20 Mb/s",
+          "feedback_md": "25% z 20 Mb/s to 5 Mb/s. To obliczenie rezerwacji przy podanej podstawie, a nie zawsze twardy limit.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.qos-interpret.16",
+      "revision": 1,
+      "title": "Dwa narzędzia razem",
+      "skills": [
+        "qos-interpret.dwa-narz-dzia-razem"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Parent policy kształtuje łącze do 10 Mb/s, a child policy ma LLQ i klasy CBWFQ. Jaki jest cel połączenia?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Hierarchiczna polityka może najpierw ograniczyć tempo do usługi operatora, a następnie rozdzielać zasoby między klasy.",
+      "card_id": "encor.qos-interpret.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Dwukrotne szyfrowanie pakietów",
+          "feedback_md": "Hierarchiczna polityka może najpierw ograniczyć tempo do usługi operatora, a następnie rozdzielać zasoby między klasy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Usunięcie wszystkich kolejek",
+          "feedback_md": "Hierarchiczna polityka może najpierw ograniczyć tempo do usługi operatora, a następnie rozdzielać zasoby między klasy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zastąpienie routingu przez DSCP",
+          "feedback_md": "Hierarchiczna polityka może najpierw ograniczyć tempo do usługi operatora, a następnie rozdzielać zasoby między klasy.",
+          "id": "C"
+        },
+        {
+          "text_md": "Dopasowanie tempa do usługi i podział obsługi między klasy",
+          "feedback_md": "Hierarchiczna polityka może najpierw ograniczyć tempo do usługi operatora, a następnie rozdzielać zasoby między klasy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.qos-interpret.17",
+      "revision": 1,
+      "title": "Drop precedence AF",
+      "skills": [
+        "qos-interpret.drop-precedence-af"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W tej samej klasie AF3 porównaj AF31 i AF33. Które oznaczenie wskazuje większą drop precedence?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "W AFxy druga cyfra oznacza drop precedence. AF33 ma większą skłonność do odrzucenia niż AF31 w odpowiedniej polityce.",
+      "card_id": "encor.qos-interpret.17.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "AF31",
+          "feedback_md": "W AFxy druga cyfra oznacza drop precedence. AF33 ma większą skłonność do odrzucenia niż AF31 w odpowiedniej polityce.",
+          "id": "A"
+        },
+        {
+          "text_md": "Oba zawsze oznaczają strict priority",
+          "feedback_md": "W AFxy druga cyfra oznacza drop precedence. AF33 ma większą skłonność do odrzucenia niż AF31 w odpowiedniej polityce.",
+          "id": "B"
+        },
+        {
+          "text_md": "AF33",
+          "feedback_md": "W AFxy druga cyfra oznacza drop precedence. AF33 ma większą skłonność do odrzucenia niż AF31 w odpowiedniej polityce.",
+          "id": "C"
+        },
+        {
+          "text_md": "Numer klasy nie ma żadnego znaczenia",
+          "feedback_md": "W AFxy druga cyfra oznacza drop precedence. AF33 ma większą skłonność do odrzucenia niż AF31 w odpowiedniej polityce.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.qos-interpret.18",
+      "revision": 1,
+      "title": "Nie utożsamiaj oznaczenia z obsługą",
+      "skills": [
+        "qos-interpret.nie-uto-samiaj-oznaczenia-z-obs-ug"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Pakiet EF przechodzi przez router bez polityki obsługi EF. Co można stwierdzić?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Do realizacji QoS potrzebna jest spójna polityka na kolejnych węzłach. Oznaczenie opisuje żądaną klasę, nie wymusza samo gwarancji.",
+      "card_id": "encor.qos-interpret.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "EF zawsze wymusza sprzętową LLQ na każdym urządzeniu",
+          "feedback_md": "Do realizacji QoS potrzebna jest spójna polityka na kolejnych węzłach. Oznaczenie opisuje żądaną klasę, nie wymusza samo gwarancji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sam znacznik nie gwarantuje niskiego opóźnienia",
+          "feedback_md": "Do realizacji QoS potrzebna jest spójna polityka na kolejnych węzłach. Oznaczenie opisuje żądaną klasę, nie wymusza samo gwarancji.",
+          "id": "B"
+        },
+        {
+          "text_md": "EF rezerwuje pasmo end-to-end",
+          "feedback_md": "Do realizacji QoS potrzebna jest spójna polityka na kolejnych węzłach. Oznaczenie opisuje żądaną klasę, nie wymusza samo gwarancji.",
+          "id": "C"
+        },
+        {
+          "text_md": "EF omija każdy policer",
+          "feedback_md": "Do realizacji QoS potrzebna jest spójna polityka na kolejnych węzłach. Oznaczenie opisuje żądaną klasę, nie wymusza samo gwarancji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

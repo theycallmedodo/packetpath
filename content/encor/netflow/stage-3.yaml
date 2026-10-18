@@ -1,0 +1,493 @@
+{
+  "schema_version": 3,
+  "id": "encor.netflow.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Brak szablonu",
+      "skills": [
+        "netflow.brak-szablonu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.13.theory",
+      "front_md": "Brak szablonu",
+      "back_md": "NetFlow v9 jest oparty na szablonach. Odbiorca musi znać format, a nie tylko otrzymywać datagramy z danymi.",
+      "example": "Szablonu opisującego pola rekordu"
+    },
+    {
+      "revision": 1,
+      "title": "Cache rośnie, eksport nie dociera",
+      "skills": [
+        "netflow.cache-ro-nie-eksport-nie-dociera"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.14.theory",
+      "front_md": "Cache rośnie, eksport nie dociera",
+      "back_md": "Obserwacja działa przynajmniej lokalnie. Teraz sprawdź odrębną ścieżkę eksportu i zgodność odbiorcy.",
+      "example": "Exporter, routing do kolektora, źródło eksportu i ACL"
+    },
+    {
+      "revision": 1,
+      "title": "Przypięcie monitora",
+      "skills": [
+        "netflow.przypi-cie-monitora"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.15.theory",
+      "front_md": "Przypięcie monitora",
+      "back_md": "Monitor zaczyna obserwować wskazany kierunek po zastosowaniu na wspieranym interfejsie. Wsparcie zależy od platformy.",
+      "example": "flow monitor MON\n record REC\n exporter EXP\nexit\ninterface GigabitEthernet0/0\n ip flow monitor MON input"
+    },
+    {
+      "revision": 1,
+      "title": "Sampling a dokładność",
+      "skills": [
+        "netflow.sampling-a-dok-adno"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.16.theory",
+      "front_md": "Sampling a dokładność",
+      "back_md": "Próbkowanie zmniejsza obciążenie i dokładność szczegółów. Interpretuj rekordy wraz z informacją o samplerze.",
+      "example": "Nie; potrzebna jest interpretacja próbkowania, a estymacja nie jest dokładnym pomiarem"
+    },
+    {
+      "revision": 1,
+      "title": "Rekord z licznikami",
+      "skills": [
+        "netflow.rekord-z-licznikami"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.17.theory",
+      "front_md": "Rekord z licznikami",
+      "back_md": "Ten uproszczony klucz grupuje według pary IP, bez rozróżniania portów. Collect packets long dodaje licznik pakietów.",
+      "example": "flow record REC\n match ipv4 source address\n match ipv4 destination address\n collect counter packets long"
+    },
+    {
+      "revision": 1,
+      "title": "Dwa punkty obserwacji",
+      "skills": [
+        "netflow.dwa-punkty-obserwacji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "id": "encor.netflow.18.theory",
+      "front_md": "Dwa punkty obserwacji",
+      "back_md": "Rekordy trzeba analizować z kontekstem punktu i kierunku obserwacji. Dwa pomiary nie muszą oznaczać dwóch różnych transferów.",
+      "example": "Podwójne liczenie tego samego ruchu"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.netflow.13",
+      "revision": 1,
+      "title": "Brak szablonu",
+      "skills": [
+        "netflow.brak-szablonu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Kolektor odbiera datagramy NetFlow v9, ale nie potrafi zinterpretować rekordów nowego eksportera. Czego może brakować?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "NetFlow v9 jest oparty na szablonach. Odbiorca musi znać format, a nie tylko otrzymywać datagramy z danymi.",
+      "card_id": "encor.netflow.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Trasy BGP do każdego hosta z rekordu",
+          "feedback_md": "NetFlow v9 jest oparty na szablonach. Odbiorca musi znać format, a nie tylko otrzymywać datagramy z danymi.",
+          "id": "A"
+        },
+        {
+          "text_md": "Identycznego numeru VLAN na kolektorze",
+          "feedback_md": "NetFlow v9 jest oparty na szablonach. Odbiorca musi znać format, a nie tylko otrzymywać datagramy z danymi.",
+          "id": "B"
+        },
+        {
+          "text_md": "Szablonu opisującego pola rekordu",
+          "feedback_md": "NetFlow v9 jest oparty na szablonach. Odbiorca musi znać format, a nie tylko otrzymywać datagramy z danymi.",
+          "id": "C"
+        },
+        {
+          "text_md": "Pełnego payloadu TCP w każdym rekordzie",
+          "feedback_md": "NetFlow v9 jest oparty na szablonach. Odbiorca musi znać format, a nie tylko otrzymywać datagramy z danymi.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.netflow.14",
+      "revision": 1,
+      "title": "Cache rośnie, eksport nie dociera",
+      "skills": [
+        "netflow.cache-ro-nie-eksport-nie-dociera"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Lokalny cache monitora zawiera ruch, lecz kolektor nie odbiera UDP. Co sprawdzić najpierw?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Obserwacja działa przynajmniej lokalnie. Teraz sprawdź odrębną ścieżkę eksportu i zgodność odbiorcy.",
+      "card_id": "encor.netflow.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie zmianę match ipv4 source na destination",
+          "feedback_md": "Obserwacja działa przynajmniej lokalnie. Teraz sprawdź odrębną ścieżkę eksportu i zgodność odbiorcy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Exporter, routing do kolektora, źródło eksportu i ACL",
+          "feedback_md": "Obserwacja działa przynajmniej lokalnie. Teraz sprawdź odrębną ścieżkę eksportu i zgodność odbiorcy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie maskę hosta obserwowanego przepływu",
+          "feedback_md": "Obserwacja działa przynajmniej lokalnie. Teraz sprawdź odrębną ścieżkę eksportu i zgodność odbiorcy.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłącznie priorytet STP portu użytkownika",
+          "feedback_md": "Obserwacja działa przynajmniej lokalnie. Teraz sprawdź odrębną ścieżkę eksportu i zgodność odbiorcy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.netflow.15",
+      "revision": 1,
+      "title": "Przypięcie monitora",
+      "skills": [
+        "netflow.przypi-cie-monitora"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "REC i EXP istnieją. Utwórz MON, wskaż te obiekty i przypnij monitor do wejścia Gi0/0.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Monitor zaczyna obserwować wskazany kierunek po zastosowaniu na wspieranym interfejsie. Wsparcie zależy od platformy.",
+      "card_id": "encor.netflow.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "flow monitor MON\n record {{b0}}\n exporter {{b1}}\nexit\ninterface GigabitEthernet0/0\n ip flow monitor MON {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "identifier",
+          "accepted": [
+            "REC"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "identifier",
+          "accepted": [
+            "EXP"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "input"
+          ],
+          "width": 7,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.netflow.16",
+      "revision": 1,
+      "title": "Sampling a dokładność",
+      "skills": [
+        "netflow.sampling-a-dok-adno"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Monitor obserwuje próbkę ruchu z samplerem 1 na 100 pakietów. Czy surowy licznik próbek jest równy dokładnej liczbie wszystkich pakietów?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Próbkowanie zmniejsza obciążenie i dokładność szczegółów. Interpretuj rekordy wraz z informacją o samplerze.",
+      "card_id": "encor.netflow.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, sampler kopiuje każdy pakiet sto razy",
+          "feedback_md": "Próbkowanie zmniejsza obciążenie i dokładność szczegółów. Interpretuj rekordy wraz z informacją o samplerze.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, zawsze wystarczy odczytać licznik bez przeliczenia",
+          "feedback_md": "Próbkowanie zmniejsza obciążenie i dokładność szczegółów. Interpretuj rekordy wraz z informacją o samplerze.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie, sampling zawsze wyłącza cache",
+          "feedback_md": "Próbkowanie zmniejsza obciążenie i dokładność szczegółów. Interpretuj rekordy wraz z informacją o samplerze.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie; potrzebna jest interpretacja próbkowania, a estymacja nie jest dokładnym pomiarem",
+          "feedback_md": "Próbkowanie zmniejsza obciążenie i dokładność szczegółów. Interpretuj rekordy wraz z informacją o samplerze.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.netflow.17",
+      "revision": 1,
+      "title": "Rekord z licznikami",
+      "skills": [
+        "netflow.rekord-z-licznikami"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Zbuduj uproszczony rekord REC z kluczami source/destination IPv4 oraz niekluczowym licznikiem pakietów.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Ten uproszczony klucz grupuje według pary IP, bez rozróżniania portów. Collect packets long dodaje licznik pakietów.",
+      "card_id": "encor.netflow.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "flow record REC\n match ipv4 {{b0}} address\n match ipv4 {{b1}} address\n collect counter {{b2}} long",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "source"
+          ],
+          "width": 8,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "destination"
+          ],
+          "width": 13,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "packets"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.netflow.18",
+      "revision": 1,
+      "title": "Dwa punkty obserwacji",
+      "skills": [
+        "netflow.dwa-punkty-obserwacji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-fnetflow.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Flexible NetFlow — rekord, monitor i eksport",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fnf-ipv4-uni.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Ten sam ruch jest monitorowany na ingress i egress routera, a kolektor sumuje oba strumienie bez rozróżnienia punktu. Jakie ryzyko powstaje?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Rekordy trzeba analizować z kontekstem punktu i kierunku obserwacji. Dwa pomiary nie muszą oznaczać dwóch różnych transferów.",
+      "card_id": "encor.netflow.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Automatyczne usunięcie duplikatów przez każdy kolektor",
+          "feedback_md": "Rekordy trzeba analizować z kontekstem punktu i kierunku obserwacji. Dwa pomiary nie muszą oznaczać dwóch różnych transferów.",
+          "id": "A"
+        },
+        {
+          "text_md": "Podwójne liczenie tego samego ruchu",
+          "feedback_md": "Rekordy trzeba analizować z kontekstem punktu i kierunku obserwacji. Dwa pomiary nie muszą oznaczać dwóch różnych transferów.",
+          "id": "B"
+        },
+        {
+          "text_md": "Podwojenie rzeczywistej przepustowości łącza",
+          "feedback_md": "Rekordy trzeba analizować z kontekstem punktu i kierunku obserwacji. Dwa pomiary nie muszą oznaczać dwóch różnych transferów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Utworzenie pętli routingu przez NetFlow",
+          "feedback_md": "Rekordy trzeba analizować z kontekstem punktu i kierunku obserwacji. Dwa pomiary nie muszą oznaczać dwóch różnych transferów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

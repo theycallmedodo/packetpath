@@ -1,0 +1,541 @@
+{
+  "schema_version": 3,
+  "id": "encor.fhrp.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Za mały decrement",
+      "skills": [
+        "fhrp.za-ma-y-decrement"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.13.theory",
+      "front_md": "Za mały decrement",
+      "back_md": "Decrement musi być dobrany do różnicy priorytetów. Sam fakt skonfigurowania trackingu nie gwarantuje zmiany preferencji.",
+      "example": "R1 nadal ma 120, czyli więcej niż 110"
+    },
+    {
+      "revision": 1,
+      "title": "Dwie grupy, dwa aktywne routery",
+      "skills": [
+        "fhrp.dwie-grupy-dwa-aktywne-routery"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.14.theory",
+      "front_md": "Dwie grupy, dwa aktywne routery",
+      "back_md": "Różne grupy mogą preferować różne routery. Nie oznacza to dwóch równoczesnych Active dla jednej zwykłej grupy HSRP.",
+      "example": "Podział obciążenia między grupami przy zachowaniu redundancji każdej grupy"
+    },
+    {
+      "revision": 1,
+      "title": "Pełny wybór preferowanej bramy",
+      "skills": [
+        "fhrp.pe-ny-wyb-r-preferowanej-bramy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.15.theory",
+      "front_md": "Pełny wybór preferowanej bramy",
+      "back_md": "VIP, priorytet i preemption pełnią różne role. Drugi router musi mieć zgodne parametry grupy i odrębny adres fizyczny.",
+      "example": "interface Vlan40\n standby 40 ip 10.40.0.1\n standby 40 priority 120\n standby 40 preempt"
+    },
+    {
+      "revision": 1,
+      "title": "Oba routery zgłaszają Active",
+      "skills": [
+        "fhrp.oba-routery-zg-aszaj-active"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.16.theory",
+      "front_md": "Oba routery zgłaszają Active",
+      "back_md": "Brak komunikacji lub niezgodność może rozdzielić postrzeganie grupy. Sprawdź L2 i parametry protokołu przed zmianą priorytetów.",
+      "example": "Wzajemna widoczność Hello, VLAN, wersja i zgodność parametrów grupy"
+    },
+    {
+      "revision": 1,
+      "title": "VRRP z kontrolą preferencji",
+      "skills": [
+        "fhrp.vrrp-z-kontrol-preferencji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.17.theory",
+      "front_md": "VRRP z kontrolą preferencji",
+      "back_md": "Jawna konfiguracja pokazuje zamierzony wybór routera. Nie przenoś bez sprawdzenia składni i domyślnych zachowań między HSRP oraz wersjami VRRP.",
+      "example": "interface Vlan50\n vrrp 50 ip 10.50.0.1\n vrrp 50 priority 120\n vrrp 50 preempt"
+    },
+    {
+      "revision": 1,
+      "title": "Próg i opóźnienie powrotu",
+      "skills": [
+        "fhrp.pr-g-i-op-nienie-powrotu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.18.theory",
+      "front_md": "Próg i opóźnienie powrotu",
+      "back_md": "Natychmiastowe odzyskanie roli nie zawsze jest korzystne. Opóźnienie powinno uwzględniać czas stabilizacji usług i routingu.",
+      "example": "Aby nie przejął bramy przed gotowością dalszej ścieżki"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.fhrp.13",
+      "revision": 1,
+      "title": "Za mały decrement",
+      "skills": [
+        "fhrp.za-ma-y-decrement"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "R1 Active ma priority 130 i decrement 10. R2 ma 110 i preempt. Track R1 przechodzi down. Dlaczego R2 nie musi przejąć?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Decrement musi być dobrany do różnicy priorytetów. Sam fakt skonfigurowania trackingu nie gwarantuje zmiany preferencji.",
+      "card_id": "encor.fhrp.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tracking zawsze zeruje priority",
+          "feedback_md": "Decrement musi być dobrany do różnicy priorytetów. Sam fakt skonfigurowania trackingu nie gwarantuje zmiany preferencji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Preempt działa tylko przy identycznych priorytetach",
+          "feedback_md": "Decrement musi być dobrany do różnicy priorytetów. Sam fakt skonfigurowania trackingu nie gwarantuje zmiany preferencji.",
+          "id": "B"
+        },
+        {
+          "text_md": "R1 nadal ma 120, czyli więcej niż 110",
+          "feedback_md": "Decrement musi być dobrany do różnicy priorytetów. Sam fakt skonfigurowania trackingu nie gwarantuje zmiany preferencji.",
+          "id": "C"
+        },
+        {
+          "text_md": "R2 musi zmienić VIP",
+          "feedback_md": "Decrement musi być dobrany do różnicy priorytetów. Sam fakt skonfigurowania trackingu nie gwarantuje zmiany preferencji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.fhrp.14",
+      "revision": 1,
+      "title": "Dwie grupy, dwa aktywne routery",
+      "skills": [
+        "fhrp.dwie-grupy-dwa-aktywne-routery"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "R1 jest Active grupy 10, R2 Active grupy 20. Hosty mają różne VIP-y według projektu. Jaka korzyść jest możliwa?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Różne grupy mogą preferować różne routery. Nie oznacza to dwóch równoczesnych Active dla jednej zwykłej grupy HSRP.",
+      "card_id": "encor.fhrp.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Automatyczny per-packet load balancing jednego VIP przez dwa Active HSRP",
+          "feedback_md": "Różne grupy mogą preferować różne routery. Nie oznacza to dwóch równoczesnych Active dla jednej zwykłej grupy HSRP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Podział obciążenia między grupami przy zachowaniu redundancji każdej grupy",
+          "feedback_md": "Różne grupy mogą preferować różne routery. Nie oznacza to dwóch równoczesnych Active dla jednej zwykłej grupy HSRP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Usunięcie potrzeby routingu między VLAN-ami",
+          "feedback_md": "Różne grupy mogą preferować różne routery. Nie oznacza to dwóch równoczesnych Active dla jednej zwykłej grupy HSRP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zamiana HSRP w LACP",
+          "feedback_md": "Różne grupy mogą preferować różne routery. Nie oznacza to dwóch równoczesnych Active dla jednej zwykłej grupy HSRP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.fhrp.15",
+      "revision": 1,
+      "title": "Pełny wybór preferowanej bramy",
+      "skills": [
+        "fhrp.pe-ny-wyb-r-preferowanej-bramy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "VLAN 40 ma fizyczny adres R1 10.40.0.2/24. Ustaw HSRP 40: VIP 10.40.0.1, priority 120, preempt.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "VIP, priorytet i preemption pełnią różne role. Drugi router musi mieć zgodne parametry grupy i odrębny adres fizyczny.",
+      "card_id": "encor.fhrp.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "interface Vlan40\n standby 40 ip {{b0}}\n standby 40 priority {{b1}}\n standby 40 {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "10.40.0.1"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "120"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "preempt"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.fhrp.16",
+      "revision": 1,
+      "title": "Oba routery zgłaszają Active",
+      "skills": [
+        "fhrp.oba-routery-zg-aszaj-active"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na tym samym planowanym LAN oba routery HSRP zgłaszają Active dla tej samej grupy. Co jest istotnym kierunkiem diagnozy?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Brak komunikacji lub niezgodność może rozdzielić postrzeganie grupy. Sprawdź L2 i parametry protokołu przed zmianą priorytetów.",
+      "card_id": "encor.fhrp.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie zwiększenie priorytetów obu routerów",
+          "feedback_md": "Brak komunikacji lub niezgodność może rozdzielić postrzeganie grupy. Sprawdź L2 i parametry protokołu przed zmianą priorytetów.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyłącznie zmiana DNS hostów",
+          "feedback_md": "Brak komunikacji lub niezgodność może rozdzielić postrzeganie grupy. Sprawdź L2 i parametry protokołu przed zmianą priorytetów.",
+          "id": "B"
+        },
+        {
+          "text_md": "Uznanie tego za zwykły wymagany stan HSRP",
+          "feedback_md": "Brak komunikacji lub niezgodność może rozdzielić postrzeganie grupy. Sprawdź L2 i parametry protokołu przed zmianą priorytetów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wzajemna widoczność Hello, VLAN, wersja i zgodność parametrów grupy",
+          "feedback_md": "Brak komunikacji lub niezgodność może rozdzielić postrzeganie grupy. Sprawdź L2 i parametry protokołu przed zmianą priorytetów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.fhrp.17",
+      "revision": 1,
+      "title": "VRRP z kontrolą preferencji",
+      "skills": [
+        "fhrp.vrrp-z-kontrol-preferencji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na platformie obsługującej klasyczne VRRP IPv4 ustaw na VLAN 50: grupę 50, VIP 10.50.0.1, priority 120 i jawnie preempt.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Jawna konfiguracja pokazuje zamierzony wybór routera. Nie przenoś bez sprawdzenia składni i domyślnych zachowań między HSRP oraz wersjami VRRP.",
+      "card_id": "encor.fhrp.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "interface Vlan50\n vrrp 50 ip {{b0}}\n vrrp 50 priority {{b1}}\n vrrp 50 {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "10.50.0.1"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "120"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "preempt"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.fhrp.18",
+      "revision": 1,
+      "title": "Próg i opóźnienie powrotu",
+      "skills": [
+        "fhrp.pr-g-i-op-nienie-powrotu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Router wrócił do LAN, ale jego routing WAN jeszcze się zbiega. Po co stosować odpowiednie opóźnienie preempt?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Natychmiastowe odzyskanie roli nie zawsze jest korzystne. Opóźnienie powinno uwzględniać czas stabilizacji usług i routingu.",
+      "card_id": "encor.fhrp.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Aby wyłączyć wszystkie Hello na stałe",
+          "feedback_md": "Natychmiastowe odzyskanie roli nie zawsze jest korzystne. Opóźnienie powinno uwzględniać czas stabilizacji usług i routingu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Aby nie przejął bramy przed gotowością dalszej ścieżki",
+          "feedback_md": "Natychmiastowe odzyskanie roli nie zawsze jest korzystne. Opóźnienie powinno uwzględniać czas stabilizacji usług i routingu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Aby zmienić adres VIP na fizyczny",
+          "feedback_md": "Natychmiastowe odzyskanie roli nie zawsze jest korzystne. Opóźnienie powinno uwzględniać czas stabilizacji usług i routingu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Aby zagwarantować szyfrowanie FHRP",
+          "feedback_md": "Natychmiastowe odzyskanie roli nie zawsze jest korzystne. Opóźnienie powinno uwzględniać czas stabilizacji usług i routingu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

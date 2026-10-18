@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "encor.yang.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Model standardowy a natywny",
+      "skills": [
+        "yang.model-standardowy-a-natywny"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "id": "encor.yang.13.theory",
+      "front_md": "Model standardowy a natywny",
+      "back_md": "Standardy ułatwiają przenośność, ale wsparcie i rozszerzenia różnią się między platformami i wersjami.",
+      "example": "Mogą współistnieć; zakres funkcji i wsparcie trzeba sprawdzić na urządzeniu"
+    },
+    {
+      "revision": 1,
+      "title": "Rewizja modułu",
+      "skills": [
+        "yang.rewizja-modu-u"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "id": "encor.yang.14.theory",
+      "front_md": "Rewizja modułu",
+      "back_md": "Obsługa modelu może się zmieniać. Klient powinien znać faktyczny kontrakt udostępniany przez urządzenie.",
+      "example": "Obsługiwane moduły, rewizje, features i deviations"
+    },
+    {
+      "revision": 1,
+      "title": "Walidacja relacji",
+      "skills": [
+        "yang.walidacja-relacji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "id": "encor.yang.15.theory",
+      "front_md": "Walidacja relacji",
+      "back_md": "Model może narzucać relacje między wartościami. Poprawna składnia i typ nie gwarantują poprawności całej konfiguracji.",
+      "example": "Tak, zgodność typu nie wyczerpuje ograniczeń modelu"
+    },
+    {
+      "revision": 1,
+      "title": "Leafref",
+      "skills": [
+        "yang.leafref"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "id": "encor.yang.16.theory",
+      "front_md": "Leafref",
+      "back_md": "Leafref opisuje referencję w modelu. Szczegółowa walidacja istnienia celu zależy od właściwości i kontekstu modelu.",
+      "example": "Modelowanie odwołania do innego węzła danych"
+    },
+    {
+      "revision": 1,
+      "title": "Lista nie jest zawsze uporządkowana przez użytkownika",
+      "skills": [
+        "yang.lista-nie-jest-zawsze-uporz-dkowana-przez-u-ytkownika"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "id": "encor.yang.17.theory",
+      "front_md": "Lista nie jest zawsze uporządkowana przez użytkownika",
+      "back_md": "Kolejność w reprezentacji nie jest uniwersalnym priorytetem. Trzeba odczytać semantykę konkretnej listy.",
+      "example": "Semantykę kolejności określa model, m.in. ordered-by"
+    },
+    {
+      "revision": 1,
+      "title": "Granica modelu i protokołu",
+      "skills": [
+        "yang.granica-modelu-i-protoko-u"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "id": "encor.yang.18.theory",
+      "front_md": "Granica modelu i protokołu",
+      "back_md": "Zmiana transportu nie usuwa semantyki modelu. Operacyjny stan odczytuje się, a konfigurację ustawia we właściwych węzłach.",
+      "example": "Nie, ograniczenie wynika z modelu danych"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.yang.13",
+      "revision": 1,
+      "title": "Model standardowy a natywny",
+      "skills": [
+        "yang.model-standardowy-a-natywny"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Co trafnie opisuje modele standardowe oraz producenta?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Standardy ułatwiają przenośność, ale wsparcie i rozszerzenia różnią się między platformami i wersjami.",
+      "card_id": "encor.yang.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Model standardowy zawsze zawiera wszystkie funkcje każdego producenta",
+          "feedback_md": "Standardy ułatwiają przenośność, ale wsparcie i rozszerzenia różnią się między platformami i wersjami.",
+          "id": "A"
+        },
+        {
+          "text_md": "Modele natywne nigdy nie działają z NETCONF",
+          "feedback_md": "Standardy ułatwiają przenośność, ale wsparcie i rozszerzenia różnią się między platformami i wersjami.",
+          "id": "B"
+        },
+        {
+          "text_md": "Mogą współistnieć; zakres funkcji i wsparcie trzeba sprawdzić na urządzeniu",
+          "feedback_md": "Standardy ułatwiają przenośność, ale wsparcie i rozszerzenia różnią się między platformami i wersjami.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tylko modele standardowe mogą używać JSON",
+          "feedback_md": "Standardy ułatwiają przenośność, ale wsparcie i rozszerzenia różnią się między platformami i wersjami.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.yang.14",
+      "revision": 1,
+      "title": "Rewizja modułu",
+      "skills": [
+        "yang.rewizja-modu-u"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Skrypt działał na jednym obrazie, lecz po zmianie wersji urządzenia ścieżka lub pole jest niedostępne. Co należy porównać?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Obsługa modelu może się zmieniać. Klient powinien znać faktyczny kontrakt udostępniany przez urządzenie.",
+      "card_id": "encor.yang.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie adres MAC klienta API",
+          "feedback_md": "Obsługa modelu może się zmieniać. Klient powinien znać faktyczny kontrakt udostępniany przez urządzenie.",
+          "id": "A"
+        },
+        {
+          "text_md": "Obsługiwane moduły, rewizje, features i deviations",
+          "feedback_md": "Obsługa modelu może się zmieniać. Klient powinien znać faktyczny kontrakt udostępniany przez urządzenie.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłącznie nazwę pliku Pythona",
+          "feedback_md": "Obsługa modelu może się zmieniać. Klient powinien znać faktyczny kontrakt udostępniany przez urządzenie.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłącznie kolor terminala",
+          "feedback_md": "Obsługa modelu może się zmieniać. Klient powinien znać faktyczny kontrakt udostępniany przez urządzenie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.yang.15",
+      "revision": 1,
+      "title": "Walidacja relacji",
+      "skills": [
+        "yang.walidacja-relacji"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Pole pojedynczo ma poprawny typ, ale narusza warunek must wiążący kilka pól. Czy walidator może odrzucić zmianę?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Model może narzucać relacje między wartościami. Poprawna składnia i typ nie gwarantują poprawności całej konfiguracji.",
+      "card_id": "encor.yang.15.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, zgodność typu nie wyczerpuje ograniczeń modelu",
+          "feedback_md": "Model może narzucać relacje między wartościami. Poprawna składnia i typ nie gwarantują poprawności całej konfiguracji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie, każdy poprawny typ unieważnia must",
+          "feedback_md": "Model może narzucać relacje między wartościami. Poprawna składnia i typ nie gwarantują poprawności całej konfiguracji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie, must jest tylko opisem interfejsu użytkownika",
+          "feedback_md": "Model może narzucać relacje między wartościami. Poprawna składnia i typ nie gwarantują poprawności całej konfiguracji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak, ale wyłącznie przy HTTP GET",
+          "feedback_md": "Model może narzucać relacje między wartościami. Poprawna składnia i typ nie gwarantują poprawności całej konfiguracji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.yang.16",
+      "revision": 1,
+      "title": "Leafref",
+      "skills": [
+        "yang.leafref"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Węzeł używa leafref do wskazania wartości w innym miejscu drzewa. Jaki jest zamysł?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Leafref opisuje referencję w modelu. Szczegółowa walidacja istnienia celu zależy od właściwości i kontekstu modelu.",
+      "card_id": "encor.yang.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Przechowywanie hasła tylko w RAM",
+          "feedback_md": "Leafref opisuje referencję w modelu. Szczegółowa walidacja istnienia celu zależy od właściwości i kontekstu modelu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wymuszenie wymiany danych przez UDP",
+          "feedback_md": "Leafref opisuje referencję w modelu. Szczegółowa walidacja istnienia celu zależy od właściwości i kontekstu modelu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Automatyczne usuwanie obu węzłów",
+          "feedback_md": "Leafref opisuje referencję w modelu. Szczegółowa walidacja istnienia celu zależy od właściwości i kontekstu modelu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Modelowanie odwołania do innego węzła danych",
+          "feedback_md": "Leafref opisuje referencję w modelu. Szczegółowa walidacja istnienia celu zależy od właściwości i kontekstu modelu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.yang.17",
+      "revision": 1,
+      "title": "Lista nie jest zawsze uporządkowana przez użytkownika",
+      "skills": [
+        "yang.lista-nie-jest-zawsze-uporz-dkowana-przez-u-ytkownika"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dlaczego klient nie powinien bez sprawdzenia traktować kolejności wpisów każdej listy YANG jako kolejności reguł ACL?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Kolejność w reprezentacji nie jest uniwersalnym priorytetem. Trzeba odczytać semantykę konkretnej listy.",
+      "card_id": "encor.yang.17.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "YANG nigdy nie pozwala modelować kolejności",
+          "feedback_md": "Kolejność w reprezentacji nie jest uniwersalnym priorytetem. Trzeba odczytać semantykę konkretnej listy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Każdy serwer zawsze sortuje po adresie IP",
+          "feedback_md": "Kolejność w reprezentacji nie jest uniwersalnym priorytetem. Trzeba odczytać semantykę konkretnej listy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Semantykę kolejności określa model, m.in. ordered-by",
+          "feedback_md": "Kolejność w reprezentacji nie jest uniwersalnym priorytetem. Trzeba odczytać semantykę konkretnej listy.",
+          "id": "C"
+        },
+        {
+          "text_md": "XML automatycznie nadaje priorytet pierwszemu wpisowi",
+          "feedback_md": "Kolejność w reprezentacji nie jest uniwersalnym priorytetem. Trzeba odczytać semantykę konkretnej listy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.yang.18",
+      "revision": 1,
+      "title": "Granica modelu i protokołu",
+      "skills": [
+        "yang.granica-modelu-i-protoko-u"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Serwer odrzuca zapis oper-state, który w modelu jest config false. Zmiana NETCONF na RESTCONF sama rozwiąże problem?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Zmiana transportu nie usuwa semantyki modelu. Operacyjny stan odczytuje się, a konfigurację ustawia we właściwych węzłach.",
+      "card_id": "encor.yang.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, RESTCONF zawsze pozwala pisać wszystkie pola",
+          "feedback_md": "Zmiana transportu nie usuwa semantyki modelu. Operacyjny stan odczytuje się, a konfigurację ustawia we właściwych węzłach.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie, ograniczenie wynika z modelu danych",
+          "feedback_md": "Zmiana transportu nie usuwa semantyki modelu. Operacyjny stan odczytuje się, a konfigurację ustawia we właściwych węzłach.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, JSON automatycznie zmienia config false na true",
+          "feedback_md": "Zmiana transportu nie usuwa semantyki modelu. Operacyjny stan odczytuje się, a konfigurację ustawia we właściwych węzłach.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, bo RESTCONF nie obsługuje modeli",
+          "feedback_md": "Zmiana transportu nie usuwa semantyki modelu. Operacyjny stan odczytuje się, a konfigurację ustawia we właściwych węzłach.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

@@ -1,0 +1,471 @@
+{
+  "schema_version": 3,
+  "id": "encor.yang.stage-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Klucz listy",
+      "skills": [
+        "yang.klucz-listy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "id": "encor.yang.07.theory",
+      "front_md": "Klucz listy",
+      "back_md": "Klucz jest częścią tożsamości wpisu listy. Nie jest kluczem kryptograficznym.",
+      "example": "Do jednoznacznego identyfikowania wpisu w tej liście"
+    },
+    {
+      "revision": 1,
+      "title": "Boolean",
+      "skills": [
+        "yang.boolean"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "id": "encor.yang.08.theory",
+      "front_md": "Boolean",
+      "back_md": "Kodowanie musi zachować typ logiczny. Napis o podobnej treści nie staje się automatycznie boolean.",
+      "example": "true"
+    },
+    {
+      "revision": 1,
+      "title": "Config false",
+      "skills": [
+        "yang.config-false"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "id": "encor.yang.09.theory",
+      "front_md": "Config false",
+      "back_md": "Config false oznacza dane niekonfiguracyjne, np. obserwowany stan. Odczyt takiego węzła nie uprawnia do jego zapisu.",
+      "example": "Dane stanu, których nie ustawia się jako konfiguracji przez zwykłą edycję datastore"
+    },
+    {
+      "revision": 1,
+      "title": "Namespace",
+      "skills": [
+        "yang.namespace"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "id": "encor.yang.10.theory",
+      "front_md": "Namespace",
+      "back_md": "Namespace pomaga uniknąć kolizji nazw. Jest ważny przy adresowaniu i kodowaniu elementów modelu.",
+      "example": "Aby jednoznacznie rozróżniać nazwy z różnych modułów"
+    },
+    {
+      "revision": 1,
+      "title": "Ograniczenie zakresu",
+      "skills": [
+        "yang.ograniczenie-zakresu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "id": "encor.yang.11.theory",
+      "front_md": "Ograniczenie zakresu",
+      "back_md": "Typ bazowy i dodatkowe ograniczenia obowiązują jednocześnie. Range zawęża dopuszczalne wartości.",
+      "example": "Nie, mieści się w uint16, ale nie w zawężonym range"
+    },
+    {
+      "revision": 1,
+      "title": "Enumeration",
+      "skills": [
+        "yang.enumeration"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "id": "encor.yang.12.theory",
+      "front_md": "Enumeration",
+      "back_md": "Enumeration ogranicza wartości do nazw zdefiniowanych w modelu. Nie zakładaj automatycznych aliasów.",
+      "example": "Jest niezgodny z tym zbiorem dozwolonych wartości"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.yang.07",
+      "revision": 1,
+      "title": "Klucz listy",
+      "skills": [
+        "yang.klucz-listy"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Model listy interfejsów deklaruje key \"name\". Do czego służy name?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Klucz jest częścią tożsamości wpisu listy. Nie jest kluczem kryptograficznym.",
+      "card_id": "encor.yang.07.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Do określenia hasła szyfrującego",
+          "feedback_md": "Klucz jest częścią tożsamości wpisu listy. Nie jest kluczem kryptograficznym.",
+          "id": "A"
+        },
+        {
+          "text_md": "Do wskazania portu transportowego NETCONF",
+          "feedback_md": "Klucz jest częścią tożsamości wpisu listy. Nie jest kluczem kryptograficznym.",
+          "id": "B"
+        },
+        {
+          "text_md": "Do wymuszenia kolejności alfabetycznej wszystkich pakietów",
+          "feedback_md": "Klucz jest częścią tożsamości wpisu listy. Nie jest kluczem kryptograficznym.",
+          "id": "C"
+        },
+        {
+          "text_md": "Do jednoznacznego identyfikowania wpisu w tej liście",
+          "feedback_md": "Klucz jest częścią tożsamości wpisu listy. Nie jest kluczem kryptograficznym.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.yang.08",
+      "revision": 1,
+      "title": "Boolean",
+      "skills": [
+        "yang.boolean"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Leaf enabled ma type boolean. Która wartość JSON pasuje do tego typu?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Kodowanie musi zachować typ logiczny. Napis o podobnej treści nie staje się automatycznie boolean.",
+      "card_id": "encor.yang.08.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "\"true\" jako napis",
+          "feedback_md": "Kodowanie musi zachować typ logiczny. Napis o podobnej treści nie staje się automatycznie boolean.",
+          "id": "A"
+        },
+        {
+          "text_md": "\"enabled\" jako napis",
+          "feedback_md": "Kodowanie musi zachować typ logiczny. Napis o podobnej treści nie staje się automatycznie boolean.",
+          "id": "B"
+        },
+        {
+          "text_md": "true",
+          "feedback_md": "Kodowanie musi zachować typ logiczny. Napis o podobnej treści nie staje się automatycznie boolean.",
+          "id": "C"
+        },
+        {
+          "text_md": "Dowolny obiekt {\"state\":\"up\"}",
+          "feedback_md": "Kodowanie musi zachować typ logiczny. Napis o podobnej treści nie staje się automatycznie boolean.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.yang.09",
+      "revision": 1,
+      "title": "Config false",
+      "skills": [
+        "yang.config-false"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Co oznacza config false na węźle YANG?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Config false oznacza dane niekonfiguracyjne, np. obserwowany stan. Odczyt takiego węzła nie uprawnia do jego zapisu.",
+      "card_id": "encor.yang.09.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłączenie całego protokołu NETCONF",
+          "feedback_md": "Config false oznacza dane niekonfiguracyjne, np. obserwowany stan. Odczyt takiego węzła nie uprawnia do jego zapisu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dane stanu, których nie ustawia się jako konfiguracji przez zwykłą edycję datastore",
+          "feedback_md": "Config false oznacza dane niekonfiguracyjne, np. obserwowany stan. Odczyt takiego węzła nie uprawnia do jego zapisu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Ustawienie każdego boolean na false",
+          "feedback_md": "Config false oznacza dane niekonfiguracyjne, np. obserwowany stan. Odczyt takiego węzła nie uprawnia do jego zapisu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Automatyczne usunięcie modelu z urządzenia",
+          "feedback_md": "Config false oznacza dane niekonfiguracyjne, np. obserwowany stan. Odczyt takiego węzła nie uprawnia do jego zapisu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.yang.10",
+      "revision": 1,
+      "title": "Namespace",
+      "skills": [
+        "yang.namespace"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dlaczego moduły YANG mają przestrzenie nazw?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Namespace pomaga uniknąć kolizji nazw. Jest ważny przy adresowaniu i kodowaniu elementów modelu.",
+      "card_id": "encor.yang.10.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Aby jednoznacznie rozróżniać nazwy z różnych modułów",
+          "feedback_md": "Namespace pomaga uniknąć kolizji nazw. Jest ważny przy adresowaniu i kodowaniu elementów modelu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Aby zawsze używać jednego VLAN-u zarządzania",
+          "feedback_md": "Namespace pomaga uniknąć kolizji nazw. Jest ważny przy adresowaniu i kodowaniu elementów modelu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Aby ukryć adresy IP w szyfrogramie",
+          "feedback_md": "Namespace pomaga uniknąć kolizji nazw. Jest ważny przy adresowaniu i kodowaniu elementów modelu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Aby wszystkie pola nazywać tak samo bez kwalifikacji",
+          "feedback_md": "Namespace pomaga uniknąć kolizji nazw. Jest ważny przy adresowaniu i kodowaniu elementów modelu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.yang.11",
+      "revision": 1,
+      "title": "Ograniczenie zakresu",
+      "skills": [
+        "yang.ograniczenie-zakresu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Leaf mtu ma type uint16 z range \"1280..9216\". Czy 1000 jest poprawne dla tego leaf?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Typ bazowy i dodatkowe ograniczenia obowiązują jednocześnie. Range zawęża dopuszczalne wartości.",
+      "card_id": "encor.yang.11.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, każda liczba uint16 jest dozwolona",
+          "feedback_md": "Typ bazowy i dodatkowe ograniczenia obowiązują jednocześnie. Range zawęża dopuszczalne wartości.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tak, range jest tylko komentarzem",
+          "feedback_md": "Typ bazowy i dodatkowe ograniczenia obowiązują jednocześnie. Range zawęża dopuszczalne wartości.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie, bo uint16 dopuszcza wyłącznie liczby ujemne",
+          "feedback_md": "Typ bazowy i dodatkowe ograniczenia obowiązują jednocześnie. Range zawęża dopuszczalne wartości.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie, mieści się w uint16, ale nie w zawężonym range",
+          "feedback_md": "Typ bazowy i dodatkowe ograniczenia obowiązują jednocześnie. Range zawęża dopuszczalne wartości.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.yang.12",
+      "revision": 1,
+      "title": "Enumeration",
+      "skills": [
+        "yang.enumeration"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://nso-docs.cisco.com/guides/development/introduction-to-automation/basic-automation-with-python"
+        },
+        {
+          "title": "Dokumentacja Cisco — YANG — model danych i walidacja",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Leaf role ma enumeration z wartościami edge i border. Jak należy interpretować zapis role=\"core\"?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Enumeration ogranicza wartości do nazw zdefiniowanych w modelu. Nie zakładaj automatycznych aliasów.",
+      "card_id": "encor.yang.12.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zawsze zostanie automatycznie zamieniony na edge",
+          "feedback_md": "Enumeration ogranicza wartości do nazw zdefiniowanych w modelu. Nie zakładaj automatycznych aliasów.",
+          "id": "A"
+        },
+        {
+          "text_md": "Jest dozwolony, bo każda enumeration to dowolny string",
+          "feedback_md": "Enumeration ogranicza wartości do nazw zdefiniowanych w modelu. Nie zakładaj automatycznych aliasów.",
+          "id": "B"
+        },
+        {
+          "text_md": "Jest niezgodny z tym zbiorem dozwolonych wartości",
+          "feedback_md": "Enumeration ogranicza wartości do nazw zdefiniowanych w modelu. Nie zakładaj automatycznych aliasów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zmienia typ leaf na list",
+          "feedback_md": "Enumeration ogranicza wartości do nazw zdefiniowanych w modelu. Nie zakładaj automatycznych aliasów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

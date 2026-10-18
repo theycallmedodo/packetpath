@@ -1,0 +1,477 @@
+{
+  "schema_version": 3,
+  "id": "ccna.vlan.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.vlan.13.theory",
+      "revision": 1,
+      "title": "Dlaczego VLAN nie przechodzi?",
+      "skills": [
+        "vlan.trunk-troubleshooting"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "front_md": "Dlaczego VLAN nie przechodzi?",
+      "back_md": "Weryfikuj kolejno istnienie VLAN-u, listę allowed i stan STP. Sam stan fizyczny trunku nie dowodzi działania konkretnego VLAN-u.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.vlan.14.theory",
+      "revision": 1,
+      "title": "Przygotuj port użytkownika",
+      "skills": [
+        "vlan.user-port-scenario"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        }
+      ],
+      "front_md": "Przygotuj port użytkownika",
+      "back_md": "Utworzenie VLAN-u nie przypisuje automatycznie konkretnego portu. Oba kroki muszą pasować do planu.",
+      "example": "SW1(config)# vlan 40\nSW1(config-vlan)# name USERS\nSW1(config-vlan)# exit\nSW1(config)# interface GigabitEthernet1/0/8\nSW1(config-if)# switchport mode access\nSW1(config-if)# switchport access vlan 40"
+    },
+    {
+      "id": "ccna.vlan.15.theory",
+      "revision": 1,
+      "title": "Pełny uplink",
+      "skills": [
+        "vlan.uplink-scenario"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "front_md": "Pełny uplink",
+      "back_md": "Konfiguracja definiuje tryb, klasyfikację ruchu native i ograniczenie VLAN-ów. Sama komenda allowed nie ustawia trybu trunk.",
+      "example": "SW1(config)# interface GigabitEthernet1/0/24\nSW1(config-if)# switchport mode trunk\nSW1(config-if)# switchport trunk native vlan 99\nSW1(config-if)# switchport trunk allowed vlan 10,20,99"
+    },
+    {
+      "id": "ccna.vlan.16.theory",
+      "revision": 1,
+      "title": "Ruch między VLAN-ami",
+      "skills": [
+        "vlan.inter-vlan-concept"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        }
+      ],
+      "front_md": "Ruch między VLAN-ami",
+      "back_md": "VLAN oddziela domeny L2. Komunikację pomiędzy podsieciami może zapewnić router lub switch L3.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.vlan.17.theory",
+      "revision": 1,
+      "title": "Router-on-a-stick",
+      "skills": [
+        "vlan.router-on-stick"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        }
+      ],
+      "front_md": "Router-on-a-stick",
+      "back_md": "Numer podinterfejsu jest nazwą lokalną; tag wybiera `encapsulation dot1Q`. W tym planie oba mają wartość 10 dla czytelności.",
+      "example": "R1(config)# interface GigabitEthernet0/0.10\nR1(config-subif)# encapsulation dot1Q 10\nR1(config-subif)# ip address 192.168.10.1 255.255.255.0"
+    },
+    {
+      "id": "ccna.vlan.18.theory",
+      "revision": 1,
+      "title": "Usuń jeden VLAN, zachowaj resztę",
+      "skills": [
+        "vlan.remove-verify"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "front_md": "Usuń jeden VLAN, zachowaj resztę",
+      "back_md": "`remove 30` zmienia wyłącznie element listy allowed. Nie usuwa VLAN-u z bazy switcha.",
+      "example": "SW1(config-if)# switchport trunk allowed vlan remove 30\nSW1(config-if)# end\nSW1# show interfaces trunk"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.vlan.13",
+      "revision": 1,
+      "title": "Dlaczego VLAN nie przechodzi?",
+      "skills": [
+        "vlan.trunk-troubleshooting"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "VLAN 20 istnieje na obu switchach. Trunk działa, STP forwarding, ale allowed list na SW1 to tylko 10,99. Co bezpośrednio blokuje VLAN 20?",
+      "hints": [
+        "Porównaj wymagany VLAN z dozwolonym zbiorem."
+      ],
+      "explanation_md": "Weryfikuj kolejno istnienie VLAN-u, listę allowed i stan STP. Sam stan fizyczny trunku nie dowodzi działania konkretnego VLAN-u.",
+      "card_id": "ccna.vlan.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Brak VLAN 20 na liście allowed SW1.",
+          "feedback_md": "Trunk nie dopuszcza danych VLAN-u 20 w tej konfiguracji."
+        },
+        {
+          "id": "B",
+          "text_md": "Numer VLAN 20 jest zarezerwowany.",
+          "feedback_md": "VLAN 20 jest zwykłym poprawnym numerem."
+        },
+        {
+          "id": "C",
+          "text_md": "Każdy trunk dopuszcza tylko jeden VLAN.",
+          "feedback_md": "Trunk może przenosić wiele VLAN-ów."
+        },
+        {
+          "id": "D",
+          "text_md": "Native VLAN musi zawsze wynosić 20.",
+          "feedback_md": "VLAN 20 może być przenoszony jako tagowany niezależnie od native."
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.vlan.14",
+      "revision": 1,
+      "title": "Przygotuj port użytkownika",
+      "skills": [
+        "vlan.user-port-scenario"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Utwórz VLAN 40 o nazwie USERS. G1/0/8 ma być access w VLAN 40. Uzupełnij cztery elementy.",
+      "hints": [
+        "Sprawdź zgodność ID w pierwszej i ostatniej linii."
+      ],
+      "explanation_md": "Utworzenie VLAN-u nie przypisuje automatycznie konkretnego portu. Oba kroki muszą pasować do planu.",
+      "card_id": "ccna.vlan.14.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# vlan {{create}}\nSW1(config-vlan)# name {{name}}\nSW1(config-vlan)# exit\nSW1(config)# interface GigabitEthernet1/0/8\nSW1(config-if)# switchport mode {{mode}}\nSW1(config-if)# switchport access vlan {{assign}}",
+      "blanks": [
+        {
+          "id": "create",
+          "label": "Tworzony VLAN",
+          "answer_type": "integer",
+          "accepted": [
+            "40"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "name",
+          "label": "Nazwa",
+          "answer_type": "keyword",
+          "accepted": [
+            "USERS"
+          ],
+          "width": 8,
+          "common_errors": {}
+        },
+        {
+          "id": "mode",
+          "label": "Tryb",
+          "answer_type": "keyword",
+          "accepted": [
+            "access"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "assign",
+          "label": "Przypisanie portu",
+          "answer_type": "integer",
+          "accepted": [
+            "40"
+          ],
+          "width": 5,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.15",
+      "revision": 1,
+      "title": "Pełny uplink",
+      "skills": [
+        "vlan.uplink-scenario"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na G1/0/24 wymuś trunk, native 99 oraz listę allowed dokładnie 10,20,99. Wszystkie te VLAN-y istnieją. Wpisz listę rosnąco, bez spacji.",
+      "hints": [
+        "Native VLAN również powinien znajdować się na wymaganej liście."
+      ],
+      "explanation_md": "Konfiguracja definiuje tryb, klasyfikację ruchu native i ograniczenie VLAN-ów. Sama komenda allowed nie ustawia trybu trunk.",
+      "card_id": "ccna.vlan.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config)# interface GigabitEthernet1/0/24\nSW1(config-if)# switchport mode {{mode}}\nSW1(config-if)# switchport trunk native vlan {{native}}\nSW1(config-if)# switchport trunk allowed vlan {{allowed}}",
+      "blanks": [
+        {
+          "id": "mode",
+          "label": "Tryb uplinku",
+          "answer_type": "keyword",
+          "accepted": [
+            "trunk"
+          ],
+          "width": 8,
+          "common_errors": {}
+        },
+        {
+          "id": "native",
+          "label": "Native VLAN",
+          "answer_type": "integer",
+          "accepted": [
+            "99"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "allowed",
+          "label": "Lista VLAN-ów",
+          "answer_type": "keyword",
+          "accepted": [
+            "10,20,99"
+          ],
+          "width": 11,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.16",
+      "revision": 1,
+      "title": "Ruch między VLAN-ami",
+      "skills": [
+        "vlan.inter-vlan-concept"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Hosty VLAN 10 i VLAN 20 mają poprawne adresy w różnych podsieciach. Switch działa wyłącznie w L2. Co jest potrzebne do komunikacji między tymi podsieciami?",
+      "hints": [
+        "Szukasz funkcji warstwy trzeciej."
+      ],
+      "explanation_md": "VLAN oddziela domeny L2. Komunikację pomiędzy podsieciami może zapewnić router lub switch L3.",
+      "card_id": "ccna.vlan.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Wspólny native VLAN na wszystkich portach.",
+          "feedback_md": "Native VLAN nie zapewnia routingu między podsieciami."
+        },
+        {
+          "id": "B",
+          "text_md": "Identyczna lista allowed na trunku bez urządzenia L3.",
+          "feedback_md": "Spójny trunk zapewnia transport L2, ale nie sam routing."
+        },
+        {
+          "id": "C",
+          "text_md": "Routing między VLAN-ami i właściwe bramy.",
+          "feedback_md": "Router lub switch L3 może zapewnić komunikację między podsieciami."
+        },
+        {
+          "id": "D",
+          "text_md": "Samo utworzenie obu VLAN-ów w bazie switcha.",
+          "feedback_md": "Utworzenie VLAN-ów nie uruchamia routingu."
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.vlan.17",
+      "revision": 1,
+      "title": "Router-on-a-stick",
+      "skills": [
+        "vlan.router-on-stick"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Interfejs fizyczny G0/0 routera jest aktywny, bez adresu IP, połączony z trunkiem dopuszczającym VLAN 10. Utwórz G0/0.10, wybierz tag 10 i bramę 192.168.10.1/24.",
+      "hints": [
+        "Adres IP należy do podinterfejsu danego VLAN-u."
+      ],
+      "explanation_md": "Numer podinterfejsu jest nazwą lokalną; tag wybiera `encapsulation dot1Q`. W tym planie oba mają wartość 10 dla czytelności.",
+      "card_id": "ccna.vlan.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# interface {{subif}}\nR1(config-subif)# encapsulation dot1Q {{tag}}\nR1(config-subif)# ip address {{ip}} 255.255.255.0",
+      "blanks": [
+        {
+          "id": "subif",
+          "label": "Podinterfejs",
+          "answer_type": "keyword",
+          "accepted": [
+            "GigabitEthernet0/0.10"
+          ],
+          "width": 24,
+          "common_errors": {}
+        },
+        {
+          "id": "tag",
+          "label": "Tag 802.1Q",
+          "answer_type": "integer",
+          "accepted": [
+            "10"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "ip",
+          "label": "Brama VLAN 10",
+          "answer_type": "ipv4",
+          "accepted": [
+            "192.168.10.1"
+          ],
+          "width": 15,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.18",
+      "revision": 1,
+      "title": "Usuń jeden VLAN, zachowaj resztę",
+      "skills": [
+        "vlan.remove-verify"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Trunk ma listę 10,20,30,99. Usuń z niej tylko 30, zachowując tryb trunk. Potem wyświetl działające trunki.",
+      "hints": [
+        "To zmiana przenoszenia VLAN-u na jednym łączu, nie jego globalne skasowanie."
+      ],
+      "explanation_md": "`remove 30` zmienia wyłącznie element listy allowed. Nie usuwa VLAN-u z bazy switcha.",
+      "card_id": "ccna.vlan.18.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "SW1(config-if)# switchport trunk allowed vlan {{operation}} {{id}}\nSW1(config-if)# end\nSW1# show interfaces {{view}}",
+      "blanks": [
+        {
+          "id": "operation",
+          "label": "Usunięcie z listy",
+          "answer_type": "keyword",
+          "accepted": [
+            "remove"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "id",
+          "label": "Usuwany VLAN",
+          "answer_type": "integer",
+          "accepted": [
+            "30"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "view",
+          "label": "Widok trunków",
+          "answer_type": "keyword",
+          "accepted": [
+            "trunk"
+          ],
+          "width": 8,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,541 @@
+{
+  "schema_version": 3,
+  "id": "encor.netconf.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Błąd RPC",
+      "skills": [
+        "netconf.b-d-rpc"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        }
+      ],
+      "id": "encor.netconf.13.theory",
+      "front_md": "Błąd RPC",
+      "back_md": "Odpowiedź RPC dowodzi, że dotarłeś do warstwy protokołu. Invalid-value wskazuje problem danych, nie automatycznie transportu.",
+      "example": "Sprawdzenie wartości, typu i ograniczeń modelu oraz error-path"
+    },
+    {
+      "revision": 1,
+      "title": "Sesja CLI a NETCONF",
+      "skills": [
+        "netconf.sesja-cli-a-netconf"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        }
+      ],
+      "id": "encor.netconf.14.theory",
+      "front_md": "Sesja CLI a NETCONF",
+      "back_md": "Sukces CLI nie dowodzi dostępności osobnej usługi i portu NETCONF. Testuj właściwy transport i podsystem.",
+      "example": "Usługa NETCONF, ACL lub dostęp do TCP 830"
+    },
+    {
+      "revision": 1,
+      "title": "Minimalny ograniczony dostęp",
+      "skills": [
+        "netconf.minimalny-ograniczony-dost-p"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        }
+      ],
+      "id": "encor.netconf.15.theory",
+      "front_md": "Minimalny ograniczony dostęp",
+      "back_md": "Usługa oraz jej źródłowa ACL to odrębne elementy. Konfiguracja kont i poprawna ścieżka zarządzania pozostają warunkami wstępnymi.",
+      "example": "netconf-yang\nip access-list standard NC-ONLY\n permit host 198.51.100.10\nexit\nnetconf-yang ssh access-list NC-ONLY"
+    },
+    {
+      "revision": 1,
+      "title": "Niepewny wynik zapisu",
+      "skills": [
+        "netconf.niepewny-wynik-zapisu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        }
+      ],
+      "id": "encor.netconf.16.theory",
+      "front_md": "Niepewny wynik zapisu",
+      "back_md": "Brak odpowiedzi nie rozstrzyga wyniku operacji. Odczyt i idempotentny workflow ograniczają niezamierzone powtórzenia.",
+      "example": "Odczytać aktualny stan i ustalić, czy zmiana została zastosowana"
+    },
+    {
+      "revision": 1,
+      "title": "Dwie dozwolone stacje",
+      "skills": [
+        "netconf.dwie-dozwolone-stacje"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        }
+      ],
+      "id": "encor.netconf.17.theory",
+      "front_md": "Dwie dozwolone stacje",
+      "back_md": "Lista dopuszcza dwa konkretne źródła. Nie zastępuje ona weryfikacji tożsamości i uprawnień użytkownika NETCONF.",
+      "example": "ip access-list standard NC-CLIENTS\n permit host 192.0.2.10\n permit host 192.0.2.11\nexit\nnetconf-yang ssh access-list NC-CLIENTS"
+    },
+    {
+      "revision": 1,
+      "title": "Bezpieczne zakończenie",
+      "skills": [
+        "netconf.bezpieczne-zako-czenie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        }
+      ],
+      "id": "encor.netconf.18.theory",
+      "front_md": "Bezpieczne zakończenie",
+      "back_md": "Zasoby sesji i blokady trzeba porządkować także przy błędach. Obsługa zakończenia zmniejsza konflikty z innymi operatorami.",
+      "example": "Zwolnić lock i zamknąć sesję w kontrolowany sposób"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.netconf.13",
+      "revision": 1,
+      "title": "Błąd RPC",
+      "skills": [
+        "netconf.b-d-rpc"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Serwer odpowiada rpc-error z error-tag invalid-value. Jaki jest właściwy kierunek diagnozy?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Odpowiedź RPC dowodzi, że dotarłeś do warstwy protokołu. Invalid-value wskazuje problem danych, nie automatycznie transportu.",
+      "card_id": "encor.netconf.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Uznanie, że TCP 830 jest zablokowany",
+          "feedback_md": "Odpowiedź RPC dowodzi, że dotarłeś do warstwy protokołu. Invalid-value wskazuje problem danych, nie automatycznie transportu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Natychmiastowy restart całego urządzenia",
+          "feedback_md": "Odpowiedź RPC dowodzi, że dotarłeś do warstwy protokołu. Invalid-value wskazuje problem danych, nie automatycznie transportu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Sprawdzenie wartości, typu i ograniczeń modelu oraz error-path",
+          "feedback_md": "Odpowiedź RPC dowodzi, że dotarłeś do warstwy protokołu. Invalid-value wskazuje problem danych, nie automatycznie transportu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zamiana nazwy sesji SSH na hostname",
+          "feedback_md": "Odpowiedź RPC dowodzi, że dotarłeś do warstwy protokołu. Invalid-value wskazuje problem danych, nie automatycznie transportu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.netconf.14",
+      "revision": 1,
+      "title": "Sesja CLI a NETCONF",
+      "skills": [
+        "netconf.sesja-cli-a-netconf"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Zwykłe SSH na TCP 22 działa, ale połączenie NETCONF na 830 nie. Co nadal może być problemem?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Sukces CLI nie dowodzi dostępności osobnej usługi i portu NETCONF. Testuj właściwy transport i podsystem.",
+      "card_id": "encor.netconf.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "NETCONF musi działać, jeśli CLI działa",
+          "feedback_md": "Sukces CLI nie dowodzi dostępności osobnej usługi i portu NETCONF. Testuj właściwy transport i podsystem.",
+          "id": "A"
+        },
+        {
+          "text_md": "Usługa NETCONF, ACL lub dostęp do TCP 830",
+          "feedback_md": "Sukces CLI nie dowodzi dostępności osobnej usługi i portu NETCONF. Testuj właściwy transport i podsystem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Każdy pakiet SSH omija wszystkie ACL",
+          "feedback_md": "Sukces CLI nie dowodzi dostępności osobnej usługi i portu NETCONF. Testuj właściwy transport i podsystem.",
+          "id": "C"
+        },
+        {
+          "text_md": "YANG wymaga wyłączonego SSH",
+          "feedback_md": "Sukces CLI nie dowodzi dostępności osobnej usługi i portu NETCONF. Testuj właściwy transport i podsystem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.netconf.15",
+      "revision": 1,
+      "title": "Minimalny ograniczony dostęp",
+      "skills": [
+        "netconf.minimalny-ograniczony-dost-p"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na wspieranej platformie włącz NETCONF i przypnij nową standardową ACL NC-ONLY dopuszczającą 198.51.100.10. Uwierzytelnianie jest gotowe.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Usługa oraz jej źródłowa ACL to odrębne elementy. Konfiguracja kont i poprawna ścieżka zarządzania pozostają warunkami wstępnymi.",
+      "card_id": "encor.netconf.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "{{b0}}\nip access-list standard NC-ONLY\n permit host {{b1}}\nexit\nnetconf-yang ssh access-list {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "netconf-yang"
+          ],
+          "width": 14,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "198.51.100.10"
+          ],
+          "width": 15,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "identifier",
+          "accepted": [
+            "NC-ONLY"
+          ],
+          "width": 9,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.netconf.16",
+      "revision": 1,
+      "title": "Niepewny wynik zapisu",
+      "skills": [
+        "netconf.niepewny-wynik-zapisu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Po edit-config połączenie zerwało się przed odpowiedzią. Jak postąpić przed bezwarunkowym ponowieniem zmiany?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Brak odpowiedzi nie rozstrzyga wyniku operacji. Odczyt i idempotentny workflow ograniczają niezamierzone powtórzenia.",
+      "card_id": "encor.netconf.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Założyć, że na pewno nie wykonano operacji",
+          "feedback_md": "Brak odpowiedzi nie rozstrzyga wyniku operacji. Odczyt i idempotentny workflow ograniczają niezamierzone powtórzenia.",
+          "id": "A"
+        },
+        {
+          "text_md": "Założyć, że zawsze wykonano całość",
+          "feedback_md": "Brak odpowiedzi nie rozstrzyga wyniku operacji. Odczyt i idempotentny workflow ograniczają niezamierzone powtórzenia.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wysłać kolejną zmianę z losowym ID",
+          "feedback_md": "Brak odpowiedzi nie rozstrzyga wyniku operacji. Odczyt i idempotentny workflow ograniczają niezamierzone powtórzenia.",
+          "id": "C"
+        },
+        {
+          "text_md": "Odczytać aktualny stan i ustalić, czy zmiana została zastosowana",
+          "feedback_md": "Brak odpowiedzi nie rozstrzyga wyniku operacji. Odczyt i idempotentny workflow ograniczają niezamierzone powtórzenia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.netconf.17",
+      "revision": 1,
+      "title": "Dwie dozwolone stacje",
+      "skills": [
+        "netconf.dwie-dozwolone-stacje"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Nowa ACL NC-CLIENTS ma dopuścić 192.0.2.10 i 192.0.2.11, a następnie być przypięta do usługi NETCONF.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Lista dopuszcza dwa konkretne źródła. Nie zastępuje ona weryfikacji tożsamości i uprawnień użytkownika NETCONF.",
+      "card_id": "encor.netconf.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "ip access-list standard NC-CLIENTS\n permit host {{b0}}\n permit host {{b1}}\nexit\nnetconf-yang ssh access-list {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "192.0.2.10"
+          ],
+          "width": 12,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "192.0.2.11"
+          ],
+          "width": 12,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "identifier",
+          "accepted": [
+            "NC-CLIENTS"
+          ],
+          "width": 12,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.netconf.18",
+      "revision": 1,
+      "title": "Bezpieczne zakończenie",
+      "skills": [
+        "netconf.bezpieczne-zako-czenie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Klient zakończył pracę i trzyma lock. Co powinien zrobić w poprawnym workflow?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Zasoby sesji i blokady trzeba porządkować także przy błędach. Obsługa zakończenia zmniejsza konflikty z innymi operatorami.",
+      "card_id": "encor.netconf.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Pozostawić sesję i lock bezterminowo",
+          "feedback_md": "Zasoby sesji i blokady trzeba porządkować także przy błędach. Obsługa zakończenia zmniejsza konflikty z innymi operatorami.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zwolnić lock i zamknąć sesję w kontrolowany sposób",
+          "feedback_md": "Zasoby sesji i blokady trzeba porządkować także przy błędach. Obsługa zakończenia zmniejsza konflikty z innymi operatorami.",
+          "id": "B"
+        },
+        {
+          "text_md": "Usunąć cały datastore",
+          "feedback_md": "Zasoby sesji i blokady trzeba porządkować także przy błędach. Obsługa zakończenia zmniejsza konflikty z innymi operatorami.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłączyć wszystkie usługi SSH",
+          "feedback_md": "Zasoby sesji i blokady trzeba porządkować także przy błędach. Obsługa zakończenia zmniejsza konflikty z innymi operatorami.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

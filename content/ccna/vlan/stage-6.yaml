@@ -1,0 +1,503 @@
+{
+  "schema_version": 3,
+  "id": "ccna.vlan.stage-6",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Native mismatch w praktyce",
+      "skills": [
+        "vlan.native-mismatch-w-praktyce"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.ext.13.theory",
+      "front_md": "Native mismatch w praktyce",
+      "back_md": "Niezgodna interpretacja ruchu nietagowanego może naruszyć segmentację i łączność.",
+      "example": "Zostaną przypisane do różnych VLAN-ów na końcach"
+    },
+    {
+      "revision": 1,
+      "title": "Trunk a STP",
+      "skills": [
+        "vlan.trunk-a-stp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.ext.14.theory",
+      "front_md": "Trunk a STP",
+      "back_md": "Transport VLAN-u zależy również od stanu STP i pozostałych warunków operacyjnych.",
+      "example": "Nie"
+    },
+    {
+      "revision": 1,
+      "title": "Utwórz, dodaj, sprawdź",
+      "skills": [
+        "vlan.utw-rz-dodaj-sprawd"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.ext.15.theory",
+      "front_md": "Utwórz, dodaj, sprawdź",
+      "back_md": "Kolejność pozwala przygotować lokalny VLAN i rozszerzyć istniejący transport bez nadpisania listy.",
+      "example": "SW(config)# vlan 55\nSW(config-vlan)# exit\nSW(config)# interface GigabitEthernet1/0/24\nSW(config-if)# switchport trunk allowed vlan add 55\nSW(config-if)# end\nSW# show interfaces trunk"
+    },
+    {
+      "revision": 1,
+      "title": "PC bez tagów",
+      "skills": [
+        "vlan.pc-bez-tag-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.ext.16.theory",
+      "front_md": "PC bez tagów",
+      "back_md": "Przypisanie na wejściu wynika z konfiguracji portu access, a nie tagu dodanego przez PC.",
+      "example": "VLAN 70"
+    },
+    {
+      "revision": 1,
+      "title": "Pełny port telefonu",
+      "skills": [
+        "vlan.pe-ny-port-telefonu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.ext.17.theory",
+      "front_md": "Pełny port telefonu",
+      "back_md": "Port telefonu z PC wymaga świadomego rozdzielenia danych i głosu; negocjacja trunku nie jest do tego potrzebna.",
+      "example": "SW(config-if)# switchport mode access\nSW(config-if)# switchport access vlan 110\nSW(config-if)# switchport voice vlan 120\nSW(config-if)# switchport nonegotiate"
+    },
+    {
+      "revision": 1,
+      "title": "Brama jest osiągalna, zdalny VLAN nie",
+      "skills": [
+        "vlan.brama-jest-osi-galna-zdalny-vlan-nie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.ext.18.theory",
+      "front_md": "Brama jest osiągalna, zdalny VLAN nie",
+      "back_md": "Łączność lokalna nie przesądza o routingu, filtrach i odpowiedzi końca zdalnego.",
+      "example": "Routing, polityki oraz drogę powrotną i stan docelowego hosta"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.vlan.ext.13",
+      "revision": 1,
+      "title": "Native mismatch w praktyce",
+      "skills": [
+        "vlan.native-mismatch-w-praktyce"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na jednym końcu native VLAN to 10, na drugim 20; standardowo native jest nietagowany. Co grozi ramkom nietagowanym?",
+      "hints": [
+        "Niezgodna interpretacja ruchu nietagowanego może naruszyć segmentację i łączność."
+      ],
+      "explanation_md": "Niezgodna interpretacja ruchu nietagowanego może naruszyć segmentację i łączność.",
+      "card_id": "ccna.vlan.ext.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Automatycznie dostaną tag 4095",
+          "feedback_md": "To nie zachowanie naprawcze native mismatch.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zawsze zostaną zaszyfrowane",
+          "feedback_md": "802.1Q nie szyfruje danych.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zostaną przypisane do różnych VLAN-ów na końcach",
+          "feedback_md": "Niezgodna interpretacja ruchu nietagowanego może naruszyć segmentację i łączność.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zmienią się w pakiety IPv6",
+          "feedback_md": "Tagowanie nie zmienia protokołu IP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.vlan.ext.14",
+      "revision": 1,
+      "title": "Trunk a STP",
+      "skills": [
+        "vlan.trunk-a-stp"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "VLAN 50 jest allowed i active, ale port dla niego jest w stanie STP discarding. Czy sam allowed gwarantuje forwarding?",
+      "hints": [
+        "Transport VLAN-u zależy również od stanu STP i pozostałych warunków operacyjnych."
+      ],
+      "explanation_md": "Transport VLAN-u zależy również od stanu STP i pozostałych warunków operacyjnych.",
+      "card_id": "ccna.vlan.ext.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tak, allowed ma pierwszeństwo przed STP",
+          "feedback_md": "STP nadal kontroluje przekazywanie.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie",
+          "feedback_md": "Transport VLAN-u zależy również od stanu STP i pozostałych warunków operacyjnych.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tak, jeśli port ma 1 Gb/s",
+          "feedback_md": "Szybkość nie wyłącza STP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tak, jeśli VLAN jest nazwany USERS",
+          "feedback_md": "Nazwa VLAN-u nie steruje stanem STP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.vlan.ext.15",
+      "revision": 1,
+      "title": "Utwórz, dodaj, sprawdź",
+      "skills": [
+        "vlan.utw-rz-dodaj-sprawd"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Utwórz VLAN 55, dodaj go do już działającego trunku G1/0/24 bez usuwania innych VLAN-ów i wyświetl trunki.",
+      "hints": [
+        "Kolejność pozwala przygotować lokalny VLAN i rozszerzyć istniejący transport bez nadpisania listy."
+      ],
+      "explanation_md": "Kolejność pozwala przygotować lokalny VLAN i rozszerzyć istniejący transport bez nadpisania listy.",
+      "card_id": "ccna.vlan.ext.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config)# vlan {{b0}}\nSW(config-vlan)# exit\nSW(config)# interface GigabitEthernet1/0/24\nSW(config-if)# switchport trunk allowed vlan {{b1}} 55\nSW(config-if)# end\nSW# show interfaces {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "55"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "add"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "trunk"
+          ],
+          "width": 7,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.ext.16",
+      "revision": 1,
+      "title": "PC bez tagów",
+      "skills": [
+        "vlan.pc-bez-tag-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na statycznym access VLAN 70 PC wysyła zwykłą nieotagowaną ramkę. Do którego VLAN-u jest ona przypisana?",
+      "hints": [
+        "Przypisanie na wejściu wynika z konfiguracji portu access, a nie tagu dodanego przez PC."
+      ],
+      "explanation_md": "Przypisanie na wejściu wynika z konfiguracji portu access, a nie tagu dodanego przez PC.",
+      "card_id": "ccna.vlan.ext.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zawsze VLAN 1",
+          "feedback_md": "Access VLAN został jawnie ustawiony na 70.",
+          "id": "A"
+        },
+        {
+          "text_md": "Do żadnego VLAN-u",
+          "feedback_md": "Nieotagowany ruch na access nadal ma przypisanie VLAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "Do VLAN-u równego portowi TCP",
+          "feedback_md": "Port transportowy nie wybiera access VLAN-u.",
+          "id": "C"
+        },
+        {
+          "text_md": "VLAN 70",
+          "feedback_md": "Przypisanie na wejściu wynika z konfiguracji portu access, a nie tagu dodanego przez PC.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.vlan.ext.17",
+      "revision": 1,
+      "title": "Pełny port telefonu",
+      "skills": [
+        "vlan.pe-ny-port-telefonu"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "VLAN 110 dla danych i 120 dla głosu istnieją. Ustaw port jako access, przypisz oba VLAN-y i wyłącz DTP.",
+      "hints": [
+        "Port telefonu z PC wymaga świadomego rozdzielenia danych i głosu; negocjacja trunku nie jest do tego potrzebna."
+      ],
+      "explanation_md": "Port telefonu z PC wymaga świadomego rozdzielenia danych i głosu; negocjacja trunku nie jest do tego potrzebna.",
+      "card_id": "ccna.vlan.ext.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "SW(config-if)# switchport mode {{b0}}\nSW(config-if)# switchport access vlan {{b1}}\nSW(config-if)# switchport voice vlan {{b2}}\nSW(config-if)# switchport {{b3}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "access"
+          ],
+          "width": 8,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "110"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "120"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b3",
+          "label": "Luka 4",
+          "answer_type": "command",
+          "accepted": [
+            "nonegotiate"
+          ],
+          "width": 13,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.ext.18",
+      "revision": 1,
+      "title": "Brama jest osiągalna, zdalny VLAN nie",
+      "skills": [
+        "vlan.brama-jest-osi-galna-zdalny-vlan-nie"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "PC pinguje własną bramę SVI, lecz nie hosta innego VLAN-u. Co sprawdzić dalej?",
+      "hints": [
+        "Łączność lokalna nie przesądza o routingu, filtrach i odpowiedzi końca zdalnego."
+      ],
+      "explanation_md": "Łączność lokalna nie przesądza o routingu, filtrach i odpowiedzi końca zdalnego.",
+      "card_id": "ccna.vlan.ext.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Uznać, że ping do bramy dowodzi całej ścieżki",
+          "feedback_md": "To potwierdza tylko część drogi.",
+          "id": "A"
+        },
+        {
+          "text_md": "Routing, polityki oraz drogę powrotną i stan docelowego hosta",
+          "feedback_md": "Łączność lokalna nie przesądza o routingu, filtrach i odpowiedzi końca zdalnego.",
+          "id": "B"
+        },
+        {
+          "text_md": "Od razu zmienić MAC wszystkich urządzeń",
+          "feedback_md": "Nie jest celowaną diagnostyką.",
+          "id": "C"
+        },
+        {
+          "text_md": "Usunąć numer VLAN ze wszystkich portów",
+          "feedback_md": "To może zniszczyć działający fragment sieci.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

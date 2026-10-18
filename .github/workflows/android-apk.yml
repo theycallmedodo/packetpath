@@ -1,0 +1,60 @@
+name: Build Android APK
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: android-apk
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+      - name: Install Android SDK
+        run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0'
+      - run: npm ci
+      - run: npm test
+      - run: npm run android:sync
+      - name: Restore private signing key
+        env:
+          KEY_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+        run: |
+          test -n "$KEY_BASE64" || { echo 'Missing ANDROID_KEYSTORE_BASE64. Run START-ANDROID-TERMUX.sh.'; exit 1; }
+          test -n "$STORE_PASSWORD" || { echo 'Missing ANDROID_STORE_PASSWORD.'; exit 1; }
+          umask 077
+          printf '%s' "$KEY_BASE64" | base64 --decode > "$RUNNER_TEMP/packetpath.p12"
+      - name: Build signed APK
+        working-directory: android
+        env:
+          PACKETPATH_KEYSTORE: ${{ runner.temp }}/packetpath.p12
+          PACKETPATH_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          PACKETPATH_VERSION_CODE: ${{ github.run_number }}
+        run: bash ./gradlew --no-daemon assembleRelease
+      - name: Verify APK signature and prepare download
+        run: |
+          mkdir -p apk
+          cp android/app/build/outputs/apk/release/app-release.apk apk/PacketPath-v0.14.apk
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose apk/PacketPath-v0.14.apk
+          cd apk
+          sha256sum PacketPath-v0.14.apk > SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PacketPath-Android
+          path: apk/
+          if-no-files-found: error
+          retention-days: 14
+      - name: Remove temporary signing key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/packetpath.p12"

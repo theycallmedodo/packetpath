@@ -1,0 +1,495 @@
+{
+  "schema_version": 3,
+  "id": "ccna.monitoring.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "id": "ccna.monitoring.13.theory",
+      "revision": 1,
+      "title": "SNMPv3 authPriv",
+      "skills": [
+        "monitoring.snmpv3-level"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "front_md": "SNMPv3 authPriv",
+      "back_md": "Poziomy SNMPv3 odróżniają brak ochrony, uwierzytelnienie oraz uwierzytelnienie z prywatnością. Same nazwy użytkowników nie gwarantują authPriv.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.monitoring.14.theory",
+      "revision": 1,
+      "title": "Spójne znaczniki czasu",
+      "skills": [
+        "monitoring.timestamps"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "front_md": "Spójne znaczniki czasu",
+      "back_md": "Format timestamp i synchronizacja zegara są osobnymi ustawieniami. Milisekundy zwiększają rozdzielczość zapisu, nie gwarantują dokładności synchronizacji.",
+      "example": "R1(config)# ntp server 192.0.2.123\nR1(config)# service timestamps log datetime msec\nR1(config)# logging host 192.0.2.50"
+    },
+    {
+      "id": "ccna.monitoring.15.theory",
+      "revision": 1,
+      "title": "Ograniczony polling SNMPv2c",
+      "skills": [
+        "monitoring.snmp-acl"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "front_md": "Ograniczony polling SNMPv2c",
+      "back_md": "RO i ACL ograniczają zakres dostępu, ale v2c nadal nie zapewnia poufności community. To przykład interpretacji konfiguracji laboratoryjnej.",
+      "example": "R1(config)# access-list 10 permit host 192.0.2.60\nR1(config)# snmp-server community LAB_RO_DEMO RO 10"
+    },
+    {
+      "id": "ccna.monitoring.16.theory",
+      "revision": 1,
+      "title": "Dlaczego brak informational?",
+      "skills": [
+        "monitoring.logging-diagnosis"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "front_md": "Dlaczego brak informational?",
+      "back_md": "Brak konkretnej klasy logów może wynikać z progu, nawet gdy transport do serwera działa.",
+      "example": "Pytanie koncepcyjne — bez konfiguracji."
+    },
+    {
+      "id": "ccna.monitoring.17.theory",
+      "revision": 1,
+      "title": "Polityka logów na źródle loopback",
+      "skills": [
+        "monitoring.source-policy"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "front_md": "Polityka logów na źródle loopback",
+      "back_md": "Stałe źródło upraszcza identyfikację urządzenia i reguły odbiorcy. Próg informational obejmuje poziomy 0–6.",
+      "example": "R1(config)# logging host 192.0.2.50\nR1(config)# logging source-interface Loopback0\nR1(config)# logging trap informational"
+    },
+    {
+      "id": "ccna.monitoring.18.theory",
+      "revision": 1,
+      "title": "Weryfikacja czasu i lokalnych logów",
+      "skills": [
+        "monitoring.ops-verification"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "front_md": "Weryfikacja czasu i lokalnych logów",
+      "back_md": "Analizuj stan czasu razem z logami. Gdy zegar był niesynchronizowany, znaczniki wcześniejszych zdarzeń wymagają ostrożnej interpretacji.",
+      "example": "R1# show ntp associations\nR1# show ntp status\nR1# show logging"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.monitoring.13",
+      "revision": 1,
+      "title": "SNMPv3 authPriv",
+      "skills": [
+        "monitoring.snmpv3-level"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Co zapewnia poziom bezpieczeństwa authPriv w SNMPv3?",
+      "hints": [
+        "Rozdziel dwa człony nazwy."
+      ],
+      "explanation_md": "Poziomy SNMPv3 odróżniają brak ochrony, uwierzytelnienie oraz uwierzytelnienie z prywatnością. Same nazwy użytkowników nie gwarantują authPriv.",
+      "card_id": "ccna.monitoring.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Brak uwierzytelnienia i brak szyfrowania.",
+          "feedback_md": "To nie jest authPriv."
+        },
+        {
+          "id": "B",
+          "text_md": "Wyłącznie nazwę community.",
+          "feedback_md": "SNMPv3 nie opiera tego poziomu na community v2c."
+        },
+        {
+          "id": "C",
+          "text_md": "Samo uwierzytelnienie bez poufności.",
+          "feedback_md": "To odpowiada idei authNoPriv."
+        },
+        {
+          "id": "D",
+          "text_md": "Uwierzytelnienie i ochronę poufności danych.",
+          "feedback_md": "Auth dotyczy uwierzytelnienia, priv poufności."
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.monitoring.14",
+      "revision": 1,
+      "title": "Spójne znaczniki czasu",
+      "skills": [
+        "monitoring.timestamps"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Skonfiguruj serwer NTP 192.0.2.123, znaczniki logów jako datetime z milisekundami i syslog do 192.0.2.50.",
+      "hints": [
+        "Potrzebujesz źródła czasu i formatu, a nie jednego z nich."
+      ],
+      "explanation_md": "Format timestamp i synchronizacja zegara są osobnymi ustawieniami. Milisekundy zwiększają rozdzielczość zapisu, nie gwarantują dokładności synchronizacji.",
+      "card_id": "ccna.monitoring.14.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# ntp server {{ntp}}\nR1(config)# service timestamps log {{format}} msec\nR1(config)# logging host {{syslog}}",
+      "blanks": [
+        {
+          "id": "ntp",
+          "label": "Serwer NTP",
+          "answer_type": "ipv4",
+          "accepted": [
+            "192.0.2.123"
+          ],
+          "width": 14,
+          "common_errors": {}
+        },
+        {
+          "id": "format",
+          "label": "Format daty i czasu",
+          "answer_type": "keyword",
+          "accepted": [
+            "datetime"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "syslog",
+          "label": "Serwer logów",
+          "answer_type": "ipv4",
+          "accepted": [
+            "192.0.2.50"
+          ],
+          "width": 13,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.monitoring.15",
+      "revision": 1,
+      "title": "Ograniczony polling SNMPv2c",
+      "skills": [
+        "monitoring.snmp-acl"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Ćwiczenie starszej konfiguracji: ACL 10 ma dopuszczać tylko managera 192.0.2.60. Community LAB_RO_DEMO ma być read-only z tą ACL.",
+      "hints": [
+        "ACL źródłowa ma objąć jednego managera, nie any."
+      ],
+      "explanation_md": "RO i ACL ograniczają zakres dostępu, ale v2c nadal nie zapewnia poufności community. To przykład interpretacji konfiguracji laboratoryjnej.",
+      "card_id": "ccna.monitoring.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# access-list 10 permit host {{manager}}\nR1(config)# snmp-server community LAB_RO_DEMO {{permission}} {{acl}}",
+      "blanks": [
+        {
+          "id": "manager",
+          "label": "Adres managera",
+          "answer_type": "ipv4",
+          "accepted": [
+            "192.0.2.60"
+          ],
+          "width": 13,
+          "common_errors": {}
+        },
+        {
+          "id": "permission",
+          "label": "Tylko odczyt",
+          "answer_type": "keyword",
+          "accepted": [
+            "RO"
+          ],
+          "width": 5,
+          "common_errors": {}
+        },
+        {
+          "id": "acl",
+          "label": "Lista ograniczająca",
+          "answer_type": "integer",
+          "accepted": [
+            "10"
+          ],
+          "width": 5,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.monitoring.16",
+      "revision": 1,
+      "title": "Dlaczego brak informational?",
+      "skills": [
+        "monitoring.logging-diagnosis"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Syslog dociera do serwera, ale urządzenie ma logging trap warnings. Dlaczego nie widać wiadomości severity 6?",
+      "hints": [
+        "Porównaj wartość progu z numerem wiadomości."
+      ],
+      "explanation_md": "Brak konkretnej klasy logów może wynikać z progu, nawet gdy transport do serwera działa.",
+      "card_id": "ccna.monitoring.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "id": "A",
+          "text_md": "Poziom 6 jest poniżej wymaganego progu pilności i nie jest wysyłany.",
+          "feedback_md": "Próg 4 obejmuje 0–4, więc 6 jest wykluczone."
+        },
+        {
+          "id": "B",
+          "text_md": "Każda wiadomość 6 oznacza błąd hasła community.",
+          "feedback_md": "Severity syslog nie definiuje takiej przyczyny SNMP."
+        },
+        {
+          "id": "C",
+          "text_md": "Severity 6 jest zawsze wysyłane tylko przez konsolę szeregową.",
+          "feedback_md": "Można wysyłać 6 zdalnie po dobraniu progu."
+        },
+        {
+          "id": "D",
+          "text_md": "NTP usuwa wiadomości severity 6.",
+          "feedback_md": "NTP nie filtruje wiadomości po severity."
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.monitoring.17",
+      "revision": 1,
+      "title": "Polityka logów na źródle loopback",
+      "skills": [
+        "monitoring.source-policy"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Wyślij logi do 192.0.2.50 ze źródła Loopback0, próg informational. Loopback i routing powrotny już działają.",
+      "hints": [
+        "Nie ustawiaj adresu serwera jako źródła interfejsowego."
+      ],
+      "explanation_md": "Stałe źródło upraszcza identyfikację urządzenia i reguły odbiorcy. Próg informational obejmuje poziomy 0–6.",
+      "card_id": "ccna.monitoring.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1(config)# logging host {{server}}\nR1(config)# logging source-interface {{source}}\nR1(config)# logging trap {{level}}",
+      "blanks": [
+        {
+          "id": "server",
+          "label": "Odbiornik",
+          "answer_type": "ipv4",
+          "accepted": [
+            "192.0.2.50"
+          ],
+          "width": 13,
+          "common_errors": {}
+        },
+        {
+          "id": "source",
+          "label": "Interfejs źródłowy",
+          "answer_type": "keyword",
+          "accepted": [
+            "Loopback0",
+            "Loopback 0"
+          ],
+          "width": 12,
+          "common_errors": {}
+        },
+        {
+          "id": "level",
+          "label": "Próg",
+          "answer_type": "keyword",
+          "accepted": [
+            "informational",
+            "6"
+          ],
+          "width": 16,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.monitoring.18",
+      "revision": 1,
+      "title": "Weryfikacja czasu i lokalnych logów",
+      "skills": [
+        "monitoring.ops-verification"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Masz sprawdzić kolejno skojarzenia NTP, synchronizację zegara i lokalne logi. Uzupełnij końcówki komend.",
+      "hints": [
+        "Nie używaj show running-config jako dowodu skutecznej synchronizacji."
+      ],
+      "explanation_md": "Analizuj stan czasu razem z logami. Gdy zegar był niesynchronizowany, znaczniki wcześniejszych zdarzeń wymagają ostrożnej interpretacji.",
+      "card_id": "ccna.monitoring.18.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE — składnia wskazana w zadaniu",
+      "template": "R1# show ntp {{relations}}\nR1# show ntp {{state}}\nR1# show {{logs}}",
+      "blanks": [
+        {
+          "id": "relations",
+          "label": "Lista źródeł NTP",
+          "answer_type": "keyword",
+          "accepted": [
+            "associations"
+          ],
+          "width": 15,
+          "common_errors": {}
+        },
+        {
+          "id": "state",
+          "label": "Stan NTP",
+          "answer_type": "keyword",
+          "accepted": [
+            "status"
+          ],
+          "width": 9,
+          "common_errors": {}
+        },
+        {
+          "id": "logs",
+          "label": "Lokalne logi",
+          "answer_type": "keyword",
+          "accepted": [
+            "logging"
+          ],
+          "width": 10,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

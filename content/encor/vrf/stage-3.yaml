@@ -1,0 +1,445 @@
+{
+  "schema_version": 3,
+  "id": "encor.vrf.stage-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Nakładające się connected",
+      "skills": [
+        "vrf.nak-adaj-ce-si-connected"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.13.theory",
+      "front_md": "Nakładające się connected",
+      "back_md": "Kontekst interfejsu wybiera tablicę. Nakładające się prefiksy nie powodują automatycznego połączenia klientów.",
+      "example": "Adresacja może współistnieć w oddzielnych VRF"
+    },
+    {
+      "revision": 1,
+      "title": "Diagnoza asymetrii",
+      "skills": [
+        "vrf.diagnoza-asymetrii"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.14.theory",
+      "front_md": "Diagnoza asymetrii",
+      "back_md": "Poprawna trasa w jedną stronę nie dowodzi dwukierunkowej łączności. Zweryfikuj powrót i filtrowanie.",
+      "example": "Trasę powrotną do źródła i polityki po drodze"
+    },
+    {
+      "revision": 1,
+      "title": "Pełna konfiguracja klienta",
+      "skills": [
+        "vrf.pe-na-konfiguracja-klienta"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.15.theory",
+      "front_md": "Pełna konfiguracja klienta",
+      "back_md": "Rodzina adresowa, adres interfejsu i trasa muszą należeć do spójnego kontekstu klienta.",
+      "example": "vrf definition BLUE\n address-family ipv4\n exit-address-family\ninterface GigabitEthernet0/1\n vrf forwarding BLUE\n ip address 10.8.0.1 255.255.255.0\nexit\nip route vrf BLUE 0.0.0.0 0.0.0.0 10.8.0.2"
+    },
+    {
+      "revision": 1,
+      "title": "Trasa w złej RIB",
+      "skills": [
+        "vrf.trasa-w-z-ej-rib"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.16.theory",
+      "front_md": "Trasa w złej RIB",
+      "back_md": "Bez parametru vrf wpis nie jest konfigurowany w BLUE, niezależnie od intencji administratora.",
+      "example": "Wpis trafił do globalnej konfiguracji routingu"
+    },
+    {
+      "revision": 1,
+      "title": "Oddzielne trasy dwóch klientów",
+      "skills": [
+        "vrf.oddzielne-trasy-dw-ch-klient-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.17.theory",
+      "front_md": "Oddzielne trasy dwóch klientów",
+      "back_md": "Ten sam prefiks może prowadzić do różnych next hopów, ponieważ każdy klient ma własną tablicę.",
+      "example": "ip route vrf BLUE 10.40.0.0 255.255.0.0 192.0.2.2\nip route vrf RED 10.40.0.0 255.255.0.0 198.51.100.2"
+    },
+    {
+      "revision": 1,
+      "title": "Trasa connected we właściwym VRF",
+      "skills": [
+        "vrf.trasa-connected-we-w-a-ciwym-vrf"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.18.theory",
+      "front_md": "Trasa connected we właściwym VRF",
+      "back_md": "Brak wpisu w globalnej RIB jest oczekiwany dla interfejsu należącego do VRF. Odczytaj odpowiednią tablicę.",
+      "example": "show ip route vrf BLUE 10.8.0.0"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.vrf.13",
+      "revision": 1,
+      "title": "Nakładające się connected",
+      "skills": [
+        "vrf.nak-adaj-ce-si-connected"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Gi0/1 w BLUE ma 10.0.0.1/24, Gi0/2 w RED ma 10.0.0.1/24. Co jest poprawną interpretacją?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Kontekst interfejsu wybiera tablicę. Nakładające się prefiksy nie powodują automatycznego połączenia klientów.",
+      "card_id": "encor.vrf.13.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Router musi połączyć obie sieci w jeden broadcast domain",
+          "feedback_md": "Kontekst interfejsu wybiera tablicę. Nakładające się prefiksy nie powodują automatycznego połączenia klientów.",
+          "id": "A"
+        },
+        {
+          "text_md": "RED zawsze wygrywa przez kolejność alfabetyczną",
+          "feedback_md": "Kontekst interfejsu wybiera tablicę. Nakładające się prefiksy nie powodują automatycznego połączenia klientów.",
+          "id": "B"
+        },
+        {
+          "text_md": "Adresacja może współistnieć w oddzielnych VRF",
+          "feedback_md": "Kontekst interfejsu wybiera tablicę. Nakładające się prefiksy nie powodują automatycznego połączenia klientów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Każdy pakiet jest kopiowany do obu VRF",
+          "feedback_md": "Kontekst interfejsu wybiera tablicę. Nakładające się prefiksy nie powodują automatycznego połączenia klientów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.vrf.14",
+      "revision": 1,
+      "title": "Diagnoza asymetrii",
+      "skills": [
+        "vrf.diagnoza-asymetrii"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "R1 ma w BLUE trasę do zdalnego hosta. Ping z poprawnym źródłem nie wraca. Co trzeba jeszcze sprawdzić?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Poprawna trasa w jedną stronę nie dowodzi dwukierunkowej łączności. Zweryfikuj powrót i filtrowanie.",
+      "card_id": "encor.vrf.14.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłącznie nazwę hostname",
+          "feedback_md": "Poprawna trasa w jedną stronę nie dowodzi dwukierunkowej łączności. Zweryfikuj powrót i filtrowanie.",
+          "id": "A"
+        },
+        {
+          "text_md": "Trasę powrotną do źródła i polityki po drodze",
+          "feedback_md": "Poprawna trasa w jedną stronę nie dowodzi dwukierunkowej łączności. Zweryfikuj powrót i filtrowanie.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tylko globalne OSPF process ID",
+          "feedback_md": "Poprawna trasa w jedną stronę nie dowodzi dwukierunkowej łączności. Zweryfikuj powrót i filtrowanie.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wyłącznie kolejność definicji VRF",
+          "feedback_md": "Poprawna trasa w jedną stronę nie dowodzi dwukierunkowej łączności. Zweryfikuj powrót i filtrowanie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.vrf.15",
+      "revision": 1,
+      "title": "Pełna konfiguracja klienta",
+      "skills": [
+        "vrf.pe-na-konfiguracja-klienta"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Utwórz BLUE dla IPv4, dodaj Gi0/1 10.8.0.1/24 i default przez 10.8.0.2. Uzupełnij trzy brakujące elementy.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Rodzina adresowa, adres interfejsu i trasa muszą należeć do spójnego kontekstu klienta.",
+      "card_id": "encor.vrf.15.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "vrf definition BLUE\n address-family {{b0}}\n exit-address-family\ninterface GigabitEthernet0/1\n vrf forwarding BLUE\n ip address 10.8.0.1 {{b1}}\nexit\nip route vrf BLUE 0.0.0.0 0.0.0.0 {{b2}}",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "command",
+          "accepted": [
+            "ipv4"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "255.255.255.0"
+          ],
+          "width": 15,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "command",
+          "accepted": [
+            "10.8.0.2"
+          ],
+          "width": 10,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.vrf.16",
+      "revision": 1,
+      "title": "Trasa w złej RIB",
+      "skills": [
+        "vrf.trasa-w-z-ej-rib"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Administrator wpisał ip route 10.90.0.0 255.255.0.0 10.8.0.2 bez vrf BLUE. Jaki jest pierwszy problem?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Bez parametru vrf wpis nie jest konfigurowany w BLUE, niezależnie od intencji administratora.",
+      "card_id": "encor.vrf.16.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "IOS automatycznie wybrał BLUE po next hop",
+          "feedback_md": "Bez parametru vrf wpis nie jest konfigurowany w BLUE, niezależnie od intencji administratora.",
+          "id": "A"
+        },
+        {
+          "text_md": "Maska /16 jest nielegalna w VRF",
+          "feedback_md": "Bez parametru vrf wpis nie jest konfigurowany w BLUE, niezależnie od intencji administratora.",
+          "id": "B"
+        },
+        {
+          "text_md": "Polecenie zawsze tworzy trasę we wszystkich VRF",
+          "feedback_md": "Bez parametru vrf wpis nie jest konfigurowany w BLUE, niezależnie od intencji administratora.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wpis trafił do globalnej konfiguracji routingu",
+          "feedback_md": "Bez parametru vrf wpis nie jest konfigurowany w BLUE, niezależnie od intencji administratora.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.vrf.17",
+      "revision": 1,
+      "title": "Oddzielne trasy dwóch klientów",
+      "skills": [
+        "vrf.oddzielne-trasy-dw-ch-klient-w"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "BLUE: 10.40.0.0/16 przez 192.0.2.2. RED: ten sam prefiks przez 198.51.100.2. Oba next hopy są osiągalne w swoich VRF.",
+      "hints": [
+        "Zwróć uwagę na tryb konfiguracji i parametry wymienione w poleceniu."
+      ],
+      "explanation_md": "Ten sam prefiks może prowadzić do różnych next hopów, ponieważ każdy klient ma własną tablicę.",
+      "card_id": "encor.vrf.17.theory",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; zgodnie z założeniami zadania",
+      "template": "ip route vrf {{b0}} 10.40.0.0 255.255.0.0 {{b1}}\nip route vrf {{b2}} 10.40.0.0 255.255.0.0 198.51.100.2",
+      "blanks": [
+        {
+          "id": "b0",
+          "label": "Luka 1",
+          "answer_type": "identifier",
+          "accepted": [
+            "BLUE"
+          ],
+          "width": 6,
+          "common_errors": {}
+        },
+        {
+          "id": "b1",
+          "label": "Luka 2",
+          "answer_type": "command",
+          "accepted": [
+            "192.0.2.2"
+          ],
+          "width": 11,
+          "common_errors": {}
+        },
+        {
+          "id": "b2",
+          "label": "Luka 3",
+          "answer_type": "identifier",
+          "accepted": [
+            "RED"
+          ],
+          "width": 6,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.vrf.18",
+      "revision": 1,
+      "title": "Trasa connected we właściwym VRF",
+      "skills": [
+        "vrf.trasa-connected-we-w-a-ciwym-vrf"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W globalnym show ip route nie widać 10.8.0.0/24. Gi0/1 jest up/up w BLUE. Jaki jest najlepszy następny odczyt?",
+      "hints": [
+        "Przeanalizuj warunki scenariusza; odpowiedź dotyczy wyłącznie podanych założeń."
+      ],
+      "explanation_md": "Brak wpisu w globalnej RIB jest oczekiwany dla interfejsu należącego do VRF. Odczytaj odpowiednią tablicę.",
+      "card_id": "encor.vrf.18.theory",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "show spanning-tree root",
+          "feedback_md": "Brak wpisu w globalnej RIB jest oczekiwany dla interfejsu należącego do VRF. Odczytaj odpowiednią tablicę.",
+          "id": "A"
+        },
+        {
+          "text_md": "show ip route vrf BLUE 10.8.0.0",
+          "feedback_md": "Brak wpisu w globalnej RIB jest oczekiwany dla interfejsu należącego do VRF. Odczytaj odpowiednią tablicę.",
+          "id": "B"
+        },
+        {
+          "text_md": "show ip bgp summary bez sprawdzania VRF",
+          "feedback_md": "Brak wpisu w globalnej RIB jest oczekiwany dla interfejsu należącego do VRF. Odczytaj odpowiednią tablicę.",
+          "id": "C"
+        },
+        {
+          "text_md": "show interfaces trunk jako jedyny test",
+          "feedback_md": "Brak wpisu w globalnej RIB jest oczekiwany dla interfejsu należącego do VRF. Odczytaj odpowiednią tablicę.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}
