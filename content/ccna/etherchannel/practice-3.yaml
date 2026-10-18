@@ -1,0 +1,435 @@
+{
+  "schema_version": 3,
+  "id": "ccna.etherchannel.practice-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa passive — weryfikacja",
+      "skills": [
+        "ccna.etherchannel.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.case-01.3.card",
+      "front_md": "Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\n**Rozpoznanie:** Żadna strona nie inicjuje negocjacji LACP.\n\n**Działanie:** Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.",
+      "example": "Show etherchannel summary pokazuje porty członkowskie w stanie bundled."
+    },
+    {
+      "revision": 1,
+      "title": "Różne VLAN-y — weryfikacja",
+      "skills": [
+        "ccna.etherchannel.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.case-02.3.card",
+      "front_md": "Dwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "EtherChannel wymaga zgodnych parametrów swoich członków.\n\n**Rozpoznanie:** Parametry warstwy drugiej członków kanału są niespójne.\n\n**Działanie:** Ujednolicić parametry trunków członkowskich i Port-channel.\n\n**Sprawdzenie:** Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.",
+      "example": "Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN."
+    },
+    {
+      "revision": 1,
+      "title": "Jeden duży przepływ — weryfikacja",
+      "skills": [
+        "ccna.etherchannel.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.case-03.3.card",
+      "front_md": "Kanał ma cztery łącza 1 Gb/s. Jeden przepływ TCP używa jednego członka i osiąga mniej niż 1 Gb/s.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.\n\n**Rozpoznanie:** Hash przypisał pojedynczy przepływ do jednego łącza.\n\n**Działanie:** Ocenić wykorzystanie kanału za pomocą wielu różnych przepływów.\n\n**Sprawdzenie:** Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.",
+      "example": "Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości."
+    },
+    {
+      "revision": 1,
+      "title": "Awaria członka — weryfikacja",
+      "skills": [
+        "ccna.etherchannel.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.case-04.3.card",
+      "front_md": "LACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Awaria pojedynczego członka nie musi wyłączyć całej agregacji.\n\n**Rozpoznanie:** Kanał działa ze zmniejszoną przepustowością.\n\n**Działanie:** Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.",
+      "example": "Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki."
+    },
+    {
+      "revision": 1,
+      "title": "Różne protokoły — weryfikacja",
+      "skills": [
+        "ccna.etherchannel.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.case-05.3.card",
+      "front_md": "Jedna strona ma channel-group mode active, druga desirable. Nie zestawia się negocjowany kanał.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Active/passive należą do LACP, desirable/auto do PAgP.\n\n**Rozpoznanie:** LACP i PAgP nie negocjują między sobą.\n\n**Działanie:** Uzgodnić jeden protokół, np. LACP active po obu stronach.\n\n**Sprawdzenie:** Oba końce pokazują LACP i zgodnego partnera.",
+      "example": "Oba końce pokazują LACP i zgodnego partnera."
+    },
+    {
+      "revision": 1,
+      "title": "Port-channel i STP — weryfikacja",
+      "skills": [
+        "ccna.etherchannel.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.case-06.3.card",
+      "front_md": "Dwa fizyczne łącza są poprawnie bundled w Po1. STP przedstawia Po1 jako jeden port logiczny.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.\n\n**Rozpoznanie:** STP operuje na interfejsie logicznym agregacji.\n\n**Działanie:** Analizować rolę i koszt Po1, nie wymuszać osobnych ról członków.\n\n**Sprawdzenie:** Show spanning-tree wskazuje logiczny Po1 dla tej drogi.",
+      "example": "Show spanning-tree wskazuje logiczny Po1 dla tej drogi."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.etherchannel.practice.case-01.3",
+      "revision": 1,
+      "title": "Dwa passive — weryfikacja",
+      "skills": [
+        "ccna.etherchannel.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\n**Rozpoznanie:** Żadna strona nie inicjuje negocjacji LACP.\n\n**Działanie:** Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.",
+      "card_id": "ccna.etherchannel.practice.case-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Awaria członka”: LACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału. W bieżącym przypadku: Show etherchannel summary pokazuje porty członkowskie w stanie bundled.",
+          "id": "A"
+        },
+        {
+          "text_md": "Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Różne VLAN-y”: Dwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended. W bieżącym przypadku: Show etherchannel summary pokazuje porty członkowskie w stanie bundled.",
+          "id": "B"
+        },
+        {
+          "text_md": "Show etherchannel summary pokazuje porty członkowskie w stanie bundled.",
+          "feedback_md": "LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\n**Rozpoznanie:** Żadna strona nie inicjuje negocjacji LACP.\n\n**Działanie:** Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.",
+          "id": "C"
+        },
+        {
+          "text_md": "Oba końce pokazują LACP i zgodnego partnera.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Różne protokoły”: Jedna strona ma channel-group mode active, druga desirable. Nie zestawia się negocjowany kanał. W bieżącym przypadku: Show etherchannel summary pokazuje porty członkowskie w stanie bundled.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.etherchannel.practice.case-02.3",
+      "revision": 1,
+      "title": "Różne VLAN-y — weryfikacja",
+      "skills": [
+        "ccna.etherchannel.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "EtherChannel wymaga zgodnych parametrów swoich członków.\n\n**Rozpoznanie:** Parametry warstwy drugiej członków kanału są niespójne.\n\n**Działanie:** Ujednolicić parametry trunków członkowskich i Port-channel.\n\n**Sprawdzenie:** Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.",
+      "card_id": "ccna.etherchannel.practice.case-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Oba końce pokazują LACP i zgodnego partnera.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Różne protokoły”: Jedna strona ma channel-group mode active, druga desirable. Nie zestawia się negocjowany kanał. W bieżącym przypadku: Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.",
+          "id": "A"
+        },
+        {
+          "text_md": "Show spanning-tree wskazuje logiczny Po1 dla tej drogi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Port-channel i STP”: Dwa fizyczne łącza są poprawnie bundled w Po1. STP przedstawia Po1 jako jeden port logiczny. W bieżącym przypadku: Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Jeden duży przepływ”: Kanał ma cztery łącza 1 Gb/s. Jeden przepływ TCP używa jednego członka i osiąga mniej niż 1 Gb/s. W bieżącym przypadku: Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.",
+          "id": "C"
+        },
+        {
+          "text_md": "Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.",
+          "feedback_md": "EtherChannel wymaga zgodnych parametrów swoich członków.\n\n**Rozpoznanie:** Parametry warstwy drugiej członków kanału są niespójne.\n\n**Działanie:** Ujednolicić parametry trunków członkowskich i Port-channel.\n\n**Sprawdzenie:** Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.etherchannel.practice.case-03.3",
+      "revision": 1,
+      "title": "Jeden duży przepływ — weryfikacja",
+      "skills": [
+        "ccna.etherchannel.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Kanał ma cztery łącza 1 Gb/s. Jeden przepływ TCP używa jednego członka i osiąga mniej niż 1 Gb/s.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.\n\n**Rozpoznanie:** Hash przypisał pojedynczy przepływ do jednego łącza.\n\n**Działanie:** Ocenić wykorzystanie kanału za pomocą wielu różnych przepływów.\n\n**Sprawdzenie:** Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.",
+      "card_id": "ccna.etherchannel.practice.case-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.",
+          "feedback_md": "Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.\n\n**Rozpoznanie:** Hash przypisał pojedynczy przepływ do jednego łącza.\n\n**Działanie:** Ocenić wykorzystanie kanału za pomocą wielu różnych przepływów.\n\n**Sprawdzenie:** Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.",
+          "id": "A"
+        },
+        {
+          "text_md": "Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Awaria członka”: LACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału. W bieżącym przypadku: Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.",
+          "id": "B"
+        },
+        {
+          "text_md": "Show etherchannel summary pokazuje porty członkowskie w stanie bundled.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Dwa passive”: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. W bieżącym przypadku: Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.",
+          "id": "C"
+        },
+        {
+          "text_md": "Show spanning-tree wskazuje logiczny Po1 dla tej drogi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Port-channel i STP”: Dwa fizyczne łącza są poprawnie bundled w Po1. STP przedstawia Po1 jako jeden port logiczny. W bieżącym przypadku: Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.etherchannel.practice.case-04.3",
+      "revision": 1,
+      "title": "Awaria członka — weryfikacja",
+      "skills": [
+        "ccna.etherchannel.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "LACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Awaria pojedynczego członka nie musi wyłączyć całej agregacji.\n\n**Rozpoznanie:** Kanał działa ze zmniejszoną przepustowością.\n\n**Działanie:** Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.",
+      "card_id": "ccna.etherchannel.practice.case-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Show etherchannel summary pokazuje porty członkowskie w stanie bundled.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Dwa passive”: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. W bieżącym przypadku: Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.",
+          "id": "A"
+        },
+        {
+          "text_md": "Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.",
+          "feedback_md": "Awaria pojedynczego członka nie musi wyłączyć całej agregacji.\n\n**Rozpoznanie:** Kanał działa ze zmniejszoną przepustowością.\n\n**Działanie:** Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.",
+          "id": "B"
+        },
+        {
+          "text_md": "Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Różne VLAN-y”: Dwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended. W bieżącym przypadku: Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.",
+          "id": "C"
+        },
+        {
+          "text_md": "Oba końce pokazują LACP i zgodnego partnera.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Różne protokoły”: Jedna strona ma channel-group mode active, druga desirable. Nie zestawia się negocjowany kanał. W bieżącym przypadku: Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.etherchannel.practice.case-05.3",
+      "revision": 1,
+      "title": "Różne protokoły — weryfikacja",
+      "skills": [
+        "ccna.etherchannel.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Jedna strona ma channel-group mode active, druga desirable. Nie zestawia się negocjowany kanał.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Active/passive należą do LACP, desirable/auto do PAgP.\n\n**Rozpoznanie:** LACP i PAgP nie negocjują między sobą.\n\n**Działanie:** Uzgodnić jeden protokół, np. LACP active po obu stronach.\n\n**Sprawdzenie:** Oba końce pokazują LACP i zgodnego partnera.",
+      "card_id": "ccna.etherchannel.practice.case-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Show etherchannel summary pokazuje porty członkowskie w stanie bundled.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Dwa passive”: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. W bieżącym przypadku: Oba końce pokazują LACP i zgodnego partnera.",
+          "id": "A"
+        },
+        {
+          "text_md": "Show spanning-tree wskazuje logiczny Po1 dla tej drogi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Port-channel i STP”: Dwa fizyczne łącza są poprawnie bundled w Po1. STP przedstawia Po1 jako jeden port logiczny. W bieżącym przypadku: Oba końce pokazują LACP i zgodnego partnera.",
+          "id": "B"
+        },
+        {
+          "text_md": "Oba końce pokazują LACP i zgodnego partnera.",
+          "feedback_md": "Active/passive należą do LACP, desirable/auto do PAgP.\n\n**Rozpoznanie:** LACP i PAgP nie negocjują między sobą.\n\n**Działanie:** Uzgodnić jeden protokół, np. LACP active po obu stronach.\n\n**Sprawdzenie:** Oba końce pokazują LACP i zgodnego partnera.",
+          "id": "C"
+        },
+        {
+          "text_md": "Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Różne VLAN-y”: Dwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended. W bieżącym przypadku: Oba końce pokazują LACP i zgodnego partnera.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.etherchannel.practice.case-06.3",
+      "revision": 1,
+      "title": "Port-channel i STP — weryfikacja",
+      "skills": [
+        "ccna.etherchannel.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dwa fizyczne łącza są poprawnie bundled w Po1. STP przedstawia Po1 jako jeden port logiczny.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.\n\n**Rozpoznanie:** STP operuje na interfejsie logicznym agregacji.\n\n**Działanie:** Analizować rolę i koszt Po1, nie wymuszać osobnych ról członków.\n\n**Sprawdzenie:** Show spanning-tree wskazuje logiczny Po1 dla tej drogi.",
+      "card_id": "ccna.etherchannel.practice.case-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Jeden duży przepływ”: Kanał ma cztery łącza 1 Gb/s. Jeden przepływ TCP używa jednego członka i osiąga mniej niż 1 Gb/s. W bieżącym przypadku: Show spanning-tree wskazuje logiczny Po1 dla tej drogi.",
+          "id": "A"
+        },
+        {
+          "text_md": "Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Awaria członka”: LACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału. W bieżącym przypadku: Show spanning-tree wskazuje logiczny Po1 dla tej drogi.",
+          "id": "B"
+        },
+        {
+          "text_md": "Show etherchannel summary pokazuje porty członkowskie w stanie bundled.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Dwa passive”: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. W bieżącym przypadku: Show spanning-tree wskazuje logiczny Po1 dla tej drogi.",
+          "id": "C"
+        },
+        {
+          "text_md": "Show spanning-tree wskazuje logiczny Po1 dla tej drogi.",
+          "feedback_md": "Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.\n\n**Rozpoznanie:** STP operuje na interfejsie logicznym agregacji.\n\n**Działanie:** Analizować rolę i koszt Po1, nie wymuszać osobnych ról członków.\n\n**Sprawdzenie:** Show spanning-tree wskazuje logiczny Po1 dla tej drogi.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

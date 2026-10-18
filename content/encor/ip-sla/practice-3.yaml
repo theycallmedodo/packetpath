@@ -1,0 +1,435 @@
+{
+  "schema_version": 3,
+  "id": "encor.ip-sla.practice-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Brak schedule — weryfikacja",
+      "skills": [
+        "encor.ip-sla.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.case-01.3.card",
+      "front_md": "Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Definicja operacji i harmonogram jej wykonywania są oddzielne.\n\n**Rozpoznanie:** Zdefiniowany pomiar nie został aktywowany.\n\n**Działanie:** Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.",
+      "example": "Show ip sla statistics pokazuje aktualne wykonania i wyniki."
+    },
+    {
+      "revision": 1,
+      "title": "Złe źródło — weryfikacja",
+      "skills": [
+        "encor.ip-sla.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.case-02.3.card",
+      "front_md": "Probe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Wynik IP SLA zależy od adresu źródłowego i jego routingu.\n\n**Rozpoznanie:** Test mierzy inny przepływ niż zamierzona usługa.\n\n**Działanie:** Ustawić odpowiednie source-interface lub źródło operacji.\n\n**Sprawdzenie:** Odpowiedzi wracają do oczekiwanego źródła pomiaru.",
+      "example": "Odpowiedzi wracają do oczekiwanego źródła pomiaru."
+    },
+    {
+      "revision": 1,
+      "title": "ICMP a HTTPS — weryfikacja",
+      "skills": [
+        "encor.ip-sla.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.case-03.3.card",
+      "front_md": "Echo do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Rodzaj sondy określa, co rzeczywiście mierzymy.\n\n**Rozpoznanie:** Dostępność IP nie potwierdza dostępności aplikacji.\n\n**Działanie:** Dobrać pomiar testujący wymagany transport lub usługę.\n\n**Sprawdzenie:** Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.",
+      "example": "Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP."
+    },
+    {
+      "revision": 1,
+      "title": "Track bez trasy — weryfikacja",
+      "skills": [
+        "encor.ip-sla.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.case-04.3.card",
+      "front_md": "IP SLA pokazuje timeout i track jest Down, lecz statyczna trasa nie odnosi się do tego track.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Pomiar, obiekt track i konsument track to osobne elementy konfiguracji.\n\n**Rozpoznanie:** Wynik pomiaru nie steruje analizowaną trasą.\n\n**Działanie:** Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.",
+      "example": "Zmiana stanu track usuwa lub przywraca tę konkretną trasę."
+    },
+    {
+      "revision": 1,
+      "title": "Flapping — weryfikacja",
+      "skills": [
+        "encor.ip-sla.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.case-05.3.card",
+      "front_md": "Pojedyncze utracone probe powodują ciągłe przełączanie tras.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Histereza równoważy szybkość detekcji i stabilność przełączeń.\n\n**Rozpoznanie:** Reakcja jest zbyt czuła względem zakłóceń pomiaru.\n\n**Działanie:** Dobrać opóźnienia track i parametry sond zgodnie z wymaganiami dostępności.\n\n**Sprawdzenie:** Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.",
+      "example": "Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana."
+    },
+    {
+      "revision": 1,
+      "title": "Cel osiągalny przez backup — weryfikacja",
+      "skills": [
+        "encor.ip-sla.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.case-06.3.card",
+      "front_md": "Sonda primary po awarii zaczyna docierać przez backup i ponownie uznaje primary za zdrowe.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Pomiar stanu konkretnego łącza musi rzeczywiście korzystać z tego łącza.\n\n**Rozpoznanie:** Test nie jest ograniczony do badanej ścieżki.\n\n**Działanie:** Zapewnić sondzie drogę przez właściwe łącze i odpowiednie źródło.\n\n**Sprawdzenie:** Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.",
+      "example": "Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ip-sla.practice.case-01.3",
+      "revision": 1,
+      "title": "Brak schedule — weryfikacja",
+      "skills": [
+        "encor.ip-sla.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Definicja operacji i harmonogram jej wykonywania są oddzielne.\n\n**Rozpoznanie:** Zdefiniowany pomiar nie został aktywowany.\n\n**Działanie:** Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.",
+      "card_id": "encor.ip-sla.practice.case-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Cel osiągalny przez backup”: Sonda primary po awarii zaczyna docierać przez backup i ponownie uznaje primary za zdrowe. W bieżącym przypadku: Show ip sla statistics pokazuje aktualne wykonania i wyniki.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zmiana stanu track usuwa lub przywraca tę konkretną trasę.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Track bez trasy”: IP SLA pokazuje timeout i track jest Down, lecz statyczna trasa nie odnosi się do tego track. W bieżącym przypadku: Show ip sla statistics pokazuje aktualne wykonania i wyniki.",
+          "id": "B"
+        },
+        {
+          "text_md": "Show ip sla statistics pokazuje aktualne wykonania i wyniki.",
+          "feedback_md": "Definicja operacji i harmonogram jej wykonywania są oddzielne.\n\n**Rozpoznanie:** Zdefiniowany pomiar nie został aktywowany.\n\n**Działanie:** Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.",
+          "id": "C"
+        },
+        {
+          "text_md": "Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „ICMP a HTTPS”: Echo do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje. W bieżącym przypadku: Show ip sla statistics pokazuje aktualne wykonania i wyniki.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ip-sla.practice.case-02.3",
+      "revision": 1,
+      "title": "Złe źródło — weryfikacja",
+      "skills": [
+        "encor.ip-sla.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Probe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Wynik IP SLA zależy od adresu źródłowego i jego routingu.\n\n**Rozpoznanie:** Test mierzy inny przepływ niż zamierzona usługa.\n\n**Działanie:** Ustawić odpowiednie source-interface lub źródło operacji.\n\n**Sprawdzenie:** Odpowiedzi wracają do oczekiwanego źródła pomiaru.",
+      "card_id": "encor.ip-sla.practice.case-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „ICMP a HTTPS”: Echo do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje. W bieżącym przypadku: Odpowiedzi wracają do oczekiwanego źródła pomiaru.",
+          "id": "A"
+        },
+        {
+          "text_md": "Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Flapping”: Pojedyncze utracone probe powodują ciągłe przełączanie tras. W bieżącym przypadku: Odpowiedzi wracają do oczekiwanego źródła pomiaru.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zmiana stanu track usuwa lub przywraca tę konkretną trasę.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Track bez trasy”: IP SLA pokazuje timeout i track jest Down, lecz statyczna trasa nie odnosi się do tego track. W bieżącym przypadku: Odpowiedzi wracają do oczekiwanego źródła pomiaru.",
+          "id": "C"
+        },
+        {
+          "text_md": "Odpowiedzi wracają do oczekiwanego źródła pomiaru.",
+          "feedback_md": "Wynik IP SLA zależy od adresu źródłowego i jego routingu.\n\n**Rozpoznanie:** Test mierzy inny przepływ niż zamierzona usługa.\n\n**Działanie:** Ustawić odpowiednie source-interface lub źródło operacji.\n\n**Sprawdzenie:** Odpowiedzi wracają do oczekiwanego źródła pomiaru.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ip-sla.practice.case-03.3",
+      "revision": 1,
+      "title": "ICMP a HTTPS — weryfikacja",
+      "skills": [
+        "encor.ip-sla.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Echo do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Rodzaj sondy określa, co rzeczywiście mierzymy.\n\n**Rozpoznanie:** Dostępność IP nie potwierdza dostępności aplikacji.\n\n**Działanie:** Dobrać pomiar testujący wymagany transport lub usługę.\n\n**Sprawdzenie:** Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.",
+      "card_id": "encor.ip-sla.practice.case-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.",
+          "feedback_md": "Rodzaj sondy określa, co rzeczywiście mierzymy.\n\n**Rozpoznanie:** Dostępność IP nie potwierdza dostępności aplikacji.\n\n**Działanie:** Dobrać pomiar testujący wymagany transport lub usługę.\n\n**Sprawdzenie:** Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Cel osiągalny przez backup”: Sonda primary po awarii zaczyna docierać przez backup i ponownie uznaje primary za zdrowe. W bieżącym przypadku: Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Flapping”: Pojedyncze utracone probe powodują ciągłe przełączanie tras. W bieżącym przypadku: Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Show ip sla statistics pokazuje aktualne wykonania i wyniki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak schedule”: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. W bieżącym przypadku: Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ip-sla.practice.case-04.3",
+      "revision": 1,
+      "title": "Track bez trasy — weryfikacja",
+      "skills": [
+        "encor.ip-sla.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "IP SLA pokazuje timeout i track jest Down, lecz statyczna trasa nie odnosi się do tego track.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Pomiar, obiekt track i konsument track to osobne elementy konfiguracji.\n\n**Rozpoznanie:** Wynik pomiaru nie steruje analizowaną trasą.\n\n**Działanie:** Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.",
+      "card_id": "encor.ip-sla.practice.case-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Flapping”: Pojedyncze utracone probe powodują ciągłe przełączanie tras. W bieżącym przypadku: Zmiana stanu track usuwa lub przywraca tę konkretną trasę.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zmiana stanu track usuwa lub przywraca tę konkretną trasę.",
+          "feedback_md": "Pomiar, obiekt track i konsument track to osobne elementy konfiguracji.\n\n**Rozpoznanie:** Wynik pomiaru nie steruje analizowaną trasą.\n\n**Działanie:** Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.",
+          "id": "B"
+        },
+        {
+          "text_md": "Odpowiedzi wracają do oczekiwanego źródła pomiaru.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Złe źródło”: Probe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa. W bieżącym przypadku: Zmiana stanu track usuwa lub przywraca tę konkretną trasę.",
+          "id": "C"
+        },
+        {
+          "text_md": "Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „ICMP a HTTPS”: Echo do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje. W bieżącym przypadku: Zmiana stanu track usuwa lub przywraca tę konkretną trasę.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ip-sla.practice.case-05.3",
+      "revision": 1,
+      "title": "Flapping — weryfikacja",
+      "skills": [
+        "encor.ip-sla.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Pojedyncze utracone probe powodują ciągłe przełączanie tras.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Histereza równoważy szybkość detekcji i stabilność przełączeń.\n\n**Rozpoznanie:** Reakcja jest zbyt czuła względem zakłóceń pomiaru.\n\n**Działanie:** Dobrać opóźnienia track i parametry sond zgodnie z wymaganiami dostępności.\n\n**Sprawdzenie:** Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.",
+      "card_id": "encor.ip-sla.practice.case-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Odpowiedzi wracają do oczekiwanego źródła pomiaru.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Złe źródło”: Probe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa. W bieżącym przypadku: Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.",
+          "id": "A"
+        },
+        {
+          "text_md": "Show ip sla statistics pokazuje aktualne wykonania i wyniki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak schedule”: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. W bieżącym przypadku: Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.",
+          "id": "B"
+        },
+        {
+          "text_md": "Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.",
+          "feedback_md": "Histereza równoważy szybkość detekcji i stabilność przełączeń.\n\n**Rozpoznanie:** Reakcja jest zbyt czuła względem zakłóceń pomiaru.\n\n**Działanie:** Dobrać opóźnienia track i parametry sond zgodnie z wymaganiami dostępności.\n\n**Sprawdzenie:** Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.",
+          "id": "C"
+        },
+        {
+          "text_md": "Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Cel osiągalny przez backup”: Sonda primary po awarii zaczyna docierać przez backup i ponownie uznaje primary za zdrowe. W bieżącym przypadku: Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ip-sla.practice.case-06.3",
+      "revision": 1,
+      "title": "Cel osiągalny przez backup — weryfikacja",
+      "skills": [
+        "encor.ip-sla.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Sonda primary po awarii zaczyna docierać przez backup i ponownie uznaje primary za zdrowe.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Pomiar stanu konkretnego łącza musi rzeczywiście korzystać z tego łącza.\n\n**Rozpoznanie:** Test nie jest ograniczony do badanej ścieżki.\n\n**Działanie:** Zapewnić sondzie drogę przez właściwe łącze i odpowiednie źródło.\n\n**Sprawdzenie:** Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.",
+      "card_id": "encor.ip-sla.practice.case-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Odpowiedzi wracają do oczekiwanego źródła pomiaru.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Złe źródło”: Probe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa. W bieżącym przypadku: Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.",
+          "id": "A"
+        },
+        {
+          "text_md": "Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „ICMP a HTTPS”: Echo do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje. W bieżącym przypadku: Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.",
+          "id": "B"
+        },
+        {
+          "text_md": "Show ip sla statistics pokazuje aktualne wykonania i wyniki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak schedule”: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. W bieżącym przypadku: Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.",
+          "id": "C"
+        },
+        {
+          "text_md": "Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.",
+          "feedback_md": "Pomiar stanu konkretnego łącza musi rzeczywiście korzystać z tego łącza.\n\n**Rozpoznanie:** Test nie jest ograniczony do badanej ścieżki.\n\n**Działanie:** Zapewnić sondzie drogę przez właściwe łącze i odpowiednie źródło.\n\n**Sprawdzenie:** Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

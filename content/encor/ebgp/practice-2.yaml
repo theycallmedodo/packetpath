@@ -1,0 +1,1053 @@
+{
+  "schema_version": 3,
+  "id": "encor.ebgp.practice-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Weight przed LP — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-13",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-13.1.card",
+      "front_md": "Dwie poprawne ścieżki: A weight 200 i local-pref 100, B weight 0 i local-pref 300. Inne warunki nie dyskwalifikują ścieżek.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Weight jest porównywany przed local preference i ma lokalny zasięg.\n\n**Rozpoznanie:** Cisco preferuje A przez wyższy weight.\n\n**Działanie:** Oczekiwać wyboru A na tym routerze albo świadomie ujednolicić weight przed oceną LP.\n\n**Sprawdzenie:** Best-path wskazuje A mimo wyższego local-pref B.",
+      "example": "Cisco preferuje A przez wyższy weight."
+    },
+    {
+      "revision": 1,
+      "title": "LP przed długością — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-14",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-14.1.card",
+      "front_md": "Obie poprawne ścieżki mają weight 0 i nie są lokalne. A ma LP 200 oraz cztery AS, B LP 100 oraz jeden AS.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Local preference ma pierwszeństwo przed długością AS_PATH.\n\n**Rozpoznanie:** Wyższy local-pref A rozstrzyga przed długością AS_PATH.\n\n**Działanie:** Jeśli projekt preferuje A, zachować tę politykę.\n\n**Sprawdzenie:** A jest best-path dla tego prefiksu.",
+      "example": "Wyższy local-pref A rozstrzyga przed długością AS_PATH."
+    },
+    {
+      "revision": 1,
+      "title": "Krótszy AS_PATH — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-15",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-15.1.card",
+      "front_md": "Dwie poprawne nielokalne ścieżki mają równe weight i LP. A AS_PATH 65010 65020, B 65030 65040 65050. Nie wyłączono porównania długości.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Długość AS_PATH rozstrzyga dopiero po wcześniejszych kryteriach.\n\n**Rozpoznanie:** A ma krótszy AS_PATH.\n\n**Działanie:** Oczekiwać wyboru A przy podanych równych wcześniejszych kryteriach.\n\n**Sprawdzenie:** Best-path wskazuje ścieżkę z dwoma AS.",
+      "example": "A ma krótszy AS_PATH."
+    },
+    {
+      "revision": 1,
+      "title": "Origin — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-16",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-16.1.card",
+      "front_md": "Równe wcześniejsze atrybuty i długość AS_PATH; A ma origin IGP, B incomplete.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Kod origin opisuje pochodzenie reklamy, nie aktualny protokół transportujący pakiety.\n\n**Rozpoznanie:** Origin IGP jest preferowany przed incomplete.\n\n**Działanie:** Oczekiwać wyboru A, jeśli wszystkie wcześniejsze warunki są równe.\n\n**Sprawdzenie:** Ścieżka z kodem i jest preferowana względem ? w tym porównaniu.",
+      "example": "Origin IGP jest preferowany przed incomplete."
+    },
+    {
+      "revision": 1,
+      "title": "MED ten sam AS — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-17",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-17.1.card",
+      "front_md": "Dwie poprawne ścieżki od tego samego sąsiedniego AS mają równe wcześniejsze kryteria; MED A=50, B=100.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "MED preferuje mniejszą wartość, gdy ścieżki podlegają jego porównaniu.\n\n**Rozpoznanie:** Niższy MED A rozstrzyga dla porównywalnych ścieżek.\n\n**Działanie:** Oczekiwać wyboru A w tym konkretnym porównaniu.\n\n**Sprawdzenie:** Best-path wskazuje ścieżkę z MED 50.",
+      "example": "Niższy MED A rozstrzyga dla porównywalnych ścieżek."
+    },
+    {
+      "revision": 1,
+      "title": "MED różne AS — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-18",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-18.1.card",
+      "front_md": "A i B pochodzą z różnych sąsiednich AS. Operator zakłada, że przy domyślnych ustawieniach zawsze wygra niższy MED.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Zakres porównywania atrybutu jest równie ważny jak jego wartość.\n\n**Rozpoznanie:** Domyślnie MED nie musi być porównywany między różnymi sąsiednimi AS.\n\n**Działanie:** Sprawdzić reguły porównywania MED i pozostałe atrybuty przed wskazaniem zwycięzcy.\n\n**Sprawdzenie:** Analiza nie wybiera ścieżki wyłącznie z dwóch wartości MED z różnych AS.",
+      "example": "Domyślnie MED nie musi być porównywany między różnymi sąsiednimi AS."
+    },
+    {
+      "revision": 1,
+      "title": "Weight nie wędruje — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-19",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-19.1.card",
+      "front_md": "R1 ustawia weight 500 na trasie i wysyła ją do R2. Operator oczekuje, że R2 też zobaczy weight 500.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Weight jest lokalnym parametrem wyboru Cisco, nie atrybutem propagowanym do peerów.\n\n**Rozpoznanie:** Weight nie jest przenoszonym między routerami atrybutem BGP.\n\n**Działanie:** Dla polityki obejmującej AS użyć właściwego mechanizmu, np. local preference w obrębie AS.\n\n**Sprawdzenie:** R2 nie dziedziczy lokalnego weight R1.",
+      "example": "Weight nie jest przenoszonym między routerami atrybutem BGP."
+    },
+    {
+      "revision": 1,
+      "title": "LP a ruch przychodzący — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-20",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-20.1.card",
+      "front_md": "Administrator zwiększa local-pref importowanej trasy, aby wymusić wejście ruchu z Internetu przez konkretnego ISP.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Local preference wyraża wewnętrzną preferencję wyjścia z AS.\n\n**Rozpoznanie:** Zmiana steruje wyborem wyjścia lokalnego AS, nie bezpośrednio wyborem obcych AS.\n\n**Działanie:** Rozdzielić politykę ruchu wychodzącego od ogłaszanych wskazówek dla ruchu przychodzącego.\n\n**Sprawdzenie:** Zmiana LP wpływa na wyjście z AS, bez gwarancji zmiany wejścia od ISP.",
+      "example": "Zmiana steruje wyborem wyjścia lokalnego AS, nie bezpośrednio wyborem obcych AS."
+    },
+    {
+      "revision": 1,
+      "title": "Prepend bez gwarancji — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-21",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-21.1.card",
+      "front_md": "Dodano prepend na zapasowym ISP, lecz część Internetu nadal wybiera tę drogę przez własny wyższy local-pref.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Prepend jest wskazówką wpływającą na wybór innych AS, a nie nakazem.\n\n**Rozpoznanie:** Zewnętrzna polityka może przeważyć nad długością AS_PATH.\n\n**Działanie:** Zweryfikować reklamy i politykę operatora, nie traktować prepend jako gwarancji.\n\n**Sprawdzenie:** Zdalny wybór jest wyjaśniony wcześniejszym atrybutem mimo wydłużonego AS_PATH.",
+      "example": "Zewnętrzna polityka może przeważyć nad długością AS_PATH."
+    },
+    {
+      "revision": 1,
+      "title": "Własny AS w path — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-22",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-22.1.card",
+      "front_md": "Lokalny AS 65001 otrzymuje reklamę z AS_PATH zawierającym 65001. Nie skonfigurowano wyjątków.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Wykrycie własnego AS w AS_PATH zapobiega przyjmowaniu typowej pętli między AS.\n\n**Rozpoznanie:** Zadziałała standardowa ochrona przed pętlą AS.\n\n**Działanie:** Sprawdzić przyczynę powrotu reklamy i projekt zamiast automatycznie wyłączać ochronę.\n\n**Sprawdzenie:** Prawidłowa ścieżka nie zawiera niezamierzonego powrotu lokalnego AS.",
+      "example": "Zadziałała standardowa ochrona przed pętlą AS."
+    },
+    {
+      "revision": 1,
+      "title": "RIB failure — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-23",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-23.1.card",
+      "front_md": "BGP wybrało najlepszą ścieżkę do /24, ale w RIB jest statyczna do tego samego /24 z niższym AD.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Najlepsza ścieżka w BGP nie zawsze jest aktywną trasą systemowej tablicy routingu.\n\n**Rozpoznanie:** BGP best-path przegrało instalację z innym źródłem trasy.\n\n**Działanie:** Porównać źródła RIB i ich AD dla dokładnie tego prefiksu.\n\n**Sprawdzenie:** RIB wskazuje statyczną, a status BGP wyjaśnia brak instalacji.",
+      "example": "BGP best-path przegrało instalację z innym źródłem trasy."
+    },
+    {
+      "revision": 1,
+      "title": "Default od ISP — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-24",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-24.1.card",
+      "front_md": "Sesja działa i przyjęto 0.0.0.0/0, ale operator szuka pełnej tablicy Internetu, której nie zamówiono.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Liczba prefiksów sama nie ocenia poprawności bez znajomości kontraktu routingu.\n\n**Rozpoznanie:** Sąsiad zgodnie z usługą dostarcza tylko trasę domyślną.\n\n**Działanie:** Ocenić działanie default i uzgodniony zakres reklam.\n\n**Sprawdzenie:** Prefix count odpowiada zamówionej usłudze, a default prowadzi do ISP.",
+      "example": "Sąsiad zgodnie z usługą dostarcza tylko trasę domyślną."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ebgp.practice.case-13.1",
+      "revision": 1,
+      "title": "Weight przed LP — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-13",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dwie poprawne ścieżki: A weight 200 i local-pref 100, B weight 0 i local-pref 300. Inne warunki nie dyskwalifikują ścieżek.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Weight jest porównywany przed local preference i ma lokalny zasięg.\n\n**Rozpoznanie:** Cisco preferuje A przez wyższy weight.\n\n**Działanie:** Oczekiwać wyboru A na tym routerze albo świadomie ujednolicić weight przed oceną LP.\n\n**Sprawdzenie:** Best-path wskazuje A mimo wyższego local-pref B.",
+      "card_id": "encor.ebgp.practice.case-13.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Cisco preferuje A przez wyższy weight.",
+          "feedback_md": "Weight jest porównywany przed local preference i ma lokalny zasięg.\n\n**Rozpoznanie:** Cisco preferuje A przez wyższy weight.\n\n**Działanie:** Oczekiwać wyboru A na tym routerze albo świadomie ujednolicić weight przed oceną LP.\n\n**Sprawdzenie:** Best-path wskazuje A mimo wyższego local-pref B.",
+          "id": "A"
+        },
+        {
+          "text_md": "Control-plane działa, natomiast problem leży na ścieżce danych.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prefiks a ruch”: BGP i RIB zawierają poprawną trasę, ale firewall dalej odrzuca dane użytkownika. W bieżącym przypadku: Cisco preferuje A przez wyższy weight.",
+          "id": "B"
+        },
+        {
+          "text_md": "Niższy MED A rozstrzyga dla porównywalnych ścieżek.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „MED ten sam AS”: Dwie poprawne ścieżki od tego samego sąsiedniego AS mają równe wcześniejsze kryteria; MED A=50, B=100. W bieżącym przypadku: Cisco preferuje A przez wyższy weight.",
+          "id": "C"
+        },
+        {
+          "text_md": "Import jest blokowany przez lokalny filtr.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prefix-list in”: ISP wysyła prefiks, lecz lokalna polityka inbound go odrzuca; sesja jest Established. W bieżącym przypadku: Cisco preferuje A przez wyższy weight.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ebgp.practice.case-14.1",
+      "revision": 1,
+      "title": "LP przed długością — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-14",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Obie poprawne ścieżki mają weight 0 i nie są lokalne. A ma LP 200 oraz cztery AS, B LP 100 oraz jeden AS.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Local preference ma pierwszeństwo przed długością AS_PATH.\n\n**Rozpoznanie:** Wyższy local-pref A rozstrzyga przed długością AS_PATH.\n\n**Działanie:** Jeśli projekt preferuje A, zachować tę politykę.\n\n**Sprawdzenie:** A jest best-path dla tego prefiksu.",
+      "card_id": "encor.ebgp.practice.case-14.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Domyślny zasięg eBGP jest niewystarczający dla tej topologii.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „TTL multihop”: eBGP między loopbackami jest poprawnie routowane przez kilka skoków, lecz pakiet z domyślnym TTL nie dociera. Nie użyto TTL security. W bieżącym przypadku: Wyższy local-pref A rozstrzyga przed długością AS_PATH.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wyższy local-pref A rozstrzyga przed długością AS_PATH.",
+          "feedback_md": "Local preference ma pierwszeństwo przed długością AS_PATH.\n\n**Rozpoznanie:** Wyższy local-pref A rozstrzyga przed długością AS_PATH.\n\n**Działanie:** Jeśli projekt preferuje A, zachować tę politykę.\n\n**Sprawdzenie:** A jest best-path dla tego prefiksu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Skonfigurowany numer AS sąsiada jest niezgodny.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły remote-as”: R1 oczekuje remote-as 65020, ale rzeczywisty sąsiad ma AS 65030. Log OPEN wskazuje Bad Peer AS. W bieżącym przypadku: Wyższy local-pref A rozstrzyga przed długością AS_PATH.",
+          "id": "C"
+        },
+        {
+          "text_md": "Niższy MED A rozstrzyga dla porównywalnych ścieżek.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „MED ten sam AS”: Dwie poprawne ścieżki od tego samego sąsiedniego AS mają równe wcześniejsze kryteria; MED A=50, B=100. W bieżącym przypadku: Wyższy local-pref A rozstrzyga przed długością AS_PATH.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ebgp.practice.case-15.1",
+      "revision": 1,
+      "title": "Krótszy AS_PATH — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-15",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dwie poprawne nielokalne ścieżki mają równe weight i LP. A AS_PATH 65010 65020, B 65030 65040 65050. Nie wyłączono porównania długości.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Długość AS_PATH rozstrzyga dopiero po wcześniejszych kryteriach.\n\n**Rozpoznanie:** A ma krótszy AS_PATH.\n\n**Działanie:** Oczekiwać wyboru A przy podanych równych wcześniejszych kryteriach.\n\n**Sprawdzenie:** Best-path wskazuje ścieżkę z dwoma AS.",
+      "card_id": "encor.ebgp.practice.case-15.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Brakuje dokładnego prefiksu /24 wymaganego przez network.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak dokładnego RIB”: Network wskazuje 10.40.0.0 mask 255.255.255.0, ale RIB ma wyłącznie 10.40.0.0/16. W bieżącym przypadku: A ma krótszy AS_PATH.",
+          "id": "A"
+        },
+        {
+          "text_md": "Droga wychodząca działa bez zapewnionej drogi powrotnej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak ścieżki powrotnej”: CE wysyła ruch przez poprawny default BGP, ale jego LAN nie jest ogłaszany ani tłumaczony; ISP nie ma drogi do źródła. W bieżącym przypadku: A ma krótszy AS_PATH.",
+          "id": "B"
+        },
+        {
+          "text_md": "A ma krótszy AS_PATH.",
+          "feedback_md": "Długość AS_PATH rozstrzyga dopiero po wcześniejszych kryteriach.\n\n**Rozpoznanie:** A ma krótszy AS_PATH.\n\n**Działanie:** Oczekiwać wyboru A przy podanych równych wcześniejszych kryteriach.\n\n**Sprawdzenie:** Best-path wskazuje ścieżkę z dwoma AS.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zewnętrzna polityka może przeważyć nad długością AS_PATH.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prepend bez gwarancji”: Dodano prepend na zapasowym ISP, lecz część Internetu nadal wybiera tę drogę przez własny wyższy local-pref. W bieżącym przypadku: A ma krótszy AS_PATH.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ebgp.practice.case-16.1",
+      "revision": 1,
+      "title": "Origin — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-16",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Równe wcześniejsze atrybuty i długość AS_PATH; A ma origin IGP, B incomplete.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Kod origin opisuje pochodzenie reklamy, nie aktualny protokół transportujący pakiety.\n\n**Rozpoznanie:** Origin IGP jest preferowany przed incomplete.\n\n**Działanie:** Oczekiwać wyboru A, jeśli wszystkie wcześniejsze warunki są równe.\n\n**Sprawdzenie:** Ścieżka z kodem i jest preferowana względem ? w tym porównaniu.",
+      "card_id": "encor.ebgp.practice.case-16.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Reklama sumaryczna nie dowodzi dostępności każdej składowej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Agregat maskuje awarię”: Agregat jest nadal ogłaszany, lecz jedna składowa sieć jest nieosiągalna i ruch do niej jest odrzucany. W bieżącym przypadku: Origin IGP jest preferowany przed incomplete.",
+          "id": "A"
+        },
+        {
+          "text_md": "Control-plane działa, natomiast problem leży na ścieżce danych.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prefiks a ruch”: BGP i RIB zawierają poprawną trasę, ale firewall dalej odrzuca dane użytkownika. W bieżącym przypadku: Origin IGP jest preferowany przed incomplete.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyższy local-pref A rozstrzyga przed długością AS_PATH.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „LP przed długością”: Obie poprawne ścieżki mają weight 0 i nie są lokalne. A ma LP 200 oraz cztery AS, B LP 100 oraz jeden AS. W bieżącym przypadku: Origin IGP jest preferowany przed incomplete.",
+          "id": "C"
+        },
+        {
+          "text_md": "Origin IGP jest preferowany przed incomplete.",
+          "feedback_md": "Kod origin opisuje pochodzenie reklamy, nie aktualny protokół transportujący pakiety.\n\n**Rozpoznanie:** Origin IGP jest preferowany przed incomplete.\n\n**Działanie:** Oczekiwać wyboru A, jeśli wszystkie wcześniejsze warunki są równe.\n\n**Sprawdzenie:** Ścieżka z kodem i jest preferowana względem ? w tym porównaniu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ebgp.practice.case-17.1",
+      "revision": 1,
+      "title": "MED ten sam AS — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-17",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dwie poprawne ścieżki od tego samego sąsiedniego AS mają równe wcześniejsze kryteria; MED A=50, B=100.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "MED preferuje mniejszą wartość, gdy ścieżki podlegają jego porównaniu.\n\n**Rozpoznanie:** Niższy MED A rozstrzyga dla porównywalnych ścieżek.\n\n**Działanie:** Oczekiwać wyboru A w tym konkretnym porównaniu.\n\n**Sprawdzenie:** Best-path wskazuje ścieżkę z MED 50.",
+      "card_id": "encor.ebgp.practice.case-17.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Niższy MED A rozstrzyga dla porównywalnych ścieżek.",
+          "feedback_md": "MED preferuje mniejszą wartość, gdy ścieżki podlegają jego porównaniu.\n\n**Rozpoznanie:** Niższy MED A rozstrzyga dla porównywalnych ścieżek.\n\n**Działanie:** Oczekiwać wyboru A w tym konkretnym porównaniu.\n\n**Sprawdzenie:** Best-path wskazuje ścieżkę z MED 50.",
+          "id": "A"
+        },
+        {
+          "text_md": "Użyto wildcard zamiast maski podsieci.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Network nie wildcard”: Operator chce ogłosić /24 i podaje mask 0.0.0.255 w BGP network. W bieżącym przypadku: Niższy MED A rozstrzyga dla porównywalnych ścieżek.",
+          "id": "B"
+        },
+        {
+          "text_md": "Polityka eksportu blokuje reklamę do tego sąsiada.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prefix-list out”: Prefiks jest lokalnie w BGP, lecz outbound prefix-list jawnie go odrzuca dla ISP. W bieżącym przypadku: Niższy MED A rozstrzyga dla porównywalnych ścieżek.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zadziałała standardowa ochrona przed pętlą AS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Własny AS w path”: Lokalny AS 65001 otrzymuje reklamę z AS_PATH zawierającym 65001. Nie skonfigurowano wyjątków. W bieżącym przypadku: Niższy MED A rozstrzyga dla porównywalnych ścieżek.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ebgp.practice.case-18.1",
+      "revision": 1,
+      "title": "MED różne AS — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-18",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "A i B pochodzą z różnych sąsiednich AS. Operator zakłada, że przy domyślnych ustawieniach zawsze wygra niższy MED.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Zakres porównywania atrybutu jest równie ważny jak jego wartość.\n\n**Rozpoznanie:** Domyślnie MED nie musi być porównywany między różnymi sąsiednimi AS.\n\n**Działanie:** Sprawdzić reguły porównywania MED i pozostałe atrybuty przed wskazaniem zwycięzcy.\n\n**Sprawdzenie:** Analiza nie wybiera ścieżki wyłącznie z dwóch wartości MED z różnych AS.",
+      "card_id": "encor.ebgp.practice.case-18.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Pierwsza ścieżka nie spełnia warunku używalności.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nieosiągalny next hop”: Trasa ma local-pref 300, lecz jej next hop nie jest osiągalny. Druga ścieżka jest poprawna. W bieżącym przypadku: Domyślnie MED nie musi być porównywany między różnymi sąsiednimi AS.",
+          "id": "A"
+        },
+        {
+          "text_md": "Domyślnie MED nie musi być porównywany między różnymi sąsiednimi AS.",
+          "feedback_md": "Zakres porównywania atrybutu jest równie ważny jak jego wartość.\n\n**Rozpoznanie:** Domyślnie MED nie musi być porównywany między różnymi sąsiednimi AS.\n\n**Działanie:** Sprawdzić reguły porównywania MED i pozostałe atrybuty przed wskazaniem zwycięzcy.\n\n**Sprawdzenie:** Analiza nie wybiera ścieżki wyłącznie z dwóch wartości MED z różnych AS.",
+          "id": "B"
+        },
+        {
+          "text_md": "Import jest blokowany przez lokalny filtr.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prefix-list in”: ISP wysyła prefiks, lecz lokalna polityka inbound go odrzuca; sesja jest Established. W bieżącym przypadku: Domyślnie MED nie musi być porównywany między różnymi sąsiednimi AS.",
+          "id": "C"
+        },
+        {
+          "text_md": "Brakuje dokładnego prefiksu /24 wymaganego przez network.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak dokładnego RIB”: Network wskazuje 10.40.0.0 mask 255.255.255.0, ale RIB ma wyłącznie 10.40.0.0/16. W bieżącym przypadku: Domyślnie MED nie musi być porównywany między różnymi sąsiednimi AS.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ebgp.practice.case-19.1",
+      "revision": 1,
+      "title": "Weight nie wędruje — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-19",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "R1 ustawia weight 500 na trasie i wysyła ją do R2. Operator oczekuje, że R2 też zobaczy weight 500.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Weight jest lokalnym parametrem wyboru Cisco, nie atrybutem propagowanym do peerów.\n\n**Rozpoznanie:** Weight nie jest przenoszonym między routerami atrybutem BGP.\n\n**Działanie:** Dla polityki obejmującej AS użyć właściwego mechanizmu, np. local preference w obrębie AS.\n\n**Sprawdzenie:** R2 nie dziedziczy lokalnego weight R1.",
+      "card_id": "encor.ebgp.practice.case-19.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Origin IGP jest preferowany przed incomplete.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Origin”: Równe wcześniejsze atrybuty i długość AS_PATH; A ma origin IGP, B incomplete. W bieżącym przypadku: Weight nie jest przenoszonym między routerami atrybutem BGP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Domyślnie MED nie musi być porównywany między różnymi sąsiednimi AS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „MED różne AS”: A i B pochodzą z różnych sąsiednich AS. Operator zakłada, że przy domyślnych ustawieniach zawsze wygra niższy MED. W bieżącym przypadku: Weight nie jest przenoszonym między routerami atrybutem BGP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Weight nie jest przenoszonym między routerami atrybutem BGP.",
+          "feedback_md": "Weight jest lokalnym parametrem wyboru Cisco, nie atrybutem propagowanym do peerów.\n\n**Rozpoznanie:** Weight nie jest przenoszonym między routerami atrybutem BGP.\n\n**Działanie:** Dla polityki obejmującej AS użyć właściwego mechanizmu, np. local preference w obrębie AS.\n\n**Sprawdzenie:** R2 nie dziedziczy lokalnego weight R1.",
+          "id": "C"
+        },
+        {
+          "text_md": "Reklama sumaryczna nie dowodzi dostępności każdej składowej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Agregat maskuje awarię”: Agregat jest nadal ogłaszany, lecz jedna składowa sieć jest nieosiągalna i ruch do niej jest odrzucany. W bieżącym przypadku: Weight nie jest przenoszonym między routerami atrybutem BGP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ebgp.practice.case-20.1",
+      "revision": 1,
+      "title": "LP a ruch przychodzący — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-20",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Administrator zwiększa local-pref importowanej trasy, aby wymusić wejście ruchu z Internetu przez konkretnego ISP.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Local preference wyraża wewnętrzną preferencję wyjścia z AS.\n\n**Rozpoznanie:** Zmiana steruje wyborem wyjścia lokalnego AS, nie bezpośrednio wyborem obcych AS.\n\n**Działanie:** Rozdzielić politykę ruchu wychodzącego od ogłaszanych wskazówek dla ruchu przychodzącego.\n\n**Sprawdzenie:** Zmiana LP wpływa na wyjście z AS, bez gwarancji zmiany wejścia od ISP.",
+      "card_id": "encor.ebgp.practice.case-20.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sąsiad jest administracyjnie wyłączony.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Neighbor shutdown”: Konfiguracja peera zawiera neighbor shutdown, a operator oczekuje automatycznego zestawienia. W bieżącym przypadku: Zmiana steruje wyborem wyjścia lokalnego AS, nie bezpośrednio wyborem obcych AS.",
+          "id": "A"
+        },
+        {
+          "text_md": "Stan transportu jest poprawny, a zero reklam wymaga oceny polityki i źródeł tras.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Established zero”: Sesja jest Established i ma 0 prefiksów. Nie uzgodniono jeszcze, czy peer ma cokolwiek ogłaszać. W bieżącym przypadku: Zmiana steruje wyborem wyjścia lokalnego AS, nie bezpośrednio wyborem obcych AS.",
+          "id": "B"
+        },
+        {
+          "text_md": "Filtrowany jest transport wymagany przez BGP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak TCP 179”: Ping do sąsiada działa, ale ACL odrzuca TCP 179 i sesja nie dochodzi do wymiany OPEN. W bieżącym przypadku: Zmiana steruje wyborem wyjścia lokalnego AS, nie bezpośrednio wyborem obcych AS.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zmiana steruje wyborem wyjścia lokalnego AS, nie bezpośrednio wyborem obcych AS.",
+          "feedback_md": "Local preference wyraża wewnętrzną preferencję wyjścia z AS.\n\n**Rozpoznanie:** Zmiana steruje wyborem wyjścia lokalnego AS, nie bezpośrednio wyborem obcych AS.\n\n**Działanie:** Rozdzielić politykę ruchu wychodzącego od ogłaszanych wskazówek dla ruchu przychodzącego.\n\n**Sprawdzenie:** Zmiana LP wpływa na wyjście z AS, bez gwarancji zmiany wejścia od ISP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ebgp.practice.case-21.1",
+      "revision": 1,
+      "title": "Prepend bez gwarancji — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-21",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Dodano prepend na zapasowym ISP, lecz część Internetu nadal wybiera tę drogę przez własny wyższy local-pref.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Prepend jest wskazówką wpływającą na wybór innych AS, a nie nakazem.\n\n**Rozpoznanie:** Zewnętrzna polityka może przeważyć nad długością AS_PATH.\n\n**Działanie:** Zweryfikować reklamy i politykę operatora, nie traktować prepend jako gwarancji.\n\n**Sprawdzenie:** Zdalny wybór jest wyjaśniony wcześniejszym atrybutem mimo wydłużonego AS_PATH.",
+      "card_id": "encor.ebgp.practice.case-21.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zewnętrzna polityka może przeważyć nad długością AS_PATH.",
+          "feedback_md": "Prepend jest wskazówką wpływającą na wybór innych AS, a nie nakazem.\n\n**Rozpoznanie:** Zewnętrzna polityka może przeważyć nad długością AS_PATH.\n\n**Działanie:** Zweryfikować reklamy i politykę operatora, nie traktować prepend jako gwarancji.\n\n**Sprawdzenie:** Zdalny wybór jest wyjaśniony wcześniejszym atrybutem mimo wydłużonego AS_PATH.",
+          "id": "A"
+        },
+        {
+          "text_md": "Polityka jest zastosowana w kierunku niezgodnym z zamiarem eksportu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Kierunek prepend”: Route-map z prepend przypięto inbound, ale celem było wydłużenie własnej reklamy wysyłanej do ISP. W bieżącym przypadku: Zewnętrzna polityka może przeważyć nad długością AS_PATH.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie włączono wymiany wymaganej rodziny adresowej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „AF nieaktywna”: Sesja jest Established, ale przy wyłączonym domyślnym IPv4-unicast nie aktywowano peera w AF IPv4. W bieżącym przypadku: Zewnętrzna polityka może przeważyć nad długością AS_PATH.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zadziałała ochrona przed nadmierną liczbą prefiksów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Limit prefixów”: Po wzroście liczby reklam do skonfigurowanego limitu maximum-prefix sesja została wyłączona ochronnie. W bieżącym przypadku: Zewnętrzna polityka może przeważyć nad długością AS_PATH.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ebgp.practice.case-22.1",
+      "revision": 1,
+      "title": "Własny AS w path — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-22",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Lokalny AS 65001 otrzymuje reklamę z AS_PATH zawierającym 65001. Nie skonfigurowano wyjątków.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Wykrycie własnego AS w AS_PATH zapobiega przyjmowaniu typowej pętli między AS.\n\n**Rozpoznanie:** Zadziałała standardowa ochrona przed pętlą AS.\n\n**Działanie:** Sprawdzić przyczynę powrotu reklamy i projekt zamiast automatycznie wyłączać ochronę.\n\n**Sprawdzenie:** Prawidłowa ścieżka nie zawiera niezamierzonego powrotu lokalnego AS.",
+      "card_id": "encor.ebgp.practice.case-22.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Weight nie jest przenoszonym między routerami atrybutem BGP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Weight nie wędruje”: R1 ustawia weight 500 na trasie i wysyła ją do R2. Operator oczekuje, że R2 też zobaczy weight 500. W bieżącym przypadku: Zadziałała standardowa ochrona przed pętlą AS.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zadziałała standardowa ochrona przed pętlą AS.",
+          "feedback_md": "Wykrycie własnego AS w AS_PATH zapobiega przyjmowaniu typowej pętli między AS.\n\n**Rozpoznanie:** Zadziałała standardowa ochrona przed pętlą AS.\n\n**Działanie:** Sprawdzić przyczynę powrotu reklamy i projekt zamiast automatycznie wyłączać ochronę.\n\n**Sprawdzenie:** Prawidłowa ścieżka nie zawiera niezamierzonego powrotu lokalnego AS.",
+          "id": "B"
+        },
+        {
+          "text_md": "A ma krótszy AS_PATH.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Krótszy AS_PATH”: Dwie poprawne nielokalne ścieżki mają równe weight i LP. A AS_PATH 65010 65020, B 65030 65040 65050. Nie wyłączono porównania długości. W bieżącym przypadku: Zadziałała standardowa ochrona przed pętlą AS.",
+          "id": "C"
+        },
+        {
+          "text_md": "Pierwsza ścieżka nie spełnia warunku używalności.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nieosiągalny next hop”: Trasa ma local-pref 300, lecz jej next hop nie jest osiągalny. Druga ścieżka jest poprawna. W bieżącym przypadku: Zadziałała standardowa ochrona przed pętlą AS.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ebgp.practice.case-23.1",
+      "revision": 1,
+      "title": "RIB failure — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-23",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "BGP wybrało najlepszą ścieżkę do /24, ale w RIB jest statyczna do tego samego /24 z niższym AD.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Najlepsza ścieżka w BGP nie zawsze jest aktywną trasą systemowej tablicy routingu.\n\n**Rozpoznanie:** BGP best-path przegrało instalację z innym źródłem trasy.\n\n**Działanie:** Porównać źródła RIB i ich AD dla dokładnie tego prefiksu.\n\n**Sprawdzenie:** RIB wskazuje statyczną, a status BGP wyjaśnia brak instalacji.",
+      "card_id": "encor.ebgp.practice.case-23.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Reklama sumaryczna nie dowodzi dostępności każdej składowej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Agregat maskuje awarię”: Agregat jest nadal ogłaszany, lecz jedna składowa sieć jest nieosiągalna i ruch do niej jest odrzucany. W bieżącym przypadku: BGP best-path przegrało instalację z innym źródłem trasy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Adres źródłowy nie zgadza się z definicją peera po drugiej stronie.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Źródło loopback”: R2 oczekuje sąsiada 10.0.0.1, ale R1 inicjuje sesję ze swojego adresu fizycznego. Routing loopbacków działa. W bieżącym przypadku: BGP best-path przegrało instalację z innym źródłem trasy.",
+          "id": "B"
+        },
+        {
+          "text_md": "BGP best-path przegrało instalację z innym źródłem trasy.",
+          "feedback_md": "Najlepsza ścieżka w BGP nie zawsze jest aktywną trasą systemowej tablicy routingu.\n\n**Rozpoznanie:** BGP best-path przegrało instalację z innym źródłem trasy.\n\n**Działanie:** Porównać źródła RIB i ich AD dla dokładnie tego prefiksu.\n\n**Sprawdzenie:** RIB wskazuje statyczną, a status BGP wyjaśnia brak instalacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zewnętrzna polityka może przeważyć nad długością AS_PATH.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prepend bez gwarancji”: Dodano prepend na zapasowym ISP, lecz część Internetu nadal wybiera tę drogę przez własny wyższy local-pref. W bieżącym przypadku: BGP best-path przegrało instalację z innym źródłem trasy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ebgp.practice.case-24.1",
+      "revision": 1,
+      "title": "Default od ISP — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-24",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Sesja działa i przyjęto 0.0.0.0/0, ale operator szuka pełnej tablicy Internetu, której nie zamówiono.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Liczba prefiksów sama nie ocenia poprawności bez znajomości kontraktu routingu.\n\n**Rozpoznanie:** Sąsiad zgodnie z usługą dostarcza tylko trasę domyślną.\n\n**Działanie:** Ocenić działanie default i uzgodniony zakres reklam.\n\n**Sprawdzenie:** Prefix count odpowiada zamówionej usłudze, a default prowadzi do ISP.",
+      "card_id": "encor.ebgp.practice.case-24.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Dłuższy prefiks /24 decyduje o przekazywaniu do hosta.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Longest prefix BGP”: RIB ma /16 przez ISP-A i /24 przez ISP-B. Host należy do obu, a A ma atrakcyjniejsze atrybuty dla /16. W bieżącym przypadku: Sąsiad zgodnie z usługą dostarcza tylko trasę domyślną.",
+          "id": "A"
+        },
+        {
+          "text_md": "Reklama sumaryczna nie dowodzi dostępności każdej składowej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Agregat maskuje awarię”: Agregat jest nadal ogłaszany, lecz jedna składowa sieć jest nieosiągalna i ruch do niej jest odrzucany. W bieżącym przypadku: Sąsiad zgodnie z usługą dostarcza tylko trasę domyślną.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zadziałała ochrona przed nadmierną liczbą prefiksów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Limit prefixów”: Po wzroście liczby reklam do skonfigurowanego limitu maximum-prefix sesja została wyłączona ochronnie. W bieżącym przypadku: Sąsiad zgodnie z usługą dostarcza tylko trasę domyślną.",
+          "id": "C"
+        },
+        {
+          "text_md": "Sąsiad zgodnie z usługą dostarcza tylko trasę domyślną.",
+          "feedback_md": "Liczba prefiksów sama nie ocenia poprawności bez znajomości kontraktu routingu.\n\n**Rozpoznanie:** Sąsiad zgodnie z usługą dostarcza tylko trasę domyślną.\n\n**Działanie:** Ocenić działanie default i uzgodniony zakres reklam.\n\n**Sprawdzenie:** Prefix count odpowiada zamówionej usłudze, a default prowadzi do ISP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

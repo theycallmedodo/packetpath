@@ -1,0 +1,483 @@
+{
+  "schema_version": 3,
+  "id": "encor.sdaccess.practice-4",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Control-plane mapping — zależności",
+      "skills": [
+        "encor.sdaccess.case-01",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.practice.case-01.4.card",
+      "front_md": "Endpoint przeniósł się na inny fabric edge, ale badana mapa nadal wskazuje starą lokalizację.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Control-plane fabric wiąże tożsamość endpointu z jego aktualną lokalizacją.\n\n**Rozpoznanie:** Informacja o lokalizacji endpointu jest nieaktualna.\n\n**Działanie:** Sprawdzić rejestrację endpointu i aktualizację mapowania control-plane.\n\n**Sprawdzenie:** Mapa endpointu wskazuje bieżący fabric edge.",
+      "example": "Control-plane fabric wiąże tożsamość endpointu z jego aktualną lokalizacją."
+    },
+    {
+      "revision": 1,
+      "title": "VN isolation — zależności",
+      "skills": [
+        "encor.sdaccess.case-02",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.practice.case-02.4.card",
+      "front_md": "Dwa endpointy w różnych virtual networks nie komunikują się, a polityka nie przewiduje połączenia tych VN.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Virtual network wyznacza oddzielny kontekst sieciowy fabric.\n\n**Rozpoznanie:** Działa makrosegmentacja między virtual networks.\n\n**Działanie:** Zweryfikować zamierzoną separację lub zaprojektować kontrolowany dostęp między VN.\n\n**Sprawdzenie:** Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny.",
+      "example": "Virtual network wyznacza oddzielny kontekst sieciowy fabric."
+    },
+    {
+      "revision": 1,
+      "title": "SGT policy — zależności",
+      "skills": [
+        "encor.sdaccess.case-03",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.practice.case-03.4.card",
+      "front_md": "Endpointy są w tej samej VN, lecz macierz polityk zabrania komunikacji między ich SGT.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.\n\n**Rozpoznanie:** Ruch jest ograniczony polityką grup bezpieczeństwa.\n\n**Działanie:** Sprawdzić przypisanie SGT i regułę między konkretnymi grupami.\n\n**Sprawdzenie:** Dozwolona para działa, a zabroniona pozostaje zablokowana.",
+      "example": "Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN."
+    },
+    {
+      "revision": 1,
+      "title": "Border do zewnątrz — zależności",
+      "skills": [
+        "encor.sdaccess.case-04",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.practice.case-04.4.card",
+      "front_md": "Endpoint działa w fabric, ale brak wymaganej trasy z border do zewnętrznej usługi.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Fabric border łączy domenę fabric ze światem zewnętrznym.\n\n**Rozpoznanie:** Nie zapewniono wyjścia z fabric do zewnętrznej sieci.\n\n**Działanie:** Zweryfikować handoff, routing i drogę powrotną na border.\n\n**Sprawdzenie:** Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu.",
+      "example": "Fabric border łączy domenę fabric ze światem zewnętrznym."
+    },
+    {
+      "revision": 1,
+      "title": "Underlay niedostępny — zależności",
+      "skills": [
+        "encor.sdaccess.case-05",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.practice.case-05.4.card",
+      "front_md": "Loopback fabric edge nie jest osiągalny w underlay, choć endpoint jest fizycznie podłączony.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Overlay fabric wymaga sprawnego underlay.\n\n**Rozpoznanie:** Transport IP fabric jest uszkodzony.\n\n**Działanie:** Przywrócić osiągalność infrastruktury underlay.\n\n**Sprawdzenie:** Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+      "example": "Overlay fabric wymaga sprawnego underlay."
+    },
+    {
+      "revision": 1,
+      "title": "Onboarding — zależności",
+      "skills": [
+        "encor.sdaccess.case-06",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.practice.case-06.4.card",
+      "front_md": "Port działa, ale endpoint nie otrzymuje zamierzonej tożsamości i polityki po nieudanym uwierzytelnieniu.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.\n\n**Rozpoznanie:** Nie zakończył się proces przypisania endpointu do właściwego profilu dostępu.\n\n**Działanie:** Sprawdzić uwierzytelnienie, autoryzację i wynik przypisania polityki.\n\n**Sprawdzenie:** Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+      "example": "Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.sdaccess.practice.case-01.4",
+      "revision": 1,
+      "title": "Control-plane mapping — zależności",
+      "skills": [
+        "encor.sdaccess.case-01",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Endpoint przeniósł się na inny fabric edge, ale badana mapa nadal wskazuje starą lokalizację.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Control-plane fabric wiąże tożsamość endpointu z jego aktualną lokalizacją.\n\n**Rozpoznanie:** Informacja o lokalizacji endpointu jest nieaktualna.\n\n**Działanie:** Sprawdzić rejestrację endpointu i aktualizację mapowania control-plane.\n\n**Sprawdzenie:** Mapa endpointu wskazuje bieżący fabric edge.",
+      "card_id": "encor.sdaccess.practice.case-01.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SGT policy”: Endpointy są w tej samej VN, lecz macierz polityk zabrania komunikacji między ich SGT. W bieżącym przypadku: Control-plane fabric wiąże tożsamość endpointu z jego aktualną lokalizacją.",
+          "id": "A"
+        },
+        {
+          "text_md": "Control-plane fabric wiąże tożsamość endpointu z jego aktualną lokalizacją.",
+          "feedback_md": "Control-plane fabric wiąże tożsamość endpointu z jego aktualną lokalizacją.\n\n**Rozpoznanie:** Informacja o lokalizacji endpointu jest nieaktualna.\n\n**Działanie:** Sprawdzić rejestrację endpointu i aktualizację mapowania control-plane.\n\n**Sprawdzenie:** Mapa endpointu wskazuje bieżący fabric edge.",
+          "id": "B"
+        },
+        {
+          "text_md": "Virtual network wyznacza oddzielny kontekst sieciowy fabric.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „VN isolation”: Dwa endpointy w różnych virtual networks nie komunikują się, a polityka nie przewiduje połączenia tych VN. W bieżącym przypadku: Control-plane fabric wiąże tożsamość endpointu z jego aktualną lokalizacją.",
+          "id": "C"
+        },
+        {
+          "text_md": "Fabric border łączy domenę fabric ze światem zewnętrznym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Border do zewnątrz”: Endpoint działa w fabric, ale brak wymaganej trasy z border do zewnętrznej usługi. W bieżącym przypadku: Control-plane fabric wiąże tożsamość endpointu z jego aktualną lokalizacją.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.sdaccess.practice.case-02.4",
+      "revision": 1,
+      "title": "VN isolation — zależności",
+      "skills": [
+        "encor.sdaccess.case-02",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dwa endpointy w różnych virtual networks nie komunikują się, a polityka nie przewiduje połączenia tych VN.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Virtual network wyznacza oddzielny kontekst sieciowy fabric.\n\n**Rozpoznanie:** Działa makrosegmentacja między virtual networks.\n\n**Działanie:** Zweryfikować zamierzoną separację lub zaprojektować kontrolowany dostęp między VN.\n\n**Sprawdzenie:** Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny.",
+      "card_id": "encor.sdaccess.practice.case-02.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SGT policy”: Endpointy są w tej samej VN, lecz macierz polityk zabrania komunikacji między ich SGT. W bieżącym przypadku: Virtual network wyznacza oddzielny kontekst sieciowy fabric.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Onboarding”: Port działa, ale endpoint nie otrzymuje zamierzonej tożsamości i polityki po nieudanym uwierzytelnieniu. W bieżącym przypadku: Virtual network wyznacza oddzielny kontekst sieciowy fabric.",
+          "id": "B"
+        },
+        {
+          "text_md": "Virtual network wyznacza oddzielny kontekst sieciowy fabric.",
+          "feedback_md": "Virtual network wyznacza oddzielny kontekst sieciowy fabric.\n\n**Rozpoznanie:** Działa makrosegmentacja między virtual networks.\n\n**Działanie:** Zweryfikować zamierzoną separację lub zaprojektować kontrolowany dostęp między VN.\n\n**Sprawdzenie:** Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny.",
+          "id": "C"
+        },
+        {
+          "text_md": "Fabric border łączy domenę fabric ze światem zewnętrznym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Border do zewnątrz”: Endpoint działa w fabric, ale brak wymaganej trasy z border do zewnętrznej usługi. W bieżącym przypadku: Virtual network wyznacza oddzielny kontekst sieciowy fabric.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.sdaccess.practice.case-03.4",
+      "revision": 1,
+      "title": "SGT policy — zależności",
+      "skills": [
+        "encor.sdaccess.case-03",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Endpointy są w tej samej VN, lecz macierz polityk zabrania komunikacji między ich SGT.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.\n\n**Rozpoznanie:** Ruch jest ograniczony polityką grup bezpieczeństwa.\n\n**Działanie:** Sprawdzić przypisanie SGT i regułę między konkretnymi grupami.\n\n**Sprawdzenie:** Dozwolona para działa, a zabroniona pozostaje zablokowana.",
+      "card_id": "encor.sdaccess.practice.case-03.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Virtual network wyznacza oddzielny kontekst sieciowy fabric.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „VN isolation”: Dwa endpointy w różnych virtual networks nie komunikują się, a polityka nie przewiduje połączenia tych VN. W bieżącym przypadku: Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.",
+          "id": "A"
+        },
+        {
+          "text_md": "Overlay fabric wymaga sprawnego underlay.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Underlay niedostępny”: Loopback fabric edge nie jest osiągalny w underlay, choć endpoint jest fizycznie podłączony. W bieżącym przypadku: Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.",
+          "id": "B"
+        },
+        {
+          "text_md": "Fabric border łączy domenę fabric ze światem zewnętrznym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Border do zewnątrz”: Endpoint działa w fabric, ale brak wymaganej trasy z border do zewnętrznej usługi. W bieżącym przypadku: Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.",
+          "id": "C"
+        },
+        {
+          "text_md": "Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.",
+          "feedback_md": "Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.\n\n**Rozpoznanie:** Ruch jest ograniczony polityką grup bezpieczeństwa.\n\n**Działanie:** Sprawdzić przypisanie SGT i regułę między konkretnymi grupami.\n\n**Sprawdzenie:** Dozwolona para działa, a zabroniona pozostaje zablokowana.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.sdaccess.practice.case-04.4",
+      "revision": 1,
+      "title": "Border do zewnątrz — zależności",
+      "skills": [
+        "encor.sdaccess.case-04",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Endpoint działa w fabric, ale brak wymaganej trasy z border do zewnętrznej usługi.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Fabric border łączy domenę fabric ze światem zewnętrznym.\n\n**Rozpoznanie:** Nie zapewniono wyjścia z fabric do zewnętrznej sieci.\n\n**Działanie:** Zweryfikować handoff, routing i drogę powrotną na border.\n\n**Sprawdzenie:** Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu.",
+      "card_id": "encor.sdaccess.practice.case-04.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Fabric border łączy domenę fabric ze światem zewnętrznym.",
+          "feedback_md": "Fabric border łączy domenę fabric ze światem zewnętrznym.\n\n**Rozpoznanie:** Nie zapewniono wyjścia z fabric do zewnętrznej sieci.\n\n**Działanie:** Zweryfikować handoff, routing i drogę powrotną na border.\n\n**Sprawdzenie:** Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Overlay fabric wymaga sprawnego underlay.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Underlay niedostępny”: Loopback fabric edge nie jest osiągalny w underlay, choć endpoint jest fizycznie podłączony. W bieżącym przypadku: Fabric border łączy domenę fabric ze światem zewnętrznym.",
+          "id": "B"
+        },
+        {
+          "text_md": "Virtual network wyznacza oddzielny kontekst sieciowy fabric.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „VN isolation”: Dwa endpointy w różnych virtual networks nie komunikują się, a polityka nie przewiduje połączenia tych VN. W bieżącym przypadku: Fabric border łączy domenę fabric ze światem zewnętrznym.",
+          "id": "C"
+        },
+        {
+          "text_md": "Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Onboarding”: Port działa, ale endpoint nie otrzymuje zamierzonej tożsamości i polityki po nieudanym uwierzytelnieniu. W bieżącym przypadku: Fabric border łączy domenę fabric ze światem zewnętrznym.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.sdaccess.practice.case-05.4",
+      "revision": 1,
+      "title": "Underlay niedostępny — zależności",
+      "skills": [
+        "encor.sdaccess.case-05",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Loopback fabric edge nie jest osiągalny w underlay, choć endpoint jest fizycznie podłączony.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Overlay fabric wymaga sprawnego underlay.\n\n**Rozpoznanie:** Transport IP fabric jest uszkodzony.\n\n**Działanie:** Przywrócić osiągalność infrastruktury underlay.\n\n**Sprawdzenie:** Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+      "card_id": "encor.sdaccess.practice.case-05.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Virtual network wyznacza oddzielny kontekst sieciowy fabric.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „VN isolation”: Dwa endpointy w różnych virtual networks nie komunikują się, a polityka nie przewiduje połączenia tych VN. W bieżącym przypadku: Overlay fabric wymaga sprawnego underlay.",
+          "id": "A"
+        },
+        {
+          "text_md": "Overlay fabric wymaga sprawnego underlay.",
+          "feedback_md": "Overlay fabric wymaga sprawnego underlay.\n\n**Rozpoznanie:** Transport IP fabric jest uszkodzony.\n\n**Działanie:** Przywrócić osiągalność infrastruktury underlay.\n\n**Sprawdzenie:** Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+          "id": "B"
+        },
+        {
+          "text_md": "Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Onboarding”: Port działa, ale endpoint nie otrzymuje zamierzonej tożsamości i polityki po nieudanym uwierzytelnieniu. W bieżącym przypadku: Overlay fabric wymaga sprawnego underlay.",
+          "id": "C"
+        },
+        {
+          "text_md": "Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SGT policy”: Endpointy są w tej samej VN, lecz macierz polityk zabrania komunikacji między ich SGT. W bieżącym przypadku: Overlay fabric wymaga sprawnego underlay.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.sdaccess.practice.case-06.4",
+      "revision": 1,
+      "title": "Onboarding — zależności",
+      "skills": [
+        "encor.sdaccess.case-06",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Port działa, ale endpoint nie otrzymuje zamierzonej tożsamości i polityki po nieudanym uwierzytelnieniu.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.\n\n**Rozpoznanie:** Nie zakończył się proces przypisania endpointu do właściwego profilu dostępu.\n\n**Działanie:** Sprawdzić uwierzytelnienie, autoryzację i wynik przypisania polityki.\n\n**Sprawdzenie:** Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+      "card_id": "encor.sdaccess.practice.case-06.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Virtual network wyznacza oddzielny kontekst sieciowy fabric.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „VN isolation”: Dwa endpointy w różnych virtual networks nie komunikują się, a polityka nie przewiduje połączenia tych VN. W bieżącym przypadku: Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Fabric border łączy domenę fabric ze światem zewnętrznym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Border do zewnątrz”: Endpoint działa w fabric, ale brak wymaganej trasy z border do zewnętrznej usługi. W bieżącym przypadku: Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.",
+          "feedback_md": "Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.\n\n**Rozpoznanie:** Nie zakończył się proces przypisania endpointu do właściwego profilu dostępu.\n\n**Działanie:** Sprawdzić uwierzytelnienie, autoryzację i wynik przypisania polityki.\n\n**Sprawdzenie:** Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+          "id": "C"
+        },
+        {
+          "text_md": "Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SGT policy”: Endpointy są w tej samej VN, lecz macierz polityk zabrania komunikacji między ich SGT. W bieżącym przypadku: Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

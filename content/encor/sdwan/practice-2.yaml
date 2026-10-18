@@ -1,0 +1,483 @@
+{
+  "schema_version": 3,
+  "id": "encor.sdwan.practice-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Control a data — działanie",
+      "skills": [
+        "encor.sdwan.case-01",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.practice.case-01.2.card",
+      "front_md": "Edge ma działające połączenia kontrolne, ale tunel danych nie przechodzi testu BFD.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Płaszczyzny sterowania i przekazywania mają odrębne warunki sprawności.\n\n**Rozpoznanie:** Dostępność control-plane nie potwierdza ścieżki danych.\n\n**Działanie:** Diagnozować transport i sesje BFD dla konkretnego tunelu.\n\n**Sprawdzenie:** BFD oraz rzeczywisty ruch potwierdzają działanie wybranej ścieżki danych.",
+      "example": "Diagnozować transport i sesje BFD dla konkretnego tunelu."
+    },
+    {
+      "revision": 1,
+      "title": "OMP route bez TLOC — działanie",
+      "skills": [
+        "encor.sdwan.case-02",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.practice.case-02.2.card",
+      "front_md": "Edge zna prefiks OMP, lecz wskazany TLOC jest nieosiągalny.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Trasa overlay wymaga dostępnego transportowego punktu końcowego.\n\n**Rozpoznanie:** Informacja o prefiksie nie ma używalnej lokalizacji transportowej.\n\n**Działanie:** Sprawdzić dostępność TLOC i powiązany tunel.\n\n**Sprawdzenie:** Prefiks ma aktywną ścieżkę przez osiągalny TLOC.",
+      "example": "Sprawdzić dostępność TLOC i powiązany tunel."
+    },
+    {
+      "revision": 1,
+      "title": "SLA aplikacji — działanie",
+      "skills": [
+        "encor.sdwan.case-03",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.practice.case-03.2.card",
+      "front_md": "Oba transporty są up, ale tylko jeden spełnia limit jitter dla głosu.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "App-aware routing może wybierać na podstawie jakości, a nie tylko stanu up/down.\n\n**Rozpoznanie:** Dostępność łącza nie oznacza spełnienia wymagań jakości.\n\n**Działanie:** Zastosować politykę aplikacyjną uwzględniającą mierzone SLA.\n\n**Sprawdzenie:** Głos wybiera ścieżkę spełniającą skonfigurowane kryteria.",
+      "example": "Zastosować politykę aplikacyjną uwzględniającą mierzone SLA."
+    },
+    {
+      "revision": 1,
+      "title": "Zła segmentacja VPN — działanie",
+      "skills": [
+        "encor.sdwan.case-04",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.practice.case-04.2.card",
+      "front_md": "Dwa oddziały mają podobne adresy, ale należą do różnych service VPN i nie ma wymiany tras.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Segment usługowy SD-WAN izoluje trasy i ruch użytkowników.\n\n**Rozpoznanie:** Ruch jest rozdzielony przez segmentację usługi.\n\n**Działanie:** Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami.\n\n**Sprawdzenie:** Komunikacja występuje tylko w zgodnym segmencie lub przez zaplanowaną politykę.",
+      "example": "Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami."
+    },
+    {
+      "revision": 1,
+      "title": "Central policy — działanie",
+      "skills": [
+        "encor.sdwan.case-05",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.practice.case-05.2.card",
+      "front_md": "Prefiks nie jest przyjmowany w jednym oddziale, choć transport działa; centralna polityka wyraźnie go odrzuca.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Dystrybucja tras overlay może być ograniczana centralną polityką.\n\n**Rozpoznanie:** Polityka sterująca filtruje reklamę do tego miejsca.\n\n**Działanie:** Sprawdzić dopasowanie i kierunek właściwej centralnej polityki.\n\n**Sprawdzenie:** Po zatwierdzonej korekcie właściwy oddział otrzymuje zamierzony prefiks.",
+      "example": "Sprawdzić dopasowanie i kierunek właściwej centralnej polityki."
+    },
+    {
+      "revision": 1,
+      "title": "NAT transportu — działanie",
+      "skills": [
+        "encor.sdwan.case-06",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "id": "encor.sdwan.practice.case-06.2.card",
+      "front_md": "Edge za NAT ma problem z budową tunelu mimo działającego Internetu dla zwykłego HTTPS.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Tunel wymaga odpowiednich zachowań transportu niezależnie od przeglądania stron.\n\n**Rozpoznanie:** Łączność aplikacyjna do Internetu nie dowodzi przejścia transportu SD-WAN.\n\n**Działanie:** Sprawdzić wymagania NAT, firewalla i ustanawiania tunelu dla wdrożenia.\n\n**Sprawdzenie:** Właściwe sesje transportowe powstają i przechodzą testy danych.",
+      "example": "Sprawdzić wymagania NAT, firewalla i ustanawiania tunelu dla wdrożenia."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.sdwan.practice.case-01.2",
+      "revision": 1,
+      "title": "Control a data — działanie",
+      "skills": [
+        "encor.sdwan.case-01",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Edge ma działające połączenia kontrolne, ale tunel danych nie przechodzi testu BFD.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Płaszczyzny sterowania i przekazywania mają odrębne warunki sprawności.\n\n**Rozpoznanie:** Dostępność control-plane nie potwierdza ścieżki danych.\n\n**Działanie:** Diagnozować transport i sesje BFD dla konkretnego tunelu.\n\n**Sprawdzenie:** BFD oraz rzeczywisty ruch potwierdzają działanie wybranej ścieżki danych.",
+      "card_id": "encor.sdwan.practice.case-01.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła segmentacja VPN”: Dwa oddziały mają podobne adresy, ale należą do różnych service VPN i nie ma wymiany tras. W bieżącym przypadku: Diagnozować transport i sesje BFD dla konkretnego tunelu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sprawdzić dostępność TLOC i powiązany tunel.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „OMP route bez TLOC”: Edge zna prefiks OMP, lecz wskazany TLOC jest nieosiągalny. W bieżącym przypadku: Diagnozować transport i sesje BFD dla konkretnego tunelu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zastosować politykę aplikacyjną uwzględniającą mierzone SLA.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SLA aplikacji”: Oba transporty są up, ale tylko jeden spełnia limit jitter dla głosu. W bieżącym przypadku: Diagnozować transport i sesje BFD dla konkretnego tunelu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Diagnozować transport i sesje BFD dla konkretnego tunelu.",
+          "feedback_md": "Płaszczyzny sterowania i przekazywania mają odrębne warunki sprawności.\n\n**Rozpoznanie:** Dostępność control-plane nie potwierdza ścieżki danych.\n\n**Działanie:** Diagnozować transport i sesje BFD dla konkretnego tunelu.\n\n**Sprawdzenie:** BFD oraz rzeczywisty ruch potwierdzają działanie wybranej ścieżki danych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.sdwan.practice.case-02.2",
+      "revision": 1,
+      "title": "OMP route bez TLOC — działanie",
+      "skills": [
+        "encor.sdwan.case-02",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Edge zna prefiks OMP, lecz wskazany TLOC jest nieosiągalny.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Trasa overlay wymaga dostępnego transportowego punktu końcowego.\n\n**Rozpoznanie:** Informacja o prefiksie nie ma używalnej lokalizacji transportowej.\n\n**Działanie:** Sprawdzić dostępność TLOC i powiązany tunel.\n\n**Sprawdzenie:** Prefiks ma aktywną ścieżkę przez osiągalny TLOC.",
+      "card_id": "encor.sdwan.practice.case-02.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sprawdzić dostępność TLOC i powiązany tunel.",
+          "feedback_md": "Trasa overlay wymaga dostępnego transportowego punktu końcowego.\n\n**Rozpoznanie:** Informacja o prefiksie nie ma używalnej lokalizacji transportowej.\n\n**Działanie:** Sprawdzić dostępność TLOC i powiązany tunel.\n\n**Sprawdzenie:** Prefiks ma aktywną ścieżkę przez osiągalny TLOC.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sprawdzić dopasowanie i kierunek właściwej centralnej polityki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Central policy”: Prefiks nie jest przyjmowany w jednym oddziale, choć transport działa; centralna polityka wyraźnie go odrzuca. W bieżącym przypadku: Sprawdzić dostępność TLOC i powiązany tunel.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła segmentacja VPN”: Dwa oddziały mają podobne adresy, ale należą do różnych service VPN i nie ma wymiany tras. W bieżącym przypadku: Sprawdzić dostępność TLOC i powiązany tunel.",
+          "id": "C"
+        },
+        {
+          "text_md": "Diagnozować transport i sesje BFD dla konkretnego tunelu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Control a data”: Edge ma działające połączenia kontrolne, ale tunel danych nie przechodzi testu BFD. W bieżącym przypadku: Sprawdzić dostępność TLOC i powiązany tunel.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.sdwan.practice.case-03.2",
+      "revision": 1,
+      "title": "SLA aplikacji — działanie",
+      "skills": [
+        "encor.sdwan.case-03",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Oba transporty są up, ale tylko jeden spełnia limit jitter dla głosu.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "App-aware routing może wybierać na podstawie jakości, a nie tylko stanu up/down.\n\n**Rozpoznanie:** Dostępność łącza nie oznacza spełnienia wymagań jakości.\n\n**Działanie:** Zastosować politykę aplikacyjną uwzględniającą mierzone SLA.\n\n**Sprawdzenie:** Głos wybiera ścieżkę spełniającą skonfigurowane kryteria.",
+      "card_id": "encor.sdwan.practice.case-03.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła segmentacja VPN”: Dwa oddziały mają podobne adresy, ale należą do różnych service VPN i nie ma wymiany tras. W bieżącym przypadku: Zastosować politykę aplikacyjną uwzględniającą mierzone SLA.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zastosować politykę aplikacyjną uwzględniającą mierzone SLA.",
+          "feedback_md": "App-aware routing może wybierać na podstawie jakości, a nie tylko stanu up/down.\n\n**Rozpoznanie:** Dostępność łącza nie oznacza spełnienia wymagań jakości.\n\n**Działanie:** Zastosować politykę aplikacyjną uwzględniającą mierzone SLA.\n\n**Sprawdzenie:** Głos wybiera ścieżkę spełniającą skonfigurowane kryteria.",
+          "id": "B"
+        },
+        {
+          "text_md": "Sprawdzić dopasowanie i kierunek właściwej centralnej polityki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Central policy”: Prefiks nie jest przyjmowany w jednym oddziale, choć transport działa; centralna polityka wyraźnie go odrzuca. W bieżącym przypadku: Zastosować politykę aplikacyjną uwzględniającą mierzone SLA.",
+          "id": "C"
+        },
+        {
+          "text_md": "Sprawdzić dostępność TLOC i powiązany tunel.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „OMP route bez TLOC”: Edge zna prefiks OMP, lecz wskazany TLOC jest nieosiągalny. W bieżącym przypadku: Zastosować politykę aplikacyjną uwzględniającą mierzone SLA.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.sdwan.practice.case-04.2",
+      "revision": 1,
+      "title": "Zła segmentacja VPN — działanie",
+      "skills": [
+        "encor.sdwan.case-04",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dwa oddziały mają podobne adresy, ale należą do różnych service VPN i nie ma wymiany tras.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Segment usługowy SD-WAN izoluje trasy i ruch użytkowników.\n\n**Rozpoznanie:** Ruch jest rozdzielony przez segmentację usługi.\n\n**Działanie:** Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami.\n\n**Sprawdzenie:** Komunikacja występuje tylko w zgodnym segmencie lub przez zaplanowaną politykę.",
+      "card_id": "encor.sdwan.practice.case-04.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sprawdzić dopasowanie i kierunek właściwej centralnej polityki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Central policy”: Prefiks nie jest przyjmowany w jednym oddziale, choć transport działa; centralna polityka wyraźnie go odrzuca. W bieżącym przypadku: Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sprawdzić wymagania NAT, firewalla i ustanawiania tunelu dla wdrożenia.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „NAT transportu”: Edge za NAT ma problem z budową tunelu mimo działającego Internetu dla zwykłego HTTPS. W bieżącym przypadku: Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami.",
+          "feedback_md": "Segment usługowy SD-WAN izoluje trasy i ruch użytkowników.\n\n**Rozpoznanie:** Ruch jest rozdzielony przez segmentację usługi.\n\n**Działanie:** Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami.\n\n**Sprawdzenie:** Komunikacja występuje tylko w zgodnym segmencie lub przez zaplanowaną politykę.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zastosować politykę aplikacyjną uwzględniającą mierzone SLA.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SLA aplikacji”: Oba transporty są up, ale tylko jeden spełnia limit jitter dla głosu. W bieżącym przypadku: Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.sdwan.practice.case-05.2",
+      "revision": 1,
+      "title": "Central policy — działanie",
+      "skills": [
+        "encor.sdwan.case-05",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Prefiks nie jest przyjmowany w jednym oddziale, choć transport działa; centralna polityka wyraźnie go odrzuca.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Dystrybucja tras overlay może być ograniczana centralną polityką.\n\n**Rozpoznanie:** Polityka sterująca filtruje reklamę do tego miejsca.\n\n**Działanie:** Sprawdzić dopasowanie i kierunek właściwej centralnej polityki.\n\n**Sprawdzenie:** Po zatwierdzonej korekcie właściwy oddział otrzymuje zamierzony prefiks.",
+      "card_id": "encor.sdwan.practice.case-05.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Diagnozować transport i sesje BFD dla konkretnego tunelu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Control a data”: Edge ma działające połączenia kontrolne, ale tunel danych nie przechodzi testu BFD. W bieżącym przypadku: Sprawdzić dopasowanie i kierunek właściwej centralnej polityki.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła segmentacja VPN”: Dwa oddziały mają podobne adresy, ale należą do różnych service VPN i nie ma wymiany tras. W bieżącym przypadku: Sprawdzić dopasowanie i kierunek właściwej centralnej polityki.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zastosować politykę aplikacyjną uwzględniającą mierzone SLA.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SLA aplikacji”: Oba transporty są up, ale tylko jeden spełnia limit jitter dla głosu. W bieżącym przypadku: Sprawdzić dopasowanie i kierunek właściwej centralnej polityki.",
+          "id": "C"
+        },
+        {
+          "text_md": "Sprawdzić dopasowanie i kierunek właściwej centralnej polityki.",
+          "feedback_md": "Dystrybucja tras overlay może być ograniczana centralną polityką.\n\n**Rozpoznanie:** Polityka sterująca filtruje reklamę do tego miejsca.\n\n**Działanie:** Sprawdzić dopasowanie i kierunek właściwej centralnej polityki.\n\n**Sprawdzenie:** Po zatwierdzonej korekcie właściwy oddział otrzymuje zamierzony prefiks.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.sdwan.practice.case-06.2",
+      "revision": 1,
+      "title": "NAT transportu — działanie",
+      "skills": [
+        "encor.sdwan.case-06",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/SDWAN/cisco-sdwan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-WAN — płaszczyzny, OMP i jakość łączy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/routers/sd-wan/222302-troubleshoot-common-sd-wan-control-and-d.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Edge za NAT ma problem z budową tunelu mimo działającego Internetu dla zwykłego HTTPS.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Tunel wymaga odpowiednich zachowań transportu niezależnie od przeglądania stron.\n\n**Rozpoznanie:** Łączność aplikacyjna do Internetu nie dowodzi przejścia transportu SD-WAN.\n\n**Działanie:** Sprawdzić wymagania NAT, firewalla i ustanawiania tunelu dla wdrożenia.\n\n**Sprawdzenie:** Właściwe sesje transportowe powstają i przechodzą testy danych.",
+      "card_id": "encor.sdwan.practice.case-06.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sprawdzić wymagania NAT, firewalla i ustanawiania tunelu dla wdrożenia.",
+          "feedback_md": "Tunel wymaga odpowiednich zachowań transportu niezależnie od przeglądania stron.\n\n**Rozpoznanie:** Łączność aplikacyjna do Internetu nie dowodzi przejścia transportu SD-WAN.\n\n**Działanie:** Sprawdzić wymagania NAT, firewalla i ustanawiania tunelu dla wdrożenia.\n\n**Sprawdzenie:** Właściwe sesje transportowe powstają i przechodzą testy danych.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zweryfikować właściwy VPN i wyłącznie zamierzone połączenia między segmentami.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła segmentacja VPN”: Dwa oddziały mają podobne adresy, ale należą do różnych service VPN i nie ma wymiany tras. W bieżącym przypadku: Sprawdzić wymagania NAT, firewalla i ustanawiania tunelu dla wdrożenia.",
+          "id": "B"
+        },
+        {
+          "text_md": "Diagnozować transport i sesje BFD dla konkretnego tunelu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Control a data”: Edge ma działające połączenia kontrolne, ale tunel danych nie przechodzi testu BFD. W bieżącym przypadku: Sprawdzić wymagania NAT, firewalla i ustanawiania tunelu dla wdrożenia.",
+          "id": "C"
+        },
+        {
+          "text_md": "Sprawdzić dostępność TLOC i powiązany tunel.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „OMP route bez TLOC”: Edge zna prefiks OMP, lecz wskazany TLOC jest nieosiągalny. W bieżącym przypadku: Sprawdzić wymagania NAT, firewalla i ustanawiania tunelu dla wdrożenia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

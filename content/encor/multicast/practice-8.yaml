@@ -1,0 +1,799 @@
+{
+  "schema_version": 3,
+  "id": "encor.multicast.practice-8",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.practice.compare-01.4.card",
+      "front_md": "**Zgłoszenie I**\n\nPakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1.\n\n**Zgłoszenie II**\n\nW LAN nie ma zgłoszenia członkostwa dla grupy G, a router nie ma powodu wysyłać tam ruchu G.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Pakiet nie spełnia kontroli Reverse Path Forwarding. Uzgodnić drogę źródłową i oczekiwany interfejs RPF zgodnie z topologią.\n\n**Sprawdzenie I:** Show ip rpf S wskazuje interfejs, którym faktycznie przychodzi poprawny ruch.\n\n**Zgłoszenie II:** Nie wykryto zainteresowanego odbiorcy grupy. Sprawdzić IGMP klienta i przekazywanie jego raportów.\n\n**Sprawdzenie II:** Tabela członkostwa zawiera grupę G na właściwym LAN.\n\n**Zależności:** RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast. Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+      "example": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.practice.compare-02.4.card",
+      "front_md": "**Zgłoszenie I**\n\nPIM-SM dla grupy ASM nie ma poprawnego mapowania RP.\n\n**Zgłoszenie II**\n\nOdbiorca SSM potrzebuje konkretnej pary S,G, ale zgłasza tylko ogólne zainteresowanie grupą bez źródła.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brakuje punktu spotkania dla drzewa współdzielonego ASM. Zapewnić zgodne mapowanie RP i jego osiągalność.\n\n**Sprawdzenie I:** Routery wskazują ten sam właściwy RP dla grupy ASM.\n\n**Zgłoszenie II:** Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zapewnić obsługę IGMPv3 i właściwego zgłoszenia INCLUDE dla S,G.\n\n**Sprawdzenie II:** Router tworzy stan dla oczekiwanego źródła i grupy.\n\n**Zależności:** W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji. SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+      "example": "I — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.\n\nII — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.practice.compare-03.4.card",
+      "front_md": "**Zgłoszenie I**\n\nRouting unicast działa, lecz jeden interfejs router–router nie ma PIM i nie tworzy sąsiedztwa multicast.\n\n**Zgłoszenie II**\n\nŹródło wysyła multicast z TTL 1, a odbiorca znajduje się za routerem.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Łącze transportowe nie uczestniczy w wymaganym protokole multicast. Włączyć właściwy tryb PIM na zamierzonym interfejsie.\n\n**Sprawdzenie I:** Pojawia się sąsiad PIM i właściwy stan drzewa przez to łącze.\n\n**Zgłoszenie II:** Pakiet nie ma wystarczającego TTL do przekroczenia granicy routowanej. Ustawić w aplikacji źródłowej TTL odpowiedni dla zamierzonego zasięgu.\n\n**Sprawdzenie II:** Pakiety docierają przez wymagane skoki bez wygaśnięcia TTL.\n\n**Zależności:** Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast. TTL ogranicza zasięg także dla pakietów multicast.",
+      "example": "I — Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.\n\nII — TTL ogranicza zasięg także dla pakietów multicast."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.practice.compare-04.4.card",
+      "front_md": "**Zgłoszenie I**\n\nPakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1.\n\n**Zgłoszenie II**\n\nPIM-SM dla grupy ASM nie ma poprawnego mapowania RP.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Pakiet nie spełnia kontroli Reverse Path Forwarding. Uzgodnić drogę źródłową i oczekiwany interfejs RPF zgodnie z topologią.\n\n**Sprawdzenie I:** Show ip rpf S wskazuje interfejs, którym faktycznie przychodzi poprawny ruch.\n\n**Zgłoszenie II:** Brakuje punktu spotkania dla drzewa współdzielonego ASM. Zapewnić zgodne mapowanie RP i jego osiągalność.\n\n**Sprawdzenie II:** Routery wskazują ten sam właściwy RP dla grupy ASM.\n\n**Zależności:** RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast. W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.",
+      "example": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.practice.compare-05.4.card",
+      "front_md": "**Zgłoszenie I**\n\nW LAN nie ma zgłoszenia członkostwa dla grupy G, a router nie ma powodu wysyłać tam ruchu G.\n\n**Zgłoszenie II**\n\nRouting unicast działa, lecz jeden interfejs router–router nie ma PIM i nie tworzy sąsiedztwa multicast.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Nie wykryto zainteresowanego odbiorcy grupy. Sprawdzić IGMP klienta i przekazywanie jego raportów.\n\n**Sprawdzenie I:** Tabela członkostwa zawiera grupę G na właściwym LAN.\n\n**Zgłoszenie II:** Łącze transportowe nie uczestniczy w wymaganym protokole multicast. Włączyć właściwy tryb PIM na zamierzonym interfejsie.\n\n**Sprawdzenie II:** Pojawia się sąsiad PIM i właściwy stan drzewa przez to łącze.\n\n**Zależności:** Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców. Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+      "example": "I — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.\n\nII — Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.practice.compare-06.4.card",
+      "front_md": "**Zgłoszenie I**\n\nOdbiorca SSM potrzebuje konkretnej pary S,G, ale zgłasza tylko ogólne zainteresowanie grupą bez źródła.\n\n**Zgłoszenie II**\n\nŹródło wysyła multicast z TTL 1, a odbiorca znajduje się za routerem.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zapewnić obsługę IGMPv3 i właściwego zgłoszenia INCLUDE dla S,G.\n\n**Sprawdzenie I:** Router tworzy stan dla oczekiwanego źródła i grupy.\n\n**Zgłoszenie II:** Pakiet nie ma wystarczającego TTL do przekroczenia granicy routowanej. Ustawić w aplikacji źródłowej TTL odpowiedni dla zamierzonego zasięgu.\n\n**Sprawdzenie II:** Pakiety docierają przez wymagane skoki bez wygaśnięcia TTL.\n\n**Zależności:** SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy. TTL ogranicza zasięg także dla pakietów multicast.",
+      "example": "I — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.\n\nII — TTL ogranicza zasięg także dla pakietów multicast."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.practice.compare-07.4.card",
+      "front_md": "**Zgłoszenie I**\n\nPakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1.\n\n**Zgłoszenie II**\n\nŹródło wysyła multicast z TTL 1, a odbiorca znajduje się za routerem.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Pakiet nie spełnia kontroli Reverse Path Forwarding. Uzgodnić drogę źródłową i oczekiwany interfejs RPF zgodnie z topologią.\n\n**Sprawdzenie I:** Show ip rpf S wskazuje interfejs, którym faktycznie przychodzi poprawny ruch.\n\n**Zgłoszenie II:** Pakiet nie ma wystarczającego TTL do przekroczenia granicy routowanej. Ustawić w aplikacji źródłowej TTL odpowiedni dla zamierzonego zasięgu.\n\n**Sprawdzenie II:** Pakiety docierają przez wymagane skoki bez wygaśnięcia TTL.\n\n**Zależności:** RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast. TTL ogranicza zasięg także dla pakietów multicast.",
+      "example": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — TTL ogranicza zasięg także dla pakietów multicast."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.practice.compare-08.4.card",
+      "front_md": "**Zgłoszenie I**\n\nW LAN nie ma zgłoszenia członkostwa dla grupy G, a router nie ma powodu wysyłać tam ruchu G.\n\n**Zgłoszenie II**\n\nOdbiorca SSM potrzebuje konkretnej pary S,G, ale zgłasza tylko ogólne zainteresowanie grupą bez źródła.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Nie wykryto zainteresowanego odbiorcy grupy. Sprawdzić IGMP klienta i przekazywanie jego raportów.\n\n**Sprawdzenie I:** Tabela członkostwa zawiera grupę G na właściwym LAN.\n\n**Zgłoszenie II:** Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zapewnić obsługę IGMPv3 i właściwego zgłoszenia INCLUDE dla S,G.\n\n**Sprawdzenie II:** Router tworzy stan dla oczekiwanego źródła i grupy.\n\n**Zależności:** Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców. SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+      "example": "I — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.\n\nII — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.practice.compare-09.4.card",
+      "front_md": "**Zgłoszenie I**\n\nPIM-SM dla grupy ASM nie ma poprawnego mapowania RP.\n\n**Zgłoszenie II**\n\nRouting unicast działa, lecz jeden interfejs router–router nie ma PIM i nie tworzy sąsiedztwa multicast.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brakuje punktu spotkania dla drzewa współdzielonego ASM. Zapewnić zgodne mapowanie RP i jego osiągalność.\n\n**Sprawdzenie I:** Routery wskazują ten sam właściwy RP dla grupy ASM.\n\n**Zgłoszenie II:** Łącze transportowe nie uczestniczy w wymaganym protokole multicast. Włączyć właściwy tryb PIM na zamierzonym interfejsie.\n\n**Sprawdzenie II:** Pojawia się sąsiad PIM i właściwy stan drzewa przez to łącze.\n\n**Zależności:** W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji. Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+      "example": "I — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.\n\nII — Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "id": "encor.multicast.practice.compare-10.4.card",
+      "front_md": "**Zgłoszenie I**\n\nPakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1.\n\n**Zgłoszenie II**\n\nOdbiorca SSM potrzebuje konkretnej pary S,G, ale zgłasza tylko ogólne zainteresowanie grupą bez źródła.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Pakiet nie spełnia kontroli Reverse Path Forwarding. Uzgodnić drogę źródłową i oczekiwany interfejs RPF zgodnie z topologią.\n\n**Sprawdzenie I:** Show ip rpf S wskazuje interfejs, którym faktycznie przychodzi poprawny ruch.\n\n**Zgłoszenie II:** Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zapewnić obsługę IGMPv3 i właściwego zgłoszenia INCLUDE dla S,G.\n\n**Sprawdzenie II:** Router tworzy stan dla oczekiwanego źródła i grupy.\n\n**Zależności:** RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast. SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+      "example": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.multicast.practice.compare-01.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1.\n\n**Zgłoszenie II**\n\nW LAN nie ma zgłoszenia członkostwa dla grupy G, a router nie ma powodu wysyłać tam ruchu G.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Pakiet nie spełnia kontroli Reverse Path Forwarding. Uzgodnić drogę źródłową i oczekiwany interfejs RPF zgodnie z topologią.\n\n**Sprawdzenie I:** Show ip rpf S wskazuje interfejs, którym faktycznie przychodzi poprawny ruch.\n\n**Zgłoszenie II:** Nie wykryto zainteresowanego odbiorcy grupy. Sprawdzić IGMP klienta i przekazywanie jego raportów.\n\n**Sprawdzenie II:** Tabela członkostwa zawiera grupę G na właściwym LAN.\n\n**Zależności:** RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast. Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+      "card_id": "encor.multicast.practice.compare-01.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+          "feedback_md": "**Zgłoszenie I:** Pakiet nie spełnia kontroli Reverse Path Forwarding. Uzgodnić drogę źródłową i oczekiwany interfejs RPF zgodnie z topologią.\n\n**Sprawdzenie I:** Show ip rpf S wskazuje interfejs, którym faktycznie przychodzi poprawny ruch.\n\n**Zgłoszenie II:** Nie wykryto zainteresowanego odbiorcy grupy. Sprawdzić IGMP klienta i przekazywanie jego raportów.\n\n**Sprawdzenie II:** Tabela członkostwa zawiera grupę G na właściwym LAN.\n\n**Zależności:** RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast. Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.\n\nII — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Pakiet nie spełnia kontroli Reverse Path Forwarding. Zgłoszenie II: Nie wykryto zainteresowanego odbiorcy grupy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: PIM-SM dla grupy ASM nie ma poprawnego mapowania RP. Dla II: Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.\n\nII — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: PIM-SM dla grupy ASM nie ma poprawnego mapowania RP. Dla I: RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.multicast.practice.compare-02.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPIM-SM dla grupy ASM nie ma poprawnego mapowania RP.\n\n**Zgłoszenie II**\n\nOdbiorca SSM potrzebuje konkretnej pary S,G, ale zgłasza tylko ogólne zainteresowanie grupą bez źródła.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brakuje punktu spotkania dla drzewa współdzielonego ASM. Zapewnić zgodne mapowanie RP i jego osiągalność.\n\n**Sprawdzenie I:** Routery wskazują ten sam właściwy RP dla grupy ASM.\n\n**Zgłoszenie II:** Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zapewnić obsługę IGMPv3 i właściwego zgłoszenia INCLUDE dla S,G.\n\n**Sprawdzenie II:** Router tworzy stan dla oczekiwanego źródła i grupy.\n\n**Zależności:** W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji. SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+      "card_id": "encor.multicast.practice.compare-02.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.\n\nII — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brakuje punktu spotkania dla drzewa współdzielonego ASM. Zgłoszenie II: Brakuje źródłowo specyficznego zgłoszenia odbiorcy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.\n\nII — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "feedback_md": "**Zgłoszenie I:** Brakuje punktu spotkania dla drzewa współdzielonego ASM. Zapewnić zgodne mapowanie RP i jego osiągalność.\n\n**Sprawdzenie I:** Routery wskazują ten sam właściwy RP dla grupy ASM.\n\n**Zgłoszenie II:** Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zapewnić obsługę IGMPv3 i właściwego zgłoszenia INCLUDE dla S,G.\n\n**Sprawdzenie II:** Router tworzy stan dla oczekiwanego źródła i grupy.\n\n**Zależności:** W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji. SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.\n\nII — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Pakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1. Dla II: SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Pakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1. Dla I: W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.multicast.practice.compare-03.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRouting unicast działa, lecz jeden interfejs router–router nie ma PIM i nie tworzy sąsiedztwa multicast.\n\n**Zgłoszenie II**\n\nŹródło wysyła multicast z TTL 1, a odbiorca znajduje się za routerem.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Łącze transportowe nie uczestniczy w wymaganym protokole multicast. Włączyć właściwy tryb PIM na zamierzonym interfejsie.\n\n**Sprawdzenie I:** Pojawia się sąsiad PIM i właściwy stan drzewa przez to łącze.\n\n**Zgłoszenie II:** Pakiet nie ma wystarczającego TTL do przekroczenia granicy routowanej. Ustawić w aplikacji źródłowej TTL odpowiedni dla zamierzonego zasięgu.\n\n**Sprawdzenie II:** Pakiety docierają przez wymagane skoki bez wygaśnięcia TTL.\n\n**Zależności:** Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast. TTL ogranicza zasięg także dla pakietów multicast.",
+      "card_id": "encor.multicast.practice.compare-03.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — TTL ogranicza zasięg także dla pakietów multicast.\n\nII — Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Łącze transportowe nie uczestniczy w wymaganym protokole multicast. Zgłoszenie II: Pakiet nie ma wystarczającego TTL do przekroczenia granicy routowanej.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.\n\nII — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Pakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1. Dla II: TTL ogranicza zasięg także dla pakietów multicast.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.\n\nII — TTL ogranicza zasięg także dla pakietów multicast.",
+          "feedback_md": "**Zgłoszenie I:** Łącze transportowe nie uczestniczy w wymaganym protokole multicast. Włączyć właściwy tryb PIM na zamierzonym interfejsie.\n\n**Sprawdzenie I:** Pojawia się sąsiad PIM i właściwy stan drzewa przez to łącze.\n\n**Zgłoszenie II:** Pakiet nie ma wystarczającego TTL do przekroczenia granicy routowanej. Ustawić w aplikacji źródłowej TTL odpowiedni dla zamierzonego zasięgu.\n\n**Sprawdzenie II:** Pakiety docierają przez wymagane skoki bez wygaśnięcia TTL.\n\n**Zależności:** Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast. TTL ogranicza zasięg także dla pakietów multicast.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — TTL ogranicza zasięg także dla pakietów multicast.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Pakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1. Dla I: Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.multicast.practice.compare-04.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1.\n\n**Zgłoszenie II**\n\nPIM-SM dla grupy ASM nie ma poprawnego mapowania RP.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Pakiet nie spełnia kontroli Reverse Path Forwarding. Uzgodnić drogę źródłową i oczekiwany interfejs RPF zgodnie z topologią.\n\n**Sprawdzenie I:** Show ip rpf S wskazuje interfejs, którym faktycznie przychodzi poprawny ruch.\n\n**Zgłoszenie II:** Brakuje punktu spotkania dla drzewa współdzielonego ASM. Zapewnić zgodne mapowanie RP i jego osiągalność.\n\n**Sprawdzenie II:** Routery wskazują ten sam właściwy RP dla grupy ASM.\n\n**Zależności:** RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast. W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.",
+      "card_id": "encor.multicast.practice.compare-04.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.\n\nII — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Pakiet nie spełnia kontroli Reverse Path Forwarding. Zgłoszenie II: Brakuje punktu spotkania dla drzewa współdzielonego ASM.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: W LAN nie ma zgłoszenia członkostwa dla grupy G, a router nie ma powodu wysyłać tam ruchu G. Dla II: W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.\n\nII — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: W LAN nie ma zgłoszenia członkostwa dla grupy G, a router nie ma powodu wysyłać tam ruchu G. Dla I: RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.",
+          "feedback_md": "**Zgłoszenie I:** Pakiet nie spełnia kontroli Reverse Path Forwarding. Uzgodnić drogę źródłową i oczekiwany interfejs RPF zgodnie z topologią.\n\n**Sprawdzenie I:** Show ip rpf S wskazuje interfejs, którym faktycznie przychodzi poprawny ruch.\n\n**Zgłoszenie II:** Brakuje punktu spotkania dla drzewa współdzielonego ASM. Zapewnić zgodne mapowanie RP i jego osiągalność.\n\n**Sprawdzenie II:** Routery wskazują ten sam właściwy RP dla grupy ASM.\n\n**Zależności:** RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast. W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.multicast.practice.compare-05.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nW LAN nie ma zgłoszenia członkostwa dla grupy G, a router nie ma powodu wysyłać tam ruchu G.\n\n**Zgłoszenie II**\n\nRouting unicast działa, lecz jeden interfejs router–router nie ma PIM i nie tworzy sąsiedztwa multicast.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Nie wykryto zainteresowanego odbiorcy grupy. Sprawdzić IGMP klienta i przekazywanie jego raportów.\n\n**Sprawdzenie I:** Tabela członkostwa zawiera grupę G na właściwym LAN.\n\n**Zgłoszenie II:** Łącze transportowe nie uczestniczy w wymaganym protokole multicast. Włączyć właściwy tryb PIM na zamierzonym interfejsie.\n\n**Sprawdzenie II:** Pojawia się sąsiad PIM i właściwy stan drzewa przez to łącze.\n\n**Zależności:** Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców. Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+      "card_id": "encor.multicast.practice.compare-05.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.\n\nII — Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+          "feedback_md": "**Zgłoszenie I:** Nie wykryto zainteresowanego odbiorcy grupy. Sprawdzić IGMP klienta i przekazywanie jego raportów.\n\n**Sprawdzenie I:** Tabela członkostwa zawiera grupę G na właściwym LAN.\n\n**Zgłoszenie II:** Łącze transportowe nie uczestniczy w wymaganym protokole multicast. Włączyć właściwy tryb PIM na zamierzonym interfejsie.\n\n**Sprawdzenie II:** Pojawia się sąsiad PIM i właściwy stan drzewa przez to łącze.\n\n**Zależności:** Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców. Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.\n\nII — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Nie wykryto zainteresowanego odbiorcy grupy. Zgłoszenie II: Łącze transportowe nie uczestniczy w wymaganym protokole multicast.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.\n\nII — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Pakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1. Dla II: Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Pakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1. Dla I: Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.multicast.practice.compare-06.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOdbiorca SSM potrzebuje konkretnej pary S,G, ale zgłasza tylko ogólne zainteresowanie grupą bez źródła.\n\n**Zgłoszenie II**\n\nŹródło wysyła multicast z TTL 1, a odbiorca znajduje się za routerem.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zapewnić obsługę IGMPv3 i właściwego zgłoszenia INCLUDE dla S,G.\n\n**Sprawdzenie I:** Router tworzy stan dla oczekiwanego źródła i grupy.\n\n**Zgłoszenie II:** Pakiet nie ma wystarczającego TTL do przekroczenia granicy routowanej. Ustawić w aplikacji źródłowej TTL odpowiedni dla zamierzonego zasięgu.\n\n**Sprawdzenie II:** Pakiety docierają przez wymagane skoki bez wygaśnięcia TTL.\n\n**Zależności:** SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy. TTL ogranicza zasięg także dla pakietów multicast.",
+      "card_id": "encor.multicast.practice.compare-06.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — TTL ogranicza zasięg także dla pakietów multicast.\n\nII — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zgłoszenie II: Pakiet nie ma wystarczającego TTL do przekroczenia granicy routowanej.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.\n\nII — TTL ogranicza zasięg także dla pakietów multicast.",
+          "feedback_md": "**Zgłoszenie I:** Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zapewnić obsługę IGMPv3 i właściwego zgłoszenia INCLUDE dla S,G.\n\n**Sprawdzenie I:** Router tworzy stan dla oczekiwanego źródła i grupy.\n\n**Zgłoszenie II:** Pakiet nie ma wystarczającego TTL do przekroczenia granicy routowanej. Ustawić w aplikacji źródłowej TTL odpowiedni dla zamierzonego zasięgu.\n\n**Sprawdzenie II:** Pakiety docierają przez wymagane skoki bez wygaśnięcia TTL.\n\n**Zależności:** SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy. TTL ogranicza zasięg także dla pakietów multicast.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.\n\nII — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Pakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1. Dla II: TTL ogranicza zasięg także dla pakietów multicast.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — TTL ogranicza zasięg także dla pakietów multicast.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Pakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1. Dla I: SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.multicast.practice.compare-07.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1.\n\n**Zgłoszenie II**\n\nŹródło wysyła multicast z TTL 1, a odbiorca znajduje się za routerem.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Pakiet nie spełnia kontroli Reverse Path Forwarding. Uzgodnić drogę źródłową i oczekiwany interfejs RPF zgodnie z topologią.\n\n**Sprawdzenie I:** Show ip rpf S wskazuje interfejs, którym faktycznie przychodzi poprawny ruch.\n\n**Zgłoszenie II:** Pakiet nie ma wystarczającego TTL do przekroczenia granicy routowanej. Ustawić w aplikacji źródłowej TTL odpowiedni dla zamierzonego zasięgu.\n\n**Sprawdzenie II:** Pakiety docierają przez wymagane skoki bez wygaśnięcia TTL.\n\n**Zależności:** RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast. TTL ogranicza zasięg także dla pakietów multicast.",
+      "card_id": "encor.multicast.practice.compare-07.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — TTL ogranicza zasięg także dla pakietów multicast.\n\nII — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Pakiet nie spełnia kontroli Reverse Path Forwarding. Zgłoszenie II: Pakiet nie ma wystarczającego TTL do przekroczenia granicy routowanej.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: W LAN nie ma zgłoszenia członkostwa dla grupy G, a router nie ma powodu wysyłać tam ruchu G. Dla II: TTL ogranicza zasięg także dla pakietów multicast.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — TTL ogranicza zasięg także dla pakietów multicast.",
+          "feedback_md": "**Zgłoszenie I:** Pakiet nie spełnia kontroli Reverse Path Forwarding. Uzgodnić drogę źródłową i oczekiwany interfejs RPF zgodnie z topologią.\n\n**Sprawdzenie I:** Show ip rpf S wskazuje interfejs, którym faktycznie przychodzi poprawny ruch.\n\n**Zgłoszenie II:** Pakiet nie ma wystarczającego TTL do przekroczenia granicy routowanej. Ustawić w aplikacji źródłowej TTL odpowiedni dla zamierzonego zasięgu.\n\n**Sprawdzenie II:** Pakiety docierają przez wymagane skoki bez wygaśnięcia TTL.\n\n**Zależności:** RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast. TTL ogranicza zasięg także dla pakietów multicast.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.\n\nII — TTL ogranicza zasięg także dla pakietów multicast.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: W LAN nie ma zgłoszenia członkostwa dla grupy G, a router nie ma powodu wysyłać tam ruchu G. Dla I: RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.multicast.practice.compare-08.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nW LAN nie ma zgłoszenia członkostwa dla grupy G, a router nie ma powodu wysyłać tam ruchu G.\n\n**Zgłoszenie II**\n\nOdbiorca SSM potrzebuje konkretnej pary S,G, ale zgłasza tylko ogólne zainteresowanie grupą bez źródła.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Nie wykryto zainteresowanego odbiorcy grupy. Sprawdzić IGMP klienta i przekazywanie jego raportów.\n\n**Sprawdzenie I:** Tabela członkostwa zawiera grupę G na właściwym LAN.\n\n**Zgłoszenie II:** Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zapewnić obsługę IGMPv3 i właściwego zgłoszenia INCLUDE dla S,G.\n\n**Sprawdzenie II:** Router tworzy stan dla oczekiwanego źródła i grupy.\n\n**Zależności:** Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców. SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+      "card_id": "encor.multicast.practice.compare-08.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.\n\nII — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Nie wykryto zainteresowanego odbiorcy grupy. Zgłoszenie II: Brakuje źródłowo specyficznego zgłoszenia odbiorcy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.\n\nII — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Pakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1. Dla II: SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Pakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1. Dla I: Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.\n\nII — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "feedback_md": "**Zgłoszenie I:** Nie wykryto zainteresowanego odbiorcy grupy. Sprawdzić IGMP klienta i przekazywanie jego raportów.\n\n**Sprawdzenie I:** Tabela członkostwa zawiera grupę G na właściwym LAN.\n\n**Zgłoszenie II:** Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zapewnić obsługę IGMPv3 i właściwego zgłoszenia INCLUDE dla S,G.\n\n**Sprawdzenie II:** Router tworzy stan dla oczekiwanego źródła i grupy.\n\n**Zależności:** Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców. SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.multicast.practice.compare-09.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPIM-SM dla grupy ASM nie ma poprawnego mapowania RP.\n\n**Zgłoszenie II**\n\nRouting unicast działa, lecz jeden interfejs router–router nie ma PIM i nie tworzy sąsiedztwa multicast.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brakuje punktu spotkania dla drzewa współdzielonego ASM. Zapewnić zgodne mapowanie RP i jego osiągalność.\n\n**Sprawdzenie I:** Routery wskazują ten sam właściwy RP dla grupy ASM.\n\n**Zgłoszenie II:** Łącze transportowe nie uczestniczy w wymaganym protokole multicast. Włączyć właściwy tryb PIM na zamierzonym interfejsie.\n\n**Sprawdzenie II:** Pojawia się sąsiad PIM i właściwy stan drzewa przez to łącze.\n\n**Zależności:** W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji. Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+      "card_id": "encor.multicast.practice.compare-09.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.\n\nII — Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+          "feedback_md": "**Zgłoszenie I:** Brakuje punktu spotkania dla drzewa współdzielonego ASM. Zapewnić zgodne mapowanie RP i jego osiągalność.\n\n**Sprawdzenie I:** Routery wskazują ten sam właściwy RP dla grupy ASM.\n\n**Zgłoszenie II:** Łącze transportowe nie uczestniczy w wymaganym protokole multicast. Włączyć właściwy tryb PIM na zamierzonym interfejsie.\n\n**Sprawdzenie II:** Pojawia się sąsiad PIM i właściwy stan drzewa przez to łącze.\n\n**Zależności:** W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji. Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.\n\nII — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brakuje punktu spotkania dla drzewa współdzielonego ASM. Zgłoszenie II: Łącze transportowe nie uczestniczy w wymaganym protokole multicast.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.\n\nII — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Pakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1. Dla II: Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — Działający unicast jest potrzebny, ale nie zastępuje konfiguracji multicast.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Pakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1. Dla I: W ASM PIM-SM RP pełni rolę w tworzeniu początkowego drzewa dystrybucji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.multicast.practice.compare-10.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — zależności",
+      "skills": [
+        "encor.multicast.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-multicast/ip-multicast/m_imc_basic_cfg-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Multicast — RPF, PIM, IGMP i SSM",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipmulti_pim/configuration/15-s/imc-pim-15-s-book/imc_cfg_ssm.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPakiet multicast od źródła S przychodzi na Gi2, lecz najlepsza droga unicast do S wskazuje Gi1.\n\n**Zgłoszenie II**\n\nOdbiorca SSM potrzebuje konkretnej pary S,G, ale zgłasza tylko ogólne zainteresowanie grupą bez źródła.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Pakiet nie spełnia kontroli Reverse Path Forwarding. Uzgodnić drogę źródłową i oczekiwany interfejs RPF zgodnie z topologią.\n\n**Sprawdzenie I:** Show ip rpf S wskazuje interfejs, którym faktycznie przychodzi poprawny ruch.\n\n**Zgłoszenie II:** Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zapewnić obsługę IGMPv3 i właściwego zgłoszenia INCLUDE dla S,G.\n\n**Sprawdzenie II:** Router tworzy stan dla oczekiwanego źródła i grupy.\n\n**Zależności:** RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast. SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+      "card_id": "encor.multicast.practice.compare-10.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.\n\nII — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Pakiet nie spełnia kontroli Reverse Path Forwarding. Zgłoszenie II: Brakuje źródłowo specyficznego zgłoszenia odbiorcy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "feedback_md": "**Zgłoszenie I:** Pakiet nie spełnia kontroli Reverse Path Forwarding. Uzgodnić drogę źródłową i oczekiwany interfejs RPF zgodnie z topologią.\n\n**Sprawdzenie I:** Show ip rpf S wskazuje interfejs, którym faktycznie przychodzi poprawny ruch.\n\n**Zgłoszenie II:** Brakuje źródłowo specyficznego zgłoszenia odbiorcy. Zapewnić obsługę IGMPv3 i właściwego zgłoszenia INCLUDE dla S,G.\n\n**Sprawdzenie II:** Router tworzy stan dla oczekiwanego źródła i grupy.\n\n**Zależności:** RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast. SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.\n\nII — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: W LAN nie ma zgłoszenia członkostwa dla grupy G, a router nie ma powodu wysyłać tam ruchu G. Dla II: SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Dystrybucja multicast opiera się na sygnalizacji zainteresowania odbiorców.\n\nII — SSM identyfikuje kanał przez parę źródło–grupa, nie wyłącznie adres grupy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: W LAN nie ma zgłoszenia członkostwa dla grupy G, a router nie ma powodu wysyłać tam ruchu G. Dla I: RPF sprawdza drogę w stronę źródła, nie odbiorcy multicast.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

@@ -1,0 +1,879 @@
+{
+  "schema_version": 3,
+  "id": "encor.fhrp.practice-6",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.practice.compare-01.2.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10.\n\n**Zgłoszenie II**\n\nPo restarcie router przejmuje VIP przed odbudową potrzebnych tras, powodując krótką przerwę.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** R1 nadal ma priorytet 110, większy od R2. Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\n**Sprawdzenie I:** Po awarii zdrowy R2 przejmuje rolę Active.\n\n**Zgłoszenie II:** Przejęcie roli następuje przed gotowością routingu. Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\n**Sprawdzenie II:** Router przejmuje rolę dopiero po ustabilizowaniu wymaganych zależności.\n\n**Zależności:** Tracking musi zmienić relację priorytetów, nie tylko obniżyć liczbę. Gotowość interfejsu LAN nie oznacza gotowości całej ścieżki przekazywania.",
+      "example": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.practice.compare-02.2.card",
+      "front_md": "**Zgłoszenie I**\n\nNa wspólnym LAN R1 używa HSRPv1, R2 HSRPv2 dla zamierzonej pary.\n\n**Zgłoszenie II**\n\nRouter VRRP jest właścicielem adresu wirtualnego i ma priority 255.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Routery używają niezgodnych wersji protokołu grupy. Ujednolicić wersję i parametry grupy na obu końcach.\n\n**Sprawdzenie I:** Routery widzą się w tej samej grupie i uzgadniają role.\n\n**Zgłoszenie II:** Właściciel adresu ma specjalny najwyższy priorytet VRRP. Uwzględnić rolę owner przy analizie wyboru Master.\n\n**Sprawdzenie II:** Stan i priorytet odpowiadają routerowi posiadającemu adres VIP.\n\n**Zależności:** Wersja protokołu jest częścią zgodności konfiguracji FHRP. W VRRP priorytet 255 jest związany z właścicielem adresu.",
+      "example": "I — Ujednolicić wersję i parametry grupy na obu końcach.\n\nII — Uwzględnić rolę owner przy analizie wyboru Master."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.practice.compare-03.2.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 jest Active grupy 10, R2 grupy 20; hosty rozdzielono między dwa VIP.\n\n**Zgłoszenie II**\n\nACL blokuje komunikaty HSRP między routerami, choć zwykły unicast między ich IP działa.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Obciążenie jest dzielone przez różne grupy wirtualnych bram. Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\n**Sprawdzenie I:** Każdy VIP ma właściwy aktywny router i działający backup.\n\n**Zgłoszenie II:** Polityka filtruje ruch protokołu redundancji. Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.\n\n**Sprawdzenie II:** Hello są odbierane i grupa utrzymuje właściwe role.\n\n**Zależności:** HSRP może rozdzielać aktywne role między grupami, nie równoważy automatycznie każdego pakietu jednego VIP. Test unicast nie potwierdza przejścia multicastowego ruchu kontrolnego FHRP.",
+      "example": "I — Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\nII — Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.practice.compare-04.2.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10.\n\n**Zgłoszenie II**\n\nNa wspólnym LAN R1 używa HSRPv1, R2 HSRPv2 dla zamierzonej pary.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** R1 nadal ma priorytet 110, większy od R2. Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\n**Sprawdzenie I:** Po awarii zdrowy R2 przejmuje rolę Active.\n\n**Zgłoszenie II:** Routery używają niezgodnych wersji protokołu grupy. Ujednolicić wersję i parametry grupy na obu końcach.\n\n**Sprawdzenie II:** Routery widzą się w tej samej grupie i uzgadniają role.\n\n**Zależności:** Tracking musi zmienić relację priorytetów, nie tylko obniżyć liczbę. Wersja protokołu jest częścią zgodności konfiguracji FHRP.",
+      "example": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Ujednolicić wersję i parametry grupy na obu końcach."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.practice.compare-05.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPo restarcie router przejmuje VIP przed odbudową potrzebnych tras, powodując krótką przerwę.\n\n**Zgłoszenie II**\n\nR1 jest Active grupy 10, R2 grupy 20; hosty rozdzielono między dwa VIP.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Przejęcie roli następuje przed gotowością routingu. Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\n**Sprawdzenie I:** Router przejmuje rolę dopiero po ustabilizowaniu wymaganych zależności.\n\n**Zgłoszenie II:** Obciążenie jest dzielone przez różne grupy wirtualnych bram. Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\n**Sprawdzenie II:** Każdy VIP ma właściwy aktywny router i działający backup.\n\n**Zależności:** Gotowość interfejsu LAN nie oznacza gotowości całej ścieżki przekazywania. HSRP może rozdzielać aktywne role między grupami, nie równoważy automatycznie każdego pakietu jednego VIP.",
+      "example": "I — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\nII — Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.practice.compare-06.2.card",
+      "front_md": "**Zgłoszenie I**\n\nRouter VRRP jest właścicielem adresu wirtualnego i ma priority 255.\n\n**Zgłoszenie II**\n\nACL blokuje komunikaty HSRP między routerami, choć zwykły unicast między ich IP działa.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Właściciel adresu ma specjalny najwyższy priorytet VRRP. Uwzględnić rolę owner przy analizie wyboru Master.\n\n**Sprawdzenie I:** Stan i priorytet odpowiadają routerowi posiadającemu adres VIP.\n\n**Zgłoszenie II:** Polityka filtruje ruch protokołu redundancji. Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.\n\n**Sprawdzenie II:** Hello są odbierane i grupa utrzymuje właściwe role.\n\n**Zależności:** W VRRP priorytet 255 jest związany z właścicielem adresu. Test unicast nie potwierdza przejścia multicastowego ruchu kontrolnego FHRP.",
+      "example": "I — Uwzględnić rolę owner przy analizie wyboru Master.\n\nII — Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.practice.compare-07.2.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10.\n\n**Zgłoszenie II**\n\nACL blokuje komunikaty HSRP między routerami, choć zwykły unicast między ich IP działa.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** R1 nadal ma priorytet 110, większy od R2. Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\n**Sprawdzenie I:** Po awarii zdrowy R2 przejmuje rolę Active.\n\n**Zgłoszenie II:** Polityka filtruje ruch protokołu redundancji. Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.\n\n**Sprawdzenie II:** Hello są odbierane i grupa utrzymuje właściwe role.\n\n**Zależności:** Tracking musi zmienić relację priorytetów, nie tylko obniżyć liczbę. Test unicast nie potwierdza przejścia multicastowego ruchu kontrolnego FHRP.",
+      "example": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.practice.compare-08.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPo restarcie router przejmuje VIP przed odbudową potrzebnych tras, powodując krótką przerwę.\n\n**Zgłoszenie II**\n\nRouter VRRP jest właścicielem adresu wirtualnego i ma priority 255.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Przejęcie roli następuje przed gotowością routingu. Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\n**Sprawdzenie I:** Router przejmuje rolę dopiero po ustabilizowaniu wymaganych zależności.\n\n**Zgłoszenie II:** Właściciel adresu ma specjalny najwyższy priorytet VRRP. Uwzględnić rolę owner przy analizie wyboru Master.\n\n**Sprawdzenie II:** Stan i priorytet odpowiadają routerowi posiadającemu adres VIP.\n\n**Zależności:** Gotowość interfejsu LAN nie oznacza gotowości całej ścieżki przekazywania. W VRRP priorytet 255 jest związany z właścicielem adresu.",
+      "example": "I — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\nII — Uwzględnić rolę owner przy analizie wyboru Master."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.practice.compare-09.2.card",
+      "front_md": "**Zgłoszenie I**\n\nNa wspólnym LAN R1 używa HSRPv1, R2 HSRPv2 dla zamierzonej pary.\n\n**Zgłoszenie II**\n\nR1 jest Active grupy 10, R2 grupy 20; hosty rozdzielono między dwa VIP.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Routery używają niezgodnych wersji protokołu grupy. Ujednolicić wersję i parametry grupy na obu końcach.\n\n**Sprawdzenie I:** Routery widzą się w tej samej grupie i uzgadniają role.\n\n**Zgłoszenie II:** Obciążenie jest dzielone przez różne grupy wirtualnych bram. Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\n**Sprawdzenie II:** Każdy VIP ma właściwy aktywny router i działający backup.\n\n**Zależności:** Wersja protokołu jest częścią zgodności konfiguracji FHRP. HSRP może rozdzielać aktywne role między grupami, nie równoważy automatycznie każdego pakietu jednego VIP.",
+      "example": "I — Ujednolicić wersję i parametry grupy na obu końcach.\n\nII — Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "id": "encor.fhrp.practice.compare-10.2.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10.\n\n**Zgłoszenie II**\n\nRouter VRRP jest właścicielem adresu wirtualnego i ma priority 255.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** R1 nadal ma priorytet 110, większy od R2. Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\n**Sprawdzenie I:** Po awarii zdrowy R2 przejmuje rolę Active.\n\n**Zgłoszenie II:** Właściciel adresu ma specjalny najwyższy priorytet VRRP. Uwzględnić rolę owner przy analizie wyboru Master.\n\n**Sprawdzenie II:** Stan i priorytet odpowiadają routerowi posiadającemu adres VIP.\n\n**Zależności:** Tracking musi zmienić relację priorytetów, nie tylko obniżyć liczbę. W VRRP priorytet 255 jest związany z właścicielem adresu.",
+      "example": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Uwzględnić rolę owner przy analizie wyboru Master."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.fhrp.practice.compare-01.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10.\n\n**Zgłoszenie II**\n\nPo restarcie router przejmuje VIP przed odbudową potrzebnych tras, powodując krótką przerwę.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** R1 nadal ma priorytet 110, większy od R2. Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\n**Sprawdzenie I:** Po awarii zdrowy R2 przejmuje rolę Active.\n\n**Zgłoszenie II:** Przejęcie roli następuje przed gotowością routingu. Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\n**Sprawdzenie II:** Router przejmuje rolę dopiero po ustabilizowaniu wymaganych zależności.\n\n**Zależności:** Tracking musi zmienić relację priorytetów, nie tylko obniżyć liczbę. Gotowość interfejsu LAN nie oznacza gotowości całej ścieżki przekazywania.",
+      "card_id": "encor.fhrp.practice.compare-01.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\nII — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: R1 nadal ma priorytet 110, większy od R2. Zgłoszenie II: Przejęcie roli następuje przed gotowością routingu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Ujednolicić wersję i parametry grupy na obu końcach.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Na wspólnym LAN R1 używa HSRPv1, R2 HSRPv2 dla zamierzonej pary. Dla II: Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.",
+          "feedback_md": "**Zgłoszenie I:** R1 nadal ma priorytet 110, większy od R2. Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\n**Sprawdzenie I:** Po awarii zdrowy R2 przejmuje rolę Active.\n\n**Zgłoszenie II:** Przejęcie roli następuje przed gotowością routingu. Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\n**Sprawdzenie II:** Router przejmuje rolę dopiero po ustabilizowaniu wymaganych zależności.\n\n**Zależności:** Tracking musi zmienić relację priorytetów, nie tylko obniżyć liczbę. Gotowość interfejsu LAN nie oznacza gotowości całej ścieżki przekazywania.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ujednolicić wersję i parametry grupy na obu końcach.\n\nII — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Na wspólnym LAN R1 używa HSRPv1, R2 HSRPv2 dla zamierzonej pary. Dla I: Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.fhrp.practice.compare-02.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNa wspólnym LAN R1 używa HSRPv1, R2 HSRPv2 dla zamierzonej pary.\n\n**Zgłoszenie II**\n\nRouter VRRP jest właścicielem adresu wirtualnego i ma priority 255.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Routery używają niezgodnych wersji protokołu grupy. Ujednolicić wersję i parametry grupy na obu końcach.\n\n**Sprawdzenie I:** Routery widzą się w tej samej grupie i uzgadniają role.\n\n**Zgłoszenie II:** Właściciel adresu ma specjalny najwyższy priorytet VRRP. Uwzględnić rolę owner przy analizie wyboru Master.\n\n**Sprawdzenie II:** Stan i priorytet odpowiadają routerowi posiadającemu adres VIP.\n\n**Zależności:** Wersja protokołu jest częścią zgodności konfiguracji FHRP. W VRRP priorytet 255 jest związany z właścicielem adresu.",
+      "card_id": "encor.fhrp.practice.compare-02.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Uwzględnić rolę owner przy analizie wyboru Master.\n\nII — Ujednolicić wersję i parametry grupy na obu końcach.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Routery używają niezgodnych wersji protokołu grupy. Zgłoszenie II: Właściciel adresu ma specjalny najwyższy priorytet VRRP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ujednolicić wersję i parametry grupy na obu końcach.\n\nII — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10. Dla II: Uwzględnić rolę owner przy analizie wyboru Master.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Uwzględnić rolę owner przy analizie wyboru Master.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10. Dla I: Ujednolicić wersję i parametry grupy na obu końcach.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ujednolicić wersję i parametry grupy na obu końcach.\n\nII — Uwzględnić rolę owner przy analizie wyboru Master.",
+          "feedback_md": "**Zgłoszenie I:** Routery używają niezgodnych wersji protokołu grupy. Ujednolicić wersję i parametry grupy na obu końcach.\n\n**Sprawdzenie I:** Routery widzą się w tej samej grupie i uzgadniają role.\n\n**Zgłoszenie II:** Właściciel adresu ma specjalny najwyższy priorytet VRRP. Uwzględnić rolę owner przy analizie wyboru Master.\n\n**Sprawdzenie II:** Stan i priorytet odpowiadają routerowi posiadającemu adres VIP.\n\n**Zależności:** Wersja protokołu jest częścią zgodności konfiguracji FHRP. W VRRP priorytet 255 jest związany z właścicielem adresu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.fhrp.practice.compare-03.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 jest Active grupy 10, R2 grupy 20; hosty rozdzielono między dwa VIP.\n\n**Zgłoszenie II**\n\nACL blokuje komunikaty HSRP między routerami, choć zwykły unicast między ich IP działa.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Obciążenie jest dzielone przez różne grupy wirtualnych bram. Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\n**Sprawdzenie I:** Każdy VIP ma właściwy aktywny router i działający backup.\n\n**Zgłoszenie II:** Polityka filtruje ruch protokołu redundancji. Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.\n\n**Sprawdzenie II:** Hello są odbierane i grupa utrzymuje właściwe role.\n\n**Zależności:** HSRP może rozdzielać aktywne role między grupami, nie równoważy automatycznie każdego pakietu jednego VIP. Test unicast nie potwierdza przejścia multicastowego ruchu kontrolnego FHRP.",
+      "card_id": "encor.fhrp.practice.compare-03.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\nII — Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.",
+          "feedback_md": "**Zgłoszenie I:** Obciążenie jest dzielone przez różne grupy wirtualnych bram. Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\n**Sprawdzenie I:** Każdy VIP ma właściwy aktywny router i działający backup.\n\n**Zgłoszenie II:** Polityka filtruje ruch protokołu redundancji. Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.\n\n**Sprawdzenie II:** Hello są odbierane i grupa utrzymuje właściwe role.\n\n**Zależności:** HSRP może rozdzielać aktywne role między grupami, nie równoważy automatycznie każdego pakietu jednego VIP. Test unicast nie potwierdza przejścia multicastowego ruchu kontrolnego FHRP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.\n\nII — Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Obciążenie jest dzielone przez różne grupy wirtualnych bram. Zgłoszenie II: Polityka filtruje ruch protokołu redundancji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\nII — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10. Dla II: Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10. Dla I: Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.fhrp.practice.compare-04.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10.\n\n**Zgłoszenie II**\n\nNa wspólnym LAN R1 używa HSRPv1, R2 HSRPv2 dla zamierzonej pary.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** R1 nadal ma priorytet 110, większy od R2. Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\n**Sprawdzenie I:** Po awarii zdrowy R2 przejmuje rolę Active.\n\n**Zgłoszenie II:** Routery używają niezgodnych wersji protokołu grupy. Ujednolicić wersję i parametry grupy na obu końcach.\n\n**Sprawdzenie II:** Routery widzą się w tej samej grupie i uzgadniają role.\n\n**Zależności:** Tracking musi zmienić relację priorytetów, nie tylko obniżyć liczbę. Wersja protokołu jest częścią zgodności konfiguracji FHRP.",
+      "card_id": "encor.fhrp.practice.compare-04.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Ujednolicić wersję i parametry grupy na obu końcach.\n\nII — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: R1 nadal ma priorytet 110, większy od R2. Zgłoszenie II: Routery używają niezgodnych wersji protokołu grupy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Ujednolicić wersję i parametry grupy na obu końcach.",
+          "feedback_md": "**Zgłoszenie I:** R1 nadal ma priorytet 110, większy od R2. Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\n**Sprawdzenie I:** Po awarii zdrowy R2 przejmuje rolę Active.\n\n**Zgłoszenie II:** Routery używają niezgodnych wersji protokołu grupy. Ujednolicić wersję i parametry grupy na obu końcach.\n\n**Sprawdzenie II:** Routery widzą się w tej samej grupie i uzgadniają role.\n\n**Zależności:** Tracking musi zmienić relację priorytetów, nie tylko obniżyć liczbę. Wersja protokołu jest częścią zgodności konfiguracji FHRP.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Po restarcie router przejmuje VIP przed odbudową potrzebnych tras, powodując krótką przerwę. Dla II: Ujednolicić wersję i parametry grupy na obu końcach.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\nII — Ujednolicić wersję i parametry grupy na obu końcach.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Po restarcie router przejmuje VIP przed odbudową potrzebnych tras, powodując krótką przerwę. Dla I: Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.fhrp.practice.compare-05.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPo restarcie router przejmuje VIP przed odbudową potrzebnych tras, powodując krótką przerwę.\n\n**Zgłoszenie II**\n\nR1 jest Active grupy 10, R2 grupy 20; hosty rozdzielono między dwa VIP.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Przejęcie roli następuje przed gotowością routingu. Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\n**Sprawdzenie I:** Router przejmuje rolę dopiero po ustabilizowaniu wymaganych zależności.\n\n**Zgłoszenie II:** Obciążenie jest dzielone przez różne grupy wirtualnych bram. Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\n**Sprawdzenie II:** Każdy VIP ma właściwy aktywny router i działający backup.\n\n**Zależności:** Gotowość interfejsu LAN nie oznacza gotowości całej ścieżki przekazywania. HSRP może rozdzielać aktywne role między grupami, nie równoważy automatycznie każdego pakietu jednego VIP.",
+      "card_id": "encor.fhrp.practice.compare-05.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\nII — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Przejęcie roli następuje przed gotowością routingu. Zgłoszenie II: Obciążenie jest dzielone przez różne grupy wirtualnych bram.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\nII — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10. Dla II: Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\nII — Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.",
+          "feedback_md": "**Zgłoszenie I:** Przejęcie roli następuje przed gotowością routingu. Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\n**Sprawdzenie I:** Router przejmuje rolę dopiero po ustabilizowaniu wymaganych zależności.\n\n**Zgłoszenie II:** Obciążenie jest dzielone przez różne grupy wirtualnych bram. Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\n**Sprawdzenie II:** Każdy VIP ma właściwy aktywny router i działający backup.\n\n**Zależności:** Gotowość interfejsu LAN nie oznacza gotowości całej ścieżki przekazywania. HSRP może rozdzielać aktywne role między grupami, nie równoważy automatycznie każdego pakietu jednego VIP.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10. Dla I: Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.fhrp.practice.compare-06.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRouter VRRP jest właścicielem adresu wirtualnego i ma priority 255.\n\n**Zgłoszenie II**\n\nACL blokuje komunikaty HSRP między routerami, choć zwykły unicast między ich IP działa.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Właściciel adresu ma specjalny najwyższy priorytet VRRP. Uwzględnić rolę owner przy analizie wyboru Master.\n\n**Sprawdzenie I:** Stan i priorytet odpowiadają routerowi posiadającemu adres VIP.\n\n**Zgłoszenie II:** Polityka filtruje ruch protokołu redundancji. Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.\n\n**Sprawdzenie II:** Hello są odbierane i grupa utrzymuje właściwe role.\n\n**Zależności:** W VRRP priorytet 255 jest związany z właścicielem adresu. Test unicast nie potwierdza przejścia multicastowego ruchu kontrolnego FHRP.",
+      "card_id": "encor.fhrp.practice.compare-06.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.\n\nII — Uwzględnić rolę owner przy analizie wyboru Master.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Właściciel adresu ma specjalny najwyższy priorytet VRRP. Zgłoszenie II: Polityka filtruje ruch protokołu redundancji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Uwzględnić rolę owner przy analizie wyboru Master.\n\nII — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10. Dla II: Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10. Dla I: Uwzględnić rolę owner przy analizie wyboru Master.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uwzględnić rolę owner przy analizie wyboru Master.\n\nII — Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.",
+          "feedback_md": "**Zgłoszenie I:** Właściciel adresu ma specjalny najwyższy priorytet VRRP. Uwzględnić rolę owner przy analizie wyboru Master.\n\n**Sprawdzenie I:** Stan i priorytet odpowiadają routerowi posiadającemu adres VIP.\n\n**Zgłoszenie II:** Polityka filtruje ruch protokołu redundancji. Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.\n\n**Sprawdzenie II:** Hello są odbierane i grupa utrzymuje właściwe role.\n\n**Zależności:** W VRRP priorytet 255 jest związany z właścicielem adresu. Test unicast nie potwierdza przejścia multicastowego ruchu kontrolnego FHRP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.fhrp.practice.compare-07.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10.\n\n**Zgłoszenie II**\n\nACL blokuje komunikaty HSRP między routerami, choć zwykły unicast między ich IP działa.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** R1 nadal ma priorytet 110, większy od R2. Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\n**Sprawdzenie I:** Po awarii zdrowy R2 przejmuje rolę Active.\n\n**Zgłoszenie II:** Polityka filtruje ruch protokołu redundancji. Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.\n\n**Sprawdzenie II:** Hello są odbierane i grupa utrzymuje właściwe role.\n\n**Zależności:** Tracking musi zmienić relację priorytetów, nie tylko obniżyć liczbę. Test unicast nie potwierdza przejścia multicastowego ruchu kontrolnego FHRP.",
+      "card_id": "encor.fhrp.practice.compare-07.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.",
+          "feedback_md": "**Zgłoszenie I:** R1 nadal ma priorytet 110, większy od R2. Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\n**Sprawdzenie I:** Po awarii zdrowy R2 przejmuje rolę Active.\n\n**Zgłoszenie II:** Polityka filtruje ruch protokołu redundancji. Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.\n\n**Sprawdzenie II:** Hello są odbierane i grupa utrzymuje właściwe role.\n\n**Zależności:** Tracking musi zmienić relację priorytetów, nie tylko obniżyć liczbę. Test unicast nie potwierdza przejścia multicastowego ruchu kontrolnego FHRP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.\n\nII — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: R1 nadal ma priorytet 110, większy od R2. Zgłoszenie II: Polityka filtruje ruch protokołu redundancji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Po restarcie router przejmuje VIP przed odbudową potrzebnych tras, powodując krótką przerwę. Dla II: Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\nII — Dopuścić wymagane komunikaty HSRP między uprawnionymi członkami.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Po restarcie router przejmuje VIP przed odbudową potrzebnych tras, powodując krótką przerwę. Dla I: Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.fhrp.practice.compare-08.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPo restarcie router przejmuje VIP przed odbudową potrzebnych tras, powodując krótką przerwę.\n\n**Zgłoszenie II**\n\nRouter VRRP jest właścicielem adresu wirtualnego i ma priority 255.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Przejęcie roli następuje przed gotowością routingu. Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\n**Sprawdzenie I:** Router przejmuje rolę dopiero po ustabilizowaniu wymaganych zależności.\n\n**Zgłoszenie II:** Właściciel adresu ma specjalny najwyższy priorytet VRRP. Uwzględnić rolę owner przy analizie wyboru Master.\n\n**Sprawdzenie II:** Stan i priorytet odpowiadają routerowi posiadającemu adres VIP.\n\n**Zależności:** Gotowość interfejsu LAN nie oznacza gotowości całej ścieżki przekazywania. W VRRP priorytet 255 jest związany z właścicielem adresu.",
+      "card_id": "encor.fhrp.practice.compare-08.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Uwzględnić rolę owner przy analizie wyboru Master.\n\nII — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Przejęcie roli następuje przed gotowością routingu. Zgłoszenie II: Właściciel adresu ma specjalny najwyższy priorytet VRRP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\nII — Uwzględnić rolę owner przy analizie wyboru Master.",
+          "feedback_md": "**Zgłoszenie I:** Przejęcie roli następuje przed gotowością routingu. Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\n**Sprawdzenie I:** Router przejmuje rolę dopiero po ustabilizowaniu wymaganych zależności.\n\n**Zgłoszenie II:** Właściciel adresu ma specjalny najwyższy priorytet VRRP. Uwzględnić rolę owner przy analizie wyboru Master.\n\n**Sprawdzenie II:** Stan i priorytet odpowiadają routerowi posiadającemu adres VIP.\n\n**Zależności:** Gotowość interfejsu LAN nie oznacza gotowości całej ścieżki przekazywania. W VRRP priorytet 255 jest związany z właścicielem adresu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\nII — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10. Dla II: Uwzględnić rolę owner przy analizie wyboru Master.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Uwzględnić rolę owner przy analizie wyboru Master.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10. Dla I: Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.fhrp.practice.compare-09.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNa wspólnym LAN R1 używa HSRPv1, R2 HSRPv2 dla zamierzonej pary.\n\n**Zgłoszenie II**\n\nR1 jest Active grupy 10, R2 grupy 20; hosty rozdzielono między dwa VIP.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Routery używają niezgodnych wersji protokołu grupy. Ujednolicić wersję i parametry grupy na obu końcach.\n\n**Sprawdzenie I:** Routery widzą się w tej samej grupie i uzgadniają role.\n\n**Zgłoszenie II:** Obciążenie jest dzielone przez różne grupy wirtualnych bram. Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\n**Sprawdzenie II:** Każdy VIP ma właściwy aktywny router i działający backup.\n\n**Zależności:** Wersja protokołu jest częścią zgodności konfiguracji FHRP. HSRP może rozdzielać aktywne role między grupami, nie równoważy automatycznie każdego pakietu jednego VIP.",
+      "card_id": "encor.fhrp.practice.compare-09.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\nII — Ujednolicić wersję i parametry grupy na obu końcach.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Routery używają niezgodnych wersji protokołu grupy. Zgłoszenie II: Obciążenie jest dzielone przez różne grupy wirtualnych bram.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ujednolicić wersję i parametry grupy na obu końcach.\n\nII — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10. Dla II: Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ujednolicić wersję i parametry grupy na obu końcach.\n\nII — Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.",
+          "feedback_md": "**Zgłoszenie I:** Routery używają niezgodnych wersji protokołu grupy. Ujednolicić wersję i parametry grupy na obu końcach.\n\n**Sprawdzenie I:** Routery widzą się w tej samej grupie i uzgadniają role.\n\n**Zgłoszenie II:** Obciążenie jest dzielone przez różne grupy wirtualnych bram. Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.\n\n**Sprawdzenie II:** Każdy VIP ma właściwy aktywny router i działający backup.\n\n**Zależności:** Wersja protokołu jest częścią zgodności konfiguracji FHRP. HSRP może rozdzielać aktywne role między grupami, nie równoważy automatycznie każdego pakietu jednego VIP.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Sprawdzać każdą grupę i jej awaryjne przejęcie niezależnie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10. Dla I: Ujednolicić wersję i parametry grupy na obu końcach.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.fhrp.practice.compare-10.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — działanie",
+      "skills": [
+        "encor.fhrp.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ntw-servs/b-network-services/m_fhp-hsrp-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — HSRP i VRRP — wybór bramy i awarie",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/fhrp/fhrp-configuration-guide/vrrp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 priority 120, R2 priority 100 z preempt. Awaria track na R1 odejmuje tylko 10.\n\n**Zgłoszenie II**\n\nRouter VRRP jest właścicielem adresu wirtualnego i ma priority 255.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** R1 nadal ma priorytet 110, większy od R2. Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\n**Sprawdzenie I:** Po awarii zdrowy R2 przejmuje rolę Active.\n\n**Zgłoszenie II:** Właściciel adresu ma specjalny najwyższy priorytet VRRP. Uwzględnić rolę owner przy analizie wyboru Master.\n\n**Sprawdzenie II:** Stan i priorytet odpowiadają routerowi posiadającemu adres VIP.\n\n**Zależności:** Tracking musi zmienić relację priorytetów, nie tylko obniżyć liczbę. W VRRP priorytet 255 jest związany z właścicielem adresu.",
+      "card_id": "encor.fhrp.practice.compare-10.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Uwzględnić rolę owner przy analizie wyboru Master.\n\nII — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: R1 nadal ma priorytet 110, większy od R2. Zgłoszenie II: Właściciel adresu ma specjalny najwyższy priorytet VRRP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Po restarcie router przejmuje VIP przed odbudową potrzebnych tras, powodując krótką przerwę. Dla II: Uwzględnić rolę owner przy analizie wyboru Master.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zastosować uzasadnione opóźnienie preempt i kontrolę dostępności.\n\nII — Uwzględnić rolę owner przy analizie wyboru Master.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Po restarcie router przejmuje VIP przed odbudową potrzebnych tras, powodując krótką przerwę. Dla I: Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\nII — Uwzględnić rolę owner przy analizie wyboru Master.",
+          "feedback_md": "**Zgłoszenie I:** R1 nadal ma priorytet 110, większy od R2. Dobrać decrement tak, by po awarii R1 miał priorytet mniejszy niż 100.\n\n**Sprawdzenie I:** Po awarii zdrowy R2 przejmuje rolę Active.\n\n**Zgłoszenie II:** Właściciel adresu ma specjalny najwyższy priorytet VRRP. Uwzględnić rolę owner przy analizie wyboru Master.\n\n**Sprawdzenie II:** Stan i priorytet odpowiadają routerowi posiadającemu adres VIP.\n\n**Zależności:** Tracking musi zmienić relację priorytetów, nie tylko obniżyć liczbę. W VRRP priorytet 255 jest związany z właścicielem adresu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

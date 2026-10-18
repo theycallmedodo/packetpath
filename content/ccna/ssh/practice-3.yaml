@@ -1,0 +1,435 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ssh.practice-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Transport VTY — weryfikacja",
+      "skills": [
+        "ccna.ssh.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.case-01.3.card",
+      "front_md": "SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\n**Rozpoznanie:** VTY nie dopuszczają protokołu SSH.\n\n**Działanie:** Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.",
+      "example": "Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony."
+    },
+    {
+      "revision": 1,
+      "title": "Brak login local — weryfikacja",
+      "skills": [
+        "ccna.ssh.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.case-02.3.card",
+      "front_md": "Lokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Bez AAA polecenie login local wybiera lokalną bazę kont.\n\n**Rozpoznanie:** Wybrano niewłaściwe źródło uwierzytelniania VTY.\n\n**Działanie:** Ustawić login local na właściwych liniach VTY.\n\n**Sprawdzenie:** Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.",
+      "example": "Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu."
+    },
+    {
+      "revision": 1,
+      "title": "ACL zarządzania — weryfikacja",
+      "skills": [
+        "ccna.ssh.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.case-03.3.card",
+      "front_md": "Access-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "ACL VTY ogranicza dostęp do sesji zarządzania według źródła.\n\n**Rozpoznanie:** Źródło administratora nie jest dozwolone w ACL VTY.\n\n**Działanie:** Dodać precyzyjny wyjątek dla uprawnionego hosta zgodnie z polityką.\n\n**Sprawdzenie:** SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.",
+      "example": "SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane."
+    },
+    {
+      "revision": 1,
+      "title": "Brak klucza serwera — weryfikacja",
+      "skills": [
+        "ccna.ssh.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.case-04.3.card",
+      "front_md": "Na nowym urządzeniu brak kluczy RSA, a show ip ssh wskazuje nieaktywny serwer; konfiguracja tej wersji wymaga kluczy RSA.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.\n\n**Rozpoznanie:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH.\n\n**Działanie:** Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie:** Show ip ssh potwierdza aktywny serwer SSHv2.",
+      "example": "Show ip ssh potwierdza aktywny serwer SSHv2."
+    },
+    {
+      "revision": 1,
+      "title": "Niewłaściwy sekret — weryfikacja",
+      "skills": [
+        "ccna.ssh.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.case-05.3.card",
+      "front_md": "TCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.\n\n**Rozpoznanie:** Uwierzytelnienie konta nie powiodło się po zestawieniu transportu.\n\n**Działanie:** Zweryfikować nazwę konta i sekret, korzystając z bezpiecznego dostępu administracyjnego.\n\n**Sprawdzenie:** Poprawne dane tego konta umożliwiają logowanie przez SSH.",
+      "example": "Poprawne dane tego konta umożliwiają logowanie przez SSH."
+    },
+    {
+      "revision": 1,
+      "title": "Osiągalność management — weryfikacja",
+      "skills": [
+        "ccna.ssh.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.case-06.3.card",
+      "front_md": "SSH działa z sąsiedniego hosta. Zdalny host nie ma trasy do podsieci management.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.\n\n**Rozpoznanie:** Brak drogi routowanej do adresu zarządzania.\n\n**Działanie:** Przywrócić wymagany routing między siecią administratora a management.\n\n**Sprawdzenie:** Lookup i test TCP do portu SSH przechodzą z właściwego źródła.",
+      "example": "Lookup i test TCP do portu SSH przechodzą z właściwego źródła."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ssh.practice.case-01.3",
+      "revision": 1,
+      "title": "Transport VTY — weryfikacja",
+      "skills": [
+        "ccna.ssh.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\n**Rozpoznanie:** VTY nie dopuszczają protokołu SSH.\n\n**Działanie:** Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.",
+      "card_id": "ccna.ssh.practice.case-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Poprawne dane tego konta umożliwiają logowanie przez SSH.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niewłaściwy sekret”: TCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta. W bieżącym przypadku: Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.",
+          "id": "A"
+        },
+        {
+          "text_md": "Show ip ssh potwierdza aktywny serwer SSHv2.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak klucza serwera”: Na nowym urządzeniu brak kluczy RSA, a show ip ssh wskazuje nieaktywny serwer; konfiguracja tej wersji wymaga kluczy RSA. W bieżącym przypadku: Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.",
+          "id": "B"
+        },
+        {
+          "text_md": "Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.",
+          "feedback_md": "Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\n**Rozpoznanie:** VTY nie dopuszczają protokołu SSH.\n\n**Działanie:** Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.",
+          "id": "C"
+        },
+        {
+          "text_md": "SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „ACL zarządzania”: Access-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane. W bieżącym przypadku: Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ssh.practice.case-02.3",
+      "revision": 1,
+      "title": "Brak login local — weryfikacja",
+      "skills": [
+        "ccna.ssh.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Lokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Bez AAA polecenie login local wybiera lokalną bazę kont.\n\n**Rozpoznanie:** Wybrano niewłaściwe źródło uwierzytelniania VTY.\n\n**Działanie:** Ustawić login local na właściwych liniach VTY.\n\n**Sprawdzenie:** Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.",
+      "card_id": "ccna.ssh.practice.case-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Poprawne dane tego konta umożliwiają logowanie przez SSH.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niewłaściwy sekret”: TCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta. W bieżącym przypadku: Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Lookup i test TCP do portu SSH przechodzą z właściwego źródła.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Osiągalność management”: SSH działa z sąsiedniego hosta. Zdalny host nie ma trasy do podsieci management. W bieżącym przypadku: Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.",
+          "id": "B"
+        },
+        {
+          "text_md": "SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „ACL zarządzania”: Access-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane. W bieżącym przypadku: Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.",
+          "feedback_md": "Bez AAA polecenie login local wybiera lokalną bazę kont.\n\n**Rozpoznanie:** Wybrano niewłaściwe źródło uwierzytelniania VTY.\n\n**Działanie:** Ustawić login local na właściwych liniach VTY.\n\n**Sprawdzenie:** Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ssh.practice.case-03.3",
+      "revision": 1,
+      "title": "ACL zarządzania — weryfikacja",
+      "skills": [
+        "ccna.ssh.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Access-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "ACL VTY ogranicza dostęp do sesji zarządzania według źródła.\n\n**Rozpoznanie:** Źródło administratora nie jest dozwolone w ACL VTY.\n\n**Działanie:** Dodać precyzyjny wyjątek dla uprawnionego hosta zgodnie z polityką.\n\n**Sprawdzenie:** SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.",
+      "card_id": "ccna.ssh.practice.case-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.",
+          "feedback_md": "ACL VTY ogranicza dostęp do sesji zarządzania według źródła.\n\n**Rozpoznanie:** Źródło administratora nie jest dozwolone w ACL VTY.\n\n**Działanie:** Dodać precyzyjny wyjątek dla uprawnionego hosta zgodnie z polityką.\n\n**Sprawdzenie:** SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.",
+          "id": "A"
+        },
+        {
+          "text_md": "Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Transport VTY”: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. W bieżącym przypadku: SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.",
+          "id": "B"
+        },
+        {
+          "text_md": "Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak login local”: Lokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone. W bieżącym przypadku: SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.",
+          "id": "C"
+        },
+        {
+          "text_md": "Poprawne dane tego konta umożliwiają logowanie przez SSH.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niewłaściwy sekret”: TCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta. W bieżącym przypadku: SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ssh.practice.case-04.3",
+      "revision": 1,
+      "title": "Brak klucza serwera — weryfikacja",
+      "skills": [
+        "ccna.ssh.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na nowym urządzeniu brak kluczy RSA, a show ip ssh wskazuje nieaktywny serwer; konfiguracja tej wersji wymaga kluczy RSA.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.\n\n**Rozpoznanie:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH.\n\n**Działanie:** Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie:** Show ip ssh potwierdza aktywny serwer SSHv2.",
+      "card_id": "ccna.ssh.practice.case-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak login local”: Lokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone. W bieżącym przypadku: Show ip ssh potwierdza aktywny serwer SSHv2.",
+          "id": "A"
+        },
+        {
+          "text_md": "Show ip ssh potwierdza aktywny serwer SSHv2.",
+          "feedback_md": "Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.\n\n**Rozpoznanie:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH.\n\n**Działanie:** Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie:** Show ip ssh potwierdza aktywny serwer SSHv2.",
+          "id": "B"
+        },
+        {
+          "text_md": "SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „ACL zarządzania”: Access-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane. W bieżącym przypadku: Show ip ssh potwierdza aktywny serwer SSHv2.",
+          "id": "C"
+        },
+        {
+          "text_md": "Poprawne dane tego konta umożliwiają logowanie przez SSH.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niewłaściwy sekret”: TCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta. W bieżącym przypadku: Show ip ssh potwierdza aktywny serwer SSHv2.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ssh.practice.case-05.3",
+      "revision": 1,
+      "title": "Niewłaściwy sekret — weryfikacja",
+      "skills": [
+        "ccna.ssh.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "TCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.\n\n**Rozpoznanie:** Uwierzytelnienie konta nie powiodło się po zestawieniu transportu.\n\n**Działanie:** Zweryfikować nazwę konta i sekret, korzystając z bezpiecznego dostępu administracyjnego.\n\n**Sprawdzenie:** Poprawne dane tego konta umożliwiają logowanie przez SSH.",
+      "card_id": "ccna.ssh.practice.case-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Show ip ssh potwierdza aktywny serwer SSHv2.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak klucza serwera”: Na nowym urządzeniu brak kluczy RSA, a show ip ssh wskazuje nieaktywny serwer; konfiguracja tej wersji wymaga kluczy RSA. W bieżącym przypadku: Poprawne dane tego konta umożliwiają logowanie przez SSH.",
+          "id": "A"
+        },
+        {
+          "text_md": "Lookup i test TCP do portu SSH przechodzą z właściwego źródła.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Osiągalność management”: SSH działa z sąsiedniego hosta. Zdalny host nie ma trasy do podsieci management. W bieżącym przypadku: Poprawne dane tego konta umożliwiają logowanie przez SSH.",
+          "id": "B"
+        },
+        {
+          "text_md": "Poprawne dane tego konta umożliwiają logowanie przez SSH.",
+          "feedback_md": "Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.\n\n**Rozpoznanie:** Uwierzytelnienie konta nie powiodło się po zestawieniu transportu.\n\n**Działanie:** Zweryfikować nazwę konta i sekret, korzystając z bezpiecznego dostępu administracyjnego.\n\n**Sprawdzenie:** Poprawne dane tego konta umożliwiają logowanie przez SSH.",
+          "id": "C"
+        },
+        {
+          "text_md": "SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „ACL zarządzania”: Access-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane. W bieżącym przypadku: Poprawne dane tego konta umożliwiają logowanie przez SSH.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ssh.practice.case-06.3",
+      "revision": 1,
+      "title": "Osiągalność management — weryfikacja",
+      "skills": [
+        "ccna.ssh.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "SSH działa z sąsiedniego hosta. Zdalny host nie ma trasy do podsieci management.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.\n\n**Rozpoznanie:** Brak drogi routowanej do adresu zarządzania.\n\n**Działanie:** Przywrócić wymagany routing między siecią administratora a management.\n\n**Sprawdzenie:** Lookup i test TCP do portu SSH przechodzą z właściwego źródła.",
+      "card_id": "ccna.ssh.practice.case-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Poprawne dane tego konta umożliwiają logowanie przez SSH.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niewłaściwy sekret”: TCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta. W bieżącym przypadku: Lookup i test TCP do portu SSH przechodzą z właściwego źródła.",
+          "id": "A"
+        },
+        {
+          "text_md": "Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Transport VTY”: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. W bieżącym przypadku: Lookup i test TCP do portu SSH przechodzą z właściwego źródła.",
+          "id": "B"
+        },
+        {
+          "text_md": "Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak login local”: Lokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone. W bieżącym przypadku: Lookup i test TCP do portu SSH przechodzą z właściwego źródła.",
+          "id": "C"
+        },
+        {
+          "text_md": "Lookup i test TCP do portu SSH przechodzą z właściwego źródła.",
+          "feedback_md": "Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.\n\n**Rozpoznanie:** Brak drogi routowanej do adresu zarządzania.\n\n**Działanie:** Przywrócić wymagany routing między siecią administratora a management.\n\n**Sprawdzenie:** Lookup i test TCP do portu SSH przechodzą z właściwego źródła.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

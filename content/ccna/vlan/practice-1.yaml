@@ -1,0 +1,1365 @@
+{
+  "schema_version": 3,
+  "id": "ccna.vlan.practice-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Brak lokalnego VLAN — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.case-01.1.card",
+      "front_md": "Gi1/0/3 ma access VLAN 30, lecz VLAN 30 nie istnieje w lokalnej bazie; port nie przenosi ruchu użytkownika.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Samo przypisanie access VLAN nie zastępuje obecności aktywnego VLAN w bazie.\n\n**Rozpoznanie:** Przypisano port do nieistniejącego lokalnie VLAN.\n\n**Działanie:** Utworzyć VLAN 30 i sprawdzić jego aktywny stan.\n\n**Sprawdzenie:** Show vlan brief zawiera aktywny VLAN 30 i port klienta.",
+      "example": "Przypisano port do nieistniejącego lokalnie VLAN."
+    },
+    {
+      "revision": 1,
+      "title": "Access w złej sieci — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.case-02.1.card",
+      "front_md": "PC ma adresację VLAN 20, lecz jego port access jest w VLAN 10. Inne hosty VLAN 20 działają.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Adres IP hosta nie przypisuje automatycznie portu switcha do właściwego VLAN.\n\n**Rozpoznanie:** Port klienta należy do innej domeny L2 niż jego brama.\n\n**Działanie:** Przypisać port klienta do VLAN 20 zgodnie z dokumentacją.\n\n**Sprawdzenie:** MAC klienta pojawia się w VLAN 20 i klient rozwiązuje ARP swojej bramy.",
+      "example": "Port klienta należy do innej domeny L2 niż jego brama."
+    },
+    {
+      "revision": 1,
+      "title": "Allowed po jednym końcu — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.case-03.1.card",
+      "front_md": "Trunk SW1–SW2 jest up. VLAN 10 działa, VLAN 20 nie; SW1 dopuszcza 10,20, SW2 tylko 10.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Transport VLAN wymaga zgodnego dopuszczenia na całej ścieżce.\n\n**Rozpoznanie:** VLAN 20 jest wykluczony z listy allowed na SW2.\n\n**Działanie:** Dodać VLAN 20 do listy SW2 bez usuwania VLAN 10.\n\n**Sprawdzenie:** Oba końce trunku dopuszczają VLAN 20 i kontrolny ruch tego VLAN przechodzi.",
+      "example": "VLAN 20 jest wykluczony z listy allowed na SW2."
+    },
+    {
+      "revision": 1,
+      "title": "Nadpisana lista — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.case-04.1.card",
+      "front_md": "Na trunku były VLAN 10,20. Komenda switchport trunk allowed vlan 30 spowodowała utratę 10 i 20.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Allowed vlan bez add ustawia nową listę, co może usunąć dotychczasowe usługi.\n\n**Rozpoznanie:** Polecenie zastąpiło listę zamiast dopisać element.\n\n**Działanie:** Przywrócić zatwierdzoną listę 10,20,30 i używać add dla kolejnych dopisań.\n\n**Sprawdzenie:** Show interfaces trunk pokazuje wszystkie trzy zamierzone VLAN.",
+      "example": "Polecenie zastąpiło listę zamiast dopisać element."
+    },
+    {
+      "revision": 1,
+      "title": "Native mismatch — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.case-05.1.card",
+      "front_md": "SW1 ma native VLAN 99, SW2 native 1. Zwykłe tagowanie native jest wyłączone; ruch untagged trafia do różnych VLAN.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Native VLAN definiuje domyślne przypisanie nietagowanego ruchu na trunku 802.1Q.\n\n**Rozpoznanie:** Końce trunku inaczej klasyfikują nietagowane ramki.\n\n**Działanie:** Ujednolicić native VLAN według projektu na obu końcach.\n\n**Sprawdzenie:** Oba końce pokazują ten sam native i znika niezgodna klasyfikacja untagged.",
+      "example": "Końce trunku inaczej klasyfikują nietagowane ramki."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa auto — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.case-06.1.card",
+      "front_md": "Oba końce wspierają DTP i są w dynamic auto. Link fizyczny działa, lecz trunk nie powstaje.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Dwa dynamic auto nie zapewniają utworzenia trunku.\n\n**Rozpoznanie:** Żadna strona nie inicjuje negocjacji trunku.\n\n**Działanie:** Ustawić jawny trunk zgodnie z projektem po obu stronach.\n\n**Sprawdzenie:** Operational mode wskazuje trunk na obu końcach.",
+      "example": "Żadna strona nie inicjuje negocjacji trunku."
+    },
+    {
+      "revision": 1,
+      "title": "Urządzenie bez DTP — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-07",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.case-07.1.card",
+      "front_md": "Switch ma dynamic auto, a firewall nie obsługuje DTP. Usługa wymaga tagowanych VLAN.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Trunk do urządzenia bez DTP trzeba skonfigurować jawnie.\n\n**Rozpoznanie:** Nie ma partnera inicjującego negocjację DTP.\n\n**Działanie:** Ustawić statyczny trunk i właściwe tagowanie po stronie firewalla.\n\n**Sprawdzenie:** Tagowany ruch wymaganych VLAN przechodzi przez połączenie.",
+      "example": "Nie ma partnera inicjującego negocjację DTP."
+    },
+    {
+      "revision": 1,
+      "title": "VLAN na środku drogi — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-08",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.case-08.1.card",
+      "front_md": "SW1 i SW3 mają VLAN 40, ale pośredni SW2 nie ma go w bazie. Listy allowed na łączach obejmują 40.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Lista allowed i obecność VLAN w bazie są odrębnymi warunkami.\n\n**Rozpoznanie:** Pośredni switch nie ma aktywnego VLAN dla transportowanej usługi.\n\n**Działanie:** Utworzyć VLAN 40 na SW2 zgodnie z trybem zarządzania VLAN.\n\n**Sprawdzenie:** VLAN 40 jest aktywny na każdym switchu ścieżki.",
+      "example": "Pośredni switch nie ma aktywnego VLAN dla transportowanej usługi."
+    },
+    {
+      "revision": 1,
+      "title": "STP tylko jednego VLAN — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-09",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.case-09.1.card",
+      "front_md": "Trunk dopuszcza VLAN 10 i 20. Dla VLAN 20 ten port jest blocking, dla 10 forwarding; istnieje inna poprawna droga 20.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Stan trunku nie oznacza identycznego stanu STP dla wszystkich VLAN.\n\n**Rozpoznanie:** STP wybiera różne ścieżki dla różnych instancji VLAN.\n\n**Działanie:** Sprawdzić aktywną drogę VLAN 20 zamiast wymuszać forwarding na blokowanym porcie.\n\n**Sprawdzenie:** VLAN 20 dociera po swojej aktywnej bezpętlowej ścieżce.",
+      "example": "STP wybiera różne ścieżki dla różnych instancji VLAN."
+    },
+    {
+      "revision": 1,
+      "title": "SVI bez aktywnego portu — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-10",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.case-10.1.card",
+      "front_md": "Vlan50 istnieje i SVI ma no shutdown, lecz żaden port warstwy drugiej tego VLAN nie jest aktywny w forwarding. Obowiązuje standardowe autostate.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Stan SVI zależy od stanu odpowiadającej domeny L2, nie tylko no shutdown.\n\n**Rozpoznanie:** Brakuje aktywnej podstawy L2 wymaganej do podniesienia SVI.\n\n**Działanie:** Zapewnić poprawnie działający port lub trunk przenoszący VLAN 50.\n\n**Sprawdzenie:** SVI osiąga up/up po spełnieniu warunków aktywnego VLAN.",
+      "example": "Brakuje aktywnej podstawy L2 wymaganej do podniesienia SVI."
+    },
+    {
+      "revision": 1,
+      "title": "Routing wyłączony — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-11",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.case-11.1.card",
+      "front_md": "Switch L3 ma dwa działające SVI, lecz ip routing jest wyłączone. Hosty osiągają własne bramy, ale nie drugi VLAN.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "VLAN-y rozdzielają L2, a komunikacja między nimi wymaga funkcji L3.\n\n**Rozpoznanie:** Switch nie przekazuje routowanego ruchu między SVI.\n\n**Działanie:** Włączyć routing IP zgodnie z projektem i sprawdzić polityki dostępu.\n\n**Sprawdzenie:** Hosty komunikują się między podsieciami przez właściwe SVI.",
+      "example": "Switch nie przekazuje routowanego ruchu między SVI."
+    },
+    {
+      "revision": 1,
+      "title": "Router-on-a-stick tag — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-12",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.case-12.1.card",
+      "front_md": "Subinterfejs routera ma encapsulation dot1Q 30, lecz hosty są w VLAN 20 i oczekują tej bramy.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Numer subinterfejsu jest nazwą lokalną; o tagu decyduje encapsulation dot1Q.\n\n**Rozpoznanie:** Subinterfejs obsługuje inny tag niż segment klienta.\n\n**Działanie:** Uzgodnić identyfikator dot1Q subinterfejsu z właściwym VLAN 20.\n\n**Sprawdzenie:** Ramki VLAN 20 trafiają do właściwej bramy subinterfejsu.",
+      "example": "Subinterfejs obsługuje inny tag niż segment klienta."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.vlan.practice.case-01.1",
+      "revision": 1,
+      "title": "Brak lokalnego VLAN — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Gi1/0/3 ma access VLAN 30, lecz VLAN 30 nie istnieje w lokalnej bazie; port nie przenosi ruchu użytkownika.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Samo przypisanie access VLAN nie zastępuje obecności aktywnego VLAN w bazie.\n\n**Rozpoznanie:** Przypisano port do nieistniejącego lokalnie VLAN.\n\n**Działanie:** Utworzyć VLAN 30 i sprawdzić jego aktywny stan.\n\n**Sprawdzenie:** Show vlan brief zawiera aktywny VLAN 30 i port klienta.",
+      "card_id": "ccna.vlan.practice.case-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Przypisano port do nieistniejącego lokalnie VLAN.",
+          "feedback_md": "Samo przypisanie access VLAN nie zastępuje obecności aktywnego VLAN w bazie.\n\n**Rozpoznanie:** Przypisano port do nieistniejącego lokalnie VLAN.\n\n**Działanie:** Utworzyć VLAN 30 i sprawdzić jego aktywny stan.\n\n**Sprawdzenie:** Show vlan brief zawiera aktywny VLAN 30 i port klienta.",
+          "id": "A"
+        },
+        {
+          "text_md": "Subinterfejs obsługuje inny tag niż segment klienta.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Router-on-a-stick tag”: Subinterfejs routera ma encapsulation dot1Q 30, lecz hosty są w VLAN 20 i oczekują tej bramy. W bieżącym przypadku: Przypisano port do nieistniejącego lokalnie VLAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "STP wybiera różne ścieżki dla różnych instancji VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „STP tylko jednego VLAN”: Trunk dopuszcza VLAN 10 i 20. Dla VLAN 20 ten port jest blocking, dla 10 forwarding; istnieje inna poprawna droga 20. W bieżącym przypadku: Przypisano port do nieistniejącego lokalnie VLAN.",
+          "id": "C"
+        },
+        {
+          "text_md": "Proponowane polecenie zachowałoby tylko VLAN przeznaczony do usunięcia.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Lista remove”: Trzeba usunąć tylko VLAN 30 z trunku, zachowując 10,20,40. Operator proponuje ustawić listę na 30. W bieżącym przypadku: Przypisano port do nieistniejącego lokalnie VLAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.vlan.practice.case-02.1",
+      "revision": 1,
+      "title": "Access w złej sieci — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "PC ma adresację VLAN 20, lecz jego port access jest w VLAN 10. Inne hosty VLAN 20 działają.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Adres IP hosta nie przypisuje automatycznie portu switcha do właściwego VLAN.\n\n**Rozpoznanie:** Port klienta należy do innej domeny L2 niż jego brama.\n\n**Działanie:** Przypisać port klienta do VLAN 20 zgodnie z dokumentacją.\n\n**Sprawdzenie:** MAC klienta pojawia się w VLAN 20 i klient rozwiązuje ARP swojej bramy.",
+      "card_id": "ccna.vlan.practice.case-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Pośredni switch nie ma aktywnego VLAN dla transportowanej usługi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „VLAN na środku drogi”: SW1 i SW3 mają VLAN 40, ale pośredni SW2 nie ma go w bazie. Listy allowed na łączach obejmują 40. W bieżącym przypadku: Port klienta należy do innej domeny L2 niż jego brama.",
+          "id": "A"
+        },
+        {
+          "text_md": "Port klienta należy do innej domeny L2 niż jego brama.",
+          "feedback_md": "Adres IP hosta nie przypisuje automatycznie portu switcha do właściwego VLAN.\n\n**Rozpoznanie:** Port klienta należy do innej domeny L2 niż jego brama.\n\n**Działanie:** Przypisać port klienta do VLAN 20 zgodnie z dokumentacją.\n\n**Sprawdzenie:** MAC klienta pojawia się w VLAN 20 i klient rozwiązuje ARP swojej bramy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Potwierdzono tylko wejściową ścieżkę L2 hosta.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „MAC we właściwym VLAN”: Host wysyła ramki, a jego MAC jest uczony w VLAN 70 na oczekiwanym porcie. Brak jeszcze dowodu osiągalności bramy. W bieżącym przypadku: Port klienta należy do innej domeny L2 niż jego brama.",
+          "id": "C"
+        },
+        {
+          "text_md": "VLAN 20 jest wykluczony z listy allowed na SW2.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Allowed po jednym końcu”: Trunk SW1–SW2 jest up. VLAN 10 działa, VLAN 20 nie; SW1 dopuszcza 10,20, SW2 tylko 10. W bieżącym przypadku: Port klienta należy do innej domeny L2 niż jego brama.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.vlan.practice.case-03.1",
+      "revision": 1,
+      "title": "Allowed po jednym końcu — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Trunk SW1–SW2 jest up. VLAN 10 działa, VLAN 20 nie; SW1 dopuszcza 10,20, SW2 tylko 10.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Transport VLAN wymaga zgodnego dopuszczenia na całej ścieżce.\n\n**Rozpoznanie:** VLAN 20 jest wykluczony z listy allowed na SW2.\n\n**Działanie:** Dodać VLAN 20 do listy SW2 bez usuwania VLAN 10.\n\n**Sprawdzenie:** Oba końce trunku dopuszczają VLAN 20 i kontrolny ruch tego VLAN przechodzi.",
+      "card_id": "ccna.vlan.practice.case-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłączony interfejs nadrzędny odcina wszystkie subinterfejsy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Parent shutdown”: Subinterfejsy routera mają adresy i tagi, ale fizyczny interfejs rodzic jest administracyjnie wyłączony. W bieżącym przypadku: VLAN 20 jest wykluczony z listy allowed na SW2.",
+          "id": "A"
+        },
+        {
+          "text_md": "Końce trunku inaczej klasyfikują nietagowane ramki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Native mismatch”: SW1 ma native VLAN 99, SW2 native 1. Zwykłe tagowanie native jest wyłączone; ruch untagged trafia do różnych VLAN. W bieżącym przypadku: VLAN 20 jest wykluczony z listy allowed na SW2.",
+          "id": "B"
+        },
+        {
+          "text_md": "VLAN 20 jest wykluczony z listy allowed na SW2.",
+          "feedback_md": "Transport VLAN wymaga zgodnego dopuszczenia na całej ścieżce.\n\n**Rozpoznanie:** VLAN 20 jest wykluczony z listy allowed na SW2.\n\n**Działanie:** Dodać VLAN 20 do listy SW2 bez usuwania VLAN 10.\n\n**Sprawdzenie:** Oba końce trunku dopuszczają VLAN 20 i kontrolny ruch tego VLAN przechodzi.",
+          "id": "C"
+        },
+        {
+          "text_md": "Separacja L2 nie jest równoznaczna z zakazem routingu L3.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak izolacji security”: Hosty są w osobnych VLAN, ale router bez ACL routuje między nimi. Operator oczekiwał całkowitej blokady. W bieżącym przypadku: VLAN 20 jest wykluczony z listy allowed na SW2.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.vlan.practice.case-04.1",
+      "revision": 1,
+      "title": "Nadpisana lista — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Na trunku były VLAN 10,20. Komenda switchport trunk allowed vlan 30 spowodowała utratę 10 i 20.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Allowed vlan bez add ustawia nową listę, co może usunąć dotychczasowe usługi.\n\n**Rozpoznanie:** Polecenie zastąpiło listę zamiast dopisać element.\n\n**Działanie:** Przywrócić zatwierdzoną listę 10,20,30 i używać add dla kolejnych dopisań.\n\n**Sprawdzenie:** Show interfaces trunk pokazuje wszystkie trzy zamierzone VLAN.",
+      "card_id": "ccna.vlan.practice.case-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "VLAN 20 jest wykluczony z listy allowed na SW2.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Allowed po jednym końcu”: Trunk SW1–SW2 jest up. VLAN 10 działa, VLAN 20 nie; SW1 dopuszcza 10,20, SW2 tylko 10. W bieżącym przypadku: Polecenie zastąpiło listę zamiast dopisać element.",
+          "id": "A"
+        },
+        {
+          "text_md": "Brakuje aktywnej podstawy L2 wymaganej do podniesienia SVI.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SVI bez aktywnego portu”: Vlan50 istnieje i SVI ma no shutdown, lecz żaden port warstwy drugiej tego VLAN nie jest aktywny w forwarding. Obowiązuje standardowe autostate. W bieżącym przypadku: Polecenie zastąpiło listę zamiast dopisać element.",
+          "id": "B"
+        },
+        {
+          "text_md": "Potwierdzono tylko wejściową ścieżkę L2 hosta.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „MAC we właściwym VLAN”: Host wysyła ramki, a jego MAC jest uczony w VLAN 70 na oczekiwanym porcie. Brak jeszcze dowodu osiągalności bramy. W bieżącym przypadku: Polecenie zastąpiło listę zamiast dopisać element.",
+          "id": "C"
+        },
+        {
+          "text_md": "Polecenie zastąpiło listę zamiast dopisać element.",
+          "feedback_md": "Allowed vlan bez add ustawia nową listę, co może usunąć dotychczasowe usługi.\n\n**Rozpoznanie:** Polecenie zastąpiło listę zamiast dopisać element.\n\n**Działanie:** Przywrócić zatwierdzoną listę 10,20,30 i używać add dla kolejnych dopisań.\n\n**Sprawdzenie:** Show interfaces trunk pokazuje wszystkie trzy zamierzone VLAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.vlan.practice.case-05.1",
+      "revision": 1,
+      "title": "Native mismatch — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "SW1 ma native VLAN 99, SW2 native 1. Zwykłe tagowanie native jest wyłączone; ruch untagged trafia do różnych VLAN.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Native VLAN definiuje domyślne przypisanie nietagowanego ruchu na trunku 802.1Q.\n\n**Rozpoznanie:** Końce trunku inaczej klasyfikują nietagowane ramki.\n\n**Działanie:** Ujednolicić native VLAN według projektu na obu końcach.\n\n**Sprawdzenie:** Oba końce pokazują ten sam native i znika niezgodna klasyfikacja untagged.",
+      "card_id": "ccna.vlan.practice.case-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Końce trunku inaczej klasyfikują nietagowane ramki.",
+          "feedback_md": "Native VLAN definiuje domyślne przypisanie nietagowanego ruchu na trunku 802.1Q.\n\n**Rozpoznanie:** Końce trunku inaczej klasyfikują nietagowane ramki.\n\n**Działanie:** Ujednolicić native VLAN według projektu na obu końcach.\n\n**Sprawdzenie:** Oba końce pokazują ten sam native i znika niezgodna klasyfikacja untagged.",
+          "id": "A"
+        },
+        {
+          "text_md": "Proponowane polecenie zachowałoby tylko VLAN przeznaczony do usunięcia.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Lista remove”: Trzeba usunąć tylko VLAN 30 z trunku, zachowując 10,20,40. Operator proponuje ustawić listę na 30. W bieżącym przypadku: Końce trunku inaczej klasyfikują nietagowane ramki.",
+          "id": "B"
+        },
+        {
+          "text_md": "Pośredni switch nie ma aktywnego VLAN dla transportowanej usługi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „VLAN na środku drogi”: SW1 i SW3 mają VLAN 40, ale pośredni SW2 nie ma go w bazie. Listy allowed na łączach obejmują 40. W bieżącym przypadku: Końce trunku inaczej klasyfikują nietagowane ramki.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zmieniono standardowe zachowanie nietagowanego native przez konfigurację.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Native oznaczony tagiem”: Oba końce wdrożenia mają jawnie włączone tagowanie native VLAN i zgodne oczekiwania. Capture pokazuje tag także dla native. W bieżącym przypadku: Końce trunku inaczej klasyfikują nietagowane ramki.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.vlan.practice.case-06.1",
+      "revision": 1,
+      "title": "Dwa auto — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Oba końce wspierają DTP i są w dynamic auto. Link fizyczny działa, lecz trunk nie powstaje.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Dwa dynamic auto nie zapewniają utworzenia trunku.\n\n**Rozpoznanie:** Żadna strona nie inicjuje negocjacji trunku.\n\n**Działanie:** Ustawić jawny trunk zgodnie z projektem po obu stronach.\n\n**Sprawdzenie:** Operational mode wskazuje trunk na obu końcach.",
+      "card_id": "ccna.vlan.practice.case-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Końce łącza mają niezgodne role dla transportu wielu VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Jedna strona access”: SW1 jest trunk, SW2 access VLAN 10. Wymagany VLAN 20 nie działa między switchami. W bieżącym przypadku: Żadna strona nie inicjuje negocjacji trunku.",
+          "id": "A"
+        },
+        {
+          "text_md": "Żadna strona nie inicjuje negocjacji trunku.",
+          "feedback_md": "Dwa dynamic auto nie zapewniają utworzenia trunku.\n\n**Rozpoznanie:** Żadna strona nie inicjuje negocjacji trunku.\n\n**Działanie:** Ustawić jawny trunk zgodnie z projektem po obu stronach.\n\n**Sprawdzenie:** Operational mode wskazuje trunk na obu końcach.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zmieniono standardowe zachowanie nietagowanego native przez konfigurację.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Native oznaczony tagiem”: Oba końce wdrożenia mają jawnie włączone tagowanie native VLAN i zgodne oczekiwania. Capture pokazuje tag także dla native. W bieżącym przypadku: Żadna strona nie inicjuje negocjacji trunku.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nie skonfigurowano wymaganej obsługi voice VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Voice i data”: Telefon ma tagować głos VLAN 30, komputer za nim wysyła untagged dane VLAN 20. Port ma tylko access VLAN 20 bez konfiguracji voice. W bieżącym przypadku: Żadna strona nie inicjuje negocjacji trunku.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.vlan.practice.case-07.1",
+      "revision": 1,
+      "title": "Urządzenie bez DTP — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-07",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Switch ma dynamic auto, a firewall nie obsługuje DTP. Usługa wymaga tagowanych VLAN.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Trunk do urządzenia bez DTP trzeba skonfigurować jawnie.\n\n**Rozpoznanie:** Nie ma partnera inicjującego negocjację DTP.\n\n**Działanie:** Ustawić statyczny trunk i właściwe tagowanie po stronie firewalla.\n\n**Sprawdzenie:** Tagowany ruch wymaganych VLAN przechodzi przez połączenie.",
+      "card_id": "ccna.vlan.practice.case-07.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Mechanizm pruning ograniczył zalewanie tego VLAN na łączu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Pruning”: VLAN jest aktywny i allowed, ale w środowisku z VTP pruning został wycięty na badanym trunku. W bieżącym przypadku: Nie ma partnera inicjującego negocjację DTP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Końce łącza mają niezgodne role dla transportu wielu VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Jedna strona access”: SW1 jest trunk, SW2 access VLAN 10. Wymagany VLAN 20 nie działa między switchami. W bieżącym przypadku: Nie ma partnera inicjującego negocjację DTP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie ma partnera inicjującego negocjację DTP.",
+          "feedback_md": "Trunk do urządzenia bez DTP trzeba skonfigurować jawnie.\n\n**Rozpoznanie:** Nie ma partnera inicjującego negocjację DTP.\n\n**Działanie:** Ustawić statyczny trunk i właściwe tagowanie po stronie firewalla.\n\n**Sprawdzenie:** Tagowany ruch wymaganych VLAN przechodzi przez połączenie.",
+          "id": "C"
+        },
+        {
+          "text_md": "VLAN 20 jest wykluczony z listy allowed na SW2.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Allowed po jednym końcu”: Trunk SW1–SW2 jest up. VLAN 10 działa, VLAN 20 nie; SW1 dopuszcza 10,20, SW2 tylko 10. W bieżącym przypadku: Nie ma partnera inicjującego negocjację DTP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.vlan.practice.case-08.1",
+      "revision": 1,
+      "title": "VLAN na środku drogi — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-08",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "SW1 i SW3 mają VLAN 40, ale pośredni SW2 nie ma go w bazie. Listy allowed na łączach obejmują 40.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Lista allowed i obecność VLAN w bazie są odrębnymi warunkami.\n\n**Rozpoznanie:** Pośredni switch nie ma aktywnego VLAN dla transportowanej usługi.\n\n**Działanie:** Utworzyć VLAN 40 na SW2 zgodnie z trybem zarządzania VLAN.\n\n**Sprawdzenie:** VLAN 40 jest aktywny na każdym switchu ścieżki.",
+      "card_id": "ccna.vlan.practice.case-08.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Końce trunku inaczej klasyfikują nietagowane ramki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Native mismatch”: SW1 ma native VLAN 99, SW2 native 1. Zwykłe tagowanie native jest wyłączone; ruch untagged trafia do różnych VLAN. W bieżącym przypadku: Pośredni switch nie ma aktywnego VLAN dla transportowanej usługi.",
+          "id": "A"
+        },
+        {
+          "text_md": "Mechanizm pruning ograniczył zalewanie tego VLAN na łączu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Pruning”: VLAN jest aktywny i allowed, ale w środowisku z VTP pruning został wycięty na badanym trunku. W bieżącym przypadku: Pośredni switch nie ma aktywnego VLAN dla transportowanej usługi.",
+          "id": "B"
+        },
+        {
+          "text_md": "Proponowane polecenie zachowałoby tylko VLAN przeznaczony do usunięcia.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Lista remove”: Trzeba usunąć tylko VLAN 30 z trunku, zachowując 10,20,40. Operator proponuje ustawić listę na 30. W bieżącym przypadku: Pośredni switch nie ma aktywnego VLAN dla transportowanej usługi.",
+          "id": "C"
+        },
+        {
+          "text_md": "Pośredni switch nie ma aktywnego VLAN dla transportowanej usługi.",
+          "feedback_md": "Lista allowed i obecność VLAN w bazie są odrębnymi warunkami.\n\n**Rozpoznanie:** Pośredni switch nie ma aktywnego VLAN dla transportowanej usługi.\n\n**Działanie:** Utworzyć VLAN 40 na SW2 zgodnie z trybem zarządzania VLAN.\n\n**Sprawdzenie:** VLAN 40 jest aktywny na każdym switchu ścieżki.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.vlan.practice.case-09.1",
+      "revision": 1,
+      "title": "STP tylko jednego VLAN — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-09",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Trunk dopuszcza VLAN 10 i 20. Dla VLAN 20 ten port jest blocking, dla 10 forwarding; istnieje inna poprawna droga 20.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Stan trunku nie oznacza identycznego stanu STP dla wszystkich VLAN.\n\n**Rozpoznanie:** STP wybiera różne ścieżki dla różnych instancji VLAN.\n\n**Działanie:** Sprawdzić aktywną drogę VLAN 20 zamiast wymuszać forwarding na blokowanym porcie.\n\n**Sprawdzenie:** VLAN 20 dociera po swojej aktywnej bezpętlowej ścieżce.",
+      "card_id": "ccna.vlan.practice.case-09.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "STP wybiera różne ścieżki dla różnych instancji VLAN.",
+          "feedback_md": "Stan trunku nie oznacza identycznego stanu STP dla wszystkich VLAN.\n\n**Rozpoznanie:** STP wybiera różne ścieżki dla różnych instancji VLAN.\n\n**Działanie:** Sprawdzić aktywną drogę VLAN 20 zamiast wymuszać forwarding na blokowanym porcie.\n\n**Sprawdzenie:** VLAN 20 dociera po swojej aktywnej bezpętlowej ścieżce.",
+          "id": "A"
+        },
+        {
+          "text_md": "Proponowane polecenie zachowałoby tylko VLAN przeznaczony do usunięcia.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Lista remove”: Trzeba usunąć tylko VLAN 30 z trunku, zachowując 10,20,40. Operator proponuje ustawić listę na 30. W bieżącym przypadku: STP wybiera różne ścieżki dla różnych instancji VLAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "Brakuje aktywnej podstawy L2 wymaganej do podniesienia SVI.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SVI bez aktywnego portu”: Vlan50 istnieje i SVI ma no shutdown, lecz żaden port warstwy drugiej tego VLAN nie jest aktywny w forwarding. Obowiązuje standardowe autostate. W bieżącym przypadku: STP wybiera różne ścieżki dla różnych instancji VLAN.",
+          "id": "C"
+        },
+        {
+          "text_md": "VLAN 20 jest wykluczony z listy allowed na SW2.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Allowed po jednym końcu”: Trunk SW1–SW2 jest up. VLAN 10 działa, VLAN 20 nie; SW1 dopuszcza 10,20, SW2 tylko 10. W bieżącym przypadku: STP wybiera różne ścieżki dla różnych instancji VLAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.vlan.practice.case-10.1",
+      "revision": 1,
+      "title": "SVI bez aktywnego portu — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-10",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Vlan50 istnieje i SVI ma no shutdown, lecz żaden port warstwy drugiej tego VLAN nie jest aktywny w forwarding. Obowiązuje standardowe autostate.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Stan SVI zależy od stanu odpowiadającej domeny L2, nie tylko no shutdown.\n\n**Rozpoznanie:** Brakuje aktywnej podstawy L2 wymaganej do podniesienia SVI.\n\n**Działanie:** Zapewnić poprawnie działający port lub trunk przenoszący VLAN 50.\n\n**Sprawdzenie:** SVI osiąga up/up po spełnieniu warunków aktywnego VLAN.",
+      "card_id": "ccna.vlan.practice.case-10.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyłączony interfejs nadrzędny odcina wszystkie subinterfejsy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Parent shutdown”: Subinterfejsy routera mają adresy i tagi, ale fizyczny interfejs rodzic jest administracyjnie wyłączony. W bieżącym przypadku: Brakuje aktywnej podstawy L2 wymaganej do podniesienia SVI.",
+          "id": "A"
+        },
+        {
+          "text_md": "Brakuje aktywnej podstawy L2 wymaganej do podniesienia SVI.",
+          "feedback_md": "Stan SVI zależy od stanu odpowiadającej domeny L2, nie tylko no shutdown.\n\n**Rozpoznanie:** Brakuje aktywnej podstawy L2 wymaganej do podniesienia SVI.\n\n**Działanie:** Zapewnić poprawnie działający port lub trunk przenoszący VLAN 50.\n\n**Sprawdzenie:** SVI osiąga up/up po spełnieniu warunków aktywnego VLAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "Host wskazuje bramę innej podsieci mimo poprawnej warstwy drugiej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła brama hosta”: Port i trunki VLAN 60 działają. Host 10.60.0.10/24 ma bramę 10.50.0.1, a SVI VLAN 60 ma 10.60.0.1. W bieżącym przypadku: Brakuje aktywnej podstawy L2 wymaganej do podniesienia SVI.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wspólna adresacja nie scala rozdzielonych domen L2.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Podsieć w dwóch VLAN”: Dwa hosty 192.168.1.10/24 i .20/24 są w różnych izolowanych VLAN bez mostkowania. Próbują ARP bez bramy. W bieżącym przypadku: Brakuje aktywnej podstawy L2 wymaganej do podniesienia SVI.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.vlan.practice.case-11.1",
+      "revision": 1,
+      "title": "Routing wyłączony — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-11",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Switch L3 ma dwa działające SVI, lecz ip routing jest wyłączone. Hosty osiągają własne bramy, ale nie drugi VLAN.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "VLAN-y rozdzielają L2, a komunikacja między nimi wymaga funkcji L3.\n\n**Rozpoznanie:** Switch nie przekazuje routowanego ruchu między SVI.\n\n**Działanie:** Włączyć routing IP zgodnie z projektem i sprawdzić polityki dostępu.\n\n**Sprawdzenie:** Hosty komunikują się między podsieciami przez właściwe SVI.",
+      "card_id": "ccna.vlan.practice.case-11.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Port klienta należy do innej domeny L2 niż jego brama.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Access w złej sieci”: PC ma adresację VLAN 20, lecz jego port access jest w VLAN 10. Inne hosty VLAN 20 działają. W bieżącym przypadku: Switch nie przekazuje routowanego ruchu między SVI.",
+          "id": "A"
+        },
+        {
+          "text_md": "Proponowane polecenie zachowałoby tylko VLAN przeznaczony do usunięcia.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Lista remove”: Trzeba usunąć tylko VLAN 30 z trunku, zachowując 10,20,40. Operator proponuje ustawić listę na 30. W bieżącym przypadku: Switch nie przekazuje routowanego ruchu między SVI.",
+          "id": "B"
+        },
+        {
+          "text_md": "Switch nie przekazuje routowanego ruchu między SVI.",
+          "feedback_md": "VLAN-y rozdzielają L2, a komunikacja między nimi wymaga funkcji L3.\n\n**Rozpoznanie:** Switch nie przekazuje routowanego ruchu między SVI.\n\n**Działanie:** Włączyć routing IP zgodnie z projektem i sprawdzić polityki dostępu.\n\n**Sprawdzenie:** Hosty komunikują się między podsieciami przez właściwe SVI.",
+          "id": "C"
+        },
+        {
+          "text_md": "Żadna strona nie inicjuje negocjacji trunku.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Dwa auto”: Oba końce wspierają DTP i są w dynamic auto. Link fizyczny działa, lecz trunk nie powstaje. W bieżącym przypadku: Switch nie przekazuje routowanego ruchu między SVI.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.vlan.practice.case-12.1",
+      "revision": 1,
+      "title": "Router-on-a-stick tag — rozpoznanie",
+      "skills": [
+        "ccna.vlan.case-12",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Subinterfejs routera ma encapsulation dot1Q 30, lecz hosty są w VLAN 20 i oczekują tej bramy.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Numer subinterfejsu jest nazwą lokalną; o tagu decyduje encapsulation dot1Q.\n\n**Rozpoznanie:** Subinterfejs obsługuje inny tag niż segment klienta.\n\n**Działanie:** Uzgodnić identyfikator dot1Q subinterfejsu z właściwym VLAN 20.\n\n**Sprawdzenie:** Ramki VLAN 20 trafiają do właściwej bramy subinterfejsu.",
+      "card_id": "ccna.vlan.practice.case-12.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie skonfigurowano wymaganej obsługi voice VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Voice i data”: Telefon ma tagować głos VLAN 30, komputer za nim wysyła untagged dane VLAN 20. Port ma tylko access VLAN 20 bez konfiguracji voice. W bieżącym przypadku: Subinterfejs obsługuje inny tag niż segment klienta.",
+          "id": "A"
+        },
+        {
+          "text_md": "Port klienta należy do innej domeny L2 niż jego brama.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Access w złej sieci”: PC ma adresację VLAN 20, lecz jego port access jest w VLAN 10. Inne hosty VLAN 20 działają. W bieżącym przypadku: Subinterfejs obsługuje inny tag niż segment klienta.",
+          "id": "B"
+        },
+        {
+          "text_md": "STP wybiera różne ścieżki dla różnych instancji VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „STP tylko jednego VLAN”: Trunk dopuszcza VLAN 10 i 20. Dla VLAN 20 ten port jest blocking, dla 10 forwarding; istnieje inna poprawna droga 20. W bieżącym przypadku: Subinterfejs obsługuje inny tag niż segment klienta.",
+          "id": "C"
+        },
+        {
+          "text_md": "Subinterfejs obsługuje inny tag niż segment klienta.",
+          "feedback_md": "Numer subinterfejsu jest nazwą lokalną; o tagu decyduje encapsulation dot1Q.\n\n**Rozpoznanie:** Subinterfejs obsługuje inny tag niż segment klienta.\n\n**Działanie:** Uzgodnić identyfikator dot1Q subinterfejsu z właściwym VLAN 20.\n\n**Sprawdzenie:** Ramki VLAN 20 trafiają do właściwej bramy subinterfejsu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

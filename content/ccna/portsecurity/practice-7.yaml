@@ -1,0 +1,799 @@
+{
+  "schema_version": 3,
+  "id": "ccna.portsecurity.practice-7",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "id": "ccna.portsecurity.practice.compare-01.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPort z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia.\n\n**Zgłoszenie II**\n\nPo pojawieniu się obcego MAC rośnie licznik violations; port pozostaje up i ruch legalnego MAC działa. Ustawiono restrict.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Dostosować limit i przypisania secure MAC do telefonu oraz komputera.\n\n**Sprawdzenie I:** Oba uprawnione MAC są akceptowane bez nowych violations.\n\n**Zgłoszenie II:** Tryb restrict odrzuca nieuprawnione źródło bez wyłączenia portu. Usunąć lub autoryzować nowe urządzenie według polityki.\n\n**Sprawdzenie II:** Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\n**Zależności:** Limit port-security musi odzwierciedlać rzeczywistą liczbę urządzeń za portem. Restrict różni się od shutdown zakresem reakcji, zachowując port aktywny.",
+      "example": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "id": "ccna.portsecurity.practice.compare-02.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPort-security w trybie shutdown wykryło naruszenie, a port ma secure-shutdown.\n\n**Zgłoszenie II**\n\nPort pamięta sticky MAC starego komputera. Nowy autoryzowany komputer ma inny MAC i jest odrzucany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Naruszenie bezpieczeństwa wyłączyło port. Usunąć przyczynę, a potem przywrócić port zgodnie z procedurą.\n\n**Sprawdzenie I:** Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\n**Zgłoszenie II:** Stary wpis sticky nie odpowiada nowemu urządzeniu. Usunąć właściwy stary wpis i bezpiecznie nauczyć autoryzowany nowy MAC.\n\n**Sprawdzenie II:** Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\n**Zależności:** Samo podniesienie portu bez usunięcia przyczyny może odtworzyć awarię. Sticky utrwala poznane MAC; wymiana urządzenia wymaga kontrolowanej aktualizacji.",
+      "example": "I — Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\nII — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "id": "ccna.portsecurity.practice.compare-03.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPort działa w protect. Obce źródła są odrzucane bez sygnalizacji charakterystycznej dla restrict.\n\n**Zgłoszenie II**\n\nPo nauczeniu sticky MAC administrator nie zapisał konfiguracji; po restarcie wpis nie jest zachowany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Cisza w logach nie wyklucza odrzucania przez protect. Sprawdzić tryb i secure MAC oraz użyć odpowiednich testów ruchu.\n\n**Sprawdzenie I:** Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\n**Zgłoszenie II:** Nauczona konfiguracja nie trafiła do startup-config. Po weryfikacji autoryzowanych wpisów zapisać konfigurację.\n\n**Sprawdzenie II:** Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.\n\n**Zależności:** Tryby naruszeń różnią się także widocznością operacyjną. Uczenie sticky i trwały zapis konfiguracji to osobne kroki.",
+      "example": "I — Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\nII — Zatwierdzone wpisy są obecne w startup-config i przetrwają restart."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "id": "ccna.portsecurity.practice.compare-04.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPort z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia.\n\n**Zgłoszenie II**\n\nPort-security w trybie shutdown wykryło naruszenie, a port ma secure-shutdown.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Dostosować limit i przypisania secure MAC do telefonu oraz komputera.\n\n**Sprawdzenie I:** Oba uprawnione MAC są akceptowane bez nowych violations.\n\n**Zgłoszenie II:** Naruszenie bezpieczeństwa wyłączyło port. Usunąć przyczynę, a potem przywrócić port zgodnie z procedurą.\n\n**Sprawdzenie II:** Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\n**Zależności:** Limit port-security musi odzwierciedlać rzeczywistą liczbę urządzeń za portem. Samo podniesienie portu bez usunięcia przyczyny może odtworzyć awarię.",
+      "example": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Port wraca do pracy bez natychmiastowego ponownego naruszenia."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "id": "ccna.portsecurity.practice.compare-05.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPo pojawieniu się obcego MAC rośnie licznik violations; port pozostaje up i ruch legalnego MAC działa. Ustawiono restrict.\n\n**Zgłoszenie II**\n\nPort działa w protect. Obce źródła są odrzucane bez sygnalizacji charakterystycznej dla restrict.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Tryb restrict odrzuca nieuprawnione źródło bez wyłączenia portu. Usunąć lub autoryzować nowe urządzenie według polityki.\n\n**Sprawdzenie I:** Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\n**Zgłoszenie II:** Cisza w logach nie wyklucza odrzucania przez protect. Sprawdzić tryb i secure MAC oraz użyć odpowiednich testów ruchu.\n\n**Sprawdzenie II:** Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\n**Zależności:** Restrict różni się od shutdown zakresem reakcji, zachowując port aktywny. Tryby naruszeń różnią się także widocznością operacyjną.",
+      "example": "I — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\nII — Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "id": "ccna.portsecurity.practice.compare-06.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPort pamięta sticky MAC starego komputera. Nowy autoryzowany komputer ma inny MAC i jest odrzucany.\n\n**Zgłoszenie II**\n\nPo nauczeniu sticky MAC administrator nie zapisał konfiguracji; po restarcie wpis nie jest zachowany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Stary wpis sticky nie odpowiada nowemu urządzeniu. Usunąć właściwy stary wpis i bezpiecznie nauczyć autoryzowany nowy MAC.\n\n**Sprawdzenie I:** Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\n**Zgłoszenie II:** Nauczona konfiguracja nie trafiła do startup-config. Po weryfikacji autoryzowanych wpisów zapisać konfigurację.\n\n**Sprawdzenie II:** Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.\n\n**Zależności:** Sticky utrwala poznane MAC; wymiana urządzenia wymaga kontrolowanej aktualizacji. Uczenie sticky i trwały zapis konfiguracji to osobne kroki.",
+      "example": "I — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\nII — Zatwierdzone wpisy są obecne w startup-config i przetrwają restart."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "id": "ccna.portsecurity.practice.compare-07.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPort z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia.\n\n**Zgłoszenie II**\n\nPo nauczeniu sticky MAC administrator nie zapisał konfiguracji; po restarcie wpis nie jest zachowany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Dostosować limit i przypisania secure MAC do telefonu oraz komputera.\n\n**Sprawdzenie I:** Oba uprawnione MAC są akceptowane bez nowych violations.\n\n**Zgłoszenie II:** Nauczona konfiguracja nie trafiła do startup-config. Po weryfikacji autoryzowanych wpisów zapisać konfigurację.\n\n**Sprawdzenie II:** Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.\n\n**Zależności:** Limit port-security musi odzwierciedlać rzeczywistą liczbę urządzeń za portem. Uczenie sticky i trwały zapis konfiguracji to osobne kroki.",
+      "example": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Zatwierdzone wpisy są obecne w startup-config i przetrwają restart."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "id": "ccna.portsecurity.practice.compare-08.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPo pojawieniu się obcego MAC rośnie licznik violations; port pozostaje up i ruch legalnego MAC działa. Ustawiono restrict.\n\n**Zgłoszenie II**\n\nPort pamięta sticky MAC starego komputera. Nowy autoryzowany komputer ma inny MAC i jest odrzucany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Tryb restrict odrzuca nieuprawnione źródło bez wyłączenia portu. Usunąć lub autoryzować nowe urządzenie według polityki.\n\n**Sprawdzenie I:** Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\n**Zgłoszenie II:** Stary wpis sticky nie odpowiada nowemu urządzeniu. Usunąć właściwy stary wpis i bezpiecznie nauczyć autoryzowany nowy MAC.\n\n**Sprawdzenie II:** Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\n**Zależności:** Restrict różni się od shutdown zakresem reakcji, zachowując port aktywny. Sticky utrwala poznane MAC; wymiana urządzenia wymaga kontrolowanej aktualizacji.",
+      "example": "I — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\nII — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "id": "ccna.portsecurity.practice.compare-09.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPort-security w trybie shutdown wykryło naruszenie, a port ma secure-shutdown.\n\n**Zgłoszenie II**\n\nPort działa w protect. Obce źródła są odrzucane bez sygnalizacji charakterystycznej dla restrict.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Naruszenie bezpieczeństwa wyłączyło port. Usunąć przyczynę, a potem przywrócić port zgodnie z procedurą.\n\n**Sprawdzenie I:** Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\n**Zgłoszenie II:** Cisza w logach nie wyklucza odrzucania przez protect. Sprawdzić tryb i secure MAC oraz użyć odpowiednich testów ruchu.\n\n**Sprawdzenie II:** Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\n**Zależności:** Samo podniesienie portu bez usunięcia przyczyny może odtworzyć awarię. Tryby naruszeń różnią się także widocznością operacyjną.",
+      "example": "I — Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\nII — Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "id": "ccna.portsecurity.practice.compare-10.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPort z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia.\n\n**Zgłoszenie II**\n\nPort pamięta sticky MAC starego komputera. Nowy autoryzowany komputer ma inny MAC i jest odrzucany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Dostosować limit i przypisania secure MAC do telefonu oraz komputera.\n\n**Sprawdzenie I:** Oba uprawnione MAC są akceptowane bez nowych violations.\n\n**Zgłoszenie II:** Stary wpis sticky nie odpowiada nowemu urządzeniu. Usunąć właściwy stary wpis i bezpiecznie nauczyć autoryzowany nowy MAC.\n\n**Sprawdzenie II:** Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\n**Zależności:** Limit port-security musi odzwierciedlać rzeczywistą liczbę urządzeń za portem. Sticky utrwala poznane MAC; wymiana urządzenia wymaga kontrolowanej aktualizacji.",
+      "example": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.portsecurity.practice.compare-01.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPort z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia.\n\n**Zgłoszenie II**\n\nPo pojawieniu się obcego MAC rośnie licznik violations; port pozostaje up i ruch legalnego MAC działa. Ustawiono restrict.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Dostosować limit i przypisania secure MAC do telefonu oraz komputera.\n\n**Sprawdzenie I:** Oba uprawnione MAC są akceptowane bez nowych violations.\n\n**Zgłoszenie II:** Tryb restrict odrzuca nieuprawnione źródło bez wyłączenia portu. Usunąć lub autoryzować nowe urządzenie według polityki.\n\n**Sprawdzenie II:** Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\n**Zależności:** Limit port-security musi odzwierciedlać rzeczywistą liczbę urządzeń za portem. Restrict różni się od shutdown zakresem reakcji, zachowując port aktywny.",
+      "card_id": "ccna.portsecurity.practice.compare-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\nII — Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Zgłoszenie II: Tryb restrict odrzuca nieuprawnione źródło bez wyłączenia portu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Port wraca do pracy bez natychmiastowego ponownego naruszenia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Port-security w trybie shutdown wykryło naruszenie, a port ma secure-shutdown. Dla II: Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\nII — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Port-security w trybie shutdown wykryło naruszenie, a port ma secure-shutdown. Dla I: Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.",
+          "feedback_md": "**Zgłoszenie I:** Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Dostosować limit i przypisania secure MAC do telefonu oraz komputera.\n\n**Sprawdzenie I:** Oba uprawnione MAC są akceptowane bez nowych violations.\n\n**Zgłoszenie II:** Tryb restrict odrzuca nieuprawnione źródło bez wyłączenia portu. Usunąć lub autoryzować nowe urządzenie według polityki.\n\n**Sprawdzenie II:** Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\n**Zależności:** Limit port-security musi odzwierciedlać rzeczywistą liczbę urządzeń za portem. Restrict różni się od shutdown zakresem reakcji, zachowując port aktywny.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.portsecurity.practice.compare-02.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPort-security w trybie shutdown wykryło naruszenie, a port ma secure-shutdown.\n\n**Zgłoszenie II**\n\nPort pamięta sticky MAC starego komputera. Nowy autoryzowany komputer ma inny MAC i jest odrzucany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Naruszenie bezpieczeństwa wyłączyło port. Usunąć przyczynę, a potem przywrócić port zgodnie z procedurą.\n\n**Sprawdzenie I:** Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\n**Zgłoszenie II:** Stary wpis sticky nie odpowiada nowemu urządzeniu. Usunąć właściwy stary wpis i bezpiecznie nauczyć autoryzowany nowy MAC.\n\n**Sprawdzenie II:** Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\n**Zależności:** Samo podniesienie portu bez usunięcia przyczyny może odtworzyć awarię. Sticky utrwala poznane MAC; wymiana urządzenia wymaga kontrolowanej aktualizacji.",
+      "card_id": "ccna.portsecurity.practice.compare-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\nII — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.",
+          "feedback_md": "**Zgłoszenie I:** Naruszenie bezpieczeństwa wyłączyło port. Usunąć przyczynę, a potem przywrócić port zgodnie z procedurą.\n\n**Sprawdzenie I:** Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\n**Zgłoszenie II:** Stary wpis sticky nie odpowiada nowemu urządzeniu. Usunąć właściwy stary wpis i bezpiecznie nauczyć autoryzowany nowy MAC.\n\n**Sprawdzenie II:** Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\n**Zależności:** Samo podniesienie portu bez usunięcia przyczyny może odtworzyć awarię. Sticky utrwala poznane MAC; wymiana urządzenia wymaga kontrolowanej aktualizacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\nII — Port wraca do pracy bez natychmiastowego ponownego naruszenia.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Naruszenie bezpieczeństwa wyłączyło port. Zgłoszenie II: Stary wpis sticky nie odpowiada nowemu urządzeniu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\nII — Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Port z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia. Dla II: Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Port z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia. Dla I: Port wraca do pracy bez natychmiastowego ponownego naruszenia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.portsecurity.practice.compare-03.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPort działa w protect. Obce źródła są odrzucane bez sygnalizacji charakterystycznej dla restrict.\n\n**Zgłoszenie II**\n\nPo nauczeniu sticky MAC administrator nie zapisał konfiguracji; po restarcie wpis nie jest zachowany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Cisza w logach nie wyklucza odrzucania przez protect. Sprawdzić tryb i secure MAC oraz użyć odpowiednich testów ruchu.\n\n**Sprawdzenie I:** Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\n**Zgłoszenie II:** Nauczona konfiguracja nie trafiła do startup-config. Po weryfikacji autoryzowanych wpisów zapisać konfigurację.\n\n**Sprawdzenie II:** Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.\n\n**Zależności:** Tryby naruszeń różnią się także widocznością operacyjną. Uczenie sticky i trwały zapis konfiguracji to osobne kroki.",
+      "card_id": "ccna.portsecurity.practice.compare-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.\n\nII — Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Cisza w logach nie wyklucza odrzucania przez protect. Zgłoszenie II: Nauczona konfiguracja nie trafiła do startup-config.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\nII — Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.",
+          "feedback_md": "**Zgłoszenie I:** Cisza w logach nie wyklucza odrzucania przez protect. Sprawdzić tryb i secure MAC oraz użyć odpowiednich testów ruchu.\n\n**Sprawdzenie I:** Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\n**Zgłoszenie II:** Nauczona konfiguracja nie trafiła do startup-config. Po weryfikacji autoryzowanych wpisów zapisać konfigurację.\n\n**Sprawdzenie II:** Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.\n\n**Zależności:** Tryby naruszeń różnią się także widocznością operacyjną. Uczenie sticky i trwały zapis konfiguracji to osobne kroki.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\nII — Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Port z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia. Dla II: Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Port z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia. Dla I: Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.portsecurity.practice.compare-04.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPort z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia.\n\n**Zgłoszenie II**\n\nPort-security w trybie shutdown wykryło naruszenie, a port ma secure-shutdown.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Dostosować limit i przypisania secure MAC do telefonu oraz komputera.\n\n**Sprawdzenie I:** Oba uprawnione MAC są akceptowane bez nowych violations.\n\n**Zgłoszenie II:** Naruszenie bezpieczeństwa wyłączyło port. Usunąć przyczynę, a potem przywrócić port zgodnie z procedurą.\n\n**Sprawdzenie II:** Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\n**Zależności:** Limit port-security musi odzwierciedlać rzeczywistą liczbę urządzeń za portem. Samo podniesienie portu bez usunięcia przyczyny może odtworzyć awarię.",
+      "card_id": "ccna.portsecurity.practice.compare-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\nII — Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Zgłoszenie II: Naruszenie bezpieczeństwa wyłączyło port.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Po pojawieniu się obcego MAC rośnie licznik violations; port pozostaje up i ruch legalnego MAC działa. Ustawiono restrict. Dla II: Port wraca do pracy bez natychmiastowego ponownego naruszenia.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Port wraca do pracy bez natychmiastowego ponownego naruszenia.",
+          "feedback_md": "**Zgłoszenie I:** Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Dostosować limit i przypisania secure MAC do telefonu oraz komputera.\n\n**Sprawdzenie I:** Oba uprawnione MAC są akceptowane bez nowych violations.\n\n**Zgłoszenie II:** Naruszenie bezpieczeństwa wyłączyło port. Usunąć przyczynę, a potem przywrócić port zgodnie z procedurą.\n\n**Sprawdzenie II:** Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\n**Zależności:** Limit port-security musi odzwierciedlać rzeczywistą liczbę urządzeń za portem. Samo podniesienie portu bez usunięcia przyczyny może odtworzyć awarię.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\nII — Port wraca do pracy bez natychmiastowego ponownego naruszenia.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Po pojawieniu się obcego MAC rośnie licznik violations; port pozostaje up i ruch legalnego MAC działa. Ustawiono restrict. Dla I: Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.portsecurity.practice.compare-05.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPo pojawieniu się obcego MAC rośnie licznik violations; port pozostaje up i ruch legalnego MAC działa. Ustawiono restrict.\n\n**Zgłoszenie II**\n\nPort działa w protect. Obce źródła są odrzucane bez sygnalizacji charakterystycznej dla restrict.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Tryb restrict odrzuca nieuprawnione źródło bez wyłączenia portu. Usunąć lub autoryzować nowe urządzenie według polityki.\n\n**Sprawdzenie I:** Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\n**Zgłoszenie II:** Cisza w logach nie wyklucza odrzucania przez protect. Sprawdzić tryb i secure MAC oraz użyć odpowiednich testów ruchu.\n\n**Sprawdzenie II:** Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\n**Zależności:** Restrict różni się od shutdown zakresem reakcji, zachowując port aktywny. Tryby naruszeń różnią się także widocznością operacyjną.",
+      "card_id": "ccna.portsecurity.practice.compare-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\nII — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Tryb restrict odrzuca nieuprawnione źródło bez wyłączenia portu. Zgłoszenie II: Cisza w logach nie wyklucza odrzucania przez protect.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\nII — Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Port z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia. Dla II: Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Port z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia. Dla I: Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\nII — Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.",
+          "feedback_md": "**Zgłoszenie I:** Tryb restrict odrzuca nieuprawnione źródło bez wyłączenia portu. Usunąć lub autoryzować nowe urządzenie według polityki.\n\n**Sprawdzenie I:** Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\n**Zgłoszenie II:** Cisza w logach nie wyklucza odrzucania przez protect. Sprawdzić tryb i secure MAC oraz użyć odpowiednich testów ruchu.\n\n**Sprawdzenie II:** Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\n**Zależności:** Restrict różni się od shutdown zakresem reakcji, zachowując port aktywny. Tryby naruszeń różnią się także widocznością operacyjną.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.portsecurity.practice.compare-06.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPort pamięta sticky MAC starego komputera. Nowy autoryzowany komputer ma inny MAC i jest odrzucany.\n\n**Zgłoszenie II**\n\nPo nauczeniu sticky MAC administrator nie zapisał konfiguracji; po restarcie wpis nie jest zachowany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Stary wpis sticky nie odpowiada nowemu urządzeniu. Usunąć właściwy stary wpis i bezpiecznie nauczyć autoryzowany nowy MAC.\n\n**Sprawdzenie I:** Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\n**Zgłoszenie II:** Nauczona konfiguracja nie trafiła do startup-config. Po weryfikacji autoryzowanych wpisów zapisać konfigurację.\n\n**Sprawdzenie II:** Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.\n\n**Zależności:** Sticky utrwala poznane MAC; wymiana urządzenia wymaga kontrolowanej aktualizacji. Uczenie sticky i trwały zapis konfiguracji to osobne kroki.",
+      "card_id": "ccna.portsecurity.practice.compare-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\nII — Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.",
+          "feedback_md": "**Zgłoszenie I:** Stary wpis sticky nie odpowiada nowemu urządzeniu. Usunąć właściwy stary wpis i bezpiecznie nauczyć autoryzowany nowy MAC.\n\n**Sprawdzenie I:** Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\n**Zgłoszenie II:** Nauczona konfiguracja nie trafiła do startup-config. Po weryfikacji autoryzowanych wpisów zapisać konfigurację.\n\n**Sprawdzenie II:** Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.\n\n**Zależności:** Sticky utrwala poznane MAC; wymiana urządzenia wymaga kontrolowanej aktualizacji. Uczenie sticky i trwały zapis konfiguracji to osobne kroki.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.\n\nII — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Stary wpis sticky nie odpowiada nowemu urządzeniu. Zgłoszenie II: Nauczona konfiguracja nie trafiła do startup-config.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\nII — Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Port z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia. Dla II: Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Port z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia. Dla I: Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.portsecurity.practice.compare-07.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPort z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia.\n\n**Zgłoszenie II**\n\nPo nauczeniu sticky MAC administrator nie zapisał konfiguracji; po restarcie wpis nie jest zachowany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Dostosować limit i przypisania secure MAC do telefonu oraz komputera.\n\n**Sprawdzenie I:** Oba uprawnione MAC są akceptowane bez nowych violations.\n\n**Zgłoszenie II:** Nauczona konfiguracja nie trafiła do startup-config. Po weryfikacji autoryzowanych wpisów zapisać konfigurację.\n\n**Sprawdzenie II:** Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.\n\n**Zależności:** Limit port-security musi odzwierciedlać rzeczywistą liczbę urządzeń za portem. Uczenie sticky i trwały zapis konfiguracji to osobne kroki.",
+      "card_id": "ccna.portsecurity.practice.compare-07.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.\n\nII — Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Zgłoszenie II: Nauczona konfiguracja nie trafiła do startup-config.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.",
+          "feedback_md": "**Zgłoszenie I:** Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Dostosować limit i przypisania secure MAC do telefonu oraz komputera.\n\n**Sprawdzenie I:** Oba uprawnione MAC są akceptowane bez nowych violations.\n\n**Zgłoszenie II:** Nauczona konfiguracja nie trafiła do startup-config. Po weryfikacji autoryzowanych wpisów zapisać konfigurację.\n\n**Sprawdzenie II:** Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.\n\n**Zależności:** Limit port-security musi odzwierciedlać rzeczywistą liczbę urządzeń za portem. Uczenie sticky i trwały zapis konfiguracji to osobne kroki.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Po pojawieniu się obcego MAC rośnie licznik violations; port pozostaje up i ruch legalnego MAC działa. Ustawiono restrict. Dla II: Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\nII — Zatwierdzone wpisy są obecne w startup-config i przetrwają restart.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Po pojawieniu się obcego MAC rośnie licznik violations; port pozostaje up i ruch legalnego MAC działa. Ustawiono restrict. Dla I: Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.portsecurity.practice.compare-08.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPo pojawieniu się obcego MAC rośnie licznik violations; port pozostaje up i ruch legalnego MAC działa. Ustawiono restrict.\n\n**Zgłoszenie II**\n\nPort pamięta sticky MAC starego komputera. Nowy autoryzowany komputer ma inny MAC i jest odrzucany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Tryb restrict odrzuca nieuprawnione źródło bez wyłączenia portu. Usunąć lub autoryzować nowe urządzenie według polityki.\n\n**Sprawdzenie I:** Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\n**Zgłoszenie II:** Stary wpis sticky nie odpowiada nowemu urządzeniu. Usunąć właściwy stary wpis i bezpiecznie nauczyć autoryzowany nowy MAC.\n\n**Sprawdzenie II:** Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\n**Zależności:** Restrict różni się od shutdown zakresem reakcji, zachowując port aktywny. Sticky utrwala poznane MAC; wymiana urządzenia wymaga kontrolowanej aktualizacji.",
+      "card_id": "ccna.portsecurity.practice.compare-08.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\nII — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Tryb restrict odrzuca nieuprawnione źródło bez wyłączenia portu. Zgłoszenie II: Stary wpis sticky nie odpowiada nowemu urządzeniu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\nII — Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Port z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia. Dla II: Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\nII — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.",
+          "feedback_md": "**Zgłoszenie I:** Tryb restrict odrzuca nieuprawnione źródło bez wyłączenia portu. Usunąć lub autoryzować nowe urządzenie według polityki.\n\n**Sprawdzenie I:** Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\n**Zgłoszenie II:** Stary wpis sticky nie odpowiada nowemu urządzeniu. Usunąć właściwy stary wpis i bezpiecznie nauczyć autoryzowany nowy MAC.\n\n**Sprawdzenie II:** Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\n**Zależności:** Restrict różni się od shutdown zakresem reakcji, zachowując port aktywny. Sticky utrwala poznane MAC; wymiana urządzenia wymaga kontrolowanej aktualizacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Port z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia. Dla I: Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.portsecurity.practice.compare-09.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPort-security w trybie shutdown wykryło naruszenie, a port ma secure-shutdown.\n\n**Zgłoszenie II**\n\nPort działa w protect. Obce źródła są odrzucane bez sygnalizacji charakterystycznej dla restrict.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Naruszenie bezpieczeństwa wyłączyło port. Usunąć przyczynę, a potem przywrócić port zgodnie z procedurą.\n\n**Sprawdzenie I:** Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\n**Zgłoszenie II:** Cisza w logach nie wyklucza odrzucania przez protect. Sprawdzić tryb i secure MAC oraz użyć odpowiednich testów ruchu.\n\n**Sprawdzenie II:** Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\n**Zależności:** Samo podniesienie portu bez usunięcia przyczyny może odtworzyć awarię. Tryby naruszeń różnią się także widocznością operacyjną.",
+      "card_id": "ccna.portsecurity.practice.compare-09.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\nII — Port wraca do pracy bez natychmiastowego ponownego naruszenia.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Naruszenie bezpieczeństwa wyłączyło port. Zgłoszenie II: Cisza w logach nie wyklucza odrzucania przez protect.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\nII — Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Port z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia. Dla II: Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Port z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia. Dla I: Port wraca do pracy bez natychmiastowego ponownego naruszenia.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\nII — Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.",
+          "feedback_md": "**Zgłoszenie I:** Naruszenie bezpieczeństwa wyłączyło port. Usunąć przyczynę, a potem przywrócić port zgodnie z procedurą.\n\n**Sprawdzenie I:** Port wraca do pracy bez natychmiastowego ponownego naruszenia.\n\n**Zgłoszenie II:** Cisza w logach nie wyklucza odrzucania przez protect. Sprawdzić tryb i secure MAC oraz użyć odpowiednich testów ruchu.\n\n**Sprawdzenie II:** Legalne źródło przechodzi, a nieautoryzowane nie, przy aktywnym porcie.\n\n**Zależności:** Samo podniesienie portu bez usunięcia przyczyny może odtworzyć awarię. Tryby naruszeń różnią się także widocznością operacyjną.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.portsecurity.practice.compare-10.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "ccna.portsecurity.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960l/software/15-2_7_e/configuration_guide/sec/b_1527e_security_2960l_cg/port_security.html"
+        },
+        {
+          "title": "Cisco — Port Security",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/security/s1/sec-s1-cr-book/sec-cr-s6.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPort z maximum 1 obsługuje telefon i komputer, które wysyłają dwa różne MAC. Polityka dopuszcza oba urządzenia.\n\n**Zgłoszenie II**\n\nPort pamięta sticky MAC starego komputera. Nowy autoryzowany komputer ma inny MAC i jest odrzucany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Dostosować limit i przypisania secure MAC do telefonu oraz komputera.\n\n**Sprawdzenie I:** Oba uprawnione MAC są akceptowane bez nowych violations.\n\n**Zgłoszenie II:** Stary wpis sticky nie odpowiada nowemu urządzeniu. Usunąć właściwy stary wpis i bezpiecznie nauczyć autoryzowany nowy MAC.\n\n**Sprawdzenie II:** Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\n**Zależności:** Limit port-security musi odzwierciedlać rzeczywistą liczbę urządzeń za portem. Sticky utrwala poznane MAC; wymiana urządzenia wymaga kontrolowanej aktualizacji.",
+      "card_id": "ccna.portsecurity.practice.compare-10.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.",
+          "feedback_md": "**Zgłoszenie I:** Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Dostosować limit i przypisania secure MAC do telefonu oraz komputera.\n\n**Sprawdzenie I:** Oba uprawnione MAC są akceptowane bez nowych violations.\n\n**Zgłoszenie II:** Stary wpis sticky nie odpowiada nowemu urządzeniu. Usunąć właściwy stary wpis i bezpiecznie nauczyć autoryzowany nowy MAC.\n\n**Sprawdzenie II:** Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\n**Zależności:** Limit port-security musi odzwierciedlać rzeczywistą liczbę urządzeń za portem. Sticky utrwala poznane MAC; wymiana urządzenia wymaga kontrolowanej aktualizacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.\n\nII — Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Limit secure MAC jest mniejszy niż liczba uprawnionych urządzeń. Zgłoszenie II: Stary wpis sticky nie odpowiada nowemu urządzeniu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Oba uprawnione MAC są akceptowane bez nowych violations.\n\nII — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Po pojawieniu się obcego MAC rośnie licznik violations; port pozostaje up i ruch legalnego MAC działa. Ustawiono restrict. Dla II: Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Legalny MAC nadal działa, a po usunięciu obcego ustaje przyrost violations.\n\nII — Tabela secure MAC wskazuje nowy komputer, bez nieplanowanego rozszerzenia dostępu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Po pojawieniu się obcego MAC rośnie licznik violations; port pozostaje up i ruch legalnego MAC działa. Ustawiono restrict. Dla I: Oba uprawnione MAC są akceptowane bez nowych violations.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

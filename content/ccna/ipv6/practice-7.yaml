@@ -1,0 +1,819 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ipv6.practice-7",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.practice.compare-01.3.card",
+      "front_md": "**Zgłoszenie I**\n\nAdministrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu.\n\n**Zgłoszenie II**\n\nHost ma SLAAC, lecz router nie wysyła RA. Link jest sprawny i host posiada tylko link-local.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Adres link-local ma zasięg jednego łącza. Użyć routowalnego adresu IPv6 celu dla komunikacji między podsieciami.\n\n**Sprawdzenie I:** Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\n**Zgłoszenie II:** Host nie otrzymuje prefiksu i informacji o routerze przez RA. Przywrócić poprawne Router Advertisements na tym LAN.\n\n**Sprawdzenie II:** Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\n**Zależności:** Routery nie przekazują pakietów o źródle lub celu link-local na inne łącze. SLAAC korzysta z RA, a sama obecność link-local nie zapewnia dostępu poza LAN.",
+      "example": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.practice.compare-02.3.card",
+      "front_md": "**Zgłoszenie I**\n\nNowy statyczny adres IPv6 pozostaje duplicate po wykryciu innego urządzenia z tym adresem.\n\n**Zgłoszenie II**\n\nRouter ma adresy na dwóch interfejsach, ale ipv6 unicast-routing jest wyłączone. Komunikuje się lokalnie, nie przekazuje między LAN-ami.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Duplicate Address Detection wykrył konflikt IPv6. Usunąć konflikt i przydzielić unikalny adres stacji.\n\n**Sprawdzenie I:** Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\n**Zgłoszenie II:** Wyłączono funkcję przekazywania unicast IPv6. Włączyć ipv6 unicast-routing i zweryfikować tablicę IPv6.\n\n**Sprawdzenie II:** Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\n**Zależności:** DAD sprawdza unikalność adresu przed jego normalnym użyciem. Adresacja interfejsów i globalne włączenie routingu IPv6 to osobne elementy.",
+      "example": "I — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\nII — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.practice.compare-03.3.card",
+      "front_md": "**Zgłoszenie I**\n\nStatyczna trasa ma używać fe80::1 jako next hop. Taki sam link-local może istnieć na różnych interfejsach routera.\n\n**Zgłoszenie II**\n\nFiltr na LAN odrzuca Neighbor Solicitation i Advertisement. Hosty nie poznają swoich adresów warstwy drugiej.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Sam adres link-local nie określa jednoznacznie łącza wyjściowego. Podać w trasie właściwy interfejs wyjściowy razem z fe80::1.\n\n**Sprawdzenie I:** Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\n**Zgłoszenie II:** Zablokowano podstawowy mechanizm Neighbor Discovery. Dopuścić wymagane komunikaty ICMPv6 ND w polityce LAN.\n\n**Sprawdzenie II:** Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.\n\n**Zależności:** Next hop link-local wymaga wskazania jego strefy, czyli lokalnego interfejsu. ICMPv6 obsługuje podstawowe funkcje IPv6, więc nie należy traktować go tylko jako ping.",
+      "example": "I — Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\nII — Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.practice.compare-04.3.card",
+      "front_md": "**Zgłoszenie I**\n\nAdministrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu.\n\n**Zgłoszenie II**\n\nNowy statyczny adres IPv6 pozostaje duplicate po wykryciu innego urządzenia z tym adresem.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Adres link-local ma zasięg jednego łącza. Użyć routowalnego adresu IPv6 celu dla komunikacji między podsieciami.\n\n**Sprawdzenie I:** Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\n**Zgłoszenie II:** Duplicate Address Detection wykrył konflikt IPv6. Usunąć konflikt i przydzielić unikalny adres stacji.\n\n**Sprawdzenie II:** Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\n**Zależności:** Routery nie przekazują pakietów o źródle lub celu link-local na inne łącze. DAD sprawdza unikalność adresu przed jego normalnym użyciem.",
+      "example": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.practice.compare-05.3.card",
+      "front_md": "**Zgłoszenie I**\n\nHost ma SLAAC, lecz router nie wysyła RA. Link jest sprawny i host posiada tylko link-local.\n\n**Zgłoszenie II**\n\nStatyczna trasa ma używać fe80::1 jako next hop. Taki sam link-local może istnieć na różnych interfejsach routera.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Host nie otrzymuje prefiksu i informacji o routerze przez RA. Przywrócić poprawne Router Advertisements na tym LAN.\n\n**Sprawdzenie I:** Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\n**Zgłoszenie II:** Sam adres link-local nie określa jednoznacznie łącza wyjściowego. Podać w trasie właściwy interfejs wyjściowy razem z fe80::1.\n\n**Sprawdzenie II:** Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\n**Zależności:** SLAAC korzysta z RA, a sama obecność link-local nie zapewnia dostępu poza LAN. Next hop link-local wymaga wskazania jego strefy, czyli lokalnego interfejsu.",
+      "example": "I — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\nII — Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.practice.compare-06.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRouter ma adresy na dwóch interfejsach, ale ipv6 unicast-routing jest wyłączone. Komunikuje się lokalnie, nie przekazuje między LAN-ami.\n\n**Zgłoszenie II**\n\nFiltr na LAN odrzuca Neighbor Solicitation i Advertisement. Hosty nie poznają swoich adresów warstwy drugiej.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wyłączono funkcję przekazywania unicast IPv6. Włączyć ipv6 unicast-routing i zweryfikować tablicę IPv6.\n\n**Sprawdzenie I:** Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\n**Zgłoszenie II:** Zablokowano podstawowy mechanizm Neighbor Discovery. Dopuścić wymagane komunikaty ICMPv6 ND w polityce LAN.\n\n**Sprawdzenie II:** Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.\n\n**Zależności:** Adresacja interfejsów i globalne włączenie routingu IPv6 to osobne elementy. ICMPv6 obsługuje podstawowe funkcje IPv6, więc nie należy traktować go tylko jako ping.",
+      "example": "I — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\nII — Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.practice.compare-07.3.card",
+      "front_md": "**Zgłoszenie I**\n\nAdministrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu.\n\n**Zgłoszenie II**\n\nFiltr na LAN odrzuca Neighbor Solicitation i Advertisement. Hosty nie poznają swoich adresów warstwy drugiej.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Adres link-local ma zasięg jednego łącza. Użyć routowalnego adresu IPv6 celu dla komunikacji między podsieciami.\n\n**Sprawdzenie I:** Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\n**Zgłoszenie II:** Zablokowano podstawowy mechanizm Neighbor Discovery. Dopuścić wymagane komunikaty ICMPv6 ND w polityce LAN.\n\n**Sprawdzenie II:** Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.\n\n**Zależności:** Routery nie przekazują pakietów o źródle lub celu link-local na inne łącze. ICMPv6 obsługuje podstawowe funkcje IPv6, więc nie należy traktować go tylko jako ping.",
+      "example": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.practice.compare-08.3.card",
+      "front_md": "**Zgłoszenie I**\n\nHost ma SLAAC, lecz router nie wysyła RA. Link jest sprawny i host posiada tylko link-local.\n\n**Zgłoszenie II**\n\nRouter ma adresy na dwóch interfejsach, ale ipv6 unicast-routing jest wyłączone. Komunikuje się lokalnie, nie przekazuje między LAN-ami.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Host nie otrzymuje prefiksu i informacji o routerze przez RA. Przywrócić poprawne Router Advertisements na tym LAN.\n\n**Sprawdzenie I:** Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\n**Zgłoszenie II:** Wyłączono funkcję przekazywania unicast IPv6. Włączyć ipv6 unicast-routing i zweryfikować tablicę IPv6.\n\n**Sprawdzenie II:** Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\n**Zależności:** SLAAC korzysta z RA, a sama obecność link-local nie zapewnia dostępu poza LAN. Adresacja interfejsów i globalne włączenie routingu IPv6 to osobne elementy.",
+      "example": "I — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\nII — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.practice.compare-09.3.card",
+      "front_md": "**Zgłoszenie I**\n\nNowy statyczny adres IPv6 pozostaje duplicate po wykryciu innego urządzenia z tym adresem.\n\n**Zgłoszenie II**\n\nStatyczna trasa ma używać fe80::1 jako next hop. Taki sam link-local może istnieć na różnych interfejsach routera.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Duplicate Address Detection wykrył konflikt IPv6. Usunąć konflikt i przydzielić unikalny adres stacji.\n\n**Sprawdzenie I:** Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\n**Zgłoszenie II:** Sam adres link-local nie określa jednoznacznie łącza wyjściowego. Podać w trasie właściwy interfejs wyjściowy razem z fe80::1.\n\n**Sprawdzenie II:** Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\n**Zależności:** DAD sprawdza unikalność adresu przed jego normalnym użyciem. Next hop link-local wymaga wskazania jego strefy, czyli lokalnego interfejsu.",
+      "example": "I — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\nII — Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "id": "ccna.ipv6.practice.compare-10.3.card",
+      "front_md": "**Zgłoszenie I**\n\nAdministrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu.\n\n**Zgłoszenie II**\n\nRouter ma adresy na dwóch interfejsach, ale ipv6 unicast-routing jest wyłączone. Komunikuje się lokalnie, nie przekazuje między LAN-ami.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Adres link-local ma zasięg jednego łącza. Użyć routowalnego adresu IPv6 celu dla komunikacji między podsieciami.\n\n**Sprawdzenie I:** Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\n**Zgłoszenie II:** Wyłączono funkcję przekazywania unicast IPv6. Włączyć ipv6 unicast-routing i zweryfikować tablicę IPv6.\n\n**Sprawdzenie II:** Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\n**Zależności:** Routery nie przekazują pakietów o źródle lub celu link-local na inne łącze. Adresacja interfejsów i globalne włączenie routingu IPv6 to osobne elementy.",
+      "example": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ipv6.practice.compare-01.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAdministrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu.\n\n**Zgłoszenie II**\n\nHost ma SLAAC, lecz router nie wysyła RA. Link jest sprawny i host posiada tylko link-local.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Adres link-local ma zasięg jednego łącza. Użyć routowalnego adresu IPv6 celu dla komunikacji między podsieciami.\n\n**Sprawdzenie I:** Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\n**Zgłoszenie II:** Host nie otrzymuje prefiksu i informacji o routerze przez RA. Przywrócić poprawne Router Advertisements na tym LAN.\n\n**Sprawdzenie II:** Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\n**Zależności:** Routery nie przekazują pakietów o źródle lub celu link-local na inne łącze. SLAAC korzysta z RA, a sama obecność link-local nie zapewnia dostępu poza LAN.",
+      "card_id": "ccna.ipv6.practice.compare-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\nII — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Adres link-local ma zasięg jednego łącza. Zgłoszenie II: Host nie otrzymuje prefiksu i informacji o routerze przez RA.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Nowy statyczny adres IPv6 pozostaje duplicate po wykryciu innego urządzenia z tym adresem. Dla II: Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\nII — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Nowy statyczny adres IPv6 pozostaje duplicate po wykryciu innego urządzenia z tym adresem. Dla I: Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.",
+          "feedback_md": "**Zgłoszenie I:** Adres link-local ma zasięg jednego łącza. Użyć routowalnego adresu IPv6 celu dla komunikacji między podsieciami.\n\n**Sprawdzenie I:** Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\n**Zgłoszenie II:** Host nie otrzymuje prefiksu i informacji o routerze przez RA. Przywrócić poprawne Router Advertisements na tym LAN.\n\n**Sprawdzenie II:** Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\n**Zależności:** Routery nie przekazują pakietów o źródle lub celu link-local na inne łącze. SLAAC korzysta z RA, a sama obecność link-local nie zapewnia dostępu poza LAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ipv6.practice.compare-02.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNowy statyczny adres IPv6 pozostaje duplicate po wykryciu innego urządzenia z tym adresem.\n\n**Zgłoszenie II**\n\nRouter ma adresy na dwóch interfejsach, ale ipv6 unicast-routing jest wyłączone. Komunikuje się lokalnie, nie przekazuje między LAN-ami.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Duplicate Address Detection wykrył konflikt IPv6. Usunąć konflikt i przydzielić unikalny adres stacji.\n\n**Sprawdzenie I:** Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\n**Zgłoszenie II:** Wyłączono funkcję przekazywania unicast IPv6. Włączyć ipv6 unicast-routing i zweryfikować tablicę IPv6.\n\n**Sprawdzenie II:** Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\n**Zależności:** DAD sprawdza unikalność adresu przed jego normalnym użyciem. Adresacja interfejsów i globalne włączenie routingu IPv6 to osobne elementy.",
+      "card_id": "ccna.ipv6.practice.compare-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\nII — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.",
+          "feedback_md": "**Zgłoszenie I:** Duplicate Address Detection wykrył konflikt IPv6. Usunąć konflikt i przydzielić unikalny adres stacji.\n\n**Sprawdzenie I:** Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\n**Zgłoszenie II:** Wyłączono funkcję przekazywania unicast IPv6. Włączyć ipv6 unicast-routing i zweryfikować tablicę IPv6.\n\n**Sprawdzenie II:** Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\n**Zależności:** DAD sprawdza unikalność adresu przed jego normalnym użyciem. Adresacja interfejsów i globalne włączenie routingu IPv6 to osobne elementy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\nII — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Duplicate Address Detection wykrył konflikt IPv6. Zgłoszenie II: Wyłączono funkcję przekazywania unicast IPv6.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\nII — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Administrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu. Dla II: Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Administrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu. Dla I: Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ipv6.practice.compare-03.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nStatyczna trasa ma używać fe80::1 jako next hop. Taki sam link-local może istnieć na różnych interfejsach routera.\n\n**Zgłoszenie II**\n\nFiltr na LAN odrzuca Neighbor Solicitation i Advertisement. Hosty nie poznają swoich adresów warstwy drugiej.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Sam adres link-local nie określa jednoznacznie łącza wyjściowego. Podać w trasie właściwy interfejs wyjściowy razem z fe80::1.\n\n**Sprawdzenie I:** Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\n**Zgłoszenie II:** Zablokowano podstawowy mechanizm Neighbor Discovery. Dopuścić wymagane komunikaty ICMPv6 ND w polityce LAN.\n\n**Sprawdzenie II:** Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.\n\n**Zależności:** Next hop link-local wymaga wskazania jego strefy, czyli lokalnego interfejsu. ICMPv6 obsługuje podstawowe funkcje IPv6, więc nie należy traktować go tylko jako ping.",
+      "card_id": "ccna.ipv6.practice.compare-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.\n\nII — Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Sam adres link-local nie określa jednoznacznie łącza wyjściowego. Zgłoszenie II: Zablokowano podstawowy mechanizm Neighbor Discovery.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\nII — Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.",
+          "feedback_md": "**Zgłoszenie I:** Sam adres link-local nie określa jednoznacznie łącza wyjściowego. Podać w trasie właściwy interfejs wyjściowy razem z fe80::1.\n\n**Sprawdzenie I:** Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\n**Zgłoszenie II:** Zablokowano podstawowy mechanizm Neighbor Discovery. Dopuścić wymagane komunikaty ICMPv6 ND w polityce LAN.\n\n**Sprawdzenie II:** Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.\n\n**Zależności:** Next hop link-local wymaga wskazania jego strefy, czyli lokalnego interfejsu. ICMPv6 obsługuje podstawowe funkcje IPv6, więc nie należy traktować go tylko jako ping.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\nII — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Administrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu. Dla II: Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Administrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu. Dla I: Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ipv6.practice.compare-04.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAdministrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu.\n\n**Zgłoszenie II**\n\nNowy statyczny adres IPv6 pozostaje duplicate po wykryciu innego urządzenia z tym adresem.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Adres link-local ma zasięg jednego łącza. Użyć routowalnego adresu IPv6 celu dla komunikacji między podsieciami.\n\n**Sprawdzenie I:** Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\n**Zgłoszenie II:** Duplicate Address Detection wykrył konflikt IPv6. Usunąć konflikt i przydzielić unikalny adres stacji.\n\n**Sprawdzenie II:** Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\n**Zależności:** Routery nie przekazują pakietów o źródle lub celu link-local na inne łącze. DAD sprawdza unikalność adresu przed jego normalnym użyciem.",
+      "card_id": "ccna.ipv6.practice.compare-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\nII — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Adres link-local ma zasięg jednego łącza. Zgłoszenie II: Duplicate Address Detection wykrył konflikt IPv6.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host ma SLAAC, lecz router nie wysyła RA. Link jest sprawny i host posiada tylko link-local. Dla II: Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.",
+          "feedback_md": "**Zgłoszenie I:** Adres link-local ma zasięg jednego łącza. Użyć routowalnego adresu IPv6 celu dla komunikacji między podsieciami.\n\n**Sprawdzenie I:** Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\n**Zgłoszenie II:** Duplicate Address Detection wykrył konflikt IPv6. Usunąć konflikt i przydzielić unikalny adres stacji.\n\n**Sprawdzenie II:** Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\n**Zależności:** Routery nie przekazują pakietów o źródle lub celu link-local na inne łącze. DAD sprawdza unikalność adresu przed jego normalnym użyciem.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\nII — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host ma SLAAC, lecz router nie wysyła RA. Link jest sprawny i host posiada tylko link-local. Dla I: Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ipv6.practice.compare-05.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost ma SLAAC, lecz router nie wysyła RA. Link jest sprawny i host posiada tylko link-local.\n\n**Zgłoszenie II**\n\nStatyczna trasa ma używać fe80::1 jako next hop. Taki sam link-local może istnieć na różnych interfejsach routera.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Host nie otrzymuje prefiksu i informacji o routerze przez RA. Przywrócić poprawne Router Advertisements na tym LAN.\n\n**Sprawdzenie I:** Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\n**Zgłoszenie II:** Sam adres link-local nie określa jednoznacznie łącza wyjściowego. Podać w trasie właściwy interfejs wyjściowy razem z fe80::1.\n\n**Sprawdzenie II:** Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\n**Zależności:** SLAAC korzysta z RA, a sama obecność link-local nie zapewnia dostępu poza LAN. Next hop link-local wymaga wskazania jego strefy, czyli lokalnego interfejsu.",
+      "card_id": "ccna.ipv6.practice.compare-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\nII — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Host nie otrzymuje prefiksu i informacji o routerze przez RA. Zgłoszenie II: Sam adres link-local nie określa jednoznacznie łącza wyjściowego.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\nII — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Administrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu. Dla II: Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Administrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu. Dla I: Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\nII — Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.",
+          "feedback_md": "**Zgłoszenie I:** Host nie otrzymuje prefiksu i informacji o routerze przez RA. Przywrócić poprawne Router Advertisements na tym LAN.\n\n**Sprawdzenie I:** Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\n**Zgłoszenie II:** Sam adres link-local nie określa jednoznacznie łącza wyjściowego. Podać w trasie właściwy interfejs wyjściowy razem z fe80::1.\n\n**Sprawdzenie II:** Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\n**Zależności:** SLAAC korzysta z RA, a sama obecność link-local nie zapewnia dostępu poza LAN. Next hop link-local wymaga wskazania jego strefy, czyli lokalnego interfejsu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ipv6.practice.compare-06.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRouter ma adresy na dwóch interfejsach, ale ipv6 unicast-routing jest wyłączone. Komunikuje się lokalnie, nie przekazuje między LAN-ami.\n\n**Zgłoszenie II**\n\nFiltr na LAN odrzuca Neighbor Solicitation i Advertisement. Hosty nie poznają swoich adresów warstwy drugiej.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wyłączono funkcję przekazywania unicast IPv6. Włączyć ipv6 unicast-routing i zweryfikować tablicę IPv6.\n\n**Sprawdzenie I:** Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\n**Zgłoszenie II:** Zablokowano podstawowy mechanizm Neighbor Discovery. Dopuścić wymagane komunikaty ICMPv6 ND w polityce LAN.\n\n**Sprawdzenie II:** Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.\n\n**Zależności:** Adresacja interfejsów i globalne włączenie routingu IPv6 to osobne elementy. ICMPv6 obsługuje podstawowe funkcje IPv6, więc nie należy traktować go tylko jako ping.",
+      "card_id": "ccna.ipv6.practice.compare-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\nII — Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.",
+          "feedback_md": "**Zgłoszenie I:** Wyłączono funkcję przekazywania unicast IPv6. Włączyć ipv6 unicast-routing i zweryfikować tablicę IPv6.\n\n**Sprawdzenie I:** Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\n**Zgłoszenie II:** Zablokowano podstawowy mechanizm Neighbor Discovery. Dopuścić wymagane komunikaty ICMPv6 ND w polityce LAN.\n\n**Sprawdzenie II:** Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.\n\n**Zależności:** Adresacja interfejsów i globalne włączenie routingu IPv6 to osobne elementy. ICMPv6 obsługuje podstawowe funkcje IPv6, więc nie należy traktować go tylko jako ping.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.\n\nII — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wyłączono funkcję przekazywania unicast IPv6. Zgłoszenie II: Zablokowano podstawowy mechanizm Neighbor Discovery.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\nII — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Administrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu. Dla II: Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Administrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu. Dla I: Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ipv6.practice.compare-07.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAdministrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu.\n\n**Zgłoszenie II**\n\nFiltr na LAN odrzuca Neighbor Solicitation i Advertisement. Hosty nie poznają swoich adresów warstwy drugiej.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Adres link-local ma zasięg jednego łącza. Użyć routowalnego adresu IPv6 celu dla komunikacji między podsieciami.\n\n**Sprawdzenie I:** Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\n**Zgłoszenie II:** Zablokowano podstawowy mechanizm Neighbor Discovery. Dopuścić wymagane komunikaty ICMPv6 ND w polityce LAN.\n\n**Sprawdzenie II:** Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.\n\n**Zależności:** Routery nie przekazują pakietów o źródle lub celu link-local na inne łącze. ICMPv6 obsługuje podstawowe funkcje IPv6, więc nie należy traktować go tylko jako ping.",
+      "card_id": "ccna.ipv6.practice.compare-07.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.\n\nII — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Adres link-local ma zasięg jednego łącza. Zgłoszenie II: Zablokowano podstawowy mechanizm Neighbor Discovery.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.",
+          "feedback_md": "**Zgłoszenie I:** Adres link-local ma zasięg jednego łącza. Użyć routowalnego adresu IPv6 celu dla komunikacji między podsieciami.\n\n**Sprawdzenie I:** Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\n**Zgłoszenie II:** Zablokowano podstawowy mechanizm Neighbor Discovery. Dopuścić wymagane komunikaty ICMPv6 ND w polityce LAN.\n\n**Sprawdzenie II:** Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.\n\n**Zależności:** Routery nie przekazują pakietów o źródle lub celu link-local na inne łącze. ICMPv6 obsługuje podstawowe funkcje IPv6, więc nie należy traktować go tylko jako ping.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host ma SLAAC, lecz router nie wysyła RA. Link jest sprawny i host posiada tylko link-local. Dla II: Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\nII — Tabela sąsiadów zawiera poprawne mapowania IPv6–MAC.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host ma SLAAC, lecz router nie wysyła RA. Link jest sprawny i host posiada tylko link-local. Dla I: Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ipv6.practice.compare-08.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost ma SLAAC, lecz router nie wysyła RA. Link jest sprawny i host posiada tylko link-local.\n\n**Zgłoszenie II**\n\nRouter ma adresy na dwóch interfejsach, ale ipv6 unicast-routing jest wyłączone. Komunikuje się lokalnie, nie przekazuje między LAN-ami.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Host nie otrzymuje prefiksu i informacji o routerze przez RA. Przywrócić poprawne Router Advertisements na tym LAN.\n\n**Sprawdzenie I:** Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\n**Zgłoszenie II:** Wyłączono funkcję przekazywania unicast IPv6. Włączyć ipv6 unicast-routing i zweryfikować tablicę IPv6.\n\n**Sprawdzenie II:** Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\n**Zależności:** SLAAC korzysta z RA, a sama obecność link-local nie zapewnia dostępu poza LAN. Adresacja interfejsów i globalne włączenie routingu IPv6 to osobne elementy.",
+      "card_id": "ccna.ipv6.practice.compare-08.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\nII — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Host nie otrzymuje prefiksu i informacji o routerze przez RA. Zgłoszenie II: Wyłączono funkcję przekazywania unicast IPv6.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\nII — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Administrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu. Dla II: Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\nII — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.",
+          "feedback_md": "**Zgłoszenie I:** Host nie otrzymuje prefiksu i informacji o routerze przez RA. Przywrócić poprawne Router Advertisements na tym LAN.\n\n**Sprawdzenie I:** Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\n**Zgłoszenie II:** Wyłączono funkcję przekazywania unicast IPv6. Włączyć ipv6 unicast-routing i zweryfikować tablicę IPv6.\n\n**Sprawdzenie II:** Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\n**Zależności:** SLAAC korzysta z RA, a sama obecność link-local nie zapewnia dostępu poza LAN. Adresacja interfejsów i globalne włączenie routingu IPv6 to osobne elementy.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Administrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu. Dla I: Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ipv6.practice.compare-09.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNowy statyczny adres IPv6 pozostaje duplicate po wykryciu innego urządzenia z tym adresem.\n\n**Zgłoszenie II**\n\nStatyczna trasa ma używać fe80::1 jako next hop. Taki sam link-local może istnieć na różnych interfejsach routera.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Duplicate Address Detection wykrył konflikt IPv6. Usunąć konflikt i przydzielić unikalny adres stacji.\n\n**Sprawdzenie I:** Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\n**Zgłoszenie II:** Sam adres link-local nie określa jednoznacznie łącza wyjściowego. Podać w trasie właściwy interfejs wyjściowy razem z fe80::1.\n\n**Sprawdzenie II:** Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\n**Zależności:** DAD sprawdza unikalność adresu przed jego normalnym użyciem. Next hop link-local wymaga wskazania jego strefy, czyli lokalnego interfejsu.",
+      "card_id": "ccna.ipv6.practice.compare-09.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\nII — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Duplicate Address Detection wykrył konflikt IPv6. Zgłoszenie II: Sam adres link-local nie określa jednoznacznie łącza wyjściowego.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\nII — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Administrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu. Dla II: Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Administrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu. Dla I: Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\nII — Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.",
+          "feedback_md": "**Zgłoszenie I:** Duplicate Address Detection wykrył konflikt IPv6. Usunąć konflikt i przydzielić unikalny adres stacji.\n\n**Sprawdzenie I:** Adres przechodzi do stanu używalnego i nie występuje ponowny konflikt DAD.\n\n**Zgłoszenie II:** Sam adres link-local nie określa jednoznacznie łącza wyjściowego. Podać w trasie właściwy interfejs wyjściowy razem z fe80::1.\n\n**Sprawdzenie II:** Trasa wskazuje zaplanowany interfejs, a ND rozwiązuje sąsiada na tym łączu.\n\n**Zależności:** DAD sprawdza unikalność adresu przed jego normalnym użyciem. Next hop link-local wymaga wskazania jego strefy, czyli lokalnego interfejsu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ipv6.practice.compare-10.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "ccna.ipv6.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv6: adresacja i sąsiedzi",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/ipv6/configuration/guide/xe-17/ipv6-xe-17-book-cat8000/m_ip6-addrg-bsc-con.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.8"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAdministrator próbuje osiągnąć fe80::2 przez kilka routerów. Adres działa tylko na wspólnym łączu.\n\n**Zgłoszenie II**\n\nRouter ma adresy na dwóch interfejsach, ale ipv6 unicast-routing jest wyłączone. Komunikuje się lokalnie, nie przekazuje między LAN-ami.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Adres link-local ma zasięg jednego łącza. Użyć routowalnego adresu IPv6 celu dla komunikacji między podsieciami.\n\n**Sprawdzenie I:** Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\n**Zgłoszenie II:** Wyłączono funkcję przekazywania unicast IPv6. Włączyć ipv6 unicast-routing i zweryfikować tablicę IPv6.\n\n**Sprawdzenie II:** Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\n**Zależności:** Routery nie przekazują pakietów o źródle lub celu link-local na inne łącze. Adresacja interfejsów i globalne włączenie routingu IPv6 to osobne elementy.",
+      "card_id": "ccna.ipv6.practice.compare-10.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.",
+          "feedback_md": "**Zgłoszenie I:** Adres link-local ma zasięg jednego łącza. Użyć routowalnego adresu IPv6 celu dla komunikacji między podsieciami.\n\n**Sprawdzenie I:** Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\n**Zgłoszenie II:** Wyłączono funkcję przekazywania unicast IPv6. Włączyć ipv6 unicast-routing i zweryfikować tablicę IPv6.\n\n**Sprawdzenie II:** Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\n**Zależności:** Routery nie przekazują pakietów o źródle lub celu link-local na inne łącze. Adresacja interfejsów i globalne włączenie routingu IPv6 to osobne elementy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.\n\nII — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Adres link-local ma zasięg jednego łącza. Zgłoszenie II: Wyłączono funkcję przekazywania unicast IPv6.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.\n\nII — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host ma SLAAC, lecz router nie wysyła RA. Link jest sprawny i host posiada tylko link-local. Dla II: Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Host otrzymuje oczekiwany prefiks /64 i trasę domyślną wskazującą router.\n\nII — Dwa hosty z różnych bezpośrednich podsieci komunikują się przez router.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host ma SLAAC, lecz router nie wysyła RA. Link jest sprawny i host posiada tylko link-local. Dla I: Komunikacja między segmentami korzysta z adresu globalnego lub właściwie routowanego ULA.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

@@ -1,0 +1,591 @@
+{
+  "schema_version": 3,
+  "id": "ccna.monitoring.practice-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Niezgodny czas — rozpoznanie",
+      "skills": [
+        "ccna.monitoring.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        },
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "id": "ccna.monitoring.practice.case-01.1.card",
+      "front_md": "Logi dwóch routerów dotyczą tej samej awarii, ale znaczniki różnią się o kilkanaście minut; jeden router nie jest zsynchronizowany.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Monitoring wymaga wiarygodnego czasu, nie tylko poprawnego odbioru logów.\n\n**Rozpoznanie:** Niespójny czas utrudnia korelację zdarzeń.\n\n**Działanie:** Przywrócić synchronizację z zatwierdzonym źródłem NTP.\n\n**Sprawdzenie:** Status NTP potwierdza synchronizację, a porównane zdarzenia mają spójne czasy.",
+      "example": "Niespójny czas utrudnia korelację zdarzeń."
+    },
+    {
+      "revision": 1,
+      "title": "Poziom syslog — rozpoznanie",
+      "skills": [
+        "ccna.monitoring.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        },
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "id": "ccna.monitoring.practice.case-02.1.card",
+      "front_md": "Urządzenie wysyła do kolektora tylko severity 0–4. Poszukiwany komunikat ma poziom 6.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Niższy numer syslog oznacza większą pilność; próg obejmuje poziomy do wskazanego numeru.\n\n**Rozpoznanie:** Próg wysyłania wyklucza komunikat informational.\n\n**Działanie:** Dostosować próg logging trap do wymaganego poziomu i obciążenia.\n\n**Sprawdzenie:** Kolektor odbiera kontrolny komunikat severity 6.",
+      "example": "Próg wysyłania wyklucza komunikat informational."
+    },
+    {
+      "revision": 1,
+      "title": "Zły adres kolektora — rozpoznanie",
+      "skills": [
+        "ccna.monitoring.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        },
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "id": "ccna.monitoring.practice.case-03.1.card",
+      "front_md": "Lokalny bufor zawiera zdarzenia, ale logging host wskazuje stary adres kolektora.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Działający bufor lokalny nie potwierdza poprawnego eksportu logów.\n\n**Rozpoznanie:** Logi są kierowane do niewłaściwego odbiorcy.\n\n**Działanie:** Ustawić aktualny zatwierdzony adres serwera syslog.\n\n**Sprawdzenie:** Kontrolne zdarzenie pojawia się na nowym kolektorze z poprawnym źródłem.",
+      "example": "Logi są kierowane do niewłaściwego odbiorcy."
+    },
+    {
+      "revision": 1,
+      "title": "SNMP ACL — rozpoznanie",
+      "skills": [
+        "ccna.monitoring.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        },
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "id": "ccna.monitoring.practice.case-04.1.card",
+      "front_md": "Zapytania SNMP z NMS są widoczne na routerze, ale ACL przypisana do community nie obejmuje adresu NMS.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Dostęp SNMP zależy także od ograniczeń źródłowych, nie tylko poprawnej community.\n\n**Rozpoznanie:** Polityka community odrzuca źródło zapytań.\n\n**Działanie:** Dodać właściwy adres NMS do dedykowanej listy dopuszczonych źródeł.\n\n**Sprawdzenie:** Kontrolny odczyt SNMP z NMS zwraca oczekiwaną wartość.",
+      "example": "Polityka community odrzuca źródło zapytań."
+    },
+    {
+      "revision": 1,
+      "title": "Licznik narastający — rozpoznanie",
+      "skills": [
+        "ccna.monitoring.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        },
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "id": "ccna.monitoring.practice.case-05.1.card",
+      "front_md": "Interfejs ma 100000 błędów, lecz w ciągu kontrolowanych 10 minut licznik nie wzrósł.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Liczniki narastające interpretuje się przez różnicę w określonym interwale.\n\n**Rozpoznanie:** Suma historyczna nie dowodzi bieżącego wzrostu błędów.\n\n**Działanie:** Porównać przyrosty i czasy pomiarów przy rzeczywistym ruchu.\n\n**Sprawdzenie:** Dwa kolejne odczyty z czasem pozwalają wyliczyć tempo nowych błędów.",
+      "example": "Suma historyczna nie dowodzi bieżącego wzrostu błędów."
+    },
+    {
+      "revision": 1,
+      "title": "Zła skala wykresu — rozpoznanie",
+      "skills": [
+        "ccna.monitoring.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        },
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "id": "ccna.monitoring.practice.case-06.1.card",
+      "front_md": "Przyrost licznika octets wynosi 1250000 przez sekundę, a wykres opisuje tę liczbę jako bit/s.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Octet to osiem bitów; jednostka i interwał są częścią poprawnego pomiaru.\n\n**Rozpoznanie:** Nie przeliczono bajtów na bity.\n\n**Działanie:** Pomnożyć tempo octets/s przez 8 dla wykresu bit/s.\n\n**Sprawdzenie:** Wartość odpowiada 10000000 bit/s, czyli 10 Mb/s.",
+      "example": "Nie przeliczono bajtów na bity."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.monitoring.practice.case-01.1",
+      "revision": 1,
+      "title": "Niezgodny czas — rozpoznanie",
+      "skills": [
+        "ccna.monitoring.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        },
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Logi dwóch routerów dotyczą tej samej awarii, ale znaczniki różnią się o kilkanaście minut; jeden router nie jest zsynchronizowany.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Monitoring wymaga wiarygodnego czasu, nie tylko poprawnego odbioru logów.\n\n**Rozpoznanie:** Niespójny czas utrudnia korelację zdarzeń.\n\n**Działanie:** Przywrócić synchronizację z zatwierdzonym źródłem NTP.\n\n**Sprawdzenie:** Status NTP potwierdza synchronizację, a porównane zdarzenia mają spójne czasy.",
+      "card_id": "ccna.monitoring.practice.case-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Niespójny czas utrudnia korelację zdarzeń.",
+          "feedback_md": "Monitoring wymaga wiarygodnego czasu, nie tylko poprawnego odbioru logów.\n\n**Rozpoznanie:** Niespójny czas utrudnia korelację zdarzeń.\n\n**Działanie:** Przywrócić synchronizację z zatwierdzonym źródłem NTP.\n\n**Sprawdzenie:** Status NTP potwierdza synchronizację, a porównane zdarzenia mają spójne czasy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Polityka community odrzuca źródło zapytań.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SNMP ACL”: Zapytania SNMP z NMS są widoczne na routerze, ale ACL przypisana do community nie obejmuje adresu NMS. W bieżącym przypadku: Niespójny czas utrudnia korelację zdarzeń.",
+          "id": "B"
+        },
+        {
+          "text_md": "Próg wysyłania wyklucza komunikat informational.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Poziom syslog”: Urządzenie wysyła do kolektora tylko severity 0–4. Poszukiwany komunikat ma poziom 6. W bieżącym przypadku: Niespójny czas utrudnia korelację zdarzeń.",
+          "id": "C"
+        },
+        {
+          "text_md": "Suma historyczna nie dowodzi bieżącego wzrostu błędów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Licznik narastający”: Interfejs ma 100000 błędów, lecz w ciągu kontrolowanych 10 minut licznik nie wzrósł. W bieżącym przypadku: Niespójny czas utrudnia korelację zdarzeń.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.monitoring.practice.case-02.1",
+      "revision": 1,
+      "title": "Poziom syslog — rozpoznanie",
+      "skills": [
+        "ccna.monitoring.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        },
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Urządzenie wysyła do kolektora tylko severity 0–4. Poszukiwany komunikat ma poziom 6.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Niższy numer syslog oznacza większą pilność; próg obejmuje poziomy do wskazanego numeru.\n\n**Rozpoznanie:** Próg wysyłania wyklucza komunikat informational.\n\n**Działanie:** Dostosować próg logging trap do wymaganego poziomu i obciążenia.\n\n**Sprawdzenie:** Kolektor odbiera kontrolny komunikat severity 6.",
+      "card_id": "ccna.monitoring.practice.case-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Polityka community odrzuca źródło zapytań.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SNMP ACL”: Zapytania SNMP z NMS są widoczne na routerze, ale ACL przypisana do community nie obejmuje adresu NMS. W bieżącym przypadku: Próg wysyłania wyklucza komunikat informational.",
+          "id": "A"
+        },
+        {
+          "text_md": "Próg wysyłania wyklucza komunikat informational.",
+          "feedback_md": "Niższy numer syslog oznacza większą pilność; próg obejmuje poziomy do wskazanego numeru.\n\n**Rozpoznanie:** Próg wysyłania wyklucza komunikat informational.\n\n**Działanie:** Dostosować próg logging trap do wymaganego poziomu i obciążenia.\n\n**Sprawdzenie:** Kolektor odbiera kontrolny komunikat severity 6.",
+          "id": "B"
+        },
+        {
+          "text_md": "Logi są kierowane do niewłaściwego odbiorcy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły adres kolektora”: Lokalny bufor zawiera zdarzenia, ale logging host wskazuje stary adres kolektora. W bieżącym przypadku: Próg wysyłania wyklucza komunikat informational.",
+          "id": "C"
+        },
+        {
+          "text_md": "Niespójny czas utrudnia korelację zdarzeń.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niezgodny czas”: Logi dwóch routerów dotyczą tej samej awarii, ale znaczniki różnią się o kilkanaście minut; jeden router nie jest zsynchronizowany. W bieżącym przypadku: Próg wysyłania wyklucza komunikat informational.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.monitoring.practice.case-03.1",
+      "revision": 1,
+      "title": "Zły adres kolektora — rozpoznanie",
+      "skills": [
+        "ccna.monitoring.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        },
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Lokalny bufor zawiera zdarzenia, ale logging host wskazuje stary adres kolektora.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Działający bufor lokalny nie potwierdza poprawnego eksportu logów.\n\n**Rozpoznanie:** Logi są kierowane do niewłaściwego odbiorcy.\n\n**Działanie:** Ustawić aktualny zatwierdzony adres serwera syslog.\n\n**Sprawdzenie:** Kontrolne zdarzenie pojawia się na nowym kolektorze z poprawnym źródłem.",
+      "card_id": "ccna.monitoring.practice.case-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Niespójny czas utrudnia korelację zdarzeń.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niezgodny czas”: Logi dwóch routerów dotyczą tej samej awarii, ale znaczniki różnią się o kilkanaście minut; jeden router nie jest zsynchronizowany. W bieżącym przypadku: Logi są kierowane do niewłaściwego odbiorcy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Polityka community odrzuca źródło zapytań.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SNMP ACL”: Zapytania SNMP z NMS są widoczne na routerze, ale ACL przypisana do community nie obejmuje adresu NMS. W bieżącym przypadku: Logi są kierowane do niewłaściwego odbiorcy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Logi są kierowane do niewłaściwego odbiorcy.",
+          "feedback_md": "Działający bufor lokalny nie potwierdza poprawnego eksportu logów.\n\n**Rozpoznanie:** Logi są kierowane do niewłaściwego odbiorcy.\n\n**Działanie:** Ustawić aktualny zatwierdzony adres serwera syslog.\n\n**Sprawdzenie:** Kontrolne zdarzenie pojawia się na nowym kolektorze z poprawnym źródłem.",
+          "id": "C"
+        },
+        {
+          "text_md": "Próg wysyłania wyklucza komunikat informational.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Poziom syslog”: Urządzenie wysyła do kolektora tylko severity 0–4. Poszukiwany komunikat ma poziom 6. W bieżącym przypadku: Logi są kierowane do niewłaściwego odbiorcy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.monitoring.practice.case-04.1",
+      "revision": 1,
+      "title": "SNMP ACL — rozpoznanie",
+      "skills": [
+        "ccna.monitoring.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        },
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Zapytania SNMP z NMS są widoczne na routerze, ale ACL przypisana do community nie obejmuje adresu NMS.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Dostęp SNMP zależy także od ograniczeń źródłowych, nie tylko poprawnej community.\n\n**Rozpoznanie:** Polityka community odrzuca źródło zapytań.\n\n**Działanie:** Dodać właściwy adres NMS do dedykowanej listy dopuszczonych źródeł.\n\n**Sprawdzenie:** Kontrolny odczyt SNMP z NMS zwraca oczekiwaną wartość.",
+      "card_id": "ccna.monitoring.practice.case-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nie przeliczono bajtów na bity.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła skala wykresu”: Przyrost licznika octets wynosi 1250000 przez sekundę, a wykres opisuje tę liczbę jako bit/s. W bieżącym przypadku: Polityka community odrzuca źródło zapytań.",
+          "id": "A"
+        },
+        {
+          "text_md": "Próg wysyłania wyklucza komunikat informational.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Poziom syslog”: Urządzenie wysyła do kolektora tylko severity 0–4. Poszukiwany komunikat ma poziom 6. W bieżącym przypadku: Polityka community odrzuca źródło zapytań.",
+          "id": "B"
+        },
+        {
+          "text_md": "Suma historyczna nie dowodzi bieżącego wzrostu błędów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Licznik narastający”: Interfejs ma 100000 błędów, lecz w ciągu kontrolowanych 10 minut licznik nie wzrósł. W bieżącym przypadku: Polityka community odrzuca źródło zapytań.",
+          "id": "C"
+        },
+        {
+          "text_md": "Polityka community odrzuca źródło zapytań.",
+          "feedback_md": "Dostęp SNMP zależy także od ograniczeń źródłowych, nie tylko poprawnej community.\n\n**Rozpoznanie:** Polityka community odrzuca źródło zapytań.\n\n**Działanie:** Dodać właściwy adres NMS do dedykowanej listy dopuszczonych źródeł.\n\n**Sprawdzenie:** Kontrolny odczyt SNMP z NMS zwraca oczekiwaną wartość.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.monitoring.practice.case-05.1",
+      "revision": 1,
+      "title": "Licznik narastający — rozpoznanie",
+      "skills": [
+        "ccna.monitoring.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        },
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Interfejs ma 100000 błędów, lecz w ciągu kontrolowanych 10 minut licznik nie wzrósł.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Liczniki narastające interpretuje się przez różnicę w określonym interwale.\n\n**Rozpoznanie:** Suma historyczna nie dowodzi bieżącego wzrostu błędów.\n\n**Działanie:** Porównać przyrosty i czasy pomiarów przy rzeczywistym ruchu.\n\n**Sprawdzenie:** Dwa kolejne odczyty z czasem pozwalają wyliczyć tempo nowych błędów.",
+      "card_id": "ccna.monitoring.practice.case-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Suma historyczna nie dowodzi bieżącego wzrostu błędów.",
+          "feedback_md": "Liczniki narastające interpretuje się przez różnicę w określonym interwale.\n\n**Rozpoznanie:** Suma historyczna nie dowodzi bieżącego wzrostu błędów.\n\n**Działanie:** Porównać przyrosty i czasy pomiarów przy rzeczywistym ruchu.\n\n**Sprawdzenie:** Dwa kolejne odczyty z czasem pozwalają wyliczyć tempo nowych błędów.",
+          "id": "A"
+        },
+        {
+          "text_md": "Niespójny czas utrudnia korelację zdarzeń.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niezgodny czas”: Logi dwóch routerów dotyczą tej samej awarii, ale znaczniki różnią się o kilkanaście minut; jeden router nie jest zsynchronizowany. W bieżącym przypadku: Suma historyczna nie dowodzi bieżącego wzrostu błędów.",
+          "id": "B"
+        },
+        {
+          "text_md": "Próg wysyłania wyklucza komunikat informational.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Poziom syslog”: Urządzenie wysyła do kolektora tylko severity 0–4. Poszukiwany komunikat ma poziom 6. W bieżącym przypadku: Suma historyczna nie dowodzi bieżącego wzrostu błędów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Logi są kierowane do niewłaściwego odbiorcy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły adres kolektora”: Lokalny bufor zawiera zdarzenia, ale logging host wskazuje stary adres kolektora. W bieżącym przypadku: Suma historyczna nie dowodzi bieżącego wzrostu błędów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.monitoring.practice.case-06.1",
+      "revision": 1,
+      "title": "Zła skala wykresu — rozpoznanie",
+      "skills": [
+        "ccna.monitoring.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — NTP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Cisco — System Message Logging",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/access/wireless/software/guide/SysMsgLogging.html"
+        },
+        {
+          "title": "Cisco — SNMP configuration",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/snmp/configuration/15-mt/snmp-15-mt-book/nm-snmp-cfg-snmp-support.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.5"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Przyrost licznika octets wynosi 1250000 przez sekundę, a wykres opisuje tę liczbę jako bit/s.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Octet to osiem bitów; jednostka i interwał są częścią poprawnego pomiaru.\n\n**Rozpoznanie:** Nie przeliczono bajtów na bity.\n\n**Działanie:** Pomnożyć tempo octets/s przez 8 dla wykresu bit/s.\n\n**Sprawdzenie:** Wartość odpowiada 10000000 bit/s, czyli 10 Mb/s.",
+      "card_id": "ccna.monitoring.practice.case-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Logi są kierowane do niewłaściwego odbiorcy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły adres kolektora”: Lokalny bufor zawiera zdarzenia, ale logging host wskazuje stary adres kolektora. W bieżącym przypadku: Nie przeliczono bajtów na bity.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nie przeliczono bajtów na bity.",
+          "feedback_md": "Octet to osiem bitów; jednostka i interwał są częścią poprawnego pomiaru.\n\n**Rozpoznanie:** Nie przeliczono bajtów na bity.\n\n**Działanie:** Pomnożyć tempo octets/s przez 8 dla wykresu bit/s.\n\n**Sprawdzenie:** Wartość odpowiada 10000000 bit/s, czyli 10 Mb/s.",
+          "id": "B"
+        },
+        {
+          "text_md": "Polityka community odrzuca źródło zapytań.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SNMP ACL”: Zapytania SNMP z NMS są widoczne na routerze, ale ACL przypisana do community nie obejmuje adresu NMS. W bieżącym przypadku: Nie przeliczono bajtów na bity.",
+          "id": "C"
+        },
+        {
+          "text_md": "Próg wysyłania wyklucza komunikat informational.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Poziom syslog”: Urządzenie wysyła do kolektora tylko severity 0–4. Poszukiwany komunikat ma poziom 6. W bieżącym przypadku: Nie przeliczono bajtów na bity.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

@@ -1,0 +1,1053 @@
+{
+  "schema_version": 3,
+  "id": "encor.ebgp.practice-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Zły remote-as — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-01.1.card",
+      "front_md": "R1 oczekuje remote-as 65020, ale rzeczywisty sąsiad ma AS 65030. Log OPEN wskazuje Bad Peer AS.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Remote-as opisuje system autonomiczny sąsiada, nie lokalny AS.\n\n**Rozpoznanie:** Skonfigurowany numer AS sąsiada jest niezgodny.\n\n**Działanie:** Poprawić remote-as na uzgodniony AS 65030 po potwierdzeniu obu końców.\n\n**Sprawdzenie:** Sesja przechodzi wymianę OPEN bez błędu Bad Peer AS.",
+      "example": "Skonfigurowany numer AS sąsiada jest niezgodny."
+    },
+    {
+      "revision": 1,
+      "title": "Brak TCP 179 — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-02.1.card",
+      "front_md": "Ping do sąsiada działa, ale ACL odrzuca TCP 179 i sesja nie dochodzi do wymiany OPEN.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Osiągalność ICMP nie potwierdza dostępności transportu BGP.\n\n**Rozpoznanie:** Filtrowany jest transport wymagany przez BGP.\n\n**Działanie:** Dopuścić wymagany TCP między uprawnionymi adresami peerów.\n\n**Sprawdzenie:** Połączenie TCP dla BGP zestawia się i pojawiają się wiadomości OPEN.",
+      "example": "Filtrowany jest transport wymagany przez BGP."
+    },
+    {
+      "revision": 1,
+      "title": "Źródło loopback — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-03.1.card",
+      "front_md": "R2 oczekuje sąsiada 10.0.0.1, ale R1 inicjuje sesję ze swojego adresu fizycznego. Routing loopbacków działa.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Peering identyfikuje sąsiada przez adres; osiągalność loopbacku nie ustawia źródła automatycznie.\n\n**Rozpoznanie:** Adres źródłowy nie zgadza się z definicją peera po drugiej stronie.\n\n**Działanie:** Ustawić właściwe update-source na R1 i zachować zgodne definicje peerów.\n\n**Sprawdzenie:** R2 widzi połączenie z oczekiwanego 10.0.0.1.",
+      "example": "Adres źródłowy nie zgadza się z definicją peera po drugiej stronie."
+    },
+    {
+      "revision": 1,
+      "title": "TTL multihop — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-04.1.card",
+      "front_md": "eBGP między loopbackami jest poprawnie routowane przez kilka skoków, lecz pakiet z domyślnym TTL nie dociera. Nie użyto TTL security.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Peering wieloskokowy wymaga świadomej konfiguracji zasięgu transportu.\n\n**Rozpoznanie:** Domyślny zasięg eBGP jest niewystarczający dla tej topologii.\n\n**Działanie:** Skonfigurować uzgodnione ebgp-multihop z odpowiednim limitem po obu stronach.\n\n**Sprawdzenie:** Pakiety sesji docierają między loopbackami z prawidłowym źródłem i TTL.",
+      "example": "Domyślny zasięg eBGP jest niewystarczający dla tej topologii."
+    },
+    {
+      "revision": 1,
+      "title": "Hasło peera — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-05.1.card",
+      "front_md": "Adresy, AS i TCP są poprawne, ale końce mają różne hasła uwierzytelniania sesji.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Zgodność adresacji nie zastępuje zgodności zabezpieczeń sesji.\n\n**Rozpoznanie:** Uwierzytelnienie TCP/BGP jest niespójne.\n\n**Działanie:** Uzgodnić poprawne hasło po obu stronach bez ujawniania go w logach.\n\n**Sprawdzenie:** Po uzgodnieniu uwierzytelniania sesja osiąga Established.",
+      "example": "Uwierzytelnienie TCP/BGP jest niespójne."
+    },
+    {
+      "revision": 1,
+      "title": "Neighbor shutdown — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-06.1.card",
+      "front_md": "Konfiguracja peera zawiera neighbor shutdown, a operator oczekuje automatycznego zestawienia.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Administracyjne wyłączenie jest odrębne od awarii transportu.\n\n**Rozpoznanie:** Sąsiad jest administracyjnie wyłączony.\n\n**Działanie:** Usunąć administracyjne shutdown tego peera po potwierdzeniu gotowości.\n\n**Sprawdzenie:** Stan administracyjny jest aktywny i rozpoczyna się zestawianie sesji.",
+      "example": "Sąsiad jest administracyjnie wyłączony."
+    },
+    {
+      "revision": 1,
+      "title": "AF nieaktywna — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-07",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-07.1.card",
+      "front_md": "Sesja jest Established, ale przy wyłączonym domyślnym IPv4-unicast nie aktywowano peera w AF IPv4.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Stan sesji transportowej nie oznacza aktywności każdej rodziny adresowej.\n\n**Rozpoznanie:** Nie włączono wymiany wymaganej rodziny adresowej.\n\n**Działanie:** Aktywować sąsiada we właściwym address-family IPv4 unicast.\n\n**Sprawdzenie:** W odpowiedniej AF widać aktywnego peera i wymianę prefiksów.",
+      "example": "Nie włączono wymiany wymaganej rodziny adresowej."
+    },
+    {
+      "revision": 1,
+      "title": "Brak dokładnego RIB — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-08",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-08.1.card",
+      "front_md": "Network wskazuje 10.40.0.0 mask 255.255.255.0, ale RIB ma wyłącznie 10.40.0.0/16.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Network z maską wymaga dokładnego dopasowania prefiksu w RIB.\n\n**Rozpoznanie:** Brakuje dokładnego prefiksu /24 wymaganego przez network.\n\n**Działanie:** Zapewnić prawidłową trasę do zamierzonego /24, jeśli ta sieć rzeczywiście istnieje.\n\n**Sprawdzenie:** W RIB i lokalnej tabeli BGP pojawia się dokładne 10.40.0.0/24.",
+      "example": "Brakuje dokładnego prefiksu /24 wymaganego przez network."
+    },
+    {
+      "revision": 1,
+      "title": "Prefix-list out — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-09",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-09.1.card",
+      "front_md": "Prefiks jest lokalnie w BGP, lecz outbound prefix-list jawnie go odrzuca dla ISP.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Lokalna obecność w BGP nie gwarantuje ogłoszenia każdemu sąsiadowi.\n\n**Rozpoznanie:** Polityka eksportu blokuje reklamę do tego sąsiada.\n\n**Działanie:** Dodać tylko zatwierdzony prefiks do właściwej polityki eksportowej.\n\n**Sprawdzenie:** Advertised-routes dla ISP zawiera oczekiwany prefiks.",
+      "example": "Polityka eksportu blokuje reklamę do tego sąsiada."
+    },
+    {
+      "revision": 1,
+      "title": "Prefix-list in — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-10",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-10.1.card",
+      "front_md": "ISP wysyła prefiks, lecz lokalna polityka inbound go odrzuca; sesja jest Established.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Polityki importu i eksportu działają w różnych kierunkach względem routera.\n\n**Rozpoznanie:** Import jest blokowany przez lokalny filtr.\n\n**Działanie:** Sprawdzić i skorygować zgodnie z umową politykę importu.\n\n**Sprawdzenie:** Po ponownym przetworzeniu reklam prefiks jest akceptowany w lokalnym BGP.",
+      "example": "Import jest blokowany przez lokalny filtr."
+    },
+    {
+      "revision": 1,
+      "title": "Network nie wildcard — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-11",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-11.1.card",
+      "front_md": "Operator chce ogłosić /24 i podaje mask 0.0.0.255 w BGP network.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Składnia mask w BGP network nie jest wildcardem używanym w innych poleceniach.\n\n**Rozpoznanie:** Użyto wildcard zamiast maski podsieci.\n\n**Działanie:** Użyć mask 255.255.255.0 dla zamierzonego /24.\n\n**Sprawdzenie:** Konfiguracja network zawiera właściwą maskę i pasuje do dokładnej trasy.",
+      "example": "Użyto wildcard zamiast maski podsieci."
+    },
+    {
+      "revision": 1,
+      "title": "Nieosiągalny next hop — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-12",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.case-12.1.card",
+      "front_md": "Trasa ma local-pref 300, lecz jej next hop nie jest osiągalny. Druga ścieżka jest poprawna.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Atrybut preferencji nie zastępuje warunku osiągalności następnego skoku.\n\n**Rozpoznanie:** Pierwsza ścieżka nie spełnia warunku używalności.\n\n**Działanie:** Przywrócić osiągalność właściwego next hop przed analizą preferencji.\n\n**Sprawdzenie:** Ścieżka staje się valid po rozwiązaniu next hop.",
+      "example": "Pierwsza ścieżka nie spełnia warunku używalności."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ebgp.practice.case-01.1",
+      "revision": 1,
+      "title": "Zły remote-as — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "R1 oczekuje remote-as 65020, ale rzeczywisty sąsiad ma AS 65030. Log OPEN wskazuje Bad Peer AS.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Remote-as opisuje system autonomiczny sąsiada, nie lokalny AS.\n\n**Rozpoznanie:** Skonfigurowany numer AS sąsiada jest niezgodny.\n\n**Działanie:** Poprawić remote-as na uzgodniony AS 65030 po potwierdzeniu obu końców.\n\n**Sprawdzenie:** Sesja przechodzi wymianę OPEN bez błędu Bad Peer AS.",
+      "card_id": "encor.ebgp.practice.case-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Skonfigurowany numer AS sąsiada jest niezgodny.",
+          "feedback_md": "Remote-as opisuje system autonomiczny sąsiada, nie lokalny AS.\n\n**Rozpoznanie:** Skonfigurowany numer AS sąsiada jest niezgodny.\n\n**Działanie:** Poprawić remote-as na uzgodniony AS 65030 po potwierdzeniu obu końców.\n\n**Sprawdzenie:** Sesja przechodzi wymianę OPEN bez błędu Bad Peer AS.",
+          "id": "A"
+        },
+        {
+          "text_md": "Definicja wskazuje lokalny adres zamiast zdalnego peera.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Adres peer pomylony”: Łącze /30 ma CE .1 i PE .2, lecz CE skonfigurowało jako neighbor własne .1. W bieżącym przypadku: Skonfigurowany numer AS sąsiada jest niezgodny.",
+          "id": "B"
+        },
+        {
+          "text_md": "Użyto wildcard zamiast maski podsieci.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Network nie wildcard”: Operator chce ogłosić /24 i podaje mask 0.0.0.255 w BGP network. W bieżącym przypadku: Skonfigurowany numer AS sąsiada jest niezgodny.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zniknął warunek originowania prefiksu przez network.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wycofanie connected”: Ogłaszany network /24 miał dokładną trasę connected. Po awarii interfejsu trasa znika i nie ma zastępstwa. W bieżącym przypadku: Skonfigurowany numer AS sąsiada jest niezgodny.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ebgp.practice.case-02.1",
+      "revision": 1,
+      "title": "Brak TCP 179 — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Ping do sąsiada działa, ale ACL odrzuca TCP 179 i sesja nie dochodzi do wymiany OPEN.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Osiągalność ICMP nie potwierdza dostępności transportu BGP.\n\n**Rozpoznanie:** Filtrowany jest transport wymagany przez BGP.\n\n**Działanie:** Dopuścić wymagany TCP między uprawnionymi adresami peerów.\n\n**Sprawdzenie:** Połączenie TCP dla BGP zestawia się i pojawiają się wiadomości OPEN.",
+      "card_id": "encor.ebgp.practice.case-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Control-plane działa, natomiast problem leży na ścieżce danych.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prefiks a ruch”: BGP i RIB zawierają poprawną trasę, ale firewall dalej odrzuca dane użytkownika. W bieżącym przypadku: Filtrowany jest transport wymagany przez BGP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Filtrowany jest transport wymagany przez BGP.",
+          "feedback_md": "Osiągalność ICMP nie potwierdza dostępności transportu BGP.\n\n**Rozpoznanie:** Filtrowany jest transport wymagany przez BGP.\n\n**Działanie:** Dopuścić wymagany TCP między uprawnionymi adresami peerów.\n\n**Sprawdzenie:** Połączenie TCP dla BGP zestawia się i pojawiają się wiadomości OPEN.",
+          "id": "B"
+        },
+        {
+          "text_md": "Import jest blokowany przez lokalny filtr.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prefix-list in”: ISP wysyła prefiks, lecz lokalna polityka inbound go odrzuca; sesja jest Established. W bieżącym przypadku: Filtrowany jest transport wymagany przez BGP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Uwierzytelnienie TCP/BGP jest niespójne.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Hasło peera”: Adresy, AS i TCP są poprawne, ale końce mają różne hasła uwierzytelniania sesji. W bieżącym przypadku: Filtrowany jest transport wymagany przez BGP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ebgp.practice.case-03.1",
+      "revision": 1,
+      "title": "Źródło loopback — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "R2 oczekuje sąsiada 10.0.0.1, ale R1 inicjuje sesję ze swojego adresu fizycznego. Routing loopbacków działa.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Peering identyfikuje sąsiada przez adres; osiągalność loopbacku nie ustawia źródła automatycznie.\n\n**Rozpoznanie:** Adres źródłowy nie zgadza się z definicją peera po drugiej stronie.\n\n**Działanie:** Ustawić właściwe update-source na R1 i zachować zgodne definicje peerów.\n\n**Sprawdzenie:** R2 widzi połączenie z oczekiwanego 10.0.0.1.",
+      "card_id": "encor.ebgp.practice.case-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wyższy local-pref A rozstrzyga przed długością AS_PATH.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „LP przed długością”: Obie poprawne ścieżki mają weight 0 i nie są lokalne. A ma LP 200 oraz cztery AS, B LP 100 oraz jeden AS. W bieżącym przypadku: Adres źródłowy nie zgadza się z definicją peera po drugiej stronie.",
+          "id": "A"
+        },
+        {
+          "text_md": "Stan transportu jest poprawny, a zero reklam wymaga oceny polityki i źródeł tras.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Established zero”: Sesja jest Established i ma 0 prefiksów. Nie uzgodniono jeszcze, czy peer ma cokolwiek ogłaszać. W bieżącym przypadku: Adres źródłowy nie zgadza się z definicją peera po drugiej stronie.",
+          "id": "B"
+        },
+        {
+          "text_md": "Adres źródłowy nie zgadza się z definicją peera po drugiej stronie.",
+          "feedback_md": "Peering identyfikuje sąsiada przez adres; osiągalność loopbacku nie ustawia źródła automatycznie.\n\n**Rozpoznanie:** Adres źródłowy nie zgadza się z definicją peera po drugiej stronie.\n\n**Działanie:** Ustawić właściwe update-source na R1 i zachować zgodne definicje peerów.\n\n**Sprawdzenie:** R2 widzi połączenie z oczekiwanego 10.0.0.1.",
+          "id": "C"
+        },
+        {
+          "text_md": "Niedopasowane reklamy są odrzucane przez politykę.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Route-map implicit”: Route-map eksportu ma jedną permit sequence matchującą tylko /24. Inne wymagane prefiksy nie pasują do żadnej sekwencji. W bieżącym przypadku: Adres źródłowy nie zgadza się z definicją peera po drugiej stronie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ebgp.practice.case-04.1",
+      "revision": 1,
+      "title": "TTL multihop — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "eBGP między loopbackami jest poprawnie routowane przez kilka skoków, lecz pakiet z domyślnym TTL nie dociera. Nie użyto TTL security.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Peering wieloskokowy wymaga świadomej konfiguracji zasięgu transportu.\n\n**Rozpoznanie:** Domyślny zasięg eBGP jest niewystarczający dla tej topologii.\n\n**Działanie:** Skonfigurować uzgodnione ebgp-multihop z odpowiednim limitem po obu stronach.\n\n**Sprawdzenie:** Pakiety sesji docierają między loopbackami z prawidłowym źródłem i TTL.",
+      "card_id": "encor.ebgp.practice.case-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Uwierzytelnienie TCP/BGP jest niespójne.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Hasło peera”: Adresy, AS i TCP są poprawne, ale końce mają różne hasła uwierzytelniania sesji. W bieżącym przypadku: Domyślny zasięg eBGP jest niewystarczający dla tej topologii.",
+          "id": "A"
+        },
+        {
+          "text_md": "Domyślnie MED nie musi być porównywany między różnymi sąsiednimi AS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „MED różne AS”: A i B pochodzą z różnych sąsiednich AS. Operator zakłada, że przy domyślnych ustawieniach zawsze wygra niższy MED. W bieżącym przypadku: Domyślny zasięg eBGP jest niewystarczający dla tej topologii.",
+          "id": "B"
+        },
+        {
+          "text_md": "Definicja wskazuje lokalny adres zamiast zdalnego peera.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Adres peer pomylony”: Łącze /30 ma CE .1 i PE .2, lecz CE skonfigurowało jako neighbor własne .1. W bieżącym przypadku: Domyślny zasięg eBGP jest niewystarczający dla tej topologii.",
+          "id": "C"
+        },
+        {
+          "text_md": "Domyślny zasięg eBGP jest niewystarczający dla tej topologii.",
+          "feedback_md": "Peering wieloskokowy wymaga świadomej konfiguracji zasięgu transportu.\n\n**Rozpoznanie:** Domyślny zasięg eBGP jest niewystarczający dla tej topologii.\n\n**Działanie:** Skonfigurować uzgodnione ebgp-multihop z odpowiednim limitem po obu stronach.\n\n**Sprawdzenie:** Pakiety sesji docierają między loopbackami z prawidłowym źródłem i TTL.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ebgp.practice.case-05.1",
+      "revision": 1,
+      "title": "Hasło peera — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Adresy, AS i TCP są poprawne, ale końce mają różne hasła uwierzytelniania sesji.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Zgodność adresacji nie zastępuje zgodności zabezpieczeń sesji.\n\n**Rozpoznanie:** Uwierzytelnienie TCP/BGP jest niespójne.\n\n**Działanie:** Uzgodnić poprawne hasło po obu stronach bez ujawniania go w logach.\n\n**Sprawdzenie:** Po uzgodnieniu uwierzytelniania sesja osiąga Established.",
+      "card_id": "encor.ebgp.practice.case-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Uwierzytelnienie TCP/BGP jest niespójne.",
+          "feedback_md": "Zgodność adresacji nie zastępuje zgodności zabezpieczeń sesji.\n\n**Rozpoznanie:** Uwierzytelnienie TCP/BGP jest niespójne.\n\n**Działanie:** Uzgodnić poprawne hasło po obu stronach bez ujawniania go w logach.\n\n**Sprawdzenie:** Po uzgodnieniu uwierzytelniania sesja osiąga Established.",
+          "id": "A"
+        },
+        {
+          "text_md": "Domyślny zasięg eBGP jest niewystarczający dla tej topologii.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „TTL multihop”: eBGP między loopbackami jest poprawnie routowane przez kilka skoków, lecz pakiet z domyślnym TTL nie dociera. Nie użyto TTL security. W bieżącym przypadku: Uwierzytelnienie TCP/BGP jest niespójne.",
+          "id": "B"
+        },
+        {
+          "text_md": "Filtrowany jest transport wymagany przez BGP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak TCP 179”: Ping do sąsiada działa, ale ACL odrzuca TCP 179 i sesja nie dochodzi do wymiany OPEN. W bieżącym przypadku: Uwierzytelnienie TCP/BGP jest niespójne.",
+          "id": "C"
+        },
+        {
+          "text_md": "Reklama sumaryczna nie dowodzi dostępności każdej składowej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Agregat maskuje awarię”: Agregat jest nadal ogłaszany, lecz jedna składowa sieć jest nieosiągalna i ruch do niej jest odrzucany. W bieżącym przypadku: Uwierzytelnienie TCP/BGP jest niespójne.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ebgp.practice.case-06.1",
+      "revision": 1,
+      "title": "Neighbor shutdown — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Konfiguracja peera zawiera neighbor shutdown, a operator oczekuje automatycznego zestawienia.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Administracyjne wyłączenie jest odrębne od awarii transportu.\n\n**Rozpoznanie:** Sąsiad jest administracyjnie wyłączony.\n\n**Działanie:** Usunąć administracyjne shutdown tego peera po potwierdzeniu gotowości.\n\n**Sprawdzenie:** Stan administracyjny jest aktywny i rozpoczyna się zestawianie sesji.",
+      "card_id": "encor.ebgp.practice.case-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Cisco preferuje A przez wyższy weight.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Weight przed LP”: Dwie poprawne ścieżki: A weight 200 i local-pref 100, B weight 0 i local-pref 300. Inne warunki nie dyskwalifikują ścieżek. W bieżącym przypadku: Sąsiad jest administracyjnie wyłączony.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sąsiad jest administracyjnie wyłączony.",
+          "feedback_md": "Administracyjne wyłączenie jest odrębne od awarii transportu.\n\n**Rozpoznanie:** Sąsiad jest administracyjnie wyłączony.\n\n**Działanie:** Usunąć administracyjne shutdown tego peera po potwierdzeniu gotowości.\n\n**Sprawdzenie:** Stan administracyjny jest aktywny i rozpoczyna się zestawianie sesji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Pierwsza ścieżka nie spełnia warunku używalności.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nieosiągalny next hop”: Trasa ma local-pref 300, lecz jej next hop nie jest osiągalny. Druga ścieżka jest poprawna. W bieżącym przypadku: Sąsiad jest administracyjnie wyłączony.",
+          "id": "C"
+        },
+        {
+          "text_md": "Adres źródłowy nie zgadza się z definicją peera po drugiej stronie.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Źródło loopback”: R2 oczekuje sąsiada 10.0.0.1, ale R1 inicjuje sesję ze swojego adresu fizycznego. Routing loopbacków działa. W bieżącym przypadku: Sąsiad jest administracyjnie wyłączony.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ebgp.practice.case-07.1",
+      "revision": 1,
+      "title": "AF nieaktywna — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-07",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Sesja jest Established, ale przy wyłączonym domyślnym IPv4-unicast nie aktywowano peera w AF IPv4.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Stan sesji transportowej nie oznacza aktywności każdej rodziny adresowej.\n\n**Rozpoznanie:** Nie włączono wymiany wymaganej rodziny adresowej.\n\n**Działanie:** Aktywować sąsiada we właściwym address-family IPv4 unicast.\n\n**Sprawdzenie:** W odpowiedniej AF widać aktywnego peera i wymianę prefiksów.",
+      "card_id": "encor.ebgp.practice.case-07.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zadziałała standardowa ochrona przed pętlą AS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Własny AS w path”: Lokalny AS 65001 otrzymuje reklamę z AS_PATH zawierającym 65001. Nie skonfigurowano wyjątków. W bieżącym przypadku: Nie włączono wymiany wymaganej rodziny adresowej.",
+          "id": "A"
+        },
+        {
+          "text_md": "BGP best-path przegrało instalację z innym źródłem trasy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „RIB failure”: BGP wybrało najlepszą ścieżkę do /24, ale w RIB jest statyczna do tego samego /24 z niższym AD. W bieżącym przypadku: Nie włączono wymiany wymaganej rodziny adresowej.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nie włączono wymiany wymaganej rodziny adresowej.",
+          "feedback_md": "Stan sesji transportowej nie oznacza aktywności każdej rodziny adresowej.\n\n**Rozpoznanie:** Nie włączono wymiany wymaganej rodziny adresowej.\n\n**Działanie:** Aktywować sąsiada we właściwym address-family IPv4 unicast.\n\n**Sprawdzenie:** W odpowiedniej AF widać aktywnego peera i wymianę prefiksów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Import jest blokowany przez lokalny filtr.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prefix-list in”: ISP wysyła prefiks, lecz lokalna polityka inbound go odrzuca; sesja jest Established. W bieżącym przypadku: Nie włączono wymiany wymaganej rodziny adresowej.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ebgp.practice.case-08.1",
+      "revision": 1,
+      "title": "Brak dokładnego RIB — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-08",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Network wskazuje 10.40.0.0 mask 255.255.255.0, ale RIB ma wyłącznie 10.40.0.0/16.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Network z maską wymaga dokładnego dopasowania prefiksu w RIB.\n\n**Rozpoznanie:** Brakuje dokładnego prefiksu /24 wymaganego przez network.\n\n**Działanie:** Zapewnić prawidłową trasę do zamierzonego /24, jeśli ta sieć rzeczywiście istnieje.\n\n**Sprawdzenie:** W RIB i lokalnej tabeli BGP pojawia się dokładne 10.40.0.0/24.",
+      "card_id": "encor.ebgp.practice.case-08.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "BGP best-path przegrało instalację z innym źródłem trasy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „RIB failure”: BGP wybrało najlepszą ścieżkę do /24, ale w RIB jest statyczna do tego samego /24 z niższym AD. W bieżącym przypadku: Brakuje dokładnego prefiksu /24 wymaganego przez network.",
+          "id": "A"
+        },
+        {
+          "text_md": "Import jest blokowany przez lokalny filtr.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prefix-list in”: ISP wysyła prefiks, lecz lokalna polityka inbound go odrzuca; sesja jest Established. W bieżącym przypadku: Brakuje dokładnego prefiksu /24 wymaganego przez network.",
+          "id": "B"
+        },
+        {
+          "text_md": "Domyślnie MED nie musi być porównywany między różnymi sąsiednimi AS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „MED różne AS”: A i B pochodzą z różnych sąsiednich AS. Operator zakłada, że przy domyślnych ustawieniach zawsze wygra niższy MED. W bieżącym przypadku: Brakuje dokładnego prefiksu /24 wymaganego przez network.",
+          "id": "C"
+        },
+        {
+          "text_md": "Brakuje dokładnego prefiksu /24 wymaganego przez network.",
+          "feedback_md": "Network z maską wymaga dokładnego dopasowania prefiksu w RIB.\n\n**Rozpoznanie:** Brakuje dokładnego prefiksu /24 wymaganego przez network.\n\n**Działanie:** Zapewnić prawidłową trasę do zamierzonego /24, jeśli ta sieć rzeczywiście istnieje.\n\n**Sprawdzenie:** W RIB i lokalnej tabeli BGP pojawia się dokładne 10.40.0.0/24.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ebgp.practice.case-09.1",
+      "revision": 1,
+      "title": "Prefix-list out — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-09",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Prefiks jest lokalnie w BGP, lecz outbound prefix-list jawnie go odrzuca dla ISP.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Lokalna obecność w BGP nie gwarantuje ogłoszenia każdemu sąsiadowi.\n\n**Rozpoznanie:** Polityka eksportu blokuje reklamę do tego sąsiada.\n\n**Działanie:** Dodać tylko zatwierdzony prefiks do właściwej polityki eksportowej.\n\n**Sprawdzenie:** Advertised-routes dla ISP zawiera oczekiwany prefiks.",
+      "card_id": "encor.ebgp.practice.case-09.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Polityka eksportu blokuje reklamę do tego sąsiada.",
+          "feedback_md": "Lokalna obecność w BGP nie gwarantuje ogłoszenia każdemu sąsiadowi.\n\n**Rozpoznanie:** Polityka eksportu blokuje reklamę do tego sąsiada.\n\n**Działanie:** Dodać tylko zatwierdzony prefiks do właściwej polityki eksportowej.\n\n**Sprawdzenie:** Advertised-routes dla ISP zawiera oczekiwany prefiks.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dłuższy prefiks /24 decyduje o przekazywaniu do hosta.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Longest prefix BGP”: RIB ma /16 przez ISP-A i /24 przez ISP-B. Host należy do obu, a A ma atrakcyjniejsze atrybuty dla /16. W bieżącym przypadku: Polityka eksportu blokuje reklamę do tego sąsiada.",
+          "id": "B"
+        },
+        {
+          "text_md": "Skonfigurowany numer AS sąsiada jest niezgodny.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły remote-as”: R1 oczekuje remote-as 65020, ale rzeczywisty sąsiad ma AS 65030. Log OPEN wskazuje Bad Peer AS. W bieżącym przypadku: Polityka eksportu blokuje reklamę do tego sąsiada.",
+          "id": "C"
+        },
+        {
+          "text_md": "Potrzebne jest odświeżenie wejściowych reklam zgodnie z nową polityką.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Soft refresh”: Zmieniono filtr inbound. Peer wspiera route refresh, a operator chce ponownie przetworzyć reklamy bez twardego resetu. W bieżącym przypadku: Polityka eksportu blokuje reklamę do tego sąsiada.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ebgp.practice.case-10.1",
+      "revision": 1,
+      "title": "Prefix-list in — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-10",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "ISP wysyła prefiks, lecz lokalna polityka inbound go odrzuca; sesja jest Established.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Polityki importu i eksportu działają w różnych kierunkach względem routera.\n\n**Rozpoznanie:** Import jest blokowany przez lokalny filtr.\n\n**Działanie:** Sprawdzić i skorygować zgodnie z umową politykę importu.\n\n**Sprawdzenie:** Po ponownym przetworzeniu reklam prefiks jest akceptowany w lokalnym BGP.",
+      "card_id": "encor.ebgp.practice.case-10.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zadziałała standardowa ochrona przed pętlą AS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Własny AS w path”: Lokalny AS 65001 otrzymuje reklamę z AS_PATH zawierającym 65001. Nie skonfigurowano wyjątków. W bieżącym przypadku: Import jest blokowany przez lokalny filtr.",
+          "id": "A"
+        },
+        {
+          "text_md": "Import jest blokowany przez lokalny filtr.",
+          "feedback_md": "Polityki importu i eksportu działają w różnych kierunkach względem routera.\n\n**Rozpoznanie:** Import jest blokowany przez lokalny filtr.\n\n**Działanie:** Sprawdzić i skorygować zgodnie z umową politykę importu.\n\n**Sprawdzenie:** Po ponownym przetworzeniu reklam prefiks jest akceptowany w lokalnym BGP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Droga wychodząca działa bez zapewnionej drogi powrotnej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak ścieżki powrotnej”: CE wysyła ruch przez poprawny default BGP, ale jego LAN nie jest ogłaszany ani tłumaczony; ISP nie ma drogi do źródła. W bieżącym przypadku: Import jest blokowany przez lokalny filtr.",
+          "id": "C"
+        },
+        {
+          "text_md": "Reklama sumaryczna nie dowodzi dostępności każdej składowej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Agregat maskuje awarię”: Agregat jest nadal ogłaszany, lecz jedna składowa sieć jest nieosiągalna i ruch do niej jest odrzucany. W bieżącym przypadku: Import jest blokowany przez lokalny filtr.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ebgp.practice.case-11.1",
+      "revision": 1,
+      "title": "Network nie wildcard — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-11",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Operator chce ogłosić /24 i podaje mask 0.0.0.255 w BGP network.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Składnia mask w BGP network nie jest wildcardem używanym w innych poleceniach.\n\n**Rozpoznanie:** Użyto wildcard zamiast maski podsieci.\n\n**Działanie:** Użyć mask 255.255.255.0 dla zamierzonego /24.\n\n**Sprawdzenie:** Konfiguracja network zawiera właściwą maskę i pasuje do dokładnej trasy.",
+      "card_id": "encor.ebgp.practice.case-11.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Definicja wskazuje lokalny adres zamiast zdalnego peera.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Adres peer pomylony”: Łącze /30 ma CE .1 i PE .2, lecz CE skonfigurowało jako neighbor własne .1. W bieżącym przypadku: Użyto wildcard zamiast maski podsieci.",
+          "id": "A"
+        },
+        {
+          "text_md": "Niedopasowane reklamy są odrzucane przez politykę.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Route-map implicit”: Route-map eksportu ma jedną permit sequence matchującą tylko /24. Inne wymagane prefiksy nie pasują do żadnej sekwencji. W bieżącym przypadku: Użyto wildcard zamiast maski podsieci.",
+          "id": "B"
+        },
+        {
+          "text_md": "Użyto wildcard zamiast maski podsieci.",
+          "feedback_md": "Składnia mask w BGP network nie jest wildcardem używanym w innych poleceniach.\n\n**Rozpoznanie:** Użyto wildcard zamiast maski podsieci.\n\n**Działanie:** Użyć mask 255.255.255.0 dla zamierzonego /24.\n\n**Sprawdzenie:** Konfiguracja network zawiera właściwą maskę i pasuje do dokładnej trasy.",
+          "id": "C"
+        },
+        {
+          "text_md": "Import jest blokowany przez lokalny filtr.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prefix-list in”: ISP wysyła prefiks, lecz lokalna polityka inbound go odrzuca; sesja jest Established. W bieżącym przypadku: Użyto wildcard zamiast maski podsieci.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ebgp.practice.case-12.1",
+      "revision": 1,
+      "title": "Nieosiągalny next hop — rozpoznanie",
+      "skills": [
+        "encor.ebgp.case-12",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Trasa ma local-pref 300, lecz jej next hop nie jest osiągalny. Druga ścieżka jest poprawna.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Atrybut preferencji nie zastępuje warunku osiągalności następnego skoku.\n\n**Rozpoznanie:** Pierwsza ścieżka nie spełnia warunku używalności.\n\n**Działanie:** Przywrócić osiągalność właściwego next hop przed analizą preferencji.\n\n**Sprawdzenie:** Ścieżka staje się valid po rozwiązaniu next hop.",
+      "card_id": "encor.ebgp.practice.case-12.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Control-plane działa, natomiast problem leży na ścieżce danych.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Prefiks a ruch”: BGP i RIB zawierają poprawną trasę, ale firewall dalej odrzuca dane użytkownika. W bieżącym przypadku: Pierwsza ścieżka nie spełnia warunku używalności.",
+          "id": "A"
+        },
+        {
+          "text_md": "Uwierzytelnienie TCP/BGP jest niespójne.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Hasło peera”: Adresy, AS i TCP są poprawne, ale końce mają różne hasła uwierzytelniania sesji. W bieżącym przypadku: Pierwsza ścieżka nie spełnia warunku używalności.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zadziałała standardowa ochrona przed pętlą AS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Własny AS w path”: Lokalny AS 65001 otrzymuje reklamę z AS_PATH zawierającym 65001. Nie skonfigurowano wyjątków. W bieżącym przypadku: Pierwsza ścieżka nie spełnia warunku używalności.",
+          "id": "C"
+        },
+        {
+          "text_md": "Pierwsza ścieżka nie spełnia warunku używalności.",
+          "feedback_md": "Atrybut preferencji nie zastępuje warunku osiągalności następnego skoku.\n\n**Rozpoznanie:** Pierwsza ścieżka nie spełnia warunku używalności.\n\n**Działanie:** Przywrócić osiągalność właściwego next hop przed analizą preferencji.\n\n**Sprawdzenie:** Ścieżka staje się valid po rozwiązaniu next hop.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

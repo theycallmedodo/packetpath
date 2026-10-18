@@ -1,0 +1,627 @@
+{
+  "schema_version": 3,
+  "id": "ccna.stp.practice-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Niewłaściwy root — działanie",
+      "skills": [
+        "ccna.stp.case-01",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.case-01.2.card",
+      "front_md": "Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\n**Rozpoznanie:** Niższy bridge priority drugiego switcha decyduje o wyborze roota.\n\n**Działanie:** Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.",
+      "example": "Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10."
+    },
+    {
+      "revision": 1,
+      "title": "Port zapasowy — działanie",
+      "skills": [
+        "ccna.stp.case-02",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.case-02.2.card",
+      "front_md": "W topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\n**Rozpoznanie:** RSTP celowo blokuje nadmiarową ścieżkę L2.\n\n**Działanie:** Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.\n\n**Sprawdzenie:** Po awarii ścieżki głównej odpowiedni port zapasowy przechodzi do forwarding.",
+      "example": "Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza."
+    },
+    {
+      "revision": 1,
+      "title": "BPDU Guard — działanie",
+      "skills": [
+        "ccna.stp.case-03",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.case-03.2.card",
+      "front_md": "Port do stacji miał PortFast i BPDU Guard. Po podłączeniu switcha dostał BPDU i przeszedł w err-disabled.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.\n\n**Rozpoznanie:** BPDU Guard zareagował na BPDU na porcie brzegowym.\n\n**Działanie:** Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.\n\n**Sprawdzenie:** Po usunięciu źródła BPDU port działa bez kolejnego zdarzenia BPDU Guard.",
+      "example": "Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port."
+    },
+    {
+      "revision": 1,
+      "title": "Koszt ścieżki — działanie",
+      "skills": [
+        "ccna.stp.case-04",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.case-04.2.card",
+      "front_md": "Root jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.\n\n**Rozpoznanie:** Gi1 ma niższy całkowity koszt drogi do roota.\n\n**Działanie:** Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.",
+      "example": "Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki."
+    },
+    {
+      "revision": 1,
+      "title": "PortFast do hosta — działanie",
+      "skills": [
+        "ccna.stp.case-05",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.case-05.2.card",
+      "front_md": "Pojedynczy komputer jest podłączony do portu access bez PortFast. Przy aktywacji port czeka na przejścia klasycznego STP.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.\n\n**Rozpoznanie:** Port hosta przechodzi zwykłe stany inicjalizacji STP.\n\n**Działanie:** Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.\n\n**Sprawdzenie:** Port hosta szybko osiąga forwarding, nadal reagując zgodnie z polityką ochrony BPDU.",
+      "example": "Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym."
+    },
+    {
+      "revision": 1,
+      "title": "Root Guard — działanie",
+      "skills": [
+        "ccna.stp.case-06",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.case-06.2.card",
+      "front_md": "Na porcie do podrzędnego switcha działa Root Guard. Lepsze BPDU spowodowało root-inconsistent.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.\n\n**Rozpoznanie:** Root Guard blokuje próbę zmiany położenia roota przez ten port.\n\n**Działanie:** Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.\n\n**Sprawdzenie:** Po ustaniu superior BPDU port automatycznie wychodzi z root-inconsistent.",
+      "example": "Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.stp.practice.case-01.2",
+      "revision": 1,
+      "title": "Niewłaściwy root — działanie",
+      "skills": [
+        "ccna.stp.case-01",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\n**Rozpoznanie:** Niższy bridge priority drugiego switcha decyduje o wyborze roota.\n\n**Działanie:** Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.",
+      "card_id": "ccna.stp.practice.case-01.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Port zapasowy”: W topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji. W bieżącym przypadku: Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.",
+          "id": "A"
+        },
+        {
+          "text_md": "Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Root Guard”: Na porcie do podrzędnego switcha działa Root Guard. Lepsze BPDU spowodowało root-inconsistent. W bieżącym przypadku: Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.",
+          "id": "B"
+        },
+        {
+          "text_md": "Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „PortFast do hosta”: Pojedynczy komputer jest podłączony do portu access bez PortFast. Przy aktywacji port czeka na przejścia klasycznego STP. W bieżącym przypadku: Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.",
+          "feedback_md": "W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\n**Rozpoznanie:** Niższy bridge priority drugiego switcha decyduje o wyborze roota.\n\n**Działanie:** Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.stp.practice.case-02.2",
+      "revision": 1,
+      "title": "Port zapasowy — działanie",
+      "skills": [
+        "ccna.stp.case-02",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\n**Rozpoznanie:** RSTP celowo blokuje nadmiarową ścieżkę L2.\n\n**Działanie:** Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.\n\n**Sprawdzenie:** Po awarii ścieżki głównej odpowiedni port zapasowy przechodzi do forwarding.",
+      "card_id": "ccna.stp.practice.case-02.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.",
+          "feedback_md": "Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\n**Rozpoznanie:** RSTP celowo blokuje nadmiarową ścieżkę L2.\n\n**Działanie:** Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.\n\n**Sprawdzenie:** Po awarii ścieżki głównej odpowiedni port zapasowy przechodzi do forwarding.",
+          "id": "A"
+        },
+        {
+          "text_md": "Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Root Guard”: Na porcie do podrzędnego switcha działa Root Guard. Lepsze BPDU spowodowało root-inconsistent. W bieżącym przypadku: Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.",
+          "id": "B"
+        },
+        {
+          "text_md": "Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „PortFast do hosta”: Pojedynczy komputer jest podłączony do portu access bez PortFast. Przy aktywacji port czeka na przejścia klasycznego STP. W bieżącym przypadku: Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.",
+          "id": "C"
+        },
+        {
+          "text_md": "Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „BPDU Guard”: Port do stacji miał PortFast i BPDU Guard. Po podłączeniu switcha dostał BPDU i przeszedł w err-disabled. W bieżącym przypadku: Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.stp.practice.case-03.2",
+      "revision": 1,
+      "title": "BPDU Guard — działanie",
+      "skills": [
+        "ccna.stp.case-03",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Port do stacji miał PortFast i BPDU Guard. Po podłączeniu switcha dostał BPDU i przeszedł w err-disabled.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.\n\n**Rozpoznanie:** BPDU Guard zareagował na BPDU na porcie brzegowym.\n\n**Działanie:** Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.\n\n**Sprawdzenie:** Po usunięciu źródła BPDU port działa bez kolejnego zdarzenia BPDU Guard.",
+      "card_id": "ccna.stp.practice.case-03.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Koszt ścieżki”: Root jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe. W bieżącym przypadku: Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.",
+          "id": "A"
+        },
+        {
+          "text_md": "Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.",
+          "feedback_md": "BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.\n\n**Rozpoznanie:** BPDU Guard zareagował na BPDU na porcie brzegowym.\n\n**Działanie:** Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.\n\n**Sprawdzenie:** Po usunięciu źródła BPDU port działa bez kolejnego zdarzenia BPDU Guard.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niewłaściwy root”: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. W bieżącym przypadku: Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.",
+          "id": "C"
+        },
+        {
+          "text_md": "Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Root Guard”: Na porcie do podrzędnego switcha działa Root Guard. Lepsze BPDU spowodowało root-inconsistent. W bieżącym przypadku: Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.stp.practice.case-04.2",
+      "revision": 1,
+      "title": "Koszt ścieżki — działanie",
+      "skills": [
+        "ccna.stp.case-04",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Root jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.\n\n**Rozpoznanie:** Gi1 ma niższy całkowity koszt drogi do roota.\n\n**Działanie:** Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.",
+      "card_id": "ccna.stp.practice.case-04.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niewłaściwy root”: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. W bieżącym przypadku: Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.",
+          "id": "A"
+        },
+        {
+          "text_md": "Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „PortFast do hosta”: Pojedynczy komputer jest podłączony do portu access bez PortFast. Przy aktywacji port czeka na przejścia klasycznego STP. W bieżącym przypadku: Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.",
+          "feedback_md": "Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.\n\n**Rozpoznanie:** Gi1 ma niższy całkowity koszt drogi do roota.\n\n**Działanie:** Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Port zapasowy”: W topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji. W bieżącym przypadku: Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.stp.practice.case-05.2",
+      "revision": 1,
+      "title": "PortFast do hosta — działanie",
+      "skills": [
+        "ccna.stp.case-05",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Pojedynczy komputer jest podłączony do portu access bez PortFast. Przy aktywacji port czeka na przejścia klasycznego STP.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.\n\n**Rozpoznanie:** Port hosta przechodzi zwykłe stany inicjalizacji STP.\n\n**Działanie:** Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.\n\n**Sprawdzenie:** Port hosta szybko osiąga forwarding, nadal reagując zgodnie z polityką ochrony BPDU.",
+      "card_id": "ccna.stp.practice.case-05.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Port zapasowy”: W topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji. W bieżącym przypadku: Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.",
+          "id": "A"
+        },
+        {
+          "text_md": "Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „BPDU Guard”: Port do stacji miał PortFast i BPDU Guard. Po podłączeniu switcha dostał BPDU i przeszedł w err-disabled. W bieżącym przypadku: Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Koszt ścieżki”: Root jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe. W bieżącym przypadku: Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.",
+          "id": "C"
+        },
+        {
+          "text_md": "Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.",
+          "feedback_md": "PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.\n\n**Rozpoznanie:** Port hosta przechodzi zwykłe stany inicjalizacji STP.\n\n**Działanie:** Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.\n\n**Sprawdzenie:** Port hosta szybko osiąga forwarding, nadal reagując zgodnie z polityką ochrony BPDU.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.stp.practice.case-06.2",
+      "revision": 1,
+      "title": "Root Guard — działanie",
+      "skills": [
+        "ccna.stp.case-06",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na porcie do podrzędnego switcha działa Root Guard. Lepsze BPDU spowodowało root-inconsistent.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.\n\n**Rozpoznanie:** Root Guard blokuje próbę zmiany położenia roota przez ten port.\n\n**Działanie:** Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.\n\n**Sprawdzenie:** Po ustaniu superior BPDU port automatycznie wychodzi z root-inconsistent.",
+      "card_id": "ccna.stp.practice.case-06.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.",
+          "feedback_md": "Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.\n\n**Rozpoznanie:** Root Guard blokuje próbę zmiany położenia roota przez ten port.\n\n**Działanie:** Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.\n\n**Sprawdzenie:** Po ustaniu superior BPDU port automatycznie wychodzi z root-inconsistent.",
+          "id": "A"
+        },
+        {
+          "text_md": "Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Port zapasowy”: W topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji. W bieżącym przypadku: Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „PortFast do hosta”: Pojedynczy komputer jest podłączony do portu access bez PortFast. Przy aktywacji port czeka na przejścia klasycznego STP. W bieżącym przypadku: Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Koszt ścieżki”: Root jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe. W bieżącym przypadku: Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

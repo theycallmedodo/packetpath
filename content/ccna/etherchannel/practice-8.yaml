@@ -1,0 +1,719 @@
+{
+  "schema_version": 3,
+  "id": "ccna.etherchannel.practice-8",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.compare-01.4.card",
+      "front_md": "**Zgłoszenie I**\n\nOba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał.\n\n**Zgłoszenie II**\n\nDwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Żadna strona nie inicjuje negocjacji LACP. Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie I:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.\n\n**Zgłoszenie II:** Parametry warstwy drugiej członków kanału są niespójne. Ujednolicić parametry trunków członkowskich i Port-channel.\n\n**Sprawdzenie II:** Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.\n\n**Zależności:** LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji. EtherChannel wymaga zgodnych parametrów swoich członków.",
+      "example": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — EtherChannel wymaga zgodnych parametrów swoich członków."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.compare-02.4.card",
+      "front_md": "**Zgłoszenie I**\n\nKanał ma cztery łącza 1 Gb/s. Jeden przepływ TCP używa jednego członka i osiąga mniej niż 1 Gb/s.\n\n**Zgłoszenie II**\n\nLACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Hash przypisał pojedynczy przepływ do jednego łącza. Ocenić wykorzystanie kanału za pomocą wielu różnych przepływów.\n\n**Sprawdzenie I:** Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.\n\n**Zgłoszenie II:** Kanał działa ze zmniejszoną przepustowością. Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie II:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.\n\n**Zależności:** Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków. Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+      "example": "I — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.\n\nII — Awaria pojedynczego członka nie musi wyłączyć całej agregacji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.compare-03.4.card",
+      "front_md": "**Zgłoszenie I**\n\nJedna strona ma channel-group mode active, druga desirable. Nie zestawia się negocjowany kanał.\n\n**Zgłoszenie II**\n\nDwa fizyczne łącza są poprawnie bundled w Po1. STP przedstawia Po1 jako jeden port logiczny.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** LACP i PAgP nie negocjują między sobą. Uzgodnić jeden protokół, np. LACP active po obu stronach.\n\n**Sprawdzenie I:** Oba końce pokazują LACP i zgodnego partnera.\n\n**Zgłoszenie II:** STP operuje na interfejsie logicznym agregacji. Analizować rolę i koszt Po1, nie wymuszać osobnych ról członków.\n\n**Sprawdzenie II:** Show spanning-tree wskazuje logiczny Po1 dla tej drogi.\n\n**Zależności:** Active/passive należą do LACP, desirable/auto do PAgP. Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+      "example": "I — Active/passive należą do LACP, desirable/auto do PAgP.\n\nII — Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.compare-04.4.card",
+      "front_md": "**Zgłoszenie I**\n\nOba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał.\n\n**Zgłoszenie II**\n\nKanał ma cztery łącza 1 Gb/s. Jeden przepływ TCP używa jednego członka i osiąga mniej niż 1 Gb/s.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Żadna strona nie inicjuje negocjacji LACP. Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie I:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.\n\n**Zgłoszenie II:** Hash przypisał pojedynczy przepływ do jednego łącza. Ocenić wykorzystanie kanału za pomocą wielu różnych przepływów.\n\n**Sprawdzenie II:** Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.\n\n**Zależności:** LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji. Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.",
+      "example": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.compare-05.4.card",
+      "front_md": "**Zgłoszenie I**\n\nDwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended.\n\n**Zgłoszenie II**\n\nJedna strona ma channel-group mode active, druga desirable. Nie zestawia się negocjowany kanał.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Parametry warstwy drugiej członków kanału są niespójne. Ujednolicić parametry trunków członkowskich i Port-channel.\n\n**Sprawdzenie I:** Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.\n\n**Zgłoszenie II:** LACP i PAgP nie negocjują między sobą. Uzgodnić jeden protokół, np. LACP active po obu stronach.\n\n**Sprawdzenie II:** Oba końce pokazują LACP i zgodnego partnera.\n\n**Zależności:** EtherChannel wymaga zgodnych parametrów swoich członków. Active/passive należą do LACP, desirable/auto do PAgP.",
+      "example": "I — EtherChannel wymaga zgodnych parametrów swoich członków.\n\nII — Active/passive należą do LACP, desirable/auto do PAgP."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.compare-06.4.card",
+      "front_md": "**Zgłoszenie I**\n\nLACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału.\n\n**Zgłoszenie II**\n\nDwa fizyczne łącza są poprawnie bundled w Po1. STP przedstawia Po1 jako jeden port logiczny.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Kanał działa ze zmniejszoną przepustowością. Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie I:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.\n\n**Zgłoszenie II:** STP operuje na interfejsie logicznym agregacji. Analizować rolę i koszt Po1, nie wymuszać osobnych ról członków.\n\n**Sprawdzenie II:** Show spanning-tree wskazuje logiczny Po1 dla tej drogi.\n\n**Zależności:** Awaria pojedynczego członka nie musi wyłączyć całej agregacji. Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+      "example": "I — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.\n\nII — Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.compare-07.4.card",
+      "front_md": "**Zgłoszenie I**\n\nOba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał.\n\n**Zgłoszenie II**\n\nDwa fizyczne łącza są poprawnie bundled w Po1. STP przedstawia Po1 jako jeden port logiczny.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Żadna strona nie inicjuje negocjacji LACP. Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie I:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.\n\n**Zgłoszenie II:** STP operuje na interfejsie logicznym agregacji. Analizować rolę i koszt Po1, nie wymuszać osobnych ról członków.\n\n**Sprawdzenie II:** Show spanning-tree wskazuje logiczny Po1 dla tej drogi.\n\n**Zależności:** LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji. Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+      "example": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.compare-08.4.card",
+      "front_md": "**Zgłoszenie I**\n\nDwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended.\n\n**Zgłoszenie II**\n\nLACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Parametry warstwy drugiej członków kanału są niespójne. Ujednolicić parametry trunków członkowskich i Port-channel.\n\n**Sprawdzenie I:** Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.\n\n**Zgłoszenie II:** Kanał działa ze zmniejszoną przepustowością. Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie II:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.\n\n**Zależności:** EtherChannel wymaga zgodnych parametrów swoich członków. Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+      "example": "I — EtherChannel wymaga zgodnych parametrów swoich członków.\n\nII — Awaria pojedynczego członka nie musi wyłączyć całej agregacji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.compare-09.4.card",
+      "front_md": "**Zgłoszenie I**\n\nKanał ma cztery łącza 1 Gb/s. Jeden przepływ TCP używa jednego członka i osiąga mniej niż 1 Gb/s.\n\n**Zgłoszenie II**\n\nJedna strona ma channel-group mode active, druga desirable. Nie zestawia się negocjowany kanał.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Hash przypisał pojedynczy przepływ do jednego łącza. Ocenić wykorzystanie kanału za pomocą wielu różnych przepływów.\n\n**Sprawdzenie I:** Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.\n\n**Zgłoszenie II:** LACP i PAgP nie negocjują między sobą. Uzgodnić jeden protokół, np. LACP active po obu stronach.\n\n**Sprawdzenie II:** Oba końce pokazują LACP i zgodnego partnera.\n\n**Zależności:** Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków. Active/passive należą do LACP, desirable/auto do PAgP.",
+      "example": "I — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.\n\nII — Active/passive należą do LACP, desirable/auto do PAgP."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "id": "ccna.etherchannel.practice.compare-10.4.card",
+      "front_md": "**Zgłoszenie I**\n\nOba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał.\n\n**Zgłoszenie II**\n\nLACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Żadna strona nie inicjuje negocjacji LACP. Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie I:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.\n\n**Zgłoszenie II:** Kanał działa ze zmniejszoną przepustowością. Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie II:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.\n\n**Zależności:** LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji. Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+      "example": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Awaria pojedynczego członka nie musi wyłączyć całej agregacji."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.etherchannel.practice.compare-01.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał.\n\n**Zgłoszenie II**\n\nDwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Żadna strona nie inicjuje negocjacji LACP. Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie I:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.\n\n**Zgłoszenie II:** Parametry warstwy drugiej członków kanału są niespójne. Ujednolicić parametry trunków członkowskich i Port-channel.\n\n**Sprawdzenie II:** Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.\n\n**Zależności:** LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji. EtherChannel wymaga zgodnych parametrów swoich członków.",
+      "card_id": "ccna.etherchannel.practice.compare-01.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — EtherChannel wymaga zgodnych parametrów swoich członków.",
+          "feedback_md": "**Zgłoszenie I:** Żadna strona nie inicjuje negocjacji LACP. Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie I:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.\n\n**Zgłoszenie II:** Parametry warstwy drugiej członków kanału są niespójne. Ujednolicić parametry trunków członkowskich i Port-channel.\n\n**Sprawdzenie II:** Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.\n\n**Zależności:** LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji. EtherChannel wymaga zgodnych parametrów swoich członków.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — EtherChannel wymaga zgodnych parametrów swoich członków.\n\nII — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Żadna strona nie inicjuje negocjacji LACP. Zgłoszenie II: Parametry warstwy drugiej członków kanału są niespójne.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Kanał ma cztery łącza 1 Gb/s. Jeden przepływ TCP używa jednego członka i osiąga mniej niż 1 Gb/s. Dla II: EtherChannel wymaga zgodnych parametrów swoich członków.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.\n\nII — EtherChannel wymaga zgodnych parametrów swoich członków.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Kanał ma cztery łącza 1 Gb/s. Jeden przepływ TCP używa jednego członka i osiąga mniej niż 1 Gb/s. Dla I: LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.etherchannel.practice.compare-02.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKanał ma cztery łącza 1 Gb/s. Jeden przepływ TCP używa jednego członka i osiąga mniej niż 1 Gb/s.\n\n**Zgłoszenie II**\n\nLACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Hash przypisał pojedynczy przepływ do jednego łącza. Ocenić wykorzystanie kanału za pomocą wielu różnych przepływów.\n\n**Sprawdzenie I:** Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.\n\n**Zgłoszenie II:** Kanał działa ze zmniejszoną przepustowością. Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie II:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.\n\n**Zależności:** Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków. Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+      "card_id": "ccna.etherchannel.practice.compare-02.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.\n\nII — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Hash przypisał pojedynczy przepływ do jednego łącza. Zgłoszenie II: Kanał działa ze zmniejszoną przepustowością.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.\n\nII — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "feedback_md": "**Zgłoszenie I:** Hash przypisał pojedynczy przepływ do jednego łącza. Ocenić wykorzystanie kanału za pomocą wielu różnych przepływów.\n\n**Sprawdzenie I:** Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.\n\n**Zgłoszenie II:** Kanał działa ze zmniejszoną przepustowością. Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie II:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.\n\n**Zależności:** Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków. Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.\n\nII — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. Dla II: Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. Dla I: Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.etherchannel.practice.compare-03.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nJedna strona ma channel-group mode active, druga desirable. Nie zestawia się negocjowany kanał.\n\n**Zgłoszenie II**\n\nDwa fizyczne łącza są poprawnie bundled w Po1. STP przedstawia Po1 jako jeden port logiczny.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** LACP i PAgP nie negocjują między sobą. Uzgodnić jeden protokół, np. LACP active po obu stronach.\n\n**Sprawdzenie I:** Oba końce pokazują LACP i zgodnego partnera.\n\n**Zgłoszenie II:** STP operuje na interfejsie logicznym agregacji. Analizować rolę i koszt Po1, nie wymuszać osobnych ról członków.\n\n**Sprawdzenie II:** Show spanning-tree wskazuje logiczny Po1 dla tej drogi.\n\n**Zależności:** Active/passive należą do LACP, desirable/auto do PAgP. Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+      "card_id": "ccna.etherchannel.practice.compare-03.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.\n\nII — Active/passive należą do LACP, desirable/auto do PAgP.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: LACP i PAgP nie negocjują między sobą. Zgłoszenie II: STP operuje na interfejsie logicznym agregacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Active/passive należą do LACP, desirable/auto do PAgP.\n\nII — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. Dla II: Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Active/passive należą do LACP, desirable/auto do PAgP.\n\nII — Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+          "feedback_md": "**Zgłoszenie I:** LACP i PAgP nie negocjują między sobą. Uzgodnić jeden protokół, np. LACP active po obu stronach.\n\n**Sprawdzenie I:** Oba końce pokazują LACP i zgodnego partnera.\n\n**Zgłoszenie II:** STP operuje na interfejsie logicznym agregacji. Analizować rolę i koszt Po1, nie wymuszać osobnych ról członków.\n\n**Sprawdzenie II:** Show spanning-tree wskazuje logiczny Po1 dla tej drogi.\n\n**Zależności:** Active/passive należą do LACP, desirable/auto do PAgP. Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. Dla I: Active/passive należą do LACP, desirable/auto do PAgP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.etherchannel.practice.compare-04.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał.\n\n**Zgłoszenie II**\n\nKanał ma cztery łącza 1 Gb/s. Jeden przepływ TCP używa jednego członka i osiąga mniej niż 1 Gb/s.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Żadna strona nie inicjuje negocjacji LACP. Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie I:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.\n\n**Zgłoszenie II:** Hash przypisał pojedynczy przepływ do jednego łącza. Ocenić wykorzystanie kanału za pomocą wielu różnych przepływów.\n\n**Sprawdzenie II:** Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.\n\n**Zależności:** LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji. Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.",
+      "card_id": "ccna.etherchannel.practice.compare-04.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.\n\nII — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Żadna strona nie inicjuje negocjacji LACP. Zgłoszenie II: Hash przypisał pojedynczy przepływ do jednego łącza.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — EtherChannel wymaga zgodnych parametrów swoich członków.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Dwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended. Dla II: Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — EtherChannel wymaga zgodnych parametrów swoich członków.\n\nII — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Dwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended. Dla I: LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.",
+          "feedback_md": "**Zgłoszenie I:** Żadna strona nie inicjuje negocjacji LACP. Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie I:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.\n\n**Zgłoszenie II:** Hash przypisał pojedynczy przepływ do jednego łącza. Ocenić wykorzystanie kanału za pomocą wielu różnych przepływów.\n\n**Sprawdzenie II:** Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.\n\n**Zależności:** LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji. Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.etherchannel.practice.compare-05.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended.\n\n**Zgłoszenie II**\n\nJedna strona ma channel-group mode active, druga desirable. Nie zestawia się negocjowany kanał.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Parametry warstwy drugiej członków kanału są niespójne. Ujednolicić parametry trunków członkowskich i Port-channel.\n\n**Sprawdzenie I:** Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.\n\n**Zgłoszenie II:** LACP i PAgP nie negocjują między sobą. Uzgodnić jeden protokół, np. LACP active po obu stronach.\n\n**Sprawdzenie II:** Oba końce pokazują LACP i zgodnego partnera.\n\n**Zależności:** EtherChannel wymaga zgodnych parametrów swoich członków. Active/passive należą do LACP, desirable/auto do PAgP.",
+      "card_id": "ccna.etherchannel.practice.compare-05.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — EtherChannel wymaga zgodnych parametrów swoich członków.\n\nII — Active/passive należą do LACP, desirable/auto do PAgP.",
+          "feedback_md": "**Zgłoszenie I:** Parametry warstwy drugiej członków kanału są niespójne. Ujednolicić parametry trunków członkowskich i Port-channel.\n\n**Sprawdzenie I:** Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.\n\n**Zgłoszenie II:** LACP i PAgP nie negocjują między sobą. Uzgodnić jeden protokół, np. LACP active po obu stronach.\n\n**Sprawdzenie II:** Oba końce pokazują LACP i zgodnego partnera.\n\n**Zależności:** EtherChannel wymaga zgodnych parametrów swoich członków. Active/passive należą do LACP, desirable/auto do PAgP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Active/passive należą do LACP, desirable/auto do PAgP.\n\nII — EtherChannel wymaga zgodnych parametrów swoich członków.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Parametry warstwy drugiej członków kanału są niespójne. Zgłoszenie II: LACP i PAgP nie negocjują między sobą.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — EtherChannel wymaga zgodnych parametrów swoich członków.\n\nII — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. Dla II: Active/passive należą do LACP, desirable/auto do PAgP.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Active/passive należą do LACP, desirable/auto do PAgP.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. Dla I: EtherChannel wymaga zgodnych parametrów swoich członków.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.etherchannel.practice.compare-06.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nLACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału.\n\n**Zgłoszenie II**\n\nDwa fizyczne łącza są poprawnie bundled w Po1. STP przedstawia Po1 jako jeden port logiczny.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Kanał działa ze zmniejszoną przepustowością. Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie I:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.\n\n**Zgłoszenie II:** STP operuje na interfejsie logicznym agregacji. Analizować rolę i koszt Po1, nie wymuszać osobnych ról członków.\n\n**Sprawdzenie II:** Show spanning-tree wskazuje logiczny Po1 dla tej drogi.\n\n**Zależności:** Awaria pojedynczego członka nie musi wyłączyć całej agregacji. Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+      "card_id": "ccna.etherchannel.practice.compare-06.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.\n\nII — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Kanał działa ze zmniejszoną przepustowością. Zgłoszenie II: STP operuje na interfejsie logicznym agregacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.\n\nII — Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+          "feedback_md": "**Zgłoszenie I:** Kanał działa ze zmniejszoną przepustowością. Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie I:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.\n\n**Zgłoszenie II:** STP operuje na interfejsie logicznym agregacji. Analizować rolę i koszt Po1, nie wymuszać osobnych ról członków.\n\n**Sprawdzenie II:** Show spanning-tree wskazuje logiczny Po1 dla tej drogi.\n\n**Zależności:** Awaria pojedynczego członka nie musi wyłączyć całej agregacji. Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.\n\nII — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. Dla II: Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. Dla I: Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.etherchannel.practice.compare-07.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał.\n\n**Zgłoszenie II**\n\nDwa fizyczne łącza są poprawnie bundled w Po1. STP przedstawia Po1 jako jeden port logiczny.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Żadna strona nie inicjuje negocjacji LACP. Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie I:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.\n\n**Zgłoszenie II:** STP operuje na interfejsie logicznym agregacji. Analizować rolę i koszt Po1, nie wymuszać osobnych ról członków.\n\n**Sprawdzenie II:** Show spanning-tree wskazuje logiczny Po1 dla tej drogi.\n\n**Zależności:** LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji. Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+      "card_id": "ccna.etherchannel.practice.compare-07.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.\n\nII — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Żadna strona nie inicjuje negocjacji LACP. Zgłoszenie II: STP operuje na interfejsie logicznym agregacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — EtherChannel wymaga zgodnych parametrów swoich członków.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Dwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended. Dla II: Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+          "feedback_md": "**Zgłoszenie I:** Żadna strona nie inicjuje negocjacji LACP. Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie I:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.\n\n**Zgłoszenie II:** STP operuje na interfejsie logicznym agregacji. Analizować rolę i koszt Po1, nie wymuszać osobnych ról członków.\n\n**Sprawdzenie II:** Show spanning-tree wskazuje logiczny Po1 dla tej drogi.\n\n**Zależności:** LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji. Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — EtherChannel wymaga zgodnych parametrów swoich członków.\n\nII — Poprawny EtherChannel prezentuje STP pojedyncze połączenie logiczne.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Dwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended. Dla I: LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.etherchannel.practice.compare-08.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended.\n\n**Zgłoszenie II**\n\nLACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Parametry warstwy drugiej członków kanału są niespójne. Ujednolicić parametry trunków członkowskich i Port-channel.\n\n**Sprawdzenie I:** Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.\n\n**Zgłoszenie II:** Kanał działa ze zmniejszoną przepustowością. Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie II:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.\n\n**Zależności:** EtherChannel wymaga zgodnych parametrów swoich członków. Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+      "card_id": "ccna.etherchannel.practice.compare-08.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.\n\nII — EtherChannel wymaga zgodnych parametrów swoich członków.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Parametry warstwy drugiej członków kanału są niespójne. Zgłoszenie II: Kanał działa ze zmniejszoną przepustowością.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — EtherChannel wymaga zgodnych parametrów swoich członków.\n\nII — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. Dla II: Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. Dla I: EtherChannel wymaga zgodnych parametrów swoich członków.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — EtherChannel wymaga zgodnych parametrów swoich członków.\n\nII — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "feedback_md": "**Zgłoszenie I:** Parametry warstwy drugiej członków kanału są niespójne. Ujednolicić parametry trunków członkowskich i Port-channel.\n\n**Sprawdzenie I:** Oba porty są bundled i przenoszą tę samą zamierzoną listę VLAN.\n\n**Zgłoszenie II:** Kanał działa ze zmniejszoną przepustowością. Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie II:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.\n\n**Zależności:** EtherChannel wymaga zgodnych parametrów swoich członków. Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.etherchannel.practice.compare-09.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKanał ma cztery łącza 1 Gb/s. Jeden przepływ TCP używa jednego członka i osiąga mniej niż 1 Gb/s.\n\n**Zgłoszenie II**\n\nJedna strona ma channel-group mode active, druga desirable. Nie zestawia się negocjowany kanał.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Hash przypisał pojedynczy przepływ do jednego łącza. Ocenić wykorzystanie kanału za pomocą wielu różnych przepływów.\n\n**Sprawdzenie I:** Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.\n\n**Zgłoszenie II:** LACP i PAgP nie negocjują między sobą. Uzgodnić jeden protokół, np. LACP active po obu stronach.\n\n**Sprawdzenie II:** Oba końce pokazują LACP i zgodnego partnera.\n\n**Zależności:** Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków. Active/passive należą do LACP, desirable/auto do PAgP.",
+      "card_id": "ccna.etherchannel.practice.compare-09.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.\n\nII — Active/passive należą do LACP, desirable/auto do PAgP.",
+          "feedback_md": "**Zgłoszenie I:** Hash przypisał pojedynczy przepływ do jednego łącza. Ocenić wykorzystanie kanału za pomocą wielu różnych przepływów.\n\n**Sprawdzenie I:** Wiele przepływów rozkłada obciążenie na członków, bez gwarancji idealnej równości.\n\n**Zgłoszenie II:** LACP i PAgP nie negocjują między sobą. Uzgodnić jeden protokół, np. LACP active po obu stronach.\n\n**Sprawdzenie II:** Oba końce pokazują LACP i zgodnego partnera.\n\n**Zależności:** Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków. Active/passive należą do LACP, desirable/auto do PAgP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Active/passive należą do LACP, desirable/auto do PAgP.\n\nII — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Hash przypisał pojedynczy przepływ do jednego łącza. Zgłoszenie II: LACP i PAgP nie negocjują między sobą.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.\n\nII — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. Dla II: Active/passive należą do LACP, desirable/auto do PAgP.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Active/passive należą do LACP, desirable/auto do PAgP.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Oba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał. Dla I: Agregacja nie oznacza, że pojedynczy strumień dostanie sumę przepustowości członków.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.etherchannel.practice.compare-10.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — zależności",
+      "skills": [
+        "ccna.etherchannel.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — EtherChannel i LACP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/etherchannel/etherchannel-configuration-guide/m_ethernetchannel.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOba końce LACP mają mode passive. Porty fizyczne są sprawne, ale nie powstaje kanał.\n\n**Zgłoszenie II**\n\nLACP miał dwa aktywne porty. Jeden utracił link; drugi nadal jest bundled, a min-links nie blokuje kanału.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Żadna strona nie inicjuje negocjacji LACP. Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie I:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.\n\n**Zgłoszenie II:** Kanał działa ze zmniejszoną przepustowością. Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie II:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.\n\n**Zależności:** LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji. Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+      "card_id": "ccna.etherchannel.practice.compare-10.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.\n\nII — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Żadna strona nie inicjuje negocjacji LACP. Zgłoszenie II: Kanał działa ze zmniejszoną przepustowością.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "feedback_md": "**Zgłoszenie I:** Żadna strona nie inicjuje negocjacji LACP. Ustawić active przynajmniej na jednym końcu.\n\n**Sprawdzenie I:** Show etherchannel summary pokazuje porty członkowskie w stanie bundled.\n\n**Zgłoszenie II:** Kanał działa ze zmniejszoną przepustowością. Naprawić uszkodzony człon, monitorując obciążenie pozostałego.\n\n**Sprawdzenie II:** Port-channel pozostaje up, a po naprawie wracają dwa aktywne członki.\n\n**Zależności:** LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji. Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.\n\nII — EtherChannel wymaga zgodnych parametrów swoich członków.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Dwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended. Dla II: Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — EtherChannel wymaga zgodnych parametrów swoich członków.\n\nII — Awaria pojedynczego członka nie musi wyłączyć całej agregacji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Dwa lokalne porty planowanego kanału mają różne listy allowed VLAN. Jeden został suspended. Dla I: LACP wymaga strony active; passive odpowiada, ale nie rozpoczyna negocjacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

@@ -1,0 +1,1039 @@
+{
+  "schema_version": 3,
+  "id": "ccna.stp.practice-8",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.compare-01.4.card",
+      "front_md": "**Zgłoszenie I**\n\nDla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy.\n\n**Zgłoszenie II**\n\nW topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Niższy bridge priority drugiego switcha decyduje o wyborze roota. Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie I:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.\n\n**Zgłoszenie II:** RSTP celowo blokuje nadmiarową ścieżkę L2. Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.\n\n**Sprawdzenie II:** Po awarii ścieżki głównej odpowiedni port zapasowy przechodzi do forwarding.\n\n**Zależności:** W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC. Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+      "example": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.compare-02.4.card",
+      "front_md": "**Zgłoszenie I**\n\nPort do stacji miał PortFast i BPDU Guard. Po podłączeniu switcha dostał BPDU i przeszedł w err-disabled.\n\n**Zgłoszenie II**\n\nRoot jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** BPDU Guard zareagował na BPDU na porcie brzegowym. Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.\n\n**Sprawdzenie I:** Po usunięciu źródła BPDU port działa bez kolejnego zdarzenia BPDU Guard.\n\n**Zgłoszenie II:** Gi1 ma niższy całkowity koszt drogi do roota. Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie II:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.\n\n**Zależności:** BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP. Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+      "example": "I — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.\n\nII — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.compare-03.4.card",
+      "front_md": "**Zgłoszenie I**\n\nPojedynczy komputer jest podłączony do portu access bez PortFast. Przy aktywacji port czeka na przejścia klasycznego STP.\n\n**Zgłoszenie II**\n\nNa porcie do podrzędnego switcha działa Root Guard. Lepsze BPDU spowodowało root-inconsistent.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Port hosta przechodzi zwykłe stany inicjalizacji STP. Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.\n\n**Sprawdzenie I:** Port hosta szybko osiąga forwarding, nadal reagując zgodnie z polityką ochrony BPDU.\n\n**Zgłoszenie II:** Root Guard blokuje próbę zmiany położenia roota przez ten port. Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.\n\n**Sprawdzenie II:** Po ustaniu superior BPDU port automatycznie wychodzi z root-inconsistent.\n\n**Zależności:** PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP. Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+      "example": "I — PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.\n\nII — Root Guard chroni położenie roota i różni się od reakcji BPDU Guard."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.compare-04.4.card",
+      "front_md": "**Zgłoszenie I**\n\nDla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy.\n\n**Zgłoszenie II**\n\nPort do stacji miał PortFast i BPDU Guard. Po podłączeniu switcha dostał BPDU i przeszedł w err-disabled.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Niższy bridge priority drugiego switcha decyduje o wyborze roota. Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie I:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.\n\n**Zgłoszenie II:** BPDU Guard zareagował na BPDU na porcie brzegowym. Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.\n\n**Sprawdzenie II:** Po usunięciu źródła BPDU port działa bez kolejnego zdarzenia BPDU Guard.\n\n**Zależności:** W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC. BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.",
+      "example": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.compare-05.4.card",
+      "front_md": "**Zgłoszenie I**\n\nW topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji.\n\n**Zgłoszenie II**\n\nPojedynczy komputer jest podłączony do portu access bez PortFast. Przy aktywacji port czeka na przejścia klasycznego STP.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** RSTP celowo blokuje nadmiarową ścieżkę L2. Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.\n\n**Sprawdzenie I:** Po awarii ścieżki głównej odpowiedni port zapasowy przechodzi do forwarding.\n\n**Zgłoszenie II:** Port hosta przechodzi zwykłe stany inicjalizacji STP. Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.\n\n**Sprawdzenie II:** Port hosta szybko osiąga forwarding, nadal reagując zgodnie z polityką ochrony BPDU.\n\n**Zależności:** Discarding na porcie alternatywnym może być prawidłowym stanem redundancji. PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+      "example": "I — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\nII — PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.compare-06.4.card",
+      "front_md": "**Zgłoszenie I**\n\nRoot jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe.\n\n**Zgłoszenie II**\n\nNa porcie do podrzędnego switcha działa Root Guard. Lepsze BPDU spowodowało root-inconsistent.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Gi1 ma niższy całkowity koszt drogi do roota. Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie I:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.\n\n**Zgłoszenie II:** Root Guard blokuje próbę zmiany położenia roota przez ten port. Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.\n\n**Sprawdzenie II:** Po ustaniu superior BPDU port automatycznie wychodzi z root-inconsistent.\n\n**Zależności:** Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota. Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+      "example": "I — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.\n\nII — Root Guard chroni położenie roota i różni się od reakcji BPDU Guard."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.compare-07.4.card",
+      "front_md": "**Zgłoszenie I**\n\nDla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy.\n\n**Zgłoszenie II**\n\nNa porcie do podrzędnego switcha działa Root Guard. Lepsze BPDU spowodowało root-inconsistent.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Niższy bridge priority drugiego switcha decyduje o wyborze roota. Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie I:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.\n\n**Zgłoszenie II:** Root Guard blokuje próbę zmiany położenia roota przez ten port. Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.\n\n**Sprawdzenie II:** Po ustaniu superior BPDU port automatycznie wychodzi z root-inconsistent.\n\n**Zależności:** W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC. Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+      "example": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Root Guard chroni położenie roota i różni się od reakcji BPDU Guard."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.compare-08.4.card",
+      "front_md": "**Zgłoszenie I**\n\nW topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji.\n\n**Zgłoszenie II**\n\nRoot jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** RSTP celowo blokuje nadmiarową ścieżkę L2. Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.\n\n**Sprawdzenie I:** Po awarii ścieżki głównej odpowiedni port zapasowy przechodzi do forwarding.\n\n**Zgłoszenie II:** Gi1 ma niższy całkowity koszt drogi do roota. Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie II:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.\n\n**Zależności:** Discarding na porcie alternatywnym może być prawidłowym stanem redundancji. Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+      "example": "I — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\nII — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.compare-09.4.card",
+      "front_md": "**Zgłoszenie I**\n\nPort do stacji miał PortFast i BPDU Guard. Po podłączeniu switcha dostał BPDU i przeszedł w err-disabled.\n\n**Zgłoszenie II**\n\nPojedynczy komputer jest podłączony do portu access bez PortFast. Przy aktywacji port czeka na przejścia klasycznego STP.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** BPDU Guard zareagował na BPDU na porcie brzegowym. Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.\n\n**Sprawdzenie I:** Po usunięciu źródła BPDU port działa bez kolejnego zdarzenia BPDU Guard.\n\n**Zgłoszenie II:** Port hosta przechodzi zwykłe stany inicjalizacji STP. Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.\n\n**Sprawdzenie II:** Port hosta szybko osiąga forwarding, nadal reagując zgodnie z polityką ochrony BPDU.\n\n**Zależności:** BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP. PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+      "example": "I — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.\n\nII — PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "id": "ccna.stp.practice.compare-10.4.card",
+      "front_md": "**Zgłoszenie I**\n\nDla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy.\n\n**Zgłoszenie II**\n\nRoot jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Niższy bridge priority drugiego switcha decyduje o wyborze roota. Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie I:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.\n\n**Zgłoszenie II:** Gi1 ma niższy całkowity koszt drogi do roota. Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie II:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.\n\n**Zależności:** W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC. Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+      "example": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.stp.practice.compare-01.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy.\n\n**Zgłoszenie II**\n\nW topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Niższy bridge priority drugiego switcha decyduje o wyborze roota. Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie I:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.\n\n**Zgłoszenie II:** RSTP celowo blokuje nadmiarową ścieżkę L2. Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.\n\n**Sprawdzenie II:** Po awarii ścieżki głównej odpowiedni port zapasowy przechodzi do forwarding.\n\n**Zależności:** W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC. Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+      "card_id": "ccna.stp.practice.compare-01.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+          "feedback_md": "**Zgłoszenie I:** Niższy bridge priority drugiego switcha decyduje o wyborze roota. Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie I:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.\n\n**Zgłoszenie II:** RSTP celowo blokuje nadmiarową ścieżkę L2. Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.\n\n**Sprawdzenie II:** Po awarii ścieżki głównej odpowiedni port zapasowy przechodzi do forwarding.\n\n**Zależności:** W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC. Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\nII — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Niższy bridge priority drugiego switcha decyduje o wyborze roota. Zgłoszenie II: RSTP celowo blokuje nadmiarową ścieżkę L2.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Port do stacji miał PortFast i BPDU Guard. Po podłączeniu switcha dostał BPDU i przeszedł w err-disabled. Dla II: Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.\n\nII — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Port do stacji miał PortFast i BPDU Guard. Po podłączeniu switcha dostał BPDU i przeszedł w err-disabled. Dla I: W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.stp.practice.compare-02.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPort do stacji miał PortFast i BPDU Guard. Po podłączeniu switcha dostał BPDU i przeszedł w err-disabled.\n\n**Zgłoszenie II**\n\nRoot jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** BPDU Guard zareagował na BPDU na porcie brzegowym. Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.\n\n**Sprawdzenie I:** Po usunięciu źródła BPDU port działa bez kolejnego zdarzenia BPDU Guard.\n\n**Zgłoszenie II:** Gi1 ma niższy całkowity koszt drogi do roota. Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie II:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.\n\n**Zależności:** BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP. Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+      "card_id": "ccna.stp.practice.compare-02.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.\n\nII — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: BPDU Guard zareagował na BPDU na porcie brzegowym. Zgłoszenie II: Gi1 ma niższy całkowity koszt drogi do roota.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.\n\nII — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "feedback_md": "**Zgłoszenie I:** BPDU Guard zareagował na BPDU na porcie brzegowym. Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.\n\n**Sprawdzenie I:** Po usunięciu źródła BPDU port działa bez kolejnego zdarzenia BPDU Guard.\n\n**Zgłoszenie II:** Gi1 ma niższy całkowity koszt drogi do roota. Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie II:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.\n\n**Zależności:** BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP. Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.\n\nII — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. Dla II: Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. Dla I: BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.stp.practice.compare-03.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPojedynczy komputer jest podłączony do portu access bez PortFast. Przy aktywacji port czeka na przejścia klasycznego STP.\n\n**Zgłoszenie II**\n\nNa porcie do podrzędnego switcha działa Root Guard. Lepsze BPDU spowodowało root-inconsistent.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Port hosta przechodzi zwykłe stany inicjalizacji STP. Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.\n\n**Sprawdzenie I:** Port hosta szybko osiąga forwarding, nadal reagując zgodnie z polityką ochrony BPDU.\n\n**Zgłoszenie II:** Root Guard blokuje próbę zmiany położenia roota przez ten port. Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.\n\n**Sprawdzenie II:** Po ustaniu superior BPDU port automatycznie wychodzi z root-inconsistent.\n\n**Zależności:** PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP. Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+      "card_id": "ccna.stp.practice.compare-03.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.\n\nII — PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Port hosta przechodzi zwykłe stany inicjalizacji STP. Zgłoszenie II: Root Guard blokuje próbę zmiany położenia roota przez ten port.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.\n\nII — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. Dla II: Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.\n\nII — Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+          "feedback_md": "**Zgłoszenie I:** Port hosta przechodzi zwykłe stany inicjalizacji STP. Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.\n\n**Sprawdzenie I:** Port hosta szybko osiąga forwarding, nadal reagując zgodnie z polityką ochrony BPDU.\n\n**Zgłoszenie II:** Root Guard blokuje próbę zmiany położenia roota przez ten port. Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.\n\n**Sprawdzenie II:** Po ustaniu superior BPDU port automatycznie wychodzi z root-inconsistent.\n\n**Zależności:** PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP. Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. Dla I: PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.stp.practice.compare-04.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy.\n\n**Zgłoszenie II**\n\nPort do stacji miał PortFast i BPDU Guard. Po podłączeniu switcha dostał BPDU i przeszedł w err-disabled.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Niższy bridge priority drugiego switcha decyduje o wyborze roota. Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie I:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.\n\n**Zgłoszenie II:** BPDU Guard zareagował na BPDU na porcie brzegowym. Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.\n\n**Sprawdzenie II:** Po usunięciu źródła BPDU port działa bez kolejnego zdarzenia BPDU Guard.\n\n**Zależności:** W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC. BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.",
+      "card_id": "ccna.stp.practice.compare-04.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.\n\nII — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Niższy bridge priority drugiego switcha decyduje o wyborze roota. Zgłoszenie II: BPDU Guard zareagował na BPDU na porcie brzegowym.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: W topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji. Dla II: BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\nII — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: W topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji. Dla I: W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.",
+          "feedback_md": "**Zgłoszenie I:** Niższy bridge priority drugiego switcha decyduje o wyborze roota. Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie I:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.\n\n**Zgłoszenie II:** BPDU Guard zareagował na BPDU na porcie brzegowym. Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.\n\n**Sprawdzenie II:** Po usunięciu źródła BPDU port działa bez kolejnego zdarzenia BPDU Guard.\n\n**Zależności:** W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC. BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.stp.practice.compare-05.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nW topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji.\n\n**Zgłoszenie II**\n\nPojedynczy komputer jest podłączony do portu access bez PortFast. Przy aktywacji port czeka na przejścia klasycznego STP.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** RSTP celowo blokuje nadmiarową ścieżkę L2. Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.\n\n**Sprawdzenie I:** Po awarii ścieżki głównej odpowiedni port zapasowy przechodzi do forwarding.\n\n**Zgłoszenie II:** Port hosta przechodzi zwykłe stany inicjalizacji STP. Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.\n\n**Sprawdzenie II:** Port hosta szybko osiąga forwarding, nadal reagując zgodnie z polityką ochrony BPDU.\n\n**Zależności:** Discarding na porcie alternatywnym może być prawidłowym stanem redundancji. PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+      "card_id": "ccna.stp.practice.compare-05.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\nII — PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+          "feedback_md": "**Zgłoszenie I:** RSTP celowo blokuje nadmiarową ścieżkę L2. Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.\n\n**Sprawdzenie I:** Po awarii ścieżki głównej odpowiedni port zapasowy przechodzi do forwarding.\n\n**Zgłoszenie II:** Port hosta przechodzi zwykłe stany inicjalizacji STP. Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.\n\n**Sprawdzenie II:** Port hosta szybko osiąga forwarding, nadal reagując zgodnie z polityką ochrony BPDU.\n\n**Zależności:** Discarding na porcie alternatywnym może być prawidłowym stanem redundancji. PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.\n\nII — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: RSTP celowo blokuje nadmiarową ścieżkę L2. Zgłoszenie II: Port hosta przechodzi zwykłe stany inicjalizacji STP.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\nII — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. Dla II: PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. Dla I: Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.stp.practice.compare-06.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRoot jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe.\n\n**Zgłoszenie II**\n\nNa porcie do podrzędnego switcha działa Root Guard. Lepsze BPDU spowodowało root-inconsistent.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Gi1 ma niższy całkowity koszt drogi do roota. Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie I:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.\n\n**Zgłoszenie II:** Root Guard blokuje próbę zmiany położenia roota przez ten port. Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.\n\n**Sprawdzenie II:** Po ustaniu superior BPDU port automatycznie wychodzi z root-inconsistent.\n\n**Zależności:** Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota. Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+      "card_id": "ccna.stp.practice.compare-06.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.\n\nII — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Gi1 ma niższy całkowity koszt drogi do roota. Zgłoszenie II: Root Guard blokuje próbę zmiany położenia roota przez ten port.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.\n\nII — Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+          "feedback_md": "**Zgłoszenie I:** Gi1 ma niższy całkowity koszt drogi do roota. Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie I:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.\n\n**Zgłoszenie II:** Root Guard blokuje próbę zmiany położenia roota przez ten port. Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.\n\n**Sprawdzenie II:** Po ustaniu superior BPDU port automatycznie wychodzi z root-inconsistent.\n\n**Zależności:** Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota. Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.\n\nII — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. Dla II: Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. Dla I: Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.stp.practice.compare-07.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy.\n\n**Zgłoszenie II**\n\nNa porcie do podrzędnego switcha działa Root Guard. Lepsze BPDU spowodowało root-inconsistent.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Niższy bridge priority drugiego switcha decyduje o wyborze roota. Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie I:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.\n\n**Zgłoszenie II:** Root Guard blokuje próbę zmiany położenia roota przez ten port. Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.\n\n**Sprawdzenie II:** Po ustaniu superior BPDU port automatycznie wychodzi z root-inconsistent.\n\n**Zależności:** W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC. Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+      "card_id": "ccna.stp.practice.compare-07.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.\n\nII — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Niższy bridge priority drugiego switcha decyduje o wyborze roota. Zgłoszenie II: Root Guard blokuje próbę zmiany położenia roota przez ten port.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: W topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji. Dla II: Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+          "feedback_md": "**Zgłoszenie I:** Niższy bridge priority drugiego switcha decyduje o wyborze roota. Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie I:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.\n\n**Zgłoszenie II:** Root Guard blokuje próbę zmiany położenia roota przez ten port. Poprawić priorytety lub topologię źródła lepszych BPDU zgodnie z projektem.\n\n**Sprawdzenie II:** Po ustaniu superior BPDU port automatycznie wychodzi z root-inconsistent.\n\n**Zależności:** W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC. Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\nII — Root Guard chroni położenie roota i różni się od reakcji BPDU Guard.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: W topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji. Dla I: W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.stp.practice.compare-08.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nW topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji.\n\n**Zgłoszenie II**\n\nRoot jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** RSTP celowo blokuje nadmiarową ścieżkę L2. Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.\n\n**Sprawdzenie I:** Po awarii ścieżki głównej odpowiedni port zapasowy przechodzi do forwarding.\n\n**Zgłoszenie II:** Gi1 ma niższy całkowity koszt drogi do roota. Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie II:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.\n\n**Zależności:** Discarding na porcie alternatywnym może być prawidłowym stanem redundancji. Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+      "card_id": "ccna.stp.practice.compare-08.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.\n\nII — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: RSTP celowo blokuje nadmiarową ścieżkę L2. Zgłoszenie II: Gi1 ma niższy całkowity koszt drogi do roota.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\nII — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. Dla II: Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. Dla I: Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\nII — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "feedback_md": "**Zgłoszenie I:** RSTP celowo blokuje nadmiarową ścieżkę L2. Pozostawić ochronę przed pętlą i wykonać kontrolowany test awarii aktywnego łącza.\n\n**Sprawdzenie I:** Po awarii ścieżki głównej odpowiedni port zapasowy przechodzi do forwarding.\n\n**Zgłoszenie II:** Gi1 ma niższy całkowity koszt drogi do roota. Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie II:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.\n\n**Zależności:** Discarding na porcie alternatywnym może być prawidłowym stanem redundancji. Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.stp.practice.compare-09.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPort do stacji miał PortFast i BPDU Guard. Po podłączeniu switcha dostał BPDU i przeszedł w err-disabled.\n\n**Zgłoszenie II**\n\nPojedynczy komputer jest podłączony do portu access bez PortFast. Przy aktywacji port czeka na przejścia klasycznego STP.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** BPDU Guard zareagował na BPDU na porcie brzegowym. Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.\n\n**Sprawdzenie I:** Po usunięciu źródła BPDU port działa bez kolejnego zdarzenia BPDU Guard.\n\n**Zgłoszenie II:** Port hosta przechodzi zwykłe stany inicjalizacji STP. Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.\n\n**Sprawdzenie II:** Port hosta szybko osiąga forwarding, nadal reagując zgodnie z polityką ochrony BPDU.\n\n**Zależności:** BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP. PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+      "card_id": "ccna.stp.practice.compare-09.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.\n\nII — PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+          "feedback_md": "**Zgłoszenie I:** BPDU Guard zareagował na BPDU na porcie brzegowym. Usunąć nieautoryzowany switch, a następnie bezpiecznie przywrócić port.\n\n**Sprawdzenie I:** Po usunięciu źródła BPDU port działa bez kolejnego zdarzenia BPDU Guard.\n\n**Zgłoszenie II:** Port hosta przechodzi zwykłe stany inicjalizacji STP. Włączyć PortFast i właściwą ochronę BPDU na potwierdzonym porcie końcowym.\n\n**Sprawdzenie II:** Port hosta szybko osiąga forwarding, nadal reagując zgodnie z polityką ochrony BPDU.\n\n**Zależności:** BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP. PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.\n\nII — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: BPDU Guard zareagował na BPDU na porcie brzegowym. Zgłoszenie II: Port hosta przechodzi zwykłe stany inicjalizacji STP.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.\n\nII — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. Dla II: PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — PortFast przyspiesza start portu brzegowego, ale nie wyłącza całego STP.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Dla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy. Dla I: BPDU Guard chroni porty brzegowe przed dołączeniem urządzeń uczestniczących w STP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.stp.practice.compare-10.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — zależności",
+      "skills": [
+        "ccna.stp.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — STP Configuration",
+          "url": "https://www.cisco.com/c/dam/en/us/td/docs/switches/lan/catalyst9500/software/release/16-12/configuration_guide/lyr2/configuring_spanning_tree_protocol.html"
+        },
+        {
+          "title": "Cisco — STP i ochrona portów",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10586-65.html"
+        },
+        {
+          "title": "Cisco — Root Guard",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol/10588-74.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/12-2_53_se/configuration/guide/2960scg/swstpopt.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — STP — role, zabezpieczenia i pętle",
+          "url": "https://www.cisco.com/c/en/us/support/docs/lan-switching/spanning-tree-protocol-stp-8021d/218321-configure-stp-with-loop-guard-and-bpdu-s.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDla VLAN 10 switche mają priorytety 32768 i 24576. Przy obu aktywnych rootem jest drugi, choć projekt wskazuje pierwszy.\n\n**Zgłoszenie II**\n\nRoot jest ustalony. Dwa porty prowadzą do niego; łączny koszt przez Gi1 to 4, przez Gi2 to 19. Pozostałe warunki są prawidłowe.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Niższy bridge priority drugiego switcha decyduje o wyborze roota. Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie I:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.\n\n**Zgłoszenie II:** Gi1 ma niższy całkowity koszt drogi do roota. Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie II:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.\n\n**Zależności:** W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC. Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+      "card_id": "ccna.stp.practice.compare-10.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.\n\nII — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Niższy bridge priority drugiego switcha decyduje o wyborze roota. Zgłoszenie II: Gi1 ma niższy całkowity koszt drogi do roota.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "feedback_md": "**Zgłoszenie I:** Niższy bridge priority drugiego switcha decyduje o wyborze roota. Nadać planowanemu rootowi niższy dozwolony priorytet, np. 16384 dla VLAN 10.\n\n**Sprawdzenie I:** Root ID w show spanning-tree vlan 10 odpowiada planowanemu switchowi.\n\n**Zgłoszenie II:** Gi1 ma niższy całkowity koszt drogi do roota. Zachować Gi1 jako root port, jeśli projekt nie wymaga innej ścieżki.\n\n**Sprawdzenie II:** Gi1 ma rolę Root i koszt 4 w analizowanej instancji STP.\n\n**Zależności:** W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC. Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.\n\nII — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: W topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji. Dla II: Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Discarding na porcie alternatywnym może być prawidłowym stanem redundancji.\n\nII — Root port wybiera się według najlepszego wektora, zaczynając od kosztu drogi do roota.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: W topologii z pętlą RSTP jeden uplink jest Alternate/Discarding; drugi Root/Forwarding. Nie ma utraty komunikacji. Dla I: W wyborze roota wygrywa najniższy Bridge ID; priorytet jest porównywany przed MAC.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

@@ -1,0 +1,719 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ssh.practice-8",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.compare-01.4.card",
+      "front_md": "**Zgłoszenie I**\n\nSSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet.\n\n**Zgłoszenie II**\n\nLokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** VTY nie dopuszczają protokołu SSH. Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie I:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.\n\n**Zgłoszenie II:** Wybrano niewłaściwe źródło uwierzytelniania VTY. Ustawić login local na właściwych liniach VTY.\n\n**Sprawdzenie II:** Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.\n\n**Zależności:** Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia. Bez AAA polecenie login local wybiera lokalną bazę kont.",
+      "example": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Bez AAA polecenie login local wybiera lokalną bazę kont."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.compare-02.4.card",
+      "front_md": "**Zgłoszenie I**\n\nAccess-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane.\n\n**Zgłoszenie II**\n\nNa nowym urządzeniu brak kluczy RSA, a show ip ssh wskazuje nieaktywny serwer; konfiguracja tej wersji wymaga kluczy RSA.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Źródło administratora nie jest dozwolone w ACL VTY. Dodać precyzyjny wyjątek dla uprawnionego hosta zgodnie z polityką.\n\n**Sprawdzenie I:** SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.\n\n**Zgłoszenie II:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie II:** Show ip ssh potwierdza aktywny serwer SSHv2.\n\n**Zależności:** ACL VTY ogranicza dostęp do sesji zarządzania według źródła. Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+      "example": "I — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.\n\nII — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.compare-03.4.card",
+      "front_md": "**Zgłoszenie I**\n\nTCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta.\n\n**Zgłoszenie II**\n\nSSH działa z sąsiedniego hosta. Zdalny host nie ma trasy do podsieci management.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Uwierzytelnienie konta nie powiodło się po zestawieniu transportu. Zweryfikować nazwę konta i sekret, korzystając z bezpiecznego dostępu administracyjnego.\n\n**Sprawdzenie I:** Poprawne dane tego konta umożliwiają logowanie przez SSH.\n\n**Zgłoszenie II:** Brak drogi routowanej do adresu zarządzania. Przywrócić wymagany routing między siecią administratora a management.\n\n**Sprawdzenie II:** Lookup i test TCP do portu SSH przechodzą z właściwego źródła.\n\n**Zależności:** Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać. Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+      "example": "I — Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.\n\nII — Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.compare-04.4.card",
+      "front_md": "**Zgłoszenie I**\n\nSSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet.\n\n**Zgłoszenie II**\n\nAccess-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** VTY nie dopuszczają protokołu SSH. Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie I:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.\n\n**Zgłoszenie II:** Źródło administratora nie jest dozwolone w ACL VTY. Dodać precyzyjny wyjątek dla uprawnionego hosta zgodnie z polityką.\n\n**Sprawdzenie II:** SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.\n\n**Zależności:** Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia. ACL VTY ogranicza dostęp do sesji zarządzania według źródła.",
+      "example": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — ACL VTY ogranicza dostęp do sesji zarządzania według źródła."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.compare-05.4.card",
+      "front_md": "**Zgłoszenie I**\n\nLokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone.\n\n**Zgłoszenie II**\n\nTCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrano niewłaściwe źródło uwierzytelniania VTY. Ustawić login local na właściwych liniach VTY.\n\n**Sprawdzenie I:** Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.\n\n**Zgłoszenie II:** Uwierzytelnienie konta nie powiodło się po zestawieniu transportu. Zweryfikować nazwę konta i sekret, korzystając z bezpiecznego dostępu administracyjnego.\n\n**Sprawdzenie II:** Poprawne dane tego konta umożliwiają logowanie przez SSH.\n\n**Zależności:** Bez AAA polecenie login local wybiera lokalną bazę kont. Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+      "example": "I — Bez AAA polecenie login local wybiera lokalną bazę kont.\n\nII — Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.compare-06.4.card",
+      "front_md": "**Zgłoszenie I**\n\nNa nowym urządzeniu brak kluczy RSA, a show ip ssh wskazuje nieaktywny serwer; konfiguracja tej wersji wymaga kluczy RSA.\n\n**Zgłoszenie II**\n\nSSH działa z sąsiedniego hosta. Zdalny host nie ma trasy do podsieci management.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie I:** Show ip ssh potwierdza aktywny serwer SSHv2.\n\n**Zgłoszenie II:** Brak drogi routowanej do adresu zarządzania. Przywrócić wymagany routing między siecią administratora a management.\n\n**Sprawdzenie II:** Lookup i test TCP do portu SSH przechodzą z właściwego źródła.\n\n**Zależności:** Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH. Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+      "example": "I — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.\n\nII — Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.compare-07.4.card",
+      "front_md": "**Zgłoszenie I**\n\nSSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet.\n\n**Zgłoszenie II**\n\nSSH działa z sąsiedniego hosta. Zdalny host nie ma trasy do podsieci management.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** VTY nie dopuszczają protokołu SSH. Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie I:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.\n\n**Zgłoszenie II:** Brak drogi routowanej do adresu zarządzania. Przywrócić wymagany routing między siecią administratora a management.\n\n**Sprawdzenie II:** Lookup i test TCP do portu SSH przechodzą z właściwego źródła.\n\n**Zależności:** Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia. Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+      "example": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.compare-08.4.card",
+      "front_md": "**Zgłoszenie I**\n\nLokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone.\n\n**Zgłoszenie II**\n\nNa nowym urządzeniu brak kluczy RSA, a show ip ssh wskazuje nieaktywny serwer; konfiguracja tej wersji wymaga kluczy RSA.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrano niewłaściwe źródło uwierzytelniania VTY. Ustawić login local na właściwych liniach VTY.\n\n**Sprawdzenie I:** Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.\n\n**Zgłoszenie II:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie II:** Show ip ssh potwierdza aktywny serwer SSHv2.\n\n**Zależności:** Bez AAA polecenie login local wybiera lokalną bazę kont. Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+      "example": "I — Bez AAA polecenie login local wybiera lokalną bazę kont.\n\nII — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.compare-09.4.card",
+      "front_md": "**Zgłoszenie I**\n\nAccess-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane.\n\n**Zgłoszenie II**\n\nTCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Źródło administratora nie jest dozwolone w ACL VTY. Dodać precyzyjny wyjątek dla uprawnionego hosta zgodnie z polityką.\n\n**Sprawdzenie I:** SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.\n\n**Zgłoszenie II:** Uwierzytelnienie konta nie powiodło się po zestawieniu transportu. Zweryfikować nazwę konta i sekret, korzystając z bezpiecznego dostępu administracyjnego.\n\n**Sprawdzenie II:** Poprawne dane tego konta umożliwiają logowanie przez SSH.\n\n**Zależności:** ACL VTY ogranicza dostęp do sesji zarządzania według źródła. Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+      "example": "I — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.\n\nII — Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "id": "ccna.ssh.practice.compare-10.4.card",
+      "front_md": "**Zgłoszenie I**\n\nSSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet.\n\n**Zgłoszenie II**\n\nNa nowym urządzeniu brak kluczy RSA, a show ip ssh wskazuje nieaktywny serwer; konfiguracja tej wersji wymaga kluczy RSA.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** VTY nie dopuszczają protokołu SSH. Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie I:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.\n\n**Zgłoszenie II:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie II:** Show ip ssh potwierdza aktywny serwer SSHv2.\n\n**Zależności:** Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia. Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+      "example": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ssh.practice.compare-01.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet.\n\n**Zgłoszenie II**\n\nLokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** VTY nie dopuszczają protokołu SSH. Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie I:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.\n\n**Zgłoszenie II:** Wybrano niewłaściwe źródło uwierzytelniania VTY. Ustawić login local na właściwych liniach VTY.\n\n**Sprawdzenie II:** Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.\n\n**Zależności:** Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia. Bez AAA polecenie login local wybiera lokalną bazę kont.",
+      "card_id": "ccna.ssh.practice.compare-01.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Bez AAA polecenie login local wybiera lokalną bazę kont.",
+          "feedback_md": "**Zgłoszenie I:** VTY nie dopuszczają protokołu SSH. Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie I:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.\n\n**Zgłoszenie II:** Wybrano niewłaściwe źródło uwierzytelniania VTY. Ustawić login local na właściwych liniach VTY.\n\n**Sprawdzenie II:** Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.\n\n**Zależności:** Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia. Bez AAA polecenie login local wybiera lokalną bazę kont.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Bez AAA polecenie login local wybiera lokalną bazę kont.\n\nII — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: VTY nie dopuszczają protokołu SSH. Zgłoszenie II: Wybrano niewłaściwe źródło uwierzytelniania VTY.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Access-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane. Dla II: Bez AAA polecenie login local wybiera lokalną bazę kont.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.\n\nII — Bez AAA polecenie login local wybiera lokalną bazę kont.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Access-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane. Dla I: Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ssh.practice.compare-02.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAccess-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane.\n\n**Zgłoszenie II**\n\nNa nowym urządzeniu brak kluczy RSA, a show ip ssh wskazuje nieaktywny serwer; konfiguracja tej wersji wymaga kluczy RSA.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Źródło administratora nie jest dozwolone w ACL VTY. Dodać precyzyjny wyjątek dla uprawnionego hosta zgodnie z polityką.\n\n**Sprawdzenie I:** SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.\n\n**Zgłoszenie II:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie II:** Show ip ssh potwierdza aktywny serwer SSHv2.\n\n**Zależności:** ACL VTY ogranicza dostęp do sesji zarządzania według źródła. Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+      "card_id": "ccna.ssh.practice.compare-02.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.\n\nII — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Źródło administratora nie jest dozwolone w ACL VTY. Zgłoszenie II: Nie przygotowano kluczy hosta wymaganych przez serwer SSH.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.\n\nII — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "feedback_md": "**Zgłoszenie I:** Źródło administratora nie jest dozwolone w ACL VTY. Dodać precyzyjny wyjątek dla uprawnionego hosta zgodnie z polityką.\n\n**Sprawdzenie I:** SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.\n\n**Zgłoszenie II:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie II:** Show ip ssh potwierdza aktywny serwer SSHv2.\n\n**Zależności:** ACL VTY ogranicza dostęp do sesji zarządzania według źródła. Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.\n\nII — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. Dla II: Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. Dla I: ACL VTY ogranicza dostęp do sesji zarządzania według źródła.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ssh.practice.compare-03.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nTCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta.\n\n**Zgłoszenie II**\n\nSSH działa z sąsiedniego hosta. Zdalny host nie ma trasy do podsieci management.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Uwierzytelnienie konta nie powiodło się po zestawieniu transportu. Zweryfikować nazwę konta i sekret, korzystając z bezpiecznego dostępu administracyjnego.\n\n**Sprawdzenie I:** Poprawne dane tego konta umożliwiają logowanie przez SSH.\n\n**Zgłoszenie II:** Brak drogi routowanej do adresu zarządzania. Przywrócić wymagany routing między siecią administratora a management.\n\n**Sprawdzenie II:** Lookup i test TCP do portu SSH przechodzą z właściwego źródła.\n\n**Zależności:** Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać. Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+      "card_id": "ccna.ssh.practice.compare-03.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.\n\nII — Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Uwierzytelnienie konta nie powiodło się po zestawieniu transportu. Zgłoszenie II: Brak drogi routowanej do adresu zarządzania.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.\n\nII — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. Dla II: Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.\n\nII — Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+          "feedback_md": "**Zgłoszenie I:** Uwierzytelnienie konta nie powiodło się po zestawieniu transportu. Zweryfikować nazwę konta i sekret, korzystając z bezpiecznego dostępu administracyjnego.\n\n**Sprawdzenie I:** Poprawne dane tego konta umożliwiają logowanie przez SSH.\n\n**Zgłoszenie II:** Brak drogi routowanej do adresu zarządzania. Przywrócić wymagany routing między siecią administratora a management.\n\n**Sprawdzenie II:** Lookup i test TCP do portu SSH przechodzą z właściwego źródła.\n\n**Zależności:** Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać. Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. Dla I: Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ssh.practice.compare-04.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet.\n\n**Zgłoszenie II**\n\nAccess-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** VTY nie dopuszczają protokołu SSH. Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie I:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.\n\n**Zgłoszenie II:** Źródło administratora nie jest dozwolone w ACL VTY. Dodać precyzyjny wyjątek dla uprawnionego hosta zgodnie z polityką.\n\n**Sprawdzenie II:** SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.\n\n**Zależności:** Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia. ACL VTY ogranicza dostęp do sesji zarządzania według źródła.",
+      "card_id": "ccna.ssh.practice.compare-04.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.\n\nII — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: VTY nie dopuszczają protokołu SSH. Zgłoszenie II: Źródło administratora nie jest dozwolone w ACL VTY.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Bez AAA polecenie login local wybiera lokalną bazę kont.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Lokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone. Dla II: ACL VTY ogranicza dostęp do sesji zarządzania według źródła.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Bez AAA polecenie login local wybiera lokalną bazę kont.\n\nII — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Lokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone. Dla I: Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.",
+          "feedback_md": "**Zgłoszenie I:** VTY nie dopuszczają protokołu SSH. Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie I:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.\n\n**Zgłoszenie II:** Źródło administratora nie jest dozwolone w ACL VTY. Dodać precyzyjny wyjątek dla uprawnionego hosta zgodnie z polityką.\n\n**Sprawdzenie II:** SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.\n\n**Zależności:** Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia. ACL VTY ogranicza dostęp do sesji zarządzania według źródła.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ssh.practice.compare-05.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nLokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone.\n\n**Zgłoszenie II**\n\nTCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrano niewłaściwe źródło uwierzytelniania VTY. Ustawić login local na właściwych liniach VTY.\n\n**Sprawdzenie I:** Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.\n\n**Zgłoszenie II:** Uwierzytelnienie konta nie powiodło się po zestawieniu transportu. Zweryfikować nazwę konta i sekret, korzystając z bezpiecznego dostępu administracyjnego.\n\n**Sprawdzenie II:** Poprawne dane tego konta umożliwiają logowanie przez SSH.\n\n**Zależności:** Bez AAA polecenie login local wybiera lokalną bazę kont. Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+      "card_id": "ccna.ssh.practice.compare-05.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Bez AAA polecenie login local wybiera lokalną bazę kont.\n\nII — Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+          "feedback_md": "**Zgłoszenie I:** Wybrano niewłaściwe źródło uwierzytelniania VTY. Ustawić login local na właściwych liniach VTY.\n\n**Sprawdzenie I:** Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.\n\n**Zgłoszenie II:** Uwierzytelnienie konta nie powiodło się po zestawieniu transportu. Zweryfikować nazwę konta i sekret, korzystając z bezpiecznego dostępu administracyjnego.\n\n**Sprawdzenie II:** Poprawne dane tego konta umożliwiają logowanie przez SSH.\n\n**Zależności:** Bez AAA polecenie login local wybiera lokalną bazę kont. Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.\n\nII — Bez AAA polecenie login local wybiera lokalną bazę kont.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrano niewłaściwe źródło uwierzytelniania VTY. Zgłoszenie II: Uwierzytelnienie konta nie powiodło się po zestawieniu transportu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Bez AAA polecenie login local wybiera lokalną bazę kont.\n\nII — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. Dla II: Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. Dla I: Bez AAA polecenie login local wybiera lokalną bazę kont.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ssh.practice.compare-06.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNa nowym urządzeniu brak kluczy RSA, a show ip ssh wskazuje nieaktywny serwer; konfiguracja tej wersji wymaga kluczy RSA.\n\n**Zgłoszenie II**\n\nSSH działa z sąsiedniego hosta. Zdalny host nie ma trasy do podsieci management.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie I:** Show ip ssh potwierdza aktywny serwer SSHv2.\n\n**Zgłoszenie II:** Brak drogi routowanej do adresu zarządzania. Przywrócić wymagany routing między siecią administratora a management.\n\n**Sprawdzenie II:** Lookup i test TCP do portu SSH przechodzą z właściwego źródła.\n\n**Zależności:** Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH. Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+      "card_id": "ccna.ssh.practice.compare-06.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.\n\nII — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Zgłoszenie II: Brak drogi routowanej do adresu zarządzania.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.\n\nII — Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+          "feedback_md": "**Zgłoszenie I:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie I:** Show ip ssh potwierdza aktywny serwer SSHv2.\n\n**Zgłoszenie II:** Brak drogi routowanej do adresu zarządzania. Przywrócić wymagany routing między siecią administratora a management.\n\n**Sprawdzenie II:** Lookup i test TCP do portu SSH przechodzą z właściwego źródła.\n\n**Zależności:** Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH. Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.\n\nII — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. Dla II: Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. Dla I: Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ssh.practice.compare-07.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet.\n\n**Zgłoszenie II**\n\nSSH działa z sąsiedniego hosta. Zdalny host nie ma trasy do podsieci management.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** VTY nie dopuszczają protokołu SSH. Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie I:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.\n\n**Zgłoszenie II:** Brak drogi routowanej do adresu zarządzania. Przywrócić wymagany routing między siecią administratora a management.\n\n**Sprawdzenie II:** Lookup i test TCP do portu SSH przechodzą z właściwego źródła.\n\n**Zależności:** Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia. Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+      "card_id": "ccna.ssh.practice.compare-07.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.\n\nII — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: VTY nie dopuszczają protokołu SSH. Zgłoszenie II: Brak drogi routowanej do adresu zarządzania.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Bez AAA polecenie login local wybiera lokalną bazę kont.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Lokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone. Dla II: Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+          "feedback_md": "**Zgłoszenie I:** VTY nie dopuszczają protokołu SSH. Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie I:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.\n\n**Zgłoszenie II:** Brak drogi routowanej do adresu zarządzania. Przywrócić wymagany routing między siecią administratora a management.\n\n**Sprawdzenie II:** Lookup i test TCP do portu SSH przechodzą z właściwego źródła.\n\n**Zależności:** Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia. Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Bez AAA polecenie login local wybiera lokalną bazę kont.\n\nII — Usługa zarządzania wymaga osiągalności IP niezależnie od ustawień uwierzytelniania.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Lokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone. Dla I: Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ssh.practice.compare-08.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nLokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone.\n\n**Zgłoszenie II**\n\nNa nowym urządzeniu brak kluczy RSA, a show ip ssh wskazuje nieaktywny serwer; konfiguracja tej wersji wymaga kluczy RSA.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrano niewłaściwe źródło uwierzytelniania VTY. Ustawić login local na właściwych liniach VTY.\n\n**Sprawdzenie I:** Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.\n\n**Zgłoszenie II:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie II:** Show ip ssh potwierdza aktywny serwer SSHv2.\n\n**Zależności:** Bez AAA polecenie login local wybiera lokalną bazę kont. Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+      "card_id": "ccna.ssh.practice.compare-08.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.\n\nII — Bez AAA polecenie login local wybiera lokalną bazę kont.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrano niewłaściwe źródło uwierzytelniania VTY. Zgłoszenie II: Nie przygotowano kluczy hosta wymaganych przez serwer SSH.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Bez AAA polecenie login local wybiera lokalną bazę kont.\n\nII — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. Dla II: Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. Dla I: Bez AAA polecenie login local wybiera lokalną bazę kont.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Bez AAA polecenie login local wybiera lokalną bazę kont.\n\nII — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "feedback_md": "**Zgłoszenie I:** Wybrano niewłaściwe źródło uwierzytelniania VTY. Ustawić login local na właściwych liniach VTY.\n\n**Sprawdzenie I:** Logowanie korzysta z lokalnej nazwy użytkownika i jej sekretu.\n\n**Zgłoszenie II:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie II:** Show ip ssh potwierdza aktywny serwer SSHv2.\n\n**Zależności:** Bez AAA polecenie login local wybiera lokalną bazę kont. Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ssh.practice.compare-09.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAccess-class VTY dopuszcza tylko 10.10.0.0/24. Administrator 10.20.0.5 ma routing, ale SSH jest odrzucane.\n\n**Zgłoszenie II**\n\nTCP i negocjacja SSH działają, lecz log wskazuje authentication failed dla istniejącego lokalnego konta.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Źródło administratora nie jest dozwolone w ACL VTY. Dodać precyzyjny wyjątek dla uprawnionego hosta zgodnie z polityką.\n\n**Sprawdzenie I:** SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.\n\n**Zgłoszenie II:** Uwierzytelnienie konta nie powiodło się po zestawieniu transportu. Zweryfikować nazwę konta i sekret, korzystając z bezpiecznego dostępu administracyjnego.\n\n**Sprawdzenie II:** Poprawne dane tego konta umożliwiają logowanie przez SSH.\n\n**Zależności:** ACL VTY ogranicza dostęp do sesji zarządzania według źródła. Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+      "card_id": "ccna.ssh.practice.compare-09.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.\n\nII — Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+          "feedback_md": "**Zgłoszenie I:** Źródło administratora nie jest dozwolone w ACL VTY. Dodać precyzyjny wyjątek dla uprawnionego hosta zgodnie z polityką.\n\n**Sprawdzenie I:** SSH z 10.20.0.5 działa, a niedozwolone źródło nadal jest blokowane.\n\n**Zgłoszenie II:** Uwierzytelnienie konta nie powiodło się po zestawieniu transportu. Zweryfikować nazwę konta i sekret, korzystając z bezpiecznego dostępu administracyjnego.\n\n**Sprawdzenie II:** Poprawne dane tego konta umożliwiają logowanie przez SSH.\n\n**Zależności:** ACL VTY ogranicza dostęp do sesji zarządzania według źródła. Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.\n\nII — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Źródło administratora nie jest dozwolone w ACL VTY. Zgłoszenie II: Uwierzytelnienie konta nie powiodło się po zestawieniu transportu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — ACL VTY ogranicza dostęp do sesji zarządzania według źródła.\n\nII — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. Dla II: Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Nie każdy błąd SSH jest błędem routingu lub TCP; etapy sesji trzeba rozdzielać.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet. Dla I: ACL VTY ogranicza dostęp do sesji zarządzania według źródła.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ssh.practice.compare-10.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — zależności",
+      "skills": [
+        "ccna.ssh.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — SSH i dostęp administracyjny",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security-vpn/secure-shell-ssh/4145-ssh.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.8"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSSH jest aktywne i osiągalne, ale linie VTY mają transport input telnet.\n\n**Zgłoszenie II**\n\nNa nowym urządzeniu brak kluczy RSA, a show ip ssh wskazuje nieaktywny serwer; konfiguracja tej wersji wymaga kluczy RSA.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** VTY nie dopuszczają protokołu SSH. Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie I:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.\n\n**Zgłoszenie II:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie II:** Show ip ssh potwierdza aktywny serwer SSHv2.\n\n**Zależności:** Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia. Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+      "card_id": "ccna.ssh.practice.compare-10.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.\n\nII — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: VTY nie dopuszczają protokołu SSH. Zgłoszenie II: Nie przygotowano kluczy hosta wymaganych przez serwer SSH.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "feedback_md": "**Zgłoszenie I:** VTY nie dopuszczają protokołu SSH. Ustawić transport input ssh na obsługiwanym zakresie VTY.\n\n**Sprawdzenie I:** Połączenie SSH trafia do logowania, a Telnet jest niedopuszczony.\n\n**Zgłoszenie II:** Nie przygotowano kluczy hosta wymaganych przez serwer SSH. Utworzyć klucze RSA po ustawieniu wymaganej nazwy hosta i domeny.\n\n**Sprawdzenie II:** Show ip ssh potwierdza aktywny serwer SSHv2.\n\n**Zależności:** Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia. Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.\n\nII — Bez AAA polecenie login local wybiera lokalną bazę kont.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Lokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone. Dla II: Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Bez AAA polecenie login local wybiera lokalną bazę kont.\n\nII — Klucz hosta jest elementem ustanowienia bezpiecznej sesji SSH.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Lokalny użytkownik istnieje, ale VTY używają login z hasłem linii zamiast lokalnej bazy; AAA nie jest włączone. Dla I: Uruchomienie serwera SSH i dopuszczenie transportu VTY to osobne ustawienia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

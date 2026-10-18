@@ -1,0 +1,483 @@
+{
+  "schema_version": 3,
+  "id": "ccna.discovery.practice-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "LLDP wyłączony — rozpoznanie",
+      "skills": [
+        "ccna.discovery.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "id": "ccna.discovery.practice.case-01.1.card",
+      "front_md": "Urządzenia różnych producentów są połączone, ale LLDP jest wyłączony. Ruch użytkowy działa.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Działanie transmisji danych nie wymaga LLDP, ale odkrywanie sąsiada już tak.\n\n**Rozpoznanie:** Brakuje aktywnego wspólnego protokołu discovery.\n\n**Działanie:** Włączyć LLDP na uprawnionym łączu i sprawdzić oba końce.\n\n**Sprawdzenie:** Tabela LLDP zawiera oczekiwanego sąsiada oraz port zdalny.",
+      "example": "Brakuje aktywnego wspólnego protokołu discovery."
+    },
+    {
+      "revision": 1,
+      "title": "Brak CDP na porcie — rozpoznanie",
+      "skills": [
+        "ccna.discovery.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "id": "ccna.discovery.practice.case-02.1.card",
+      "front_md": "CDP działa globalnie, lecz na analizowanym porcie skonfigurowano no cdp enable.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Stan globalny i stan per interfejs wspólnie decydują o działaniu CDP.\n\n**Rozpoznanie:** CDP został wyłączony lokalnie dla interfejsu.\n\n**Działanie:** Włączyć CDP na tym zaufanym porcie, jeśli wymaga tego polityka.\n\n**Sprawdzenie:** Show cdp neighbors detail pokazuje sąsiada tego interfejsu.",
+      "example": "CDP został wyłączony lokalnie dla interfejsu."
+    },
+    {
+      "revision": 1,
+      "title": "Adres management — rozpoznanie",
+      "skills": [
+        "ccna.discovery.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "id": "ccna.discovery.practice.case-03.1.card",
+      "front_md": "CDP pokazuje adres zarządzania sąsiada, ale brak trasy do jego podsieci.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Adres w reklamie discovery jest informacją, a nie automatycznie osiągalnym next hop.\n\n**Rozpoznanie:** Odkrycie sąsiada L2 nie zapewnia routingu do management.\n\n**Działanie:** Zweryfikować trasę i politykę dostępu do ogłoszonego adresu.\n\n**Sprawdzenie:** Test IP do management działa dopiero po zapewnieniu właściwej drogi.",
+      "example": "Odkrycie sąsiada L2 nie zapewnia routingu do management."
+    },
+    {
+      "revision": 1,
+      "title": "Nie ten port — rozpoznanie",
+      "skills": [
+        "ccna.discovery.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "id": "ccna.discovery.practice.case-04.1.card",
+      "front_md": "LLDP wskazuje Local Gi1/0/5 i Port ID Gi1/0/24 sąsiada. Dokumentacja błędnie przypisuje kabel do Gi1/0/23.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Local Interface i Port ID opisują różne końce tego samego połączenia.\n\n**Rozpoznanie:** Opis połączenia nie zgadza się z informacją o porcie zdalnym.\n\n**Działanie:** Zweryfikować fizyczny kabel i poprawić dokumentację pary portów.\n\n**Sprawdzenie:** Oba końce potwierdzają parę Gi1/0/5–Gi1/0/24.",
+      "example": "Opis połączenia nie zgadza się z informacją o porcie zdalnym."
+    },
+    {
+      "revision": 1,
+      "title": "Stary wpis — rozpoznanie",
+      "skills": [
+        "ccna.discovery.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "id": "ccna.discovery.practice.case-05.1.card",
+      "front_md": "Kabel odłączono przed chwilą, lecz wpis LLDP pozostaje do wygaśnięcia TTL.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Informacja discovery może przez krótki czas przeżyć fizyczne odłączenie.\n\n**Rozpoznanie:** Tabela zawiera jeszcze nieprzeterminowaną reklamę.\n\n**Działanie:** Uwzględnić TTL oraz stan linku, zamiast zakładać aktywność tylko z wpisu.\n\n**Sprawdzenie:** Po wygaśnięciu TTL bez nowych reklam wpis znika.",
+      "example": "Tabela zawiera jeszcze nieprzeterminowaną reklamę."
+    },
+    {
+      "revision": 1,
+      "title": "Granica zaufania — rozpoznanie",
+      "skills": [
+        "ccna.discovery.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "id": "ccna.discovery.practice.case-06.1.card",
+      "front_md": "CDP ujawnia model i wersję urządzenia na porcie do niezaufanego odbiorcy.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Zakres discovery powinien odpowiadać potrzebom operacyjnym i granicom zaufania.\n\n**Rozpoznanie:** Discovery ujawnia informacje o infrastrukturze poza zamierzoną granicą.\n\n**Działanie:** Wyłączyć niepotrzebne discovery na tym zewnętrznym porcie.\n\n**Sprawdzenie:** Na wskazanym porcie nie są wysyłane reklamy, a wewnętrzne discovery nadal działa.",
+      "example": "Discovery ujawnia informacje o infrastrukturze poza zamierzoną granicą."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.discovery.practice.case-01.1",
+      "revision": 1,
+      "title": "LLDP wyłączony — rozpoznanie",
+      "skills": [
+        "ccna.discovery.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Urządzenia różnych producentów są połączone, ale LLDP jest wyłączony. Ruch użytkowy działa.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Działanie transmisji danych nie wymaga LLDP, ale odkrywanie sąsiada już tak.\n\n**Rozpoznanie:** Brakuje aktywnego wspólnego protokołu discovery.\n\n**Działanie:** Włączyć LLDP na uprawnionym łączu i sprawdzić oba końce.\n\n**Sprawdzenie:** Tabela LLDP zawiera oczekiwanego sąsiada oraz port zdalny.",
+      "card_id": "ccna.discovery.practice.case-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Brakuje aktywnego wspólnego protokołu discovery.",
+          "feedback_md": "Działanie transmisji danych nie wymaga LLDP, ale odkrywanie sąsiada już tak.\n\n**Rozpoznanie:** Brakuje aktywnego wspólnego protokołu discovery.\n\n**Działanie:** Włączyć LLDP na uprawnionym łączu i sprawdzić oba końce.\n\n**Sprawdzenie:** Tabela LLDP zawiera oczekiwanego sąsiada oraz port zdalny.",
+          "id": "A"
+        },
+        {
+          "text_md": "Odkrycie sąsiada L2 nie zapewnia routingu do management.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Adres management”: CDP pokazuje adres zarządzania sąsiada, ale brak trasy do jego podsieci. W bieżącym przypadku: Brakuje aktywnego wspólnego protokołu discovery.",
+          "id": "B"
+        },
+        {
+          "text_md": "Opis połączenia nie zgadza się z informacją o porcie zdalnym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nie ten port”: LLDP wskazuje Local Gi1/0/5 i Port ID Gi1/0/24 sąsiada. Dokumentacja błędnie przypisuje kabel do Gi1/0/23. W bieżącym przypadku: Brakuje aktywnego wspólnego protokołu discovery.",
+          "id": "C"
+        },
+        {
+          "text_md": "CDP został wyłączony lokalnie dla interfejsu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak CDP na porcie”: CDP działa globalnie, lecz na analizowanym porcie skonfigurowano no cdp enable. W bieżącym przypadku: Brakuje aktywnego wspólnego protokołu discovery.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.discovery.practice.case-02.1",
+      "revision": 1,
+      "title": "Brak CDP na porcie — rozpoznanie",
+      "skills": [
+        "ccna.discovery.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "CDP działa globalnie, lecz na analizowanym porcie skonfigurowano no cdp enable.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Stan globalny i stan per interfejs wspólnie decydują o działaniu CDP.\n\n**Rozpoznanie:** CDP został wyłączony lokalnie dla interfejsu.\n\n**Działanie:** Włączyć CDP na tym zaufanym porcie, jeśli wymaga tego polityka.\n\n**Sprawdzenie:** Show cdp neighbors detail pokazuje sąsiada tego interfejsu.",
+      "card_id": "ccna.discovery.practice.case-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Discovery ujawnia informacje o infrastrukturze poza zamierzoną granicą.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Granica zaufania”: CDP ujawnia model i wersję urządzenia na porcie do niezaufanego odbiorcy. W bieżącym przypadku: CDP został wyłączony lokalnie dla interfejsu.",
+          "id": "A"
+        },
+        {
+          "text_md": "CDP został wyłączony lokalnie dla interfejsu.",
+          "feedback_md": "Stan globalny i stan per interfejs wspólnie decydują o działaniu CDP.\n\n**Rozpoznanie:** CDP został wyłączony lokalnie dla interfejsu.\n\n**Działanie:** Włączyć CDP na tym zaufanym porcie, jeśli wymaga tego polityka.\n\n**Sprawdzenie:** Show cdp neighbors detail pokazuje sąsiada tego interfejsu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Brakuje aktywnego wspólnego protokołu discovery.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „LLDP wyłączony”: Urządzenia różnych producentów są połączone, ale LLDP jest wyłączony. Ruch użytkowy działa. W bieżącym przypadku: CDP został wyłączony lokalnie dla interfejsu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Opis połączenia nie zgadza się z informacją o porcie zdalnym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nie ten port”: LLDP wskazuje Local Gi1/0/5 i Port ID Gi1/0/24 sąsiada. Dokumentacja błędnie przypisuje kabel do Gi1/0/23. W bieżącym przypadku: CDP został wyłączony lokalnie dla interfejsu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.discovery.practice.case-03.1",
+      "revision": 1,
+      "title": "Adres management — rozpoznanie",
+      "skills": [
+        "ccna.discovery.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "CDP pokazuje adres zarządzania sąsiada, ale brak trasy do jego podsieci.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Adres w reklamie discovery jest informacją, a nie automatycznie osiągalnym next hop.\n\n**Rozpoznanie:** Odkrycie sąsiada L2 nie zapewnia routingu do management.\n\n**Działanie:** Zweryfikować trasę i politykę dostępu do ogłoszonego adresu.\n\n**Sprawdzenie:** Test IP do management działa dopiero po zapewnieniu właściwej drogi.",
+      "card_id": "ccna.discovery.practice.case-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Discovery ujawnia informacje o infrastrukturze poza zamierzoną granicą.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Granica zaufania”: CDP ujawnia model i wersję urządzenia na porcie do niezaufanego odbiorcy. W bieżącym przypadku: Odkrycie sąsiada L2 nie zapewnia routingu do management.",
+          "id": "A"
+        },
+        {
+          "text_md": "Brakuje aktywnego wspólnego protokołu discovery.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „LLDP wyłączony”: Urządzenia różnych producentów są połączone, ale LLDP jest wyłączony. Ruch użytkowy działa. W bieżącym przypadku: Odkrycie sąsiada L2 nie zapewnia routingu do management.",
+          "id": "B"
+        },
+        {
+          "text_md": "Odkrycie sąsiada L2 nie zapewnia routingu do management.",
+          "feedback_md": "Adres w reklamie discovery jest informacją, a nie automatycznie osiągalnym next hop.\n\n**Rozpoznanie:** Odkrycie sąsiada L2 nie zapewnia routingu do management.\n\n**Działanie:** Zweryfikować trasę i politykę dostępu do ogłoszonego adresu.\n\n**Sprawdzenie:** Test IP do management działa dopiero po zapewnieniu właściwej drogi.",
+          "id": "C"
+        },
+        {
+          "text_md": "Opis połączenia nie zgadza się z informacją o porcie zdalnym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nie ten port”: LLDP wskazuje Local Gi1/0/5 i Port ID Gi1/0/24 sąsiada. Dokumentacja błędnie przypisuje kabel do Gi1/0/23. W bieżącym przypadku: Odkrycie sąsiada L2 nie zapewnia routingu do management.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.discovery.practice.case-04.1",
+      "revision": 1,
+      "title": "Nie ten port — rozpoznanie",
+      "skills": [
+        "ccna.discovery.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "LLDP wskazuje Local Gi1/0/5 i Port ID Gi1/0/24 sąsiada. Dokumentacja błędnie przypisuje kabel do Gi1/0/23.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Local Interface i Port ID opisują różne końce tego samego połączenia.\n\n**Rozpoznanie:** Opis połączenia nie zgadza się z informacją o porcie zdalnym.\n\n**Działanie:** Zweryfikować fizyczny kabel i poprawić dokumentację pary portów.\n\n**Sprawdzenie:** Oba końce potwierdzają parę Gi1/0/5–Gi1/0/24.",
+      "card_id": "ccna.discovery.practice.case-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Odkrycie sąsiada L2 nie zapewnia routingu do management.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Adres management”: CDP pokazuje adres zarządzania sąsiada, ale brak trasy do jego podsieci. W bieżącym przypadku: Opis połączenia nie zgadza się z informacją o porcie zdalnym.",
+          "id": "A"
+        },
+        {
+          "text_md": "CDP został wyłączony lokalnie dla interfejsu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak CDP na porcie”: CDP działa globalnie, lecz na analizowanym porcie skonfigurowano no cdp enable. W bieżącym przypadku: Opis połączenia nie zgadza się z informacją o porcie zdalnym.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tabela zawiera jeszcze nieprzeterminowaną reklamę.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Stary wpis”: Kabel odłączono przed chwilą, lecz wpis LLDP pozostaje do wygaśnięcia TTL. W bieżącym przypadku: Opis połączenia nie zgadza się z informacją o porcie zdalnym.",
+          "id": "C"
+        },
+        {
+          "text_md": "Opis połączenia nie zgadza się z informacją o porcie zdalnym.",
+          "feedback_md": "Local Interface i Port ID opisują różne końce tego samego połączenia.\n\n**Rozpoznanie:** Opis połączenia nie zgadza się z informacją o porcie zdalnym.\n\n**Działanie:** Zweryfikować fizyczny kabel i poprawić dokumentację pary portów.\n\n**Sprawdzenie:** Oba końce potwierdzają parę Gi1/0/5–Gi1/0/24.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.discovery.practice.case-05.1",
+      "revision": 1,
+      "title": "Stary wpis — rozpoznanie",
+      "skills": [
+        "ccna.discovery.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Kabel odłączono przed chwilą, lecz wpis LLDP pozostaje do wygaśnięcia TTL.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Informacja discovery może przez krótki czas przeżyć fizyczne odłączenie.\n\n**Rozpoznanie:** Tabela zawiera jeszcze nieprzeterminowaną reklamę.\n\n**Działanie:** Uwzględnić TTL oraz stan linku, zamiast zakładać aktywność tylko z wpisu.\n\n**Sprawdzenie:** Po wygaśnięciu TTL bez nowych reklam wpis znika.",
+      "card_id": "ccna.discovery.practice.case-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Tabela zawiera jeszcze nieprzeterminowaną reklamę.",
+          "feedback_md": "Informacja discovery może przez krótki czas przeżyć fizyczne odłączenie.\n\n**Rozpoznanie:** Tabela zawiera jeszcze nieprzeterminowaną reklamę.\n\n**Działanie:** Uwzględnić TTL oraz stan linku, zamiast zakładać aktywność tylko z wpisu.\n\n**Sprawdzenie:** Po wygaśnięciu TTL bez nowych reklam wpis znika.",
+          "id": "A"
+        },
+        {
+          "text_md": "Brakuje aktywnego wspólnego protokołu discovery.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „LLDP wyłączony”: Urządzenia różnych producentów są połączone, ale LLDP jest wyłączony. Ruch użytkowy działa. W bieżącym przypadku: Tabela zawiera jeszcze nieprzeterminowaną reklamę.",
+          "id": "B"
+        },
+        {
+          "text_md": "Opis połączenia nie zgadza się z informacją o porcie zdalnym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nie ten port”: LLDP wskazuje Local Gi1/0/5 i Port ID Gi1/0/24 sąsiada. Dokumentacja błędnie przypisuje kabel do Gi1/0/23. W bieżącym przypadku: Tabela zawiera jeszcze nieprzeterminowaną reklamę.",
+          "id": "C"
+        },
+        {
+          "text_md": "CDP został wyłączony lokalnie dla interfejsu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak CDP na porcie”: CDP działa globalnie, lecz na analizowanym porcie skonfigurowano no cdp enable. W bieżącym przypadku: Tabela zawiera jeszcze nieprzeterminowaną reklamę.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.discovery.practice.case-06.1",
+      "revision": 1,
+      "title": "Granica zaufania — rozpoznanie",
+      "skills": [
+        "ccna.discovery.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-cdp.html"
+        },
+        {
+          "title": "Cisco — CDP i LLDP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/cdp-lldp-mac-udld/cdp-lldp-mac-udld-configuration-guide/c-configure-lldp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "CDP ujawnia model i wersję urządzenia na porcie do niezaufanego odbiorcy.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Zakres discovery powinien odpowiadać potrzebom operacyjnym i granicom zaufania.\n\n**Rozpoznanie:** Discovery ujawnia informacje o infrastrukturze poza zamierzoną granicą.\n\n**Działanie:** Wyłączyć niepotrzebne discovery na tym zewnętrznym porcie.\n\n**Sprawdzenie:** Na wskazanym porcie nie są wysyłane reklamy, a wewnętrzne discovery nadal działa.",
+      "card_id": "ccna.discovery.practice.case-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "CDP został wyłączony lokalnie dla interfejsu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak CDP na porcie”: CDP działa globalnie, lecz na analizowanym porcie skonfigurowano no cdp enable. W bieżącym przypadku: Discovery ujawnia informacje o infrastrukturze poza zamierzoną granicą.",
+          "id": "A"
+        },
+        {
+          "text_md": "Discovery ujawnia informacje o infrastrukturze poza zamierzoną granicą.",
+          "feedback_md": "Zakres discovery powinien odpowiadać potrzebom operacyjnym i granicom zaufania.\n\n**Rozpoznanie:** Discovery ujawnia informacje o infrastrukturze poza zamierzoną granicą.\n\n**Działanie:** Wyłączyć niepotrzebne discovery na tym zewnętrznym porcie.\n\n**Sprawdzenie:** Na wskazanym porcie nie są wysyłane reklamy, a wewnętrzne discovery nadal działa.",
+          "id": "B"
+        },
+        {
+          "text_md": "Tabela zawiera jeszcze nieprzeterminowaną reklamę.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Stary wpis”: Kabel odłączono przed chwilą, lecz wpis LLDP pozostaje do wygaśnięcia TTL. W bieżącym przypadku: Discovery ujawnia informacje o infrastrukturze poza zamierzoną granicą.",
+          "id": "C"
+        },
+        {
+          "text_md": "Opis połączenia nie zgadza się z informacją o porcie zdalnym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nie ten port”: LLDP wskazuje Local Gi1/0/5 i Port ID Gi1/0/24 sąsiada. Dokumentacja błędnie przypisuje kabel do Gi1/0/23. W bieżącym przypadku: Discovery ujawnia informacje o infrastrukturze poza zamierzoną granicą.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

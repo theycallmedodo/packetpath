@@ -1,0 +1,475 @@
+{
+  "schema_version": 3,
+  "id": "encor.ebgp.practice-14",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Filtr importu",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.cli-07.card",
+      "front_md": "W AF IPv4 istniejącego peera 192.0.2.2 zastosuj istniejącą prefix-list IMPORT in. Nie zmieniaj jej definicji.",
+      "back_md": "In dotyczy reklam przychodzących od tego peera.",
+      "example": "neighbor 192.0.2.2 prefix-list IMPORT in"
+    },
+    {
+      "revision": 1,
+      "title": "Filtr eksportu",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.cli-08.card",
+      "front_md": "W AF IPv4 zastosuj istniejącą prefix-list EXPORT w kierunku reklam wysyłanych do 192.0.2.2.",
+      "back_md": "Out filtruje reklamy opuszczające lokalny router do peera.",
+      "example": "neighbor 192.0.2.2 prefix-list EXPORT out"
+    },
+    {
+      "revision": 1,
+      "title": "Precyzyjny prefix-list",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.cli-09.card",
+      "front_md": "W config dopisz seq 15 do istniejącej listy EXPORT, dopuszczając wyłącznie 10.44.0.0/24 bez prefiksów bardziej szczegółowych.",
+      "back_md": "Brak ge/le oznacza dokładny prefiks i długość.",
+      "example": "ip prefix-list EXPORT seq 15 permit 10.44.0.0/24"
+    },
+    {
+      "revision": 1,
+      "title": "Zakres długości",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.cli-10.card",
+      "front_md": "W config utwórz seq 10 listy CUSTOMERS dopuszczając podsieci w 10.0.0.0/8 o długościach /24 do /28 włącznie. Użyj ge przed le.",
+      "back_md": "Ge i le ograniczają długości prefiksów w obrębie wskazanego zakresu adresowego.",
+      "example": "ip prefix-list CUSTOMERS seq 10 permit 10.0.0.0/8 ge 24 le 28"
+    },
+    {
+      "revision": 1,
+      "title": "Route-map local-pref",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.cli-11.card",
+      "front_md": "W config wejdź do route-map PREFER permit 10 i ustaw local-preference 200. Jest to przygotowanie klauzuli; dopasowanie i przypięcie są osobnymi krokami.",
+      "back_md": "Set zmienia atrybut tras przetwarzanych przez klauzulę; sama definicja nie przypina polityki.",
+      "example": "route-map PREFER permit 10\nset local-preference 200"
+    },
+    {
+      "revision": 1,
+      "title": "Przypięcie preferencji",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.cli-12.card",
+      "front_md": "W AF IPv4 przypnij istniejącą route-map PREFER inbound do 192.0.2.2, aby zmieniała importowane trasy.",
+      "back_md": "Preferencję importu ustawia się w kierunku in.",
+      "example": "neighbor 192.0.2.2 route-map PREFER in"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ebgp.practice.cli-07",
+      "revision": 1,
+      "title": "Filtr importu",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W AF IPv4 istniejącego peera 192.0.2.2 zastosuj istniejącą prefix-list IMPORT in. Nie zmieniaj jej definicji. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "In dotyczy reklam przychodzących od tego peera.",
+      "card_id": "encor.ebgp.practice.cli-07.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "neighbor 192.0.2.2 prefix-list IMPORT in"
+          ],
+          "width": 42,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.practice.cli-08",
+      "revision": 1,
+      "title": "Filtr eksportu",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W AF IPv4 zastosuj istniejącą prefix-list EXPORT w kierunku reklam wysyłanych do 192.0.2.2. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Out filtruje reklamy opuszczające lokalny router do peera.",
+      "card_id": "encor.ebgp.practice.cli-08.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "neighbor 192.0.2.2 prefix-list EXPORT out"
+          ],
+          "width": 43,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.practice.cli-09",
+      "revision": 1,
+      "title": "Precyzyjny prefix-list",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W config dopisz seq 15 do istniejącej listy EXPORT, dopuszczając wyłącznie 10.44.0.0/24 bez prefiksów bardziej szczegółowych. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Brak ge/le oznacza dokładny prefiks i długość.",
+      "card_id": "encor.ebgp.practice.cli-09.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "ip prefix-list EXPORT seq 15 permit 10.44.0.0/24"
+          ],
+          "width": 50,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.practice.cli-10",
+      "revision": 1,
+      "title": "Zakres długości",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W config utwórz seq 10 listy CUSTOMERS dopuszczając podsieci w 10.0.0.0/8 o długościach /24 do /28 włącznie. Użyj ge przed le. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Ge i le ograniczają długości prefiksów w obrębie wskazanego zakresu adresowego.",
+      "card_id": "encor.ebgp.practice.cli-10.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "ip prefix-list CUSTOMERS seq 10 permit 10.0.0.0/8 ge 24 le 28"
+          ],
+          "width": 60,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.practice.cli-11",
+      "revision": 1,
+      "title": "Route-map local-pref",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W config wejdź do route-map PREFER permit 10 i ustaw local-preference 200. Jest to przygotowanie klauzuli; dopasowanie i przypięcie są osobnymi krokami. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Set zmienia atrybut tras przetwarzanych przez klauzulę; sama definicja nie przypina polityki.",
+      "card_id": "encor.ebgp.practice.cli-11.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}\n{{cmd1}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "route-map PREFER permit 10"
+          ],
+          "width": 28,
+          "common_errors": {}
+        },
+        {
+          "id": "cmd1",
+          "label": "Pełna komenda 2",
+          "answer_type": "command",
+          "accepted": [
+            "set local-preference 200"
+          ],
+          "width": 26,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.practice.cli-12",
+      "revision": 1,
+      "title": "Przypięcie preferencji",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W AF IPv4 przypnij istniejącą route-map PREFER inbound do 192.0.2.2, aby zmieniała importowane trasy. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Preferencję importu ustawia się w kierunku in.",
+      "card_id": "encor.ebgp.practice.cli-12.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "neighbor 192.0.2.2 route-map PREFER in"
+          ],
+          "width": 40,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

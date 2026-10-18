@@ -1,0 +1,799 @@
+{
+  "schema_version": 3,
+  "id": "encor.eem.practice-7",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.compare-01.3.card",
+      "front_md": "**Zgłoszenie I**\n\nApplet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść.\n\n**Zgłoszenie II**\n\nApplet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Warunek zdarzenia nie dopasowuje rzeczywistego logu. Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie I:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\n**Zgłoszenie II:** Kontekst wykonania nie ma wymaganej autoryzacji. Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.\n\n**Sprawdzenie II:** Log wykonania potwierdza ukończenie dozwolonej komendy.\n\n**Zależności:** EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora. Automatyzacja zdarzeń podlega mechanizmom uprawnień urządzenia.",
+      "example": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Log wykonania potwierdza ukończenie dozwolonej komendy."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.compare-02.3.card",
+      "front_md": "**Zgłoszenie I**\n\nApplet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log.\n\n**Zgłoszenie II**\n\nAkcja zbierania danych przekracza dozwolony czas wykonania i jest przerywana.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Akcja ponownie wyzwala własny warunek. Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.\n\n**Sprawdzenie I:** Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\n**Zgłoszenie II:** Czas operacji przekracza limit wykonania polityki. Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie II:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\n**Zależności:** Automatyczna reakcja powinna być odporna na samowyzwalanie. Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji.",
+      "example": "I — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\nII — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.compare-03.3.card",
+      "front_md": "**Zgłoszenie I**\n\nApplet próbuje użyć komendy konfiguracji przed wejściem w config mode.\n\n**Zgłoszenie II**\n\nPo flapie operator ręcznie sprawdza liczniki zbyt późno; EEM może zachować dane przy zdarzeniu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Sekwencja akcji nie zapewnia właściwego trybu CLI. Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.\n\n**Sprawdzenie I:** Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\n**Zgłoszenie II:** Brakuje danych z momentu wystąpienia incydentu. Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.\n\n**Sprawdzenie II:** Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.\n\n**Zależności:** Automatyzowane CLI nadal wymaga poprawnego kontekstu komend. Automatyzacja może utrwalać ulotny stan bez automatycznej zmiany konfiguracji.",
+      "example": "I — Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\nII — Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.compare-04.3.card",
+      "front_md": "**Zgłoszenie I**\n\nApplet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść.\n\n**Zgłoszenie II**\n\nApplet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Warunek zdarzenia nie dopasowuje rzeczywistego logu. Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie I:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\n**Zgłoszenie II:** Akcja ponownie wyzwala własny warunek. Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.\n\n**Sprawdzenie II:** Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\n**Zależności:** EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora. Automatyczna reakcja powinna być odporna na samowyzwalanie.",
+      "example": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.compare-05.3.card",
+      "front_md": "**Zgłoszenie I**\n\nApplet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA.\n\n**Zgłoszenie II**\n\nApplet próbuje użyć komendy konfiguracji przed wejściem w config mode.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Kontekst wykonania nie ma wymaganej autoryzacji. Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.\n\n**Sprawdzenie I:** Log wykonania potwierdza ukończenie dozwolonej komendy.\n\n**Zgłoszenie II:** Sekwencja akcji nie zapewnia właściwego trybu CLI. Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.\n\n**Sprawdzenie II:** Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\n**Zależności:** Automatyzacja zdarzeń podlega mechanizmom uprawnień urządzenia. Automatyzowane CLI nadal wymaga poprawnego kontekstu komend.",
+      "example": "I — Log wykonania potwierdza ukończenie dozwolonej komendy.\n\nII — Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.compare-06.3.card",
+      "front_md": "**Zgłoszenie I**\n\nAkcja zbierania danych przekracza dozwolony czas wykonania i jest przerywana.\n\n**Zgłoszenie II**\n\nPo flapie operator ręcznie sprawdza liczniki zbyt późno; EEM może zachować dane przy zdarzeniu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Czas operacji przekracza limit wykonania polityki. Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie I:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\n**Zgłoszenie II:** Brakuje danych z momentu wystąpienia incydentu. Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.\n\n**Sprawdzenie II:** Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.\n\n**Zależności:** Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji. Automatyzacja może utrwalać ulotny stan bez automatycznej zmiany konfiguracji.",
+      "example": "I — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\nII — Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.compare-07.3.card",
+      "front_md": "**Zgłoszenie I**\n\nApplet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść.\n\n**Zgłoszenie II**\n\nPo flapie operator ręcznie sprawdza liczniki zbyt późno; EEM może zachować dane przy zdarzeniu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Warunek zdarzenia nie dopasowuje rzeczywistego logu. Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie I:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\n**Zgłoszenie II:** Brakuje danych z momentu wystąpienia incydentu. Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.\n\n**Sprawdzenie II:** Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.\n\n**Zależności:** EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora. Automatyzacja może utrwalać ulotny stan bez automatycznej zmiany konfiguracji.",
+      "example": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.compare-08.3.card",
+      "front_md": "**Zgłoszenie I**\n\nApplet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA.\n\n**Zgłoszenie II**\n\nAkcja zbierania danych przekracza dozwolony czas wykonania i jest przerywana.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Kontekst wykonania nie ma wymaganej autoryzacji. Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.\n\n**Sprawdzenie I:** Log wykonania potwierdza ukończenie dozwolonej komendy.\n\n**Zgłoszenie II:** Czas operacji przekracza limit wykonania polityki. Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie II:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\n**Zależności:** Automatyzacja zdarzeń podlega mechanizmom uprawnień urządzenia. Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji.",
+      "example": "I — Log wykonania potwierdza ukończenie dozwolonej komendy.\n\nII — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.compare-09.3.card",
+      "front_md": "**Zgłoszenie I**\n\nApplet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log.\n\n**Zgłoszenie II**\n\nApplet próbuje użyć komendy konfiguracji przed wejściem w config mode.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Akcja ponownie wyzwala własny warunek. Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.\n\n**Sprawdzenie I:** Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\n**Zgłoszenie II:** Sekwencja akcji nie zapewnia właściwego trybu CLI. Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.\n\n**Sprawdzenie II:** Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\n**Zależności:** Automatyczna reakcja powinna być odporna na samowyzwalanie. Automatyzowane CLI nadal wymaga poprawnego kontekstu komend.",
+      "example": "I — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\nII — Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.compare-10.3.card",
+      "front_md": "**Zgłoszenie I**\n\nApplet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść.\n\n**Zgłoszenie II**\n\nAkcja zbierania danych przekracza dozwolony czas wykonania i jest przerywana.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Warunek zdarzenia nie dopasowuje rzeczywistego logu. Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie I:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\n**Zgłoszenie II:** Czas operacji przekracza limit wykonania polityki. Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie II:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\n**Zależności:** EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora. Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji.",
+      "example": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.eem.practice.compare-01.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nApplet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść.\n\n**Zgłoszenie II**\n\nApplet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Warunek zdarzenia nie dopasowuje rzeczywistego logu. Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie I:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\n**Zgłoszenie II:** Kontekst wykonania nie ma wymaganej autoryzacji. Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.\n\n**Sprawdzenie II:** Log wykonania potwierdza ukończenie dozwolonej komendy.\n\n**Zależności:** EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora. Automatyzacja zdarzeń podlega mechanizmom uprawnień urządzenia.",
+      "card_id": "encor.eem.practice.compare-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Log wykonania potwierdza ukończenie dozwolonej komendy.\n\nII — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Warunek zdarzenia nie dopasowuje rzeczywistego logu. Zgłoszenie II: Kontekst wykonania nie ma wymaganej autoryzacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Applet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log. Dla II: Log wykonania potwierdza ukończenie dozwolonej komendy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\nII — Log wykonania potwierdza ukończenie dozwolonej komendy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Applet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log. Dla I: Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Log wykonania potwierdza ukończenie dozwolonej komendy.",
+          "feedback_md": "**Zgłoszenie I:** Warunek zdarzenia nie dopasowuje rzeczywistego logu. Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie I:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\n**Zgłoszenie II:** Kontekst wykonania nie ma wymaganej autoryzacji. Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.\n\n**Sprawdzenie II:** Log wykonania potwierdza ukończenie dozwolonej komendy.\n\n**Zależności:** EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora. Automatyzacja zdarzeń podlega mechanizmom uprawnień urządzenia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.eem.practice.compare-02.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nApplet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log.\n\n**Zgłoszenie II**\n\nAkcja zbierania danych przekracza dozwolony czas wykonania i jest przerywana.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Akcja ponownie wyzwala własny warunek. Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.\n\n**Sprawdzenie I:** Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\n**Zgłoszenie II:** Czas operacji przekracza limit wykonania polityki. Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie II:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\n**Zależności:** Automatyczna reakcja powinna być odporna na samowyzwalanie. Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji.",
+      "card_id": "encor.eem.practice.compare-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\nII — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+          "feedback_md": "**Zgłoszenie I:** Akcja ponownie wyzwala własny warunek. Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.\n\n**Sprawdzenie I:** Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\n**Zgłoszenie II:** Czas operacji przekracza limit wykonania polityki. Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie II:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\n**Zależności:** Automatyczna reakcja powinna być odporna na samowyzwalanie. Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\nII — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Akcja ponownie wyzwala własny warunek. Zgłoszenie II: Czas operacji przekracza limit wykonania polityki.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\nII — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. Dla II: Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. Dla I: Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.eem.practice.compare-03.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nApplet próbuje użyć komendy konfiguracji przed wejściem w config mode.\n\n**Zgłoszenie II**\n\nPo flapie operator ręcznie sprawdza liczniki zbyt późno; EEM może zachować dane przy zdarzeniu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Sekwencja akcji nie zapewnia właściwego trybu CLI. Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.\n\n**Sprawdzenie I:** Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\n**Zgłoszenie II:** Brakuje danych z momentu wystąpienia incydentu. Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.\n\n**Sprawdzenie II:** Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.\n\n**Zależności:** Automatyzowane CLI nadal wymaga poprawnego kontekstu komend. Automatyzacja może utrwalać ulotny stan bez automatycznej zmiany konfiguracji.",
+      "card_id": "encor.eem.practice.compare-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.\n\nII — Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Sekwencja akcji nie zapewnia właściwego trybu CLI. Zgłoszenie II: Brakuje danych z momentu wystąpienia incydentu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\nII — Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.",
+          "feedback_md": "**Zgłoszenie I:** Sekwencja akcji nie zapewnia właściwego trybu CLI. Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.\n\n**Sprawdzenie I:** Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\n**Zgłoszenie II:** Brakuje danych z momentu wystąpienia incydentu. Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.\n\n**Sprawdzenie II:** Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.\n\n**Zależności:** Automatyzowane CLI nadal wymaga poprawnego kontekstu komend. Automatyzacja może utrwalać ulotny stan bez automatycznej zmiany konfiguracji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\nII — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. Dla II: Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. Dla I: Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.eem.practice.compare-04.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nApplet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść.\n\n**Zgłoszenie II**\n\nApplet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Warunek zdarzenia nie dopasowuje rzeczywistego logu. Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie I:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\n**Zgłoszenie II:** Akcja ponownie wyzwala własny warunek. Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.\n\n**Sprawdzenie II:** Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\n**Zależności:** EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora. Automatyczna reakcja powinna być odporna na samowyzwalanie.",
+      "card_id": "encor.eem.practice.compare-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\nII — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Warunek zdarzenia nie dopasowuje rzeczywistego logu. Zgłoszenie II: Akcja ponownie wyzwala własny warunek.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Log wykonania potwierdza ukończenie dozwolonej komendy.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA. Dla II: Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.",
+          "feedback_md": "**Zgłoszenie I:** Warunek zdarzenia nie dopasowuje rzeczywistego logu. Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie I:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\n**Zgłoszenie II:** Akcja ponownie wyzwala własny warunek. Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.\n\n**Sprawdzenie II:** Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\n**Zależności:** EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora. Automatyczna reakcja powinna być odporna na samowyzwalanie.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Log wykonania potwierdza ukończenie dozwolonej komendy.\n\nII — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA. Dla I: Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.eem.practice.compare-05.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nApplet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA.\n\n**Zgłoszenie II**\n\nApplet próbuje użyć komendy konfiguracji przed wejściem w config mode.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Kontekst wykonania nie ma wymaganej autoryzacji. Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.\n\n**Sprawdzenie I:** Log wykonania potwierdza ukończenie dozwolonej komendy.\n\n**Zgłoszenie II:** Sekwencja akcji nie zapewnia właściwego trybu CLI. Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.\n\n**Sprawdzenie II:** Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\n**Zależności:** Automatyzacja zdarzeń podlega mechanizmom uprawnień urządzenia. Automatyzowane CLI nadal wymaga poprawnego kontekstu komend.",
+      "card_id": "encor.eem.practice.compare-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\nII — Log wykonania potwierdza ukończenie dozwolonej komendy.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Kontekst wykonania nie ma wymaganej autoryzacji. Zgłoszenie II: Sekwencja akcji nie zapewnia właściwego trybu CLI.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Log wykonania potwierdza ukończenie dozwolonej komendy.\n\nII — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. Dla II: Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. Dla I: Log wykonania potwierdza ukończenie dozwolonej komendy.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Log wykonania potwierdza ukończenie dozwolonej komendy.\n\nII — Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.",
+          "feedback_md": "**Zgłoszenie I:** Kontekst wykonania nie ma wymaganej autoryzacji. Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.\n\n**Sprawdzenie I:** Log wykonania potwierdza ukończenie dozwolonej komendy.\n\n**Zgłoszenie II:** Sekwencja akcji nie zapewnia właściwego trybu CLI. Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.\n\n**Sprawdzenie II:** Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\n**Zależności:** Automatyzacja zdarzeń podlega mechanizmom uprawnień urządzenia. Automatyzowane CLI nadal wymaga poprawnego kontekstu komend.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.eem.practice.compare-06.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAkcja zbierania danych przekracza dozwolony czas wykonania i jest przerywana.\n\n**Zgłoszenie II**\n\nPo flapie operator ręcznie sprawdza liczniki zbyt późno; EEM może zachować dane przy zdarzeniu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Czas operacji przekracza limit wykonania polityki. Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie I:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\n**Zgłoszenie II:** Brakuje danych z momentu wystąpienia incydentu. Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.\n\n**Sprawdzenie II:** Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.\n\n**Zależności:** Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji. Automatyzacja może utrwalać ulotny stan bez automatycznej zmiany konfiguracji.",
+      "card_id": "encor.eem.practice.compare-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\nII — Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.",
+          "feedback_md": "**Zgłoszenie I:** Czas operacji przekracza limit wykonania polityki. Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie I:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\n**Zgłoszenie II:** Brakuje danych z momentu wystąpienia incydentu. Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.\n\n**Sprawdzenie II:** Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.\n\n**Zależności:** Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji. Automatyzacja może utrwalać ulotny stan bez automatycznej zmiany konfiguracji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.\n\nII — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Czas operacji przekracza limit wykonania polityki. Zgłoszenie II: Brakuje danych z momentu wystąpienia incydentu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\nII — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. Dla II: Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. Dla I: Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.eem.practice.compare-07.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nApplet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść.\n\n**Zgłoszenie II**\n\nPo flapie operator ręcznie sprawdza liczniki zbyt późno; EEM może zachować dane przy zdarzeniu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Warunek zdarzenia nie dopasowuje rzeczywistego logu. Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie I:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\n**Zgłoszenie II:** Brakuje danych z momentu wystąpienia incydentu. Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.\n\n**Sprawdzenie II:** Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.\n\n**Zależności:** EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora. Automatyzacja może utrwalać ulotny stan bez automatycznej zmiany konfiguracji.",
+      "card_id": "encor.eem.practice.compare-07.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.\n\nII — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Warunek zdarzenia nie dopasowuje rzeczywistego logu. Zgłoszenie II: Brakuje danych z momentu wystąpienia incydentu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.",
+          "feedback_md": "**Zgłoszenie I:** Warunek zdarzenia nie dopasowuje rzeczywistego logu. Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie I:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\n**Zgłoszenie II:** Brakuje danych z momentu wystąpienia incydentu. Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.\n\n**Sprawdzenie II:** Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.\n\n**Zależności:** EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora. Automatyzacja może utrwalać ulotny stan bez automatycznej zmiany konfiguracji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Log wykonania potwierdza ukończenie dozwolonej komendy.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA. Dla II: Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Log wykonania potwierdza ukończenie dozwolonej komendy.\n\nII — Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA. Dla I: Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.eem.practice.compare-08.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nApplet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA.\n\n**Zgłoszenie II**\n\nAkcja zbierania danych przekracza dozwolony czas wykonania i jest przerywana.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Kontekst wykonania nie ma wymaganej autoryzacji. Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.\n\n**Sprawdzenie I:** Log wykonania potwierdza ukończenie dozwolonej komendy.\n\n**Zgłoszenie II:** Czas operacji przekracza limit wykonania polityki. Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie II:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\n**Zależności:** Automatyzacja zdarzeń podlega mechanizmom uprawnień urządzenia. Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji.",
+      "card_id": "encor.eem.practice.compare-08.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\nII — Log wykonania potwierdza ukończenie dozwolonej komendy.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Kontekst wykonania nie ma wymaganej autoryzacji. Zgłoszenie II: Czas operacji przekracza limit wykonania polityki.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Log wykonania potwierdza ukończenie dozwolonej komendy.\n\nII — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. Dla II: Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Log wykonania potwierdza ukończenie dozwolonej komendy.\n\nII — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+          "feedback_md": "**Zgłoszenie I:** Kontekst wykonania nie ma wymaganej autoryzacji. Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.\n\n**Sprawdzenie I:** Log wykonania potwierdza ukończenie dozwolonej komendy.\n\n**Zgłoszenie II:** Czas operacji przekracza limit wykonania polityki. Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie II:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\n**Zależności:** Automatyzacja zdarzeń podlega mechanizmom uprawnień urządzenia. Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. Dla I: Log wykonania potwierdza ukończenie dozwolonej komendy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.eem.practice.compare-09.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nApplet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log.\n\n**Zgłoszenie II**\n\nApplet próbuje użyć komendy konfiguracji przed wejściem w config mode.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Akcja ponownie wyzwala własny warunek. Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.\n\n**Sprawdzenie I:** Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\n**Zgłoszenie II:** Sekwencja akcji nie zapewnia właściwego trybu CLI. Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.\n\n**Sprawdzenie II:** Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\n**Zależności:** Automatyczna reakcja powinna być odporna na samowyzwalanie. Automatyzowane CLI nadal wymaga poprawnego kontekstu komend.",
+      "card_id": "encor.eem.practice.compare-09.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\nII — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Akcja ponownie wyzwala własny warunek. Zgłoszenie II: Sekwencja akcji nie zapewnia właściwego trybu CLI.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\nII — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. Dla II: Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. Dla I: Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\nII — Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.",
+          "feedback_md": "**Zgłoszenie I:** Akcja ponownie wyzwala własny warunek. Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.\n\n**Sprawdzenie I:** Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.\n\n**Zgłoszenie II:** Sekwencja akcji nie zapewnia właściwego trybu CLI. Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.\n\n**Sprawdzenie II:** Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.\n\n**Zależności:** Automatyczna reakcja powinna być odporna na samowyzwalanie. Automatyzowane CLI nadal wymaga poprawnego kontekstu komend.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.eem.practice.compare-10.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "encor.eem.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nApplet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść.\n\n**Zgłoszenie II**\n\nAkcja zbierania danych przekracza dozwolony czas wykonania i jest przerywana.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Warunek zdarzenia nie dopasowuje rzeczywistego logu. Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie I:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\n**Zgłoszenie II:** Czas operacji przekracza limit wykonania polityki. Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie II:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\n**Zależności:** EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora. Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji.",
+      "card_id": "encor.eem.practice.compare-10.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+          "feedback_md": "**Zgłoszenie I:** Warunek zdarzenia nie dopasowuje rzeczywistego logu. Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie I:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\n**Zgłoszenie II:** Czas operacji przekracza limit wykonania polityki. Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie II:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\n**Zależności:** EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora. Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.\n\nII — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Warunek zdarzenia nie dopasowuje rzeczywistego logu. Zgłoszenie II: Czas operacji przekracza limit wykonania polityki.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.\n\nII — Log wykonania potwierdza ukończenie dozwolonej komendy.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA. Dla II: Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Log wykonania potwierdza ukończenie dozwolonej komendy.\n\nII — Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA. Dla I: Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

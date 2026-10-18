@@ -1,0 +1,669 @@
+{
+  "schema_version": 3,
+  "id": "ccna.wireless.practice-4",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Wspólny kanał — zależności",
+      "skills": [
+        "ccna.wireless.case-01",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+        }
+      ],
+      "id": "ccna.wireless.practice.case-01.4.card",
+      "front_md": "Dwa bliskie AP używają tego samego kanału i obsługują dużo klientów. Muszą dzielić czas dostępu do medium.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Wi-Fi jest medium współdzielonym; silny sygnał nie usuwa konkurencji o airtime.\n\n**Rozpoznanie:** Występuje konkurencja o airtime na wspólnym kanale.\n\n**Działanie:** Poprawić plan kanałów i rozmieszczenie zgodnie z pomiarem RF.\n\n**Sprawdzenie:** Spada zajętość wspólnego kanału, a przepustowość klientów poprawia się w porównywalnym teście.",
+      "example": "Wi-Fi jest medium współdzielonym; silny sygnał nie usuwa konkurencji o airtime."
+    },
+    {
+      "revision": 1,
+      "title": "Błędne PSK — zależności",
+      "skills": [
+        "ccna.wireless.case-02",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+        }
+      ],
+      "id": "ccna.wireless.practice.case-02.4.card",
+      "front_md": "Klient widzi SSID z dobrym sygnałem, ale odrzucane jest uwierzytelnienie z podanym PSK.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Widoczność SSID i siła sygnału nie dowodzą poprawnego uwierzytelnienia.\n\n**Rozpoznanie:** Dane uwierzytelnienia nie pasują do polityki SSID.\n\n**Działanie:** Wprowadzić prawidłowy klucz lub właściwy profil zabezpieczeń klienta.\n\n**Sprawdzenie:** Klient kończy uwierzytelnienie i przechodzi do uzyskania adresu IP.",
+      "example": "Widoczność SSID i siła sygnału nie dowodzą poprawnego uwierzytelnienia."
+    },
+    {
+      "revision": 1,
+      "title": "SSID do złego VLAN — zależności",
+      "skills": [
+        "ccna.wireless.case-03",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+        }
+      ],
+      "id": "ccna.wireless.practice.case-03.4.card",
+      "front_md": "Klient poprawnie się łączy, lecz dostaje adres z sieci gościnnej zamiast pracowniczej. Mapowanie SSID wskazuje guest VLAN.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "SSID jest logiczną usługą WLAN, której mapowanie określa segment użytkownika.\n\n**Rozpoznanie:** SSID przypisano do niewłaściwej sieci przewodowej.\n\n**Działanie:** Poprawić mapowanie WLAN/SSID na docelowy VLAN zgodnie z projektem.\n\n**Sprawdzenie:** Po ponownym przyłączeniu klient otrzymuje adres z właściwej puli pracowniczej.",
+      "example": "SSID jest logiczną usługą WLAN, której mapowanie określa segment użytkownika."
+    },
+    {
+      "revision": 1,
+      "title": "Słaby SNR — zależności",
+      "skills": [
+        "ccna.wireless.case-04",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+        }
+      ],
+      "id": "ccna.wireless.practice.case-04.4.card",
+      "front_md": "RSSI wynosi -65 dBm, poziom szumu -68 dBm; występują retransmisje.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "SNR to różnica poziomu sygnału i szumu; tutaj wynosi tylko 3 dB.\n\n**Rozpoznanie:** Sygnał jest tylko nieznacznie wyższy od szumu.\n\n**Działanie:** Zlokalizować zakłócenia i poprawić warunki RF, nie oceniać samego RSSI.\n\n**Sprawdzenie:** SNR rośnie, a liczba retransmisji maleje przy podobnym obciążeniu.",
+      "example": "SNR to różnica poziomu sygnału i szumu; tutaj wynosi tylko 3 dB."
+    },
+    {
+      "revision": 1,
+      "title": "Zbyt szeroki kanał — zależności",
+      "skills": [
+        "ccna.wireless.case-05",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+        }
+      ],
+      "id": "ccna.wireless.practice.case-05.4.card",
+      "front_md": "W gęstym biurze wszystkie AP używają szerokich kanałów, przez co trudno zaplanować niezależne komórki.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Szerszy kanał zwiększa potencjał pojedynczego połączenia kosztem zasobu widma.\n\n**Rozpoznanie:** Szerokość kanałów ogranicza dostępne możliwości ich ponownego użycia.\n\n**Działanie:** Dobrać węższe kanały na podstawie pomiarów i potrzeb pojemnościowych.\n\n**Sprawdzenie:** Plan RF zapewnia więcej rozdzielonych kanałów i mniejszą konkurencję.",
+      "example": "Szerszy kanał zwiększa potencjał pojedynczego połączenia kosztem zasobu widma."
+    },
+    {
+      "revision": 1,
+      "title": "Roaming a DHCP — zależności",
+      "skills": [
+        "ccna.wireless.case-06",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+        }
+      ],
+      "id": "ccna.wireless.practice.case-06.4.card",
+      "front_md": "Klient przechodzi między AP tego samego WLAN w tej samej podsieci. Oczekuje się zachowania adresu IP.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Roaming radiowy i zmiana adresacji warstwy trzeciej są odrębnymi zdarzeniami.\n\n**Rozpoznanie:** Zmiana AP nie musi oznaczać zmiany podsieci klienta.\n\n**Działanie:** Sprawdzić spójność polityki WLAN, VLAN i obsługi roamingu.\n\n**Sprawdzenie:** Po przejściu między AP klient zachowuje właściwy adres i sesję w granicach możliwości roamingu.",
+      "example": "Roaming radiowy i zmiana adresacji warstwy trzeciej są odrębnymi zdarzeniami."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.wireless.practice.case-01.4",
+      "revision": 1,
+      "title": "Wspólny kanał — zależności",
+      "skills": [
+        "ccna.wireless.case-01",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.11"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.9"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.6"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dwa bliskie AP używają tego samego kanału i obsługują dużo klientów. Muszą dzielić czas dostępu do medium.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Wi-Fi jest medium współdzielonym; silny sygnał nie usuwa konkurencji o airtime.\n\n**Rozpoznanie:** Występuje konkurencja o airtime na wspólnym kanale.\n\n**Działanie:** Poprawić plan kanałów i rozmieszczenie zgodnie z pomiarem RF.\n\n**Sprawdzenie:** Spada zajętość wspólnego kanału, a przepustowość klientów poprawia się w porównywalnym teście.",
+      "card_id": "ccna.wireless.practice.case-01.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Widoczność SSID i siła sygnału nie dowodzą poprawnego uwierzytelnienia.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Błędne PSK”: Klient widzi SSID z dobrym sygnałem, ale odrzucane jest uwierzytelnienie z podanym PSK. W bieżącym przypadku: Wi-Fi jest medium współdzielonym; silny sygnał nie usuwa konkurencji o airtime.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wi-Fi jest medium współdzielonym; silny sygnał nie usuwa konkurencji o airtime.",
+          "feedback_md": "Wi-Fi jest medium współdzielonym; silny sygnał nie usuwa konkurencji o airtime.\n\n**Rozpoznanie:** Występuje konkurencja o airtime na wspólnym kanale.\n\n**Działanie:** Poprawić plan kanałów i rozmieszczenie zgodnie z pomiarem RF.\n\n**Sprawdzenie:** Spada zajętość wspólnego kanału, a przepustowość klientów poprawia się w porównywalnym teście.",
+          "id": "B"
+        },
+        {
+          "text_md": "SNR to różnica poziomu sygnału i szumu; tutaj wynosi tylko 3 dB.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Słaby SNR”: RSSI wynosi -65 dBm, poziom szumu -68 dBm; występują retransmisje. W bieżącym przypadku: Wi-Fi jest medium współdzielonym; silny sygnał nie usuwa konkurencji o airtime.",
+          "id": "C"
+        },
+        {
+          "text_md": "Roaming radiowy i zmiana adresacji warstwy trzeciej są odrębnymi zdarzeniami.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Roaming a DHCP”: Klient przechodzi między AP tego samego WLAN w tej samej podsieci. Oczekuje się zachowania adresu IP. W bieżącym przypadku: Wi-Fi jest medium współdzielonym; silny sygnał nie usuwa konkurencji o airtime.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.wireless.practice.case-02.4",
+      "revision": 1,
+      "title": "Błędne PSK — zależności",
+      "skills": [
+        "ccna.wireless.case-02",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.11"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.9"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.6"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Klient widzi SSID z dobrym sygnałem, ale odrzucane jest uwierzytelnienie z podanym PSK.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Widoczność SSID i siła sygnału nie dowodzą poprawnego uwierzytelnienia.\n\n**Rozpoznanie:** Dane uwierzytelnienia nie pasują do polityki SSID.\n\n**Działanie:** Wprowadzić prawidłowy klucz lub właściwy profil zabezpieczeń klienta.\n\n**Sprawdzenie:** Klient kończy uwierzytelnienie i przechodzi do uzyskania adresu IP.",
+      "card_id": "ccna.wireless.practice.case-02.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Szerszy kanał zwiększa potencjał pojedynczego połączenia kosztem zasobu widma.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbyt szeroki kanał”: W gęstym biurze wszystkie AP używają szerokich kanałów, przez co trudno zaplanować niezależne komórki. W bieżącym przypadku: Widoczność SSID i siła sygnału nie dowodzą poprawnego uwierzytelnienia.",
+          "id": "A"
+        },
+        {
+          "text_md": "SNR to różnica poziomu sygnału i szumu; tutaj wynosi tylko 3 dB.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Słaby SNR”: RSSI wynosi -65 dBm, poziom szumu -68 dBm; występują retransmisje. W bieżącym przypadku: Widoczność SSID i siła sygnału nie dowodzą poprawnego uwierzytelnienia.",
+          "id": "B"
+        },
+        {
+          "text_md": "Widoczność SSID i siła sygnału nie dowodzą poprawnego uwierzytelnienia.",
+          "feedback_md": "Widoczność SSID i siła sygnału nie dowodzą poprawnego uwierzytelnienia.\n\n**Rozpoznanie:** Dane uwierzytelnienia nie pasują do polityki SSID.\n\n**Działanie:** Wprowadzić prawidłowy klucz lub właściwy profil zabezpieczeń klienta.\n\n**Sprawdzenie:** Klient kończy uwierzytelnienie i przechodzi do uzyskania adresu IP.",
+          "id": "C"
+        },
+        {
+          "text_md": "SSID jest logiczną usługą WLAN, której mapowanie określa segment użytkownika.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SSID do złego VLAN”: Klient poprawnie się łączy, lecz dostaje adres z sieci gościnnej zamiast pracowniczej. Mapowanie SSID wskazuje guest VLAN. W bieżącym przypadku: Widoczność SSID i siła sygnału nie dowodzą poprawnego uwierzytelnienia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.wireless.practice.case-03.4",
+      "revision": 1,
+      "title": "SSID do złego VLAN — zależności",
+      "skills": [
+        "ccna.wireless.case-03",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.11"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.9"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.6"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Klient poprawnie się łączy, lecz dostaje adres z sieci gościnnej zamiast pracowniczej. Mapowanie SSID wskazuje guest VLAN.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "SSID jest logiczną usługą WLAN, której mapowanie określa segment użytkownika.\n\n**Rozpoznanie:** SSID przypisano do niewłaściwej sieci przewodowej.\n\n**Działanie:** Poprawić mapowanie WLAN/SSID na docelowy VLAN zgodnie z projektem.\n\n**Sprawdzenie:** Po ponownym przyłączeniu klient otrzymuje adres z właściwej puli pracowniczej.",
+      "card_id": "ccna.wireless.practice.case-03.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Szerszy kanał zwiększa potencjał pojedynczego połączenia kosztem zasobu widma.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbyt szeroki kanał”: W gęstym biurze wszystkie AP używają szerokich kanałów, przez co trudno zaplanować niezależne komórki. W bieżącym przypadku: SSID jest logiczną usługą WLAN, której mapowanie określa segment użytkownika.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wi-Fi jest medium współdzielonym; silny sygnał nie usuwa konkurencji o airtime.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wspólny kanał”: Dwa bliskie AP używają tego samego kanału i obsługują dużo klientów. Muszą dzielić czas dostępu do medium. W bieżącym przypadku: SSID jest logiczną usługą WLAN, której mapowanie określa segment użytkownika.",
+          "id": "B"
+        },
+        {
+          "text_md": "SNR to różnica poziomu sygnału i szumu; tutaj wynosi tylko 3 dB.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Słaby SNR”: RSSI wynosi -65 dBm, poziom szumu -68 dBm; występują retransmisje. W bieżącym przypadku: SSID jest logiczną usługą WLAN, której mapowanie określa segment użytkownika.",
+          "id": "C"
+        },
+        {
+          "text_md": "SSID jest logiczną usługą WLAN, której mapowanie określa segment użytkownika.",
+          "feedback_md": "SSID jest logiczną usługą WLAN, której mapowanie określa segment użytkownika.\n\n**Rozpoznanie:** SSID przypisano do niewłaściwej sieci przewodowej.\n\n**Działanie:** Poprawić mapowanie WLAN/SSID na docelowy VLAN zgodnie z projektem.\n\n**Sprawdzenie:** Po ponownym przyłączeniu klient otrzymuje adres z właściwej puli pracowniczej.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.wireless.practice.case-04.4",
+      "revision": 1,
+      "title": "Słaby SNR — zależności",
+      "skills": [
+        "ccna.wireless.case-04",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.11"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.9"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.6"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "RSSI wynosi -65 dBm, poziom szumu -68 dBm; występują retransmisje.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "SNR to różnica poziomu sygnału i szumu; tutaj wynosi tylko 3 dB.\n\n**Rozpoznanie:** Sygnał jest tylko nieznacznie wyższy od szumu.\n\n**Działanie:** Zlokalizować zakłócenia i poprawić warunki RF, nie oceniać samego RSSI.\n\n**Sprawdzenie:** SNR rośnie, a liczba retransmisji maleje przy podobnym obciążeniu.",
+      "card_id": "ccna.wireless.practice.case-04.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "SNR to różnica poziomu sygnału i szumu; tutaj wynosi tylko 3 dB.",
+          "feedback_md": "SNR to różnica poziomu sygnału i szumu; tutaj wynosi tylko 3 dB.\n\n**Rozpoznanie:** Sygnał jest tylko nieznacznie wyższy od szumu.\n\n**Działanie:** Zlokalizować zakłócenia i poprawić warunki RF, nie oceniać samego RSSI.\n\n**Sprawdzenie:** SNR rośnie, a liczba retransmisji maleje przy podobnym obciążeniu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Szerszy kanał zwiększa potencjał pojedynczego połączenia kosztem zasobu widma.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbyt szeroki kanał”: W gęstym biurze wszystkie AP używają szerokich kanałów, przez co trudno zaplanować niezależne komórki. W bieżącym przypadku: SNR to różnica poziomu sygnału i szumu; tutaj wynosi tylko 3 dB.",
+          "id": "B"
+        },
+        {
+          "text_md": "SSID jest logiczną usługą WLAN, której mapowanie określa segment użytkownika.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SSID do złego VLAN”: Klient poprawnie się łączy, lecz dostaje adres z sieci gościnnej zamiast pracowniczej. Mapowanie SSID wskazuje guest VLAN. W bieżącym przypadku: SNR to różnica poziomu sygnału i szumu; tutaj wynosi tylko 3 dB.",
+          "id": "C"
+        },
+        {
+          "text_md": "Roaming radiowy i zmiana adresacji warstwy trzeciej są odrębnymi zdarzeniami.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Roaming a DHCP”: Klient przechodzi między AP tego samego WLAN w tej samej podsieci. Oczekuje się zachowania adresu IP. W bieżącym przypadku: SNR to różnica poziomu sygnału i szumu; tutaj wynosi tylko 3 dB.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.wireless.practice.case-05.4",
+      "revision": 1,
+      "title": "Zbyt szeroki kanał — zależności",
+      "skills": [
+        "ccna.wireless.case-05",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.11"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.9"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.6"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W gęstym biurze wszystkie AP używają szerokich kanałów, przez co trudno zaplanować niezależne komórki.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Szerszy kanał zwiększa potencjał pojedynczego połączenia kosztem zasobu widma.\n\n**Rozpoznanie:** Szerokość kanałów ogranicza dostępne możliwości ich ponownego użycia.\n\n**Działanie:** Dobrać węższe kanały na podstawie pomiarów i potrzeb pojemnościowych.\n\n**Sprawdzenie:** Plan RF zapewnia więcej rozdzielonych kanałów i mniejszą konkurencję.",
+      "card_id": "ccna.wireless.practice.case-05.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Widoczność SSID i siła sygnału nie dowodzą poprawnego uwierzytelnienia.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Błędne PSK”: Klient widzi SSID z dobrym sygnałem, ale odrzucane jest uwierzytelnienie z podanym PSK. W bieżącym przypadku: Szerszy kanał zwiększa potencjał pojedynczego połączenia kosztem zasobu widma.",
+          "id": "A"
+        },
+        {
+          "text_md": "Szerszy kanał zwiększa potencjał pojedynczego połączenia kosztem zasobu widma.",
+          "feedback_md": "Szerszy kanał zwiększa potencjał pojedynczego połączenia kosztem zasobu widma.\n\n**Rozpoznanie:** Szerokość kanałów ogranicza dostępne możliwości ich ponownego użycia.\n\n**Działanie:** Dobrać węższe kanały na podstawie pomiarów i potrzeb pojemnościowych.\n\n**Sprawdzenie:** Plan RF zapewnia więcej rozdzielonych kanałów i mniejszą konkurencję.",
+          "id": "B"
+        },
+        {
+          "text_md": "SSID jest logiczną usługą WLAN, której mapowanie określa segment użytkownika.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SSID do złego VLAN”: Klient poprawnie się łączy, lecz dostaje adres z sieci gościnnej zamiast pracowniczej. Mapowanie SSID wskazuje guest VLAN. W bieżącym przypadku: Szerszy kanał zwiększa potencjał pojedynczego połączenia kosztem zasobu widma.",
+          "id": "C"
+        },
+        {
+          "text_md": "SNR to różnica poziomu sygnału i szumu; tutaj wynosi tylko 3 dB.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Słaby SNR”: RSSI wynosi -65 dBm, poziom szumu -68 dBm; występują retransmisje. W bieżącym przypadku: Szerszy kanał zwiększa potencjał pojedynczego połączenia kosztem zasobu widma.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.wireless.practice.case-06.4",
+      "revision": 1,
+      "title": "Roaming a DHCP — zależności",
+      "skills": [
+        "ccna.wireless.case-06",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-campus-lan-wlan-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-10/config-guide/b_cg810/wlan_security.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/support/docs/wireless-mobility/80211/200527-Fundamentals-of-802-11-Wireless-Sniffing.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — WLAN — radio, architektura i bezpieczeństwo",
+          "url": "https://www.cisco.com/c/en/us/td/docs/wireless/controller/8-5/config-guide/b_cg85/flexconnect.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.11"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.9"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.6"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.9"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Klient przechodzi między AP tego samego WLAN w tej samej podsieci. Oczekuje się zachowania adresu IP.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Roaming radiowy i zmiana adresacji warstwy trzeciej są odrębnymi zdarzeniami.\n\n**Rozpoznanie:** Zmiana AP nie musi oznaczać zmiany podsieci klienta.\n\n**Działanie:** Sprawdzić spójność polityki WLAN, VLAN i obsługi roamingu.\n\n**Sprawdzenie:** Po przejściu między AP klient zachowuje właściwy adres i sesję w granicach możliwości roamingu.",
+      "card_id": "ccna.wireless.practice.case-06.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "SSID jest logiczną usługą WLAN, której mapowanie określa segment użytkownika.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SSID do złego VLAN”: Klient poprawnie się łączy, lecz dostaje adres z sieci gościnnej zamiast pracowniczej. Mapowanie SSID wskazuje guest VLAN. W bieżącym przypadku: Roaming radiowy i zmiana adresacji warstwy trzeciej są odrębnymi zdarzeniami.",
+          "id": "A"
+        },
+        {
+          "text_md": "Szerszy kanał zwiększa potencjał pojedynczego połączenia kosztem zasobu widma.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbyt szeroki kanał”: W gęstym biurze wszystkie AP używają szerokich kanałów, przez co trudno zaplanować niezależne komórki. W bieżącym przypadku: Roaming radiowy i zmiana adresacji warstwy trzeciej są odrębnymi zdarzeniami.",
+          "id": "B"
+        },
+        {
+          "text_md": "Roaming radiowy i zmiana adresacji warstwy trzeciej są odrębnymi zdarzeniami.",
+          "feedback_md": "Roaming radiowy i zmiana adresacji warstwy trzeciej są odrębnymi zdarzeniami.\n\n**Rozpoznanie:** Zmiana AP nie musi oznaczać zmiany podsieci klienta.\n\n**Działanie:** Sprawdzić spójność polityki WLAN, VLAN i obsługi roamingu.\n\n**Sprawdzenie:** Po przejściu między AP klient zachowuje właściwy adres i sesję w granicach możliwości roamingu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wi-Fi jest medium współdzielonym; silny sygnał nie usuwa konkurencji o airtime.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wspólny kanał”: Dwa bliskie AP używają tego samego kanału i obsługują dużo klientów. Muszą dzielić czas dostępu do medium. W bieżącym przypadku: Roaming radiowy i zmiana adresacji warstwy trzeciej są odrębnymi zdarzeniami.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

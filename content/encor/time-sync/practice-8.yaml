@@ -1,0 +1,879 @@
+{
+  "schema_version": 3,
+  "id": "encor.time-sync.practice-8",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.practice.compare-01.4.card",
+      "front_md": "**Zgłoszenie I**\n\nNTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera.\n\n**Zgłoszenie II**\n\nUrządzenie raportuje stratum 16 i brak wybranego źródła.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brak udanych ostatnich odpowiedzi NTP. Sprawdzić transport, źródło i politykę dostępu do wybranego serwera.\n\n**Sprawdzenie I:** Reach zaczyna rejestrować udane odpowiedzi, a peer może zostać oceniony.\n\n**Zgłoszenie II:** Urządzenie jest niesynchronizowane w rozumieniu NTP. Przywrócić dostępne i wiarygodne źródło czasu.\n\n**Sprawdzenie II:** Status wskazuje synchronizację z wybranym peerem i poprawne stratum.\n\n**Zależności:** Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara. Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+      "example": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.practice.compare-02.4.card",
+      "front_md": "**Zgłoszenie I**\n\nDwa urządzenia mają zgodny czas UTC, ale różne ustawienia strefy wyświetlania.\n\n**Zgłoszenie II**\n\nDwa urządzenia PTP korzystają z niezgodnych profili i domen, mimo sprawnego transportu.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Różnica prezentacji czasu nie musi oznaczać błędu synchronizacji. Porównać UTC i konfigurację strefy zamiast przesuwać źródło NTP.\n\n**Sprawdzenie I:** Po wspólnym przeliczeniu znaczniki wskazują tę samą chwilę.\n\n**Zgłoszenie II:** Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Uzgodnić profil, domain i wymagany transport wdrożenia.\n\n**Sprawdzenie II:** Urządzenia widzą właściwego mastera i osiągają zamierzony stan synchronizacji.\n\n**Zależności:** Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia. W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+      "example": "I — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.\n\nII — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.practice.compare-03.4.card",
+      "front_md": "**Zgłoszenie I**\n\nPTP działa, ale opóźnienie w jednym kierunku jest znacznie większe niż w przeciwnym.\n\n**Zgłoszenie II**\n\nGłówny grandmaster PTP znika, a projekt przewiduje zapasowy o gorszym priorytecie.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Asymetria drogi może wprowadzić błąd estymacji offsetu. Ocenić transport i kompensację asymetrii właściwą dla projektu.\n\n**Sprawdzenie I:** Pomiar niezależny potwierdza dokładność po ograniczeniu lub kompensacji asymetrii.\n\n**Zgłoszenie II:** Potrzebny jest wybór zapasowego źródła według mechanizmu PTP. Sprawdzić wybór mastera i parametry zapasowego zegara.\n\n**Sprawdzenie II:** Urządzenia przechodzą na przewidziany zapasowy grandmaster.\n\n**Zależności:** Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji. Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+      "example": "I — Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.\n\nII — Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.practice.compare-04.4.card",
+      "front_md": "**Zgłoszenie I**\n\nNTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera.\n\n**Zgłoszenie II**\n\nDwa urządzenia mają zgodny czas UTC, ale różne ustawienia strefy wyświetlania.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brak udanych ostatnich odpowiedzi NTP. Sprawdzić transport, źródło i politykę dostępu do wybranego serwera.\n\n**Sprawdzenie I:** Reach zaczyna rejestrować udane odpowiedzi, a peer może zostać oceniony.\n\n**Zgłoszenie II:** Różnica prezentacji czasu nie musi oznaczać błędu synchronizacji. Porównać UTC i konfigurację strefy zamiast przesuwać źródło NTP.\n\n**Sprawdzenie II:** Po wspólnym przeliczeniu znaczniki wskazują tę samą chwilę.\n\n**Zależności:** Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara. Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.",
+      "example": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.practice.compare-05.4.card",
+      "front_md": "**Zgłoszenie I**\n\nUrządzenie raportuje stratum 16 i brak wybranego źródła.\n\n**Zgłoszenie II**\n\nPTP działa, ale opóźnienie w jednym kierunku jest znacznie większe niż w przeciwnym.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Urządzenie jest niesynchronizowane w rozumieniu NTP. Przywrócić dostępne i wiarygodne źródło czasu.\n\n**Sprawdzenie I:** Status wskazuje synchronizację z wybranym peerem i poprawne stratum.\n\n**Zgłoszenie II:** Asymetria drogi może wprowadzić błąd estymacji offsetu. Ocenić transport i kompensację asymetrii właściwą dla projektu.\n\n**Sprawdzenie II:** Pomiar niezależny potwierdza dokładność po ograniczeniu lub kompensacji asymetrii.\n\n**Zależności:** Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar. Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+      "example": "I — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.\n\nII — Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.practice.compare-06.4.card",
+      "front_md": "**Zgłoszenie I**\n\nDwa urządzenia PTP korzystają z niezgodnych profili i domen, mimo sprawnego transportu.\n\n**Zgłoszenie II**\n\nGłówny grandmaster PTP znika, a projekt przewiduje zapasowy o gorszym priorytecie.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Uzgodnić profil, domain i wymagany transport wdrożenia.\n\n**Sprawdzenie I:** Urządzenia widzą właściwego mastera i osiągają zamierzony stan synchronizacji.\n\n**Zgłoszenie II:** Potrzebny jest wybór zapasowego źródła według mechanizmu PTP. Sprawdzić wybór mastera i parametry zapasowego zegara.\n\n**Sprawdzenie II:** Urządzenia przechodzą na przewidziany zapasowy grandmaster.\n\n**Zależności:** W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności. Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+      "example": "I — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.\n\nII — Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.practice.compare-07.4.card",
+      "front_md": "**Zgłoszenie I**\n\nNTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera.\n\n**Zgłoszenie II**\n\nGłówny grandmaster PTP znika, a projekt przewiduje zapasowy o gorszym priorytecie.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brak udanych ostatnich odpowiedzi NTP. Sprawdzić transport, źródło i politykę dostępu do wybranego serwera.\n\n**Sprawdzenie I:** Reach zaczyna rejestrować udane odpowiedzi, a peer może zostać oceniony.\n\n**Zgłoszenie II:** Potrzebny jest wybór zapasowego źródła według mechanizmu PTP. Sprawdzić wybór mastera i parametry zapasowego zegara.\n\n**Sprawdzenie II:** Urządzenia przechodzą na przewidziany zapasowy grandmaster.\n\n**Zależności:** Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara. Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+      "example": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.practice.compare-08.4.card",
+      "front_md": "**Zgłoszenie I**\n\nUrządzenie raportuje stratum 16 i brak wybranego źródła.\n\n**Zgłoszenie II**\n\nDwa urządzenia PTP korzystają z niezgodnych profili i domen, mimo sprawnego transportu.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Urządzenie jest niesynchronizowane w rozumieniu NTP. Przywrócić dostępne i wiarygodne źródło czasu.\n\n**Sprawdzenie I:** Status wskazuje synchronizację z wybranym peerem i poprawne stratum.\n\n**Zgłoszenie II:** Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Uzgodnić profil, domain i wymagany transport wdrożenia.\n\n**Sprawdzenie II:** Urządzenia widzą właściwego mastera i osiągają zamierzony stan synchronizacji.\n\n**Zależności:** Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar. W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+      "example": "I — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.\n\nII — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.practice.compare-09.4.card",
+      "front_md": "**Zgłoszenie I**\n\nDwa urządzenia mają zgodny czas UTC, ale różne ustawienia strefy wyświetlania.\n\n**Zgłoszenie II**\n\nPTP działa, ale opóźnienie w jednym kierunku jest znacznie większe niż w przeciwnym.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Różnica prezentacji czasu nie musi oznaczać błędu synchronizacji. Porównać UTC i konfigurację strefy zamiast przesuwać źródło NTP.\n\n**Sprawdzenie I:** Po wspólnym przeliczeniu znaczniki wskazują tę samą chwilę.\n\n**Zgłoszenie II:** Asymetria drogi może wprowadzić błąd estymacji offsetu. Ocenić transport i kompensację asymetrii właściwą dla projektu.\n\n**Sprawdzenie II:** Pomiar niezależny potwierdza dokładność po ograniczeniu lub kompensacji asymetrii.\n\n**Zależności:** Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia. Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+      "example": "I — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.\n\nII — Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "id": "encor.time-sync.practice.compare-10.4.card",
+      "front_md": "**Zgłoszenie I**\n\nNTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera.\n\n**Zgłoszenie II**\n\nDwa urządzenia PTP korzystają z niezgodnych profili i domen, mimo sprawnego transportu.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brak udanych ostatnich odpowiedzi NTP. Sprawdzić transport, źródło i politykę dostępu do wybranego serwera.\n\n**Sprawdzenie I:** Reach zaczyna rejestrować udane odpowiedzi, a peer może zostać oceniony.\n\n**Zgłoszenie II:** Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Uzgodnić profil, domain i wymagany transport wdrożenia.\n\n**Sprawdzenie II:** Urządzenia widzą właściwego mastera i osiągają zamierzony stan synchronizacji.\n\n**Zależności:** Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara. W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+      "example": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.time-sync.practice.compare-01.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera.\n\n**Zgłoszenie II**\n\nUrządzenie raportuje stratum 16 i brak wybranego źródła.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brak udanych ostatnich odpowiedzi NTP. Sprawdzić transport, źródło i politykę dostępu do wybranego serwera.\n\n**Sprawdzenie I:** Reach zaczyna rejestrować udane odpowiedzi, a peer może zostać oceniony.\n\n**Zgłoszenie II:** Urządzenie jest niesynchronizowane w rozumieniu NTP. Przywrócić dostępne i wiarygodne źródło czasu.\n\n**Sprawdzenie II:** Status wskazuje synchronizację z wybranym peerem i poprawne stratum.\n\n**Zależności:** Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara. Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+      "card_id": "encor.time-sync.practice.compare-01.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+          "feedback_md": "**Zgłoszenie I:** Brak udanych ostatnich odpowiedzi NTP. Sprawdzić transport, źródło i politykę dostępu do wybranego serwera.\n\n**Sprawdzenie I:** Reach zaczyna rejestrować udane odpowiedzi, a peer może zostać oceniony.\n\n**Zgłoszenie II:** Urządzenie jest niesynchronizowane w rozumieniu NTP. Przywrócić dostępne i wiarygodne źródło czasu.\n\n**Sprawdzenie II:** Status wskazuje synchronizację z wybranym peerem i poprawne stratum.\n\n**Zależności:** Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara. Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.\n\nII — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brak udanych ostatnich odpowiedzi NTP. Zgłoszenie II: Urządzenie jest niesynchronizowane w rozumieniu NTP.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Dwa urządzenia mają zgodny czas UTC, ale różne ustawienia strefy wyświetlania. Dla II: Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.\n\nII — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Dwa urządzenia mają zgodny czas UTC, ale różne ustawienia strefy wyświetlania. Dla I: Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.time-sync.practice.compare-02.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDwa urządzenia mają zgodny czas UTC, ale różne ustawienia strefy wyświetlania.\n\n**Zgłoszenie II**\n\nDwa urządzenia PTP korzystają z niezgodnych profili i domen, mimo sprawnego transportu.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Różnica prezentacji czasu nie musi oznaczać błędu synchronizacji. Porównać UTC i konfigurację strefy zamiast przesuwać źródło NTP.\n\n**Sprawdzenie I:** Po wspólnym przeliczeniu znaczniki wskazują tę samą chwilę.\n\n**Zgłoszenie II:** Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Uzgodnić profil, domain i wymagany transport wdrożenia.\n\n**Sprawdzenie II:** Urządzenia widzą właściwego mastera i osiągają zamierzony stan synchronizacji.\n\n**Zależności:** Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia. W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+      "card_id": "encor.time-sync.practice.compare-02.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.\n\nII — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Różnica prezentacji czasu nie musi oznaczać błędu synchronizacji. Zgłoszenie II: Nie uczestniczą w zgodnym kontekście synchronizacji PTP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.\n\nII — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "feedback_md": "**Zgłoszenie I:** Różnica prezentacji czasu nie musi oznaczać błędu synchronizacji. Porównać UTC i konfigurację strefy zamiast przesuwać źródło NTP.\n\n**Sprawdzenie I:** Po wspólnym przeliczeniu znaczniki wskazują tę samą chwilę.\n\n**Zgłoszenie II:** Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Uzgodnić profil, domain i wymagany transport wdrożenia.\n\n**Sprawdzenie II:** Urządzenia widzą właściwego mastera i osiągają zamierzony stan synchronizacji.\n\n**Zależności:** Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia. W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.\n\nII — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: NTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera. Dla II: W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: NTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera. Dla I: Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.time-sync.practice.compare-03.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPTP działa, ale opóźnienie w jednym kierunku jest znacznie większe niż w przeciwnym.\n\n**Zgłoszenie II**\n\nGłówny grandmaster PTP znika, a projekt przewiduje zapasowy o gorszym priorytecie.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Asymetria drogi może wprowadzić błąd estymacji offsetu. Ocenić transport i kompensację asymetrii właściwą dla projektu.\n\n**Sprawdzenie I:** Pomiar niezależny potwierdza dokładność po ograniczeniu lub kompensacji asymetrii.\n\n**Zgłoszenie II:** Potrzebny jest wybór zapasowego źródła według mechanizmu PTP. Sprawdzić wybór mastera i parametry zapasowego zegara.\n\n**Sprawdzenie II:** Urządzenia przechodzą na przewidziany zapasowy grandmaster.\n\n**Zależności:** Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji. Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+      "card_id": "encor.time-sync.practice.compare-03.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.\n\nII — Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Asymetria drogi może wprowadzić błąd estymacji offsetu. Zgłoszenie II: Potrzebny jest wybór zapasowego źródła według mechanizmu PTP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.\n\nII — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: NTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera. Dla II: Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.\n\nII — Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+          "feedback_md": "**Zgłoszenie I:** Asymetria drogi może wprowadzić błąd estymacji offsetu. Ocenić transport i kompensację asymetrii właściwą dla projektu.\n\n**Sprawdzenie I:** Pomiar niezależny potwierdza dokładność po ograniczeniu lub kompensacji asymetrii.\n\n**Zgłoszenie II:** Potrzebny jest wybór zapasowego źródła według mechanizmu PTP. Sprawdzić wybór mastera i parametry zapasowego zegara.\n\n**Sprawdzenie II:** Urządzenia przechodzą na przewidziany zapasowy grandmaster.\n\n**Zależności:** Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji. Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: NTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera. Dla I: Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.time-sync.practice.compare-04.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera.\n\n**Zgłoszenie II**\n\nDwa urządzenia mają zgodny czas UTC, ale różne ustawienia strefy wyświetlania.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brak udanych ostatnich odpowiedzi NTP. Sprawdzić transport, źródło i politykę dostępu do wybranego serwera.\n\n**Sprawdzenie I:** Reach zaczyna rejestrować udane odpowiedzi, a peer może zostać oceniony.\n\n**Zgłoszenie II:** Różnica prezentacji czasu nie musi oznaczać błędu synchronizacji. Porównać UTC i konfigurację strefy zamiast przesuwać źródło NTP.\n\n**Sprawdzenie II:** Po wspólnym przeliczeniu znaczniki wskazują tę samą chwilę.\n\n**Zależności:** Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara. Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.",
+      "card_id": "encor.time-sync.practice.compare-04.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.\n\nII — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brak udanych ostatnich odpowiedzi NTP. Zgłoszenie II: Różnica prezentacji czasu nie musi oznaczać błędu synchronizacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Urządzenie raportuje stratum 16 i brak wybranego źródła. Dla II: Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.\n\nII — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Urządzenie raportuje stratum 16 i brak wybranego źródła. Dla I: Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.",
+          "feedback_md": "**Zgłoszenie I:** Brak udanych ostatnich odpowiedzi NTP. Sprawdzić transport, źródło i politykę dostępu do wybranego serwera.\n\n**Sprawdzenie I:** Reach zaczyna rejestrować udane odpowiedzi, a peer może zostać oceniony.\n\n**Zgłoszenie II:** Różnica prezentacji czasu nie musi oznaczać błędu synchronizacji. Porównać UTC i konfigurację strefy zamiast przesuwać źródło NTP.\n\n**Sprawdzenie II:** Po wspólnym przeliczeniu znaczniki wskazują tę samą chwilę.\n\n**Zależności:** Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara. Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.time-sync.practice.compare-05.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nUrządzenie raportuje stratum 16 i brak wybranego źródła.\n\n**Zgłoszenie II**\n\nPTP działa, ale opóźnienie w jednym kierunku jest znacznie większe niż w przeciwnym.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Urządzenie jest niesynchronizowane w rozumieniu NTP. Przywrócić dostępne i wiarygodne źródło czasu.\n\n**Sprawdzenie I:** Status wskazuje synchronizację z wybranym peerem i poprawne stratum.\n\n**Zgłoszenie II:** Asymetria drogi może wprowadzić błąd estymacji offsetu. Ocenić transport i kompensację asymetrii właściwą dla projektu.\n\n**Sprawdzenie II:** Pomiar niezależny potwierdza dokładność po ograniczeniu lub kompensacji asymetrii.\n\n**Zależności:** Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar. Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+      "card_id": "encor.time-sync.practice.compare-05.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.\n\nII — Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+          "feedback_md": "**Zgłoszenie I:** Urządzenie jest niesynchronizowane w rozumieniu NTP. Przywrócić dostępne i wiarygodne źródło czasu.\n\n**Sprawdzenie I:** Status wskazuje synchronizację z wybranym peerem i poprawne stratum.\n\n**Zgłoszenie II:** Asymetria drogi może wprowadzić błąd estymacji offsetu. Ocenić transport i kompensację asymetrii właściwą dla projektu.\n\n**Sprawdzenie II:** Pomiar niezależny potwierdza dokładność po ograniczeniu lub kompensacji asymetrii.\n\n**Zależności:** Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar. Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.\n\nII — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Urządzenie jest niesynchronizowane w rozumieniu NTP. Zgłoszenie II: Asymetria drogi może wprowadzić błąd estymacji offsetu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.\n\nII — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: NTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera. Dla II: Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: NTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera. Dla I: Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.time-sync.practice.compare-06.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDwa urządzenia PTP korzystają z niezgodnych profili i domen, mimo sprawnego transportu.\n\n**Zgłoszenie II**\n\nGłówny grandmaster PTP znika, a projekt przewiduje zapasowy o gorszym priorytecie.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Uzgodnić profil, domain i wymagany transport wdrożenia.\n\n**Sprawdzenie I:** Urządzenia widzą właściwego mastera i osiągają zamierzony stan synchronizacji.\n\n**Zgłoszenie II:** Potrzebny jest wybór zapasowego źródła według mechanizmu PTP. Sprawdzić wybór mastera i parametry zapasowego zegara.\n\n**Sprawdzenie II:** Urządzenia przechodzą na przewidziany zapasowy grandmaster.\n\n**Zależności:** W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności. Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+      "card_id": "encor.time-sync.practice.compare-06.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.\n\nII — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Zgłoszenie II: Potrzebny jest wybór zapasowego źródła według mechanizmu PTP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.\n\nII — Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+          "feedback_md": "**Zgłoszenie I:** Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Uzgodnić profil, domain i wymagany transport wdrożenia.\n\n**Sprawdzenie I:** Urządzenia widzą właściwego mastera i osiągają zamierzony stan synchronizacji.\n\n**Zgłoszenie II:** Potrzebny jest wybór zapasowego źródła według mechanizmu PTP. Sprawdzić wybór mastera i parametry zapasowego zegara.\n\n**Sprawdzenie II:** Urządzenia przechodzą na przewidziany zapasowy grandmaster.\n\n**Zależności:** W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności. Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.\n\nII — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: NTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera. Dla II: Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: NTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera. Dla I: W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.time-sync.practice.compare-07.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera.\n\n**Zgłoszenie II**\n\nGłówny grandmaster PTP znika, a projekt przewiduje zapasowy o gorszym priorytecie.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brak udanych ostatnich odpowiedzi NTP. Sprawdzić transport, źródło i politykę dostępu do wybranego serwera.\n\n**Sprawdzenie I:** Reach zaczyna rejestrować udane odpowiedzi, a peer może zostać oceniony.\n\n**Zgłoszenie II:** Potrzebny jest wybór zapasowego źródła według mechanizmu PTP. Sprawdzić wybór mastera i parametry zapasowego zegara.\n\n**Sprawdzenie II:** Urządzenia przechodzą na przewidziany zapasowy grandmaster.\n\n**Zależności:** Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara. Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+      "card_id": "encor.time-sync.practice.compare-07.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.\n\nII — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brak udanych ostatnich odpowiedzi NTP. Zgłoszenie II: Potrzebny jest wybór zapasowego źródła według mechanizmu PTP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Urządzenie raportuje stratum 16 i brak wybranego źródła. Dla II: Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+          "feedback_md": "**Zgłoszenie I:** Brak udanych ostatnich odpowiedzi NTP. Sprawdzić transport, źródło i politykę dostępu do wybranego serwera.\n\n**Sprawdzenie I:** Reach zaczyna rejestrować udane odpowiedzi, a peer może zostać oceniony.\n\n**Zgłoszenie II:** Potrzebny jest wybór zapasowego źródła według mechanizmu PTP. Sprawdzić wybór mastera i parametry zapasowego zegara.\n\n**Sprawdzenie II:** Urządzenia przechodzą na przewidziany zapasowy grandmaster.\n\n**Zależności:** Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara. Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.\n\nII — Redundancja źródła czasu wymaga zarówno zapasu, jak i zgodnych reguł wyboru.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Urządzenie raportuje stratum 16 i brak wybranego źródła. Dla I: Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.time-sync.practice.compare-08.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nUrządzenie raportuje stratum 16 i brak wybranego źródła.\n\n**Zgłoszenie II**\n\nDwa urządzenia PTP korzystają z niezgodnych profili i domen, mimo sprawnego transportu.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Urządzenie jest niesynchronizowane w rozumieniu NTP. Przywrócić dostępne i wiarygodne źródło czasu.\n\n**Sprawdzenie I:** Status wskazuje synchronizację z wybranym peerem i poprawne stratum.\n\n**Zgłoszenie II:** Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Uzgodnić profil, domain i wymagany transport wdrożenia.\n\n**Sprawdzenie II:** Urządzenia widzą właściwego mastera i osiągają zamierzony stan synchronizacji.\n\n**Zależności:** Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar. W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+      "card_id": "encor.time-sync.practice.compare-08.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.\n\nII — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Urządzenie jest niesynchronizowane w rozumieniu NTP. Zgłoszenie II: Nie uczestniczą w zgodnym kontekście synchronizacji PTP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.\n\nII — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: NTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera. Dla II: W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: NTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera. Dla I: Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.\n\nII — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "feedback_md": "**Zgłoszenie I:** Urządzenie jest niesynchronizowane w rozumieniu NTP. Przywrócić dostępne i wiarygodne źródło czasu.\n\n**Sprawdzenie I:** Status wskazuje synchronizację z wybranym peerem i poprawne stratum.\n\n**Zgłoszenie II:** Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Uzgodnić profil, domain i wymagany transport wdrożenia.\n\n**Sprawdzenie II:** Urządzenia widzą właściwego mastera i osiągają zamierzony stan synchronizacji.\n\n**Zależności:** Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar. W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.time-sync.practice.compare-09.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDwa urządzenia mają zgodny czas UTC, ale różne ustawienia strefy wyświetlania.\n\n**Zgłoszenie II**\n\nPTP działa, ale opóźnienie w jednym kierunku jest znacznie większe niż w przeciwnym.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Różnica prezentacji czasu nie musi oznaczać błędu synchronizacji. Porównać UTC i konfigurację strefy zamiast przesuwać źródło NTP.\n\n**Sprawdzenie I:** Po wspólnym przeliczeniu znaczniki wskazują tę samą chwilę.\n\n**Zgłoszenie II:** Asymetria drogi może wprowadzić błąd estymacji offsetu. Ocenić transport i kompensację asymetrii właściwą dla projektu.\n\n**Sprawdzenie II:** Pomiar niezależny potwierdza dokładność po ograniczeniu lub kompensacji asymetrii.\n\n**Zależności:** Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia. Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+      "card_id": "encor.time-sync.practice.compare-09.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.\n\nII — Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+          "feedback_md": "**Zgłoszenie I:** Różnica prezentacji czasu nie musi oznaczać błędu synchronizacji. Porównać UTC i konfigurację strefy zamiast przesuwać źródło NTP.\n\n**Sprawdzenie I:** Po wspólnym przeliczeniu znaczniki wskazują tę samą chwilę.\n\n**Zgłoszenie II:** Asymetria drogi może wprowadzić błąd estymacji offsetu. Ocenić transport i kompensację asymetrii właściwą dla projektu.\n\n**Sprawdzenie II:** Pomiar niezależny potwierdza dokładność po ograniczeniu lub kompensacji asymetrii.\n\n**Zależności:** Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia. Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.\n\nII — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Różnica prezentacji czasu nie musi oznaczać błędu synchronizacji. Zgłoszenie II: Asymetria drogi może wprowadzić błąd estymacji offsetu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.\n\nII — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: NTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera. Dla II: Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Założenia o opóźnieniu dwukierunkowym wpływają na dokładność synchronizacji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: NTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera. Dla I: Synchronizacja zegara i lokalna strefa prezentacji to odrębne ustawienia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.time-sync.practice.compare-10.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — zależności",
+      "skills": [
+        "encor.time-sync.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/technical-details/220303-verify-ntp-status-with-the-show-ntp-asso.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/network-time-protocol-ntp/116161-trouble-ntp-00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NTP i PTP — interpretacja synchronizacji",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ios-nx-os-software/ios-xr-software/217579-configure-ptp-and-synce-basics-with-cisc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNTP reach pozostaje 0, a przechwycenie nie pokazuje odpowiedzi serwera.\n\n**Zgłoszenie II**\n\nDwa urządzenia PTP korzystają z niezgodnych profili i domen, mimo sprawnego transportu.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brak udanych ostatnich odpowiedzi NTP. Sprawdzić transport, źródło i politykę dostępu do wybranego serwera.\n\n**Sprawdzenie I:** Reach zaczyna rejestrować udane odpowiedzi, a peer może zostać oceniony.\n\n**Zgłoszenie II:** Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Uzgodnić profil, domain i wymagany transport wdrożenia.\n\n**Sprawdzenie II:** Urządzenia widzą właściwego mastera i osiągają zamierzony stan synchronizacji.\n\n**Zależności:** Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara. W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+      "card_id": "encor.time-sync.practice.compare-10.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.\n\nII — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brak udanych ostatnich odpowiedzi NTP. Zgłoszenie II: Nie uczestniczą w zgodnym kontekście synchronizacji PTP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "feedback_md": "**Zgłoszenie I:** Brak udanych ostatnich odpowiedzi NTP. Sprawdzić transport, źródło i politykę dostępu do wybranego serwera.\n\n**Sprawdzenie I:** Reach zaczyna rejestrować udane odpowiedzi, a peer może zostać oceniony.\n\n**Zgłoszenie II:** Nie uczestniczą w zgodnym kontekście synchronizacji PTP. Uzgodnić profil, domain i wymagany transport wdrożenia.\n\n**Sprawdzenie II:** Urządzenia widzą właściwego mastera i osiągają zamierzony stan synchronizacji.\n\n**Zależności:** Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara. W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.\n\nII — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Urządzenie raportuje stratum 16 i brak wybranego źródła. Dla II: W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Stratum 16 oznacza stan niesynchronizowany, nie bardzo dokładny zegar.\n\nII — W PTP zgodność profilu i domeny jest istotna obok fizycznej łączności.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Urządzenie raportuje stratum 16 i brak wybranego źródła. Dla I: Reach opisuje historię odpowiedzi, nie bezpośrednio dokładność zegara.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

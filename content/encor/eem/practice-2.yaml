@@ -1,0 +1,483 @@
+{
+  "schema_version": 3,
+  "id": "encor.eem.practice-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Niepasujący event — działanie",
+      "skills": [
+        "encor.eem.case-01",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.case-01.2.card",
+      "front_md": "Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora.\n\n**Rozpoznanie:** Warunek zdarzenia nie dopasowuje rzeczywistego logu.\n\n**Działanie:** Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+      "example": "Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia."
+    },
+    {
+      "revision": 1,
+      "title": "Brak uprawnień — działanie",
+      "skills": [
+        "encor.eem.case-02",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.case-02.2.card",
+      "front_md": "Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Automatyzacja zdarzeń podlega mechanizmom uprawnień urządzenia.\n\n**Rozpoznanie:** Kontekst wykonania nie ma wymaganej autoryzacji.\n\n**Działanie:** Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.\n\n**Sprawdzenie:** Log wykonania potwierdza ukończenie dozwolonej komendy.",
+      "example": "Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki."
+    },
+    {
+      "revision": 1,
+      "title": "Pętla zdarzeń — działanie",
+      "skills": [
+        "encor.eem.case-03",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.case-03.2.card",
+      "front_md": "Applet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Automatyczna reakcja powinna być odporna na samowyzwalanie.\n\n**Rozpoznanie:** Akcja ponownie wyzwala własny warunek.\n\n**Działanie:** Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.\n\n**Sprawdzenie:** Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.",
+      "example": "Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji."
+    },
+    {
+      "revision": 1,
+      "title": "Za długi applet — działanie",
+      "skills": [
+        "encor.eem.case-04",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.case-04.2.card",
+      "front_md": "Akcja zbierania danych przekracza dozwolony czas wykonania i jest przerywana.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji.\n\n**Rozpoznanie:** Czas operacji przekracza limit wykonania polityki.\n\n**Działanie:** Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+      "example": "Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu."
+    },
+    {
+      "revision": 1,
+      "title": "Zła kolejność CLI — działanie",
+      "skills": [
+        "encor.eem.case-05",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.case-05.2.card",
+      "front_md": "Applet próbuje użyć komendy konfiguracji przed wejściem w config mode.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Automatyzowane CLI nadal wymaga poprawnego kontekstu komend.\n\n**Rozpoznanie:** Sekwencja akcji nie zapewnia właściwego trybu CLI.\n\n**Działanie:** Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.\n\n**Sprawdzenie:** Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.",
+      "example": "Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan."
+    },
+    {
+      "revision": 1,
+      "title": "Zbieranie po awarii — działanie",
+      "skills": [
+        "encor.eem.case-06",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "id": "encor.eem.practice.case-06.2.card",
+      "front_md": "Po flapie operator ręcznie sprawdza liczniki zbyt późno; EEM może zachować dane przy zdarzeniu.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Automatyzacja może utrwalać ulotny stan bez automatycznej zmiany konfiguracji.\n\n**Rozpoznanie:** Brakuje danych z momentu wystąpienia incydentu.\n\n**Działanie:** Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.\n\n**Sprawdzenie:** Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.",
+      "example": "Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.eem.practice.case-01.2",
+      "revision": 1,
+      "title": "Niepasujący event — działanie",
+      "skills": [
+        "encor.eem.case-01",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora.\n\n**Rozpoznanie:** Warunek zdarzenia nie dopasowuje rzeczywistego logu.\n\n**Działanie:** Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+      "card_id": "encor.eem.practice.case-01.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak uprawnień”: Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA. W bieżącym przypadku: Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.",
+          "id": "A"
+        },
+        {
+          "text_md": "Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbieranie po awarii”: Po flapie operator ręcznie sprawdza liczniki zbyt późno; EEM może zachować dane przy zdarzeniu. W bieżącym przypadku: Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.",
+          "id": "B"
+        },
+        {
+          "text_md": "Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Pętla zdarzeń”: Applet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log. W bieżącym przypadku: Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.",
+          "id": "C"
+        },
+        {
+          "text_md": "Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.",
+          "feedback_md": "EEM reaguje na skonfigurowany detektor, nie na ogólny zamiar administratora.\n\n**Rozpoznanie:** Warunek zdarzenia nie dopasowuje rzeczywistego logu.\n\n**Działanie:** Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.\n\n**Sprawdzenie:** Kontrolny pasujący log uruchamia applet, a niepowiązany go nie uruchamia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.eem.practice.case-02.2",
+      "revision": 1,
+      "title": "Brak uprawnień — działanie",
+      "skills": [
+        "encor.eem.case-02",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Automatyzacja zdarzeń podlega mechanizmom uprawnień urządzenia.\n\n**Rozpoznanie:** Kontekst wykonania nie ma wymaganej autoryzacji.\n\n**Działanie:** Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.\n\n**Sprawdzenie:** Log wykonania potwierdza ukończenie dozwolonej komendy.",
+      "card_id": "encor.eem.practice.case-02.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.",
+          "feedback_md": "Automatyzacja zdarzeń podlega mechanizmom uprawnień urządzenia.\n\n**Rozpoznanie:** Kontekst wykonania nie ma wymaganej autoryzacji.\n\n**Działanie:** Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.\n\n**Sprawdzenie:** Log wykonania potwierdza ukończenie dozwolonej komendy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Pętla zdarzeń”: Applet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log. W bieżącym przypadku: Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.",
+          "id": "B"
+        },
+        {
+          "text_md": "Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Za długi applet”: Akcja zbierania danych przekracza dozwolony czas wykonania i jest przerywana. W bieżącym przypadku: Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.",
+          "id": "C"
+        },
+        {
+          "text_md": "Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbieranie po awarii”: Po flapie operator ręcznie sprawdza liczniki zbyt późno; EEM może zachować dane przy zdarzeniu. W bieżącym przypadku: Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.eem.practice.case-03.2",
+      "revision": 1,
+      "title": "Pętla zdarzeń — działanie",
+      "skills": [
+        "encor.eem.case-03",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Applet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Automatyczna reakcja powinna być odporna na samowyzwalanie.\n\n**Rozpoznanie:** Akcja ponownie wyzwala własny warunek.\n\n**Działanie:** Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.\n\n**Sprawdzenie:** Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.",
+      "card_id": "encor.eem.practice.case-03.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Za długi applet”: Akcja zbierania danych przekracza dozwolony czas wykonania i jest przerywana. W bieżącym przypadku: Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.",
+          "feedback_md": "Automatyczna reakcja powinna być odporna na samowyzwalanie.\n\n**Rozpoznanie:** Akcja ponownie wyzwala własny warunek.\n\n**Działanie:** Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.\n\n**Sprawdzenie:** Jedno zdarzenie nie tworzy nieograniczonej serii kolejnych wykonań.",
+          "id": "B"
+        },
+        {
+          "text_md": "Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbieranie po awarii”: Po flapie operator ręcznie sprawdza liczniki zbyt późno; EEM może zachować dane przy zdarzeniu. W bieżącym przypadku: Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak uprawnień”: Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA. W bieżącym przypadku: Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.eem.practice.case-04.2",
+      "revision": 1,
+      "title": "Za długi applet — działanie",
+      "skills": [
+        "encor.eem.case-04",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Akcja zbierania danych przekracza dozwolony czas wykonania i jest przerywana.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji.\n\n**Rozpoznanie:** Czas operacji przekracza limit wykonania polityki.\n\n**Działanie:** Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+      "card_id": "encor.eem.practice.case-04.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak uprawnień”: Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA. W bieżącym przypadku: Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Pętla zdarzeń”: Applet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log. W bieżącym przypadku: Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.",
+          "feedback_md": "Limit czasu chroni zasoby, ale musi odpowiadać rzeczywistemu zakresowi automatyzacji.\n\n**Rozpoznanie:** Czas operacji przekracza limit wykonania polityki.\n\n**Działanie:** Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.\n\n**Sprawdzenie:** Pełny zaplanowany zbiór danych jest zapisany bez przerwania z powodu czasu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niepasujący event”: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. W bieżącym przypadku: Ograniczyć akcje lub świadomie dostosować limit do uzasadnionego czasu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.eem.practice.case-05.2",
+      "revision": 1,
+      "title": "Zła kolejność CLI — działanie",
+      "skills": [
+        "encor.eem.case-05",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Applet próbuje użyć komendy konfiguracji przed wejściem w config mode.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Automatyzowane CLI nadal wymaga poprawnego kontekstu komend.\n\n**Rozpoznanie:** Sekwencja akcji nie zapewnia właściwego trybu CLI.\n\n**Działanie:** Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.\n\n**Sprawdzenie:** Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.",
+      "card_id": "encor.eem.practice.case-05.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak uprawnień”: Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA. W bieżącym przypadku: Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niepasujący event”: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. W bieżącym przypadku: Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.",
+          "id": "B"
+        },
+        {
+          "text_md": "Dodać kontrolę stanu, ograniczenie wyzwalania lub zmienić projekt reakcji.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Pętla zdarzeń”: Applet reaguje na log o zmianie interfejsu, sam zmienia ten interfejs i generuje kolejny pasujący log. W bieżącym przypadku: Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.",
+          "id": "C"
+        },
+        {
+          "text_md": "Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.",
+          "feedback_md": "Automatyzowane CLI nadal wymaga poprawnego kontekstu komend.\n\n**Rozpoznanie:** Sekwencja akcji nie zapewnia właściwego trybu CLI.\n\n**Działanie:** Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.\n\n**Sprawdzenie:** Wykonanie potwierdza poprawny tryb i brak błędu składni w tym kroku.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.eem.practice.case-06.2",
+      "revision": 1,
+      "title": "Zbieranie po awarii — działanie",
+      "skills": [
+        "encor.eem.case-06",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/eem/configuration/15-s/eem-15-s-book/eem-policy-cli.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EEM — automatyzacja zdarzeń i zbieranie danych",
+          "url": "https://sec.cloudapps.cisco.com/security/center/resources/embedded_event_manager_security_context.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Po flapie operator ręcznie sprawdza liczniki zbyt późno; EEM może zachować dane przy zdarzeniu.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Automatyzacja może utrwalać ulotny stan bez automatycznej zmiany konfiguracji.\n\n**Rozpoznanie:** Brakuje danych z momentu wystąpienia incydentu.\n\n**Działanie:** Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.\n\n**Sprawdzenie:** Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.",
+      "card_id": "encor.eem.practice.case-06.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.",
+          "feedback_md": "Automatyzacja może utrwalać ulotny stan bez automatycznej zmiany konfiguracji.\n\n**Rozpoznanie:** Brakuje danych z momentu wystąpienia incydentu.\n\n**Działanie:** Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.\n\n**Sprawdzenie:** Artefakt diagnostyczny ma czas zgodny z incydentem i wymagane wyniki show.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zapewnić właściwą tożsamość i minimalne potrzebne uprawnienia dla polityki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak uprawnień”: Applet jest wyzwalany, lecz wykonanie komendy CLI kończy się odmową AAA. W bieżącym przypadku: Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Dopasować wzorzec do zweryfikowanego komunikatu bez nadmiernego rozszerzenia.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niepasujący event”: Applet oczekuje konkretnego wzorca syslog, ale rzeczywisty komunikat ma inną treść. W bieżącym przypadku: Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.",
+          "id": "C"
+        },
+        {
+          "text_md": "Uporządkować akcje i przejścia trybów przed komendą zmieniającą stan.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła kolejność CLI”: Applet próbuje użyć komendy konfiguracji przed wejściem w config mode. W bieżącym przypadku: Skonfigurować ograniczone zbieranie diagnostyki wyzwalane właściwym zdarzeniem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

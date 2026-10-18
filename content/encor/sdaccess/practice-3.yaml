@@ -1,0 +1,483 @@
+{
+  "schema_version": 3,
+  "id": "encor.sdaccess.practice-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Control-plane mapping — weryfikacja",
+      "skills": [
+        "encor.sdaccess.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.practice.case-01.3.card",
+      "front_md": "Endpoint przeniósł się na inny fabric edge, ale badana mapa nadal wskazuje starą lokalizację.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Control-plane fabric wiąże tożsamość endpointu z jego aktualną lokalizacją.\n\n**Rozpoznanie:** Informacja o lokalizacji endpointu jest nieaktualna.\n\n**Działanie:** Sprawdzić rejestrację endpointu i aktualizację mapowania control-plane.\n\n**Sprawdzenie:** Mapa endpointu wskazuje bieżący fabric edge.",
+      "example": "Mapa endpointu wskazuje bieżący fabric edge."
+    },
+    {
+      "revision": 1,
+      "title": "VN isolation — weryfikacja",
+      "skills": [
+        "encor.sdaccess.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.practice.case-02.3.card",
+      "front_md": "Dwa endpointy w różnych virtual networks nie komunikują się, a polityka nie przewiduje połączenia tych VN.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Virtual network wyznacza oddzielny kontekst sieciowy fabric.\n\n**Rozpoznanie:** Działa makrosegmentacja między virtual networks.\n\n**Działanie:** Zweryfikować zamierzoną separację lub zaprojektować kontrolowany dostęp między VN.\n\n**Sprawdzenie:** Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny.",
+      "example": "Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny."
+    },
+    {
+      "revision": 1,
+      "title": "SGT policy — weryfikacja",
+      "skills": [
+        "encor.sdaccess.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.practice.case-03.3.card",
+      "front_md": "Endpointy są w tej samej VN, lecz macierz polityk zabrania komunikacji między ich SGT.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.\n\n**Rozpoznanie:** Ruch jest ograniczony polityką grup bezpieczeństwa.\n\n**Działanie:** Sprawdzić przypisanie SGT i regułę między konkretnymi grupami.\n\n**Sprawdzenie:** Dozwolona para działa, a zabroniona pozostaje zablokowana.",
+      "example": "Dozwolona para działa, a zabroniona pozostaje zablokowana."
+    },
+    {
+      "revision": 1,
+      "title": "Border do zewnątrz — weryfikacja",
+      "skills": [
+        "encor.sdaccess.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.practice.case-04.3.card",
+      "front_md": "Endpoint działa w fabric, ale brak wymaganej trasy z border do zewnętrznej usługi.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Fabric border łączy domenę fabric ze światem zewnętrznym.\n\n**Rozpoznanie:** Nie zapewniono wyjścia z fabric do zewnętrznej sieci.\n\n**Działanie:** Zweryfikować handoff, routing i drogę powrotną na border.\n\n**Sprawdzenie:** Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu.",
+      "example": "Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu."
+    },
+    {
+      "revision": 1,
+      "title": "Underlay niedostępny — weryfikacja",
+      "skills": [
+        "encor.sdaccess.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.practice.case-05.3.card",
+      "front_md": "Loopback fabric edge nie jest osiągalny w underlay, choć endpoint jest fizycznie podłączony.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Overlay fabric wymaga sprawnego underlay.\n\n**Rozpoznanie:** Transport IP fabric jest uszkodzony.\n\n**Działanie:** Przywrócić osiągalność infrastruktury underlay.\n\n**Sprawdzenie:** Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+      "example": "Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki."
+    },
+    {
+      "revision": 1,
+      "title": "Onboarding — weryfikacja",
+      "skills": [
+        "encor.sdaccess.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "id": "encor.sdaccess.practice.case-06.3.card",
+      "front_md": "Port działa, ale endpoint nie otrzymuje zamierzonej tożsamości i polityki po nieudanym uwierzytelnieniu.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.\n\n**Rozpoznanie:** Nie zakończył się proces przypisania endpointu do właściwego profilu dostępu.\n\n**Działanie:** Sprawdzić uwierzytelnienie, autoryzację i wynik przypisania polityki.\n\n**Sprawdzenie:** Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+      "example": "Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.sdaccess.practice.case-01.3",
+      "revision": 1,
+      "title": "Control-plane mapping — weryfikacja",
+      "skills": [
+        "encor.sdaccess.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Endpoint przeniósł się na inny fabric edge, ale badana mapa nadal wskazuje starą lokalizację.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Control-plane fabric wiąże tożsamość endpointu z jego aktualną lokalizacją.\n\n**Rozpoznanie:** Informacja o lokalizacji endpointu jest nieaktualna.\n\n**Działanie:** Sprawdzić rejestrację endpointu i aktualizację mapowania control-plane.\n\n**Sprawdzenie:** Mapa endpointu wskazuje bieżący fabric edge.",
+      "card_id": "encor.sdaccess.practice.case-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Onboarding”: Port działa, ale endpoint nie otrzymuje zamierzonej tożsamości i polityki po nieudanym uwierzytelnieniu. W bieżącym przypadku: Mapa endpointu wskazuje bieżący fabric edge.",
+          "id": "A"
+        },
+        {
+          "text_md": "Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Border do zewnątrz”: Endpoint działa w fabric, ale brak wymaganej trasy z border do zewnętrznej usługi. W bieżącym przypadku: Mapa endpointu wskazuje bieżący fabric edge.",
+          "id": "B"
+        },
+        {
+          "text_md": "Mapa endpointu wskazuje bieżący fabric edge.",
+          "feedback_md": "Control-plane fabric wiąże tożsamość endpointu z jego aktualną lokalizacją.\n\n**Rozpoznanie:** Informacja o lokalizacji endpointu jest nieaktualna.\n\n**Działanie:** Sprawdzić rejestrację endpointu i aktualizację mapowania control-plane.\n\n**Sprawdzenie:** Mapa endpointu wskazuje bieżący fabric edge.",
+          "id": "C"
+        },
+        {
+          "text_md": "Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Underlay niedostępny”: Loopback fabric edge nie jest osiągalny w underlay, choć endpoint jest fizycznie podłączony. W bieżącym przypadku: Mapa endpointu wskazuje bieżący fabric edge.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.sdaccess.practice.case-02.3",
+      "revision": 1,
+      "title": "VN isolation — weryfikacja",
+      "skills": [
+        "encor.sdaccess.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dwa endpointy w różnych virtual networks nie komunikują się, a polityka nie przewiduje połączenia tych VN.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Virtual network wyznacza oddzielny kontekst sieciowy fabric.\n\n**Rozpoznanie:** Działa makrosegmentacja między virtual networks.\n\n**Działanie:** Zweryfikować zamierzoną separację lub zaprojektować kontrolowany dostęp między VN.\n\n**Sprawdzenie:** Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny.",
+      "card_id": "encor.sdaccess.practice.case-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Border do zewnątrz”: Endpoint działa w fabric, ale brak wymaganej trasy z border do zewnętrznej usługi. W bieżącym przypadku: Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny.",
+          "id": "A"
+        },
+        {
+          "text_md": "Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Onboarding”: Port działa, ale endpoint nie otrzymuje zamierzonej tożsamości i polityki po nieudanym uwierzytelnieniu. W bieżącym przypadku: Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny.",
+          "id": "B"
+        },
+        {
+          "text_md": "Mapa endpointu wskazuje bieżący fabric edge.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Control-plane mapping”: Endpoint przeniósł się na inny fabric edge, ale badana mapa nadal wskazuje starą lokalizację. W bieżącym przypadku: Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny.",
+          "id": "C"
+        },
+        {
+          "text_md": "Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny.",
+          "feedback_md": "Virtual network wyznacza oddzielny kontekst sieciowy fabric.\n\n**Rozpoznanie:** Działa makrosegmentacja między virtual networks.\n\n**Działanie:** Zweryfikować zamierzoną separację lub zaprojektować kontrolowany dostęp między VN.\n\n**Sprawdzenie:** Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.sdaccess.practice.case-03.3",
+      "revision": 1,
+      "title": "SGT policy — weryfikacja",
+      "skills": [
+        "encor.sdaccess.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Endpointy są w tej samej VN, lecz macierz polityk zabrania komunikacji między ich SGT.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.\n\n**Rozpoznanie:** Ruch jest ograniczony polityką grup bezpieczeństwa.\n\n**Działanie:** Sprawdzić przypisanie SGT i regułę między konkretnymi grupami.\n\n**Sprawdzenie:** Dozwolona para działa, a zabroniona pozostaje zablokowana.",
+      "card_id": "encor.sdaccess.practice.case-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Dozwolona para działa, a zabroniona pozostaje zablokowana.",
+          "feedback_md": "Mikrosegmentacja może ograniczać ruch wewnątrz jednej VN.\n\n**Rozpoznanie:** Ruch jest ograniczony polityką grup bezpieczeństwa.\n\n**Działanie:** Sprawdzić przypisanie SGT i regułę między konkretnymi grupami.\n\n**Sprawdzenie:** Dozwolona para działa, a zabroniona pozostaje zablokowana.",
+          "id": "A"
+        },
+        {
+          "text_md": "Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „VN isolation”: Dwa endpointy w różnych virtual networks nie komunikują się, a polityka nie przewiduje połączenia tych VN. W bieżącym przypadku: Dozwolona para działa, a zabroniona pozostaje zablokowana.",
+          "id": "B"
+        },
+        {
+          "text_md": "Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Underlay niedostępny”: Loopback fabric edge nie jest osiągalny w underlay, choć endpoint jest fizycznie podłączony. W bieżącym przypadku: Dozwolona para działa, a zabroniona pozostaje zablokowana.",
+          "id": "C"
+        },
+        {
+          "text_md": "Mapa endpointu wskazuje bieżący fabric edge.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Control-plane mapping”: Endpoint przeniósł się na inny fabric edge, ale badana mapa nadal wskazuje starą lokalizację. W bieżącym przypadku: Dozwolona para działa, a zabroniona pozostaje zablokowana.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.sdaccess.practice.case-04.3",
+      "revision": 1,
+      "title": "Border do zewnątrz — weryfikacja",
+      "skills": [
+        "encor.sdaccess.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Endpoint działa w fabric, ale brak wymaganej trasy z border do zewnętrznej usługi.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Fabric border łączy domenę fabric ze światem zewnętrznym.\n\n**Rozpoznanie:** Nie zapewniono wyjścia z fabric do zewnętrznej sieci.\n\n**Działanie:** Zweryfikować handoff, routing i drogę powrotną na border.\n\n**Sprawdzenie:** Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu.",
+      "card_id": "encor.sdaccess.practice.case-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Underlay niedostępny”: Loopback fabric edge nie jest osiągalny w underlay, choć endpoint jest fizycznie podłączony. W bieżącym przypadku: Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu.",
+          "feedback_md": "Fabric border łączy domenę fabric ze światem zewnętrznym.\n\n**Rozpoznanie:** Nie zapewniono wyjścia z fabric do zewnętrznej sieci.\n\n**Działanie:** Zweryfikować handoff, routing i drogę powrotną na border.\n\n**Sprawdzenie:** Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Niepowiązane VN pozostają izolowane, a ewentualny wyjątek jest jawny.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „VN isolation”: Dwa endpointy w różnych virtual networks nie komunikują się, a polityka nie przewiduje połączenia tych VN. W bieżącym przypadku: Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Onboarding”: Port działa, ale endpoint nie otrzymuje zamierzonej tożsamości i polityki po nieudanym uwierzytelnieniu. W bieżącym przypadku: Ruch usługi opuszcza fabric przez właściwy border i wraca do endpointu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.sdaccess.practice.case-05.3",
+      "revision": 1,
+      "title": "Underlay niedostępny — weryfikacja",
+      "skills": [
+        "encor.sdaccess.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Loopback fabric edge nie jest osiągalny w underlay, choć endpoint jest fizycznie podłączony.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Overlay fabric wymaga sprawnego underlay.\n\n**Rozpoznanie:** Transport IP fabric jest uszkodzony.\n\n**Działanie:** Przywrócić osiągalność infrastruktury underlay.\n\n**Sprawdzenie:** Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+      "card_id": "encor.sdaccess.practice.case-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Dozwolona para działa, a zabroniona pozostaje zablokowana.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SGT policy”: Endpointy są w tej samej VN, lecz macierz polityk zabrania komunikacji między ich SGT. W bieżącym przypadku: Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+          "id": "A"
+        },
+        {
+          "text_md": "Mapa endpointu wskazuje bieżący fabric edge.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Control-plane mapping”: Endpoint przeniósł się na inny fabric edge, ale badana mapa nadal wskazuje starą lokalizację. W bieżącym przypadku: Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+          "id": "B"
+        },
+        {
+          "text_md": "Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+          "feedback_md": "Overlay fabric wymaga sprawnego underlay.\n\n**Rozpoznanie:** Transport IP fabric jest uszkodzony.\n\n**Działanie:** Przywrócić osiągalność infrastruktury underlay.\n\n**Sprawdzenie:** Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+          "id": "C"
+        },
+        {
+          "text_md": "Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Onboarding”: Port działa, ale endpoint nie otrzymuje zamierzonej tożsamości i polityki po nieudanym uwierzytelnieniu. W bieżącym przypadku: Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.sdaccess.practice.case-06.3",
+      "revision": 1,
+      "title": "Onboarding — weryfikacja",
+      "skills": [
+        "encor.sdaccess.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/solutions/CVD/Campus/cisco-sda-design-guide.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SD-Access — fabric, segmentacja i dostęp zewnętrzny",
+          "url": "https://www.cisco.com/c/en/us/td/docs/cloud-systems-management/network-automation-and-management/catalyst-center/cisco-validated-solution-profiles/validated-profile-manufacturing-sd-access.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Port działa, ale endpoint nie otrzymuje zamierzonej tożsamości i polityki po nieudanym uwierzytelnieniu.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.\n\n**Rozpoznanie:** Nie zakończył się proces przypisania endpointu do właściwego profilu dostępu.\n\n**Działanie:** Sprawdzić uwierzytelnienie, autoryzację i wynik przypisania polityki.\n\n**Sprawdzenie:** Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+      "card_id": "encor.sdaccess.practice.case-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Dozwolona para działa, a zabroniona pozostaje zablokowana.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SGT policy”: Endpointy są w tej samej VN, lecz macierz polityk zabrania komunikacji między ich SGT. W bieżącym przypadku: Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+          "id": "A"
+        },
+        {
+          "text_md": "Mapa endpointu wskazuje bieżący fabric edge.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Control-plane mapping”: Endpoint przeniósł się na inny fabric edge, ale badana mapa nadal wskazuje starą lokalizację. W bieżącym przypadku: Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Loopbacki infrastruktury są osiągalne i overlay może użyć ścieżki.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Underlay niedostępny”: Loopback fabric edge nie jest osiągalny w underlay, choć endpoint jest fizycznie podłączony. W bieżącym przypadku: Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+          "id": "C"
+        },
+        {
+          "text_md": "Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+          "feedback_md": "Dostęp fizyczny i przypisanie logicznej polityki endpointu to różne etapy.\n\n**Rozpoznanie:** Nie zakończył się proces przypisania endpointu do właściwego profilu dostępu.\n\n**Działanie:** Sprawdzić uwierzytelnienie, autoryzację i wynik przypisania polityki.\n\n**Sprawdzenie:** Endpoint ma oczekiwany profil, VN i SGT zgodnie z projektem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

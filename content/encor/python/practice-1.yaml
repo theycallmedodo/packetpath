@@ -1,0 +1,483 @@
+{
+  "schema_version": 3,
+  "id": "encor.python.practice-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "String zamiast int — rozpoznanie",
+      "skills": [
+        "encor.python.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.case-01.1.card",
+      "front_md": "Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Typy danych decydują o semantyce operacji w Pythonie.\n\n**Rozpoznanie:** Typ string nie jest liczbą całkowitą dla operatora dodawania.\n\n**Działanie:** Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.",
+      "example": "Typ string nie jest liczbą całkowitą dla operatora dodawania."
+    },
+    {
+      "revision": 1,
+      "title": "Brak klucza — rozpoznanie",
+      "skills": [
+        "encor.python.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.case-02.1.card",
+      "front_md": "Kod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\n**Rozpoznanie:** Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi.\n\n**Działanie:** Sprawdzić status i strukturę odpowiedzi przed odczytem interfaces.\n\n**Sprawdzenie:** Odpowiedź błędu jest obsłużona bez niekontrolowanego KeyError.",
+      "example": "Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi."
+    },
+    {
+      "revision": 1,
+      "title": "Lista a słownik — rozpoznanie",
+      "skills": [
+        "encor.python.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.case-03.1.card",
+      "front_md": "API zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name'].\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.\n\n**Rozpoznanie:** Listy indeksuje się pozycją, nie nazwą pola słownika.\n\n**Działanie:** Iterować po elementach listy i odczytywać name z właściwego słownika.\n\n**Sprawdzenie:** Każdy element jest przetwarzany jako osobny rekord interfejsu.",
+      "example": "Listy indeksuje się pozycją, nie nazwą pola słownika."
+    },
+    {
+      "revision": 1,
+      "title": "Brak timeout — rozpoznanie",
+      "skills": [
+        "encor.python.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.case-04.1.card",
+      "front_md": "Żądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.\n\n**Rozpoznanie:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii.\n\n**Działanie:** Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.",
+      "example": "Brak ograniczenia oczekiwania utrudnia kontrolę awarii."
+    },
+    {
+      "revision": 1,
+      "title": "Porównanie liter — rozpoznanie",
+      "skills": [
+        "encor.python.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.case-05.1.card",
+      "front_md": "Stan z API to 'UP', a skrypt porównuje go do 'up' i uznaje port za nieaktywny.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.\n\n**Rozpoznanie:** Porównanie stringów rozróżnia wielkość liter.\n\n**Działanie:** Normalizować pole tylko wtedy, gdy semantyka API pozwala ignorować wielkość liter.\n\n**Sprawdzenie:** Wartości UP i up są poprawnie interpretowane bez zmiany pól wrażliwych na litery.",
+      "example": "Porównanie stringów rozróżnia wielkość liter."
+    },
+    {
+      "revision": 1,
+      "title": "Wyjątek połknięty — rozpoznanie",
+      "skills": [
+        "encor.python.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.case-06.1.card",
+      "front_md": "Pętla używa except: pass, więc nieudane połączenia z routerami znikają z raportu.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.\n\n**Rozpoznanie:** Obsługa wyjątków ukrywa błędy zamiast je raportować.\n\n**Działanie:** Łapać konkretne wyjątki i zapisywać wynik błędu dla urządzenia.\n\n**Sprawdzenie:** Raport zawiera zarówno sukcesy, jak i jawne niepowodzenia.",
+      "example": "Obsługa wyjątków ukrywa błędy zamiast je raportować."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.python.practice.case-01.1",
+      "revision": 1,
+      "title": "String zamiast int — rozpoznanie",
+      "skills": [
+        "encor.python.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Typy danych decydują o semantyce operacji w Pythonie.\n\n**Rozpoznanie:** Typ string nie jest liczbą całkowitą dla operatora dodawania.\n\n**Działanie:** Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.",
+      "card_id": "encor.python.practice.case-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Typ string nie jest liczbą całkowitą dla operatora dodawania.",
+          "feedback_md": "Typy danych decydują o semantyce operacji w Pythonie.\n\n**Rozpoznanie:** Typ string nie jest liczbą całkowitą dla operatora dodawania.\n\n**Działanie:** Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak klucza”: Kod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error. W bieżącym przypadku: Typ string nie jest liczbą całkowitą dla operatora dodawania.",
+          "id": "B"
+        },
+        {
+          "text_md": "Obsługa wyjątków ukrywa błędy zamiast je raportować.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wyjątek połknięty”: Pętla używa except: pass, więc nieudane połączenia z routerami znikają z raportu. W bieżącym przypadku: Typ string nie jest liczbą całkowitą dla operatora dodawania.",
+          "id": "C"
+        },
+        {
+          "text_md": "Listy indeksuje się pozycją, nie nazwą pola słownika.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Lista a słownik”: API zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name']. W bieżącym przypadku: Typ string nie jest liczbą całkowitą dla operatora dodawania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.python.practice.case-02.1",
+      "revision": 1,
+      "title": "Brak klucza — rozpoznanie",
+      "skills": [
+        "encor.python.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Kod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\n**Rozpoznanie:** Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi.\n\n**Działanie:** Sprawdzić status i strukturę odpowiedzi przed odczytem interfaces.\n\n**Sprawdzenie:** Odpowiedź błędu jest obsłużona bez niekontrolowanego KeyError.",
+      "card_id": "encor.python.practice.case-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Listy indeksuje się pozycją, nie nazwą pola słownika.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Lista a słownik”: API zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name']. W bieżącym przypadku: Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi.",
+          "id": "A"
+        },
+        {
+          "text_md": "Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi.",
+          "feedback_md": "Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\n**Rozpoznanie:** Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi.\n\n**Działanie:** Sprawdzić status i strukturę odpowiedzi przed odczytem interfaces.\n\n**Sprawdzenie:** Odpowiedź błędu jest obsłużona bez niekontrolowanego KeyError.",
+          "id": "B"
+        },
+        {
+          "text_md": "Obsługa wyjątków ukrywa błędy zamiast je raportować.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wyjątek połknięty”: Pętla używa except: pass, więc nieudane połączenia z routerami znikają z raportu. W bieżącym przypadku: Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi.",
+          "id": "C"
+        },
+        {
+          "text_md": "Porównanie stringów rozróżnia wielkość liter.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Porównanie liter”: Stan z API to 'UP', a skrypt porównuje go do 'up' i uznaje port za nieaktywny. W bieżącym przypadku: Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.python.practice.case-03.1",
+      "revision": 1,
+      "title": "Lista a słownik — rozpoznanie",
+      "skills": [
+        "encor.python.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "API zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name'].\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.\n\n**Rozpoznanie:** Listy indeksuje się pozycją, nie nazwą pola słownika.\n\n**Działanie:** Iterować po elementach listy i odczytywać name z właściwego słownika.\n\n**Sprawdzenie:** Każdy element jest przetwarzany jako osobny rekord interfejsu.",
+      "card_id": "encor.python.practice.case-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Obsługa wyjątków ukrywa błędy zamiast je raportować.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wyjątek połknięty”: Pętla używa except: pass, więc nieudane połączenia z routerami znikają z raportu. W bieżącym przypadku: Listy indeksuje się pozycją, nie nazwą pola słownika.",
+          "id": "A"
+        },
+        {
+          "text_md": "Porównanie stringów rozróżnia wielkość liter.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Porównanie liter”: Stan z API to 'UP', a skrypt porównuje go do 'up' i uznaje port za nieaktywny. W bieżącym przypadku: Listy indeksuje się pozycją, nie nazwą pola słownika.",
+          "id": "B"
+        },
+        {
+          "text_md": "Listy indeksuje się pozycją, nie nazwą pola słownika.",
+          "feedback_md": "Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.\n\n**Rozpoznanie:** Listy indeksuje się pozycją, nie nazwą pola słownika.\n\n**Działanie:** Iterować po elementach listy i odczytywać name z właściwego słownika.\n\n**Sprawdzenie:** Każdy element jest przetwarzany jako osobny rekord interfejsu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Brak ograniczenia oczekiwania utrudnia kontrolę awarii.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak timeout”: Żądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia. W bieżącym przypadku: Listy indeksuje się pozycją, nie nazwą pola słownika.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.python.practice.case-04.1",
+      "revision": 1,
+      "title": "Brak timeout — rozpoznanie",
+      "skills": [
+        "encor.python.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Żądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.\n\n**Rozpoznanie:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii.\n\n**Działanie:** Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.",
+      "card_id": "encor.python.practice.case-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Porównanie stringów rozróżnia wielkość liter.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Porównanie liter”: Stan z API to 'UP', a skrypt porównuje go do 'up' i uznaje port za nieaktywny. W bieżącym przypadku: Brak ograniczenia oczekiwania utrudnia kontrolę awarii.",
+          "id": "A"
+        },
+        {
+          "text_md": "Typ string nie jest liczbą całkowitą dla operatora dodawania.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „String zamiast int”: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. W bieżącym przypadku: Brak ograniczenia oczekiwania utrudnia kontrolę awarii.",
+          "id": "B"
+        },
+        {
+          "text_md": "Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak klucza”: Kod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error. W bieżącym przypadku: Brak ograniczenia oczekiwania utrudnia kontrolę awarii.",
+          "id": "C"
+        },
+        {
+          "text_md": "Brak ograniczenia oczekiwania utrudnia kontrolę awarii.",
+          "feedback_md": "Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.\n\n**Rozpoznanie:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii.\n\n**Działanie:** Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.python.practice.case-05.1",
+      "revision": 1,
+      "title": "Porównanie liter — rozpoznanie",
+      "skills": [
+        "encor.python.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Stan z API to 'UP', a skrypt porównuje go do 'up' i uznaje port za nieaktywny.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.\n\n**Rozpoznanie:** Porównanie stringów rozróżnia wielkość liter.\n\n**Działanie:** Normalizować pole tylko wtedy, gdy semantyka API pozwala ignorować wielkość liter.\n\n**Sprawdzenie:** Wartości UP i up są poprawnie interpretowane bez zmiany pól wrażliwych na litery.",
+      "card_id": "encor.python.practice.case-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Porównanie stringów rozróżnia wielkość liter.",
+          "feedback_md": "Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.\n\n**Rozpoznanie:** Porównanie stringów rozróżnia wielkość liter.\n\n**Działanie:** Normalizować pole tylko wtedy, gdy semantyka API pozwala ignorować wielkość liter.\n\n**Sprawdzenie:** Wartości UP i up są poprawnie interpretowane bez zmiany pól wrażliwych na litery.",
+          "id": "A"
+        },
+        {
+          "text_md": "Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak klucza”: Kod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error. W bieżącym przypadku: Porównanie stringów rozróżnia wielkość liter.",
+          "id": "B"
+        },
+        {
+          "text_md": "Listy indeksuje się pozycją, nie nazwą pola słownika.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Lista a słownik”: API zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name']. W bieżącym przypadku: Porównanie stringów rozróżnia wielkość liter.",
+          "id": "C"
+        },
+        {
+          "text_md": "Brak ograniczenia oczekiwania utrudnia kontrolę awarii.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak timeout”: Żądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia. W bieżącym przypadku: Porównanie stringów rozróżnia wielkość liter.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.python.practice.case-06.1",
+      "revision": 1,
+      "title": "Wyjątek połknięty — rozpoznanie",
+      "skills": [
+        "encor.python.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Pętla używa except: pass, więc nieudane połączenia z routerami znikają z raportu.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.\n\n**Rozpoznanie:** Obsługa wyjątków ukrywa błędy zamiast je raportować.\n\n**Działanie:** Łapać konkretne wyjątki i zapisywać wynik błędu dla urządzenia.\n\n**Sprawdzenie:** Raport zawiera zarówno sukcesy, jak i jawne niepowodzenia.",
+      "card_id": "encor.python.practice.case-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Porównanie stringów rozróżnia wielkość liter.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Porównanie liter”: Stan z API to 'UP', a skrypt porównuje go do 'up' i uznaje port za nieaktywny. W bieżącym przypadku: Obsługa wyjątków ukrywa błędy zamiast je raportować.",
+          "id": "A"
+        },
+        {
+          "text_md": "Obsługa wyjątków ukrywa błędy zamiast je raportować.",
+          "feedback_md": "Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.\n\n**Rozpoznanie:** Obsługa wyjątków ukrywa błędy zamiast je raportować.\n\n**Działanie:** Łapać konkretne wyjątki i zapisywać wynik błędu dla urządzenia.\n\n**Sprawdzenie:** Raport zawiera zarówno sukcesy, jak i jawne niepowodzenia.",
+          "id": "B"
+        },
+        {
+          "text_md": "Brak ograniczenia oczekiwania utrudnia kontrolę awarii.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak timeout”: Żądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia. W bieżącym przypadku: Obsługa wyjątków ukrywa błędy zamiast je raportować.",
+          "id": "C"
+        },
+        {
+          "text_md": "Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak klucza”: Kod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error. W bieżącym przypadku: Obsługa wyjątków ukrywa błędy zamiast je raportować.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

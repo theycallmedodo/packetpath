@@ -1,0 +1,621 @@
+{
+  "schema_version": 3,
+  "id": "encor.restconf.practice-4",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "HTTP 401 — zależności",
+      "skills": [
+        "encor.restconf.case-01",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.case-01.4.card",
+      "front_md": "RESTCONF zwraca 401 dla zapytania, a TLS działa.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "401 wskazuje problem uwierzytelnienia, nie brak modelu YANG.\n\n**Rozpoznanie:** Żądanie nie ma skutecznego uwierzytelnienia.\n\n**Działanie:** Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+      "example": "401 wskazuje problem uwierzytelnienia, nie brak modelu YANG."
+    },
+    {
+      "revision": 1,
+      "title": "HTTP 403 — zależności",
+      "skills": [
+        "encor.restconf.case-02",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.case-02.4.card",
+      "front_md": "Poprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "403 rozróżnia brak autoryzacji od błędnych danych logowania.\n\n**Rozpoznanie:** Tożsamość nie ma uprawnienia do operacji.\n\n**Działanie:** Zweryfikować autoryzację dla tego zasobu i metody.\n\n**Sprawdzenie:** Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+      "example": "403 rozróżnia brak autoryzacji od błędnych danych logowania."
+    },
+    {
+      "revision": 1,
+      "title": "HTTP 404 — zależności",
+      "skills": [
+        "encor.restconf.case-03",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.case-03.4.card",
+      "front_md": "Serwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.\n\n**Rozpoznanie:** Wskazany zasób nie jest znaleziony pod tą ścieżką.\n\n**Działanie:** Zweryfikować URI, namespace modelu i klucze list.\n\n**Sprawdzenie:** Poprawny URI zwraca oczekiwany istniejący zasób.",
+      "example": "Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI."
+    },
+    {
+      "revision": 1,
+      "title": "Niepoprawny JSON — zależności",
+      "skills": [
+        "encor.restconf.case-04",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.case-04.4.card",
+      "front_md": "PATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Poprawność składni serializacji poprzedza walidację modelu.\n\n**Rozpoznanie:** Payload nie jest poprawnym dokumentem JSON.\n\n**Działanie:** Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+      "example": "Poprawność składni serializacji poprzedza walidację modelu."
+    },
+    {
+      "revision": 1,
+      "title": "PUT zastępuje — zależności",
+      "skills": [
+        "encor.restconf.case-05",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.case-05.4.card",
+      "front_md": "Operator użył PUT dla całego zasobu, przesyłając tylko część jego konfiguracji i nie uwzględniając semantyki zastąpienia.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.\n\n**Rozpoznanie:** Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany.\n\n**Działanie:** Dobrać wspieraną operację częściowej zmiany lub pełny poprawny payload PUT.\n\n**Sprawdzenie:** Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.",
+      "example": "PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych."
+    },
+    {
+      "revision": 1,
+      "title": "Błędny certyfikat — zależności",
+      "skills": [
+        "encor.restconf.case-06",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.case-06.4.card",
+      "front_md": "Klient odrzuca HTTPS, bo nazwa serwera nie pasuje do certyfikatu.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Wyłączenie weryfikacji nie naprawia tożsamości endpointu.\n\n**Rozpoznanie:** Nie powiodła się weryfikacja tożsamości TLS.\n\n**Działanie:** Użyć poprawnej nazwy i certyfikatu z zaufanego łańcucha.\n\n**Sprawdzenie:** Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.",
+      "example": "Wyłączenie weryfikacji nie naprawia tożsamości endpointu."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.restconf.practice.case-01.4",
+      "revision": 1,
+      "title": "HTTP 401 — zależności",
+      "skills": [
+        "encor.restconf.case-01",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "RESTCONF zwraca 401 dla zapytania, a TLS działa.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "401 wskazuje problem uwierzytelnienia, nie brak modelu YANG.\n\n**Rozpoznanie:** Żądanie nie ma skutecznego uwierzytelnienia.\n\n**Działanie:** Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+      "card_id": "encor.restconf.practice.case-01.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Poprawność składni serializacji poprzedza walidację modelu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niepoprawny JSON”: PATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść. W bieżącym przypadku: 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG.",
+          "id": "A"
+        },
+        {
+          "text_md": "401 wskazuje problem uwierzytelnienia, nie brak modelu YANG.",
+          "feedback_md": "401 wskazuje problem uwierzytelnienia, nie brak modelu YANG.\n\n**Rozpoznanie:** Żądanie nie ma skutecznego uwierzytelnienia.\n\n**Działanie:** Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „HTTP 404”: Serwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404. W bieżącym przypadku: 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG.",
+          "id": "C"
+        },
+        {
+          "text_md": "403 rozróżnia brak autoryzacji od błędnych danych logowania.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „HTTP 403”: Poprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu. W bieżącym przypadku: 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.restconf.practice.case-02.4",
+      "revision": 1,
+      "title": "HTTP 403 — zależności",
+      "skills": [
+        "encor.restconf.case-02",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Poprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "403 rozróżnia brak autoryzacji od błędnych danych logowania.\n\n**Rozpoznanie:** Tożsamość nie ma uprawnienia do operacji.\n\n**Działanie:** Zweryfikować autoryzację dla tego zasobu i metody.\n\n**Sprawdzenie:** Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+      "card_id": "encor.restconf.practice.case-02.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "401 wskazuje problem uwierzytelnienia, nie brak modelu YANG.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „HTTP 401”: RESTCONF zwraca 401 dla zapytania, a TLS działa. W bieżącym przypadku: 403 rozróżnia brak autoryzacji od błędnych danych logowania.",
+          "id": "A"
+        },
+        {
+          "text_md": "Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „HTTP 404”: Serwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404. W bieżącym przypadku: 403 rozróżnia brak autoryzacji od błędnych danych logowania.",
+          "id": "B"
+        },
+        {
+          "text_md": "403 rozróżnia brak autoryzacji od błędnych danych logowania.",
+          "feedback_md": "403 rozróżnia brak autoryzacji od błędnych danych logowania.\n\n**Rozpoznanie:** Tożsamość nie ma uprawnienia do operacji.\n\n**Działanie:** Zweryfikować autoryzację dla tego zasobu i metody.\n\n**Sprawdzenie:** Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+          "id": "C"
+        },
+        {
+          "text_md": "Poprawność składni serializacji poprzedza walidację modelu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niepoprawny JSON”: PATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść. W bieżącym przypadku: 403 rozróżnia brak autoryzacji od błędnych danych logowania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.restconf.practice.case-03.4",
+      "revision": 1,
+      "title": "HTTP 404 — zależności",
+      "skills": [
+        "encor.restconf.case-03",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Serwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.\n\n**Rozpoznanie:** Wskazany zasób nie jest znaleziony pod tą ścieżką.\n\n**Działanie:** Zweryfikować URI, namespace modelu i klucze list.\n\n**Sprawdzenie:** Poprawny URI zwraca oczekiwany istniejący zasób.",
+      "card_id": "encor.restconf.practice.case-03.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „PUT zastępuje”: Operator użył PUT dla całego zasobu, przesyłając tylko część jego konfiguracji i nie uwzględniając semantyki zastąpienia. W bieżącym przypadku: Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.",
+          "id": "A"
+        },
+        {
+          "text_md": "403 rozróżnia brak autoryzacji od błędnych danych logowania.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „HTTP 403”: Poprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu. W bieżącym przypadku: Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Błędny certyfikat”: Klient odrzuca HTTPS, bo nazwa serwera nie pasuje do certyfikatu. W bieżącym przypadku: Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.",
+          "id": "C"
+        },
+        {
+          "text_md": "Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.",
+          "feedback_md": "Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.\n\n**Rozpoznanie:** Wskazany zasób nie jest znaleziony pod tą ścieżką.\n\n**Działanie:** Zweryfikować URI, namespace modelu i klucze list.\n\n**Sprawdzenie:** Poprawny URI zwraca oczekiwany istniejący zasób.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.restconf.practice.case-04.4",
+      "revision": 1,
+      "title": "Niepoprawny JSON — zależności",
+      "skills": [
+        "encor.restconf.case-04",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "PATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Poprawność składni serializacji poprzedza walidację modelu.\n\n**Rozpoznanie:** Payload nie jest poprawnym dokumentem JSON.\n\n**Działanie:** Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+      "card_id": "encor.restconf.practice.case-04.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Poprawność składni serializacji poprzedza walidację modelu.",
+          "feedback_md": "Poprawność składni serializacji poprzedza walidację modelu.\n\n**Rozpoznanie:** Payload nie jest poprawnym dokumentem JSON.\n\n**Działanie:** Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+          "id": "A"
+        },
+        {
+          "text_md": "401 wskazuje problem uwierzytelnienia, nie brak modelu YANG.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „HTTP 401”: RESTCONF zwraca 401 dla zapytania, a TLS działa. W bieżącym przypadku: Poprawność składni serializacji poprzedza walidację modelu.",
+          "id": "B"
+        },
+        {
+          "text_md": "PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „PUT zastępuje”: Operator użył PUT dla całego zasobu, przesyłając tylko część jego konfiguracji i nie uwzględniając semantyki zastąpienia. W bieżącym przypadku: Poprawność składni serializacji poprzedza walidację modelu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „HTTP 404”: Serwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404. W bieżącym przypadku: Poprawność składni serializacji poprzedza walidację modelu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.restconf.practice.case-05.4",
+      "revision": 1,
+      "title": "PUT zastępuje — zależności",
+      "skills": [
+        "encor.restconf.case-05",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Operator użył PUT dla całego zasobu, przesyłając tylko część jego konfiguracji i nie uwzględniając semantyki zastąpienia.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.\n\n**Rozpoznanie:** Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany.\n\n**Działanie:** Dobrać wspieraną operację częściowej zmiany lub pełny poprawny payload PUT.\n\n**Sprawdzenie:** Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.",
+      "card_id": "encor.restconf.practice.case-05.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „HTTP 404”: Serwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404. W bieżącym przypadku: PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.",
+          "id": "A"
+        },
+        {
+          "text_md": "PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.",
+          "feedback_md": "PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.\n\n**Rozpoznanie:** Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany.\n\n**Działanie:** Dobrać wspieraną operację częściowej zmiany lub pełny poprawny payload PUT.\n\n**Sprawdzenie:** Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Poprawność składni serializacji poprzedza walidację modelu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niepoprawny JSON”: PATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść. W bieżącym przypadku: PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.",
+          "id": "C"
+        },
+        {
+          "text_md": "401 wskazuje problem uwierzytelnienia, nie brak modelu YANG.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „HTTP 401”: RESTCONF zwraca 401 dla zapytania, a TLS działa. W bieżącym przypadku: PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.restconf.practice.case-06.4",
+      "revision": 1,
+      "title": "Błędny certyfikat — zależności",
+      "skills": [
+        "encor.restconf.case-06",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Klient odrzuca HTTPS, bo nazwa serwera nie pasuje do certyfikatu.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Wyłączenie weryfikacji nie naprawia tożsamości endpointu.\n\n**Rozpoznanie:** Nie powiodła się weryfikacja tożsamości TLS.\n\n**Działanie:** Użyć poprawnej nazwy i certyfikatu z zaufanego łańcucha.\n\n**Sprawdzenie:** Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.",
+      "card_id": "encor.restconf.practice.case-06.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "401 wskazuje problem uwierzytelnienia, nie brak modelu YANG.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „HTTP 401”: RESTCONF zwraca 401 dla zapytania, a TLS działa. W bieżącym przypadku: Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „HTTP 404”: Serwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404. W bieżącym przypadku: Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+          "feedback_md": "Wyłączenie weryfikacji nie naprawia tożsamości endpointu.\n\n**Rozpoznanie:** Nie powiodła się weryfikacja tożsamości TLS.\n\n**Działanie:** Użyć poprawnej nazwy i certyfikatu z zaufanego łańcucha.\n\n**Sprawdzenie:** Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.",
+          "id": "C"
+        },
+        {
+          "text_md": "403 rozróżnia brak autoryzacji od błędnych danych logowania.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „HTTP 403”: Poprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu. W bieżącym przypadku: Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

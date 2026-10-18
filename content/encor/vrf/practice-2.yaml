@@ -1,0 +1,435 @@
+{
+  "schema_version": 3,
+  "id": "encor.vrf.practice-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Ping w main — działanie",
+      "skills": [
+        "encor.vrf.case-01",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.practice.case-01.2.card",
+      "front_md": "Cel istnieje tylko w VRF BLUE. Zwykły ping z tablicy globalnej nie działa.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "VRF izoluje wyszukiwanie tras; narzędzia diagnostyczne muszą wskazać właściwy kontekst.\n\n**Rozpoznanie:** Test używa innego kontekstu routingu niż usługa.\n\n**Działanie:** Wykonać ping w VRF BLUE z odpowiednim źródłem.\n\n**Sprawdzenie:** Test w BLUE używa tras BLUE i osiąga zamierzony cel.",
+      "example": "Wykonać ping w VRF BLUE z odpowiednim źródłem."
+    },
+    {
+      "revision": 1,
+      "title": "Nakładające adresy — działanie",
+      "skills": [
+        "encor.vrf.case-02",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.practice.case-02.2.card",
+      "front_md": "BLUE i RED mają hosty 10.0.0.10, lecz w oddzielnych VRF i segmentach.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Ten sam prefiks może być używany przez różne izolowane VRF.\n\n**Rozpoznanie:** Adresy są rozdzielone przez niezależne tablice routingu.\n\n**Działanie:** Diagnozować każdą usługę z jawnym wskazaniem jej VRF.\n\n**Sprawdzenie:** Lookup 10.0.0.10 w każdej VRF prowadzi do jej własnego klienta.",
+      "example": "Diagnozować każdą usługę z jawnym wskazaniem jej VRF."
+    },
+    {
+      "revision": 1,
+      "title": "Default tylko globalny — działanie",
+      "skills": [
+        "encor.vrf.case-03",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.practice.case-03.2.card",
+      "front_md": "VRF BLUE nie ma default, natomiast tablica globalna ma działające 0.0.0.0/0.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Każdy kontekst potrzebuje własnej osiągalności lub jawnego mechanizmu wymiany tras.\n\n**Rozpoznanie:** Trasa globalna nie jest automatycznie dostępna wewnątrz BLUE.\n\n**Działanie:** Zapewnić zaplanowaną trasę lub kontrolowane połączenie VRF z wyjściem.\n\n**Sprawdzenie:** Lookup w BLUE wskazuje właściwą drogę dla celu zewnętrznego.",
+      "example": "Zapewnić zaplanowaną trasę lub kontrolowane połączenie VRF z wyjściem."
+    },
+    {
+      "revision": 1,
+      "title": "Zły interfejs VRF — działanie",
+      "skills": [
+        "encor.vrf.case-04",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.practice.case-04.2.card",
+      "front_md": "Port klienta należy do RED, choć projekt i adresacja przewidują BLUE.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Przynależność interfejsu określa kontekst routingu ruchu przychodzącego.\n\n**Rozpoznanie:** Interfejs wprowadza ruch do niewłaściwej tablicy.\n\n**Działanie:** Przepiąć logicznie interfejs do BLUE z kontrolą adresacji i skutków zmiany.\n\n**Sprawdzenie:** Interfejs oraz jego trasa connected występują w BLUE.",
+      "example": "Przepiąć logicznie interfejs do BLUE z kontrolą adresacji i skutków zmiany."
+    },
+    {
+      "revision": 1,
+      "title": "Brak leak — działanie",
+      "skills": [
+        "encor.vrf.case-05",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.practice.case-05.2.card",
+      "front_md": "Dwie VRF działają lokalnie, ale mają celowo rozdzielone trasy i nie ma route leaking. Operator oczekuje komunikacji między nimi.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Route leaking musi być świadomą decyzją, a nie domyślną własnością VRF.\n\n**Rozpoznanie:** Izolacja VRF nie została jawnie przełamana.\n\n**Działanie:** Zaprojektować kontrolowaną wymianę wybranych tras i odpowiednią politykę dostępu.\n\n**Sprawdzenie:** Wymienione są tylko zamierzone prefiksy i działa droga powrotna.",
+      "example": "Zaprojektować kontrolowaną wymianę wybranych tras i odpowiednią politykę dostępu."
+    },
+    {
+      "revision": 1,
+      "title": "Source interface — działanie",
+      "skills": [
+        "encor.vrf.case-06",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "id": "encor.vrf.practice.case-06.2.card",
+      "front_md": "Ping w BLUE wybiera źródło, do którego zdalna sieć nie ma trasy. Docelowy next hop jest prawidłowy.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Diagnostyka VRF wymaga kontroli tablicy, celu i adresu źródłowego.\n\n**Rozpoznanie:** Wybrany adres źródłowy nie ma drogi powrotnej.\n\n**Działanie:** Użyć poprawnego źródła usługi lub zapewnić routing powrotny do tego źródła.\n\n**Sprawdzenie:** Odpowiedź wraca do jawnie wskazanego adresu w BLUE.",
+      "example": "Użyć poprawnego źródła usługi lub zapewnić routing powrotny do tego źródła."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.vrf.practice.case-01.2",
+      "revision": 1,
+      "title": "Ping w main — działanie",
+      "skills": [
+        "encor.vrf.case-01",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Cel istnieje tylko w VRF BLUE. Zwykły ping z tablicy globalnej nie działa.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "VRF izoluje wyszukiwanie tras; narzędzia diagnostyczne muszą wskazać właściwy kontekst.\n\n**Rozpoznanie:** Test używa innego kontekstu routingu niż usługa.\n\n**Działanie:** Wykonać ping w VRF BLUE z odpowiednim źródłem.\n\n**Sprawdzenie:** Test w BLUE używa tras BLUE i osiąga zamierzony cel.",
+      "card_id": "encor.vrf.practice.case-01.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zaprojektować kontrolowaną wymianę wybranych tras i odpowiednią politykę dostępu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak leak”: Dwie VRF działają lokalnie, ale mają celowo rozdzielone trasy i nie ma route leaking. Operator oczekuje komunikacji między nimi. W bieżącym przypadku: Wykonać ping w VRF BLUE z odpowiednim źródłem.",
+          "id": "A"
+        },
+        {
+          "text_md": "Przepiąć logicznie interfejs do BLUE z kontrolą adresacji i skutków zmiany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły interfejs VRF”: Port klienta należy do RED, choć projekt i adresacja przewidują BLUE. W bieżącym przypadku: Wykonać ping w VRF BLUE z odpowiednim źródłem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Diagnozować każdą usługę z jawnym wskazaniem jej VRF.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nakładające adresy”: BLUE i RED mają hosty 10.0.0.10, lecz w oddzielnych VRF i segmentach. W bieżącym przypadku: Wykonać ping w VRF BLUE z odpowiednim źródłem.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wykonać ping w VRF BLUE z odpowiednim źródłem.",
+          "feedback_md": "VRF izoluje wyszukiwanie tras; narzędzia diagnostyczne muszą wskazać właściwy kontekst.\n\n**Rozpoznanie:** Test używa innego kontekstu routingu niż usługa.\n\n**Działanie:** Wykonać ping w VRF BLUE z odpowiednim źródłem.\n\n**Sprawdzenie:** Test w BLUE używa tras BLUE i osiąga zamierzony cel.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.vrf.practice.case-02.2",
+      "revision": 1,
+      "title": "Nakładające adresy — działanie",
+      "skills": [
+        "encor.vrf.case-02",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "BLUE i RED mają hosty 10.0.0.10, lecz w oddzielnych VRF i segmentach.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Ten sam prefiks może być używany przez różne izolowane VRF.\n\n**Rozpoznanie:** Adresy są rozdzielone przez niezależne tablice routingu.\n\n**Działanie:** Diagnozować każdą usługę z jawnym wskazaniem jej VRF.\n\n**Sprawdzenie:** Lookup 10.0.0.10 w każdej VRF prowadzi do jej własnego klienta.",
+      "card_id": "encor.vrf.practice.case-02.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Diagnozować każdą usługę z jawnym wskazaniem jej VRF.",
+          "feedback_md": "Ten sam prefiks może być używany przez różne izolowane VRF.\n\n**Rozpoznanie:** Adresy są rozdzielone przez niezależne tablice routingu.\n\n**Działanie:** Diagnozować każdą usługę z jawnym wskazaniem jej VRF.\n\n**Sprawdzenie:** Lookup 10.0.0.10 w każdej VRF prowadzi do jej własnego klienta.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wykonać ping w VRF BLUE z odpowiednim źródłem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Ping w main”: Cel istnieje tylko w VRF BLUE. Zwykły ping z tablicy globalnej nie działa. W bieżącym przypadku: Diagnozować każdą usługę z jawnym wskazaniem jej VRF.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zapewnić zaplanowaną trasę lub kontrolowane połączenie VRF z wyjściem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Default tylko globalny”: VRF BLUE nie ma default, natomiast tablica globalna ma działające 0.0.0.0/0. W bieżącym przypadku: Diagnozować każdą usługę z jawnym wskazaniem jej VRF.",
+          "id": "C"
+        },
+        {
+          "text_md": "Użyć poprawnego źródła usługi lub zapewnić routing powrotny do tego źródła.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Source interface”: Ping w BLUE wybiera źródło, do którego zdalna sieć nie ma trasy. Docelowy next hop jest prawidłowy. W bieżącym przypadku: Diagnozować każdą usługę z jawnym wskazaniem jej VRF.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.vrf.practice.case-03.2",
+      "revision": 1,
+      "title": "Default tylko globalny — działanie",
+      "skills": [
+        "encor.vrf.case-03",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "VRF BLUE nie ma default, natomiast tablica globalna ma działające 0.0.0.0/0.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Każdy kontekst potrzebuje własnej osiągalności lub jawnego mechanizmu wymiany tras.\n\n**Rozpoznanie:** Trasa globalna nie jest automatycznie dostępna wewnątrz BLUE.\n\n**Działanie:** Zapewnić zaplanowaną trasę lub kontrolowane połączenie VRF z wyjściem.\n\n**Sprawdzenie:** Lookup w BLUE wskazuje właściwą drogę dla celu zewnętrznego.",
+      "card_id": "encor.vrf.practice.case-03.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wykonać ping w VRF BLUE z odpowiednim źródłem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Ping w main”: Cel istnieje tylko w VRF BLUE. Zwykły ping z tablicy globalnej nie działa. W bieżącym przypadku: Zapewnić zaplanowaną trasę lub kontrolowane połączenie VRF z wyjściem.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zapewnić zaplanowaną trasę lub kontrolowane połączenie VRF z wyjściem.",
+          "feedback_md": "Każdy kontekst potrzebuje własnej osiągalności lub jawnego mechanizmu wymiany tras.\n\n**Rozpoznanie:** Trasa globalna nie jest automatycznie dostępna wewnątrz BLUE.\n\n**Działanie:** Zapewnić zaplanowaną trasę lub kontrolowane połączenie VRF z wyjściem.\n\n**Sprawdzenie:** Lookup w BLUE wskazuje właściwą drogę dla celu zewnętrznego.",
+          "id": "B"
+        },
+        {
+          "text_md": "Użyć poprawnego źródła usługi lub zapewnić routing powrotny do tego źródła.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Source interface”: Ping w BLUE wybiera źródło, do którego zdalna sieć nie ma trasy. Docelowy next hop jest prawidłowy. W bieżącym przypadku: Zapewnić zaplanowaną trasę lub kontrolowane połączenie VRF z wyjściem.",
+          "id": "C"
+        },
+        {
+          "text_md": "Przepiąć logicznie interfejs do BLUE z kontrolą adresacji i skutków zmiany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły interfejs VRF”: Port klienta należy do RED, choć projekt i adresacja przewidują BLUE. W bieżącym przypadku: Zapewnić zaplanowaną trasę lub kontrolowane połączenie VRF z wyjściem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.vrf.practice.case-04.2",
+      "revision": 1,
+      "title": "Zły interfejs VRF — działanie",
+      "skills": [
+        "encor.vrf.case-04",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Port klienta należy do RED, choć projekt i adresacja przewidują BLUE.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Przynależność interfejsu określa kontekst routingu ruchu przychodzącego.\n\n**Rozpoznanie:** Interfejs wprowadza ruch do niewłaściwej tablicy.\n\n**Działanie:** Przepiąć logicznie interfejs do BLUE z kontrolą adresacji i skutków zmiany.\n\n**Sprawdzenie:** Interfejs oraz jego trasa connected występują w BLUE.",
+      "card_id": "encor.vrf.practice.case-04.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zaprojektować kontrolowaną wymianę wybranych tras i odpowiednią politykę dostępu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak leak”: Dwie VRF działają lokalnie, ale mają celowo rozdzielone trasy i nie ma route leaking. Operator oczekuje komunikacji między nimi. W bieżącym przypadku: Przepiąć logicznie interfejs do BLUE z kontrolą adresacji i skutków zmiany.",
+          "id": "A"
+        },
+        {
+          "text_md": "Diagnozować każdą usługę z jawnym wskazaniem jej VRF.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nakładające adresy”: BLUE i RED mają hosty 10.0.0.10, lecz w oddzielnych VRF i segmentach. W bieżącym przypadku: Przepiąć logicznie interfejs do BLUE z kontrolą adresacji i skutków zmiany.",
+          "id": "B"
+        },
+        {
+          "text_md": "Przepiąć logicznie interfejs do BLUE z kontrolą adresacji i skutków zmiany.",
+          "feedback_md": "Przynależność interfejsu określa kontekst routingu ruchu przychodzącego.\n\n**Rozpoznanie:** Interfejs wprowadza ruch do niewłaściwej tablicy.\n\n**Działanie:** Przepiąć logicznie interfejs do BLUE z kontrolą adresacji i skutków zmiany.\n\n**Sprawdzenie:** Interfejs oraz jego trasa connected występują w BLUE.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wykonać ping w VRF BLUE z odpowiednim źródłem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Ping w main”: Cel istnieje tylko w VRF BLUE. Zwykły ping z tablicy globalnej nie działa. W bieżącym przypadku: Przepiąć logicznie interfejs do BLUE z kontrolą adresacji i skutków zmiany.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.vrf.practice.case-05.2",
+      "revision": 1,
+      "title": "Brak leak — działanie",
+      "skills": [
+        "encor.vrf.case-05",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dwie VRF działają lokalnie, ale mają celowo rozdzielone trasy i nie ma route leaking. Operator oczekuje komunikacji między nimi.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Route leaking musi być świadomą decyzją, a nie domyślną własnością VRF.\n\n**Rozpoznanie:** Izolacja VRF nie została jawnie przełamana.\n\n**Działanie:** Zaprojektować kontrolowaną wymianę wybranych tras i odpowiednią politykę dostępu.\n\n**Sprawdzenie:** Wymienione są tylko zamierzone prefiksy i działa droga powrotna.",
+      "card_id": "encor.vrf.practice.case-05.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Przepiąć logicznie interfejs do BLUE z kontrolą adresacji i skutków zmiany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły interfejs VRF”: Port klienta należy do RED, choć projekt i adresacja przewidują BLUE. W bieżącym przypadku: Zaprojektować kontrolowaną wymianę wybranych tras i odpowiednią politykę dostępu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zapewnić zaplanowaną trasę lub kontrolowane połączenie VRF z wyjściem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Default tylko globalny”: VRF BLUE nie ma default, natomiast tablica globalna ma działające 0.0.0.0/0. W bieżącym przypadku: Zaprojektować kontrolowaną wymianę wybranych tras i odpowiednią politykę dostępu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Diagnozować każdą usługę z jawnym wskazaniem jej VRF.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nakładające adresy”: BLUE i RED mają hosty 10.0.0.10, lecz w oddzielnych VRF i segmentach. W bieżącym przypadku: Zaprojektować kontrolowaną wymianę wybranych tras i odpowiednią politykę dostępu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zaprojektować kontrolowaną wymianę wybranych tras i odpowiednią politykę dostępu.",
+          "feedback_md": "Route leaking musi być świadomą decyzją, a nie domyślną własnością VRF.\n\n**Rozpoznanie:** Izolacja VRF nie została jawnie przełamana.\n\n**Działanie:** Zaprojektować kontrolowaną wymianę wybranych tras i odpowiednią politykę dostępu.\n\n**Sprawdzenie:** Wymienione są tylko zamierzone prefiksy i działa droga powrotna.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.vrf.practice.case-06.2",
+      "revision": 1,
+      "title": "Source interface — działanie",
+      "skills": [
+        "encor.vrf.case-06",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — VRF — oddzielne tablice routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-vrf-tunnels.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Ping w BLUE wybiera źródło, do którego zdalna sieć nie ma trasy. Docelowy next hop jest prawidłowy.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Diagnostyka VRF wymaga kontroli tablicy, celu i adresu źródłowego.\n\n**Rozpoznanie:** Wybrany adres źródłowy nie ma drogi powrotnej.\n\n**Działanie:** Użyć poprawnego źródła usługi lub zapewnić routing powrotny do tego źródła.\n\n**Sprawdzenie:** Odpowiedź wraca do jawnie wskazanego adresu w BLUE.",
+      "card_id": "encor.vrf.practice.case-06.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Użyć poprawnego źródła usługi lub zapewnić routing powrotny do tego źródła.",
+          "feedback_md": "Diagnostyka VRF wymaga kontroli tablicy, celu i adresu źródłowego.\n\n**Rozpoznanie:** Wybrany adres źródłowy nie ma drogi powrotnej.\n\n**Działanie:** Użyć poprawnego źródła usługi lub zapewnić routing powrotny do tego źródła.\n\n**Sprawdzenie:** Odpowiedź wraca do jawnie wskazanego adresu w BLUE.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zaprojektować kontrolowaną wymianę wybranych tras i odpowiednią politykę dostępu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak leak”: Dwie VRF działają lokalnie, ale mają celowo rozdzielone trasy i nie ma route leaking. Operator oczekuje komunikacji między nimi. W bieżącym przypadku: Użyć poprawnego źródła usługi lub zapewnić routing powrotny do tego źródła.",
+          "id": "B"
+        },
+        {
+          "text_md": "Przepiąć logicznie interfejs do BLUE z kontrolą adresacji i skutków zmiany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły interfejs VRF”: Port klienta należy do RED, choć projekt i adresacja przewidują BLUE. W bieżącym przypadku: Użyć poprawnego źródła usługi lub zapewnić routing powrotny do tego źródła.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zapewnić zaplanowaną trasę lub kontrolowane połączenie VRF z wyjściem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Default tylko globalny”: VRF BLUE nie ma default, natomiast tablica globalna ma działające 0.0.0.0/0. W bieżącym przypadku: Użyć poprawnego źródła usługi lub zapewnić routing powrotny do tego źródła.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

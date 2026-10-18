@@ -1,0 +1,799 @@
+{
+  "schema_version": 3,
+  "id": "encor.pbr.practice-7",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "id": "encor.pbr.practice.compare-01.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRoute-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów.\n\n**Zgłoszenie II**\n\nACL użyta przez match ip address odrzuca badany pakiet, a operator uważa, że PBR go filtruje.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Polityka PBR nie jest stosowana do tego ruchu. Przypiąć właściwą politykę do właściwego interfejsu wejściowego.\n\n**Sprawdzenie I:** Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\n**Zgłoszenie II:** Pakiet nie pasuje do tej sekwencji PBR. Sprawdzić dalsze sekwencje i zwykły routing zamiast traktować match ACL jako filtr portu.\n\n**Sprawdzenie II:** Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\n**Zależności:** Definicja polityki nie jest równoznaczna z jej zastosowaniem. Deny w ACL dopasowania nie jest automatycznie odrzuceniem pakietu przez interfejs.",
+      "example": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "id": "encor.pbr.practice.compare-02.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPBR działa dla klientów na wejściu Gi0/0, ale ping generowany przez router używa zwykłego routingu.\n\n**Zgłoszenie II**\n\nSekwencja 10 permit matchuje całe /24 i ustawia A. Późniejsza sekwencja 20 miała skierować hosta z tego /24 przez B.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Ruch lokalny nie wchodzi przez interfejs objęty tą polityką. Testować rzeczywisty ruch klientów lub osobno zaprojektować local policy.\n\n**Sprawdzenie I:** Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\n**Zgłoszenie II:** Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Umieścić wyjątek hosta przed ogólną regułą, zachowując zakres reszty.\n\n**Sprawdzenie II:** Host używa B, a pozostałe adresy /24 nadal A.\n\n**Zależności:** Interface PBR i lokalna polityka dla ruchu routera są różnymi zakresami. Kolejność sekwencji route-map wpływa na zastosowaną politykę.",
+      "example": "I — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\nII — Host używa B, a pozostałe adresy /24 nadal A."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "id": "encor.pbr.practice.compare-03.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPBR kieruje ruch przez zapasowego operatora, ale ten nie ma drogi powrotnej do źródła.\n\n**Zgłoszenie II**\n\nNext hop odpowiada lokalnie, ale usługa za nim jest niedostępna; polityka nie sprawdza dalszej ścieżki.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Zmiana wyjścia nie zapewniła spójnej komunikacji dwukierunkowej. Zapewnić właściwy routing powrotny i zgodną translację lub ogłaszanie.\n\n**Sprawdzenie I:** Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\n**Zgłoszenie II:** Lokalna osiągalność next hop nie potwierdza dostępności usługi. Powiązać wybór z właściwą weryfikacją dostępności zgodnie z możliwościami platformy.\n\n**Sprawdzenie II:** Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.\n\n**Zależności:** PBR wpływa na wybrany kierunek i nie konfiguruje automatycznie odpowiedzi. Zakres testu dostępności musi odpowiadać temu, co polityka ma chronić.",
+      "example": "I — Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\nII — Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "id": "encor.pbr.practice.compare-04.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRoute-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów.\n\n**Zgłoszenie II**\n\nPBR działa dla klientów na wejściu Gi0/0, ale ping generowany przez router używa zwykłego routingu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Polityka PBR nie jest stosowana do tego ruchu. Przypiąć właściwą politykę do właściwego interfejsu wejściowego.\n\n**Sprawdzenie I:** Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\n**Zgłoszenie II:** Ruch lokalny nie wchodzi przez interfejs objęty tą polityką. Testować rzeczywisty ruch klientów lub osobno zaprojektować local policy.\n\n**Sprawdzenie II:** Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\n**Zależności:** Definicja polityki nie jest równoznaczna z jej zastosowaniem. Interface PBR i lokalna polityka dla ruchu routera są różnymi zakresami.",
+      "example": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "id": "encor.pbr.practice.compare-05.3.card",
+      "front_md": "**Zgłoszenie I**\n\nACL użyta przez match ip address odrzuca badany pakiet, a operator uważa, że PBR go filtruje.\n\n**Zgłoszenie II**\n\nPBR kieruje ruch przez zapasowego operatora, ale ten nie ma drogi powrotnej do źródła.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Pakiet nie pasuje do tej sekwencji PBR. Sprawdzić dalsze sekwencje i zwykły routing zamiast traktować match ACL jako filtr portu.\n\n**Sprawdzenie I:** Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\n**Zgłoszenie II:** Zmiana wyjścia nie zapewniła spójnej komunikacji dwukierunkowej. Zapewnić właściwy routing powrotny i zgodną translację lub ogłaszanie.\n\n**Sprawdzenie II:** Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\n**Zależności:** Deny w ACL dopasowania nie jest automatycznie odrzuceniem pakietu przez interfejs. PBR wpływa na wybrany kierunek i nie konfiguruje automatycznie odpowiedzi.",
+      "example": "I — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\nII — Odpowiedzi wracają do klienta dla przepływu skierowanego polityką."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "id": "encor.pbr.practice.compare-06.3.card",
+      "front_md": "**Zgłoszenie I**\n\nSekwencja 10 permit matchuje całe /24 i ustawia A. Późniejsza sekwencja 20 miała skierować hosta z tego /24 przez B.\n\n**Zgłoszenie II**\n\nNext hop odpowiada lokalnie, ale usługa za nim jest niedostępna; polityka nie sprawdza dalszej ścieżki.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Umieścić wyjątek hosta przed ogólną regułą, zachowując zakres reszty.\n\n**Sprawdzenie I:** Host używa B, a pozostałe adresy /24 nadal A.\n\n**Zgłoszenie II:** Lokalna osiągalność next hop nie potwierdza dostępności usługi. Powiązać wybór z właściwą weryfikacją dostępności zgodnie z możliwościami platformy.\n\n**Sprawdzenie II:** Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.\n\n**Zależności:** Kolejność sekwencji route-map wpływa na zastosowaną politykę. Zakres testu dostępności musi odpowiadać temu, co polityka ma chronić.",
+      "example": "I — Host używa B, a pozostałe adresy /24 nadal A.\n\nII — Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "id": "encor.pbr.practice.compare-07.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRoute-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów.\n\n**Zgłoszenie II**\n\nNext hop odpowiada lokalnie, ale usługa za nim jest niedostępna; polityka nie sprawdza dalszej ścieżki.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Polityka PBR nie jest stosowana do tego ruchu. Przypiąć właściwą politykę do właściwego interfejsu wejściowego.\n\n**Sprawdzenie I:** Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\n**Zgłoszenie II:** Lokalna osiągalność next hop nie potwierdza dostępności usługi. Powiązać wybór z właściwą weryfikacją dostępności zgodnie z możliwościami platformy.\n\n**Sprawdzenie II:** Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.\n\n**Zależności:** Definicja polityki nie jest równoznaczna z jej zastosowaniem. Zakres testu dostępności musi odpowiadać temu, co polityka ma chronić.",
+      "example": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "id": "encor.pbr.practice.compare-08.3.card",
+      "front_md": "**Zgłoszenie I**\n\nACL użyta przez match ip address odrzuca badany pakiet, a operator uważa, że PBR go filtruje.\n\n**Zgłoszenie II**\n\nSekwencja 10 permit matchuje całe /24 i ustawia A. Późniejsza sekwencja 20 miała skierować hosta z tego /24 przez B.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Pakiet nie pasuje do tej sekwencji PBR. Sprawdzić dalsze sekwencje i zwykły routing zamiast traktować match ACL jako filtr portu.\n\n**Sprawdzenie I:** Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\n**Zgłoszenie II:** Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Umieścić wyjątek hosta przed ogólną regułą, zachowując zakres reszty.\n\n**Sprawdzenie II:** Host używa B, a pozostałe adresy /24 nadal A.\n\n**Zależności:** Deny w ACL dopasowania nie jest automatycznie odrzuceniem pakietu przez interfejs. Kolejność sekwencji route-map wpływa na zastosowaną politykę.",
+      "example": "I — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\nII — Host używa B, a pozostałe adresy /24 nadal A."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "id": "encor.pbr.practice.compare-09.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPBR działa dla klientów na wejściu Gi0/0, ale ping generowany przez router używa zwykłego routingu.\n\n**Zgłoszenie II**\n\nPBR kieruje ruch przez zapasowego operatora, ale ten nie ma drogi powrotnej do źródła.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Ruch lokalny nie wchodzi przez interfejs objęty tą polityką. Testować rzeczywisty ruch klientów lub osobno zaprojektować local policy.\n\n**Sprawdzenie I:** Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\n**Zgłoszenie II:** Zmiana wyjścia nie zapewniła spójnej komunikacji dwukierunkowej. Zapewnić właściwy routing powrotny i zgodną translację lub ogłaszanie.\n\n**Sprawdzenie II:** Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\n**Zależności:** Interface PBR i lokalna polityka dla ruchu routera są różnymi zakresami. PBR wpływa na wybrany kierunek i nie konfiguruje automatycznie odpowiedzi.",
+      "example": "I — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\nII — Odpowiedzi wracają do klienta dla przepływu skierowanego polityką."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "id": "encor.pbr.practice.compare-10.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRoute-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów.\n\n**Zgłoszenie II**\n\nSekwencja 10 permit matchuje całe /24 i ustawia A. Późniejsza sekwencja 20 miała skierować hosta z tego /24 przez B.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Polityka PBR nie jest stosowana do tego ruchu. Przypiąć właściwą politykę do właściwego interfejsu wejściowego.\n\n**Sprawdzenie I:** Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\n**Zgłoszenie II:** Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Umieścić wyjątek hosta przed ogólną regułą, zachowując zakres reszty.\n\n**Sprawdzenie II:** Host używa B, a pozostałe adresy /24 nadal A.\n\n**Zależności:** Definicja polityki nie jest równoznaczna z jej zastosowaniem. Kolejność sekwencji route-map wpływa na zastosowaną politykę.",
+      "example": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Host używa B, a pozostałe adresy /24 nadal A."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.pbr.practice.compare-01.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRoute-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów.\n\n**Zgłoszenie II**\n\nACL użyta przez match ip address odrzuca badany pakiet, a operator uważa, że PBR go filtruje.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Polityka PBR nie jest stosowana do tego ruchu. Przypiąć właściwą politykę do właściwego interfejsu wejściowego.\n\n**Sprawdzenie I:** Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\n**Zgłoszenie II:** Pakiet nie pasuje do tej sekwencji PBR. Sprawdzić dalsze sekwencje i zwykły routing zamiast traktować match ACL jako filtr portu.\n\n**Sprawdzenie II:** Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\n**Zależności:** Definicja polityki nie jest równoznaczna z jej zastosowaniem. Deny w ACL dopasowania nie jest automatycznie odrzuceniem pakietu przez interfejs.",
+      "card_id": "encor.pbr.practice.compare-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\nII — Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Polityka PBR nie jest stosowana do tego ruchu. Zgłoszenie II: Pakiet nie pasuje do tej sekwencji PBR.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: PBR działa dla klientów na wejściu Gi0/0, ale ping generowany przez router używa zwykłego routingu. Dla II: Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\nII — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: PBR działa dla klientów na wejściu Gi0/0, ale ping generowany przez router używa zwykłego routingu. Dla I: Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.",
+          "feedback_md": "**Zgłoszenie I:** Polityka PBR nie jest stosowana do tego ruchu. Przypiąć właściwą politykę do właściwego interfejsu wejściowego.\n\n**Sprawdzenie I:** Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\n**Zgłoszenie II:** Pakiet nie pasuje do tej sekwencji PBR. Sprawdzić dalsze sekwencje i zwykły routing zamiast traktować match ACL jako filtr portu.\n\n**Sprawdzenie II:** Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\n**Zależności:** Definicja polityki nie jest równoznaczna z jej zastosowaniem. Deny w ACL dopasowania nie jest automatycznie odrzuceniem pakietu przez interfejs.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.pbr.practice.compare-02.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPBR działa dla klientów na wejściu Gi0/0, ale ping generowany przez router używa zwykłego routingu.\n\n**Zgłoszenie II**\n\nSekwencja 10 permit matchuje całe /24 i ustawia A. Późniejsza sekwencja 20 miała skierować hosta z tego /24 przez B.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Ruch lokalny nie wchodzi przez interfejs objęty tą polityką. Testować rzeczywisty ruch klientów lub osobno zaprojektować local policy.\n\n**Sprawdzenie I:** Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\n**Zgłoszenie II:** Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Umieścić wyjątek hosta przed ogólną regułą, zachowując zakres reszty.\n\n**Sprawdzenie II:** Host używa B, a pozostałe adresy /24 nadal A.\n\n**Zależności:** Interface PBR i lokalna polityka dla ruchu routera są różnymi zakresami. Kolejność sekwencji route-map wpływa na zastosowaną politykę.",
+      "card_id": "encor.pbr.practice.compare-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\nII — Host używa B, a pozostałe adresy /24 nadal A.",
+          "feedback_md": "**Zgłoszenie I:** Ruch lokalny nie wchodzi przez interfejs objęty tą polityką. Testować rzeczywisty ruch klientów lub osobno zaprojektować local policy.\n\n**Sprawdzenie I:** Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\n**Zgłoszenie II:** Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Umieścić wyjątek hosta przed ogólną regułą, zachowując zakres reszty.\n\n**Sprawdzenie II:** Host używa B, a pozostałe adresy /24 nadal A.\n\n**Zależności:** Interface PBR i lokalna polityka dla ruchu routera są różnymi zakresami. Kolejność sekwencji route-map wpływa na zastosowaną politykę.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Host używa B, a pozostałe adresy /24 nadal A.\n\nII — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Ruch lokalny nie wchodzi przez interfejs objęty tą polityką. Zgłoszenie II: Ogólna sekwencja przechwytuje hosta przed wyjątkiem.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\nII — Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Route-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów. Dla II: Host używa B, a pozostałe adresy /24 nadal A.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Host używa B, a pozostałe adresy /24 nadal A.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Route-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów. Dla I: Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.pbr.practice.compare-03.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPBR kieruje ruch przez zapasowego operatora, ale ten nie ma drogi powrotnej do źródła.\n\n**Zgłoszenie II**\n\nNext hop odpowiada lokalnie, ale usługa za nim jest niedostępna; polityka nie sprawdza dalszej ścieżki.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Zmiana wyjścia nie zapewniła spójnej komunikacji dwukierunkowej. Zapewnić właściwy routing powrotny i zgodną translację lub ogłaszanie.\n\n**Sprawdzenie I:** Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\n**Zgłoszenie II:** Lokalna osiągalność next hop nie potwierdza dostępności usługi. Powiązać wybór z właściwą weryfikacją dostępności zgodnie z możliwościami platformy.\n\n**Sprawdzenie II:** Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.\n\n**Zależności:** PBR wpływa na wybrany kierunek i nie konfiguruje automatycznie odpowiedzi. Zakres testu dostępności musi odpowiadać temu, co polityka ma chronić.",
+      "card_id": "encor.pbr.practice.compare-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.\n\nII — Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Zmiana wyjścia nie zapewniła spójnej komunikacji dwukierunkowej. Zgłoszenie II: Lokalna osiągalność next hop nie potwierdza dostępności usługi.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\nII — Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.",
+          "feedback_md": "**Zgłoszenie I:** Zmiana wyjścia nie zapewniła spójnej komunikacji dwukierunkowej. Zapewnić właściwy routing powrotny i zgodną translację lub ogłaszanie.\n\n**Sprawdzenie I:** Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\n**Zgłoszenie II:** Lokalna osiągalność next hop nie potwierdza dostępności usługi. Powiązać wybór z właściwą weryfikacją dostępności zgodnie z możliwościami platformy.\n\n**Sprawdzenie II:** Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.\n\n**Zależności:** PBR wpływa na wybrany kierunek i nie konfiguruje automatycznie odpowiedzi. Zakres testu dostępności musi odpowiadać temu, co polityka ma chronić.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\nII — Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Route-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów. Dla II: Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Route-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów. Dla I: Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.pbr.practice.compare-04.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRoute-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów.\n\n**Zgłoszenie II**\n\nPBR działa dla klientów na wejściu Gi0/0, ale ping generowany przez router używa zwykłego routingu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Polityka PBR nie jest stosowana do tego ruchu. Przypiąć właściwą politykę do właściwego interfejsu wejściowego.\n\n**Sprawdzenie I:** Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\n**Zgłoszenie II:** Ruch lokalny nie wchodzi przez interfejs objęty tą polityką. Testować rzeczywisty ruch klientów lub osobno zaprojektować local policy.\n\n**Sprawdzenie II:** Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\n**Zależności:** Definicja polityki nie jest równoznaczna z jej zastosowaniem. Interface PBR i lokalna polityka dla ruchu routera są różnymi zakresami.",
+      "card_id": "encor.pbr.practice.compare-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\nII — Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Polityka PBR nie jest stosowana do tego ruchu. Zgłoszenie II: Ruch lokalny nie wchodzi przez interfejs objęty tą polityką.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: ACL użyta przez match ip address odrzuca badany pakiet, a operator uważa, że PBR go filtruje. Dla II: Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.",
+          "feedback_md": "**Zgłoszenie I:** Polityka PBR nie jest stosowana do tego ruchu. Przypiąć właściwą politykę do właściwego interfejsu wejściowego.\n\n**Sprawdzenie I:** Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\n**Zgłoszenie II:** Ruch lokalny nie wchodzi przez interfejs objęty tą polityką. Testować rzeczywisty ruch klientów lub osobno zaprojektować local policy.\n\n**Sprawdzenie II:** Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\n**Zależności:** Definicja polityki nie jest równoznaczna z jej zastosowaniem. Interface PBR i lokalna polityka dla ruchu routera są różnymi zakresami.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\nII — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: ACL użyta przez match ip address odrzuca badany pakiet, a operator uważa, że PBR go filtruje. Dla I: Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.pbr.practice.compare-05.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nACL użyta przez match ip address odrzuca badany pakiet, a operator uważa, że PBR go filtruje.\n\n**Zgłoszenie II**\n\nPBR kieruje ruch przez zapasowego operatora, ale ten nie ma drogi powrotnej do źródła.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Pakiet nie pasuje do tej sekwencji PBR. Sprawdzić dalsze sekwencje i zwykły routing zamiast traktować match ACL jako filtr portu.\n\n**Sprawdzenie I:** Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\n**Zgłoszenie II:** Zmiana wyjścia nie zapewniła spójnej komunikacji dwukierunkowej. Zapewnić właściwy routing powrotny i zgodną translację lub ogłaszanie.\n\n**Sprawdzenie II:** Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\n**Zależności:** Deny w ACL dopasowania nie jest automatycznie odrzuceniem pakietu przez interfejs. PBR wpływa na wybrany kierunek i nie konfiguruje automatycznie odpowiedzi.",
+      "card_id": "encor.pbr.practice.compare-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\nII — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Pakiet nie pasuje do tej sekwencji PBR. Zgłoszenie II: Zmiana wyjścia nie zapewniła spójnej komunikacji dwukierunkowej.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\nII — Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Route-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów. Dla II: Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Route-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów. Dla I: Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\nII — Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.",
+          "feedback_md": "**Zgłoszenie I:** Pakiet nie pasuje do tej sekwencji PBR. Sprawdzić dalsze sekwencje i zwykły routing zamiast traktować match ACL jako filtr portu.\n\n**Sprawdzenie I:** Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\n**Zgłoszenie II:** Zmiana wyjścia nie zapewniła spójnej komunikacji dwukierunkowej. Zapewnić właściwy routing powrotny i zgodną translację lub ogłaszanie.\n\n**Sprawdzenie II:** Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\n**Zależności:** Deny w ACL dopasowania nie jest automatycznie odrzuceniem pakietu przez interfejs. PBR wpływa na wybrany kierunek i nie konfiguruje automatycznie odpowiedzi.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.pbr.practice.compare-06.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSekwencja 10 permit matchuje całe /24 i ustawia A. Późniejsza sekwencja 20 miała skierować hosta z tego /24 przez B.\n\n**Zgłoszenie II**\n\nNext hop odpowiada lokalnie, ale usługa za nim jest niedostępna; polityka nie sprawdza dalszej ścieżki.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Umieścić wyjątek hosta przed ogólną regułą, zachowując zakres reszty.\n\n**Sprawdzenie I:** Host używa B, a pozostałe adresy /24 nadal A.\n\n**Zgłoszenie II:** Lokalna osiągalność next hop nie potwierdza dostępności usługi. Powiązać wybór z właściwą weryfikacją dostępności zgodnie z możliwościami platformy.\n\n**Sprawdzenie II:** Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.\n\n**Zależności:** Kolejność sekwencji route-map wpływa na zastosowaną politykę. Zakres testu dostępności musi odpowiadać temu, co polityka ma chronić.",
+      "card_id": "encor.pbr.practice.compare-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Host używa B, a pozostałe adresy /24 nadal A.\n\nII — Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.",
+          "feedback_md": "**Zgłoszenie I:** Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Umieścić wyjątek hosta przed ogólną regułą, zachowując zakres reszty.\n\n**Sprawdzenie I:** Host używa B, a pozostałe adresy /24 nadal A.\n\n**Zgłoszenie II:** Lokalna osiągalność next hop nie potwierdza dostępności usługi. Powiązać wybór z właściwą weryfikacją dostępności zgodnie z możliwościami platformy.\n\n**Sprawdzenie II:** Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.\n\n**Zależności:** Kolejność sekwencji route-map wpływa na zastosowaną politykę. Zakres testu dostępności musi odpowiadać temu, co polityka ma chronić.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.\n\nII — Host używa B, a pozostałe adresy /24 nadal A.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Zgłoszenie II: Lokalna osiągalność next hop nie potwierdza dostępności usługi.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Host używa B, a pozostałe adresy /24 nadal A.\n\nII — Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Route-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów. Dla II: Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Route-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów. Dla I: Host używa B, a pozostałe adresy /24 nadal A.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.pbr.practice.compare-07.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRoute-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów.\n\n**Zgłoszenie II**\n\nNext hop odpowiada lokalnie, ale usługa za nim jest niedostępna; polityka nie sprawdza dalszej ścieżki.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Polityka PBR nie jest stosowana do tego ruchu. Przypiąć właściwą politykę do właściwego interfejsu wejściowego.\n\n**Sprawdzenie I:** Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\n**Zgłoszenie II:** Lokalna osiągalność next hop nie potwierdza dostępności usługi. Powiązać wybór z właściwą weryfikacją dostępności zgodnie z możliwościami platformy.\n\n**Sprawdzenie II:** Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.\n\n**Zależności:** Definicja polityki nie jest równoznaczna z jej zastosowaniem. Zakres testu dostępności musi odpowiadać temu, co polityka ma chronić.",
+      "card_id": "encor.pbr.practice.compare-07.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.\n\nII — Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Polityka PBR nie jest stosowana do tego ruchu. Zgłoszenie II: Lokalna osiągalność next hop nie potwierdza dostępności usługi.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.",
+          "feedback_md": "**Zgłoszenie I:** Polityka PBR nie jest stosowana do tego ruchu. Przypiąć właściwą politykę do właściwego interfejsu wejściowego.\n\n**Sprawdzenie I:** Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\n**Zgłoszenie II:** Lokalna osiągalność next hop nie potwierdza dostępności usługi. Powiązać wybór z właściwą weryfikacją dostępności zgodnie z możliwościami platformy.\n\n**Sprawdzenie II:** Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.\n\n**Zależności:** Definicja polityki nie jest równoznaczna z jej zastosowaniem. Zakres testu dostępności musi odpowiadać temu, co polityka ma chronić.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: ACL użyta przez match ip address odrzuca badany pakiet, a operator uważa, że PBR go filtruje. Dla II: Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\nII — Awaria badanej dalszej ścieżki zmienia decyzję polityki zgodnie z projektem.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: ACL użyta przez match ip address odrzuca badany pakiet, a operator uważa, że PBR go filtruje. Dla I: Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.pbr.practice.compare-08.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nACL użyta przez match ip address odrzuca badany pakiet, a operator uważa, że PBR go filtruje.\n\n**Zgłoszenie II**\n\nSekwencja 10 permit matchuje całe /24 i ustawia A. Późniejsza sekwencja 20 miała skierować hosta z tego /24 przez B.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Pakiet nie pasuje do tej sekwencji PBR. Sprawdzić dalsze sekwencje i zwykły routing zamiast traktować match ACL jako filtr portu.\n\n**Sprawdzenie I:** Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\n**Zgłoszenie II:** Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Umieścić wyjątek hosta przed ogólną regułą, zachowując zakres reszty.\n\n**Sprawdzenie II:** Host używa B, a pozostałe adresy /24 nadal A.\n\n**Zależności:** Deny w ACL dopasowania nie jest automatycznie odrzuceniem pakietu przez interfejs. Kolejność sekwencji route-map wpływa na zastosowaną politykę.",
+      "card_id": "encor.pbr.practice.compare-08.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Host używa B, a pozostałe adresy /24 nadal A.\n\nII — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Pakiet nie pasuje do tej sekwencji PBR. Zgłoszenie II: Ogólna sekwencja przechwytuje hosta przed wyjątkiem.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\nII — Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Route-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów. Dla II: Host używa B, a pozostałe adresy /24 nadal A.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\nII — Host używa B, a pozostałe adresy /24 nadal A.",
+          "feedback_md": "**Zgłoszenie I:** Pakiet nie pasuje do tej sekwencji PBR. Sprawdzić dalsze sekwencje i zwykły routing zamiast traktować match ACL jako filtr portu.\n\n**Sprawdzenie I:** Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\n**Zgłoszenie II:** Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Umieścić wyjątek hosta przed ogólną regułą, zachowując zakres reszty.\n\n**Sprawdzenie II:** Host używa B, a pozostałe adresy /24 nadal A.\n\n**Zależności:** Deny w ACL dopasowania nie jest automatycznie odrzuceniem pakietu przez interfejs. Kolejność sekwencji route-map wpływa na zastosowaną politykę.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Host używa B, a pozostałe adresy /24 nadal A.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Route-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów. Dla I: Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.pbr.practice.compare-09.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPBR działa dla klientów na wejściu Gi0/0, ale ping generowany przez router używa zwykłego routingu.\n\n**Zgłoszenie II**\n\nPBR kieruje ruch przez zapasowego operatora, ale ten nie ma drogi powrotnej do źródła.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Ruch lokalny nie wchodzi przez interfejs objęty tą polityką. Testować rzeczywisty ruch klientów lub osobno zaprojektować local policy.\n\n**Sprawdzenie I:** Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\n**Zgłoszenie II:** Zmiana wyjścia nie zapewniła spójnej komunikacji dwukierunkowej. Zapewnić właściwy routing powrotny i zgodną translację lub ogłaszanie.\n\n**Sprawdzenie II:** Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\n**Zależności:** Interface PBR i lokalna polityka dla ruchu routera są różnymi zakresami. PBR wpływa na wybrany kierunek i nie konfiguruje automatycznie odpowiedzi.",
+      "card_id": "encor.pbr.practice.compare-09.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\nII — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Ruch lokalny nie wchodzi przez interfejs objęty tą polityką. Zgłoszenie II: Zmiana wyjścia nie zapewniła spójnej komunikacji dwukierunkowej.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\nII — Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Route-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów. Dla II: Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Route-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów. Dla I: Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\nII — Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.",
+          "feedback_md": "**Zgłoszenie I:** Ruch lokalny nie wchodzi przez interfejs objęty tą polityką. Testować rzeczywisty ruch klientów lub osobno zaprojektować local policy.\n\n**Sprawdzenie I:** Pakiety klientów i lokalny test są oceniane w ich właściwych kontekstach.\n\n**Zgłoszenie II:** Zmiana wyjścia nie zapewniła spójnej komunikacji dwukierunkowej. Zapewnić właściwy routing powrotny i zgodną translację lub ogłaszanie.\n\n**Sprawdzenie II:** Odpowiedzi wracają do klienta dla przepływu skierowanego polityką.\n\n**Zależności:** Interface PBR i lokalna polityka dla ruchu routera są różnymi zakresami. PBR wpływa na wybrany kierunek i nie konfiguruje automatycznie odpowiedzi.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.pbr.practice.compare-10.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "encor.pbr.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-pbr.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — PBR — interpretacja polityk routingu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-routing/b-ip-routing/m_iri-pbr-default-nexthop-route.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.d"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRoute-map jest poprawna, lecz brak ip policy route-map na interfejsie wejściowym klientów.\n\n**Zgłoszenie II**\n\nSekwencja 10 permit matchuje całe /24 i ustawia A. Późniejsza sekwencja 20 miała skierować hosta z tego /24 przez B.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Polityka PBR nie jest stosowana do tego ruchu. Przypiąć właściwą politykę do właściwego interfejsu wejściowego.\n\n**Sprawdzenie I:** Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\n**Zgłoszenie II:** Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Umieścić wyjątek hosta przed ogólną regułą, zachowując zakres reszty.\n\n**Sprawdzenie II:** Host używa B, a pozostałe adresy /24 nadal A.\n\n**Zależności:** Definicja polityki nie jest równoznaczna z jej zastosowaniem. Kolejność sekwencji route-map wpływa na zastosowaną politykę.",
+      "card_id": "encor.pbr.practice.compare-10.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Host używa B, a pozostałe adresy /24 nadal A.",
+          "feedback_md": "**Zgłoszenie I:** Polityka PBR nie jest stosowana do tego ruchu. Przypiąć właściwą politykę do właściwego interfejsu wejściowego.\n\n**Sprawdzenie I:** Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\n**Zgłoszenie II:** Ogólna sekwencja przechwytuje hosta przed wyjątkiem. Umieścić wyjątek hosta przed ogólną regułą, zachowując zakres reszty.\n\n**Sprawdzenie II:** Host używa B, a pozostałe adresy /24 nadal A.\n\n**Zależności:** Definicja polityki nie jest równoznaczna z jej zastosowaniem. Kolejność sekwencji route-map wpływa na zastosowaną politykę.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Host używa B, a pozostałe adresy /24 nadal A.\n\nII — Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Polityka PBR nie jest stosowana do tego ruchu. Zgłoszenie II: Ogólna sekwencja przechwytuje hosta przed wyjątkiem.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ruch klienta zwiększa licznik właściwej sekwencji route-map.\n\nII — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: ACL użyta przez match ip address odrzuca badany pakiet, a operator uważa, że PBR go filtruje. Dla II: Host używa B, a pozostałe adresy /24 nadal A.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Pakiet jest obsłużony przez dalszą pasującą politykę lub standardowy routing.\n\nII — Host używa B, a pozostałe adresy /24 nadal A.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: ACL użyta przez match ip address odrzuca badany pakiet, a operator uważa, że PBR go filtruje. Dla I: Ruch klienta zwiększa licznik właściwej sekwencji route-map.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

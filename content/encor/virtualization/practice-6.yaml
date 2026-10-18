@@ -1,0 +1,1059 @@
+{
+  "schema_version": 3,
+  "id": "encor.virtualization.practice-6",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "id": "encor.virtualization.practice.compare-01.2.card",
+      "front_md": "**Zgłoszenie I**\n\nVM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy.\n\n**Zgłoszenie II**\n\nWiele VM współdzieli przeciążone CPU hosta, a wirtualny router ma opóźnienia mimo wolnego portu fizycznego.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wirtualna karta jest przyłączona do niewłaściwego segmentu. Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\n**Sprawdzenie I:** VM osiąga bramę swojego VLAN i jej MAC pojawia się we właściwym segmencie.\n\n**Zgłoszenie II:** Wąskim gardłem są zasoby obliczeniowe hosta. Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\n**Sprawdzenie II:** Maleje oczekiwanie na CPU i poprawia się opóźnienie przy porównywalnym ruchu.\n\n**Zależności:** Wirtualny switch nadal podlega regułom segmentacji L2. Wydajność wirtualnego urządzenia zależy od hypervisora i dostępnych zasobów.",
+      "example": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "id": "encor.virtualization.practice.compare-02.2.card",
+      "front_md": "**Zgłoszenie I**\n\nDwa VTEP mają transport IP, ale hosty mają różne L2 VNI, choć projekt zakłada wspólny segment.\n\n**Zgłoszenie II**\n\nMałe pakiety overlay działają, większe giną na underlay bez zapasu na enkapsulację.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Hosty należą do różnych segmentów overlay. Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\n**Sprawdzenie I:** Oba końce używają oczekiwanego VNI i uzyskują właściwą łączność L2.\n\n**Zgłoszenie II:** MTU transportu nie uwzględnia narzutu VXLAN. Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\n**Sprawdzenie II:** Test dużych pakietów overlay przechodzi na całej drodze między VTEP.\n\n**Zależności:** VNI identyfikuje segment overlay; samo IP między VTEP nie łączy segmentów. Overlay zależy od parametrów sieci transportowej.",
+      "example": "I — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\nII — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "id": "encor.virtualization.practice.compare-03.2.card",
+      "front_md": "**Zgłoszenie I**\n\nHost zachowuje EID po zmianie miejsca, ale jego bieżąca lokalizacja jest opisana innym RLOC.\n\n**Zgłoszenie II**\n\nOperator traktuje snapshot VM na tym samym uszkodzonym datastore jako jedyną kopię awaryjną.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Tożsamość endpointu jest rozdzielona od lokalizacji routowanej. Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\n**Sprawdzenie I:** Mapa wskazuje nową lokalizację, zachowując identyfikator endpointu.\n\n**Zgłoszenie II:** Snapshot współdzieli domenę awarii z oryginalnymi danymi. Zapewnić niezależny backup i przetestować odtworzenie.\n\n**Sprawdzenie II:** Odtworzenie działa także po utracie pierwotnego datastore.\n\n**Zależności:** LISP rozdziela identyfikację endpointu i lokalizację w sieci. Snapshot nie zastępuje niezależnej kopii i planu odzyskiwania.",
+      "example": "I — Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\nII — Zapewnić niezależny backup i przetestować odtworzenie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "id": "encor.virtualization.practice.compare-04.2.card",
+      "front_md": "**Zgłoszenie I**\n\nVM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy.\n\n**Zgłoszenie II**\n\nDwa VTEP mają transport IP, ale hosty mają różne L2 VNI, choć projekt zakłada wspólny segment.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wirtualna karta jest przyłączona do niewłaściwego segmentu. Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\n**Sprawdzenie I:** VM osiąga bramę swojego VLAN i jej MAC pojawia się we właściwym segmencie.\n\n**Zgłoszenie II:** Hosty należą do różnych segmentów overlay. Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\n**Sprawdzenie II:** Oba końce używają oczekiwanego VNI i uzyskują właściwą łączność L2.\n\n**Zależności:** Wirtualny switch nadal podlega regułom segmentacji L2. VNI identyfikuje segment overlay; samo IP między VTEP nie łączy segmentów.",
+      "example": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "id": "encor.virtualization.practice.compare-05.2.card",
+      "front_md": "**Zgłoszenie I**\n\nWiele VM współdzieli przeciążone CPU hosta, a wirtualny router ma opóźnienia mimo wolnego portu fizycznego.\n\n**Zgłoszenie II**\n\nHost zachowuje EID po zmianie miejsca, ale jego bieżąca lokalizacja jest opisana innym RLOC.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wąskim gardłem są zasoby obliczeniowe hosta. Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\n**Sprawdzenie I:** Maleje oczekiwanie na CPU i poprawia się opóźnienie przy porównywalnym ruchu.\n\n**Zgłoszenie II:** Tożsamość endpointu jest rozdzielona od lokalizacji routowanej. Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\n**Sprawdzenie II:** Mapa wskazuje nową lokalizację, zachowując identyfikator endpointu.\n\n**Zależności:** Wydajność wirtualnego urządzenia zależy od hypervisora i dostępnych zasobów. LISP rozdziela identyfikację endpointu i lokalizację w sieci.",
+      "example": "I — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\nII — Sprawdzić aktualne mapowanie EID do właściwego RLOC."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "id": "encor.virtualization.practice.compare-06.2.card",
+      "front_md": "**Zgłoszenie I**\n\nMałe pakiety overlay działają, większe giną na underlay bez zapasu na enkapsulację.\n\n**Zgłoszenie II**\n\nOperator traktuje snapshot VM na tym samym uszkodzonym datastore jako jedyną kopię awaryjną.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** MTU transportu nie uwzględnia narzutu VXLAN. Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\n**Sprawdzenie I:** Test dużych pakietów overlay przechodzi na całej drodze między VTEP.\n\n**Zgłoszenie II:** Snapshot współdzieli domenę awarii z oryginalnymi danymi. Zapewnić niezależny backup i przetestować odtworzenie.\n\n**Sprawdzenie II:** Odtworzenie działa także po utracie pierwotnego datastore.\n\n**Zależności:** Overlay zależy od parametrów sieci transportowej. Snapshot nie zastępuje niezależnej kopii i planu odzyskiwania.",
+      "example": "I — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\nII — Zapewnić niezależny backup i przetestować odtworzenie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "id": "encor.virtualization.practice.compare-07.2.card",
+      "front_md": "**Zgłoszenie I**\n\nVM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy.\n\n**Zgłoszenie II**\n\nOperator traktuje snapshot VM na tym samym uszkodzonym datastore jako jedyną kopię awaryjną.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wirtualna karta jest przyłączona do niewłaściwego segmentu. Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\n**Sprawdzenie I:** VM osiąga bramę swojego VLAN i jej MAC pojawia się we właściwym segmencie.\n\n**Zgłoszenie II:** Snapshot współdzieli domenę awarii z oryginalnymi danymi. Zapewnić niezależny backup i przetestować odtworzenie.\n\n**Sprawdzenie II:** Odtworzenie działa także po utracie pierwotnego datastore.\n\n**Zależności:** Wirtualny switch nadal podlega regułom segmentacji L2. Snapshot nie zastępuje niezależnej kopii i planu odzyskiwania.",
+      "example": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zapewnić niezależny backup i przetestować odtworzenie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "id": "encor.virtualization.practice.compare-08.2.card",
+      "front_md": "**Zgłoszenie I**\n\nWiele VM współdzieli przeciążone CPU hosta, a wirtualny router ma opóźnienia mimo wolnego portu fizycznego.\n\n**Zgłoszenie II**\n\nMałe pakiety overlay działają, większe giną na underlay bez zapasu na enkapsulację.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wąskim gardłem są zasoby obliczeniowe hosta. Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\n**Sprawdzenie I:** Maleje oczekiwanie na CPU i poprawia się opóźnienie przy porównywalnym ruchu.\n\n**Zgłoszenie II:** MTU transportu nie uwzględnia narzutu VXLAN. Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\n**Sprawdzenie II:** Test dużych pakietów overlay przechodzi na całej drodze między VTEP.\n\n**Zależności:** Wydajność wirtualnego urządzenia zależy od hypervisora i dostępnych zasobów. Overlay zależy od parametrów sieci transportowej.",
+      "example": "I — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\nII — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "id": "encor.virtualization.practice.compare-09.2.card",
+      "front_md": "**Zgłoszenie I**\n\nDwa VTEP mają transport IP, ale hosty mają różne L2 VNI, choć projekt zakłada wspólny segment.\n\n**Zgłoszenie II**\n\nHost zachowuje EID po zmianie miejsca, ale jego bieżąca lokalizacja jest opisana innym RLOC.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Hosty należą do różnych segmentów overlay. Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\n**Sprawdzenie I:** Oba końce używają oczekiwanego VNI i uzyskują właściwą łączność L2.\n\n**Zgłoszenie II:** Tożsamość endpointu jest rozdzielona od lokalizacji routowanej. Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\n**Sprawdzenie II:** Mapa wskazuje nową lokalizację, zachowując identyfikator endpointu.\n\n**Zależności:** VNI identyfikuje segment overlay; samo IP między VTEP nie łączy segmentów. LISP rozdziela identyfikację endpointu i lokalizację w sieci.",
+      "example": "I — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\nII — Sprawdzić aktualne mapowanie EID do właściwego RLOC."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "id": "encor.virtualization.practice.compare-10.2.card",
+      "front_md": "**Zgłoszenie I**\n\nVM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy.\n\n**Zgłoszenie II**\n\nMałe pakiety overlay działają, większe giną na underlay bez zapasu na enkapsulację.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wirtualna karta jest przyłączona do niewłaściwego segmentu. Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\n**Sprawdzenie I:** VM osiąga bramę swojego VLAN i jej MAC pojawia się we właściwym segmencie.\n\n**Zgłoszenie II:** MTU transportu nie uwzględnia narzutu VXLAN. Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\n**Sprawdzenie II:** Test dużych pakietów overlay przechodzi na całej drodze między VTEP.\n\n**Zależności:** Wirtualny switch nadal podlega regułom segmentacji L2. Overlay zależy od parametrów sieci transportowej.",
+      "example": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.virtualization.practice.compare-01.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nVM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy.\n\n**Zgłoszenie II**\n\nWiele VM współdzieli przeciążone CPU hosta, a wirtualny router ma opóźnienia mimo wolnego portu fizycznego.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wirtualna karta jest przyłączona do niewłaściwego segmentu. Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\n**Sprawdzenie I:** VM osiąga bramę swojego VLAN i jej MAC pojawia się we właściwym segmencie.\n\n**Zgłoszenie II:** Wąskim gardłem są zasoby obliczeniowe hosta. Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\n**Sprawdzenie II:** Maleje oczekiwanie na CPU i poprawia się opóźnienie przy porównywalnym ruchu.\n\n**Zależności:** Wirtualny switch nadal podlega regułom segmentacji L2. Wydajność wirtualnego urządzenia zależy od hypervisora i dostępnych zasobów.",
+      "card_id": "encor.virtualization.practice.compare-01.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\nII — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wirtualna karta jest przyłączona do niewłaściwego segmentu. Zgłoszenie II: Wąskim gardłem są zasoby obliczeniowe hosta.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Dwa VTEP mają transport IP, ale hosty mają różne L2 VNI, choć projekt zakłada wspólny segment. Dla II: Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.",
+          "feedback_md": "**Zgłoszenie I:** Wirtualna karta jest przyłączona do niewłaściwego segmentu. Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\n**Sprawdzenie I:** VM osiąga bramę swojego VLAN i jej MAC pojawia się we właściwym segmencie.\n\n**Zgłoszenie II:** Wąskim gardłem są zasoby obliczeniowe hosta. Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\n**Sprawdzenie II:** Maleje oczekiwanie na CPU i poprawia się opóźnienie przy porównywalnym ruchu.\n\n**Zależności:** Wirtualny switch nadal podlega regułom segmentacji L2. Wydajność wirtualnego urządzenia zależy od hypervisora i dostępnych zasobów.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\nII — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Dwa VTEP mają transport IP, ale hosty mają różne L2 VNI, choć projekt zakłada wspólny segment. Dla I: Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.virtualization.practice.compare-02.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDwa VTEP mają transport IP, ale hosty mają różne L2 VNI, choć projekt zakłada wspólny segment.\n\n**Zgłoszenie II**\n\nMałe pakiety overlay działają, większe giną na underlay bez zapasu na enkapsulację.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Hosty należą do różnych segmentów overlay. Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\n**Sprawdzenie I:** Oba końce używają oczekiwanego VNI i uzyskują właściwą łączność L2.\n\n**Zgłoszenie II:** MTU transportu nie uwzględnia narzutu VXLAN. Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\n**Sprawdzenie II:** Test dużych pakietów overlay przechodzi na całej drodze między VTEP.\n\n**Zależności:** VNI identyfikuje segment overlay; samo IP między VTEP nie łączy segmentów. Overlay zależy od parametrów sieci transportowej.",
+      "card_id": "encor.virtualization.practice.compare-02.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\nII — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Hosty należą do różnych segmentów overlay. Zgłoszenie II: MTU transportu nie uwzględnia narzutu VXLAN.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\nII — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: VM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy. Dla II: Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: VM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy. Dla I: Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\nII — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.",
+          "feedback_md": "**Zgłoszenie I:** Hosty należą do różnych segmentów overlay. Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\n**Sprawdzenie I:** Oba końce używają oczekiwanego VNI i uzyskują właściwą łączność L2.\n\n**Zgłoszenie II:** MTU transportu nie uwzględnia narzutu VXLAN. Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\n**Sprawdzenie II:** Test dużych pakietów overlay przechodzi na całej drodze między VTEP.\n\n**Zależności:** VNI identyfikuje segment overlay; samo IP między VTEP nie łączy segmentów. Overlay zależy od parametrów sieci transportowej.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.virtualization.practice.compare-03.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost zachowuje EID po zmianie miejsca, ale jego bieżąca lokalizacja jest opisana innym RLOC.\n\n**Zgłoszenie II**\n\nOperator traktuje snapshot VM na tym samym uszkodzonym datastore jako jedyną kopię awaryjną.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Tożsamość endpointu jest rozdzielona od lokalizacji routowanej. Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\n**Sprawdzenie I:** Mapa wskazuje nową lokalizację, zachowując identyfikator endpointu.\n\n**Zgłoszenie II:** Snapshot współdzieli domenę awarii z oryginalnymi danymi. Zapewnić niezależny backup i przetestować odtworzenie.\n\n**Sprawdzenie II:** Odtworzenie działa także po utracie pierwotnego datastore.\n\n**Zależności:** LISP rozdziela identyfikację endpointu i lokalizację w sieci. Snapshot nie zastępuje niezależnej kopii i planu odzyskiwania.",
+      "card_id": "encor.virtualization.practice.compare-03.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\nII — Zapewnić niezależny backup i przetestować odtworzenie.",
+          "feedback_md": "**Zgłoszenie I:** Tożsamość endpointu jest rozdzielona od lokalizacji routowanej. Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\n**Sprawdzenie I:** Mapa wskazuje nową lokalizację, zachowując identyfikator endpointu.\n\n**Zgłoszenie II:** Snapshot współdzieli domenę awarii z oryginalnymi danymi. Zapewnić niezależny backup i przetestować odtworzenie.\n\n**Sprawdzenie II:** Odtworzenie działa także po utracie pierwotnego datastore.\n\n**Zależności:** LISP rozdziela identyfikację endpointu i lokalizację w sieci. Snapshot nie zastępuje niezależnej kopii i planu odzyskiwania.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zapewnić niezależny backup i przetestować odtworzenie.\n\nII — Sprawdzić aktualne mapowanie EID do właściwego RLOC.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Tożsamość endpointu jest rozdzielona od lokalizacji routowanej. Zgłoszenie II: Snapshot współdzieli domenę awarii z oryginalnymi danymi.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\nII — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: VM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy. Dla II: Zapewnić niezależny backup i przetestować odtworzenie.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zapewnić niezależny backup i przetestować odtworzenie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: VM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy. Dla I: Sprawdzić aktualne mapowanie EID do właściwego RLOC.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.virtualization.practice.compare-04.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nVM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy.\n\n**Zgłoszenie II**\n\nDwa VTEP mają transport IP, ale hosty mają różne L2 VNI, choć projekt zakłada wspólny segment.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wirtualna karta jest przyłączona do niewłaściwego segmentu. Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\n**Sprawdzenie I:** VM osiąga bramę swojego VLAN i jej MAC pojawia się we właściwym segmencie.\n\n**Zgłoszenie II:** Hosty należą do różnych segmentów overlay. Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\n**Sprawdzenie II:** Oba końce używają oczekiwanego VNI i uzyskują właściwą łączność L2.\n\n**Zależności:** Wirtualny switch nadal podlega regułom segmentacji L2. VNI identyfikuje segment overlay; samo IP między VTEP nie łączy segmentów.",
+      "card_id": "encor.virtualization.practice.compare-04.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\nII — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wirtualna karta jest przyłączona do niewłaściwego segmentu. Zgłoszenie II: Hosty należą do różnych segmentów overlay.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.",
+          "feedback_md": "**Zgłoszenie I:** Wirtualna karta jest przyłączona do niewłaściwego segmentu. Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\n**Sprawdzenie I:** VM osiąga bramę swojego VLAN i jej MAC pojawia się we właściwym segmencie.\n\n**Zgłoszenie II:** Hosty należą do różnych segmentów overlay. Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\n**Sprawdzenie II:** Oba końce używają oczekiwanego VNI i uzyskują właściwą łączność L2.\n\n**Zależności:** Wirtualny switch nadal podlega regułom segmentacji L2. VNI identyfikuje segment overlay; samo IP między VTEP nie łączy segmentów.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Wiele VM współdzieli przeciążone CPU hosta, a wirtualny router ma opóźnienia mimo wolnego portu fizycznego. Dla II: Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\nII — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Wiele VM współdzieli przeciążone CPU hosta, a wirtualny router ma opóźnienia mimo wolnego portu fizycznego. Dla I: Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.virtualization.practice.compare-05.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nWiele VM współdzieli przeciążone CPU hosta, a wirtualny router ma opóźnienia mimo wolnego portu fizycznego.\n\n**Zgłoszenie II**\n\nHost zachowuje EID po zmianie miejsca, ale jego bieżąca lokalizacja jest opisana innym RLOC.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wąskim gardłem są zasoby obliczeniowe hosta. Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\n**Sprawdzenie I:** Maleje oczekiwanie na CPU i poprawia się opóźnienie przy porównywalnym ruchu.\n\n**Zgłoszenie II:** Tożsamość endpointu jest rozdzielona od lokalizacji routowanej. Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\n**Sprawdzenie II:** Mapa wskazuje nową lokalizację, zachowując identyfikator endpointu.\n\n**Zależności:** Wydajność wirtualnego urządzenia zależy od hypervisora i dostępnych zasobów. LISP rozdziela identyfikację endpointu i lokalizację w sieci.",
+      "card_id": "encor.virtualization.practice.compare-05.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\nII — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wąskim gardłem są zasoby obliczeniowe hosta. Zgłoszenie II: Tożsamość endpointu jest rozdzielona od lokalizacji routowanej.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\nII — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: VM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy. Dla II: Sprawdzić aktualne mapowanie EID do właściwego RLOC.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\nII — Sprawdzić aktualne mapowanie EID do właściwego RLOC.",
+          "feedback_md": "**Zgłoszenie I:** Wąskim gardłem są zasoby obliczeniowe hosta. Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\n**Sprawdzenie I:** Maleje oczekiwanie na CPU i poprawia się opóźnienie przy porównywalnym ruchu.\n\n**Zgłoszenie II:** Tożsamość endpointu jest rozdzielona od lokalizacji routowanej. Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\n**Sprawdzenie II:** Mapa wskazuje nową lokalizację, zachowując identyfikator endpointu.\n\n**Zależności:** Wydajność wirtualnego urządzenia zależy od hypervisora i dostępnych zasobów. LISP rozdziela identyfikację endpointu i lokalizację w sieci.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Sprawdzić aktualne mapowanie EID do właściwego RLOC.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: VM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy. Dla I: Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.virtualization.practice.compare-06.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nMałe pakiety overlay działają, większe giną na underlay bez zapasu na enkapsulację.\n\n**Zgłoszenie II**\n\nOperator traktuje snapshot VM na tym samym uszkodzonym datastore jako jedyną kopię awaryjną.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** MTU transportu nie uwzględnia narzutu VXLAN. Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\n**Sprawdzenie I:** Test dużych pakietów overlay przechodzi na całej drodze między VTEP.\n\n**Zgłoszenie II:** Snapshot współdzieli domenę awarii z oryginalnymi danymi. Zapewnić niezależny backup i przetestować odtworzenie.\n\n**Sprawdzenie II:** Odtworzenie działa także po utracie pierwotnego datastore.\n\n**Zależności:** Overlay zależy od parametrów sieci transportowej. Snapshot nie zastępuje niezależnej kopii i planu odzyskiwania.",
+      "card_id": "encor.virtualization.practice.compare-06.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zapewnić niezależny backup i przetestować odtworzenie.\n\nII — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: MTU transportu nie uwzględnia narzutu VXLAN. Zgłoszenie II: Snapshot współdzieli domenę awarii z oryginalnymi danymi.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\nII — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: VM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy. Dla II: Zapewnić niezależny backup i przetestować odtworzenie.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zapewnić niezależny backup i przetestować odtworzenie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: VM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy. Dla I: Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\nII — Zapewnić niezależny backup i przetestować odtworzenie.",
+          "feedback_md": "**Zgłoszenie I:** MTU transportu nie uwzględnia narzutu VXLAN. Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\n**Sprawdzenie I:** Test dużych pakietów overlay przechodzi na całej drodze między VTEP.\n\n**Zgłoszenie II:** Snapshot współdzieli domenę awarii z oryginalnymi danymi. Zapewnić niezależny backup i przetestować odtworzenie.\n\n**Sprawdzenie II:** Odtworzenie działa także po utracie pierwotnego datastore.\n\n**Zależności:** Overlay zależy od parametrów sieci transportowej. Snapshot nie zastępuje niezależnej kopii i planu odzyskiwania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.virtualization.practice.compare-07.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nVM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy.\n\n**Zgłoszenie II**\n\nOperator traktuje snapshot VM na tym samym uszkodzonym datastore jako jedyną kopię awaryjną.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wirtualna karta jest przyłączona do niewłaściwego segmentu. Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\n**Sprawdzenie I:** VM osiąga bramę swojego VLAN i jej MAC pojawia się we właściwym segmencie.\n\n**Zgłoszenie II:** Snapshot współdzieli domenę awarii z oryginalnymi danymi. Zapewnić niezależny backup i przetestować odtworzenie.\n\n**Sprawdzenie II:** Odtworzenie działa także po utracie pierwotnego datastore.\n\n**Zależności:** Wirtualny switch nadal podlega regułom segmentacji L2. Snapshot nie zastępuje niezależnej kopii i planu odzyskiwania.",
+      "card_id": "encor.virtualization.practice.compare-07.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zapewnić niezależny backup i przetestować odtworzenie.",
+          "feedback_md": "**Zgłoszenie I:** Wirtualna karta jest przyłączona do niewłaściwego segmentu. Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\n**Sprawdzenie I:** VM osiąga bramę swojego VLAN i jej MAC pojawia się we właściwym segmencie.\n\n**Zgłoszenie II:** Snapshot współdzieli domenę awarii z oryginalnymi danymi. Zapewnić niezależny backup i przetestować odtworzenie.\n\n**Sprawdzenie II:** Odtworzenie działa także po utracie pierwotnego datastore.\n\n**Zależności:** Wirtualny switch nadal podlega regułom segmentacji L2. Snapshot nie zastępuje niezależnej kopii i planu odzyskiwania.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zapewnić niezależny backup i przetestować odtworzenie.\n\nII — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wirtualna karta jest przyłączona do niewłaściwego segmentu. Zgłoszenie II: Snapshot współdzieli domenę awarii z oryginalnymi danymi.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Wiele VM współdzieli przeciążone CPU hosta, a wirtualny router ma opóźnienia mimo wolnego portu fizycznego. Dla II: Zapewnić niezależny backup i przetestować odtworzenie.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\nII — Zapewnić niezależny backup i przetestować odtworzenie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Wiele VM współdzieli przeciążone CPU hosta, a wirtualny router ma opóźnienia mimo wolnego portu fizycznego. Dla I: Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.virtualization.practice.compare-08.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nWiele VM współdzieli przeciążone CPU hosta, a wirtualny router ma opóźnienia mimo wolnego portu fizycznego.\n\n**Zgłoszenie II**\n\nMałe pakiety overlay działają, większe giną na underlay bez zapasu na enkapsulację.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wąskim gardłem są zasoby obliczeniowe hosta. Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\n**Sprawdzenie I:** Maleje oczekiwanie na CPU i poprawia się opóźnienie przy porównywalnym ruchu.\n\n**Zgłoszenie II:** MTU transportu nie uwzględnia narzutu VXLAN. Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\n**Sprawdzenie II:** Test dużych pakietów overlay przechodzi na całej drodze między VTEP.\n\n**Zależności:** Wydajność wirtualnego urządzenia zależy od hypervisora i dostępnych zasobów. Overlay zależy od parametrów sieci transportowej.",
+      "card_id": "encor.virtualization.practice.compare-08.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\nII — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wąskim gardłem są zasoby obliczeniowe hosta. Zgłoszenie II: MTU transportu nie uwzględnia narzutu VXLAN.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\nII — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.",
+          "feedback_md": "**Zgłoszenie I:** Wąskim gardłem są zasoby obliczeniowe hosta. Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\n**Sprawdzenie I:** Maleje oczekiwanie na CPU i poprawia się opóźnienie przy porównywalnym ruchu.\n\n**Zgłoszenie II:** MTU transportu nie uwzględnia narzutu VXLAN. Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\n**Sprawdzenie II:** Test dużych pakietów overlay przechodzi na całej drodze między VTEP.\n\n**Zależności:** Wydajność wirtualnego urządzenia zależy od hypervisora i dostępnych zasobów. Overlay zależy od parametrów sieci transportowej.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\nII — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: VM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy. Dla II: Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: VM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy. Dla I: Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.virtualization.practice.compare-09.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDwa VTEP mają transport IP, ale hosty mają różne L2 VNI, choć projekt zakłada wspólny segment.\n\n**Zgłoszenie II**\n\nHost zachowuje EID po zmianie miejsca, ale jego bieżąca lokalizacja jest opisana innym RLOC.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Hosty należą do różnych segmentów overlay. Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\n**Sprawdzenie I:** Oba końce używają oczekiwanego VNI i uzyskują właściwą łączność L2.\n\n**Zgłoszenie II:** Tożsamość endpointu jest rozdzielona od lokalizacji routowanej. Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\n**Sprawdzenie II:** Mapa wskazuje nową lokalizację, zachowując identyfikator endpointu.\n\n**Zależności:** VNI identyfikuje segment overlay; samo IP między VTEP nie łączy segmentów. LISP rozdziela identyfikację endpointu i lokalizację w sieci.",
+      "card_id": "encor.virtualization.practice.compare-09.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\nII — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Hosty należą do różnych segmentów overlay. Zgłoszenie II: Tożsamość endpointu jest rozdzielona od lokalizacji routowanej.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\nII — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: VM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy. Dla II: Sprawdzić aktualne mapowanie EID do właściwego RLOC.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\nII — Sprawdzić aktualne mapowanie EID do właściwego RLOC.",
+          "feedback_md": "**Zgłoszenie I:** Hosty należą do różnych segmentów overlay. Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.\n\n**Sprawdzenie I:** Oba końce używają oczekiwanego VNI i uzyskują właściwą łączność L2.\n\n**Zgłoszenie II:** Tożsamość endpointu jest rozdzielona od lokalizacji routowanej. Sprawdzić aktualne mapowanie EID do właściwego RLOC.\n\n**Sprawdzenie II:** Mapa wskazuje nową lokalizację, zachowując identyfikator endpointu.\n\n**Zależności:** VNI identyfikuje segment overlay; samo IP między VTEP nie łączy segmentów. LISP rozdziela identyfikację endpointu i lokalizację w sieci.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Sprawdzić aktualne mapowanie EID do właściwego RLOC.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: VM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy. Dla I: Uzgodnić właściwe mapowanie VLAN–VNI zgodnie z projektem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.virtualization.practice.compare-10.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — działanie",
+      "skills": [
+        "encor.virtualization.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/csr1000/software/configuration/b_CSR1000v_Configuration_Guide/b_CSR1000v_Configuration_Guide_chapter_00.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/voice_ip_comm/uc_system/virtualization/virtualization-qos-designs-considerations.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://developer.cisco.com/docs/sonic/vxlan-evpn/"
+        },
+        {
+          "title": "Dokumentacja Cisco — wirtualizacja",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_irl-overview.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.1"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.b"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.3.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nVM ma poprawny IP, lecz jej port group należy do innego VLAN niż sieć bramy.\n\n**Zgłoszenie II**\n\nMałe pakiety overlay działają, większe giną na underlay bez zapasu na enkapsulację.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wirtualna karta jest przyłączona do niewłaściwego segmentu. Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\n**Sprawdzenie I:** VM osiąga bramę swojego VLAN i jej MAC pojawia się we właściwym segmencie.\n\n**Zgłoszenie II:** MTU transportu nie uwzględnia narzutu VXLAN. Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\n**Sprawdzenie II:** Test dużych pakietów overlay przechodzi na całej drodze między VTEP.\n\n**Zależności:** Wirtualny switch nadal podlega regułom segmentacji L2. Overlay zależy od parametrów sieci transportowej.",
+      "card_id": "encor.virtualization.practice.compare-10.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\nII — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wirtualna karta jest przyłączona do niewłaściwego segmentu. Zgłoszenie II: MTU transportu nie uwzględnia narzutu VXLAN.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Wiele VM współdzieli przeciążone CPU hosta, a wirtualny router ma opóźnienia mimo wolnego portu fizycznego. Dla II: Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zmniejszyć konkurencję zasobów lub przydzielić wymagane zasoby routerowi.\n\nII — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Wiele VM współdzieli przeciążone CPU hosta, a wirtualny router ma opóźnienia mimo wolnego portu fizycznego. Dla I: Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\nII — Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.",
+          "feedback_md": "**Zgłoszenie I:** Wirtualna karta jest przyłączona do niewłaściwego segmentu. Poprawić przypisanie port group i transport VLAN na uplinku hypervisora.\n\n**Sprawdzenie I:** VM osiąga bramę swojego VLAN i jej MAC pojawia się we właściwym segmencie.\n\n**Zgłoszenie II:** MTU transportu nie uwzględnia narzutu VXLAN. Zapewnić spójne MTU underlay wystarczające dla używanego payloadu i enkapsulacji.\n\n**Sprawdzenie II:** Test dużych pakietów overlay przechodzi na całej drodze między VTEP.\n\n**Zależności:** Wirtualny switch nadal podlega regułom segmentacji L2. Overlay zależy od parametrów sieci transportowej.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

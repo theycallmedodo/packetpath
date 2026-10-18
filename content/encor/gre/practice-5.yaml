@@ -1,0 +1,719 @@
+{
+  "schema_version": 3,
+  "id": "encor.gre.practice-5",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.practice.compare-01.1.card",
+      "front_md": "**Zgłoszenie I**\n\nAdres tunnel destination nie jest osiągalny przez sieć transportową.\n\n**Zgłoszenie II**\n\nTrasa do tunnel destination wskazuje sam Tunnel0 zamiast underlay.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brakuje osiągalności underlay dla końca tunelu. Przywrócić trasę transportową do tunnel destination.\n\n**Sprawdzenie I:** Cel tunelu jest osiągalny poza tunelem przez fizyczny transport.\n\n**Zgłoszenie II:** Tunel próbuje osiągnąć własny koniec przez siebie. Ustawić stabilną drogę do końca tunelu przez sieć transportową.\n\n**Sprawdzenie II:** Lookup destination nie wskazuje Tunnel0, a znikają objawy recursive routing.\n\n**Zależności:** Tunel GRE zależy od routingu jego zewnętrznych adresów. Droga zewnętrznej enkapsulacji nie może zależeć od tego samego tunelu.",
+      "example": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Tunel próbuje osiągnąć własny koniec przez siebie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.practice.compare-02.1.card",
+      "front_md": "**Zgłoszenie I**\n\nICMP między końcami działa, ale firewall odrzuca IP protocol 47.\n\n**Zgłoszenie II**\n\nMały ping przez GRE działa, duże pakiety z DF nie. Droga transportowa ma MTU 1500, a enkapsulacja dodaje narzut.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Filtr blokuje protokół GRE mimo dostępności ping. Dopuścić wymagany GRE między zatwierdzonymi końcami.\n\n**Sprawdzenie I:** Pakiety IP protocol 47 docierają w obu kierunkach.\n\n**Zgłoszenie II:** Rozmiar po enkapsulacji przekracza MTU transportu. Dopasować MTU tunelu i obsługę PMTUD, ewentualnie TCP MSS zgodnie z ruchem.\n\n**Sprawdzenie II:** Test rozmiaru z DF określa działający limit i aplikacje nie zawieszają się na dużych segmentach.\n\n**Zależności:** GRE to protokół IP 47, a nie port TCP lub UDP 47. Enkapsulacja zmniejsza przestrzeń dostępną dla pakietu wewnętrznego.",
+      "example": "I — Filtr blokuje protokół GRE mimo dostępności ping.\n\nII — Rozmiar po enkapsulacji przekracza MTU transportu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.practice.compare-03.1.card",
+      "front_md": "**Zgłoszenie I**\n\nPrzechwycenie underlay ujawnia treść pakietów wewnątrz zwykłego GRE.\n\n**Zgłoszenie II**\n\nTunnel0 pokazuje up/up bez keepalive, lecz zdalny endpoint został wyłączony.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Sam GRE nie zapewnia poufności danych. Dodać odpowiednią ochronę kryptograficzną, jeśli wymaga tego polityka.\n\n**Sprawdzenie I:** Przechwycenie transportu nie ujawnia jawnego payloadu chronionej komunikacji.\n\n**Zgłoszenie II:** Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca. Wykonać test tunelu i sprawdzić transport oraz zdalną konfigurację.\n\n**Sprawdzenie II:** Rzeczywisty test ruchu potwierdza lub wyklucza łączność przez tunel.\n\n**Zależności:** Enkapsulacja i szyfrowanie to odrębne funkcje. Stan interfejsu GRE bez mechanizmu kontroli nie jest dowodem end-to-end.",
+      "example": "I — Sam GRE nie zapewnia poufności danych.\n\nII — Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.practice.compare-04.1.card",
+      "front_md": "**Zgłoszenie I**\n\nAdres tunnel destination nie jest osiągalny przez sieć transportową.\n\n**Zgłoszenie II**\n\nICMP między końcami działa, ale firewall odrzuca IP protocol 47.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brakuje osiągalności underlay dla końca tunelu. Przywrócić trasę transportową do tunnel destination.\n\n**Sprawdzenie I:** Cel tunelu jest osiągalny poza tunelem przez fizyczny transport.\n\n**Zgłoszenie II:** Filtr blokuje protokół GRE mimo dostępności ping. Dopuścić wymagany GRE między zatwierdzonymi końcami.\n\n**Sprawdzenie II:** Pakiety IP protocol 47 docierają w obu kierunkach.\n\n**Zależności:** Tunel GRE zależy od routingu jego zewnętrznych adresów. GRE to protokół IP 47, a nie port TCP lub UDP 47.",
+      "example": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Filtr blokuje protokół GRE mimo dostępności ping."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.practice.compare-05.1.card",
+      "front_md": "**Zgłoszenie I**\n\nTrasa do tunnel destination wskazuje sam Tunnel0 zamiast underlay.\n\n**Zgłoszenie II**\n\nPrzechwycenie underlay ujawnia treść pakietów wewnątrz zwykłego GRE.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Tunel próbuje osiągnąć własny koniec przez siebie. Ustawić stabilną drogę do końca tunelu przez sieć transportową.\n\n**Sprawdzenie I:** Lookup destination nie wskazuje Tunnel0, a znikają objawy recursive routing.\n\n**Zgłoszenie II:** Sam GRE nie zapewnia poufności danych. Dodać odpowiednią ochronę kryptograficzną, jeśli wymaga tego polityka.\n\n**Sprawdzenie II:** Przechwycenie transportu nie ujawnia jawnego payloadu chronionej komunikacji.\n\n**Zależności:** Droga zewnętrznej enkapsulacji nie może zależeć od tego samego tunelu. Enkapsulacja i szyfrowanie to odrębne funkcje.",
+      "example": "I — Tunel próbuje osiągnąć własny koniec przez siebie.\n\nII — Sam GRE nie zapewnia poufności danych."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.practice.compare-06.1.card",
+      "front_md": "**Zgłoszenie I**\n\nMały ping przez GRE działa, duże pakiety z DF nie. Droga transportowa ma MTU 1500, a enkapsulacja dodaje narzut.\n\n**Zgłoszenie II**\n\nTunnel0 pokazuje up/up bez keepalive, lecz zdalny endpoint został wyłączony.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Rozmiar po enkapsulacji przekracza MTU transportu. Dopasować MTU tunelu i obsługę PMTUD, ewentualnie TCP MSS zgodnie z ruchem.\n\n**Sprawdzenie I:** Test rozmiaru z DF określa działający limit i aplikacje nie zawieszają się na dużych segmentach.\n\n**Zgłoszenie II:** Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca. Wykonać test tunelu i sprawdzić transport oraz zdalną konfigurację.\n\n**Sprawdzenie II:** Rzeczywisty test ruchu potwierdza lub wyklucza łączność przez tunel.\n\n**Zależności:** Enkapsulacja zmniejsza przestrzeń dostępną dla pakietu wewnętrznego. Stan interfejsu GRE bez mechanizmu kontroli nie jest dowodem end-to-end.",
+      "example": "I — Rozmiar po enkapsulacji przekracza MTU transportu.\n\nII — Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.practice.compare-07.1.card",
+      "front_md": "**Zgłoszenie I**\n\nAdres tunnel destination nie jest osiągalny przez sieć transportową.\n\n**Zgłoszenie II**\n\nTunnel0 pokazuje up/up bez keepalive, lecz zdalny endpoint został wyłączony.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brakuje osiągalności underlay dla końca tunelu. Przywrócić trasę transportową do tunnel destination.\n\n**Sprawdzenie I:** Cel tunelu jest osiągalny poza tunelem przez fizyczny transport.\n\n**Zgłoszenie II:** Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca. Wykonać test tunelu i sprawdzić transport oraz zdalną konfigurację.\n\n**Sprawdzenie II:** Rzeczywisty test ruchu potwierdza lub wyklucza łączność przez tunel.\n\n**Zależności:** Tunel GRE zależy od routingu jego zewnętrznych adresów. Stan interfejsu GRE bez mechanizmu kontroli nie jest dowodem end-to-end.",
+      "example": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.practice.compare-08.1.card",
+      "front_md": "**Zgłoszenie I**\n\nTrasa do tunnel destination wskazuje sam Tunnel0 zamiast underlay.\n\n**Zgłoszenie II**\n\nMały ping przez GRE działa, duże pakiety z DF nie. Droga transportowa ma MTU 1500, a enkapsulacja dodaje narzut.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Tunel próbuje osiągnąć własny koniec przez siebie. Ustawić stabilną drogę do końca tunelu przez sieć transportową.\n\n**Sprawdzenie I:** Lookup destination nie wskazuje Tunnel0, a znikają objawy recursive routing.\n\n**Zgłoszenie II:** Rozmiar po enkapsulacji przekracza MTU transportu. Dopasować MTU tunelu i obsługę PMTUD, ewentualnie TCP MSS zgodnie z ruchem.\n\n**Sprawdzenie II:** Test rozmiaru z DF określa działający limit i aplikacje nie zawieszają się na dużych segmentach.\n\n**Zależności:** Droga zewnętrznej enkapsulacji nie może zależeć od tego samego tunelu. Enkapsulacja zmniejsza przestrzeń dostępną dla pakietu wewnętrznego.",
+      "example": "I — Tunel próbuje osiągnąć własny koniec przez siebie.\n\nII — Rozmiar po enkapsulacji przekracza MTU transportu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.practice.compare-09.1.card",
+      "front_md": "**Zgłoszenie I**\n\nICMP między końcami działa, ale firewall odrzuca IP protocol 47.\n\n**Zgłoszenie II**\n\nPrzechwycenie underlay ujawnia treść pakietów wewnątrz zwykłego GRE.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Filtr blokuje protokół GRE mimo dostępności ping. Dopuścić wymagany GRE między zatwierdzonymi końcami.\n\n**Sprawdzenie I:** Pakiety IP protocol 47 docierają w obu kierunkach.\n\n**Zgłoszenie II:** Sam GRE nie zapewnia poufności danych. Dodać odpowiednią ochronę kryptograficzną, jeśli wymaga tego polityka.\n\n**Sprawdzenie II:** Przechwycenie transportu nie ujawnia jawnego payloadu chronionej komunikacji.\n\n**Zależności:** GRE to protokół IP 47, a nie port TCP lub UDP 47. Enkapsulacja i szyfrowanie to odrębne funkcje.",
+      "example": "I — Filtr blokuje protokół GRE mimo dostępności ping.\n\nII — Sam GRE nie zapewnia poufności danych."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "id": "encor.gre.practice.compare-10.1.card",
+      "front_md": "**Zgłoszenie I**\n\nAdres tunnel destination nie jest osiągalny przez sieć transportową.\n\n**Zgłoszenie II**\n\nMały ping przez GRE działa, duże pakiety z DF nie. Droga transportowa ma MTU 1500, a enkapsulacja dodaje narzut.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brakuje osiągalności underlay dla końca tunelu. Przywrócić trasę transportową do tunnel destination.\n\n**Sprawdzenie I:** Cel tunelu jest osiągalny poza tunelem przez fizyczny transport.\n\n**Zgłoszenie II:** Rozmiar po enkapsulacji przekracza MTU transportu. Dopasować MTU tunelu i obsługę PMTUD, ewentualnie TCP MSS zgodnie z ruchem.\n\n**Sprawdzenie II:** Test rozmiaru z DF określa działający limit i aplikacje nie zawieszają się na dużych segmentach.\n\n**Zależności:** Tunel GRE zależy od routingu jego zewnętrznych adresów. Enkapsulacja zmniejsza przestrzeń dostępną dla pakietu wewnętrznego.",
+      "example": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Rozmiar po enkapsulacji przekracza MTU transportu."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.gre.practice.compare-01.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAdres tunnel destination nie jest osiągalny przez sieć transportową.\n\n**Zgłoszenie II**\n\nTrasa do tunnel destination wskazuje sam Tunnel0 zamiast underlay.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brakuje osiągalności underlay dla końca tunelu. Przywrócić trasę transportową do tunnel destination.\n\n**Sprawdzenie I:** Cel tunelu jest osiągalny poza tunelem przez fizyczny transport.\n\n**Zgłoszenie II:** Tunel próbuje osiągnąć własny koniec przez siebie. Ustawić stabilną drogę do końca tunelu przez sieć transportową.\n\n**Sprawdzenie II:** Lookup destination nie wskazuje Tunnel0, a znikają objawy recursive routing.\n\n**Zależności:** Tunel GRE zależy od routingu jego zewnętrznych adresów. Droga zewnętrznej enkapsulacji nie może zależeć od tego samego tunelu.",
+      "card_id": "encor.gre.practice.compare-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Tunel próbuje osiągnąć własny koniec przez siebie.\n\nII — Brakuje osiągalności underlay dla końca tunelu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brakuje osiągalności underlay dla końca tunelu. Zgłoszenie II: Tunel próbuje osiągnąć własny koniec przez siebie.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Tunel próbuje osiągnąć własny koniec przez siebie.",
+          "feedback_md": "**Zgłoszenie I:** Brakuje osiągalności underlay dla końca tunelu. Przywrócić trasę transportową do tunnel destination.\n\n**Sprawdzenie I:** Cel tunelu jest osiągalny poza tunelem przez fizyczny transport.\n\n**Zgłoszenie II:** Tunel próbuje osiągnąć własny koniec przez siebie. Ustawić stabilną drogę do końca tunelu przez sieć transportową.\n\n**Sprawdzenie II:** Lookup destination nie wskazuje Tunnel0, a znikają objawy recursive routing.\n\n**Zależności:** Tunel GRE zależy od routingu jego zewnętrznych adresów. Droga zewnętrznej enkapsulacji nie może zależeć od tego samego tunelu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Filtr blokuje protokół GRE mimo dostępności ping.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: ICMP między końcami działa, ale firewall odrzuca IP protocol 47. Dla II: Tunel próbuje osiągnąć własny koniec przez siebie.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Filtr blokuje protokół GRE mimo dostępności ping.\n\nII — Tunel próbuje osiągnąć własny koniec przez siebie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: ICMP między końcami działa, ale firewall odrzuca IP protocol 47. Dla I: Brakuje osiągalności underlay dla końca tunelu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.gre.practice.compare-02.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nICMP między końcami działa, ale firewall odrzuca IP protocol 47.\n\n**Zgłoszenie II**\n\nMały ping przez GRE działa, duże pakiety z DF nie. Droga transportowa ma MTU 1500, a enkapsulacja dodaje narzut.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Filtr blokuje protokół GRE mimo dostępności ping. Dopuścić wymagany GRE między zatwierdzonymi końcami.\n\n**Sprawdzenie I:** Pakiety IP protocol 47 docierają w obu kierunkach.\n\n**Zgłoszenie II:** Rozmiar po enkapsulacji przekracza MTU transportu. Dopasować MTU tunelu i obsługę PMTUD, ewentualnie TCP MSS zgodnie z ruchem.\n\n**Sprawdzenie II:** Test rozmiaru z DF określa działający limit i aplikacje nie zawieszają się na dużych segmentach.\n\n**Zależności:** GRE to protokół IP 47, a nie port TCP lub UDP 47. Enkapsulacja zmniejsza przestrzeń dostępną dla pakietu wewnętrznego.",
+      "card_id": "encor.gre.practice.compare-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Rozmiar po enkapsulacji przekracza MTU transportu.\n\nII — Filtr blokuje protokół GRE mimo dostępności ping.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Filtr blokuje protokół GRE mimo dostępności ping. Zgłoszenie II: Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Filtr blokuje protokół GRE mimo dostępności ping.\n\nII — Brakuje osiągalności underlay dla końca tunelu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Adres tunnel destination nie jest osiągalny przez sieć transportową. Dla II: Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Filtr blokuje protokół GRE mimo dostępności ping.\n\nII — Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "feedback_md": "**Zgłoszenie I:** Filtr blokuje protokół GRE mimo dostępności ping. Dopuścić wymagany GRE między zatwierdzonymi końcami.\n\n**Sprawdzenie I:** Pakiety IP protocol 47 docierają w obu kierunkach.\n\n**Zgłoszenie II:** Rozmiar po enkapsulacji przekracza MTU transportu. Dopasować MTU tunelu i obsługę PMTUD, ewentualnie TCP MSS zgodnie z ruchem.\n\n**Sprawdzenie II:** Test rozmiaru z DF określa działający limit i aplikacje nie zawieszają się na dużych segmentach.\n\n**Zależności:** GRE to protokół IP 47, a nie port TCP lub UDP 47. Enkapsulacja zmniejsza przestrzeń dostępną dla pakietu wewnętrznego.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Adres tunnel destination nie jest osiągalny przez sieć transportową. Dla I: Filtr blokuje protokół GRE mimo dostępności ping.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.gre.practice.compare-03.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPrzechwycenie underlay ujawnia treść pakietów wewnątrz zwykłego GRE.\n\n**Zgłoszenie II**\n\nTunnel0 pokazuje up/up bez keepalive, lecz zdalny endpoint został wyłączony.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Sam GRE nie zapewnia poufności danych. Dodać odpowiednią ochronę kryptograficzną, jeśli wymaga tego polityka.\n\n**Sprawdzenie I:** Przechwycenie transportu nie ujawnia jawnego payloadu chronionej komunikacji.\n\n**Zgłoszenie II:** Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca. Wykonać test tunelu i sprawdzić transport oraz zdalną konfigurację.\n\n**Sprawdzenie II:** Rzeczywisty test ruchu potwierdza lub wyklucza łączność przez tunel.\n\n**Zależności:** Enkapsulacja i szyfrowanie to odrębne funkcje. Stan interfejsu GRE bez mechanizmu kontroli nie jest dowodem end-to-end.",
+      "card_id": "encor.gre.practice.compare-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.\n\nII — Sam GRE nie zapewnia poufności danych.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Sam GRE nie zapewnia poufności danych. Zgłoszenie II: Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Sam GRE nie zapewnia poufności danych.\n\nII — Brakuje osiągalności underlay dla końca tunelu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Adres tunnel destination nie jest osiągalny przez sieć transportową. Dla II: Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Adres tunnel destination nie jest osiągalny przez sieć transportową. Dla I: Sam GRE nie zapewnia poufności danych.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sam GRE nie zapewnia poufności danych.\n\nII — Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.",
+          "feedback_md": "**Zgłoszenie I:** Sam GRE nie zapewnia poufności danych. Dodać odpowiednią ochronę kryptograficzną, jeśli wymaga tego polityka.\n\n**Sprawdzenie I:** Przechwycenie transportu nie ujawnia jawnego payloadu chronionej komunikacji.\n\n**Zgłoszenie II:** Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca. Wykonać test tunelu i sprawdzić transport oraz zdalną konfigurację.\n\n**Sprawdzenie II:** Rzeczywisty test ruchu potwierdza lub wyklucza łączność przez tunel.\n\n**Zależności:** Enkapsulacja i szyfrowanie to odrębne funkcje. Stan interfejsu GRE bez mechanizmu kontroli nie jest dowodem end-to-end.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.gre.practice.compare-04.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAdres tunnel destination nie jest osiągalny przez sieć transportową.\n\n**Zgłoszenie II**\n\nICMP między końcami działa, ale firewall odrzuca IP protocol 47.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brakuje osiągalności underlay dla końca tunelu. Przywrócić trasę transportową do tunnel destination.\n\n**Sprawdzenie I:** Cel tunelu jest osiągalny poza tunelem przez fizyczny transport.\n\n**Zgłoszenie II:** Filtr blokuje protokół GRE mimo dostępności ping. Dopuścić wymagany GRE między zatwierdzonymi końcami.\n\n**Sprawdzenie II:** Pakiety IP protocol 47 docierają w obu kierunkach.\n\n**Zależności:** Tunel GRE zależy od routingu jego zewnętrznych adresów. GRE to protokół IP 47, a nie port TCP lub UDP 47.",
+      "card_id": "encor.gre.practice.compare-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Filtr blokuje protokół GRE mimo dostępności ping.",
+          "feedback_md": "**Zgłoszenie I:** Brakuje osiągalności underlay dla końca tunelu. Przywrócić trasę transportową do tunnel destination.\n\n**Sprawdzenie I:** Cel tunelu jest osiągalny poza tunelem przez fizyczny transport.\n\n**Zgłoszenie II:** Filtr blokuje protokół GRE mimo dostępności ping. Dopuścić wymagany GRE między zatwierdzonymi końcami.\n\n**Sprawdzenie II:** Pakiety IP protocol 47 docierają w obu kierunkach.\n\n**Zależności:** Tunel GRE zależy od routingu jego zewnętrznych adresów. GRE to protokół IP 47, a nie port TCP lub UDP 47.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Filtr blokuje protokół GRE mimo dostępności ping.\n\nII — Brakuje osiągalności underlay dla końca tunelu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brakuje osiągalności underlay dla końca tunelu. Zgłoszenie II: Filtr blokuje protokół GRE mimo dostępności ping.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Tunel próbuje osiągnąć własny koniec przez siebie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Trasa do tunnel destination wskazuje sam Tunnel0 zamiast underlay. Dla II: Filtr blokuje protokół GRE mimo dostępności ping.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Tunel próbuje osiągnąć własny koniec przez siebie.\n\nII — Filtr blokuje protokół GRE mimo dostępności ping.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Trasa do tunnel destination wskazuje sam Tunnel0 zamiast underlay. Dla I: Brakuje osiągalności underlay dla końca tunelu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.gre.practice.compare-05.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nTrasa do tunnel destination wskazuje sam Tunnel0 zamiast underlay.\n\n**Zgłoszenie II**\n\nPrzechwycenie underlay ujawnia treść pakietów wewnątrz zwykłego GRE.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Tunel próbuje osiągnąć własny koniec przez siebie. Ustawić stabilną drogę do końca tunelu przez sieć transportową.\n\n**Sprawdzenie I:** Lookup destination nie wskazuje Tunnel0, a znikają objawy recursive routing.\n\n**Zgłoszenie II:** Sam GRE nie zapewnia poufności danych. Dodać odpowiednią ochronę kryptograficzną, jeśli wymaga tego polityka.\n\n**Sprawdzenie II:** Przechwycenie transportu nie ujawnia jawnego payloadu chronionej komunikacji.\n\n**Zależności:** Droga zewnętrznej enkapsulacji nie może zależeć od tego samego tunelu. Enkapsulacja i szyfrowanie to odrębne funkcje.",
+      "card_id": "encor.gre.practice.compare-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sam GRE nie zapewnia poufności danych.\n\nII — Tunel próbuje osiągnąć własny koniec przez siebie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Tunel próbuje osiągnąć własny koniec przez siebie. Zgłoszenie II: Sam GRE nie zapewnia poufności danych.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Tunel próbuje osiągnąć własny koniec przez siebie.\n\nII — Sam GRE nie zapewnia poufności danych.",
+          "feedback_md": "**Zgłoszenie I:** Tunel próbuje osiągnąć własny koniec przez siebie. Ustawić stabilną drogę do końca tunelu przez sieć transportową.\n\n**Sprawdzenie I:** Lookup destination nie wskazuje Tunnel0, a znikają objawy recursive routing.\n\n**Zgłoszenie II:** Sam GRE nie zapewnia poufności danych. Dodać odpowiednią ochronę kryptograficzną, jeśli wymaga tego polityka.\n\n**Sprawdzenie II:** Przechwycenie transportu nie ujawnia jawnego payloadu chronionej komunikacji.\n\n**Zależności:** Droga zewnętrznej enkapsulacji nie może zależeć od tego samego tunelu. Enkapsulacja i szyfrowanie to odrębne funkcje.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Tunel próbuje osiągnąć własny koniec przez siebie.\n\nII — Brakuje osiągalności underlay dla końca tunelu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Adres tunnel destination nie jest osiągalny przez sieć transportową. Dla II: Sam GRE nie zapewnia poufności danych.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Sam GRE nie zapewnia poufności danych.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Adres tunnel destination nie jest osiągalny przez sieć transportową. Dla I: Tunel próbuje osiągnąć własny koniec przez siebie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.gre.practice.compare-06.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nMały ping przez GRE działa, duże pakiety z DF nie. Droga transportowa ma MTU 1500, a enkapsulacja dodaje narzut.\n\n**Zgłoszenie II**\n\nTunnel0 pokazuje up/up bez keepalive, lecz zdalny endpoint został wyłączony.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Rozmiar po enkapsulacji przekracza MTU transportu. Dopasować MTU tunelu i obsługę PMTUD, ewentualnie TCP MSS zgodnie z ruchem.\n\n**Sprawdzenie I:** Test rozmiaru z DF określa działający limit i aplikacje nie zawieszają się na dużych segmentach.\n\n**Zgłoszenie II:** Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca. Wykonać test tunelu i sprawdzić transport oraz zdalną konfigurację.\n\n**Sprawdzenie II:** Rzeczywisty test ruchu potwierdza lub wyklucza łączność przez tunel.\n\n**Zależności:** Enkapsulacja zmniejsza przestrzeń dostępną dla pakietu wewnętrznego. Stan interfejsu GRE bez mechanizmu kontroli nie jest dowodem end-to-end.",
+      "card_id": "encor.gre.practice.compare-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.\n\nII — Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Rozmiar po enkapsulacji przekracza MTU transportu. Zgłoszenie II: Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Rozmiar po enkapsulacji przekracza MTU transportu.\n\nII — Brakuje osiągalności underlay dla końca tunelu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Adres tunnel destination nie jest osiągalny przez sieć transportową. Dla II: Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Rozmiar po enkapsulacji przekracza MTU transportu.\n\nII — Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.",
+          "feedback_md": "**Zgłoszenie I:** Rozmiar po enkapsulacji przekracza MTU transportu. Dopasować MTU tunelu i obsługę PMTUD, ewentualnie TCP MSS zgodnie z ruchem.\n\n**Sprawdzenie I:** Test rozmiaru z DF określa działający limit i aplikacje nie zawieszają się na dużych segmentach.\n\n**Zgłoszenie II:** Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca. Wykonać test tunelu i sprawdzić transport oraz zdalną konfigurację.\n\n**Sprawdzenie II:** Rzeczywisty test ruchu potwierdza lub wyklucza łączność przez tunel.\n\n**Zależności:** Enkapsulacja zmniejsza przestrzeń dostępną dla pakietu wewnętrznego. Stan interfejsu GRE bez mechanizmu kontroli nie jest dowodem end-to-end.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Adres tunnel destination nie jest osiągalny przez sieć transportową. Dla I: Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.gre.practice.compare-07.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAdres tunnel destination nie jest osiągalny przez sieć transportową.\n\n**Zgłoszenie II**\n\nTunnel0 pokazuje up/up bez keepalive, lecz zdalny endpoint został wyłączony.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brakuje osiągalności underlay dla końca tunelu. Przywrócić trasę transportową do tunnel destination.\n\n**Sprawdzenie I:** Cel tunelu jest osiągalny poza tunelem przez fizyczny transport.\n\n**Zgłoszenie II:** Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca. Wykonać test tunelu i sprawdzić transport oraz zdalną konfigurację.\n\n**Sprawdzenie II:** Rzeczywisty test ruchu potwierdza lub wyklucza łączność przez tunel.\n\n**Zależności:** Tunel GRE zależy od routingu jego zewnętrznych adresów. Stan interfejsu GRE bez mechanizmu kontroli nie jest dowodem end-to-end.",
+      "card_id": "encor.gre.practice.compare-07.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.\n\nII — Brakuje osiągalności underlay dla końca tunelu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brakuje osiągalności underlay dla końca tunelu. Zgłoszenie II: Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Tunel próbuje osiągnąć własny koniec przez siebie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Trasa do tunnel destination wskazuje sam Tunnel0 zamiast underlay. Dla II: Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Tunel próbuje osiągnąć własny koniec przez siebie.\n\nII — Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Trasa do tunnel destination wskazuje sam Tunnel0 zamiast underlay. Dla I: Brakuje osiągalności underlay dla końca tunelu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca.",
+          "feedback_md": "**Zgłoszenie I:** Brakuje osiągalności underlay dla końca tunelu. Przywrócić trasę transportową do tunnel destination.\n\n**Sprawdzenie I:** Cel tunelu jest osiągalny poza tunelem przez fizyczny transport.\n\n**Zgłoszenie II:** Lokalny stan tunelu nie potwierdza pełnej dostępności zdalnego końca. Wykonać test tunelu i sprawdzić transport oraz zdalną konfigurację.\n\n**Sprawdzenie II:** Rzeczywisty test ruchu potwierdza lub wyklucza łączność przez tunel.\n\n**Zależności:** Tunel GRE zależy od routingu jego zewnętrznych adresów. Stan interfejsu GRE bez mechanizmu kontroli nie jest dowodem end-to-end.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.gre.practice.compare-08.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nTrasa do tunnel destination wskazuje sam Tunnel0 zamiast underlay.\n\n**Zgłoszenie II**\n\nMały ping przez GRE działa, duże pakiety z DF nie. Droga transportowa ma MTU 1500, a enkapsulacja dodaje narzut.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Tunel próbuje osiągnąć własny koniec przez siebie. Ustawić stabilną drogę do końca tunelu przez sieć transportową.\n\n**Sprawdzenie I:** Lookup destination nie wskazuje Tunnel0, a znikają objawy recursive routing.\n\n**Zgłoszenie II:** Rozmiar po enkapsulacji przekracza MTU transportu. Dopasować MTU tunelu i obsługę PMTUD, ewentualnie TCP MSS zgodnie z ruchem.\n\n**Sprawdzenie II:** Test rozmiaru z DF określa działający limit i aplikacje nie zawieszają się na dużych segmentach.\n\n**Zależności:** Droga zewnętrznej enkapsulacji nie może zależeć od tego samego tunelu. Enkapsulacja zmniejsza przestrzeń dostępną dla pakietu wewnętrznego.",
+      "card_id": "encor.gre.practice.compare-08.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Tunel próbuje osiągnąć własny koniec przez siebie.\n\nII — Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "feedback_md": "**Zgłoszenie I:** Tunel próbuje osiągnąć własny koniec przez siebie. Ustawić stabilną drogę do końca tunelu przez sieć transportową.\n\n**Sprawdzenie I:** Lookup destination nie wskazuje Tunnel0, a znikają objawy recursive routing.\n\n**Zgłoszenie II:** Rozmiar po enkapsulacji przekracza MTU transportu. Dopasować MTU tunelu i obsługę PMTUD, ewentualnie TCP MSS zgodnie z ruchem.\n\n**Sprawdzenie II:** Test rozmiaru z DF określa działający limit i aplikacje nie zawieszają się na dużych segmentach.\n\n**Zależności:** Droga zewnętrznej enkapsulacji nie może zależeć od tego samego tunelu. Enkapsulacja zmniejsza przestrzeń dostępną dla pakietu wewnętrznego.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Rozmiar po enkapsulacji przekracza MTU transportu.\n\nII — Tunel próbuje osiągnąć własny koniec przez siebie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Tunel próbuje osiągnąć własny koniec przez siebie. Zgłoszenie II: Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Tunel próbuje osiągnąć własny koniec przez siebie.\n\nII — Brakuje osiągalności underlay dla końca tunelu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Adres tunnel destination nie jest osiągalny przez sieć transportową. Dla II: Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Adres tunnel destination nie jest osiągalny przez sieć transportową. Dla I: Tunel próbuje osiągnąć własny koniec przez siebie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.gre.practice.compare-09.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nICMP między końcami działa, ale firewall odrzuca IP protocol 47.\n\n**Zgłoszenie II**\n\nPrzechwycenie underlay ujawnia treść pakietów wewnątrz zwykłego GRE.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Filtr blokuje protokół GRE mimo dostępności ping. Dopuścić wymagany GRE między zatwierdzonymi końcami.\n\n**Sprawdzenie I:** Pakiety IP protocol 47 docierają w obu kierunkach.\n\n**Zgłoszenie II:** Sam GRE nie zapewnia poufności danych. Dodać odpowiednią ochronę kryptograficzną, jeśli wymaga tego polityka.\n\n**Sprawdzenie II:** Przechwycenie transportu nie ujawnia jawnego payloadu chronionej komunikacji.\n\n**Zależności:** GRE to protokół IP 47, a nie port TCP lub UDP 47. Enkapsulacja i szyfrowanie to odrębne funkcje.",
+      "card_id": "encor.gre.practice.compare-09.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sam GRE nie zapewnia poufności danych.\n\nII — Filtr blokuje protokół GRE mimo dostępności ping.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Filtr blokuje protokół GRE mimo dostępności ping. Zgłoszenie II: Sam GRE nie zapewnia poufności danych.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Filtr blokuje protokół GRE mimo dostępności ping.\n\nII — Sam GRE nie zapewnia poufności danych.",
+          "feedback_md": "**Zgłoszenie I:** Filtr blokuje protokół GRE mimo dostępności ping. Dopuścić wymagany GRE między zatwierdzonymi końcami.\n\n**Sprawdzenie I:** Pakiety IP protocol 47 docierają w obu kierunkach.\n\n**Zgłoszenie II:** Sam GRE nie zapewnia poufności danych. Dodać odpowiednią ochronę kryptograficzną, jeśli wymaga tego polityka.\n\n**Sprawdzenie II:** Przechwycenie transportu nie ujawnia jawnego payloadu chronionej komunikacji.\n\n**Zależności:** GRE to protokół IP 47, a nie port TCP lub UDP 47. Enkapsulacja i szyfrowanie to odrębne funkcje.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Filtr blokuje protokół GRE mimo dostępności ping.\n\nII — Brakuje osiągalności underlay dla końca tunelu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Adres tunnel destination nie jest osiągalny przez sieć transportową. Dla II: Sam GRE nie zapewnia poufności danych.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Sam GRE nie zapewnia poufności danych.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Adres tunnel destination nie jest osiągalny przez sieć transportową. Dla I: Filtr blokuje protokół GRE mimo dostępności ping.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.gre.practice.compare-10.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — rozpoznanie",
+      "skills": [
+        "encor.gre.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — GRE — tunele i zależność od underlay",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_ir-impl-tun-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "2.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAdres tunnel destination nie jest osiągalny przez sieć transportową.\n\n**Zgłoszenie II**\n\nMały ping przez GRE działa, duże pakiety z DF nie. Droga transportowa ma MTU 1500, a enkapsulacja dodaje narzut.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brakuje osiągalności underlay dla końca tunelu. Przywrócić trasę transportową do tunnel destination.\n\n**Sprawdzenie I:** Cel tunelu jest osiągalny poza tunelem przez fizyczny transport.\n\n**Zgłoszenie II:** Rozmiar po enkapsulacji przekracza MTU transportu. Dopasować MTU tunelu i obsługę PMTUD, ewentualnie TCP MSS zgodnie z ruchem.\n\n**Sprawdzenie II:** Test rozmiaru z DF określa działający limit i aplikacje nie zawieszają się na dużych segmentach.\n\n**Zależności:** Tunel GRE zależy od routingu jego zewnętrznych adresów. Enkapsulacja zmniejsza przestrzeń dostępną dla pakietu wewnętrznego.",
+      "card_id": "encor.gre.practice.compare-10.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Rozmiar po enkapsulacji przekracza MTU transportu.\n\nII — Brakuje osiągalności underlay dla końca tunelu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brakuje osiągalności underlay dla końca tunelu. Zgłoszenie II: Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Tunel próbuje osiągnąć własny koniec przez siebie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Trasa do tunnel destination wskazuje sam Tunnel0 zamiast underlay. Dla II: Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Brakuje osiągalności underlay dla końca tunelu.\n\nII — Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "feedback_md": "**Zgłoszenie I:** Brakuje osiągalności underlay dla końca tunelu. Przywrócić trasę transportową do tunnel destination.\n\n**Sprawdzenie I:** Cel tunelu jest osiągalny poza tunelem przez fizyczny transport.\n\n**Zgłoszenie II:** Rozmiar po enkapsulacji przekracza MTU transportu. Dopasować MTU tunelu i obsługę PMTUD, ewentualnie TCP MSS zgodnie z ruchem.\n\n**Sprawdzenie II:** Test rozmiaru z DF określa działający limit i aplikacje nie zawieszają się na dużych segmentach.\n\n**Zależności:** Tunel GRE zależy od routingu jego zewnętrznych adresów. Enkapsulacja zmniejsza przestrzeń dostępną dla pakietu wewnętrznego.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Tunel próbuje osiągnąć własny koniec przez siebie.\n\nII — Rozmiar po enkapsulacji przekracza MTU transportu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Trasa do tunnel destination wskazuje sam Tunnel0 zamiast underlay. Dla I: Brakuje osiągalności underlay dla końca tunelu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

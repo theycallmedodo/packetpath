@@ -1,0 +1,483 @@
+{
+  "schema_version": 3,
+  "id": "ccna.snooping.practice-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Niezaufany serwer — rozpoznanie",
+      "skills": [
+        "ccna.snooping.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "id": "ccna.snooping.practice.case-01.1.card",
+      "front_md": "Legalny DHCP Offer wchodzi na port untrusted w VLAN z aktywnym snoopingiem i jest odrzucany.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Zaufanie DHCP snooping określa, skąd wolno przyjmować wiadomości serwera.\n\n**Rozpoznanie:** Odpowiedź serwera przychodzi przez niezaufany port.\n\n**Działanie:** Oznaczyć wyłącznie zweryfikowaną drogę do legalnego serwera jako trusted.\n\n**Sprawdzenie:** Offer z legalnej drogi przechodzi, a porty klientów pozostają untrusted.",
+      "example": "Odpowiedź serwera przychodzi przez niezaufany port."
+    },
+    {
+      "revision": 1,
+      "title": "Rogue DHCP — rozpoznanie",
+      "skills": [
+        "ccna.snooping.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "id": "ccna.snooping.practice.case-02.1.card",
+      "front_md": "Nieautoryzowany serwer podłączono do zwykłego portu klienta; jego Offer jest blokowany.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Port klienta nie powinien być trusted tylko po to, aby przepuścić obcy Offer.\n\n**Rozpoznanie:** Snooping prawidłowo odrzuca wiadomości serwera na untrusted.\n\n**Działanie:** Pozostawić ochronę i usunąć nieautoryzowany serwer.\n\n**Sprawdzenie:** Klient otrzymuje ofertę tylko z legalnej infrastruktury DHCP.",
+      "example": "Snooping prawidłowo odrzuca wiadomości serwera na untrusted."
+    },
+    {
+      "revision": 1,
+      "title": "Brak VLAN — rozpoznanie",
+      "skills": [
+        "ccna.snooping.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "id": "ccna.snooping.practice.case-03.1.card",
+      "front_md": "Snooping jest włączony globalnie, ale lista chronionych VLAN nie zawiera VLAN 30.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Globalne włączenie i zakres VLAN są oddzielnymi elementami ochrony.\n\n**Rozpoznanie:** Ochrona nie obejmuje analizowanego VLAN.\n\n**Działanie:** Dodać VLAN 30 do konfiguracji DHCP snooping.\n\n**Sprawdzenie:** Show ip dhcp snooping wymienia VLAN 30 jako operacyjnie chroniony.",
+      "example": "Ochrona nie obejmuje analizowanego VLAN."
+    },
+    {
+      "revision": 1,
+      "title": "Brak binding statycznego — rozpoznanie",
+      "skills": [
+        "ccna.snooping.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "id": "ccna.snooping.practice.case-04.1.card",
+      "front_md": "Stacja ma statyczny IP. Nie pojawia się w tabeli dynamicznych bindingów DHCP snooping.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Brak dynamicznego bindingu statycznego hosta sam w sobie nie oznacza awarii DHCP.\n\n**Rozpoznanie:** Stacja nie uzyskała dzierżawy obserwowanej przez snooping.\n\n**Działanie:** Uwzględnić statyczny host w mechanizmach ochrony korzystających z bindingów.\n\n**Sprawdzenie:** Plan ochrony obejmuje ten host bez oczekiwania na nieistniejącą wymianę DHCP.",
+      "example": "Stacja nie uzyskała dzierżawy obserwowanej przez snooping."
+    },
+    {
+      "revision": 1,
+      "title": "Rate limit — rozpoznanie",
+      "skills": [
+        "ccna.snooping.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "id": "ccna.snooping.practice.case-05.1.card",
+      "front_md": "Port klienta przekracza ustawiony limit wiadomości DHCP i przechodzi do err-disabled z odpowiednim powodem.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Limit DHCP chroni zasoby, lecz wymaga dopasowania do liczby klientów i wzorca ruchu.\n\n**Rozpoznanie:** Zadziałał limit szybkości DHCP na porcie.\n\n**Działanie:** Sprawdzić źródło lawiny, dobrać uzasadniony limit i bezpiecznie odtworzyć port.\n\n**Sprawdzenie:** Normalne odnowienia działają bez przekroczeń limitu.",
+      "example": "Zadziałał limit szybkości DHCP na porcie."
+    },
+    {
+      "revision": 1,
+      "title": "Option 82 — rozpoznanie",
+      "skills": [
+        "ccna.snooping.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "id": "ccna.snooping.practice.case-06.1.card",
+      "front_md": "Serwer jawnie odrzuca relayed Discover z Option 82 zgodnie ze swoją polityką; transport działa.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Dodatkowe informacje relay wymagają zgodnej polityki po obu stronach.\n\n**Rozpoznanie:** Polityka serwera nie akceptuje dostarczonych informacji relay.\n\n**Działanie:** Uzgodnić obsługę Option 82 między relay, snoopingiem i serwerem.\n\n**Sprawdzenie:** Serwer przyjmuje prawidłową wiadomość z uzgodnionymi informacjami relay.",
+      "example": "Polityka serwera nie akceptuje dostarczonych informacji relay."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.snooping.practice.case-01.1",
+      "revision": 1,
+      "title": "Niezaufany serwer — rozpoznanie",
+      "skills": [
+        "ccna.snooping.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Legalny DHCP Offer wchodzi na port untrusted w VLAN z aktywnym snoopingiem i jest odrzucany.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Zaufanie DHCP snooping określa, skąd wolno przyjmować wiadomości serwera.\n\n**Rozpoznanie:** Odpowiedź serwera przychodzi przez niezaufany port.\n\n**Działanie:** Oznaczyć wyłącznie zweryfikowaną drogę do legalnego serwera jako trusted.\n\n**Sprawdzenie:** Offer z legalnej drogi przechodzi, a porty klientów pozostają untrusted.",
+      "card_id": "ccna.snooping.practice.case-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Odpowiedź serwera przychodzi przez niezaufany port.",
+          "feedback_md": "Zaufanie DHCP snooping określa, skąd wolno przyjmować wiadomości serwera.\n\n**Rozpoznanie:** Odpowiedź serwera przychodzi przez niezaufany port.\n\n**Działanie:** Oznaczyć wyłącznie zweryfikowaną drogę do legalnego serwera jako trusted.\n\n**Sprawdzenie:** Offer z legalnej drogi przechodzi, a porty klientów pozostają untrusted.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zadziałał limit szybkości DHCP na porcie.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Rate limit”: Port klienta przekracza ustawiony limit wiadomości DHCP i przechodzi do err-disabled z odpowiednim powodem. W bieżącym przypadku: Odpowiedź serwera przychodzi przez niezaufany port.",
+          "id": "B"
+        },
+        {
+          "text_md": "Stacja nie uzyskała dzierżawy obserwowanej przez snooping.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak binding statycznego”: Stacja ma statyczny IP. Nie pojawia się w tabeli dynamicznych bindingów DHCP snooping. W bieżącym przypadku: Odpowiedź serwera przychodzi przez niezaufany port.",
+          "id": "C"
+        },
+        {
+          "text_md": "Ochrona nie obejmuje analizowanego VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak VLAN”: Snooping jest włączony globalnie, ale lista chronionych VLAN nie zawiera VLAN 30. W bieżącym przypadku: Odpowiedź serwera przychodzi przez niezaufany port.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.snooping.practice.case-02.1",
+      "revision": 1,
+      "title": "Rogue DHCP — rozpoznanie",
+      "skills": [
+        "ccna.snooping.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Nieautoryzowany serwer podłączono do zwykłego portu klienta; jego Offer jest blokowany.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Port klienta nie powinien być trusted tylko po to, aby przepuścić obcy Offer.\n\n**Rozpoznanie:** Snooping prawidłowo odrzuca wiadomości serwera na untrusted.\n\n**Działanie:** Pozostawić ochronę i usunąć nieautoryzowany serwer.\n\n**Sprawdzenie:** Klient otrzymuje ofertę tylko z legalnej infrastruktury DHCP.",
+      "card_id": "ccna.snooping.practice.case-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Odpowiedź serwera przychodzi przez niezaufany port.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niezaufany serwer”: Legalny DHCP Offer wchodzi na port untrusted w VLAN z aktywnym snoopingiem i jest odrzucany. W bieżącym przypadku: Snooping prawidłowo odrzuca wiadomości serwera na untrusted.",
+          "id": "A"
+        },
+        {
+          "text_md": "Snooping prawidłowo odrzuca wiadomości serwera na untrusted.",
+          "feedback_md": "Port klienta nie powinien być trusted tylko po to, aby przepuścić obcy Offer.\n\n**Rozpoznanie:** Snooping prawidłowo odrzuca wiadomości serwera na untrusted.\n\n**Działanie:** Pozostawić ochronę i usunąć nieautoryzowany serwer.\n\n**Sprawdzenie:** Klient otrzymuje ofertę tylko z legalnej infrastruktury DHCP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Polityka serwera nie akceptuje dostarczonych informacji relay.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Option 82”: Serwer jawnie odrzuca relayed Discover z Option 82 zgodnie ze swoją polityką; transport działa. W bieżącym przypadku: Snooping prawidłowo odrzuca wiadomości serwera na untrusted.",
+          "id": "C"
+        },
+        {
+          "text_md": "Ochrona nie obejmuje analizowanego VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak VLAN”: Snooping jest włączony globalnie, ale lista chronionych VLAN nie zawiera VLAN 30. W bieżącym przypadku: Snooping prawidłowo odrzuca wiadomości serwera na untrusted.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.snooping.practice.case-03.1",
+      "revision": 1,
+      "title": "Brak VLAN — rozpoznanie",
+      "skills": [
+        "ccna.snooping.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Snooping jest włączony globalnie, ale lista chronionych VLAN nie zawiera VLAN 30.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Globalne włączenie i zakres VLAN są oddzielnymi elementami ochrony.\n\n**Rozpoznanie:** Ochrona nie obejmuje analizowanego VLAN.\n\n**Działanie:** Dodać VLAN 30 do konfiguracji DHCP snooping.\n\n**Sprawdzenie:** Show ip dhcp snooping wymienia VLAN 30 jako operacyjnie chroniony.",
+      "card_id": "ccna.snooping.practice.case-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Stacja nie uzyskała dzierżawy obserwowanej przez snooping.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak binding statycznego”: Stacja ma statyczny IP. Nie pojawia się w tabeli dynamicznych bindingów DHCP snooping. W bieżącym przypadku: Ochrona nie obejmuje analizowanego VLAN.",
+          "id": "A"
+        },
+        {
+          "text_md": "Snooping prawidłowo odrzuca wiadomości serwera na untrusted.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Rogue DHCP”: Nieautoryzowany serwer podłączono do zwykłego portu klienta; jego Offer jest blokowany. W bieżącym przypadku: Ochrona nie obejmuje analizowanego VLAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "Ochrona nie obejmuje analizowanego VLAN.",
+          "feedback_md": "Globalne włączenie i zakres VLAN są oddzielnymi elementami ochrony.\n\n**Rozpoznanie:** Ochrona nie obejmuje analizowanego VLAN.\n\n**Działanie:** Dodać VLAN 30 do konfiguracji DHCP snooping.\n\n**Sprawdzenie:** Show ip dhcp snooping wymienia VLAN 30 jako operacyjnie chroniony.",
+          "id": "C"
+        },
+        {
+          "text_md": "Odpowiedź serwera przychodzi przez niezaufany port.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niezaufany serwer”: Legalny DHCP Offer wchodzi na port untrusted w VLAN z aktywnym snoopingiem i jest odrzucany. W bieżącym przypadku: Ochrona nie obejmuje analizowanego VLAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.snooping.practice.case-04.1",
+      "revision": 1,
+      "title": "Brak binding statycznego — rozpoznanie",
+      "skills": [
+        "ccna.snooping.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Stacja ma statyczny IP. Nie pojawia się w tabeli dynamicznych bindingów DHCP snooping.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Brak dynamicznego bindingu statycznego hosta sam w sobie nie oznacza awarii DHCP.\n\n**Rozpoznanie:** Stacja nie uzyskała dzierżawy obserwowanej przez snooping.\n\n**Działanie:** Uwzględnić statyczny host w mechanizmach ochrony korzystających z bindingów.\n\n**Sprawdzenie:** Plan ochrony obejmuje ten host bez oczekiwania na nieistniejącą wymianę DHCP.",
+      "card_id": "ccna.snooping.practice.case-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Polityka serwera nie akceptuje dostarczonych informacji relay.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Option 82”: Serwer jawnie odrzuca relayed Discover z Option 82 zgodnie ze swoją polityką; transport działa. W bieżącym przypadku: Stacja nie uzyskała dzierżawy obserwowanej przez snooping.",
+          "id": "A"
+        },
+        {
+          "text_md": "Odpowiedź serwera przychodzi przez niezaufany port.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niezaufany serwer”: Legalny DHCP Offer wchodzi na port untrusted w VLAN z aktywnym snoopingiem i jest odrzucany. W bieżącym przypadku: Stacja nie uzyskała dzierżawy obserwowanej przez snooping.",
+          "id": "B"
+        },
+        {
+          "text_md": "Snooping prawidłowo odrzuca wiadomości serwera na untrusted.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Rogue DHCP”: Nieautoryzowany serwer podłączono do zwykłego portu klienta; jego Offer jest blokowany. W bieżącym przypadku: Stacja nie uzyskała dzierżawy obserwowanej przez snooping.",
+          "id": "C"
+        },
+        {
+          "text_md": "Stacja nie uzyskała dzierżawy obserwowanej przez snooping.",
+          "feedback_md": "Brak dynamicznego bindingu statycznego hosta sam w sobie nie oznacza awarii DHCP.\n\n**Rozpoznanie:** Stacja nie uzyskała dzierżawy obserwowanej przez snooping.\n\n**Działanie:** Uwzględnić statyczny host w mechanizmach ochrony korzystających z bindingów.\n\n**Sprawdzenie:** Plan ochrony obejmuje ten host bez oczekiwania na nieistniejącą wymianę DHCP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.snooping.practice.case-05.1",
+      "revision": 1,
+      "title": "Rate limit — rozpoznanie",
+      "skills": [
+        "ccna.snooping.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Port klienta przekracza ustawiony limit wiadomości DHCP i przechodzi do err-disabled z odpowiednim powodem.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Limit DHCP chroni zasoby, lecz wymaga dopasowania do liczby klientów i wzorca ruchu.\n\n**Rozpoznanie:** Zadziałał limit szybkości DHCP na porcie.\n\n**Działanie:** Sprawdzić źródło lawiny, dobrać uzasadniony limit i bezpiecznie odtworzyć port.\n\n**Sprawdzenie:** Normalne odnowienia działają bez przekroczeń limitu.",
+      "card_id": "ccna.snooping.practice.case-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zadziałał limit szybkości DHCP na porcie.",
+          "feedback_md": "Limit DHCP chroni zasoby, lecz wymaga dopasowania do liczby klientów i wzorca ruchu.\n\n**Rozpoznanie:** Zadziałał limit szybkości DHCP na porcie.\n\n**Działanie:** Sprawdzić źródło lawiny, dobrać uzasadniony limit i bezpiecznie odtworzyć port.\n\n**Sprawdzenie:** Normalne odnowienia działają bez przekroczeń limitu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Odpowiedź serwera przychodzi przez niezaufany port.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niezaufany serwer”: Legalny DHCP Offer wchodzi na port untrusted w VLAN z aktywnym snoopingiem i jest odrzucany. W bieżącym przypadku: Zadziałał limit szybkości DHCP na porcie.",
+          "id": "B"
+        },
+        {
+          "text_md": "Polityka serwera nie akceptuje dostarczonych informacji relay.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Option 82”: Serwer jawnie odrzuca relayed Discover z Option 82 zgodnie ze swoją polityką; transport działa. W bieżącym przypadku: Zadziałał limit szybkości DHCP na porcie.",
+          "id": "C"
+        },
+        {
+          "text_md": "Ochrona nie obejmuje analizowanego VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak VLAN”: Snooping jest włączony globalnie, ale lista chronionych VLAN nie zawiera VLAN 30. W bieżącym przypadku: Zadziałał limit szybkości DHCP na porcie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.snooping.practice.case-06.1",
+      "revision": 1,
+      "title": "Option 82 — rozpoznanie",
+      "skills": [
+        "ccna.snooping.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst4500/XE3-10-0E/configuration/guide/xe-310-cg/dhcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DHCP Snooping",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/catalyst-3750-series-switches/72846-layer2-secftrs-catl3fixed.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Serwer jawnie odrzuca relayed Discover z Option 82 zgodnie ze swoją polityką; transport działa.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Dodatkowe informacje relay wymagają zgodnej polityki po obu stronach.\n\n**Rozpoznanie:** Polityka serwera nie akceptuje dostarczonych informacji relay.\n\n**Działanie:** Uzgodnić obsługę Option 82 między relay, snoopingiem i serwerem.\n\n**Sprawdzenie:** Serwer przyjmuje prawidłową wiadomość z uzgodnionymi informacjami relay.",
+      "card_id": "ccna.snooping.practice.case-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Zadziałał limit szybkości DHCP na porcie.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Rate limit”: Port klienta przekracza ustawiony limit wiadomości DHCP i przechodzi do err-disabled z odpowiednim powodem. W bieżącym przypadku: Polityka serwera nie akceptuje dostarczonych informacji relay.",
+          "id": "A"
+        },
+        {
+          "text_md": "Polityka serwera nie akceptuje dostarczonych informacji relay.",
+          "feedback_md": "Dodatkowe informacje relay wymagają zgodnej polityki po obu stronach.\n\n**Rozpoznanie:** Polityka serwera nie akceptuje dostarczonych informacji relay.\n\n**Działanie:** Uzgodnić obsługę Option 82 między relay, snoopingiem i serwerem.\n\n**Sprawdzenie:** Serwer przyjmuje prawidłową wiadomość z uzgodnionymi informacjami relay.",
+          "id": "B"
+        },
+        {
+          "text_md": "Odpowiedź serwera przychodzi przez niezaufany port.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niezaufany serwer”: Legalny DHCP Offer wchodzi na port untrusted w VLAN z aktywnym snoopingiem i jest odrzucany. W bieżącym przypadku: Polityka serwera nie akceptuje dostarczonych informacji relay.",
+          "id": "C"
+        },
+        {
+          "text_md": "Ochrona nie obejmuje analizowanego VLAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak VLAN”: Snooping jest włączony globalnie, ale lista chronionych VLAN nie zawiera VLAN 30. W bieżącym przypadku: Polityka serwera nie akceptuje dostarczonych informacji relay.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

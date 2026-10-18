@@ -1,0 +1,639 @@
+{
+  "schema_version": 3,
+  "id": "ccna.automation.practice-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "GET zmienia dane — działanie",
+      "skills": [
+        "ccna.automation.case-01",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/hyperfabric/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/security/asa/api/asa_rest_api.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/intersight/supported-http-methods/"
+        },
+        {
+          "title": "Cisco DevNet — JSON schema types",
+          "url": "https://developer.cisco.com/docs/cisco-observability-platform/define-a-knowledge-type/"
+        }
+      ],
+      "id": "ccna.automation.practice.case-01.2.card",
+      "front_md": "Skrypt ma tylko odczytać stan, lecz autor planuje wywołać operację modyfikującą konfigurację.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Automatyzacja powinna rozdzielać pobieranie danych od mutacji.\n\n**Rozpoznanie:** Wybrano operację niezgodną z zamiarem odczytu.\n\n**Działanie:** Użyć udokumentowanej operacji odczytu, np. właściwego GET.\n\n**Sprawdzenie:** Stan jest odczytany bez diffu konfiguracji urządzenia.",
+      "example": "Użyć udokumentowanej operacji odczytu, np. właściwego GET."
+    },
+    {
+      "revision": 1,
+      "title": "Hasło w kodzie — działanie",
+      "skills": [
+        "ccna.automation.case-02",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/hyperfabric/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/security/asa/api/asa_rest_api.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/intersight/supported-http-methods/"
+        },
+        {
+          "title": "Cisco DevNet — JSON schema types",
+          "url": "https://developer.cisco.com/docs/cisco-observability-platform/define-a-knowledge-type/"
+        }
+      ],
+      "id": "ccna.automation.practice.case-02.2.card",
+      "front_md": "Skrypt zawiera jawne hasło w wersjonowanym pliku.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Sekrety powinny mieć niezależny cykl przechowywania i rotacji.\n\n**Rozpoznanie:** Sekret jest przechowywany razem z kodem źródłowym.\n\n**Działanie:** Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów.\n\n**Sprawdzenie:** Repozytorium nie wymaga jawnego hasła do uruchomienia, a stare dane są unieważnione.",
+      "example": "Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów."
+    },
+    {
+      "revision": 1,
+      "title": "Brak sprawdzania wyniku — działanie",
+      "skills": [
+        "ccna.automation.case-03",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/hyperfabric/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/security/asa/api/asa_rest_api.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/intersight/supported-http-methods/"
+        },
+        {
+          "title": "Cisco DevNet — JSON schema types",
+          "url": "https://developer.cisco.com/docs/cisco-observability-platform/define-a-knowledge-type/"
+        }
+      ],
+      "id": "ccna.automation.practice.case-03.2.card",
+      "front_md": "Skrypt drukuje sukces po każdym żądaniu, również po HTTP 403.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Wysłanie żądania nie jest równoznaczne z wykonaniem zmiany.\n\n**Rozpoznanie:** Wynik operacji nie jest sprawdzany przed ogłoszeniem powodzenia.\n\n**Działanie:** Sprawdzać status i treść odpowiedzi oraz odczyt stanu po zmianie.\n\n**Sprawdzenie:** Odmowa jest raportowana jako błąd, a sukces wymaga potwierdzenia.",
+      "example": "Sprawdzać status i treść odpowiedzi oraz odczyt stanu po zmianie."
+    },
+    {
+      "revision": 1,
+      "title": "Dry run — działanie",
+      "skills": [
+        "ccna.automation.case-04",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/hyperfabric/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/security/asa/api/asa_rest_api.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/intersight/supported-http-methods/"
+        },
+        {
+          "title": "Cisco DevNet — JSON schema types",
+          "url": "https://developer.cisco.com/docs/cisco-observability-platform/define-a-knowledge-type/"
+        }
+      ],
+      "id": "ccna.automation.practice.case-04.2.card",
+      "front_md": "Operator chce ocenić masową zmianę bez jej wdrażania. Narzędzie obsługuje generowanie planu i diffu.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Przegląd planu ogranicza ryzyko zmian masowych przed ich wykonaniem.\n\n**Rozpoznanie:** Potrzebny jest etap oceny proponowanej zmiany.\n\n**Działanie:** Wygenerować plan i diff w trybie bez zapisu.\n\n**Sprawdzenie:** Konfiguracja pozostaje niezmieniona, a operator widzi konkretne proponowane różnice.",
+      "example": "Wygenerować plan i diff w trybie bez zapisu."
+    },
+    {
+      "revision": 1,
+      "title": "Niezależność zadań — działanie",
+      "skills": [
+        "ccna.automation.case-05",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/hyperfabric/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/security/asa/api/asa_rest_api.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/intersight/supported-http-methods/"
+        },
+        {
+          "title": "Cisco DevNet — JSON schema types",
+          "url": "https://developer.cisco.com/docs/cisco-observability-platform/define-a-knowledge-type/"
+        }
+      ],
+      "id": "ccna.automation.practice.case-05.2.card",
+      "front_md": "Jedna operacja tworzy VLAN, druga przypisuje do niego port. Skrypt uruchamia obie bez kontroli kolejności.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Równoległość jest bezpieczna tylko dla operacji bez nieobsłużonych zależności.\n\n**Rozpoznanie:** Pominięto zależność między utworzeniem obiektu a jego użyciem.\n\n**Działanie:** Wykonać i potwierdzić utworzenie VLAN przed przypisaniem portu.\n\n**Sprawdzenie:** Port jest przypisany dopiero po udanym utworzeniu docelowego VLAN.",
+      "example": "Wykonać i potwierdzić utworzenie VLAN przed przypisaniem portu."
+    },
+    {
+      "revision": 1,
+      "title": "Idempotencja — działanie",
+      "skills": [
+        "ccna.automation.case-06",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/hyperfabric/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/security/asa/api/asa_rest_api.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/intersight/supported-http-methods/"
+        },
+        {
+          "title": "Cisco DevNet — JSON schema types",
+          "url": "https://developer.cisco.com/docs/cisco-observability-platform/define-a-knowledge-type/"
+        }
+      ],
+      "id": "ccna.automation.practice.case-06.2.card",
+      "front_md": "Drugie uruchomienie tego samego skryptu dopisuje kolejny identyczny wpis zamiast zachować stan.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Idempotencja oznacza ten sam stan końcowy przy powtarzaniu tej samej operacji.\n\n**Rozpoznanie:** Skrypt nie jest idempotentny względem zamierzonej konfiguracji.\n\n**Działanie:** Porównywać stan istniejący z docelowym i wykonywać tylko brakujące zmiany.\n\n**Sprawdzenie:** Drugie uruchomienie nie wprowadza dodatkowego diffu.",
+      "example": "Porównywać stan istniejący z docelowym i wykonywać tylko brakujące zmiany."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.automation.practice.case-01.2",
+      "revision": 1,
+      "title": "GET zmienia dane — działanie",
+      "skills": [
+        "ccna.automation.case-01",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/hyperfabric/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/security/asa/api/asa_rest_api.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/intersight/supported-http-methods/"
+        },
+        {
+          "title": "Cisco DevNet — JSON schema types",
+          "url": "https://developer.cisco.com/docs/cisco-observability-platform/define-a-knowledge-type/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.5"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Skrypt ma tylko odczytać stan, lecz autor planuje wywołać operację modyfikującą konfigurację.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Automatyzacja powinna rozdzielać pobieranie danych od mutacji.\n\n**Rozpoznanie:** Wybrano operację niezgodną z zamiarem odczytu.\n\n**Działanie:** Użyć udokumentowanej operacji odczytu, np. właściwego GET.\n\n**Sprawdzenie:** Stan jest odczytany bez diffu konfiguracji urządzenia.",
+      "card_id": "ccna.automation.practice.case-01.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wygenerować plan i diff w trybie bez zapisu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Dry run”: Operator chce ocenić masową zmianę bez jej wdrażania. Narzędzie obsługuje generowanie planu i diffu. W bieżącym przypadku: Użyć udokumentowanej operacji odczytu, np. właściwego GET.",
+          "id": "A"
+        },
+        {
+          "text_md": "Porównywać stan istniejący z docelowym i wykonywać tylko brakujące zmiany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Idempotencja”: Drugie uruchomienie tego samego skryptu dopisuje kolejny identyczny wpis zamiast zachować stan. W bieżącym przypadku: Użyć udokumentowanej operacji odczytu, np. właściwego GET.",
+          "id": "B"
+        },
+        {
+          "text_md": "Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Hasło w kodzie”: Skrypt zawiera jawne hasło w wersjonowanym pliku. W bieżącym przypadku: Użyć udokumentowanej operacji odczytu, np. właściwego GET.",
+          "id": "C"
+        },
+        {
+          "text_md": "Użyć udokumentowanej operacji odczytu, np. właściwego GET.",
+          "feedback_md": "Automatyzacja powinna rozdzielać pobieranie danych od mutacji.\n\n**Rozpoznanie:** Wybrano operację niezgodną z zamiarem odczytu.\n\n**Działanie:** Użyć udokumentowanej operacji odczytu, np. właściwego GET.\n\n**Sprawdzenie:** Stan jest odczytany bez diffu konfiguracji urządzenia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.automation.practice.case-02.2",
+      "revision": 1,
+      "title": "Hasło w kodzie — działanie",
+      "skills": [
+        "ccna.automation.case-02",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/hyperfabric/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/security/asa/api/asa_rest_api.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/intersight/supported-http-methods/"
+        },
+        {
+          "title": "Cisco DevNet — JSON schema types",
+          "url": "https://developer.cisco.com/docs/cisco-observability-platform/define-a-knowledge-type/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.5"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Skrypt zawiera jawne hasło w wersjonowanym pliku.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Sekrety powinny mieć niezależny cykl przechowywania i rotacji.\n\n**Rozpoznanie:** Sekret jest przechowywany razem z kodem źródłowym.\n\n**Działanie:** Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów.\n\n**Sprawdzenie:** Repozytorium nie wymaga jawnego hasła do uruchomienia, a stare dane są unieważnione.",
+      "card_id": "ccna.automation.practice.case-02.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów.",
+          "feedback_md": "Sekrety powinny mieć niezależny cykl przechowywania i rotacji.\n\n**Rozpoznanie:** Sekret jest przechowywany razem z kodem źródłowym.\n\n**Działanie:** Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów.\n\n**Sprawdzenie:** Repozytorium nie wymaga jawnego hasła do uruchomienia, a stare dane są unieważnione.",
+          "id": "A"
+        },
+        {
+          "text_md": "Użyć udokumentowanej operacji odczytu, np. właściwego GET.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „GET zmienia dane”: Skrypt ma tylko odczytać stan, lecz autor planuje wywołać operację modyfikującą konfigurację. W bieżącym przypadku: Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów.",
+          "id": "B"
+        },
+        {
+          "text_md": "Porównywać stan istniejący z docelowym i wykonywać tylko brakujące zmiany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Idempotencja”: Drugie uruchomienie tego samego skryptu dopisuje kolejny identyczny wpis zamiast zachować stan. W bieżącym przypadku: Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wykonać i potwierdzić utworzenie VLAN przed przypisaniem portu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niezależność zadań”: Jedna operacja tworzy VLAN, druga przypisuje do niego port. Skrypt uruchamia obie bez kontroli kolejności. W bieżącym przypadku: Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.automation.practice.case-03.2",
+      "revision": 1,
+      "title": "Brak sprawdzania wyniku — działanie",
+      "skills": [
+        "ccna.automation.case-03",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/hyperfabric/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/security/asa/api/asa_rest_api.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/intersight/supported-http-methods/"
+        },
+        {
+          "title": "Cisco DevNet — JSON schema types",
+          "url": "https://developer.cisco.com/docs/cisco-observability-platform/define-a-knowledge-type/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.5"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Skrypt drukuje sukces po każdym żądaniu, również po HTTP 403.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Wysłanie żądania nie jest równoznaczne z wykonaniem zmiany.\n\n**Rozpoznanie:** Wynik operacji nie jest sprawdzany przed ogłoszeniem powodzenia.\n\n**Działanie:** Sprawdzać status i treść odpowiedzi oraz odczyt stanu po zmianie.\n\n**Sprawdzenie:** Odmowa jest raportowana jako błąd, a sukces wymaga potwierdzenia.",
+      "card_id": "ccna.automation.practice.case-03.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wygenerować plan i diff w trybie bez zapisu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Dry run”: Operator chce ocenić masową zmianę bez jej wdrażania. Narzędzie obsługuje generowanie planu i diffu. W bieżącym przypadku: Sprawdzać status i treść odpowiedzi oraz odczyt stanu po zmianie.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sprawdzać status i treść odpowiedzi oraz odczyt stanu po zmianie.",
+          "feedback_md": "Wysłanie żądania nie jest równoznaczne z wykonaniem zmiany.\n\n**Rozpoznanie:** Wynik operacji nie jest sprawdzany przed ogłoszeniem powodzenia.\n\n**Działanie:** Sprawdzać status i treść odpowiedzi oraz odczyt stanu po zmianie.\n\n**Sprawdzenie:** Odmowa jest raportowana jako błąd, a sukces wymaga potwierdzenia.",
+          "id": "B"
+        },
+        {
+          "text_md": "Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Hasło w kodzie”: Skrypt zawiera jawne hasło w wersjonowanym pliku. W bieżącym przypadku: Sprawdzać status i treść odpowiedzi oraz odczyt stanu po zmianie.",
+          "id": "C"
+        },
+        {
+          "text_md": "Użyć udokumentowanej operacji odczytu, np. właściwego GET.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „GET zmienia dane”: Skrypt ma tylko odczytać stan, lecz autor planuje wywołać operację modyfikującą konfigurację. W bieżącym przypadku: Sprawdzać status i treść odpowiedzi oraz odczyt stanu po zmianie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.automation.practice.case-04.2",
+      "revision": 1,
+      "title": "Dry run — działanie",
+      "skills": [
+        "ccna.automation.case-04",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/hyperfabric/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/security/asa/api/asa_rest_api.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/intersight/supported-http-methods/"
+        },
+        {
+          "title": "Cisco DevNet — JSON schema types",
+          "url": "https://developer.cisco.com/docs/cisco-observability-platform/define-a-knowledge-type/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.5"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Operator chce ocenić masową zmianę bez jej wdrażania. Narzędzie obsługuje generowanie planu i diffu.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Przegląd planu ogranicza ryzyko zmian masowych przed ich wykonaniem.\n\n**Rozpoznanie:** Potrzebny jest etap oceny proponowanej zmiany.\n\n**Działanie:** Wygenerować plan i diff w trybie bez zapisu.\n\n**Sprawdzenie:** Konfiguracja pozostaje niezmieniona, a operator widzi konkretne proponowane różnice.",
+      "card_id": "ccna.automation.practice.case-04.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sprawdzać status i treść odpowiedzi oraz odczyt stanu po zmianie.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak sprawdzania wyniku”: Skrypt drukuje sukces po każdym żądaniu, również po HTTP 403. W bieżącym przypadku: Wygenerować plan i diff w trybie bez zapisu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Porównywać stan istniejący z docelowym i wykonywać tylko brakujące zmiany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Idempotencja”: Drugie uruchomienie tego samego skryptu dopisuje kolejny identyczny wpis zamiast zachować stan. W bieżącym przypadku: Wygenerować plan i diff w trybie bez zapisu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wygenerować plan i diff w trybie bez zapisu.",
+          "feedback_md": "Przegląd planu ogranicza ryzyko zmian masowych przed ich wykonaniem.\n\n**Rozpoznanie:** Potrzebny jest etap oceny proponowanej zmiany.\n\n**Działanie:** Wygenerować plan i diff w trybie bez zapisu.\n\n**Sprawdzenie:** Konfiguracja pozostaje niezmieniona, a operator widzi konkretne proponowane różnice.",
+          "id": "C"
+        },
+        {
+          "text_md": "Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Hasło w kodzie”: Skrypt zawiera jawne hasło w wersjonowanym pliku. W bieżącym przypadku: Wygenerować plan i diff w trybie bez zapisu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.automation.practice.case-05.2",
+      "revision": 1,
+      "title": "Niezależność zadań — działanie",
+      "skills": [
+        "ccna.automation.case-05",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/hyperfabric/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/security/asa/api/asa_rest_api.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/intersight/supported-http-methods/"
+        },
+        {
+          "title": "Cisco DevNet — JSON schema types",
+          "url": "https://developer.cisco.com/docs/cisco-observability-platform/define-a-knowledge-type/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.5"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Jedna operacja tworzy VLAN, druga przypisuje do niego port. Skrypt uruchamia obie bez kontroli kolejności.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Równoległość jest bezpieczna tylko dla operacji bez nieobsłużonych zależności.\n\n**Rozpoznanie:** Pominięto zależność między utworzeniem obiektu a jego użyciem.\n\n**Działanie:** Wykonać i potwierdzić utworzenie VLAN przed przypisaniem portu.\n\n**Sprawdzenie:** Port jest przypisany dopiero po udanym utworzeniu docelowego VLAN.",
+      "card_id": "ccna.automation.practice.case-05.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Porównywać stan istniejący z docelowym i wykonywać tylko brakujące zmiany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Idempotencja”: Drugie uruchomienie tego samego skryptu dopisuje kolejny identyczny wpis zamiast zachować stan. W bieżącym przypadku: Wykonać i potwierdzić utworzenie VLAN przed przypisaniem portu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sprawdzać status i treść odpowiedzi oraz odczyt stanu po zmianie.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak sprawdzania wyniku”: Skrypt drukuje sukces po każdym żądaniu, również po HTTP 403. W bieżącym przypadku: Wykonać i potwierdzić utworzenie VLAN przed przypisaniem portu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Hasło w kodzie”: Skrypt zawiera jawne hasło w wersjonowanym pliku. W bieżącym przypadku: Wykonać i potwierdzić utworzenie VLAN przed przypisaniem portu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wykonać i potwierdzić utworzenie VLAN przed przypisaniem portu.",
+          "feedback_md": "Równoległość jest bezpieczna tylko dla operacji bez nieobsłużonych zależności.\n\n**Rozpoznanie:** Pominięto zależność między utworzeniem obiektu a jego użyciem.\n\n**Działanie:** Wykonać i potwierdzić utworzenie VLAN przed przypisaniem portu.\n\n**Sprawdzenie:** Port jest przypisany dopiero po udanym utworzeniu docelowego VLAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.automation.practice.case-06.2",
+      "revision": 1,
+      "title": "Idempotencja — działanie",
+      "skills": [
+        "ccna.automation.case-06",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/hyperfabric/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/security/asa/api/asa_rest_api.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — JSON i API",
+          "url": "https://developer.cisco.com/docs/intersight/supported-http-methods/"
+        },
+        {
+          "title": "Cisco DevNet — JSON schema types",
+          "url": "https://developer.cisco.com/docs/cisco-observability-platform/define-a-knowledge-type/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.5"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Drugie uruchomienie tego samego skryptu dopisuje kolejny identyczny wpis zamiast zachować stan.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Idempotencja oznacza ten sam stan końcowy przy powtarzaniu tej samej operacji.\n\n**Rozpoznanie:** Skrypt nie jest idempotentny względem zamierzonej konfiguracji.\n\n**Działanie:** Porównywać stan istniejący z docelowym i wykonywać tylko brakujące zmiany.\n\n**Sprawdzenie:** Drugie uruchomienie nie wprowadza dodatkowego diffu.",
+      "card_id": "ccna.automation.practice.case-06.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Porównywać stan istniejący z docelowym i wykonywać tylko brakujące zmiany.",
+          "feedback_md": "Idempotencja oznacza ten sam stan końcowy przy powtarzaniu tej samej operacji.\n\n**Rozpoznanie:** Skrypt nie jest idempotentny względem zamierzonej konfiguracji.\n\n**Działanie:** Porównywać stan istniejący z docelowym i wykonywać tylko brakujące zmiany.\n\n**Sprawdzenie:** Drugie uruchomienie nie wprowadza dodatkowego diffu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wygenerować plan i diff w trybie bez zapisu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Dry run”: Operator chce ocenić masową zmianę bez jej wdrażania. Narzędzie obsługuje generowanie planu i diffu. W bieżącym przypadku: Porównywać stan istniejący z docelowym i wykonywać tylko brakujące zmiany.",
+          "id": "B"
+        },
+        {
+          "text_md": "Usunąć sekret z kodu, zmienić ujawnione dane i użyć bezpiecznego źródła sekretów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Hasło w kodzie”: Skrypt zawiera jawne hasło w wersjonowanym pliku. W bieżącym przypadku: Porównywać stan istniejący z docelowym i wykonywać tylko brakujące zmiany.",
+          "id": "C"
+        },
+        {
+          "text_md": "Użyć udokumentowanej operacji odczytu, np. właściwego GET.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „GET zmienia dane”: Skrypt ma tylko odczytać stan, lecz autor planuje wywołać operację modyfikującą konfigurację. W bieżącym przypadku: Porównywać stan istniejący z docelowym i wykonywać tylko brakujące zmiany.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

@@ -1,0 +1,799 @@
+{
+  "schema_version": 3,
+  "id": "encor.span.practice-5",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.practice.compare-01.1.card",
+      "front_md": "**Zgłoszenie I**\n\nSPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera.\n\n**Zgłoszenie II**\n\nSPAN kopiuje dwa źródła 1 Gb/s na jeden port 1 Gb/s. Pod obciążeniem brakuje pakietów w capture.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Dobrać tx lub both dla źródła SPAN zgodnie z celem analizy.\n\n**Sprawdzenie I:** Przechwycenie zawiera pakiety kierowane do serwera.\n\n**Zgłoszenie II:** Port docelowy nie mieści sumy kopiowanego ruchu. Ograniczyć źródła lub użyć wydajniejszej drogi przechwytywania.\n\n**Sprawdzenie II:** Przy dopasowanym wolumenie znikają straty związane z przepełnieniem mirroringu.\n\n**Zależności:** Rx i tx w SPAN odnoszą się do kierunku na obserwowanym porcie switcha. SPAN może gubić kopie bez odpowiadającej temu utraty ruchu produkcyjnego.",
+      "example": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Port docelowy nie mieści sumy kopiowanego ruchu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.practice.compare-02.1.card",
+      "front_md": "**Zgłoszenie I**\n\nŹródło i odbiorca RSPAN są na różnych switchach, a VLAN RSPAN nie jest dozwolony na pośrednim trunku.\n\n**Zgłoszenie II**\n\nSesja ERSPAN ma nieosiągalny docelowy adres IP kolektora.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Transport warstwy drugiej nie przenosi kopii RSPAN. Dopuścić właściwy remote-span VLAN na wymaganej trasie.\n\n**Sprawdzenie I:** Kopie docierają przez wszystkie pośrednie trunki do sesji docelowej.\n\n**Zgłoszenie II:** Brakuje routingu transportowego dla kopii ERSPAN. Zapewnić trasę i wymagane dopuszczenia do odbiorcy ERSPAN.\n\n**Sprawdzenie II:** Pakiety enkapsulowane docierają do poprawnego adresu kolektora.\n\n**Zależności:** RSPAN wymaga spójnego transportu dedykowanego VLAN. ERSPAN korzysta z transportu IP, więc wymaga osiągalności końca tunelu.",
+      "example": "I — Transport warstwy drugiej nie przenosi kopii RSPAN.\n\nII — Brakuje routingu transportowego dla kopii ERSPAN."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.practice.compare-03.1.card",
+      "front_md": "**Zgłoszenie I**\n\nCapture działa, ale kopiuje Gi1/0/5; badana usługa przechodzi przez Gi1/0/6.\n\n**Zgłoszenie II**\n\nOperator dodaje sesję SPAN, aby zatrzymać podejrzany ruch, lecz ruch nadal jest przekazywany.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Sesja obserwuje niewłaściwe źródło. Zmienić source SPAN na port lub VLAN rzeczywiście niosący usługę.\n\n**Sprawdzenie I:** Kontrolny ruch badanej usługi pojawia się w przechwyceniu.\n\n**Zgłoszenie II:** SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym. Użyć właściwej polityki bezpieczeństwa do blokady, a SPAN do analizy.\n\n**Sprawdzenie II:** Kontrolowany filtr blokuje ruch, niezależnie od obecności sesji mirroringu.\n\n**Zależności:** Poprawna sesja mirroringu nie gwarantuje obserwowania właściwego przepływu. Monitoring i egzekwowanie polityki bezpieczeństwa mają różne funkcje.",
+      "example": "I — Sesja obserwuje niewłaściwe źródło.\n\nII — SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.practice.compare-04.1.card",
+      "front_md": "**Zgłoszenie I**\n\nSPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera.\n\n**Zgłoszenie II**\n\nŹródło i odbiorca RSPAN są na różnych switchach, a VLAN RSPAN nie jest dozwolony na pośrednim trunku.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Dobrać tx lub both dla źródła SPAN zgodnie z celem analizy.\n\n**Sprawdzenie I:** Przechwycenie zawiera pakiety kierowane do serwera.\n\n**Zgłoszenie II:** Transport warstwy drugiej nie przenosi kopii RSPAN. Dopuścić właściwy remote-span VLAN na wymaganej trasie.\n\n**Sprawdzenie II:** Kopie docierają przez wszystkie pośrednie trunki do sesji docelowej.\n\n**Zależności:** Rx i tx w SPAN odnoszą się do kierunku na obserwowanym porcie switcha. RSPAN wymaga spójnego transportu dedykowanego VLAN.",
+      "example": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Transport warstwy drugiej nie przenosi kopii RSPAN."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.practice.compare-05.1.card",
+      "front_md": "**Zgłoszenie I**\n\nSPAN kopiuje dwa źródła 1 Gb/s na jeden port 1 Gb/s. Pod obciążeniem brakuje pakietów w capture.\n\n**Zgłoszenie II**\n\nCapture działa, ale kopiuje Gi1/0/5; badana usługa przechodzi przez Gi1/0/6.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Port docelowy nie mieści sumy kopiowanego ruchu. Ograniczyć źródła lub użyć wydajniejszej drogi przechwytywania.\n\n**Sprawdzenie I:** Przy dopasowanym wolumenie znikają straty związane z przepełnieniem mirroringu.\n\n**Zgłoszenie II:** Sesja obserwuje niewłaściwe źródło. Zmienić source SPAN na port lub VLAN rzeczywiście niosący usługę.\n\n**Sprawdzenie II:** Kontrolny ruch badanej usługi pojawia się w przechwyceniu.\n\n**Zależności:** SPAN może gubić kopie bez odpowiadającej temu utraty ruchu produkcyjnego. Poprawna sesja mirroringu nie gwarantuje obserwowania właściwego przepływu.",
+      "example": "I — Port docelowy nie mieści sumy kopiowanego ruchu.\n\nII — Sesja obserwuje niewłaściwe źródło."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.practice.compare-06.1.card",
+      "front_md": "**Zgłoszenie I**\n\nSesja ERSPAN ma nieosiągalny docelowy adres IP kolektora.\n\n**Zgłoszenie II**\n\nOperator dodaje sesję SPAN, aby zatrzymać podejrzany ruch, lecz ruch nadal jest przekazywany.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brakuje routingu transportowego dla kopii ERSPAN. Zapewnić trasę i wymagane dopuszczenia do odbiorcy ERSPAN.\n\n**Sprawdzenie I:** Pakiety enkapsulowane docierają do poprawnego adresu kolektora.\n\n**Zgłoszenie II:** SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym. Użyć właściwej polityki bezpieczeństwa do blokady, a SPAN do analizy.\n\n**Sprawdzenie II:** Kontrolowany filtr blokuje ruch, niezależnie od obecności sesji mirroringu.\n\n**Zależności:** ERSPAN korzysta z transportu IP, więc wymaga osiągalności końca tunelu. Monitoring i egzekwowanie polityki bezpieczeństwa mają różne funkcje.",
+      "example": "I — Brakuje routingu transportowego dla kopii ERSPAN.\n\nII — SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.practice.compare-07.1.card",
+      "front_md": "**Zgłoszenie I**\n\nSPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera.\n\n**Zgłoszenie II**\n\nOperator dodaje sesję SPAN, aby zatrzymać podejrzany ruch, lecz ruch nadal jest przekazywany.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Dobrać tx lub both dla źródła SPAN zgodnie z celem analizy.\n\n**Sprawdzenie I:** Przechwycenie zawiera pakiety kierowane do serwera.\n\n**Zgłoszenie II:** SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym. Użyć właściwej polityki bezpieczeństwa do blokady, a SPAN do analizy.\n\n**Sprawdzenie II:** Kontrolowany filtr blokuje ruch, niezależnie od obecności sesji mirroringu.\n\n**Zależności:** Rx i tx w SPAN odnoszą się do kierunku na obserwowanym porcie switcha. Monitoring i egzekwowanie polityki bezpieczeństwa mają różne funkcje.",
+      "example": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.practice.compare-08.1.card",
+      "front_md": "**Zgłoszenie I**\n\nSPAN kopiuje dwa źródła 1 Gb/s na jeden port 1 Gb/s. Pod obciążeniem brakuje pakietów w capture.\n\n**Zgłoszenie II**\n\nSesja ERSPAN ma nieosiągalny docelowy adres IP kolektora.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Port docelowy nie mieści sumy kopiowanego ruchu. Ograniczyć źródła lub użyć wydajniejszej drogi przechwytywania.\n\n**Sprawdzenie I:** Przy dopasowanym wolumenie znikają straty związane z przepełnieniem mirroringu.\n\n**Zgłoszenie II:** Brakuje routingu transportowego dla kopii ERSPAN. Zapewnić trasę i wymagane dopuszczenia do odbiorcy ERSPAN.\n\n**Sprawdzenie II:** Pakiety enkapsulowane docierają do poprawnego adresu kolektora.\n\n**Zależności:** SPAN może gubić kopie bez odpowiadającej temu utraty ruchu produkcyjnego. ERSPAN korzysta z transportu IP, więc wymaga osiągalności końca tunelu.",
+      "example": "I — Port docelowy nie mieści sumy kopiowanego ruchu.\n\nII — Brakuje routingu transportowego dla kopii ERSPAN."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.practice.compare-09.1.card",
+      "front_md": "**Zgłoszenie I**\n\nŹródło i odbiorca RSPAN są na różnych switchach, a VLAN RSPAN nie jest dozwolony na pośrednim trunku.\n\n**Zgłoszenie II**\n\nCapture działa, ale kopiuje Gi1/0/5; badana usługa przechodzi przez Gi1/0/6.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Transport warstwy drugiej nie przenosi kopii RSPAN. Dopuścić właściwy remote-span VLAN na wymaganej trasie.\n\n**Sprawdzenie I:** Kopie docierają przez wszystkie pośrednie trunki do sesji docelowej.\n\n**Zgłoszenie II:** Sesja obserwuje niewłaściwe źródło. Zmienić source SPAN na port lub VLAN rzeczywiście niosący usługę.\n\n**Sprawdzenie II:** Kontrolny ruch badanej usługi pojawia się w przechwyceniu.\n\n**Zależności:** RSPAN wymaga spójnego transportu dedykowanego VLAN. Poprawna sesja mirroringu nie gwarantuje obserwowania właściwego przepływu.",
+      "example": "I — Transport warstwy drugiej nie przenosi kopii RSPAN.\n\nII — Sesja obserwuje niewłaściwe źródło."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "id": "encor.span.practice.compare-10.1.card",
+      "front_md": "**Zgłoszenie I**\n\nSPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera.\n\n**Zgłoszenie II**\n\nSesja ERSPAN ma nieosiągalny docelowy adres IP kolektora.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Dobrać tx lub both dla źródła SPAN zgodnie z celem analizy.\n\n**Sprawdzenie I:** Przechwycenie zawiera pakiety kierowane do serwera.\n\n**Zgłoszenie II:** Brakuje routingu transportowego dla kopii ERSPAN. Zapewnić trasę i wymagane dopuszczenia do odbiorcy ERSPAN.\n\n**Sprawdzenie II:** Pakiety enkapsulowane docierają do poprawnego adresu kolektora.\n\n**Zależności:** Rx i tx w SPAN odnoszą się do kierunku na obserwowanym porcie switcha. ERSPAN korzysta z transportu IP, więc wymaga osiągalności końca tunelu.",
+      "example": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Brakuje routingu transportowego dla kopii ERSPAN."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.span.practice.compare-01.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera.\n\n**Zgłoszenie II**\n\nSPAN kopiuje dwa źródła 1 Gb/s na jeden port 1 Gb/s. Pod obciążeniem brakuje pakietów w capture.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Dobrać tx lub both dla źródła SPAN zgodnie z celem analizy.\n\n**Sprawdzenie I:** Przechwycenie zawiera pakiety kierowane do serwera.\n\n**Zgłoszenie II:** Port docelowy nie mieści sumy kopiowanego ruchu. Ograniczyć źródła lub użyć wydajniejszej drogi przechwytywania.\n\n**Sprawdzenie II:** Przy dopasowanym wolumenie znikają straty związane z przepełnieniem mirroringu.\n\n**Zależności:** Rx i tx w SPAN odnoszą się do kierunku na obserwowanym porcie switcha. SPAN może gubić kopie bez odpowiadającej temu utraty ruchu produkcyjnego.",
+      "card_id": "encor.span.practice.compare-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Port docelowy nie mieści sumy kopiowanego ruchu.\n\nII — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Zgłoszenie II: Port docelowy nie mieści sumy kopiowanego ruchu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Port docelowy nie mieści sumy kopiowanego ruchu.",
+          "feedback_md": "**Zgłoszenie I:** Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Dobrać tx lub both dla źródła SPAN zgodnie z celem analizy.\n\n**Sprawdzenie I:** Przechwycenie zawiera pakiety kierowane do serwera.\n\n**Zgłoszenie II:** Port docelowy nie mieści sumy kopiowanego ruchu. Ograniczyć źródła lub użyć wydajniejszej drogi przechwytywania.\n\n**Sprawdzenie II:** Przy dopasowanym wolumenie znikają straty związane z przepełnieniem mirroringu.\n\n**Zależności:** Rx i tx w SPAN odnoszą się do kierunku na obserwowanym porcie switcha. SPAN może gubić kopie bez odpowiadającej temu utraty ruchu produkcyjnego.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Transport warstwy drugiej nie przenosi kopii RSPAN.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Źródło i odbiorca RSPAN są na różnych switchach, a VLAN RSPAN nie jest dozwolony na pośrednim trunku. Dla II: Port docelowy nie mieści sumy kopiowanego ruchu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Transport warstwy drugiej nie przenosi kopii RSPAN.\n\nII — Port docelowy nie mieści sumy kopiowanego ruchu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Źródło i odbiorca RSPAN są na różnych switchach, a VLAN RSPAN nie jest dozwolony na pośrednim trunku. Dla I: Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.span.practice.compare-02.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nŹródło i odbiorca RSPAN są na różnych switchach, a VLAN RSPAN nie jest dozwolony na pośrednim trunku.\n\n**Zgłoszenie II**\n\nSesja ERSPAN ma nieosiągalny docelowy adres IP kolektora.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Transport warstwy drugiej nie przenosi kopii RSPAN. Dopuścić właściwy remote-span VLAN na wymaganej trasie.\n\n**Sprawdzenie I:** Kopie docierają przez wszystkie pośrednie trunki do sesji docelowej.\n\n**Zgłoszenie II:** Brakuje routingu transportowego dla kopii ERSPAN. Zapewnić trasę i wymagane dopuszczenia do odbiorcy ERSPAN.\n\n**Sprawdzenie II:** Pakiety enkapsulowane docierają do poprawnego adresu kolektora.\n\n**Zależności:** RSPAN wymaga spójnego transportu dedykowanego VLAN. ERSPAN korzysta z transportu IP, więc wymaga osiągalności końca tunelu.",
+      "card_id": "encor.span.practice.compare-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Brakuje routingu transportowego dla kopii ERSPAN.\n\nII — Transport warstwy drugiej nie przenosi kopii RSPAN.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Transport warstwy drugiej nie przenosi kopii RSPAN. Zgłoszenie II: Brakuje routingu transportowego dla kopii ERSPAN.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Transport warstwy drugiej nie przenosi kopii RSPAN.\n\nII — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera. Dla II: Brakuje routingu transportowego dla kopii ERSPAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Transport warstwy drugiej nie przenosi kopii RSPAN.\n\nII — Brakuje routingu transportowego dla kopii ERSPAN.",
+          "feedback_md": "**Zgłoszenie I:** Transport warstwy drugiej nie przenosi kopii RSPAN. Dopuścić właściwy remote-span VLAN na wymaganej trasie.\n\n**Sprawdzenie I:** Kopie docierają przez wszystkie pośrednie trunki do sesji docelowej.\n\n**Zgłoszenie II:** Brakuje routingu transportowego dla kopii ERSPAN. Zapewnić trasę i wymagane dopuszczenia do odbiorcy ERSPAN.\n\n**Sprawdzenie II:** Pakiety enkapsulowane docierają do poprawnego adresu kolektora.\n\n**Zależności:** RSPAN wymaga spójnego transportu dedykowanego VLAN. ERSPAN korzysta z transportu IP, więc wymaga osiągalności końca tunelu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Brakuje routingu transportowego dla kopii ERSPAN.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera. Dla I: Transport warstwy drugiej nie przenosi kopii RSPAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.span.practice.compare-03.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nCapture działa, ale kopiuje Gi1/0/5; badana usługa przechodzi przez Gi1/0/6.\n\n**Zgłoszenie II**\n\nOperator dodaje sesję SPAN, aby zatrzymać podejrzany ruch, lecz ruch nadal jest przekazywany.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Sesja obserwuje niewłaściwe źródło. Zmienić source SPAN na port lub VLAN rzeczywiście niosący usługę.\n\n**Sprawdzenie I:** Kontrolny ruch badanej usługi pojawia się w przechwyceniu.\n\n**Zgłoszenie II:** SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym. Użyć właściwej polityki bezpieczeństwa do blokady, a SPAN do analizy.\n\n**Sprawdzenie II:** Kontrolowany filtr blokuje ruch, niezależnie od obecności sesji mirroringu.\n\n**Zależności:** Poprawna sesja mirroringu nie gwarantuje obserwowania właściwego przepływu. Monitoring i egzekwowanie polityki bezpieczeństwa mają różne funkcje.",
+      "card_id": "encor.span.practice.compare-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.\n\nII — Sesja obserwuje niewłaściwe źródło.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Sesja obserwuje niewłaściwe źródło. Zgłoszenie II: SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Sesja obserwuje niewłaściwe źródło.\n\nII — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera. Dla II: SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera. Dla I: Sesja obserwuje niewłaściwe źródło.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sesja obserwuje niewłaściwe źródło.\n\nII — SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.",
+          "feedback_md": "**Zgłoszenie I:** Sesja obserwuje niewłaściwe źródło. Zmienić source SPAN na port lub VLAN rzeczywiście niosący usługę.\n\n**Sprawdzenie I:** Kontrolny ruch badanej usługi pojawia się w przechwyceniu.\n\n**Zgłoszenie II:** SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym. Użyć właściwej polityki bezpieczeństwa do blokady, a SPAN do analizy.\n\n**Sprawdzenie II:** Kontrolowany filtr blokuje ruch, niezależnie od obecności sesji mirroringu.\n\n**Zależności:** Poprawna sesja mirroringu nie gwarantuje obserwowania właściwego przepływu. Monitoring i egzekwowanie polityki bezpieczeństwa mają różne funkcje.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.span.practice.compare-04.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera.\n\n**Zgłoszenie II**\n\nŹródło i odbiorca RSPAN są na różnych switchach, a VLAN RSPAN nie jest dozwolony na pośrednim trunku.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Dobrać tx lub both dla źródła SPAN zgodnie z celem analizy.\n\n**Sprawdzenie I:** Przechwycenie zawiera pakiety kierowane do serwera.\n\n**Zgłoszenie II:** Transport warstwy drugiej nie przenosi kopii RSPAN. Dopuścić właściwy remote-span VLAN na wymaganej trasie.\n\n**Sprawdzenie II:** Kopie docierają przez wszystkie pośrednie trunki do sesji docelowej.\n\n**Zależności:** Rx i tx w SPAN odnoszą się do kierunku na obserwowanym porcie switcha. RSPAN wymaga spójnego transportu dedykowanego VLAN.",
+      "card_id": "encor.span.practice.compare-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Transport warstwy drugiej nie przenosi kopii RSPAN.",
+          "feedback_md": "**Zgłoszenie I:** Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Dobrać tx lub both dla źródła SPAN zgodnie z celem analizy.\n\n**Sprawdzenie I:** Przechwycenie zawiera pakiety kierowane do serwera.\n\n**Zgłoszenie II:** Transport warstwy drugiej nie przenosi kopii RSPAN. Dopuścić właściwy remote-span VLAN na wymaganej trasie.\n\n**Sprawdzenie II:** Kopie docierają przez wszystkie pośrednie trunki do sesji docelowej.\n\n**Zależności:** Rx i tx w SPAN odnoszą się do kierunku na obserwowanym porcie switcha. RSPAN wymaga spójnego transportu dedykowanego VLAN.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Transport warstwy drugiej nie przenosi kopii RSPAN.\n\nII — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Zgłoszenie II: Transport warstwy drugiej nie przenosi kopii RSPAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Port docelowy nie mieści sumy kopiowanego ruchu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SPAN kopiuje dwa źródła 1 Gb/s na jeden port 1 Gb/s. Pod obciążeniem brakuje pakietów w capture. Dla II: Transport warstwy drugiej nie przenosi kopii RSPAN.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Port docelowy nie mieści sumy kopiowanego ruchu.\n\nII — Transport warstwy drugiej nie przenosi kopii RSPAN.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SPAN kopiuje dwa źródła 1 Gb/s na jeden port 1 Gb/s. Pod obciążeniem brakuje pakietów w capture. Dla I: Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.span.practice.compare-05.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSPAN kopiuje dwa źródła 1 Gb/s na jeden port 1 Gb/s. Pod obciążeniem brakuje pakietów w capture.\n\n**Zgłoszenie II**\n\nCapture działa, ale kopiuje Gi1/0/5; badana usługa przechodzi przez Gi1/0/6.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Port docelowy nie mieści sumy kopiowanego ruchu. Ograniczyć źródła lub użyć wydajniejszej drogi przechwytywania.\n\n**Sprawdzenie I:** Przy dopasowanym wolumenie znikają straty związane z przepełnieniem mirroringu.\n\n**Zgłoszenie II:** Sesja obserwuje niewłaściwe źródło. Zmienić source SPAN na port lub VLAN rzeczywiście niosący usługę.\n\n**Sprawdzenie II:** Kontrolny ruch badanej usługi pojawia się w przechwyceniu.\n\n**Zależności:** SPAN może gubić kopie bez odpowiadającej temu utraty ruchu produkcyjnego. Poprawna sesja mirroringu nie gwarantuje obserwowania właściwego przepływu.",
+      "card_id": "encor.span.practice.compare-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sesja obserwuje niewłaściwe źródło.\n\nII — Port docelowy nie mieści sumy kopiowanego ruchu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Port docelowy nie mieści sumy kopiowanego ruchu. Zgłoszenie II: Sesja obserwuje niewłaściwe źródło.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Port docelowy nie mieści sumy kopiowanego ruchu.\n\nII — Sesja obserwuje niewłaściwe źródło.",
+          "feedback_md": "**Zgłoszenie I:** Port docelowy nie mieści sumy kopiowanego ruchu. Ograniczyć źródła lub użyć wydajniejszej drogi przechwytywania.\n\n**Sprawdzenie I:** Przy dopasowanym wolumenie znikają straty związane z przepełnieniem mirroringu.\n\n**Zgłoszenie II:** Sesja obserwuje niewłaściwe źródło. Zmienić source SPAN na port lub VLAN rzeczywiście niosący usługę.\n\n**Sprawdzenie II:** Kontrolny ruch badanej usługi pojawia się w przechwyceniu.\n\n**Zależności:** SPAN może gubić kopie bez odpowiadającej temu utraty ruchu produkcyjnego. Poprawna sesja mirroringu nie gwarantuje obserwowania właściwego przepływu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Port docelowy nie mieści sumy kopiowanego ruchu.\n\nII — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera. Dla II: Sesja obserwuje niewłaściwe źródło.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Sesja obserwuje niewłaściwe źródło.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera. Dla I: Port docelowy nie mieści sumy kopiowanego ruchu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.span.practice.compare-06.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSesja ERSPAN ma nieosiągalny docelowy adres IP kolektora.\n\n**Zgłoszenie II**\n\nOperator dodaje sesję SPAN, aby zatrzymać podejrzany ruch, lecz ruch nadal jest przekazywany.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brakuje routingu transportowego dla kopii ERSPAN. Zapewnić trasę i wymagane dopuszczenia do odbiorcy ERSPAN.\n\n**Sprawdzenie I:** Pakiety enkapsulowane docierają do poprawnego adresu kolektora.\n\n**Zgłoszenie II:** SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym. Użyć właściwej polityki bezpieczeństwa do blokady, a SPAN do analizy.\n\n**Sprawdzenie II:** Kontrolowany filtr blokuje ruch, niezależnie od obecności sesji mirroringu.\n\n**Zależności:** ERSPAN korzysta z transportu IP, więc wymaga osiągalności końca tunelu. Monitoring i egzekwowanie polityki bezpieczeństwa mają różne funkcje.",
+      "card_id": "encor.span.practice.compare-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.\n\nII — Brakuje routingu transportowego dla kopii ERSPAN.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brakuje routingu transportowego dla kopii ERSPAN. Zgłoszenie II: SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Brakuje routingu transportowego dla kopii ERSPAN.\n\nII — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera. Dla II: SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Brakuje routingu transportowego dla kopii ERSPAN.\n\nII — SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.",
+          "feedback_md": "**Zgłoszenie I:** Brakuje routingu transportowego dla kopii ERSPAN. Zapewnić trasę i wymagane dopuszczenia do odbiorcy ERSPAN.\n\n**Sprawdzenie I:** Pakiety enkapsulowane docierają do poprawnego adresu kolektora.\n\n**Zgłoszenie II:** SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym. Użyć właściwej polityki bezpieczeństwa do blokady, a SPAN do analizy.\n\n**Sprawdzenie II:** Kontrolowany filtr blokuje ruch, niezależnie od obecności sesji mirroringu.\n\n**Zależności:** ERSPAN korzysta z transportu IP, więc wymaga osiągalności końca tunelu. Monitoring i egzekwowanie polityki bezpieczeństwa mają różne funkcje.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera. Dla I: Brakuje routingu transportowego dla kopii ERSPAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.span.practice.compare-07.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera.\n\n**Zgłoszenie II**\n\nOperator dodaje sesję SPAN, aby zatrzymać podejrzany ruch, lecz ruch nadal jest przekazywany.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Dobrać tx lub both dla źródła SPAN zgodnie z celem analizy.\n\n**Sprawdzenie I:** Przechwycenie zawiera pakiety kierowane do serwera.\n\n**Zgłoszenie II:** SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym. Użyć właściwej polityki bezpieczeństwa do blokady, a SPAN do analizy.\n\n**Sprawdzenie II:** Kontrolowany filtr blokuje ruch, niezależnie od obecności sesji mirroringu.\n\n**Zależności:** Rx i tx w SPAN odnoszą się do kierunku na obserwowanym porcie switcha. Monitoring i egzekwowanie polityki bezpieczeństwa mają różne funkcje.",
+      "card_id": "encor.span.practice.compare-07.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.\n\nII — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Zgłoszenie II: SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Port docelowy nie mieści sumy kopiowanego ruchu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SPAN kopiuje dwa źródła 1 Gb/s na jeden port 1 Gb/s. Pod obciążeniem brakuje pakietów w capture. Dla II: SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Port docelowy nie mieści sumy kopiowanego ruchu.\n\nII — SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SPAN kopiuje dwa źródła 1 Gb/s na jeden port 1 Gb/s. Pod obciążeniem brakuje pakietów w capture. Dla I: Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym.",
+          "feedback_md": "**Zgłoszenie I:** Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Dobrać tx lub both dla źródła SPAN zgodnie z celem analizy.\n\n**Sprawdzenie I:** Przechwycenie zawiera pakiety kierowane do serwera.\n\n**Zgłoszenie II:** SPAN kopiuje ruch do obserwacji, nie jest filtrem blokującym. Użyć właściwej polityki bezpieczeństwa do blokady, a SPAN do analizy.\n\n**Sprawdzenie II:** Kontrolowany filtr blokuje ruch, niezależnie od obecności sesji mirroringu.\n\n**Zależności:** Rx i tx w SPAN odnoszą się do kierunku na obserwowanym porcie switcha. Monitoring i egzekwowanie polityki bezpieczeństwa mają różne funkcje.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.span.practice.compare-08.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSPAN kopiuje dwa źródła 1 Gb/s na jeden port 1 Gb/s. Pod obciążeniem brakuje pakietów w capture.\n\n**Zgłoszenie II**\n\nSesja ERSPAN ma nieosiągalny docelowy adres IP kolektora.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Port docelowy nie mieści sumy kopiowanego ruchu. Ograniczyć źródła lub użyć wydajniejszej drogi przechwytywania.\n\n**Sprawdzenie I:** Przy dopasowanym wolumenie znikają straty związane z przepełnieniem mirroringu.\n\n**Zgłoszenie II:** Brakuje routingu transportowego dla kopii ERSPAN. Zapewnić trasę i wymagane dopuszczenia do odbiorcy ERSPAN.\n\n**Sprawdzenie II:** Pakiety enkapsulowane docierają do poprawnego adresu kolektora.\n\n**Zależności:** SPAN może gubić kopie bez odpowiadającej temu utraty ruchu produkcyjnego. ERSPAN korzysta z transportu IP, więc wymaga osiągalności końca tunelu.",
+      "card_id": "encor.span.practice.compare-08.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Port docelowy nie mieści sumy kopiowanego ruchu.\n\nII — Brakuje routingu transportowego dla kopii ERSPAN.",
+          "feedback_md": "**Zgłoszenie I:** Port docelowy nie mieści sumy kopiowanego ruchu. Ograniczyć źródła lub użyć wydajniejszej drogi przechwytywania.\n\n**Sprawdzenie I:** Przy dopasowanym wolumenie znikają straty związane z przepełnieniem mirroringu.\n\n**Zgłoszenie II:** Brakuje routingu transportowego dla kopii ERSPAN. Zapewnić trasę i wymagane dopuszczenia do odbiorcy ERSPAN.\n\n**Sprawdzenie II:** Pakiety enkapsulowane docierają do poprawnego adresu kolektora.\n\n**Zależności:** SPAN może gubić kopie bez odpowiadającej temu utraty ruchu produkcyjnego. ERSPAN korzysta z transportu IP, więc wymaga osiągalności końca tunelu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Brakuje routingu transportowego dla kopii ERSPAN.\n\nII — Port docelowy nie mieści sumy kopiowanego ruchu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Port docelowy nie mieści sumy kopiowanego ruchu. Zgłoszenie II: Brakuje routingu transportowego dla kopii ERSPAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Port docelowy nie mieści sumy kopiowanego ruchu.\n\nII — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera. Dla II: Brakuje routingu transportowego dla kopii ERSPAN.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Brakuje routingu transportowego dla kopii ERSPAN.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera. Dla I: Port docelowy nie mieści sumy kopiowanego ruchu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.span.practice.compare-09.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nŹródło i odbiorca RSPAN są na różnych switchach, a VLAN RSPAN nie jest dozwolony na pośrednim trunku.\n\n**Zgłoszenie II**\n\nCapture działa, ale kopiuje Gi1/0/5; badana usługa przechodzi przez Gi1/0/6.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Transport warstwy drugiej nie przenosi kopii RSPAN. Dopuścić właściwy remote-span VLAN na wymaganej trasie.\n\n**Sprawdzenie I:** Kopie docierają przez wszystkie pośrednie trunki do sesji docelowej.\n\n**Zgłoszenie II:** Sesja obserwuje niewłaściwe źródło. Zmienić source SPAN na port lub VLAN rzeczywiście niosący usługę.\n\n**Sprawdzenie II:** Kontrolny ruch badanej usługi pojawia się w przechwyceniu.\n\n**Zależności:** RSPAN wymaga spójnego transportu dedykowanego VLAN. Poprawna sesja mirroringu nie gwarantuje obserwowania właściwego przepływu.",
+      "card_id": "encor.span.practice.compare-09.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sesja obserwuje niewłaściwe źródło.\n\nII — Transport warstwy drugiej nie przenosi kopii RSPAN.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Transport warstwy drugiej nie przenosi kopii RSPAN. Zgłoszenie II: Sesja obserwuje niewłaściwe źródło.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Transport warstwy drugiej nie przenosi kopii RSPAN.\n\nII — Sesja obserwuje niewłaściwe źródło.",
+          "feedback_md": "**Zgłoszenie I:** Transport warstwy drugiej nie przenosi kopii RSPAN. Dopuścić właściwy remote-span VLAN na wymaganej trasie.\n\n**Sprawdzenie I:** Kopie docierają przez wszystkie pośrednie trunki do sesji docelowej.\n\n**Zgłoszenie II:** Sesja obserwuje niewłaściwe źródło. Zmienić source SPAN na port lub VLAN rzeczywiście niosący usługę.\n\n**Sprawdzenie II:** Kontrolny ruch badanej usługi pojawia się w przechwyceniu.\n\n**Zależności:** RSPAN wymaga spójnego transportu dedykowanego VLAN. Poprawna sesja mirroringu nie gwarantuje obserwowania właściwego przepływu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Transport warstwy drugiej nie przenosi kopii RSPAN.\n\nII — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera. Dla II: Sesja obserwuje niewłaściwe źródło.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Sesja obserwuje niewłaściwe źródło.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera. Dla I: Transport warstwy drugiej nie przenosi kopii RSPAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.span.practice.compare-10.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — rozpoznanie",
+      "skills": [
+        "encor.span.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst9600/software/release/17-3/configuration_guide/nmgmt/b_173_nmgmt_9600_cg/configuring_span_and_rspan.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — SPAN, RSPAN i ERSPAN — obserwacja ruchu",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/lan-wan/b-lan-wan/m_lnsw-conf-erspan.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSPAN kopiuje tylko rx z portu serwera, a operator szuka pakietów wysyłanych przez switch do serwera.\n\n**Zgłoszenie II**\n\nSesja ERSPAN ma nieosiągalny docelowy adres IP kolektora.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Dobrać tx lub both dla źródła SPAN zgodnie z celem analizy.\n\n**Sprawdzenie I:** Przechwycenie zawiera pakiety kierowane do serwera.\n\n**Zgłoszenie II:** Brakuje routingu transportowego dla kopii ERSPAN. Zapewnić trasę i wymagane dopuszczenia do odbiorcy ERSPAN.\n\n**Sprawdzenie II:** Pakiety enkapsulowane docierają do poprawnego adresu kolektora.\n\n**Zależności:** Rx i tx w SPAN odnoszą się do kierunku na obserwowanym porcie switcha. ERSPAN korzysta z transportu IP, więc wymaga osiągalności końca tunelu.",
+      "card_id": "encor.span.practice.compare-10.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Brakuje routingu transportowego dla kopii ERSPAN.\n\nII — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Zgłoszenie II: Brakuje routingu transportowego dla kopii ERSPAN.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Port docelowy nie mieści sumy kopiowanego ruchu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: SPAN kopiuje dwa źródła 1 Gb/s na jeden port 1 Gb/s. Pod obciążeniem brakuje pakietów w capture. Dla II: Brakuje routingu transportowego dla kopii ERSPAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wybrany kierunek mirroringu nie obejmuje badanego ruchu.\n\nII — Brakuje routingu transportowego dla kopii ERSPAN.",
+          "feedback_md": "**Zgłoszenie I:** Wybrany kierunek mirroringu nie obejmuje badanego ruchu. Dobrać tx lub both dla źródła SPAN zgodnie z celem analizy.\n\n**Sprawdzenie I:** Przechwycenie zawiera pakiety kierowane do serwera.\n\n**Zgłoszenie II:** Brakuje routingu transportowego dla kopii ERSPAN. Zapewnić trasę i wymagane dopuszczenia do odbiorcy ERSPAN.\n\n**Sprawdzenie II:** Pakiety enkapsulowane docierają do poprawnego adresu kolektora.\n\n**Zależności:** Rx i tx w SPAN odnoszą się do kierunku na obserwowanym porcie switcha. ERSPAN korzysta z transportu IP, więc wymaga osiągalności końca tunelu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Port docelowy nie mieści sumy kopiowanego ruchu.\n\nII — Brakuje routingu transportowego dla kopii ERSPAN.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: SPAN kopiuje dwa źródła 1 Gb/s na jeden port 1 Gb/s. Pod obciążeniem brakuje pakietów w capture. Dla I: Wybrany kierunek mirroringu nie obejmuje badanego ruchu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

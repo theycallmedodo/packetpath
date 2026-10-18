@@ -1,0 +1,799 @@
+{
+  "schema_version": 3,
+  "id": "encor.python.practice-8",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.compare-01.4.card",
+      "front_md": "**Zgłoszenie I**\n\nSkrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1.\n\n**Zgłoszenie II**\n\nKod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Typ string nie jest liczbą całkowitą dla operatora dodawania. Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie I:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.\n\n**Zgłoszenie II:** Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi. Sprawdzić status i strukturę odpowiedzi przed odczytem interfaces.\n\n**Sprawdzenie II:** Odpowiedź błędu jest obsłużona bez niekontrolowanego KeyError.\n\n**Zależności:** Typy danych decydują o semantyce operacji w Pythonie. Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+      "example": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Struktura odpowiedzi błędnej może różnić się od poprawnych danych."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.compare-02.4.card",
+      "front_md": "**Zgłoszenie I**\n\nAPI zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name'].\n\n**Zgłoszenie II**\n\nŻądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Listy indeksuje się pozycją, nie nazwą pola słownika. Iterować po elementach listy i odczytywać name z właściwego słownika.\n\n**Sprawdzenie I:** Każdy element jest przetwarzany jako osobny rekord interfejsu.\n\n**Zgłoszenie II:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie II:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.\n\n**Zależności:** Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu. Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+      "example": "I — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.\n\nII — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.compare-03.4.card",
+      "front_md": "**Zgłoszenie I**\n\nStan z API to 'UP', a skrypt porównuje go do 'up' i uznaje port za nieaktywny.\n\n**Zgłoszenie II**\n\nPętla używa except: pass, więc nieudane połączenia z routerami znikają z raportu.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Porównanie stringów rozróżnia wielkość liter. Normalizować pole tylko wtedy, gdy semantyka API pozwala ignorować wielkość liter.\n\n**Sprawdzenie I:** Wartości UP i up są poprawnie interpretowane bez zmiany pól wrażliwych na litery.\n\n**Zgłoszenie II:** Obsługa wyjątków ukrywa błędy zamiast je raportować. Łapać konkretne wyjątki i zapisywać wynik błędu dla urządzenia.\n\n**Sprawdzenie II:** Raport zawiera zarówno sukcesy, jak i jawne niepowodzenia.\n\n**Zależności:** Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego. Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+      "example": "I — Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.\n\nII — Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.compare-04.4.card",
+      "front_md": "**Zgłoszenie I**\n\nSkrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1.\n\n**Zgłoszenie II**\n\nAPI zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name'].\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Typ string nie jest liczbą całkowitą dla operatora dodawania. Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie I:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.\n\n**Zgłoszenie II:** Listy indeksuje się pozycją, nie nazwą pola słownika. Iterować po elementach listy i odczytywać name z właściwego słownika.\n\n**Sprawdzenie II:** Każdy element jest przetwarzany jako osobny rekord interfejsu.\n\n**Zależności:** Typy danych decydują o semantyce operacji w Pythonie. Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.",
+      "example": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.compare-05.4.card",
+      "front_md": "**Zgłoszenie I**\n\nKod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error.\n\n**Zgłoszenie II**\n\nStan z API to 'UP', a skrypt porównuje go do 'up' i uznaje port za nieaktywny.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi. Sprawdzić status i strukturę odpowiedzi przed odczytem interfaces.\n\n**Sprawdzenie I:** Odpowiedź błędu jest obsłużona bez niekontrolowanego KeyError.\n\n**Zgłoszenie II:** Porównanie stringów rozróżnia wielkość liter. Normalizować pole tylko wtedy, gdy semantyka API pozwala ignorować wielkość liter.\n\n**Sprawdzenie II:** Wartości UP i up są poprawnie interpretowane bez zmiany pól wrażliwych na litery.\n\n**Zależności:** Struktura odpowiedzi błędnej może różnić się od poprawnych danych. Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+      "example": "I — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\nII — Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.compare-06.4.card",
+      "front_md": "**Zgłoszenie I**\n\nŻądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia.\n\n**Zgłoszenie II**\n\nPętla używa except: pass, więc nieudane połączenia z routerami znikają z raportu.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie I:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.\n\n**Zgłoszenie II:** Obsługa wyjątków ukrywa błędy zamiast je raportować. Łapać konkretne wyjątki i zapisywać wynik błędu dla urządzenia.\n\n**Sprawdzenie II:** Raport zawiera zarówno sukcesy, jak i jawne niepowodzenia.\n\n**Zależności:** Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności. Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+      "example": "I — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.\n\nII — Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.compare-07.4.card",
+      "front_md": "**Zgłoszenie I**\n\nSkrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1.\n\n**Zgłoszenie II**\n\nPętla używa except: pass, więc nieudane połączenia z routerami znikają z raportu.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Typ string nie jest liczbą całkowitą dla operatora dodawania. Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie I:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.\n\n**Zgłoszenie II:** Obsługa wyjątków ukrywa błędy zamiast je raportować. Łapać konkretne wyjątki i zapisywać wynik błędu dla urządzenia.\n\n**Sprawdzenie II:** Raport zawiera zarówno sukcesy, jak i jawne niepowodzenia.\n\n**Zależności:** Typy danych decydują o semantyce operacji w Pythonie. Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+      "example": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.compare-08.4.card",
+      "front_md": "**Zgłoszenie I**\n\nKod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error.\n\n**Zgłoszenie II**\n\nŻądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi. Sprawdzić status i strukturę odpowiedzi przed odczytem interfaces.\n\n**Sprawdzenie I:** Odpowiedź błędu jest obsłużona bez niekontrolowanego KeyError.\n\n**Zgłoszenie II:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie II:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.\n\n**Zależności:** Struktura odpowiedzi błędnej może różnić się od poprawnych danych. Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+      "example": "I — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\nII — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.compare-09.4.card",
+      "front_md": "**Zgłoszenie I**\n\nAPI zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name'].\n\n**Zgłoszenie II**\n\nStan z API to 'UP', a skrypt porównuje go do 'up' i uznaje port za nieaktywny.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Listy indeksuje się pozycją, nie nazwą pola słownika. Iterować po elementach listy i odczytywać name z właściwego słownika.\n\n**Sprawdzenie I:** Każdy element jest przetwarzany jako osobny rekord interfejsu.\n\n**Zgłoszenie II:** Porównanie stringów rozróżnia wielkość liter. Normalizować pole tylko wtedy, gdy semantyka API pozwala ignorować wielkość liter.\n\n**Sprawdzenie II:** Wartości UP i up są poprawnie interpretowane bez zmiany pól wrażliwych na litery.\n\n**Zależności:** Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu. Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+      "example": "I — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.\n\nII — Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "id": "encor.python.practice.compare-10.4.card",
+      "front_md": "**Zgłoszenie I**\n\nSkrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1.\n\n**Zgłoszenie II**\n\nŻądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Typ string nie jest liczbą całkowitą dla operatora dodawania. Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie I:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.\n\n**Zgłoszenie II:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie II:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.\n\n**Zależności:** Typy danych decydują o semantyce operacji w Pythonie. Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+      "example": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.python.practice.compare-01.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSkrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1.\n\n**Zgłoszenie II**\n\nKod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Typ string nie jest liczbą całkowitą dla operatora dodawania. Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie I:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.\n\n**Zgłoszenie II:** Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi. Sprawdzić status i strukturę odpowiedzi przed odczytem interfaces.\n\n**Sprawdzenie II:** Odpowiedź błędu jest obsłużona bez niekontrolowanego KeyError.\n\n**Zależności:** Typy danych decydują o semantyce operacji w Pythonie. Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+      "card_id": "encor.python.practice.compare-01.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+          "feedback_md": "**Zgłoszenie I:** Typ string nie jest liczbą całkowitą dla operatora dodawania. Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie I:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.\n\n**Zgłoszenie II:** Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi. Sprawdzić status i strukturę odpowiedzi przed odczytem interfaces.\n\n**Sprawdzenie II:** Odpowiedź błędu jest obsłużona bez niekontrolowanego KeyError.\n\n**Zależności:** Typy danych decydują o semantyce operacji w Pythonie. Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\nII — Typy danych decydują o semantyce operacji w Pythonie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Typ string nie jest liczbą całkowitą dla operatora dodawania. Zgłoszenie II: Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: API zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name']. Dla II: Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.\n\nII — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: API zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name']. Dla I: Typy danych decydują o semantyce operacji w Pythonie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.python.practice.compare-02.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAPI zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name'].\n\n**Zgłoszenie II**\n\nŻądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Listy indeksuje się pozycją, nie nazwą pola słownika. Iterować po elementach listy i odczytywać name z właściwego słownika.\n\n**Sprawdzenie I:** Każdy element jest przetwarzany jako osobny rekord interfejsu.\n\n**Zgłoszenie II:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie II:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.\n\n**Zależności:** Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu. Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+      "card_id": "encor.python.practice.compare-02.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.\n\nII — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Listy indeksuje się pozycją, nie nazwą pola słownika. Zgłoszenie II: Brak ograniczenia oczekiwania utrudnia kontrolę awarii.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.\n\nII — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "feedback_md": "**Zgłoszenie I:** Listy indeksuje się pozycją, nie nazwą pola słownika. Iterować po elementach listy i odczytywać name z właściwego słownika.\n\n**Sprawdzenie I:** Każdy element jest przetwarzany jako osobny rekord interfejsu.\n\n**Zgłoszenie II:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie II:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.\n\n**Zależności:** Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu. Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.\n\nII — Typy danych decydują o semantyce operacji w Pythonie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. Dla II: Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. Dla I: Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.python.practice.compare-03.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nStan z API to 'UP', a skrypt porównuje go do 'up' i uznaje port za nieaktywny.\n\n**Zgłoszenie II**\n\nPętla używa except: pass, więc nieudane połączenia z routerami znikają z raportu.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Porównanie stringów rozróżnia wielkość liter. Normalizować pole tylko wtedy, gdy semantyka API pozwala ignorować wielkość liter.\n\n**Sprawdzenie I:** Wartości UP i up są poprawnie interpretowane bez zmiany pól wrażliwych na litery.\n\n**Zgłoszenie II:** Obsługa wyjątków ukrywa błędy zamiast je raportować. Łapać konkretne wyjątki i zapisywać wynik błędu dla urządzenia.\n\n**Sprawdzenie II:** Raport zawiera zarówno sukcesy, jak i jawne niepowodzenia.\n\n**Zależności:** Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego. Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+      "card_id": "encor.python.practice.compare-03.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.\n\nII — Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Porównanie stringów rozróżnia wielkość liter. Zgłoszenie II: Obsługa wyjątków ukrywa błędy zamiast je raportować.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.\n\nII — Typy danych decydują o semantyce operacji w Pythonie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. Dla II: Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.\n\nII — Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+          "feedback_md": "**Zgłoszenie I:** Porównanie stringów rozróżnia wielkość liter. Normalizować pole tylko wtedy, gdy semantyka API pozwala ignorować wielkość liter.\n\n**Sprawdzenie I:** Wartości UP i up są poprawnie interpretowane bez zmiany pól wrażliwych na litery.\n\n**Zgłoszenie II:** Obsługa wyjątków ukrywa błędy zamiast je raportować. Łapać konkretne wyjątki i zapisywać wynik błędu dla urządzenia.\n\n**Sprawdzenie II:** Raport zawiera zarówno sukcesy, jak i jawne niepowodzenia.\n\n**Zależności:** Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego. Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. Dla I: Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.python.practice.compare-04.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSkrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1.\n\n**Zgłoszenie II**\n\nAPI zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name'].\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Typ string nie jest liczbą całkowitą dla operatora dodawania. Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie I:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.\n\n**Zgłoszenie II:** Listy indeksuje się pozycją, nie nazwą pola słownika. Iterować po elementach listy i odczytywać name z właściwego słownika.\n\n**Sprawdzenie II:** Każdy element jest przetwarzany jako osobny rekord interfejsu.\n\n**Zależności:** Typy danych decydują o semantyce operacji w Pythonie. Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.",
+      "card_id": "encor.python.practice.compare-04.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.\n\nII — Typy danych decydują o semantyce operacji w Pythonie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Typ string nie jest liczbą całkowitą dla operatora dodawania. Zgłoszenie II: Listy indeksuje się pozycją, nie nazwą pola słownika.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Kod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error. Dla II: Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\nII — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Kod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error. Dla I: Typy danych decydują o semantyce operacji w Pythonie.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.",
+          "feedback_md": "**Zgłoszenie I:** Typ string nie jest liczbą całkowitą dla operatora dodawania. Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie I:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.\n\n**Zgłoszenie II:** Listy indeksuje się pozycją, nie nazwą pola słownika. Iterować po elementach listy i odczytywać name z właściwego słownika.\n\n**Sprawdzenie II:** Każdy element jest przetwarzany jako osobny rekord interfejsu.\n\n**Zależności:** Typy danych decydują o semantyce operacji w Pythonie. Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.python.practice.compare-05.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error.\n\n**Zgłoszenie II**\n\nStan z API to 'UP', a skrypt porównuje go do 'up' i uznaje port za nieaktywny.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi. Sprawdzić status i strukturę odpowiedzi przed odczytem interfaces.\n\n**Sprawdzenie I:** Odpowiedź błędu jest obsłużona bez niekontrolowanego KeyError.\n\n**Zgłoszenie II:** Porównanie stringów rozróżnia wielkość liter. Normalizować pole tylko wtedy, gdy semantyka API pozwala ignorować wielkość liter.\n\n**Sprawdzenie II:** Wartości UP i up są poprawnie interpretowane bez zmiany pól wrażliwych na litery.\n\n**Zależności:** Struktura odpowiedzi błędnej może różnić się od poprawnych danych. Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+      "card_id": "encor.python.practice.compare-05.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\nII — Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+          "feedback_md": "**Zgłoszenie I:** Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi. Sprawdzić status i strukturę odpowiedzi przed odczytem interfaces.\n\n**Sprawdzenie I:** Odpowiedź błędu jest obsłużona bez niekontrolowanego KeyError.\n\n**Zgłoszenie II:** Porównanie stringów rozróżnia wielkość liter. Normalizować pole tylko wtedy, gdy semantyka API pozwala ignorować wielkość liter.\n\n**Sprawdzenie II:** Wartości UP i up są poprawnie interpretowane bez zmiany pól wrażliwych na litery.\n\n**Zależności:** Struktura odpowiedzi błędnej może różnić się od poprawnych danych. Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.\n\nII — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi. Zgłoszenie II: Porównanie stringów rozróżnia wielkość liter.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\nII — Typy danych decydują o semantyce operacji w Pythonie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. Dla II: Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. Dla I: Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.python.practice.compare-06.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nŻądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia.\n\n**Zgłoszenie II**\n\nPętla używa except: pass, więc nieudane połączenia z routerami znikają z raportu.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie I:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.\n\n**Zgłoszenie II:** Obsługa wyjątków ukrywa błędy zamiast je raportować. Łapać konkretne wyjątki i zapisywać wynik błędu dla urządzenia.\n\n**Sprawdzenie II:** Raport zawiera zarówno sukcesy, jak i jawne niepowodzenia.\n\n**Zależności:** Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności. Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+      "card_id": "encor.python.practice.compare-06.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.\n\nII — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Zgłoszenie II: Obsługa wyjątków ukrywa błędy zamiast je raportować.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.\n\nII — Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+          "feedback_md": "**Zgłoszenie I:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie I:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.\n\n**Zgłoszenie II:** Obsługa wyjątków ukrywa błędy zamiast je raportować. Łapać konkretne wyjątki i zapisywać wynik błędu dla urządzenia.\n\n**Sprawdzenie II:** Raport zawiera zarówno sukcesy, jak i jawne niepowodzenia.\n\n**Zależności:** Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności. Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.\n\nII — Typy danych decydują o semantyce operacji w Pythonie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. Dla II: Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. Dla I: Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.python.practice.compare-07.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSkrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1.\n\n**Zgłoszenie II**\n\nPętla używa except: pass, więc nieudane połączenia z routerami znikają z raportu.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Typ string nie jest liczbą całkowitą dla operatora dodawania. Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie I:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.\n\n**Zgłoszenie II:** Obsługa wyjątków ukrywa błędy zamiast je raportować. Łapać konkretne wyjątki i zapisywać wynik błędu dla urządzenia.\n\n**Sprawdzenie II:** Raport zawiera zarówno sukcesy, jak i jawne niepowodzenia.\n\n**Zależności:** Typy danych decydują o semantyce operacji w Pythonie. Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+      "card_id": "encor.python.practice.compare-07.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.\n\nII — Typy danych decydują o semantyce operacji w Pythonie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Typ string nie jest liczbą całkowitą dla operatora dodawania. Zgłoszenie II: Obsługa wyjątków ukrywa błędy zamiast je raportować.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Kod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error. Dla II: Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+          "feedback_md": "**Zgłoszenie I:** Typ string nie jest liczbą całkowitą dla operatora dodawania. Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie I:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.\n\n**Zgłoszenie II:** Obsługa wyjątków ukrywa błędy zamiast je raportować. Łapać konkretne wyjątki i zapisywać wynik błędu dla urządzenia.\n\n**Sprawdzenie II:** Raport zawiera zarówno sukcesy, jak i jawne niepowodzenia.\n\n**Zależności:** Typy danych decydują o semantyce operacji w Pythonie. Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\nII — Brak wyjątku na ekranie nie jest dowodem powodzenia automatyzacji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Kod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error. Dla I: Typy danych decydują o semantyce operacji w Pythonie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.python.practice.compare-08.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error.\n\n**Zgłoszenie II**\n\nŻądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi. Sprawdzić status i strukturę odpowiedzi przed odczytem interfaces.\n\n**Sprawdzenie I:** Odpowiedź błędu jest obsłużona bez niekontrolowanego KeyError.\n\n**Zgłoszenie II:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie II:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.\n\n**Zależności:** Struktura odpowiedzi błędnej może różnić się od poprawnych danych. Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+      "card_id": "encor.python.practice.compare-08.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.\n\nII — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi. Zgłoszenie II: Brak ograniczenia oczekiwania utrudnia kontrolę awarii.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\nII — Typy danych decydują o semantyce operacji w Pythonie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. Dla II: Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. Dla I: Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\nII — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "feedback_md": "**Zgłoszenie I:** Skrypt zakłada obecność klucza, którego nie ma w tej odpowiedzi. Sprawdzić status i strukturę odpowiedzi przed odczytem interfaces.\n\n**Sprawdzenie I:** Odpowiedź błędu jest obsłużona bez niekontrolowanego KeyError.\n\n**Zgłoszenie II:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie II:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.\n\n**Zależności:** Struktura odpowiedzi błędnej może różnić się od poprawnych danych. Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.python.practice.compare-09.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAPI zwraca listę słowników interfejsów, a kod próbuje odczytać ją przez data['name'].\n\n**Zgłoszenie II**\n\nStan z API to 'UP', a skrypt porównuje go do 'up' i uznaje port za nieaktywny.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Listy indeksuje się pozycją, nie nazwą pola słownika. Iterować po elementach listy i odczytywać name z właściwego słownika.\n\n**Sprawdzenie I:** Każdy element jest przetwarzany jako osobny rekord interfejsu.\n\n**Zgłoszenie II:** Porównanie stringów rozróżnia wielkość liter. Normalizować pole tylko wtedy, gdy semantyka API pozwala ignorować wielkość liter.\n\n**Sprawdzenie II:** Wartości UP i up są poprawnie interpretowane bez zmiany pól wrażliwych na litery.\n\n**Zależności:** Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu. Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+      "card_id": "encor.python.practice.compare-09.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.\n\nII — Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+          "feedback_md": "**Zgłoszenie I:** Listy indeksuje się pozycją, nie nazwą pola słownika. Iterować po elementach listy i odczytywać name z właściwego słownika.\n\n**Sprawdzenie I:** Każdy element jest przetwarzany jako osobny rekord interfejsu.\n\n**Zgłoszenie II:** Porównanie stringów rozróżnia wielkość liter. Normalizować pole tylko wtedy, gdy semantyka API pozwala ignorować wielkość liter.\n\n**Sprawdzenie II:** Wartości UP i up są poprawnie interpretowane bez zmiany pól wrażliwych na litery.\n\n**Zależności:** Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu. Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.\n\nII — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Listy indeksuje się pozycją, nie nazwą pola słownika. Zgłoszenie II: Porównanie stringów rozróżnia wielkość liter.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.\n\nII — Typy danych decydują o semantyce operacji w Pythonie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. Dla II: Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Normalizacja musi odpowiadać znaczeniu danych, a nie być ślepo stosowana do wszystkiego.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Skrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1. Dla I: Lista rekordów i pojedynczy rekord mają odmienne sposoby dostępu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.python.practice.compare-10.4",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — zależności",
+      "skills": [
+        "encor.python.contrast",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Python — odczyt skryptów sieciowych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Python — tutorial",
+          "url": "https://docs.python.org/3/tutorial/"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.1"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSkrypt otrzymuje JSON z licznikiem zapisanym jako string '10' i próbuje dodać do niego liczbę 1.\n\n**Zgłoszenie II**\n\nŻądanie HTTP nie ma timeout i po awarii endpointu skrypt długo blokuje kolejne urządzenia.\n\nOceń każde zgłoszenie oddzielnie. Która zasada najbezpośredniej wyjaśnia opisany mechanizm? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Typ string nie jest liczbą całkowitą dla operatora dodawania. Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie I:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.\n\n**Zgłoszenie II:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie II:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.\n\n**Zależności:** Typy danych decydują o semantyce operacji w Pythonie. Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+      "card_id": "encor.python.practice.compare-10.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.\n\nII — Typy danych decydują o semantyce operacji w Pythonie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Typ string nie jest liczbą całkowitą dla operatora dodawania. Zgłoszenie II: Brak ograniczenia oczekiwania utrudnia kontrolę awarii.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "feedback_md": "**Zgłoszenie I:** Typ string nie jest liczbą całkowitą dla operatora dodawania. Zweryfikować dane i jawnie przekształcić poprawny string na int przed obliczeniem.\n\n**Sprawdzenie I:** Wynik liczbowy wynosi 11, a błędne dane mają obsłużony błąd konwersji.\n\n**Zgłoszenie II:** Brak ograniczenia oczekiwania utrudnia kontrolę awarii. Ustawić rozsądny timeout i obsłużyć jego wyjątek.\n\n**Sprawdzenie II:** Niedostępne urządzenie kończy próbę w kontrolowanym czasie, a raport zawiera błąd.\n\n**Zależności:** Typy danych decydują o semantyce operacji w Pythonie. Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Typy danych decydują o semantyce operacji w Pythonie.\n\nII — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Kod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error. Dla II: Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Struktura odpowiedzi błędnej może różnić się od poprawnych danych.\n\nII — Automatyzacja sieciowa wymaga jawnej obsługi opóźnień i niedostępności.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Kod używa response['interfaces'], ale odpowiedź błędu zawiera tylko pole error. Dla I: Typy danych decydują o semantyce operacji w Pythonie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

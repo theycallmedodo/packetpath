@@ -1,0 +1,799 @@
+{
+  "schema_version": 3,
+  "id": "encor.routing-compare.practice-6",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.practice.compare-01.2.card",
+      "front_md": "**Zgłoszenie I**\n\nTen sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach.\n\n**Zgłoszenie II**\n\nOperator porównuje koszt OSPF 20 z metryką EIGRP 256000 i twierdzi, że OSPF zawsze wygra.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** RIB preferuje źródło z niższym AD. Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\n**Sprawdzenie I:** Show ip route wskazuje EIGRP jako aktywne źródło /24.\n\n**Zgłoszenie II:** Metryki różnych protokołów nie mają wspólnej skali. Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\n**Sprawdzenie II:** Analiza wskazuje AD jako kryterium między protokołami dla identycznego prefiksu.\n\n**Zależności:** AD porównuje źródła tras do tego samego prefiksu, nie ich metryki w różnych jednostkach. Liczby metryk OSPF i EIGRP nie służą do bezpośredniego porównania między nimi.",
+      "example": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.practice.compare-02.2.card",
+      "front_md": "**Zgłoszenie I**\n\nEIGRP ma successor i kandydata z reported distance mniejszym od bieżącej feasible distance.\n\n**Zgłoszenie II**\n\nPo utracie successor nie ma kandydata spełniającego feasibility, choć w sieci może istnieć droga.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Kandydat spełnia warunek feasibility. Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\n**Sprawdzenie I:** RD kandydata jest ściśle mniejsze od FD.\n\n**Zgłoszenie II:** Router nie ma gotowej lokalnie potwierdzonej alternatywy. Analizować przejście DUAL w active i wymianę query/reply.\n\n**Sprawdzenie II:** Po zakończeniu obliczenia trasa wraca do passive z poprawnym wynikiem.\n\n**Zależności:** Warunek feasibility zapewnia lokalnie rozpoznawalną bezpętlową alternatywę. Brak feasible successor nie oznacza automatycznie, że żadna droga nie istnieje.",
+      "example": "I — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\nII — Analizować przejście DUAL w active i wymianę query/reply."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.practice.compare-03.2.card",
+      "front_md": "**Zgłoszenie I**\n\nDwa routery w tym samym obszarze mają zsynchronizowaną LSDB, lecz inne najlepsze drogi do prefiksu.\n\n**Zgłoszenie II**\n\nOSPF oferuje /24, a EIGRP /16 obejmujące ten sam host. Obie trasy są w RIB.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Każdy router liczy SPF z własnego położenia. Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\n**Sprawdzenie I:** Wybrane drogi odpowiadają lokalnym drzewom najkrótszych ścieżek.\n\n**Zgłoszenie II:** Do pakietu pasuje bardziej szczegółowe /24. Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.\n\n**Sprawdzenie II:** Lookup adresu hosta wskazuje /24 OSPF.\n\n**Zależności:** Wspólna baza topologii nie oznacza identycznych tablic routingu. Longest prefix match dotyczy przekazywania, a AD wyboru źródła dla konkretnego prefiksu.",
+      "example": "I — Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\nII — Przekazać pakiet według /24 niezależnie od niższego AD trasy /16."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.practice.compare-04.2.card",
+      "front_md": "**Zgłoszenie I**\n\nTen sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach.\n\n**Zgłoszenie II**\n\nEIGRP ma successor i kandydata z reported distance mniejszym od bieżącej feasible distance.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** RIB preferuje źródło z niższym AD. Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\n**Sprawdzenie I:** Show ip route wskazuje EIGRP jako aktywne źródło /24.\n\n**Zgłoszenie II:** Kandydat spełnia warunek feasibility. Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\n**Sprawdzenie II:** RD kandydata jest ściśle mniejsze od FD.\n\n**Zależności:** AD porównuje źródła tras do tego samego prefiksu, nie ich metryki w różnych jednostkach. Warunek feasibility zapewnia lokalnie rozpoznawalną bezpętlową alternatywę.",
+      "example": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.practice.compare-05.2.card",
+      "front_md": "**Zgłoszenie I**\n\nOperator porównuje koszt OSPF 20 z metryką EIGRP 256000 i twierdzi, że OSPF zawsze wygra.\n\n**Zgłoszenie II**\n\nDwa routery w tym samym obszarze mają zsynchronizowaną LSDB, lecz inne najlepsze drogi do prefiksu.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Metryki różnych protokołów nie mają wspólnej skali. Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\n**Sprawdzenie I:** Analiza wskazuje AD jako kryterium między protokołami dla identycznego prefiksu.\n\n**Zgłoszenie II:** Każdy router liczy SPF z własnego położenia. Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\n**Sprawdzenie II:** Wybrane drogi odpowiadają lokalnym drzewom najkrótszych ścieżek.\n\n**Zależności:** Liczby metryk OSPF i EIGRP nie służą do bezpośredniego porównania między nimi. Wspólna baza topologii nie oznacza identycznych tablic routingu.",
+      "example": "I — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\nII — Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.practice.compare-06.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPo utracie successor nie ma kandydata spełniającego feasibility, choć w sieci może istnieć droga.\n\n**Zgłoszenie II**\n\nOSPF oferuje /24, a EIGRP /16 obejmujące ten sam host. Obie trasy są w RIB.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Router nie ma gotowej lokalnie potwierdzonej alternatywy. Analizować przejście DUAL w active i wymianę query/reply.\n\n**Sprawdzenie I:** Po zakończeniu obliczenia trasa wraca do passive z poprawnym wynikiem.\n\n**Zgłoszenie II:** Do pakietu pasuje bardziej szczegółowe /24. Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.\n\n**Sprawdzenie II:** Lookup adresu hosta wskazuje /24 OSPF.\n\n**Zależności:** Brak feasible successor nie oznacza automatycznie, że żadna droga nie istnieje. Longest prefix match dotyczy przekazywania, a AD wyboru źródła dla konkretnego prefiksu.",
+      "example": "I — Analizować przejście DUAL w active i wymianę query/reply.\n\nII — Przekazać pakiet według /24 niezależnie od niższego AD trasy /16."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.practice.compare-07.2.card",
+      "front_md": "**Zgłoszenie I**\n\nTen sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach.\n\n**Zgłoszenie II**\n\nOSPF oferuje /24, a EIGRP /16 obejmujące ten sam host. Obie trasy są w RIB.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** RIB preferuje źródło z niższym AD. Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\n**Sprawdzenie I:** Show ip route wskazuje EIGRP jako aktywne źródło /24.\n\n**Zgłoszenie II:** Do pakietu pasuje bardziej szczegółowe /24. Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.\n\n**Sprawdzenie II:** Lookup adresu hosta wskazuje /24 OSPF.\n\n**Zależności:** AD porównuje źródła tras do tego samego prefiksu, nie ich metryki w różnych jednostkach. Longest prefix match dotyczy przekazywania, a AD wyboru źródła dla konkretnego prefiksu.",
+      "example": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Przekazać pakiet według /24 niezależnie od niższego AD trasy /16."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.practice.compare-08.2.card",
+      "front_md": "**Zgłoszenie I**\n\nOperator porównuje koszt OSPF 20 z metryką EIGRP 256000 i twierdzi, że OSPF zawsze wygra.\n\n**Zgłoszenie II**\n\nPo utracie successor nie ma kandydata spełniającego feasibility, choć w sieci może istnieć droga.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Metryki różnych protokołów nie mają wspólnej skali. Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\n**Sprawdzenie I:** Analiza wskazuje AD jako kryterium między protokołami dla identycznego prefiksu.\n\n**Zgłoszenie II:** Router nie ma gotowej lokalnie potwierdzonej alternatywy. Analizować przejście DUAL w active i wymianę query/reply.\n\n**Sprawdzenie II:** Po zakończeniu obliczenia trasa wraca do passive z poprawnym wynikiem.\n\n**Zależności:** Liczby metryk OSPF i EIGRP nie służą do bezpośredniego porównania między nimi. Brak feasible successor nie oznacza automatycznie, że żadna droga nie istnieje.",
+      "example": "I — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\nII — Analizować przejście DUAL w active i wymianę query/reply."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.practice.compare-09.2.card",
+      "front_md": "**Zgłoszenie I**\n\nEIGRP ma successor i kandydata z reported distance mniejszym od bieżącej feasible distance.\n\n**Zgłoszenie II**\n\nDwa routery w tym samym obszarze mają zsynchronizowaną LSDB, lecz inne najlepsze drogi do prefiksu.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Kandydat spełnia warunek feasibility. Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\n**Sprawdzenie I:** RD kandydata jest ściśle mniejsze od FD.\n\n**Zgłoszenie II:** Każdy router liczy SPF z własnego położenia. Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\n**Sprawdzenie II:** Wybrane drogi odpowiadają lokalnym drzewom najkrótszych ścieżek.\n\n**Zależności:** Warunek feasibility zapewnia lokalnie rozpoznawalną bezpętlową alternatywę. Wspólna baza topologii nie oznacza identycznych tablic routingu.",
+      "example": "I — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\nII — Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "id": "encor.routing-compare.practice.compare-10.2.card",
+      "front_md": "**Zgłoszenie I**\n\nTen sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach.\n\n**Zgłoszenie II**\n\nPo utracie successor nie ma kandydata spełniającego feasibility, choć w sieci może istnieć droga.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** RIB preferuje źródło z niższym AD. Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\n**Sprawdzenie I:** Show ip route wskazuje EIGRP jako aktywne źródło /24.\n\n**Zgłoszenie II:** Router nie ma gotowej lokalnie potwierdzonej alternatywy. Analizować przejście DUAL w active i wymianę query/reply.\n\n**Sprawdzenie II:** Po zakończeniu obliczenia trasa wraca do passive z poprawnym wynikiem.\n\n**Zależności:** AD porównuje źródła tras do tego samego prefiksu, nie ich metryki w różnych jednostkach. Brak feasible successor nie oznacza automatycznie, że żadna droga nie istnieje.",
+      "example": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Analizować przejście DUAL w active i wymianę query/reply."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.routing-compare.practice.compare-01.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nTen sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach.\n\n**Zgłoszenie II**\n\nOperator porównuje koszt OSPF 20 z metryką EIGRP 256000 i twierdzi, że OSPF zawsze wygra.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** RIB preferuje źródło z niższym AD. Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\n**Sprawdzenie I:** Show ip route wskazuje EIGRP jako aktywne źródło /24.\n\n**Zgłoszenie II:** Metryki różnych protokołów nie mają wspólnej skali. Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\n**Sprawdzenie II:** Analiza wskazuje AD jako kryterium między protokołami dla identycznego prefiksu.\n\n**Zależności:** AD porównuje źródła tras do tego samego prefiksu, nie ich metryki w różnych jednostkach. Liczby metryk OSPF i EIGRP nie służą do bezpośredniego porównania między nimi.",
+      "card_id": "encor.routing-compare.practice.compare-01.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\nII — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: RIB preferuje źródło z niższym AD. Zgłoszenie II: Metryki różnych protokołów nie mają wspólnej skali.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: EIGRP ma successor i kandydata z reported distance mniejszym od bieżącej feasible distance. Dla II: Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.",
+          "feedback_md": "**Zgłoszenie I:** RIB preferuje źródło z niższym AD. Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\n**Sprawdzenie I:** Show ip route wskazuje EIGRP jako aktywne źródło /24.\n\n**Zgłoszenie II:** Metryki różnych protokołów nie mają wspólnej skali. Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\n**Sprawdzenie II:** Analiza wskazuje AD jako kryterium między protokołami dla identycznego prefiksu.\n\n**Zależności:** AD porównuje źródła tras do tego samego prefiksu, nie ich metryki w różnych jednostkach. Liczby metryk OSPF i EIGRP nie służą do bezpośredniego porównania między nimi.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\nII — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: EIGRP ma successor i kandydata z reported distance mniejszym od bieżącej feasible distance. Dla I: Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.routing-compare.practice.compare-02.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nEIGRP ma successor i kandydata z reported distance mniejszym od bieżącej feasible distance.\n\n**Zgłoszenie II**\n\nPo utracie successor nie ma kandydata spełniającego feasibility, choć w sieci może istnieć droga.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Kandydat spełnia warunek feasibility. Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\n**Sprawdzenie I:** RD kandydata jest ściśle mniejsze od FD.\n\n**Zgłoszenie II:** Router nie ma gotowej lokalnie potwierdzonej alternatywy. Analizować przejście DUAL w active i wymianę query/reply.\n\n**Sprawdzenie II:** Po zakończeniu obliczenia trasa wraca do passive z poprawnym wynikiem.\n\n**Zależności:** Warunek feasibility zapewnia lokalnie rozpoznawalną bezpętlową alternatywę. Brak feasible successor nie oznacza automatycznie, że żadna droga nie istnieje.",
+      "card_id": "encor.routing-compare.practice.compare-02.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Analizować przejście DUAL w active i wymianę query/reply.\n\nII — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Kandydat spełnia warunek feasibility. Zgłoszenie II: Router nie ma gotowej lokalnie potwierdzonej alternatywy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\nII — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Ten sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach. Dla II: Analizować przejście DUAL w active i wymianę query/reply.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Analizować przejście DUAL w active i wymianę query/reply.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Ten sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach. Dla I: Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\nII — Analizować przejście DUAL w active i wymianę query/reply.",
+          "feedback_md": "**Zgłoszenie I:** Kandydat spełnia warunek feasibility. Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\n**Sprawdzenie I:** RD kandydata jest ściśle mniejsze od FD.\n\n**Zgłoszenie II:** Router nie ma gotowej lokalnie potwierdzonej alternatywy. Analizować przejście DUAL w active i wymianę query/reply.\n\n**Sprawdzenie II:** Po zakończeniu obliczenia trasa wraca do passive z poprawnym wynikiem.\n\n**Zależności:** Warunek feasibility zapewnia lokalnie rozpoznawalną bezpętlową alternatywę. Brak feasible successor nie oznacza automatycznie, że żadna droga nie istnieje.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.routing-compare.practice.compare-03.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDwa routery w tym samym obszarze mają zsynchronizowaną LSDB, lecz inne najlepsze drogi do prefiksu.\n\n**Zgłoszenie II**\n\nOSPF oferuje /24, a EIGRP /16 obejmujące ten sam host. Obie trasy są w RIB.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Każdy router liczy SPF z własnego położenia. Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\n**Sprawdzenie I:** Wybrane drogi odpowiadają lokalnym drzewom najkrótszych ścieżek.\n\n**Zgłoszenie II:** Do pakietu pasuje bardziej szczegółowe /24. Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.\n\n**Sprawdzenie II:** Lookup adresu hosta wskazuje /24 OSPF.\n\n**Zależności:** Wspólna baza topologii nie oznacza identycznych tablic routingu. Longest prefix match dotyczy przekazywania, a AD wyboru źródła dla konkretnego prefiksu.",
+      "card_id": "encor.routing-compare.practice.compare-03.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\nII — Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.",
+          "feedback_md": "**Zgłoszenie I:** Każdy router liczy SPF z własnego położenia. Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\n**Sprawdzenie I:** Wybrane drogi odpowiadają lokalnym drzewom najkrótszych ścieżek.\n\n**Zgłoszenie II:** Do pakietu pasuje bardziej szczegółowe /24. Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.\n\n**Sprawdzenie II:** Lookup adresu hosta wskazuje /24 OSPF.\n\n**Zależności:** Wspólna baza topologii nie oznacza identycznych tablic routingu. Longest prefix match dotyczy przekazywania, a AD wyboru źródła dla konkretnego prefiksu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.\n\nII — Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Każdy router liczy SPF z własnego położenia. Zgłoszenie II: Do pakietu pasuje bardziej szczegółowe /24.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\nII — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Ten sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach. Dla II: Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Ten sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach. Dla I: Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.routing-compare.practice.compare-04.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nTen sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach.\n\n**Zgłoszenie II**\n\nEIGRP ma successor i kandydata z reported distance mniejszym od bieżącej feasible distance.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** RIB preferuje źródło z niższym AD. Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\n**Sprawdzenie I:** Show ip route wskazuje EIGRP jako aktywne źródło /24.\n\n**Zgłoszenie II:** Kandydat spełnia warunek feasibility. Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\n**Sprawdzenie II:** RD kandydata jest ściśle mniejsze od FD.\n\n**Zależności:** AD porównuje źródła tras do tego samego prefiksu, nie ich metryki w różnych jednostkach. Warunek feasibility zapewnia lokalnie rozpoznawalną bezpętlową alternatywę.",
+      "card_id": "encor.routing-compare.practice.compare-04.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\nII — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: RIB preferuje źródło z niższym AD. Zgłoszenie II: Kandydat spełnia warunek feasibility.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.",
+          "feedback_md": "**Zgłoszenie I:** RIB preferuje źródło z niższym AD. Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\n**Sprawdzenie I:** Show ip route wskazuje EIGRP jako aktywne źródło /24.\n\n**Zgłoszenie II:** Kandydat spełnia warunek feasibility. Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\n**Sprawdzenie II:** RD kandydata jest ściśle mniejsze od FD.\n\n**Zależności:** AD porównuje źródła tras do tego samego prefiksu, nie ich metryki w różnych jednostkach. Warunek feasibility zapewnia lokalnie rozpoznawalną bezpętlową alternatywę.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Operator porównuje koszt OSPF 20 z metryką EIGRP 256000 i twierdzi, że OSPF zawsze wygra. Dla II: Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\nII — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Operator porównuje koszt OSPF 20 z metryką EIGRP 256000 i twierdzi, że OSPF zawsze wygra. Dla I: Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.routing-compare.practice.compare-05.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOperator porównuje koszt OSPF 20 z metryką EIGRP 256000 i twierdzi, że OSPF zawsze wygra.\n\n**Zgłoszenie II**\n\nDwa routery w tym samym obszarze mają zsynchronizowaną LSDB, lecz inne najlepsze drogi do prefiksu.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Metryki różnych protokołów nie mają wspólnej skali. Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\n**Sprawdzenie I:** Analiza wskazuje AD jako kryterium między protokołami dla identycznego prefiksu.\n\n**Zgłoszenie II:** Każdy router liczy SPF z własnego położenia. Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\n**Sprawdzenie II:** Wybrane drogi odpowiadają lokalnym drzewom najkrótszych ścieżek.\n\n**Zależności:** Liczby metryk OSPF i EIGRP nie służą do bezpośredniego porównania między nimi. Wspólna baza topologii nie oznacza identycznych tablic routingu.",
+      "card_id": "encor.routing-compare.practice.compare-05.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\nII — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Metryki różnych protokołów nie mają wspólnej skali. Zgłoszenie II: Każdy router liczy SPF z własnego położenia.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\nII — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Ten sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach. Dla II: Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\nII — Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.",
+          "feedback_md": "**Zgłoszenie I:** Metryki różnych protokołów nie mają wspólnej skali. Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\n**Sprawdzenie I:** Analiza wskazuje AD jako kryterium między protokołami dla identycznego prefiksu.\n\n**Zgłoszenie II:** Każdy router liczy SPF z własnego położenia. Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\n**Sprawdzenie II:** Wybrane drogi odpowiadają lokalnym drzewom najkrótszych ścieżek.\n\n**Zależności:** Liczby metryk OSPF i EIGRP nie służą do bezpośredniego porównania między nimi. Wspólna baza topologii nie oznacza identycznych tablic routingu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Ten sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach. Dla I: Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.routing-compare.practice.compare-06.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPo utracie successor nie ma kandydata spełniającego feasibility, choć w sieci może istnieć droga.\n\n**Zgłoszenie II**\n\nOSPF oferuje /24, a EIGRP /16 obejmujące ten sam host. Obie trasy są w RIB.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Router nie ma gotowej lokalnie potwierdzonej alternatywy. Analizować przejście DUAL w active i wymianę query/reply.\n\n**Sprawdzenie I:** Po zakończeniu obliczenia trasa wraca do passive z poprawnym wynikiem.\n\n**Zgłoszenie II:** Do pakietu pasuje bardziej szczegółowe /24. Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.\n\n**Sprawdzenie II:** Lookup adresu hosta wskazuje /24 OSPF.\n\n**Zależności:** Brak feasible successor nie oznacza automatycznie, że żadna droga nie istnieje. Longest prefix match dotyczy przekazywania, a AD wyboru źródła dla konkretnego prefiksu.",
+      "card_id": "encor.routing-compare.practice.compare-06.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.\n\nII — Analizować przejście DUAL w active i wymianę query/reply.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Router nie ma gotowej lokalnie potwierdzonej alternatywy. Zgłoszenie II: Do pakietu pasuje bardziej szczegółowe /24.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Analizować przejście DUAL w active i wymianę query/reply.\n\nII — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Ten sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach. Dla II: Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Ten sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach. Dla I: Analizować przejście DUAL w active i wymianę query/reply.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Analizować przejście DUAL w active i wymianę query/reply.\n\nII — Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.",
+          "feedback_md": "**Zgłoszenie I:** Router nie ma gotowej lokalnie potwierdzonej alternatywy. Analizować przejście DUAL w active i wymianę query/reply.\n\n**Sprawdzenie I:** Po zakończeniu obliczenia trasa wraca do passive z poprawnym wynikiem.\n\n**Zgłoszenie II:** Do pakietu pasuje bardziej szczegółowe /24. Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.\n\n**Sprawdzenie II:** Lookup adresu hosta wskazuje /24 OSPF.\n\n**Zależności:** Brak feasible successor nie oznacza automatycznie, że żadna droga nie istnieje. Longest prefix match dotyczy przekazywania, a AD wyboru źródła dla konkretnego prefiksu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.routing-compare.practice.compare-07.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nTen sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach.\n\n**Zgłoszenie II**\n\nOSPF oferuje /24, a EIGRP /16 obejmujące ten sam host. Obie trasy są w RIB.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** RIB preferuje źródło z niższym AD. Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\n**Sprawdzenie I:** Show ip route wskazuje EIGRP jako aktywne źródło /24.\n\n**Zgłoszenie II:** Do pakietu pasuje bardziej szczegółowe /24. Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.\n\n**Sprawdzenie II:** Lookup adresu hosta wskazuje /24 OSPF.\n\n**Zależności:** AD porównuje źródła tras do tego samego prefiksu, nie ich metryki w różnych jednostkach. Longest prefix match dotyczy przekazywania, a AD wyboru źródła dla konkretnego prefiksu.",
+      "card_id": "encor.routing-compare.practice.compare-07.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.",
+          "feedback_md": "**Zgłoszenie I:** RIB preferuje źródło z niższym AD. Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\n**Sprawdzenie I:** Show ip route wskazuje EIGRP jako aktywne źródło /24.\n\n**Zgłoszenie II:** Do pakietu pasuje bardziej szczegółowe /24. Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.\n\n**Sprawdzenie II:** Lookup adresu hosta wskazuje /24 OSPF.\n\n**Zależności:** AD porównuje źródła tras do tego samego prefiksu, nie ich metryki w różnych jednostkach. Longest prefix match dotyczy przekazywania, a AD wyboru źródła dla konkretnego prefiksu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.\n\nII — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: RIB preferuje źródło z niższym AD. Zgłoszenie II: Do pakietu pasuje bardziej szczegółowe /24.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Operator porównuje koszt OSPF 20 z metryką EIGRP 256000 i twierdzi, że OSPF zawsze wygra. Dla II: Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\nII — Przekazać pakiet według /24 niezależnie od niższego AD trasy /16.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Operator porównuje koszt OSPF 20 z metryką EIGRP 256000 i twierdzi, że OSPF zawsze wygra. Dla I: Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.routing-compare.practice.compare-08.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOperator porównuje koszt OSPF 20 z metryką EIGRP 256000 i twierdzi, że OSPF zawsze wygra.\n\n**Zgłoszenie II**\n\nPo utracie successor nie ma kandydata spełniającego feasibility, choć w sieci może istnieć droga.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Metryki różnych protokołów nie mają wspólnej skali. Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\n**Sprawdzenie I:** Analiza wskazuje AD jako kryterium między protokołami dla identycznego prefiksu.\n\n**Zgłoszenie II:** Router nie ma gotowej lokalnie potwierdzonej alternatywy. Analizować przejście DUAL w active i wymianę query/reply.\n\n**Sprawdzenie II:** Po zakończeniu obliczenia trasa wraca do passive z poprawnym wynikiem.\n\n**Zależności:** Liczby metryk OSPF i EIGRP nie służą do bezpośredniego porównania między nimi. Brak feasible successor nie oznacza automatycznie, że żadna droga nie istnieje.",
+      "card_id": "encor.routing-compare.practice.compare-08.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Analizować przejście DUAL w active i wymianę query/reply.\n\nII — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Metryki różnych protokołów nie mają wspólnej skali. Zgłoszenie II: Router nie ma gotowej lokalnie potwierdzonej alternatywy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\nII — Analizować przejście DUAL w active i wymianę query/reply.",
+          "feedback_md": "**Zgłoszenie I:** Metryki różnych protokołów nie mają wspólnej skali. Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\n**Sprawdzenie I:** Analiza wskazuje AD jako kryterium między protokołami dla identycznego prefiksu.\n\n**Zgłoszenie II:** Router nie ma gotowej lokalnie potwierdzonej alternatywy. Analizować przejście DUAL w active i wymianę query/reply.\n\n**Sprawdzenie II:** Po zakończeniu obliczenia trasa wraca do passive z poprawnym wynikiem.\n\n**Zależności:** Liczby metryk OSPF i EIGRP nie służą do bezpośredniego porównania między nimi. Brak feasible successor nie oznacza automatycznie, że żadna droga nie istnieje.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\nII — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Ten sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach. Dla II: Analizować przejście DUAL w active i wymianę query/reply.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Analizować przejście DUAL w active i wymianę query/reply.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Ten sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach. Dla I: Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.routing-compare.practice.compare-09.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nEIGRP ma successor i kandydata z reported distance mniejszym od bieżącej feasible distance.\n\n**Zgłoszenie II**\n\nDwa routery w tym samym obszarze mają zsynchronizowaną LSDB, lecz inne najlepsze drogi do prefiksu.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Kandydat spełnia warunek feasibility. Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\n**Sprawdzenie I:** RD kandydata jest ściśle mniejsze od FD.\n\n**Zgłoszenie II:** Każdy router liczy SPF z własnego położenia. Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\n**Sprawdzenie II:** Wybrane drogi odpowiadają lokalnym drzewom najkrótszych ścieżek.\n\n**Zależności:** Warunek feasibility zapewnia lokalnie rozpoznawalną bezpętlową alternatywę. Wspólna baza topologii nie oznacza identycznych tablic routingu.",
+      "card_id": "encor.routing-compare.practice.compare-09.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\nII — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Kandydat spełnia warunek feasibility. Zgłoszenie II: Każdy router liczy SPF z własnego położenia.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\nII — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Ten sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach. Dla II: Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\nII — Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.",
+          "feedback_md": "**Zgłoszenie I:** Kandydat spełnia warunek feasibility. Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.\n\n**Sprawdzenie I:** RD kandydata jest ściśle mniejsze od FD.\n\n**Zgłoszenie II:** Każdy router liczy SPF z własnego położenia. Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.\n\n**Sprawdzenie II:** Wybrane drogi odpowiadają lokalnym drzewom najkrótszych ścieżek.\n\n**Zależności:** Warunek feasibility zapewnia lokalnie rozpoznawalną bezpętlową alternatywę. Wspólna baza topologii nie oznacza identycznych tablic routingu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Porównać koszty od każdego routera zamiast oczekiwać identycznego next hop.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Ten sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach. Dla I: Sprawdzić topology table i możliwość użycia kandydata jako feasible successor.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.routing-compare.practice.compare-10.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — działanie",
+      "skills": [
+        "encor.routing-compare.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/enhanced-interior-gateway-routing-protocol-eigrp/16406-eigrp-toc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — EIGRP a OSPF — metryki i zbieżność",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.a"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nTen sam /24 jest poprawnie dostępny z wewnętrznego EIGRP AD 90 i OSPF AD 110 przy domyślnych wartościach.\n\n**Zgłoszenie II**\n\nPo utracie successor nie ma kandydata spełniającego feasibility, choć w sieci może istnieć droga.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** RIB preferuje źródło z niższym AD. Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\n**Sprawdzenie I:** Show ip route wskazuje EIGRP jako aktywne źródło /24.\n\n**Zgłoszenie II:** Router nie ma gotowej lokalnie potwierdzonej alternatywy. Analizować przejście DUAL w active i wymianę query/reply.\n\n**Sprawdzenie II:** Po zakończeniu obliczenia trasa wraca do passive z poprawnym wynikiem.\n\n**Zależności:** AD porównuje źródła tras do tego samego prefiksu, nie ich metryki w różnych jednostkach. Brak feasible successor nie oznacza automatycznie, że żadna droga nie istnieje.",
+      "card_id": "encor.routing-compare.practice.compare-10.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Analizować przejście DUAL w active i wymianę query/reply.\n\nII — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: RIB preferuje źródło z niższym AD. Zgłoszenie II: Router nie ma gotowej lokalnie potwierdzonej alternatywy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Operator porównuje koszt OSPF 20 z metryką EIGRP 256000 i twierdzi, że OSPF zawsze wygra. Dla II: Analizować przejście DUAL w active i wymianę query/reply.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Rozdzielić wybór w protokole od wyboru źródła trasy przez AD.\n\nII — Analizować przejście DUAL w active i wymianę query/reply.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Operator porównuje koszt OSPF 20 z metryką EIGRP 256000 i twierdzi, że OSPF zawsze wygra. Dla I: Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\nII — Analizować przejście DUAL w active i wymianę query/reply.",
+          "feedback_md": "**Zgłoszenie I:** RIB preferuje źródło z niższym AD. Oczekiwać instalacji trasy EIGRP dla tego samego prefiksu.\n\n**Sprawdzenie I:** Show ip route wskazuje EIGRP jako aktywne źródło /24.\n\n**Zgłoszenie II:** Router nie ma gotowej lokalnie potwierdzonej alternatywy. Analizować przejście DUAL w active i wymianę query/reply.\n\n**Sprawdzenie II:** Po zakończeniu obliczenia trasa wraca do passive z poprawnym wynikiem.\n\n**Zależności:** AD porównuje źródła tras do tego samego prefiksu, nie ich metryki w różnych jednostkach. Brak feasible successor nie oznacza automatycznie, że żadna droga nie istnieje.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

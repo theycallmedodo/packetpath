@@ -167,3 +167,15 @@ Wersja 0.11 rozszerza ENCOR do 51 paczek, bez zmiany schematu ani formatu zapisu
 Wersja 0.12: ENCOR ma 63 paczki. Unikalność opcji quizu jest case-sensitive po trim(), ponieważ kod rozróżnia true/True i up/UP. Nadal wymagane są cztery różne opcje A–D. Format zapisu postępu nie zmienił się.
 
 Wersja 0.13: ENCOR ma 72 paczki. Dodano fhrp, time-sync i pbr. Bez zmiany kontraktu oraz klucza zapisu postępu.
+
+## Rozszerzenie 0.15
+
+Nowe sekcje `.practice-N` kontynuują istniejące ścieżki. Nie zmieniono starych
+ID, rewizji ani klucza zapisu. Cztery decyzje dotyczące przypadku umieszczono
+w osobnych paczkach. Poziom trudności CLI określa samodzielne wpisanie pełnej
+komendy, nie wymóg co najmniej trzech luk.
+
+Działy mają 82–180 zadań. BGP: 180, VLAN: 144. Pozostałe działy mają
+82 lub 100 zadań. Ćwiczenia porównawcze przedstawiają dwa odrębne przypadki
+i wymagają poprawnego przypisania rozpoznania, działania, dowodu lub zasady
+do obu zgłoszeń. Pełny zakres: CONTENT-EXPANSION.json.

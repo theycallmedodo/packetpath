@@ -1,0 +1,799 @@
+{
+  "schema_version": 3,
+  "id": "encor.qos-interpret.practice-7",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.practice.compare-01.3.card",
+      "front_md": "**Zgłoszenie I**\n\nW klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu.\n\n**Zgłoszenie II**\n\nKolejka osiąga limit i rośnie total drops podczas burstów; policer nie jest skonfigurowany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Część ruchu przekracza profil policera. Porównać oferowane tempo i burst z CIR oraz parametrami policera.\n\n**Sprawdzenie I:** Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\n**Zgłoszenie II:** Bufor kolejki nie mieści nadmiaru ruchu. Ocenić przeciążenie, profil źródła i właściwy rozmiar kolejki.\n\n**Sprawdzenie II:** Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\n**Zależności:** Drop policera ma inne znaczenie niż drop pełnej kolejki. Tail drop występuje przy braku miejsca w kolejce.",
+      "example": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.practice.compare-02.3.card",
+      "front_md": "**Zgłoszenie I**\n\nKlasa priorytetowa przekracza swój skonfigurowany limit w czasie przeciążenia i część pakietów jest odrzucana.\n\n**Zgłoszenie II**\n\nRuch ma oczekiwany DSCP, ale licznik jego klasy stoi, a class-default rośnie; class-map dopasowuje inny DSCP.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Priorytet nie oznacza nieograniczonego pasma. Zweryfikować klasyfikację i wymiarowanie klasy priorytetowej.\n\n**Sprawdzenie I:** Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\n**Zgłoszenie II:** Pakiety nie pasują do warunku klasy. Poprawić match zgodnie z rzeczywistym i zatwierdzonym oznaczeniem ruchu.\n\n**Sprawdzenie II:** Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\n**Zależności:** Ograniczenie LLQ chroni inne klasy przed zagłodzeniem. Przed analizą kolejkowania trzeba potwierdzić klasyfikację.",
+      "example": "I — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\nII — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.practice.compare-03.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPolicy child ma kolejki usług, ale parent ogranicza cały ruch do 50 Mb/s.\n\n**Zgłoszenie II**\n\nAF31 i AF33 należą do tej samej klasy AF3, ale mają różne drop precedence.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Łączny limit wynika z polityki nadrzędnej. Analizować hierarchię parent/child i łączny budżet klas.\n\n**Sprawdzenie I:** Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\n**Zgłoszenie II:** AF33 ma wyższy priorytet odrzucania niż AF31 w odpowiedniej polityce. Sprawdzić mapowanie AF3 i mechanizm odrzucania respektujący drop precedence.\n\n**Sprawdzenie II:** Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.\n\n**Zależności:** W HQoS polityka nadrzędna ogranicza zasoby dostępne politykom podrzędnym. Druga cyfra AF określa podatność na drop, nie gwarantowaną prędkość transmisji.",
+      "example": "I — Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\nII — Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.practice.compare-04.3.card",
+      "front_md": "**Zgłoszenie I**\n\nW klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu.\n\n**Zgłoszenie II**\n\nKlasa priorytetowa przekracza swój skonfigurowany limit w czasie przeciążenia i część pakietów jest odrzucana.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Część ruchu przekracza profil policera. Porównać oferowane tempo i burst z CIR oraz parametrami policera.\n\n**Sprawdzenie I:** Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\n**Zgłoszenie II:** Priorytet nie oznacza nieograniczonego pasma. Zweryfikować klasyfikację i wymiarowanie klasy priorytetowej.\n\n**Sprawdzenie II:** Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\n**Zależności:** Drop policera ma inne znaczenie niż drop pełnej kolejki. Ograniczenie LLQ chroni inne klasy przed zagłodzeniem.",
+      "example": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.practice.compare-05.3.card",
+      "front_md": "**Zgłoszenie I**\n\nKolejka osiąga limit i rośnie total drops podczas burstów; policer nie jest skonfigurowany.\n\n**Zgłoszenie II**\n\nPolicy child ma kolejki usług, ale parent ogranicza cały ruch do 50 Mb/s.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Bufor kolejki nie mieści nadmiaru ruchu. Ocenić przeciążenie, profil źródła i właściwy rozmiar kolejki.\n\n**Sprawdzenie I:** Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\n**Zgłoszenie II:** Łączny limit wynika z polityki nadrzędnej. Analizować hierarchię parent/child i łączny budżet klas.\n\n**Sprawdzenie II:** Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\n**Zależności:** Tail drop występuje przy braku miejsca w kolejce. W HQoS polityka nadrzędna ogranicza zasoby dostępne politykom podrzędnym.",
+      "example": "I — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\nII — Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.practice.compare-06.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRuch ma oczekiwany DSCP, ale licznik jego klasy stoi, a class-default rośnie; class-map dopasowuje inny DSCP.\n\n**Zgłoszenie II**\n\nAF31 i AF33 należą do tej samej klasy AF3, ale mają różne drop precedence.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Pakiety nie pasują do warunku klasy. Poprawić match zgodnie z rzeczywistym i zatwierdzonym oznaczeniem ruchu.\n\n**Sprawdzenie I:** Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\n**Zgłoszenie II:** AF33 ma wyższy priorytet odrzucania niż AF31 w odpowiedniej polityce. Sprawdzić mapowanie AF3 i mechanizm odrzucania respektujący drop precedence.\n\n**Sprawdzenie II:** Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.\n\n**Zależności:** Przed analizą kolejkowania trzeba potwierdzić klasyfikację. Druga cyfra AF określa podatność na drop, nie gwarantowaną prędkość transmisji.",
+      "example": "I — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\nII — Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.practice.compare-07.3.card",
+      "front_md": "**Zgłoszenie I**\n\nW klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu.\n\n**Zgłoszenie II**\n\nAF31 i AF33 należą do tej samej klasy AF3, ale mają różne drop precedence.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Część ruchu przekracza profil policera. Porównać oferowane tempo i burst z CIR oraz parametrami policera.\n\n**Sprawdzenie I:** Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\n**Zgłoszenie II:** AF33 ma wyższy priorytet odrzucania niż AF31 w odpowiedniej polityce. Sprawdzić mapowanie AF3 i mechanizm odrzucania respektujący drop precedence.\n\n**Sprawdzenie II:** Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.\n\n**Zależności:** Drop policera ma inne znaczenie niż drop pełnej kolejki. Druga cyfra AF określa podatność na drop, nie gwarantowaną prędkość transmisji.",
+      "example": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.practice.compare-08.3.card",
+      "front_md": "**Zgłoszenie I**\n\nKolejka osiąga limit i rośnie total drops podczas burstów; policer nie jest skonfigurowany.\n\n**Zgłoszenie II**\n\nRuch ma oczekiwany DSCP, ale licznik jego klasy stoi, a class-default rośnie; class-map dopasowuje inny DSCP.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Bufor kolejki nie mieści nadmiaru ruchu. Ocenić przeciążenie, profil źródła i właściwy rozmiar kolejki.\n\n**Sprawdzenie I:** Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\n**Zgłoszenie II:** Pakiety nie pasują do warunku klasy. Poprawić match zgodnie z rzeczywistym i zatwierdzonym oznaczeniem ruchu.\n\n**Sprawdzenie II:** Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\n**Zależności:** Tail drop występuje przy braku miejsca w kolejce. Przed analizą kolejkowania trzeba potwierdzić klasyfikację.",
+      "example": "I — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\nII — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.practice.compare-09.3.card",
+      "front_md": "**Zgłoszenie I**\n\nKlasa priorytetowa przekracza swój skonfigurowany limit w czasie przeciążenia i część pakietów jest odrzucana.\n\n**Zgłoszenie II**\n\nPolicy child ma kolejki usług, ale parent ogranicza cały ruch do 50 Mb/s.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Priorytet nie oznacza nieograniczonego pasma. Zweryfikować klasyfikację i wymiarowanie klasy priorytetowej.\n\n**Sprawdzenie I:** Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\n**Zgłoszenie II:** Łączny limit wynika z polityki nadrzędnej. Analizować hierarchię parent/child i łączny budżet klas.\n\n**Sprawdzenie II:** Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\n**Zależności:** Ograniczenie LLQ chroni inne klasy przed zagłodzeniem. W HQoS polityka nadrzędna ogranicza zasoby dostępne politykom podrzędnym.",
+      "example": "I — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\nII — Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "id": "encor.qos-interpret.practice.compare-10.3.card",
+      "front_md": "**Zgłoszenie I**\n\nW klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu.\n\n**Zgłoszenie II**\n\nRuch ma oczekiwany DSCP, ale licznik jego klasy stoi, a class-default rośnie; class-map dopasowuje inny DSCP.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Część ruchu przekracza profil policera. Porównać oferowane tempo i burst z CIR oraz parametrami policera.\n\n**Sprawdzenie I:** Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\n**Zgłoszenie II:** Pakiety nie pasują do warunku klasy. Poprawić match zgodnie z rzeczywistym i zatwierdzonym oznaczeniem ruchu.\n\n**Sprawdzenie II:** Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\n**Zależności:** Drop policera ma inne znaczenie niż drop pełnej kolejki. Przed analizą kolejkowania trzeba potwierdzić klasyfikację.",
+      "example": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.qos-interpret.practice.compare-01.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nW klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu.\n\n**Zgłoszenie II**\n\nKolejka osiąga limit i rośnie total drops podczas burstów; policer nie jest skonfigurowany.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Część ruchu przekracza profil policera. Porównać oferowane tempo i burst z CIR oraz parametrami policera.\n\n**Sprawdzenie I:** Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\n**Zgłoszenie II:** Bufor kolejki nie mieści nadmiaru ruchu. Ocenić przeciążenie, profil źródła i właściwy rozmiar kolejki.\n\n**Sprawdzenie II:** Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\n**Zależności:** Drop policera ma inne znaczenie niż drop pełnej kolejki. Tail drop występuje przy braku miejsca w kolejce.",
+      "card_id": "encor.qos-interpret.practice.compare-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\nII — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Część ruchu przekracza profil policera. Zgłoszenie II: Bufor kolejki nie mieści nadmiaru ruchu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Klasa priorytetowa przekracza swój skonfigurowany limit w czasie przeciążenia i część pakietów jest odrzucana. Dla II: Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\nII — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Klasa priorytetowa przekracza swój skonfigurowany limit w czasie przeciążenia i część pakietów jest odrzucana. Dla I: Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.",
+          "feedback_md": "**Zgłoszenie I:** Część ruchu przekracza profil policera. Porównać oferowane tempo i burst z CIR oraz parametrami policera.\n\n**Sprawdzenie I:** Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\n**Zgłoszenie II:** Bufor kolejki nie mieści nadmiaru ruchu. Ocenić przeciążenie, profil źródła i właściwy rozmiar kolejki.\n\n**Sprawdzenie II:** Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\n**Zależności:** Drop policera ma inne znaczenie niż drop pełnej kolejki. Tail drop występuje przy braku miejsca w kolejce.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.qos-interpret.practice.compare-02.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKlasa priorytetowa przekracza swój skonfigurowany limit w czasie przeciążenia i część pakietów jest odrzucana.\n\n**Zgłoszenie II**\n\nRuch ma oczekiwany DSCP, ale licznik jego klasy stoi, a class-default rośnie; class-map dopasowuje inny DSCP.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Priorytet nie oznacza nieograniczonego pasma. Zweryfikować klasyfikację i wymiarowanie klasy priorytetowej.\n\n**Sprawdzenie I:** Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\n**Zgłoszenie II:** Pakiety nie pasują do warunku klasy. Poprawić match zgodnie z rzeczywistym i zatwierdzonym oznaczeniem ruchu.\n\n**Sprawdzenie II:** Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\n**Zależności:** Ograniczenie LLQ chroni inne klasy przed zagłodzeniem. Przed analizą kolejkowania trzeba potwierdzić klasyfikację.",
+      "card_id": "encor.qos-interpret.practice.compare-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\nII — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.",
+          "feedback_md": "**Zgłoszenie I:** Priorytet nie oznacza nieograniczonego pasma. Zweryfikować klasyfikację i wymiarowanie klasy priorytetowej.\n\n**Sprawdzenie I:** Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\n**Zgłoszenie II:** Pakiety nie pasują do warunku klasy. Poprawić match zgodnie z rzeczywistym i zatwierdzonym oznaczeniem ruchu.\n\n**Sprawdzenie II:** Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\n**Zależności:** Ograniczenie LLQ chroni inne klasy przed zagłodzeniem. Przed analizą kolejkowania trzeba potwierdzić klasyfikację.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\nII — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Priorytet nie oznacza nieograniczonego pasma. Zgłoszenie II: Pakiety nie pasują do warunku klasy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\nII — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: W klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu. Dla II: Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: W klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu. Dla I: Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.qos-interpret.practice.compare-03.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPolicy child ma kolejki usług, ale parent ogranicza cały ruch do 50 Mb/s.\n\n**Zgłoszenie II**\n\nAF31 i AF33 należą do tej samej klasy AF3, ale mają różne drop precedence.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Łączny limit wynika z polityki nadrzędnej. Analizować hierarchię parent/child i łączny budżet klas.\n\n**Sprawdzenie I:** Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\n**Zgłoszenie II:** AF33 ma wyższy priorytet odrzucania niż AF31 w odpowiedniej polityce. Sprawdzić mapowanie AF3 i mechanizm odrzucania respektujący drop precedence.\n\n**Sprawdzenie II:** Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.\n\n**Zależności:** W HQoS polityka nadrzędna ogranicza zasoby dostępne politykom podrzędnym. Druga cyfra AF określa podatność na drop, nie gwarantowaną prędkość transmisji.",
+      "card_id": "encor.qos-interpret.practice.compare-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.\n\nII — Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Łączny limit wynika z polityki nadrzędnej. Zgłoszenie II: AF33 ma wyższy priorytet odrzucania niż AF31 w odpowiedniej polityce.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\nII — Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.",
+          "feedback_md": "**Zgłoszenie I:** Łączny limit wynika z polityki nadrzędnej. Analizować hierarchię parent/child i łączny budżet klas.\n\n**Sprawdzenie I:** Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\n**Zgłoszenie II:** AF33 ma wyższy priorytet odrzucania niż AF31 w odpowiedniej polityce. Sprawdzić mapowanie AF3 i mechanizm odrzucania respektujący drop precedence.\n\n**Sprawdzenie II:** Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.\n\n**Zależności:** W HQoS polityka nadrzędna ogranicza zasoby dostępne politykom podrzędnym. Druga cyfra AF określa podatność na drop, nie gwarantowaną prędkość transmisji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\nII — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: W klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu. Dla II: Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: W klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu. Dla I: Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.qos-interpret.practice.compare-04.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nW klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu.\n\n**Zgłoszenie II**\n\nKlasa priorytetowa przekracza swój skonfigurowany limit w czasie przeciążenia i część pakietów jest odrzucana.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Część ruchu przekracza profil policera. Porównać oferowane tempo i burst z CIR oraz parametrami policera.\n\n**Sprawdzenie I:** Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\n**Zgłoszenie II:** Priorytet nie oznacza nieograniczonego pasma. Zweryfikować klasyfikację i wymiarowanie klasy priorytetowej.\n\n**Sprawdzenie II:** Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\n**Zależności:** Drop policera ma inne znaczenie niż drop pełnej kolejki. Ograniczenie LLQ chroni inne klasy przed zagłodzeniem.",
+      "card_id": "encor.qos-interpret.practice.compare-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\nII — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Część ruchu przekracza profil policera. Zgłoszenie II: Priorytet nie oznacza nieograniczonego pasma.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Kolejka osiąga limit i rośnie total drops podczas burstów; policer nie jest skonfigurowany. Dla II: Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.",
+          "feedback_md": "**Zgłoszenie I:** Część ruchu przekracza profil policera. Porównać oferowane tempo i burst z CIR oraz parametrami policera.\n\n**Sprawdzenie I:** Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\n**Zgłoszenie II:** Priorytet nie oznacza nieograniczonego pasma. Zweryfikować klasyfikację i wymiarowanie klasy priorytetowej.\n\n**Sprawdzenie II:** Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\n**Zależności:** Drop policera ma inne znaczenie niż drop pełnej kolejki. Ograniczenie LLQ chroni inne klasy przed zagłodzeniem.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\nII — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Kolejka osiąga limit i rośnie total drops podczas burstów; policer nie jest skonfigurowany. Dla I: Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.qos-interpret.practice.compare-05.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKolejka osiąga limit i rośnie total drops podczas burstów; policer nie jest skonfigurowany.\n\n**Zgłoszenie II**\n\nPolicy child ma kolejki usług, ale parent ogranicza cały ruch do 50 Mb/s.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Bufor kolejki nie mieści nadmiaru ruchu. Ocenić przeciążenie, profil źródła i właściwy rozmiar kolejki.\n\n**Sprawdzenie I:** Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\n**Zgłoszenie II:** Łączny limit wynika z polityki nadrzędnej. Analizować hierarchię parent/child i łączny budżet klas.\n\n**Sprawdzenie II:** Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\n**Zależności:** Tail drop występuje przy braku miejsca w kolejce. W HQoS polityka nadrzędna ogranicza zasoby dostępne politykom podrzędnym.",
+      "card_id": "encor.qos-interpret.practice.compare-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\nII — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Bufor kolejki nie mieści nadmiaru ruchu. Zgłoszenie II: Łączny limit wynika z polityki nadrzędnej.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\nII — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: W klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu. Dla II: Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: W klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu. Dla I: Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\nII — Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.",
+          "feedback_md": "**Zgłoszenie I:** Bufor kolejki nie mieści nadmiaru ruchu. Ocenić przeciążenie, profil źródła i właściwy rozmiar kolejki.\n\n**Sprawdzenie I:** Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\n**Zgłoszenie II:** Łączny limit wynika z polityki nadrzędnej. Analizować hierarchię parent/child i łączny budżet klas.\n\n**Sprawdzenie II:** Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\n**Zależności:** Tail drop występuje przy braku miejsca w kolejce. W HQoS polityka nadrzędna ogranicza zasoby dostępne politykom podrzędnym.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.qos-interpret.practice.compare-06.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRuch ma oczekiwany DSCP, ale licznik jego klasy stoi, a class-default rośnie; class-map dopasowuje inny DSCP.\n\n**Zgłoszenie II**\n\nAF31 i AF33 należą do tej samej klasy AF3, ale mają różne drop precedence.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Pakiety nie pasują do warunku klasy. Poprawić match zgodnie z rzeczywistym i zatwierdzonym oznaczeniem ruchu.\n\n**Sprawdzenie I:** Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\n**Zgłoszenie II:** AF33 ma wyższy priorytet odrzucania niż AF31 w odpowiedniej polityce. Sprawdzić mapowanie AF3 i mechanizm odrzucania respektujący drop precedence.\n\n**Sprawdzenie II:** Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.\n\n**Zależności:** Przed analizą kolejkowania trzeba potwierdzić klasyfikację. Druga cyfra AF określa podatność na drop, nie gwarantowaną prędkość transmisji.",
+      "card_id": "encor.qos-interpret.practice.compare-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\nII — Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.",
+          "feedback_md": "**Zgłoszenie I:** Pakiety nie pasują do warunku klasy. Poprawić match zgodnie z rzeczywistym i zatwierdzonym oznaczeniem ruchu.\n\n**Sprawdzenie I:** Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\n**Zgłoszenie II:** AF33 ma wyższy priorytet odrzucania niż AF31 w odpowiedniej polityce. Sprawdzić mapowanie AF3 i mechanizm odrzucania respektujący drop precedence.\n\n**Sprawdzenie II:** Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.\n\n**Zależności:** Przed analizą kolejkowania trzeba potwierdzić klasyfikację. Druga cyfra AF określa podatność na drop, nie gwarantowaną prędkość transmisji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.\n\nII — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Pakiety nie pasują do warunku klasy. Zgłoszenie II: AF33 ma wyższy priorytet odrzucania niż AF31 w odpowiedniej polityce.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\nII — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: W klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu. Dla II: Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: W klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu. Dla I: Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.qos-interpret.practice.compare-07.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nW klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu.\n\n**Zgłoszenie II**\n\nAF31 i AF33 należą do tej samej klasy AF3, ale mają różne drop precedence.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Część ruchu przekracza profil policera. Porównać oferowane tempo i burst z CIR oraz parametrami policera.\n\n**Sprawdzenie I:** Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\n**Zgłoszenie II:** AF33 ma wyższy priorytet odrzucania niż AF31 w odpowiedniej polityce. Sprawdzić mapowanie AF3 i mechanizm odrzucania respektujący drop precedence.\n\n**Sprawdzenie II:** Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.\n\n**Zależności:** Drop policera ma inne znaczenie niż drop pełnej kolejki. Druga cyfra AF określa podatność na drop, nie gwarantowaną prędkość transmisji.",
+      "card_id": "encor.qos-interpret.practice.compare-07.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.\n\nII — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Część ruchu przekracza profil policera. Zgłoszenie II: AF33 ma wyższy priorytet odrzucania niż AF31 w odpowiedniej polityce.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.",
+          "feedback_md": "**Zgłoszenie I:** Część ruchu przekracza profil policera. Porównać oferowane tempo i burst z CIR oraz parametrami policera.\n\n**Sprawdzenie I:** Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\n**Zgłoszenie II:** AF33 ma wyższy priorytet odrzucania niż AF31 w odpowiedniej polityce. Sprawdzić mapowanie AF3 i mechanizm odrzucania respektujący drop precedence.\n\n**Sprawdzenie II:** Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.\n\n**Zależności:** Drop policera ma inne znaczenie niż drop pełnej kolejki. Druga cyfra AF określa podatność na drop, nie gwarantowaną prędkość transmisji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Kolejka osiąga limit i rośnie total drops podczas burstów; policer nie jest skonfigurowany. Dla II: Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\nII — Przy właściwej polityce przeciążenia AF33 jest bardziej podatne na odrzucenie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Kolejka osiąga limit i rośnie total drops podczas burstów; policer nie jest skonfigurowany. Dla I: Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.qos-interpret.practice.compare-08.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKolejka osiąga limit i rośnie total drops podczas burstów; policer nie jest skonfigurowany.\n\n**Zgłoszenie II**\n\nRuch ma oczekiwany DSCP, ale licznik jego klasy stoi, a class-default rośnie; class-map dopasowuje inny DSCP.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Bufor kolejki nie mieści nadmiaru ruchu. Ocenić przeciążenie, profil źródła i właściwy rozmiar kolejki.\n\n**Sprawdzenie I:** Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\n**Zgłoszenie II:** Pakiety nie pasują do warunku klasy. Poprawić match zgodnie z rzeczywistym i zatwierdzonym oznaczeniem ruchu.\n\n**Sprawdzenie II:** Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\n**Zależności:** Tail drop występuje przy braku miejsca w kolejce. Przed analizą kolejkowania trzeba potwierdzić klasyfikację.",
+      "card_id": "encor.qos-interpret.practice.compare-08.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\nII — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Bufor kolejki nie mieści nadmiaru ruchu. Zgłoszenie II: Pakiety nie pasują do warunku klasy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\nII — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: W klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu. Dla II: Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\nII — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.",
+          "feedback_md": "**Zgłoszenie I:** Bufor kolejki nie mieści nadmiaru ruchu. Ocenić przeciążenie, profil źródła i właściwy rozmiar kolejki.\n\n**Sprawdzenie I:** Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\n**Zgłoszenie II:** Pakiety nie pasują do warunku klasy. Poprawić match zgodnie z rzeczywistym i zatwierdzonym oznaczeniem ruchu.\n\n**Sprawdzenie II:** Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\n**Zależności:** Tail drop występuje przy braku miejsca w kolejce. Przed analizą kolejkowania trzeba potwierdzić klasyfikację.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: W klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu. Dla I: Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.qos-interpret.practice.compare-09.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKlasa priorytetowa przekracza swój skonfigurowany limit w czasie przeciążenia i część pakietów jest odrzucana.\n\n**Zgłoszenie II**\n\nPolicy child ma kolejki usług, ale parent ogranicza cały ruch do 50 Mb/s.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Priorytet nie oznacza nieograniczonego pasma. Zweryfikować klasyfikację i wymiarowanie klasy priorytetowej.\n\n**Sprawdzenie I:** Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\n**Zgłoszenie II:** Łączny limit wynika z polityki nadrzędnej. Analizować hierarchię parent/child i łączny budżet klas.\n\n**Sprawdzenie II:** Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\n**Zależności:** Ograniczenie LLQ chroni inne klasy przed zagłodzeniem. W HQoS polityka nadrzędna ogranicza zasoby dostępne politykom podrzędnym.",
+      "card_id": "encor.qos-interpret.practice.compare-09.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\nII — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Priorytet nie oznacza nieograniczonego pasma. Zgłoszenie II: Łączny limit wynika z polityki nadrzędnej.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\nII — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: W klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu. Dla II: Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: W klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu. Dla I: Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\nII — Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.",
+          "feedback_md": "**Zgłoszenie I:** Priorytet nie oznacza nieograniczonego pasma. Zweryfikować klasyfikację i wymiarowanie klasy priorytetowej.\n\n**Sprawdzenie I:** Legalny ruch czasu rzeczywistego mieści się w zaprojektowanym budżecie.\n\n**Zgłoszenie II:** Łączny limit wynika z polityki nadrzędnej. Analizować hierarchię parent/child i łączny budżet klas.\n\n**Sprawdzenie II:** Łączne wyjście nie przekracza tempa parent mimo większych możliwości fizycznego portu.\n\n**Zależności:** Ograniczenie LLQ chroni inne klasy przed zagłodzeniem. W HQoS polityka nadrzędna ogranicza zasoby dostępne politykom podrzędnym.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.qos-interpret.practice.compare-10.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "encor.qos-interpret.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — czytanie konfiguracji i liczników",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "1.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nW klasie rośnie exceed-drop, a conform-transmit nadal przepuszcza część ruchu.\n\n**Zgłoszenie II**\n\nRuch ma oczekiwany DSCP, ale licznik jego klasy stoi, a class-default rośnie; class-map dopasowuje inny DSCP.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Część ruchu przekracza profil policera. Porównać oferowane tempo i burst z CIR oraz parametrami policera.\n\n**Sprawdzenie I:** Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\n**Zgłoszenie II:** Pakiety nie pasują do warunku klasy. Poprawić match zgodnie z rzeczywistym i zatwierdzonym oznaczeniem ruchu.\n\n**Sprawdzenie II:** Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\n**Zależności:** Drop policera ma inne znaczenie niż drop pełnej kolejki. Przed analizą kolejkowania trzeba potwierdzić klasyfikację.",
+      "card_id": "encor.qos-interpret.practice.compare-10.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.",
+          "feedback_md": "**Zgłoszenie I:** Część ruchu przekracza profil policera. Porównać oferowane tempo i burst z CIR oraz parametrami policera.\n\n**Sprawdzenie I:** Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\n**Zgłoszenie II:** Pakiety nie pasują do warunku klasy. Poprawić match zgodnie z rzeczywistym i zatwierdzonym oznaczeniem ruchu.\n\n**Sprawdzenie II:** Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\n**Zależności:** Drop policera ma inne znaczenie niż drop pełnej kolejki. Przed analizą kolejkowania trzeba potwierdzić klasyfikację.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.\n\nII — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Część ruchu przekracza profil policera. Zgłoszenie II: Pakiety nie pasują do warunku klasy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.\n\nII — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Kolejka osiąga limit i rośnie total drops podczas burstów; policer nie jest skonfigurowany. Dla II: Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy kontrolowanym ruchu kolejka nie przepełnia się lub drop odpowiada zaplanowanej polityce.\n\nII — Ruch testowy zwiększa licznik właściwej klasy zamiast class-default.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Kolejka osiąga limit i rośnie total drops podczas burstów; policer nie jest skonfigurowany. Dla I: Przy ruchu zgodnym z profilem ustaje przyrost exceed-drop.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

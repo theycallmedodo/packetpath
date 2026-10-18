@@ -1,0 +1,959 @@
+{
+  "schema_version": 3,
+  "id": "ccna.qos.practice-7",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.qos.practice.compare-01.3.card",
+      "front_md": "**Zgłoszenie I**\n\nNa łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego.\n\n**Zgłoszenie II**\n\nKomputer sam oznacza pobieranie plików jako EF, a sieć ufa oznaczeniom wszystkich hostów.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zmierzyć składowe opóźnienia i szukać problemu poza konkurencją kolejki.\n\n**Sprawdzenie I:** Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\n**Zgłoszenie II:** Granica zaufania pozwala użytkownikowi nadużyć klasy priorytetowej. Klasyfikować i oznaczać ruch na kontrolowanej granicy zamiast ufać dowolnemu hostowi.\n\n**Sprawdzenie II:** Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\n**Zależności:** QoS zarządza konkurencją zasobów, ale nie usuwa odległości ani czasu propagacji. Znaczenie DSCP zależy od polityki zaufania i klasyfikacji.",
+      "example": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.qos.practice.compare-02.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRuch ponad CIR jest odrzucany od razu, bez buforowania nadmiaru; tak ustawiono akcję exceed.\n\n**Zgłoszenie II**\n\nPo wdrożeniu shaping burst jest wysyłany wolniej i pojawia się dodatkowe opóźnienie kolejki.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Działa policing z odrzucaniem nadmiaru. Jeśli wymagane jest wygładzanie zamiast drop, rozważyć właściwy shaper.\n\n**Sprawdzenie I:** Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\n**Zgłoszenie II:** Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Ocenić bufor, tempo i wymagania opóźnienia dla tej klasy.\n\n**Sprawdzenie II:** Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\n**Zależności:** Policing i shaping różnią się sposobem obsługi ruchu ponad profil. Shaping wygładza tempo kosztem możliwego opóźnienia.",
+      "example": "I — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\nII — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.qos.practice.compare-03.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPakiety mają DSCP EF, ale egress traktuje wszystkie identycznie w FIFO.\n\n**Zgłoszenie II**\n\nInterfejs CE ma 1 Gb/s, ale usługa operatora 100 Mb/s. Lokalne kolejki są puste, a operator odrzuca nadmiar.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Samo oznaczenie nie utworzyło preferencyjnej obsługi. Skonfigurować wspieraną politykę egress mapującą klasę na odpowiednią kolejkę.\n\n**Sprawdzenie I:** Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\n**Zgłoszenie II:** Przeciążenie występuje za szybkim interfejsem, na limicie usługi. Dopasować shaping CE do uzgodnionego profilu usługi z uwzględnieniem narzutu.\n\n**Sprawdzenie II:** Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.\n\n**Zależności:** Marking opisuje pakiet; scheduling określa jego obsługę na wyjściu. Polityka QoS powinna uwzględniać rzeczywistą przepustowość usługi, nie tylko prędkość portu.",
+      "example": "I — Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\nII — Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.qos.practice.compare-04.3.card",
+      "front_md": "**Zgłoszenie I**\n\nNa łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego.\n\n**Zgłoszenie II**\n\nRuch ponad CIR jest odrzucany od razu, bez buforowania nadmiaru; tak ustawiono akcję exceed.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zmierzyć składowe opóźnienia i szukać problemu poza konkurencją kolejki.\n\n**Sprawdzenie I:** Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\n**Zgłoszenie II:** Działa policing z odrzucaniem nadmiaru. Jeśli wymagane jest wygładzanie zamiast drop, rozważyć właściwy shaper.\n\n**Sprawdzenie II:** Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\n**Zależności:** QoS zarządza konkurencją zasobów, ale nie usuwa odległości ani czasu propagacji. Policing i shaping różnią się sposobem obsługi ruchu ponad profil.",
+      "example": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.qos.practice.compare-05.3.card",
+      "front_md": "**Zgłoszenie I**\n\nKomputer sam oznacza pobieranie plików jako EF, a sieć ufa oznaczeniom wszystkich hostów.\n\n**Zgłoszenie II**\n\nPakiety mają DSCP EF, ale egress traktuje wszystkie identycznie w FIFO.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Granica zaufania pozwala użytkownikowi nadużyć klasy priorytetowej. Klasyfikować i oznaczać ruch na kontrolowanej granicy zamiast ufać dowolnemu hostowi.\n\n**Sprawdzenie I:** Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\n**Zgłoszenie II:** Samo oznaczenie nie utworzyło preferencyjnej obsługi. Skonfigurować wspieraną politykę egress mapującą klasę na odpowiednią kolejkę.\n\n**Sprawdzenie II:** Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\n**Zależności:** Znaczenie DSCP zależy od polityki zaufania i klasyfikacji. Marking opisuje pakiet; scheduling określa jego obsługę na wyjściu.",
+      "example": "I — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\nII — Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.qos.practice.compare-06.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPo wdrożeniu shaping burst jest wysyłany wolniej i pojawia się dodatkowe opóźnienie kolejki.\n\n**Zgłoszenie II**\n\nInterfejs CE ma 1 Gb/s, ale usługa operatora 100 Mb/s. Lokalne kolejki są puste, a operator odrzuca nadmiar.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Ocenić bufor, tempo i wymagania opóźnienia dla tej klasy.\n\n**Sprawdzenie I:** Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\n**Zgłoszenie II:** Przeciążenie występuje za szybkim interfejsem, na limicie usługi. Dopasować shaping CE do uzgodnionego profilu usługi z uwzględnieniem narzutu.\n\n**Sprawdzenie II:** Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.\n\n**Zależności:** Shaping wygładza tempo kosztem możliwego opóźnienia. Polityka QoS powinna uwzględniać rzeczywistą przepustowość usługi, nie tylko prędkość portu.",
+      "example": "I — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\nII — Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.qos.practice.compare-07.3.card",
+      "front_md": "**Zgłoszenie I**\n\nNa łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego.\n\n**Zgłoszenie II**\n\nInterfejs CE ma 1 Gb/s, ale usługa operatora 100 Mb/s. Lokalne kolejki są puste, a operator odrzuca nadmiar.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zmierzyć składowe opóźnienia i szukać problemu poza konkurencją kolejki.\n\n**Sprawdzenie I:** Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\n**Zgłoszenie II:** Przeciążenie występuje za szybkim interfejsem, na limicie usługi. Dopasować shaping CE do uzgodnionego profilu usługi z uwzględnieniem narzutu.\n\n**Sprawdzenie II:** Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.\n\n**Zależności:** QoS zarządza konkurencją zasobów, ale nie usuwa odległości ani czasu propagacji. Polityka QoS powinna uwzględniać rzeczywistą przepustowość usługi, nie tylko prędkość portu.",
+      "example": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.qos.practice.compare-08.3.card",
+      "front_md": "**Zgłoszenie I**\n\nKomputer sam oznacza pobieranie plików jako EF, a sieć ufa oznaczeniom wszystkich hostów.\n\n**Zgłoszenie II**\n\nPo wdrożeniu shaping burst jest wysyłany wolniej i pojawia się dodatkowe opóźnienie kolejki.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Granica zaufania pozwala użytkownikowi nadużyć klasy priorytetowej. Klasyfikować i oznaczać ruch na kontrolowanej granicy zamiast ufać dowolnemu hostowi.\n\n**Sprawdzenie I:** Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\n**Zgłoszenie II:** Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Ocenić bufor, tempo i wymagania opóźnienia dla tej klasy.\n\n**Sprawdzenie II:** Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\n**Zależności:** Znaczenie DSCP zależy od polityki zaufania i klasyfikacji. Shaping wygładza tempo kosztem możliwego opóźnienia.",
+      "example": "I — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\nII — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.qos.practice.compare-09.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRuch ponad CIR jest odrzucany od razu, bez buforowania nadmiaru; tak ustawiono akcję exceed.\n\n**Zgłoszenie II**\n\nPakiety mają DSCP EF, ale egress traktuje wszystkie identycznie w FIFO.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Działa policing z odrzucaniem nadmiaru. Jeśli wymagane jest wygładzanie zamiast drop, rozważyć właściwy shaper.\n\n**Sprawdzenie I:** Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\n**Zgłoszenie II:** Samo oznaczenie nie utworzyło preferencyjnej obsługi. Skonfigurować wspieraną politykę egress mapującą klasę na odpowiednią kolejkę.\n\n**Sprawdzenie II:** Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\n**Zależności:** Policing i shaping różnią się sposobem obsługi ruchu ponad profil. Marking opisuje pakiet; scheduling określa jego obsługę na wyjściu.",
+      "example": "I — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\nII — Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.qos.practice.compare-10.3.card",
+      "front_md": "**Zgłoszenie I**\n\nNa łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego.\n\n**Zgłoszenie II**\n\nPo wdrożeniu shaping burst jest wysyłany wolniej i pojawia się dodatkowe opóźnienie kolejki.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zmierzyć składowe opóźnienia i szukać problemu poza konkurencją kolejki.\n\n**Sprawdzenie I:** Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\n**Zgłoszenie II:** Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Ocenić bufor, tempo i wymagania opóźnienia dla tej klasy.\n\n**Sprawdzenie II:** Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\n**Zależności:** QoS zarządza konkurencją zasobów, ale nie usuwa odległości ani czasu propagacji. Shaping wygładza tempo kosztem możliwego opóźnienia.",
+      "example": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.qos.practice.compare-01.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNa łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego.\n\n**Zgłoszenie II**\n\nKomputer sam oznacza pobieranie plików jako EF, a sieć ufa oznaczeniom wszystkich hostów.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zmierzyć składowe opóźnienia i szukać problemu poza konkurencją kolejki.\n\n**Sprawdzenie I:** Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\n**Zgłoszenie II:** Granica zaufania pozwala użytkownikowi nadużyć klasy priorytetowej. Klasyfikować i oznaczać ruch na kontrolowanej granicy zamiast ufać dowolnemu hostowi.\n\n**Sprawdzenie II:** Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\n**Zależności:** QoS zarządza konkurencją zasobów, ale nie usuwa odległości ani czasu propagacji. Znaczenie DSCP zależy od polityki zaufania i klasyfikacji.",
+      "card_id": "ccna.qos.practice.compare-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\nII — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zgłoszenie II: Granica zaufania pozwala użytkownikowi nadużyć klasy priorytetowej.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Ruch ponad CIR jest odrzucany od razu, bez buforowania nadmiaru; tak ustawiono akcję exceed. Dla II: Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\nII — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Ruch ponad CIR jest odrzucany od razu, bez buforowania nadmiaru; tak ustawiono akcję exceed. Dla I: Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.",
+          "feedback_md": "**Zgłoszenie I:** Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zmierzyć składowe opóźnienia i szukać problemu poza konkurencją kolejki.\n\n**Sprawdzenie I:** Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\n**Zgłoszenie II:** Granica zaufania pozwala użytkownikowi nadużyć klasy priorytetowej. Klasyfikować i oznaczać ruch na kontrolowanej granicy zamiast ufać dowolnemu hostowi.\n\n**Sprawdzenie II:** Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\n**Zależności:** QoS zarządza konkurencją zasobów, ale nie usuwa odległości ani czasu propagacji. Znaczenie DSCP zależy od polityki zaufania i klasyfikacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.qos.practice.compare-02.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRuch ponad CIR jest odrzucany od razu, bez buforowania nadmiaru; tak ustawiono akcję exceed.\n\n**Zgłoszenie II**\n\nPo wdrożeniu shaping burst jest wysyłany wolniej i pojawia się dodatkowe opóźnienie kolejki.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Działa policing z odrzucaniem nadmiaru. Jeśli wymagane jest wygładzanie zamiast drop, rozważyć właściwy shaper.\n\n**Sprawdzenie I:** Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\n**Zgłoszenie II:** Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Ocenić bufor, tempo i wymagania opóźnienia dla tej klasy.\n\n**Sprawdzenie II:** Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\n**Zależności:** Policing i shaping różnią się sposobem obsługi ruchu ponad profil. Shaping wygładza tempo kosztem możliwego opóźnienia.",
+      "card_id": "ccna.qos.practice.compare-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\nII — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.",
+          "feedback_md": "**Zgłoszenie I:** Działa policing z odrzucaniem nadmiaru. Jeśli wymagane jest wygładzanie zamiast drop, rozważyć właściwy shaper.\n\n**Sprawdzenie I:** Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\n**Zgłoszenie II:** Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Ocenić bufor, tempo i wymagania opóźnienia dla tej klasy.\n\n**Sprawdzenie II:** Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\n**Zależności:** Policing i shaping różnią się sposobem obsługi ruchu ponad profil. Shaping wygładza tempo kosztem możliwego opóźnienia.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\nII — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Działa policing z odrzucaniem nadmiaru. Zgłoszenie II: Nadmiar jest czasowo buforowany w celu ograniczenia tempa.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\nII — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Na łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego. Dla II: Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Na łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego. Dla I: Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.qos.practice.compare-03.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPakiety mają DSCP EF, ale egress traktuje wszystkie identycznie w FIFO.\n\n**Zgłoszenie II**\n\nInterfejs CE ma 1 Gb/s, ale usługa operatora 100 Mb/s. Lokalne kolejki są puste, a operator odrzuca nadmiar.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Samo oznaczenie nie utworzyło preferencyjnej obsługi. Skonfigurować wspieraną politykę egress mapującą klasę na odpowiednią kolejkę.\n\n**Sprawdzenie I:** Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\n**Zgłoszenie II:** Przeciążenie występuje za szybkim interfejsem, na limicie usługi. Dopasować shaping CE do uzgodnionego profilu usługi z uwzględnieniem narzutu.\n\n**Sprawdzenie II:** Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.\n\n**Zależności:** Marking opisuje pakiet; scheduling określa jego obsługę na wyjściu. Polityka QoS powinna uwzględniać rzeczywistą przepustowość usługi, nie tylko prędkość portu.",
+      "card_id": "ccna.qos.practice.compare-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.\n\nII — Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Samo oznaczenie nie utworzyło preferencyjnej obsługi. Zgłoszenie II: Przeciążenie występuje za szybkim interfejsem, na limicie usługi.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\nII — Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.",
+          "feedback_md": "**Zgłoszenie I:** Samo oznaczenie nie utworzyło preferencyjnej obsługi. Skonfigurować wspieraną politykę egress mapującą klasę na odpowiednią kolejkę.\n\n**Sprawdzenie I:** Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\n**Zgłoszenie II:** Przeciążenie występuje za szybkim interfejsem, na limicie usługi. Dopasować shaping CE do uzgodnionego profilu usługi z uwzględnieniem narzutu.\n\n**Sprawdzenie II:** Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.\n\n**Zależności:** Marking opisuje pakiet; scheduling określa jego obsługę na wyjściu. Polityka QoS powinna uwzględniać rzeczywistą przepustowość usługi, nie tylko prędkość portu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\nII — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Na łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego. Dla II: Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Na łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego. Dla I: Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.qos.practice.compare-04.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNa łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego.\n\n**Zgłoszenie II**\n\nRuch ponad CIR jest odrzucany od razu, bez buforowania nadmiaru; tak ustawiono akcję exceed.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zmierzyć składowe opóźnienia i szukać problemu poza konkurencją kolejki.\n\n**Sprawdzenie I:** Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\n**Zgłoszenie II:** Działa policing z odrzucaniem nadmiaru. Jeśli wymagane jest wygładzanie zamiast drop, rozważyć właściwy shaper.\n\n**Sprawdzenie II:** Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\n**Zależności:** QoS zarządza konkurencją zasobów, ale nie usuwa odległości ani czasu propagacji. Policing i shaping różnią się sposobem obsługi ruchu ponad profil.",
+      "card_id": "ccna.qos.practice.compare-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\nII — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zgłoszenie II: Działa policing z odrzucaniem nadmiaru.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Komputer sam oznacza pobieranie plików jako EF, a sieć ufa oznaczeniom wszystkich hostów. Dla II: Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.",
+          "feedback_md": "**Zgłoszenie I:** Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zmierzyć składowe opóźnienia i szukać problemu poza konkurencją kolejki.\n\n**Sprawdzenie I:** Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\n**Zgłoszenie II:** Działa policing z odrzucaniem nadmiaru. Jeśli wymagane jest wygładzanie zamiast drop, rozważyć właściwy shaper.\n\n**Sprawdzenie II:** Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\n**Zależności:** QoS zarządza konkurencją zasobów, ale nie usuwa odległości ani czasu propagacji. Policing i shaping różnią się sposobem obsługi ruchu ponad profil.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\nII — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Komputer sam oznacza pobieranie plików jako EF, a sieć ufa oznaczeniom wszystkich hostów. Dla I: Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.qos.practice.compare-05.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKomputer sam oznacza pobieranie plików jako EF, a sieć ufa oznaczeniom wszystkich hostów.\n\n**Zgłoszenie II**\n\nPakiety mają DSCP EF, ale egress traktuje wszystkie identycznie w FIFO.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Granica zaufania pozwala użytkownikowi nadużyć klasy priorytetowej. Klasyfikować i oznaczać ruch na kontrolowanej granicy zamiast ufać dowolnemu hostowi.\n\n**Sprawdzenie I:** Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\n**Zgłoszenie II:** Samo oznaczenie nie utworzyło preferencyjnej obsługi. Skonfigurować wspieraną politykę egress mapującą klasę na odpowiednią kolejkę.\n\n**Sprawdzenie II:** Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\n**Zależności:** Znaczenie DSCP zależy od polityki zaufania i klasyfikacji. Marking opisuje pakiet; scheduling określa jego obsługę na wyjściu.",
+      "card_id": "ccna.qos.practice.compare-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\nII — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Granica zaufania pozwala użytkownikowi nadużyć klasy priorytetowej. Zgłoszenie II: Samo oznaczenie nie utworzyło preferencyjnej obsługi.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\nII — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Na łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego. Dla II: Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Na łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego. Dla I: Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\nII — Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.",
+          "feedback_md": "**Zgłoszenie I:** Granica zaufania pozwala użytkownikowi nadużyć klasy priorytetowej. Klasyfikować i oznaczać ruch na kontrolowanej granicy zamiast ufać dowolnemu hostowi.\n\n**Sprawdzenie I:** Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\n**Zgłoszenie II:** Samo oznaczenie nie utworzyło preferencyjnej obsługi. Skonfigurować wspieraną politykę egress mapującą klasę na odpowiednią kolejkę.\n\n**Sprawdzenie II:** Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\n**Zależności:** Znaczenie DSCP zależy od polityki zaufania i klasyfikacji. Marking opisuje pakiet; scheduling określa jego obsługę na wyjściu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.qos.practice.compare-06.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPo wdrożeniu shaping burst jest wysyłany wolniej i pojawia się dodatkowe opóźnienie kolejki.\n\n**Zgłoszenie II**\n\nInterfejs CE ma 1 Gb/s, ale usługa operatora 100 Mb/s. Lokalne kolejki są puste, a operator odrzuca nadmiar.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Ocenić bufor, tempo i wymagania opóźnienia dla tej klasy.\n\n**Sprawdzenie I:** Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\n**Zgłoszenie II:** Przeciążenie występuje za szybkim interfejsem, na limicie usługi. Dopasować shaping CE do uzgodnionego profilu usługi z uwzględnieniem narzutu.\n\n**Sprawdzenie II:** Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.\n\n**Zależności:** Shaping wygładza tempo kosztem możliwego opóźnienia. Polityka QoS powinna uwzględniać rzeczywistą przepustowość usługi, nie tylko prędkość portu.",
+      "card_id": "ccna.qos.practice.compare-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\nII — Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.",
+          "feedback_md": "**Zgłoszenie I:** Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Ocenić bufor, tempo i wymagania opóźnienia dla tej klasy.\n\n**Sprawdzenie I:** Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\n**Zgłoszenie II:** Przeciążenie występuje za szybkim interfejsem, na limicie usługi. Dopasować shaping CE do uzgodnionego profilu usługi z uwzględnieniem narzutu.\n\n**Sprawdzenie II:** Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.\n\n**Zależności:** Shaping wygładza tempo kosztem możliwego opóźnienia. Polityka QoS powinna uwzględniać rzeczywistą przepustowość usługi, nie tylko prędkość portu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.\n\nII — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Zgłoszenie II: Przeciążenie występuje za szybkim interfejsem, na limicie usługi.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\nII — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Na łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego. Dla II: Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Na łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego. Dla I: Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.qos.practice.compare-07.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNa łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego.\n\n**Zgłoszenie II**\n\nInterfejs CE ma 1 Gb/s, ale usługa operatora 100 Mb/s. Lokalne kolejki są puste, a operator odrzuca nadmiar.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zmierzyć składowe opóźnienia i szukać problemu poza konkurencją kolejki.\n\n**Sprawdzenie I:** Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\n**Zgłoszenie II:** Przeciążenie występuje za szybkim interfejsem, na limicie usługi. Dopasować shaping CE do uzgodnionego profilu usługi z uwzględnieniem narzutu.\n\n**Sprawdzenie II:** Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.\n\n**Zależności:** QoS zarządza konkurencją zasobów, ale nie usuwa odległości ani czasu propagacji. Polityka QoS powinna uwzględniać rzeczywistą przepustowość usługi, nie tylko prędkość portu.",
+      "card_id": "ccna.qos.practice.compare-07.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.\n\nII — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zgłoszenie II: Przeciążenie występuje za szybkim interfejsem, na limicie usługi.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.",
+          "feedback_md": "**Zgłoszenie I:** Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zmierzyć składowe opóźnienia i szukać problemu poza konkurencją kolejki.\n\n**Sprawdzenie I:** Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\n**Zgłoszenie II:** Przeciążenie występuje za szybkim interfejsem, na limicie usługi. Dopasować shaping CE do uzgodnionego profilu usługi z uwzględnieniem narzutu.\n\n**Sprawdzenie II:** Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.\n\n**Zależności:** QoS zarządza konkurencją zasobów, ale nie usuwa odległości ani czasu propagacji. Polityka QoS powinna uwzględniać rzeczywistą przepustowość usługi, nie tylko prędkość portu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Komputer sam oznacza pobieranie plików jako EF, a sieć ufa oznaczeniom wszystkich hostów. Dla II: Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\nII — Przeciążenie jest kontrolowane lokalnie, a nieplanowane dropy operatora maleją.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Komputer sam oznacza pobieranie plików jako EF, a sieć ufa oznaczeniom wszystkich hostów. Dla I: Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.qos.practice.compare-08.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKomputer sam oznacza pobieranie plików jako EF, a sieć ufa oznaczeniom wszystkich hostów.\n\n**Zgłoszenie II**\n\nPo wdrożeniu shaping burst jest wysyłany wolniej i pojawia się dodatkowe opóźnienie kolejki.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Granica zaufania pozwala użytkownikowi nadużyć klasy priorytetowej. Klasyfikować i oznaczać ruch na kontrolowanej granicy zamiast ufać dowolnemu hostowi.\n\n**Sprawdzenie I:** Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\n**Zgłoszenie II:** Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Ocenić bufor, tempo i wymagania opóźnienia dla tej klasy.\n\n**Sprawdzenie II:** Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\n**Zależności:** Znaczenie DSCP zależy od polityki zaufania i klasyfikacji. Shaping wygładza tempo kosztem możliwego opóźnienia.",
+      "card_id": "ccna.qos.practice.compare-08.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\nII — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Granica zaufania pozwala użytkownikowi nadużyć klasy priorytetowej. Zgłoszenie II: Nadmiar jest czasowo buforowany w celu ograniczenia tempa.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\nII — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Na łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego. Dla II: Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\nII — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.",
+          "feedback_md": "**Zgłoszenie I:** Granica zaufania pozwala użytkownikowi nadużyć klasy priorytetowej. Klasyfikować i oznaczać ruch na kontrolowanej granicy zamiast ufać dowolnemu hostowi.\n\n**Sprawdzenie I:** Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\n**Zgłoszenie II:** Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Ocenić bufor, tempo i wymagania opóźnienia dla tej klasy.\n\n**Sprawdzenie II:** Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\n**Zależności:** Znaczenie DSCP zależy od polityki zaufania i klasyfikacji. Shaping wygładza tempo kosztem możliwego opóźnienia.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Na łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego. Dla I: Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.qos.practice.compare-09.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRuch ponad CIR jest odrzucany od razu, bez buforowania nadmiaru; tak ustawiono akcję exceed.\n\n**Zgłoszenie II**\n\nPakiety mają DSCP EF, ale egress traktuje wszystkie identycznie w FIFO.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Działa policing z odrzucaniem nadmiaru. Jeśli wymagane jest wygładzanie zamiast drop, rozważyć właściwy shaper.\n\n**Sprawdzenie I:** Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\n**Zgłoszenie II:** Samo oznaczenie nie utworzyło preferencyjnej obsługi. Skonfigurować wspieraną politykę egress mapującą klasę na odpowiednią kolejkę.\n\n**Sprawdzenie II:** Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\n**Zależności:** Policing i shaping różnią się sposobem obsługi ruchu ponad profil. Marking opisuje pakiet; scheduling określa jego obsługę na wyjściu.",
+      "card_id": "ccna.qos.practice.compare-09.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\nII — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Działa policing z odrzucaniem nadmiaru. Zgłoszenie II: Samo oznaczenie nie utworzyło preferencyjnej obsługi.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\nII — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Na łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego. Dla II: Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Na łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego. Dla I: Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\nII — Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.",
+          "feedback_md": "**Zgłoszenie I:** Działa policing z odrzucaniem nadmiaru. Jeśli wymagane jest wygładzanie zamiast drop, rozważyć właściwy shaper.\n\n**Sprawdzenie I:** Nowa polityka buforuje przejściowy nadmiar zgodnie z limitem i pojemnością kolejki.\n\n**Zgłoszenie II:** Samo oznaczenie nie utworzyło preferencyjnej obsługi. Skonfigurować wspieraną politykę egress mapującą klasę na odpowiednią kolejkę.\n\n**Sprawdzenie II:** Pod obciążeniem liczniki pokazują obsługę EF w zaplanowanej klasie.\n\n**Zależności:** Policing i shaping różnią się sposobem obsługi ruchu ponad profil. Marking opisuje pakiet; scheduling określa jego obsługę na wyjściu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.qos.practice.compare-10.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "ccna.qos.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/support/docs/quality-of-service-qos/qos-packet-marking/10103-dscpvalues.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/qos/b-quality-of-service/m_qos-mrkg.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_dfsrv/configuration/15-mt/qos-dfsrv-15-mt-book/qos-dfsrv.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — QoS — klasyfikacja i kolejki",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16/qos-plcshp-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNa łączu nie ma kolejek ani przeciążenia. Dodanie priorytetu nie poprawiło opóźnienia geograficznego.\n\n**Zgłoszenie II**\n\nPo wdrożeniu shaping burst jest wysyłany wolniej i pojawia się dodatkowe opóźnienie kolejki.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zmierzyć składowe opóźnienia i szukać problemu poza konkurencją kolejki.\n\n**Sprawdzenie I:** Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\n**Zgłoszenie II:** Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Ocenić bufor, tempo i wymagania opóźnienia dla tej klasy.\n\n**Sprawdzenie II:** Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\n**Zależności:** QoS zarządza konkurencją zasobów, ale nie usuwa odległości ani czasu propagacji. Shaping wygładza tempo kosztem możliwego opóźnienia.",
+      "card_id": "ccna.qos.practice.compare-10.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.",
+          "feedback_md": "**Zgłoszenie I:** Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zmierzyć składowe opóźnienia i szukać problemu poza konkurencją kolejki.\n\n**Sprawdzenie I:** Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\n**Zgłoszenie II:** Nadmiar jest czasowo buforowany w celu ograniczenia tempa. Ocenić bufor, tempo i wymagania opóźnienia dla tej klasy.\n\n**Sprawdzenie II:** Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\n**Zależności:** QoS zarządza konkurencją zasobów, ale nie usuwa odległości ani czasu propagacji. Shaping wygładza tempo kosztem możliwego opóźnienia.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.\n\nII — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Kolejkowanie nie jest źródłem obserwowanego opóźnienia. Zgłoszenie II: Nadmiar jest czasowo buforowany w celu ograniczenia tempa.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.\n\nII — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Komputer sam oznacza pobieranie plików jako EF, a sieć ufa oznaczeniom wszystkich hostów. Dla II: Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ruch plikowy nie trafia do kolejki głosowej tylko z powodu oznaczenia klienta.\n\nII — Tempo wyjściowe jest ograniczone, a opóźnienie odpowiada buforowaniu burstów.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Komputer sam oznacza pobieranie plików jako EF, a sieć ufa oznaczeniom wszystkich hostów. Dla I: Pomiar pokazuje brak wzrostu queue delay przy utrzymanym opóźnieniu propagacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

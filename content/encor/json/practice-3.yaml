@@ -1,0 +1,531 @@
+{
+  "schema_version": 3,
+  "id": "encor.json.practice-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Pojedyncze cudzysłowy — weryfikacja",
+      "skills": [
+        "encor.json.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.case-01.3.card",
+      "front_md": "Payload ma postać {'enabled': true}. Parser JSON odrzuca go.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Składnia literału słownika Pythona i składnia JSON nie są identyczne.\n\n**Rozpoznanie:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach.\n\n**Działanie:** Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie:** Standardowy parser JSON przyjmuje dokument.",
+      "example": "Standardowy parser JSON przyjmuje dokument."
+    },
+    {
+      "revision": 1,
+      "title": "Bool jako tekst — weryfikacja",
+      "skills": [
+        "encor.json.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.case-02.3.card",
+      "front_md": "Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Boolean false i string \"false\" mają różne typy i znaczenie.\n\n**Rozpoznanie:** Przekazano string zamiast boolean.\n\n**Działanie:** Użyć wartości false bez cudzysłowów.\n\n**Sprawdzenie:** Po parsowaniu enabled jest wartością logiczną, nie tekstem.",
+      "example": "Po parsowaniu enabled jest wartością logiczną, nie tekstem."
+    },
+    {
+      "revision": 1,
+      "title": "Przecinek końcowy — weryfikacja",
+      "skills": [
+        "encor.json.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.case-03.3.card",
+      "front_md": "Dokument kończy obiekt zapisem \"mtu\": 1500, przed zamykającym nawiasem.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "JSON ma ścisłą składnię niezależną od tolerancji niektórych edytorów.\n\n**Rozpoznanie:** Standardowy JSON nie dopuszcza końcowego przecinka.\n\n**Działanie:** Usunąć przecinek po ostatnim polu.\n\n**Sprawdzenie:** Dokument przechodzi walidację składni standardowego JSON.",
+      "example": "Dokument przechodzi walidację składni standardowego JSON."
+    },
+    {
+      "revision": 1,
+      "title": "Tablica rekordów — weryfikacja",
+      "skills": [
+        "encor.json.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.case-04.3.card",
+      "front_md": "Pole interfaces zawiera trzy obiekty w tablicy; operator szuka pojedynczego pola name bez wyboru elementu.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt.\n\n**Rozpoznanie:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu.\n\n**Działanie:** Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.",
+      "example": "Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie."
+    },
+    {
+      "revision": 1,
+      "title": "Null a brak — weryfikacja",
+      "skills": [
+        "encor.json.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.case-05.3.card",
+      "front_md": "Jeden dokument ma \"description\": null, drugi nie ma pola description. API rozróżnia te przypadki.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "JSON reprezentuje null, ale semantykę braku lub wyzerowania pola określa API.\n\n**Rozpoznanie:** Jawne null nie jest tym samym co pominięty klucz.\n\n**Działanie:** Zastosować znaczenie null i braku pola określone przez model API.\n\n**Sprawdzenie:** Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.",
+      "example": "Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API."
+    },
+    {
+      "revision": 1,
+      "title": "Liczba z cudzysłowem — weryfikacja",
+      "skills": [
+        "encor.json.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.case-06.3.card",
+      "front_md": "Model oczekuje integer mtu, lecz payload zawiera \"mtu\": \"1500\".\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Poprawny składniowo JSON może nadal mieć niewłaściwe typy dla modelu.\n\n**Rozpoznanie:** Wartość ma typ tekstowy zamiast liczbowego.\n\n**Działanie:** Przekazać 1500 jako liczbę zgodnie z modelem.\n\n**Sprawdzenie:** Walidator typu akceptuje liczbową wartość mtu.",
+      "example": "Walidator typu akceptuje liczbową wartość mtu."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.json.practice.case-01.3",
+      "revision": 1,
+      "title": "Pojedyncze cudzysłowy — weryfikacja",
+      "skills": [
+        "encor.json.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Payload ma postać {'enabled': true}. Parser JSON odrzuca go.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Składnia literału słownika Pythona i składnia JSON nie są identyczne.\n\n**Rozpoznanie:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach.\n\n**Działanie:** Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie:** Standardowy parser JSON przyjmuje dokument.",
+      "card_id": "encor.json.practice.case-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Po parsowaniu enabled jest wartością logiczną, nie tekstem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Bool jako tekst”: Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej. W bieżącym przypadku: Standardowy parser JSON przyjmuje dokument.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dokument przechodzi walidację składni standardowego JSON.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Przecinek końcowy”: Dokument kończy obiekt zapisem \"mtu\": 1500, przed zamykającym nawiasem. W bieżącym przypadku: Standardowy parser JSON przyjmuje dokument.",
+          "id": "B"
+        },
+        {
+          "text_md": "Standardowy parser JSON przyjmuje dokument.",
+          "feedback_md": "Składnia literału słownika Pythona i składnia JSON nie są identyczne.\n\n**Rozpoznanie:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach.\n\n**Działanie:** Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie:** Standardowy parser JSON przyjmuje dokument.",
+          "id": "C"
+        },
+        {
+          "text_md": "Walidator typu akceptuje liczbową wartość mtu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Liczba z cudzysłowem”: Model oczekuje integer mtu, lecz payload zawiera \"mtu\": \"1500\". W bieżącym przypadku: Standardowy parser JSON przyjmuje dokument.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.json.practice.case-02.3",
+      "revision": 1,
+      "title": "Bool jako tekst — weryfikacja",
+      "skills": [
+        "encor.json.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Boolean false i string \"false\" mają różne typy i znaczenie.\n\n**Rozpoznanie:** Przekazano string zamiast boolean.\n\n**Działanie:** Użyć wartości false bez cudzysłowów.\n\n**Sprawdzenie:** Po parsowaniu enabled jest wartością logiczną, nie tekstem.",
+      "card_id": "encor.json.practice.case-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Null a brak”: Jeden dokument ma \"description\": null, drugi nie ma pola description. API rozróżnia te przypadki. W bieżącym przypadku: Po parsowaniu enabled jest wartością logiczną, nie tekstem.",
+          "id": "A"
+        },
+        {
+          "text_md": "Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Tablica rekordów”: Pole interfaces zawiera trzy obiekty w tablicy; operator szuka pojedynczego pola name bez wyboru elementu. W bieżącym przypadku: Po parsowaniu enabled jest wartością logiczną, nie tekstem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Walidator typu akceptuje liczbową wartość mtu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Liczba z cudzysłowem”: Model oczekuje integer mtu, lecz payload zawiera \"mtu\": \"1500\". W bieżącym przypadku: Po parsowaniu enabled jest wartością logiczną, nie tekstem.",
+          "id": "C"
+        },
+        {
+          "text_md": "Po parsowaniu enabled jest wartością logiczną, nie tekstem.",
+          "feedback_md": "Boolean false i string \"false\" mają różne typy i znaczenie.\n\n**Rozpoznanie:** Przekazano string zamiast boolean.\n\n**Działanie:** Użyć wartości false bez cudzysłowów.\n\n**Sprawdzenie:** Po parsowaniu enabled jest wartością logiczną, nie tekstem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.json.practice.case-03.3",
+      "revision": 1,
+      "title": "Przecinek końcowy — weryfikacja",
+      "skills": [
+        "encor.json.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Dokument kończy obiekt zapisem \"mtu\": 1500, przed zamykającym nawiasem.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "JSON ma ścisłą składnię niezależną od tolerancji niektórych edytorów.\n\n**Rozpoznanie:** Standardowy JSON nie dopuszcza końcowego przecinka.\n\n**Działanie:** Usunąć przecinek po ostatnim polu.\n\n**Sprawdzenie:** Dokument przechodzi walidację składni standardowego JSON.",
+      "card_id": "encor.json.practice.case-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Dokument przechodzi walidację składni standardowego JSON.",
+          "feedback_md": "JSON ma ścisłą składnię niezależną od tolerancji niektórych edytorów.\n\n**Rozpoznanie:** Standardowy JSON nie dopuszcza końcowego przecinka.\n\n**Działanie:** Usunąć przecinek po ostatnim polu.\n\n**Sprawdzenie:** Dokument przechodzi walidację składni standardowego JSON.",
+          "id": "A"
+        },
+        {
+          "text_md": "Po parsowaniu enabled jest wartością logiczną, nie tekstem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Bool jako tekst”: Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej. W bieżącym przypadku: Dokument przechodzi walidację składni standardowego JSON.",
+          "id": "B"
+        },
+        {
+          "text_md": "Standardowy parser JSON przyjmuje dokument.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Pojedyncze cudzysłowy”: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. W bieżącym przypadku: Dokument przechodzi walidację składni standardowego JSON.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Null a brak”: Jeden dokument ma \"description\": null, drugi nie ma pola description. API rozróżnia te przypadki. W bieżącym przypadku: Dokument przechodzi walidację składni standardowego JSON.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.json.practice.case-04.3",
+      "revision": 1,
+      "title": "Tablica rekordów — weryfikacja",
+      "skills": [
+        "encor.json.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Pole interfaces zawiera trzy obiekty w tablicy; operator szuka pojedynczego pola name bez wyboru elementu.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt.\n\n**Rozpoznanie:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu.\n\n**Działanie:** Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.",
+      "card_id": "encor.json.practice.case-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Po parsowaniu enabled jest wartością logiczną, nie tekstem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Bool jako tekst”: Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej. W bieżącym przypadku: Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.",
+          "id": "A"
+        },
+        {
+          "text_md": "Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.",
+          "feedback_md": "Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt.\n\n**Rozpoznanie:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu.\n\n**Działanie:** Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.",
+          "id": "B"
+        },
+        {
+          "text_md": "Standardowy parser JSON przyjmuje dokument.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Pojedyncze cudzysłowy”: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. W bieżącym przypadku: Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.",
+          "id": "C"
+        },
+        {
+          "text_md": "Dokument przechodzi walidację składni standardowego JSON.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Przecinek końcowy”: Dokument kończy obiekt zapisem \"mtu\": 1500, przed zamykającym nawiasem. W bieżącym przypadku: Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.json.practice.case-05.3",
+      "revision": 1,
+      "title": "Null a brak — weryfikacja",
+      "skills": [
+        "encor.json.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Jeden dokument ma \"description\": null, drugi nie ma pola description. API rozróżnia te przypadki.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "JSON reprezentuje null, ale semantykę braku lub wyzerowania pola określa API.\n\n**Rozpoznanie:** Jawne null nie jest tym samym co pominięty klucz.\n\n**Działanie:** Zastosować znaczenie null i braku pola określone przez model API.\n\n**Sprawdzenie:** Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.",
+      "card_id": "encor.json.practice.case-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Po parsowaniu enabled jest wartością logiczną, nie tekstem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Bool jako tekst”: Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej. W bieżącym przypadku: Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.",
+          "id": "A"
+        },
+        {
+          "text_md": "Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Tablica rekordów”: Pole interfaces zawiera trzy obiekty w tablicy; operator szuka pojedynczego pola name bez wyboru elementu. W bieżącym przypadku: Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.",
+          "feedback_md": "JSON reprezentuje null, ale semantykę braku lub wyzerowania pola określa API.\n\n**Rozpoznanie:** Jawne null nie jest tym samym co pominięty klucz.\n\n**Działanie:** Zastosować znaczenie null i braku pola określone przez model API.\n\n**Sprawdzenie:** Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.",
+          "id": "C"
+        },
+        {
+          "text_md": "Standardowy parser JSON przyjmuje dokument.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Pojedyncze cudzysłowy”: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. W bieżącym przypadku: Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.json.practice.case-06.3",
+      "revision": 1,
+      "title": "Liczba z cudzysłowem — weryfikacja",
+      "skills": [
+        "encor.json.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Model oczekuje integer mtu, lecz payload zawiera \"mtu\": \"1500\".\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Poprawny składniowo JSON może nadal mieć niewłaściwe typy dla modelu.\n\n**Rozpoznanie:** Wartość ma typ tekstowy zamiast liczbowego.\n\n**Działanie:** Przekazać 1500 jako liczbę zgodnie z modelem.\n\n**Sprawdzenie:** Walidator typu akceptuje liczbową wartość mtu.",
+      "card_id": "encor.json.practice.case-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Null a brak”: Jeden dokument ma \"description\": null, drugi nie ma pola description. API rozróżnia te przypadki. W bieżącym przypadku: Walidator typu akceptuje liczbową wartość mtu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Po parsowaniu enabled jest wartością logiczną, nie tekstem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Bool jako tekst”: Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej. W bieżącym przypadku: Walidator typu akceptuje liczbową wartość mtu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Standardowy parser JSON przyjmuje dokument.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Pojedyncze cudzysłowy”: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. W bieżącym przypadku: Walidator typu akceptuje liczbową wartość mtu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Walidator typu akceptuje liczbową wartość mtu.",
+          "feedback_md": "Poprawny składniowo JSON może nadal mieć niewłaściwe typy dla modelu.\n\n**Rozpoznanie:** Wartość ma typ tekstowy zamiast liczbowego.\n\n**Działanie:** Przekazać 1500 jako liczbę zgodnie z modelem.\n\n**Sprawdzenie:** Walidator typu akceptuje liczbową wartość mtu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

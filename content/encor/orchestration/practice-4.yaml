@@ -1,0 +1,531 @@
+{
+  "schema_version": 3,
+  "id": "encor.orchestration.practice-4",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Agentless — zależności",
+      "skills": [
+        "encor.orchestration.case-01",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.practice.case-01.4.card",
+      "front_md": "Narzędzie łączy się do urządzeń przez SSH lub API bez instalowania na nich własnego agenta.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Agentless przenosi logikę wykonania poza urządzenie, korzystając z istniejących interfejsów.\n\n**Rozpoznanie:** Model działania jest agentless.\n\n**Działanie:** Zapewnić właściwy transport, konto i uprawnienia zamiast instalować niepotrzebny agent.\n\n**Sprawdzenie:** Urządzenie jest zarządzane przez wspierany zdalny interfejs.",
+      "example": "Agentless przenosi logikę wykonania poza urządzenie, korzystając z istniejących interfejsów."
+    },
+    {
+      "revision": 1,
+      "title": "Drift — zależności",
+      "skills": [
+        "encor.orchestration.case-02",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.practice.case-02.4.card",
+      "front_md": "Stan urządzenia różni się od zatwierdzonego stanu docelowego po ręcznej zmianie.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Deklaratywne zarządzanie wymaga obserwacji rozbieżności i świadomej konwergencji.\n\n**Rozpoznanie:** Wystąpił configuration drift.\n\n**Działanie:** Porównać diff, ustalić intencję i kontrolowanie przywrócić lub zatwierdzić zmianę.\n\n**Sprawdzenie:** Stan rzeczywisty i zatwierdzony ponownie są zgodne.",
+      "example": "Deklaratywne zarządzanie wymaga obserwacji rozbieżności i świadomej konwergencji."
+    },
+    {
+      "revision": 1,
+      "title": "Zła grupa inventory — zależności",
+      "skills": [
+        "encor.orchestration.case-03",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.practice.case-03.4.card",
+      "front_md": "Playbook dla laboratoriów obejmuje przez pomyłkę grupę produkcyjną.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Poprawna komenda na niewłaściwym urządzeniu nadal jest błędną zmianą.\n\n**Rozpoznanie:** Zakres wykonania nie odpowiada zamierzonemu środowisku.\n\n**Działanie:** Zweryfikować inventory i ograniczyć cel przed wykonaniem.\n\n**Sprawdzenie:** Plan wykonania wymienia wyłącznie zatwierdzone urządzenia.",
+      "example": "Poprawna komenda na niewłaściwym urządzeniu nadal jest błędną zmianą."
+    },
+    {
+      "revision": 1,
+      "title": "Canary — zależności",
+      "skills": [
+        "encor.orchestration.case-04",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.practice.case-04.4.card",
+      "front_md": "Nowy szablon ma objąć sto routerów, ale nie był testowany na żadnym reprezentatywnym urządzeniu.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Etapowe wdrożenie ogranicza zasięg potencjalnego błędu.\n\n**Rozpoznanie:** Brakuje ograniczonej próby przed zmianą masową.\n\n**Działanie:** Wdrożyć na małej reprezentatywnej grupie i sprawdzić warunki sukcesu.\n\n**Sprawdzenie:** Test canary potwierdza zgodność i usługi przed rozszerzeniem zakresu.",
+      "example": "Etapowe wdrożenie ogranicza zasięg potencjalnego błędu."
+    },
+    {
+      "revision": 1,
+      "title": "Częściowy sukces — zależności",
+      "skills": [
+        "encor.orchestration.case-05",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.practice.case-05.4.card",
+      "front_md": "Zmiana udała się na 8 z 10 urządzeń. Narzędzie zgłasza globalny sukces bez wskazania pozostałych.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Orkiestracja musi uwzględniać częściowe wykonanie, nie tylko jedną flagę całości.\n\n**Rozpoznanie:** Raport ukrywa częściową niezgodność stanu.\n\n**Działanie:** Zapisać status per urządzenie i zaplanować kontrolowaną naprawę dwóch niepowodzeń.\n\n**Sprawdzenie:** Raport jednoznacznie rozróżnia 8 sukcesów i 2 błędy.",
+      "example": "Orkiestracja musi uwzględniać częściowe wykonanie, nie tylko jedną flagę całości."
+    },
+    {
+      "revision": 1,
+      "title": "Rollback bez testu — zależności",
+      "skills": [
+        "encor.orchestration.case-06",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "id": "encor.orchestration.practice.case-06.4.card",
+      "front_md": "Plan zmiany zawiera backup, ale brak procedury i warunków odtworzenia.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu.\n\n**Rozpoznanie:** Kopia konfiguracji nie jest jeszcze zweryfikowanym planem wycofania.\n\n**Działanie:** Przygotować i sprawdzić rollback oraz kryteria jego uruchomienia.\n\n**Sprawdzenie:** Odtworzenie przywraca działający stan i wymagane usługi.",
+      "example": "Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.orchestration.practice.case-01.4",
+      "revision": 1,
+      "title": "Agentless — zależności",
+      "skills": [
+        "encor.orchestration.case-01",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Narzędzie łączy się do urządzeń przez SSH lub API bez instalowania na nich własnego agenta.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Agentless przenosi logikę wykonania poza urządzenie, korzystając z istniejących interfejsów.\n\n**Rozpoznanie:** Model działania jest agentless.\n\n**Działanie:** Zapewnić właściwy transport, konto i uprawnienia zamiast instalować niepotrzebny agent.\n\n**Sprawdzenie:** Urządzenie jest zarządzane przez wspierany zdalny interfejs.",
+      "card_id": "encor.orchestration.practice.case-01.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Etapowe wdrożenie ogranicza zasięg potencjalnego błędu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Canary”: Nowy szablon ma objąć sto routerów, ale nie był testowany na żadnym reprezentatywnym urządzeniu. W bieżącym przypadku: Agentless przenosi logikę wykonania poza urządzenie, korzystając z istniejących interfejsów.",
+          "id": "A"
+        },
+        {
+          "text_md": "Agentless przenosi logikę wykonania poza urządzenie, korzystając z istniejących interfejsów.",
+          "feedback_md": "Agentless przenosi logikę wykonania poza urządzenie, korzystając z istniejących interfejsów.\n\n**Rozpoznanie:** Model działania jest agentless.\n\n**Działanie:** Zapewnić właściwy transport, konto i uprawnienia zamiast instalować niepotrzebny agent.\n\n**Sprawdzenie:** Urządzenie jest zarządzane przez wspierany zdalny interfejs.",
+          "id": "B"
+        },
+        {
+          "text_md": "Orkiestracja musi uwzględniać częściowe wykonanie, nie tylko jedną flagę całości.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Częściowy sukces”: Zmiana udała się na 8 z 10 urządzeń. Narzędzie zgłasza globalny sukces bez wskazania pozostałych. W bieżącym przypadku: Agentless przenosi logikę wykonania poza urządzenie, korzystając z istniejących interfejsów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Rollback bez testu”: Plan zmiany zawiera backup, ale brak procedury i warunków odtworzenia. W bieżącym przypadku: Agentless przenosi logikę wykonania poza urządzenie, korzystając z istniejących interfejsów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.orchestration.practice.case-02.4",
+      "revision": 1,
+      "title": "Drift — zależności",
+      "skills": [
+        "encor.orchestration.case-02",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Stan urządzenia różni się od zatwierdzonego stanu docelowego po ręcznej zmianie.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Deklaratywne zarządzanie wymaga obserwacji rozbieżności i świadomej konwergencji.\n\n**Rozpoznanie:** Wystąpił configuration drift.\n\n**Działanie:** Porównać diff, ustalić intencję i kontrolowanie przywrócić lub zatwierdzić zmianę.\n\n**Sprawdzenie:** Stan rzeczywisty i zatwierdzony ponownie są zgodne.",
+      "card_id": "encor.orchestration.practice.case-02.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Agentless przenosi logikę wykonania poza urządzenie, korzystając z istniejących interfejsów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Agentless”: Narzędzie łączy się do urządzeń przez SSH lub API bez instalowania na nich własnego agenta. W bieżącym przypadku: Deklaratywne zarządzanie wymaga obserwacji rozbieżności i świadomej konwergencji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Rollback bez testu”: Plan zmiany zawiera backup, ale brak procedury i warunków odtworzenia. W bieżącym przypadku: Deklaratywne zarządzanie wymaga obserwacji rozbieżności i świadomej konwergencji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Deklaratywne zarządzanie wymaga obserwacji rozbieżności i świadomej konwergencji.",
+          "feedback_md": "Deklaratywne zarządzanie wymaga obserwacji rozbieżności i świadomej konwergencji.\n\n**Rozpoznanie:** Wystąpił configuration drift.\n\n**Działanie:** Porównać diff, ustalić intencję i kontrolowanie przywrócić lub zatwierdzić zmianę.\n\n**Sprawdzenie:** Stan rzeczywisty i zatwierdzony ponownie są zgodne.",
+          "id": "C"
+        },
+        {
+          "text_md": "Poprawna komenda na niewłaściwym urządzeniu nadal jest błędną zmianą.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła grupa inventory”: Playbook dla laboratoriów obejmuje przez pomyłkę grupę produkcyjną. W bieżącym przypadku: Deklaratywne zarządzanie wymaga obserwacji rozbieżności i świadomej konwergencji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.orchestration.practice.case-03.4",
+      "revision": 1,
+      "title": "Zła grupa inventory — zależności",
+      "skills": [
+        "encor.orchestration.case-03",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Playbook dla laboratoriów obejmuje przez pomyłkę grupę produkcyjną.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Poprawna komenda na niewłaściwym urządzeniu nadal jest błędną zmianą.\n\n**Rozpoznanie:** Zakres wykonania nie odpowiada zamierzonemu środowisku.\n\n**Działanie:** Zweryfikować inventory i ograniczyć cel przed wykonaniem.\n\n**Sprawdzenie:** Plan wykonania wymienia wyłącznie zatwierdzone urządzenia.",
+      "card_id": "encor.orchestration.practice.case-03.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Deklaratywne zarządzanie wymaga obserwacji rozbieżności i świadomej konwergencji.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Drift”: Stan urządzenia różni się od zatwierdzonego stanu docelowego po ręcznej zmianie. W bieżącym przypadku: Poprawna komenda na niewłaściwym urządzeniu nadal jest błędną zmianą.",
+          "id": "A"
+        },
+        {
+          "text_md": "Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Rollback bez testu”: Plan zmiany zawiera backup, ale brak procedury i warunków odtworzenia. W bieżącym przypadku: Poprawna komenda na niewłaściwym urządzeniu nadal jest błędną zmianą.",
+          "id": "B"
+        },
+        {
+          "text_md": "Agentless przenosi logikę wykonania poza urządzenie, korzystając z istniejących interfejsów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Agentless”: Narzędzie łączy się do urządzeń przez SSH lub API bez instalowania na nich własnego agenta. W bieżącym przypadku: Poprawna komenda na niewłaściwym urządzeniu nadal jest błędną zmianą.",
+          "id": "C"
+        },
+        {
+          "text_md": "Poprawna komenda na niewłaściwym urządzeniu nadal jest błędną zmianą.",
+          "feedback_md": "Poprawna komenda na niewłaściwym urządzeniu nadal jest błędną zmianą.\n\n**Rozpoznanie:** Zakres wykonania nie odpowiada zamierzonemu środowisku.\n\n**Działanie:** Zweryfikować inventory i ograniczyć cel przed wykonaniem.\n\n**Sprawdzenie:** Plan wykonania wymienia wyłącznie zatwierdzone urządzenia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.orchestration.practice.case-04.4",
+      "revision": 1,
+      "title": "Canary — zależności",
+      "skills": [
+        "encor.orchestration.case-04",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Nowy szablon ma objąć sto routerów, ale nie był testowany na żadnym reprezentatywnym urządzeniu.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Etapowe wdrożenie ogranicza zasięg potencjalnego błędu.\n\n**Rozpoznanie:** Brakuje ograniczonej próby przed zmianą masową.\n\n**Działanie:** Wdrożyć na małej reprezentatywnej grupie i sprawdzić warunki sukcesu.\n\n**Sprawdzenie:** Test canary potwierdza zgodność i usługi przed rozszerzeniem zakresu.",
+      "card_id": "encor.orchestration.practice.case-04.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Etapowe wdrożenie ogranicza zasięg potencjalnego błędu.",
+          "feedback_md": "Etapowe wdrożenie ogranicza zasięg potencjalnego błędu.\n\n**Rozpoznanie:** Brakuje ograniczonej próby przed zmianą masową.\n\n**Działanie:** Wdrożyć na małej reprezentatywnej grupie i sprawdzić warunki sukcesu.\n\n**Sprawdzenie:** Test canary potwierdza zgodność i usługi przed rozszerzeniem zakresu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Poprawna komenda na niewłaściwym urządzeniu nadal jest błędną zmianą.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła grupa inventory”: Playbook dla laboratoriów obejmuje przez pomyłkę grupę produkcyjną. W bieżącym przypadku: Etapowe wdrożenie ogranicza zasięg potencjalnego błędu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Orkiestracja musi uwzględniać częściowe wykonanie, nie tylko jedną flagę całości.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Częściowy sukces”: Zmiana udała się na 8 z 10 urządzeń. Narzędzie zgłasza globalny sukces bez wskazania pozostałych. W bieżącym przypadku: Etapowe wdrożenie ogranicza zasięg potencjalnego błędu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Rollback bez testu”: Plan zmiany zawiera backup, ale brak procedury i warunków odtworzenia. W bieżącym przypadku: Etapowe wdrożenie ogranicza zasięg potencjalnego błędu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.orchestration.practice.case-05.4",
+      "revision": 1,
+      "title": "Częściowy sukces — zależności",
+      "skills": [
+        "encor.orchestration.case-05",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Zmiana udała się na 8 z 10 urządzeń. Narzędzie zgłasza globalny sukces bez wskazania pozostałych.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Orkiestracja musi uwzględniać częściowe wykonanie, nie tylko jedną flagę całości.\n\n**Rozpoznanie:** Raport ukrywa częściową niezgodność stanu.\n\n**Działanie:** Zapisać status per urządzenie i zaplanować kontrolowaną naprawę dwóch niepowodzeń.\n\n**Sprawdzenie:** Raport jednoznacznie rozróżnia 8 sukcesów i 2 błędy.",
+      "card_id": "encor.orchestration.practice.case-05.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Etapowe wdrożenie ogranicza zasięg potencjalnego błędu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Canary”: Nowy szablon ma objąć sto routerów, ale nie był testowany na żadnym reprezentatywnym urządzeniu. W bieżącym przypadku: Orkiestracja musi uwzględniać częściowe wykonanie, nie tylko jedną flagę całości.",
+          "id": "A"
+        },
+        {
+          "text_md": "Orkiestracja musi uwzględniać częściowe wykonanie, nie tylko jedną flagę całości.",
+          "feedback_md": "Orkiestracja musi uwzględniać częściowe wykonanie, nie tylko jedną flagę całości.\n\n**Rozpoznanie:** Raport ukrywa częściową niezgodność stanu.\n\n**Działanie:** Zapisać status per urządzenie i zaplanować kontrolowaną naprawę dwóch niepowodzeń.\n\n**Sprawdzenie:** Raport jednoznacznie rozróżnia 8 sukcesów i 2 błędy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Poprawna komenda na niewłaściwym urządzeniu nadal jest błędną zmianą.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła grupa inventory”: Playbook dla laboratoriów obejmuje przez pomyłkę grupę produkcyjną. W bieżącym przypadku: Orkiestracja musi uwzględniać częściowe wykonanie, nie tylko jedną flagę całości.",
+          "id": "C"
+        },
+        {
+          "text_md": "Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Rollback bez testu”: Plan zmiany zawiera backup, ale brak procedury i warunków odtworzenia. W bieżącym przypadku: Orkiestracja musi uwzględniać częściowe wykonanie, nie tylko jedną flagę całości.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.orchestration.practice.case-06.4",
+      "revision": 1,
+      "title": "Rollback bez testu — zależności",
+      "skills": [
+        "encor.orchestration.case-06",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/configuration-management-and-automation-introduction/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://developer.cisco.com/docs/nx-os/agent-based-management/"
+        },
+        {
+          "title": "Dokumentacja Cisco — Automatyzacja — agent, agentless i kontrola zmian",
+          "url": "https://www.cisco.com/c/en/us/solutions/collateral/data-center-virtualization/application-centric-infrastructure/dc-automation-red-hat-ansible-wp.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Plan zmiany zawiera backup, ale brak procedury i warunków odtworzenia.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu.\n\n**Rozpoznanie:** Kopia konfiguracji nie jest jeszcze zweryfikowanym planem wycofania.\n\n**Działanie:** Przygotować i sprawdzić rollback oraz kryteria jego uruchomienia.\n\n**Sprawdzenie:** Odtworzenie przywraca działający stan i wymagane usługi.",
+      "card_id": "encor.orchestration.practice.case-06.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Poprawna komenda na niewłaściwym urządzeniu nadal jest błędną zmianą.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła grupa inventory”: Playbook dla laboratoriów obejmuje przez pomyłkę grupę produkcyjną. W bieżącym przypadku: Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Deklaratywne zarządzanie wymaga obserwacji rozbieżności i świadomej konwergencji.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Drift”: Stan urządzenia różni się od zatwierdzonego stanu docelowego po ręcznej zmianie. W bieżącym przypadku: Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu.",
+          "feedback_md": "Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu.\n\n**Rozpoznanie:** Kopia konfiguracji nie jest jeszcze zweryfikowanym planem wycofania.\n\n**Działanie:** Przygotować i sprawdzić rollback oraz kryteria jego uruchomienia.\n\n**Sprawdzenie:** Odtworzenie przywraca działający stan i wymagane usługi.",
+          "id": "C"
+        },
+        {
+          "text_md": "Orkiestracja musi uwzględniać częściowe wykonanie, nie tylko jedną flagę całości.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Częściowy sukces”: Zmiana udała się na 8 z 10 urządzeń. Narzędzie zgłasza globalny sukces bez wskazania pozostałych. W bieżącym przypadku: Bezpieczne wycofanie wymaga procedury, dostępu i weryfikacji efektu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

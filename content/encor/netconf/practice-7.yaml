@@ -1,0 +1,959 @@
+{
+  "schema_version": 3,
+  "id": "encor.netconf.practice-7",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.compare-01.3.card",
+      "front_md": "**Zgłoszenie I**\n\nKlient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830.\n\n**Zgłoszenie II**\n\nSerwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Klient nie trafia do skonfigurowanego endpointu NETCONF. Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie I:** Sesja wymienia komunikaty hello NETCONF.\n\n**Zgłoszenie II:** Klient zakłada niewspieraną capability. Dobrać operację i datastore do faktycznie ogłoszonych capabilities.\n\n**Sprawdzenie II:** Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\n**Zależności:** Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF. Hello określa możliwości sesji; klient nie powinien ich zgadywać.",
+      "example": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.compare-02.3.card",
+      "front_md": "**Zgłoszenie I**\n\nLock datastore zwraca lock-denied, bo inna sesja trzyma blokadę.\n\n**Zgłoszenie II**\n\nTransport SSH działa, ale edit-config zwraca rpc-error z bad-element.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Datastore jest zablokowany przez innego klienta. Ustalić właściciela i skoordynować zwolnienie blokady bez ślepego nadpisywania.\n\n**Sprawdzenie I:** Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\n**Zgłoszenie II:** Serwer odrzucił treść operacji zgodnie z modelem. Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie II:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\n**Zależności:** Blokada koordynuje współbieżne modyfikacje konfiguracji. Sukces transportu nie oznacza poprawności operacji modelowanej.",
+      "example": "I — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\nII — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.compare-03.3.card",
+      "front_md": "**Zgłoszenie I**\n\nOperator potrzebuje także danych operacyjnych, lecz używa wyłącznie get-config.\n\n**Zgłoszenie II**\n\nEdit-config do candidate zakończyło się sukcesem, lecz running nie zmieniło się; commit nie wysłano.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrano operację ograniczoną do konfiguracji. Użyć wspieranej operacji odczytu obejmującej wymagany stan operacyjny.\n\n**Sprawdzenie I:** Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\n**Zgłoszenie II:** Zmiana pozostaje w candidate datastore. Po walidacji wykonać commit zgodnie ze wspieranymi capabilities.\n\n**Sprawdzenie II:** Odczyt running potwierdza zatwierdzoną konfigurację.\n\n**Zależności:** NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych. Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+      "example": "I — Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\nII — Odczyt running potwierdza zatwierdzoną konfigurację."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.compare-04.3.card",
+      "front_md": "**Zgłoszenie I**\n\nKlient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830.\n\n**Zgłoszenie II**\n\nLock datastore zwraca lock-denied, bo inna sesja trzyma blokadę.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Klient nie trafia do skonfigurowanego endpointu NETCONF. Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie I:** Sesja wymienia komunikaty hello NETCONF.\n\n**Zgłoszenie II:** Datastore jest zablokowany przez innego klienta. Ustalić właściciela i skoordynować zwolnienie blokady bez ślepego nadpisywania.\n\n**Sprawdzenie II:** Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\n**Zależności:** Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF. Blokada koordynuje współbieżne modyfikacje konfiguracji.",
+      "example": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.compare-05.3.card",
+      "front_md": "**Zgłoszenie I**\n\nSerwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore.\n\n**Zgłoszenie II**\n\nOperator potrzebuje także danych operacyjnych, lecz używa wyłącznie get-config.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Klient zakłada niewspieraną capability. Dobrać operację i datastore do faktycznie ogłoszonych capabilities.\n\n**Sprawdzenie I:** Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\n**Zgłoszenie II:** Wybrano operację ograniczoną do konfiguracji. Użyć wspieranej operacji odczytu obejmującej wymagany stan operacyjny.\n\n**Sprawdzenie II:** Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\n**Zależności:** Hello określa możliwości sesji; klient nie powinien ich zgadywać. NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+      "example": "I — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\nII — Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.compare-06.3.card",
+      "front_md": "**Zgłoszenie I**\n\nTransport SSH działa, ale edit-config zwraca rpc-error z bad-element.\n\n**Zgłoszenie II**\n\nEdit-config do candidate zakończyło się sukcesem, lecz running nie zmieniło się; commit nie wysłano.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Serwer odrzucił treść operacji zgodnie z modelem. Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie I:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\n**Zgłoszenie II:** Zmiana pozostaje w candidate datastore. Po walidacji wykonać commit zgodnie ze wspieranymi capabilities.\n\n**Sprawdzenie II:** Odczyt running potwierdza zatwierdzoną konfigurację.\n\n**Zależności:** Sukces transportu nie oznacza poprawności operacji modelowanej. Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+      "example": "I — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\nII — Odczyt running potwierdza zatwierdzoną konfigurację."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.compare-07.3.card",
+      "front_md": "**Zgłoszenie I**\n\nKlient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830.\n\n**Zgłoszenie II**\n\nEdit-config do candidate zakończyło się sukcesem, lecz running nie zmieniło się; commit nie wysłano.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Klient nie trafia do skonfigurowanego endpointu NETCONF. Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie I:** Sesja wymienia komunikaty hello NETCONF.\n\n**Zgłoszenie II:** Zmiana pozostaje w candidate datastore. Po walidacji wykonać commit zgodnie ze wspieranymi capabilities.\n\n**Sprawdzenie II:** Odczyt running potwierdza zatwierdzoną konfigurację.\n\n**Zależności:** Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF. Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+      "example": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Odczyt running potwierdza zatwierdzoną konfigurację."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.compare-08.3.card",
+      "front_md": "**Zgłoszenie I**\n\nSerwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore.\n\n**Zgłoszenie II**\n\nTransport SSH działa, ale edit-config zwraca rpc-error z bad-element.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Klient zakłada niewspieraną capability. Dobrać operację i datastore do faktycznie ogłoszonych capabilities.\n\n**Sprawdzenie I:** Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\n**Zgłoszenie II:** Serwer odrzucił treść operacji zgodnie z modelem. Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie II:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\n**Zależności:** Hello określa możliwości sesji; klient nie powinien ich zgadywać. Sukces transportu nie oznacza poprawności operacji modelowanej.",
+      "example": "I — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\nII — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.compare-09.3.card",
+      "front_md": "**Zgłoszenie I**\n\nLock datastore zwraca lock-denied, bo inna sesja trzyma blokadę.\n\n**Zgłoszenie II**\n\nOperator potrzebuje także danych operacyjnych, lecz używa wyłącznie get-config.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Datastore jest zablokowany przez innego klienta. Ustalić właściciela i skoordynować zwolnienie blokady bez ślepego nadpisywania.\n\n**Sprawdzenie I:** Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\n**Zgłoszenie II:** Wybrano operację ograniczoną do konfiguracji. Użyć wspieranej operacji odczytu obejmującej wymagany stan operacyjny.\n\n**Sprawdzenie II:** Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\n**Zależności:** Blokada koordynuje współbieżne modyfikacje konfiguracji. NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+      "example": "I — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\nII — Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.compare-10.3.card",
+      "front_md": "**Zgłoszenie I**\n\nKlient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830.\n\n**Zgłoszenie II**\n\nTransport SSH działa, ale edit-config zwraca rpc-error z bad-element.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Klient nie trafia do skonfigurowanego endpointu NETCONF. Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie I:** Sesja wymienia komunikaty hello NETCONF.\n\n**Zgłoszenie II:** Serwer odrzucił treść operacji zgodnie z modelem. Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie II:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\n**Zależności:** Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF. Sukces transportu nie oznacza poprawności operacji modelowanej.",
+      "example": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.netconf.practice.compare-01.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKlient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830.\n\n**Zgłoszenie II**\n\nSerwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Klient nie trafia do skonfigurowanego endpointu NETCONF. Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie I:** Sesja wymienia komunikaty hello NETCONF.\n\n**Zgłoszenie II:** Klient zakłada niewspieraną capability. Dobrać operację i datastore do faktycznie ogłoszonych capabilities.\n\n**Sprawdzenie II:** Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\n**Zależności:** Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF. Hello określa możliwości sesji; klient nie powinien ich zgadywać.",
+      "card_id": "encor.netconf.practice.compare-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\nII — Sesja wymienia komunikaty hello NETCONF.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Klient nie trafia do skonfigurowanego endpointu NETCONF. Zgłoszenie II: Klient zakłada niewspieraną capability.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Lock datastore zwraca lock-denied, bo inna sesja trzyma blokadę. Dla II: Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\nII — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Lock datastore zwraca lock-denied, bo inna sesja trzyma blokadę. Dla I: Sesja wymienia komunikaty hello NETCONF.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+          "feedback_md": "**Zgłoszenie I:** Klient nie trafia do skonfigurowanego endpointu NETCONF. Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie I:** Sesja wymienia komunikaty hello NETCONF.\n\n**Zgłoszenie II:** Klient zakłada niewspieraną capability. Dobrać operację i datastore do faktycznie ogłoszonych capabilities.\n\n**Sprawdzenie II:** Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\n**Zależności:** Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF. Hello określa możliwości sesji; klient nie powinien ich zgadywać.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.netconf.practice.compare-02.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nLock datastore zwraca lock-denied, bo inna sesja trzyma blokadę.\n\n**Zgłoszenie II**\n\nTransport SSH działa, ale edit-config zwraca rpc-error z bad-element.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Datastore jest zablokowany przez innego klienta. Ustalić właściciela i skoordynować zwolnienie blokady bez ślepego nadpisywania.\n\n**Sprawdzenie I:** Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\n**Zgłoszenie II:** Serwer odrzucił treść operacji zgodnie z modelem. Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie II:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\n**Zależności:** Blokada koordynuje współbieżne modyfikacje konfiguracji. Sukces transportu nie oznacza poprawności operacji modelowanej.",
+      "card_id": "encor.netconf.practice.compare-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\nII — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+          "feedback_md": "**Zgłoszenie I:** Datastore jest zablokowany przez innego klienta. Ustalić właściciela i skoordynować zwolnienie blokady bez ślepego nadpisywania.\n\n**Sprawdzenie I:** Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\n**Zgłoszenie II:** Serwer odrzucił treść operacji zgodnie z modelem. Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie II:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\n**Zależności:** Blokada koordynuje współbieżne modyfikacje konfiguracji. Sukces transportu nie oznacza poprawności operacji modelowanej.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\nII — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Datastore jest zablokowany przez innego klienta. Zgłoszenie II: Serwer odrzucił treść operacji zgodnie z modelem.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\nII — Sesja wymienia komunikaty hello NETCONF.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. Dla II: Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. Dla I: Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.netconf.practice.compare-03.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOperator potrzebuje także danych operacyjnych, lecz używa wyłącznie get-config.\n\n**Zgłoszenie II**\n\nEdit-config do candidate zakończyło się sukcesem, lecz running nie zmieniło się; commit nie wysłano.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrano operację ograniczoną do konfiguracji. Użyć wspieranej operacji odczytu obejmującej wymagany stan operacyjny.\n\n**Sprawdzenie I:** Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\n**Zgłoszenie II:** Zmiana pozostaje w candidate datastore. Po walidacji wykonać commit zgodnie ze wspieranymi capabilities.\n\n**Sprawdzenie II:** Odczyt running potwierdza zatwierdzoną konfigurację.\n\n**Zależności:** NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych. Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+      "card_id": "encor.netconf.practice.compare-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Odczyt running potwierdza zatwierdzoną konfigurację.\n\nII — Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrano operację ograniczoną do konfiguracji. Zgłoszenie II: Zmiana pozostaje w candidate datastore.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\nII — Odczyt running potwierdza zatwierdzoną konfigurację.",
+          "feedback_md": "**Zgłoszenie I:** Wybrano operację ograniczoną do konfiguracji. Użyć wspieranej operacji odczytu obejmującej wymagany stan operacyjny.\n\n**Sprawdzenie I:** Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\n**Zgłoszenie II:** Zmiana pozostaje w candidate datastore. Po walidacji wykonać commit zgodnie ze wspieranymi capabilities.\n\n**Sprawdzenie II:** Odczyt running potwierdza zatwierdzoną konfigurację.\n\n**Zależności:** NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych. Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\nII — Sesja wymienia komunikaty hello NETCONF.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. Dla II: Odczyt running potwierdza zatwierdzoną konfigurację.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Odczyt running potwierdza zatwierdzoną konfigurację.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. Dla I: Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.netconf.practice.compare-04.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKlient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830.\n\n**Zgłoszenie II**\n\nLock datastore zwraca lock-denied, bo inna sesja trzyma blokadę.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Klient nie trafia do skonfigurowanego endpointu NETCONF. Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie I:** Sesja wymienia komunikaty hello NETCONF.\n\n**Zgłoszenie II:** Datastore jest zablokowany przez innego klienta. Ustalić właściciela i skoordynować zwolnienie blokady bez ślepego nadpisywania.\n\n**Sprawdzenie II:** Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\n**Zależności:** Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF. Blokada koordynuje współbieżne modyfikacje konfiguracji.",
+      "card_id": "encor.netconf.practice.compare-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\nII — Sesja wymienia komunikaty hello NETCONF.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Klient nie trafia do skonfigurowanego endpointu NETCONF. Zgłoszenie II: Datastore jest zablokowany przez innego klienta.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Serwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore. Dla II: Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.",
+          "feedback_md": "**Zgłoszenie I:** Klient nie trafia do skonfigurowanego endpointu NETCONF. Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie I:** Sesja wymienia komunikaty hello NETCONF.\n\n**Zgłoszenie II:** Datastore jest zablokowany przez innego klienta. Ustalić właściciela i skoordynować zwolnienie blokady bez ślepego nadpisywania.\n\n**Sprawdzenie II:** Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\n**Zależności:** Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF. Blokada koordynuje współbieżne modyfikacje konfiguracji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\nII — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Serwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore. Dla I: Sesja wymienia komunikaty hello NETCONF.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.netconf.practice.compare-05.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSerwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore.\n\n**Zgłoszenie II**\n\nOperator potrzebuje także danych operacyjnych, lecz używa wyłącznie get-config.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Klient zakłada niewspieraną capability. Dobrać operację i datastore do faktycznie ogłoszonych capabilities.\n\n**Sprawdzenie I:** Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\n**Zgłoszenie II:** Wybrano operację ograniczoną do konfiguracji. Użyć wspieranej operacji odczytu obejmującej wymagany stan operacyjny.\n\n**Sprawdzenie II:** Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\n**Zależności:** Hello określa możliwości sesji; klient nie powinien ich zgadywać. NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+      "card_id": "encor.netconf.practice.compare-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\nII — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Klient zakłada niewspieraną capability. Zgłoszenie II: Wybrano operację ograniczoną do konfiguracji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\nII — Sesja wymienia komunikaty hello NETCONF.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. Dla II: Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. Dla I: Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\nII — Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.",
+          "feedback_md": "**Zgłoszenie I:** Klient zakłada niewspieraną capability. Dobrać operację i datastore do faktycznie ogłoszonych capabilities.\n\n**Sprawdzenie I:** Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\n**Zgłoszenie II:** Wybrano operację ograniczoną do konfiguracji. Użyć wspieranej operacji odczytu obejmującej wymagany stan operacyjny.\n\n**Sprawdzenie II:** Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\n**Zależności:** Hello określa możliwości sesji; klient nie powinien ich zgadywać. NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.netconf.practice.compare-06.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nTransport SSH działa, ale edit-config zwraca rpc-error z bad-element.\n\n**Zgłoszenie II**\n\nEdit-config do candidate zakończyło się sukcesem, lecz running nie zmieniło się; commit nie wysłano.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Serwer odrzucił treść operacji zgodnie z modelem. Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie I:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\n**Zgłoszenie II:** Zmiana pozostaje w candidate datastore. Po walidacji wykonać commit zgodnie ze wspieranymi capabilities.\n\n**Sprawdzenie II:** Odczyt running potwierdza zatwierdzoną konfigurację.\n\n**Zależności:** Sukces transportu nie oznacza poprawności operacji modelowanej. Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+      "card_id": "encor.netconf.practice.compare-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\nII — Odczyt running potwierdza zatwierdzoną konfigurację.",
+          "feedback_md": "**Zgłoszenie I:** Serwer odrzucił treść operacji zgodnie z modelem. Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie I:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\n**Zgłoszenie II:** Zmiana pozostaje w candidate datastore. Po walidacji wykonać commit zgodnie ze wspieranymi capabilities.\n\n**Sprawdzenie II:** Odczyt running potwierdza zatwierdzoną konfigurację.\n\n**Zależności:** Sukces transportu nie oznacza poprawności operacji modelowanej. Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Odczyt running potwierdza zatwierdzoną konfigurację.\n\nII — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Serwer odrzucił treść operacji zgodnie z modelem. Zgłoszenie II: Zmiana pozostaje w candidate datastore.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\nII — Sesja wymienia komunikaty hello NETCONF.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. Dla II: Odczyt running potwierdza zatwierdzoną konfigurację.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Odczyt running potwierdza zatwierdzoną konfigurację.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. Dla I: Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.netconf.practice.compare-07.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKlient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830.\n\n**Zgłoszenie II**\n\nEdit-config do candidate zakończyło się sukcesem, lecz running nie zmieniło się; commit nie wysłano.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Klient nie trafia do skonfigurowanego endpointu NETCONF. Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie I:** Sesja wymienia komunikaty hello NETCONF.\n\n**Zgłoszenie II:** Zmiana pozostaje w candidate datastore. Po walidacji wykonać commit zgodnie ze wspieranymi capabilities.\n\n**Sprawdzenie II:** Odczyt running potwierdza zatwierdzoną konfigurację.\n\n**Zależności:** Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF. Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+      "card_id": "encor.netconf.practice.compare-07.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Odczyt running potwierdza zatwierdzoną konfigurację.\n\nII — Sesja wymienia komunikaty hello NETCONF.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Klient nie trafia do skonfigurowanego endpointu NETCONF. Zgłoszenie II: Zmiana pozostaje w candidate datastore.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Odczyt running potwierdza zatwierdzoną konfigurację.",
+          "feedback_md": "**Zgłoszenie I:** Klient nie trafia do skonfigurowanego endpointu NETCONF. Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie I:** Sesja wymienia komunikaty hello NETCONF.\n\n**Zgłoszenie II:** Zmiana pozostaje w candidate datastore. Po walidacji wykonać commit zgodnie ze wspieranymi capabilities.\n\n**Sprawdzenie II:** Odczyt running potwierdza zatwierdzoną konfigurację.\n\n**Zależności:** Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF. Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Serwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore. Dla II: Odczyt running potwierdza zatwierdzoną konfigurację.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\nII — Odczyt running potwierdza zatwierdzoną konfigurację.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Serwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore. Dla I: Sesja wymienia komunikaty hello NETCONF.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.netconf.practice.compare-08.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSerwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore.\n\n**Zgłoszenie II**\n\nTransport SSH działa, ale edit-config zwraca rpc-error z bad-element.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Klient zakłada niewspieraną capability. Dobrać operację i datastore do faktycznie ogłoszonych capabilities.\n\n**Sprawdzenie I:** Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\n**Zgłoszenie II:** Serwer odrzucił treść operacji zgodnie z modelem. Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie II:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\n**Zależności:** Hello określa możliwości sesji; klient nie powinien ich zgadywać. Sukces transportu nie oznacza poprawności operacji modelowanej.",
+      "card_id": "encor.netconf.practice.compare-08.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\nII — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Klient zakłada niewspieraną capability. Zgłoszenie II: Serwer odrzucił treść operacji zgodnie z modelem.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\nII — Sesja wymienia komunikaty hello NETCONF.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. Dla II: Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\nII — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+          "feedback_md": "**Zgłoszenie I:** Klient zakłada niewspieraną capability. Dobrać operację i datastore do faktycznie ogłoszonych capabilities.\n\n**Sprawdzenie I:** Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\n**Zgłoszenie II:** Serwer odrzucił treść operacji zgodnie z modelem. Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie II:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\n**Zależności:** Hello określa możliwości sesji; klient nie powinien ich zgadywać. Sukces transportu nie oznacza poprawności operacji modelowanej.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. Dla I: Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.netconf.practice.compare-09.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nLock datastore zwraca lock-denied, bo inna sesja trzyma blokadę.\n\n**Zgłoszenie II**\n\nOperator potrzebuje także danych operacyjnych, lecz używa wyłącznie get-config.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Datastore jest zablokowany przez innego klienta. Ustalić właściciela i skoordynować zwolnienie blokady bez ślepego nadpisywania.\n\n**Sprawdzenie I:** Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\n**Zgłoszenie II:** Wybrano operację ograniczoną do konfiguracji. Użyć wspieranej operacji odczytu obejmującej wymagany stan operacyjny.\n\n**Sprawdzenie II:** Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\n**Zależności:** Blokada koordynuje współbieżne modyfikacje konfiguracji. NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+      "card_id": "encor.netconf.practice.compare-09.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\nII — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Datastore jest zablokowany przez innego klienta. Zgłoszenie II: Wybrano operację ograniczoną do konfiguracji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\nII — Sesja wymienia komunikaty hello NETCONF.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. Dla II: Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. Dla I: Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\nII — Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.",
+          "feedback_md": "**Zgłoszenie I:** Datastore jest zablokowany przez innego klienta. Ustalić właściciela i skoordynować zwolnienie blokady bez ślepego nadpisywania.\n\n**Sprawdzenie I:** Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.\n\n**Zgłoszenie II:** Wybrano operację ograniczoną do konfiguracji. Użyć wspieranej operacji odczytu obejmującej wymagany stan operacyjny.\n\n**Sprawdzenie II:** Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.\n\n**Zależności:** Blokada koordynuje współbieżne modyfikacje konfiguracji. NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.netconf.practice.compare-10.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "encor.netconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nKlient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830.\n\n**Zgłoszenie II**\n\nTransport SSH działa, ale edit-config zwraca rpc-error z bad-element.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Klient nie trafia do skonfigurowanego endpointu NETCONF. Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie I:** Sesja wymienia komunikaty hello NETCONF.\n\n**Zgłoszenie II:** Serwer odrzucił treść operacji zgodnie z modelem. Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie II:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\n**Zależności:** Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF. Sukces transportu nie oznacza poprawności operacji modelowanej.",
+      "card_id": "encor.netconf.practice.compare-10.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+          "feedback_md": "**Zgłoszenie I:** Klient nie trafia do skonfigurowanego endpointu NETCONF. Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie I:** Sesja wymienia komunikaty hello NETCONF.\n\n**Zgłoszenie II:** Serwer odrzucił treść operacji zgodnie z modelem. Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie II:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\n**Zależności:** Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF. Sukces transportu nie oznacza poprawności operacji modelowanej.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.\n\nII — Sesja wymienia komunikaty hello NETCONF.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Klient nie trafia do skonfigurowanego endpointu NETCONF. Zgłoszenie II: Serwer odrzucił treść operacji zgodnie z modelem.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sesja wymienia komunikaty hello NETCONF.\n\nII — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Serwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore. Dla II: Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.\n\nII — Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Serwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore. Dla I: Sesja wymienia komunikaty hello NETCONF.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

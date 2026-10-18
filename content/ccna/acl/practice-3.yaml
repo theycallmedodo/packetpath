@@ -1,0 +1,627 @@
+{
+  "schema_version": 3,
+  "id": "ccna.acl.practice-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Kolejność wpisów — weryfikacja",
+      "skills": [
+        "ccna.acl.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — ACL IPv4",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html"
+        },
+        {
+          "title": "Cisco — Refining an IP Access List",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-16-12/sec-data-acl-xe-16-12-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.practice.case-01.3.card",
+      "front_md": "ACL ma seq 10 permit ip any any i seq 20 deny tcp any host 10.1.1.10 eq 22. SSH nadal przechodzi.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "ACL stosuje pierwszą pasującą regułę, a nie najbardziej szczegółową.\n\n**Rozpoznanie:** Pierwszy ogólny permit kończy dopasowanie przed deny.\n\n**Działanie:** Przenieść precyzyjny deny przed ogólny permit, zachowując pozostałe reguły.\n\n**Sprawdzenie:** Test SSH zwiększa licznik właściwego deny, a dozwolony ruch nadal przechodzi.",
+      "example": "Test SSH zwiększa licznik właściwego deny, a dozwolony ruch nadal przechodzi."
+    },
+    {
+      "revision": 1,
+      "title": "Implicit deny — weryfikacja",
+      "skills": [
+        "ccna.acl.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — ACL IPv4",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html"
+        },
+        {
+          "title": "Cisco — Refining an IP Access List",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-16-12/sec-data-acl-xe-16-12-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.practice.case-02.3.card",
+      "front_md": "ACL na wyjściu ma tylko permit tcp any host 192.0.2.10 eq 443. ICMP i DNS przestały działać.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "ACL wymaga jawnego dopuszczenia każdego rodzaju ruchu objętego polityką.\n\n**Rozpoznanie:** Niedopasowany ruch trafia w niejawne deny na końcu ACL.\n\n**Działanie:** Dodać konkretne wymagane zezwolenia przed końcem ACL zgodnie z polityką.\n\n**Sprawdzenie:** Liczniki nowych zezwoleń rosną dla zatwierdzonych testów ICMP i DNS.",
+      "example": "Liczniki nowych zezwoleń rosną dla zatwierdzonych testów ICMP i DNS."
+    },
+    {
+      "revision": 1,
+      "title": "Zły kierunek — weryfikacja",
+      "skills": [
+        "ccna.acl.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — ACL IPv4",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html"
+        },
+        {
+          "title": "Cisco — Refining an IP Access List",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-16-12/sec-data-acl-xe-16-12-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.practice.case-03.3.card",
+      "front_md": "Klienci wchodzą przez Gi0/0. ACL blokująca ich wyjście do WAN została przypięta out na Gi0/0.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "In i out określa kierunek pakietu względem interfejsu routera.\n\n**Rozpoznanie:** ACL bada pakiety wracające do LAN zamiast wchodzących z LAN.\n\n**Działanie:** Zastosować przygotowaną politykę na Gi0/0 w kierunku in.\n\n**Sprawdzenie:** Show ip interface potwierdza inbound ACL, a jej liczniki rosną dla ruchu klientów.",
+      "example": "Show ip interface potwierdza inbound ACL, a jej liczniki rosną dla ruchu klientów."
+    },
+    {
+      "revision": 1,
+      "title": "Wildcard hosta — weryfikacja",
+      "skills": [
+        "ccna.acl.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — ACL IPv4",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html"
+        },
+        {
+          "title": "Cisco — Refining an IP Access List",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-16-12/sec-data-acl-xe-16-12-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.practice.case-04.3.card",
+      "front_md": "Wymagane jest dopasowanie tylko 10.1.2.3. Wpis 10.1.2.3 0.0.0.255 obejmuje również inne adresy /24.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Zero w wildcard oznacza bit wymagający porównania, jeden oznacza bit ignorowany.\n\n**Rozpoznanie:** Wildcard ignoruje wszystkie bity ostatniego oktetu.\n\n**Działanie:** Użyć host 10.1.2.3 albo wildcard 0.0.0.0.\n\n**Sprawdzenie:** Test .3 pasuje do wpisu, a test .4 nie pasuje do tego konkretnego wpisu.",
+      "example": "Test .3 pasuje do wpisu, a test .4 nie pasuje do tego konkretnego wpisu."
+    },
+    {
+      "revision": 1,
+      "title": "Port źródłowy — weryfikacja",
+      "skills": [
+        "ccna.acl.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — ACL IPv4",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html"
+        },
+        {
+          "title": "Cisco — Refining an IP Access List",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-16-12/sec-data-acl-xe-16-12-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.practice.case-05.3.card",
+      "front_md": "Reguła ma permit tcp any eq 443 host 192.0.2.20, a klient wysyła SYN z portu 53000 do portu 443 serwera.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Położenie operatora portu w extended ACL rozróżnia port źródłowy i docelowy.\n\n**Rozpoznanie:** Warunek eq 443 został przypisany portowi źródłowemu.\n\n**Działanie:** Umieścić eq 443 po adresie serwera docelowego.\n\n**Sprawdzenie:** SYN 53000→443 zwiększa licznik poprawionego wpisu.",
+      "example": "SYN 53000→443 zwiększa licznik poprawionego wpisu."
+    },
+    {
+      "revision": 1,
+      "title": "Wstawienie wyjątku — weryfikacja",
+      "skills": [
+        "ccna.acl.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — ACL IPv4",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html"
+        },
+        {
+          "title": "Cisco — Refining an IP Access List",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-16-12/sec-data-acl-xe-16-12-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "id": "ccna.acl.practice.case-06.3.card",
+      "front_md": "ACL blokuje /24 wpisem seq 20. Tylko host 10.0.4.9 ma otrzymać wyjątek; reszta wpisów ma pozostać.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Numery sekwencji pozwalają wstawić wyjątek bez kasowania całej ACL.\n\n**Rozpoznanie:** Wyjątek dodany za deny nie zostałby osiągnięty.\n\n**Działanie:** Dodać precyzyjne permit dla hosta z wolnym numerem mniejszym niż 20.\n\n**Sprawdzenie:** Host .9 przechodzi, inny host z /24 nadal trafia w seq 20.",
+      "example": "Host .9 przechodzi, inny host z /24 nadal trafia w seq 20."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.acl.practice.case-01.3",
+      "revision": 1,
+      "title": "Kolejność wpisów — weryfikacja",
+      "skills": [
+        "ccna.acl.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — ACL IPv4",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html"
+        },
+        {
+          "title": "Cisco — Refining an IP Access List",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-16-12/sec-data-acl-xe-16-12-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "ACL ma seq 10 permit ip any any i seq 20 deny tcp any host 10.1.1.10 eq 22. SSH nadal przechodzi.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "ACL stosuje pierwszą pasującą regułę, a nie najbardziej szczegółową.\n\n**Rozpoznanie:** Pierwszy ogólny permit kończy dopasowanie przed deny.\n\n**Działanie:** Przenieść precyzyjny deny przed ogólny permit, zachowując pozostałe reguły.\n\n**Sprawdzenie:** Test SSH zwiększa licznik właściwego deny, a dozwolony ruch nadal przechodzi.",
+      "card_id": "ccna.acl.practice.case-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Test .3 pasuje do wpisu, a test .4 nie pasuje do tego konkretnego wpisu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wildcard hosta”: Wymagane jest dopasowanie tylko 10.1.2.3. Wpis 10.1.2.3 0.0.0.255 obejmuje również inne adresy /24. W bieżącym przypadku: Test SSH zwiększa licznik właściwego deny, a dozwolony ruch nadal przechodzi.",
+          "id": "A"
+        },
+        {
+          "text_md": "SYN 53000→443 zwiększa licznik poprawionego wpisu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Port źródłowy”: Reguła ma permit tcp any eq 443 host 192.0.2.20, a klient wysyła SYN z portu 53000 do portu 443 serwera. W bieżącym przypadku: Test SSH zwiększa licznik właściwego deny, a dozwolony ruch nadal przechodzi.",
+          "id": "B"
+        },
+        {
+          "text_md": "Test SSH zwiększa licznik właściwego deny, a dozwolony ruch nadal przechodzi.",
+          "feedback_md": "ACL stosuje pierwszą pasującą regułę, a nie najbardziej szczegółową.\n\n**Rozpoznanie:** Pierwszy ogólny permit kończy dopasowanie przed deny.\n\n**Działanie:** Przenieść precyzyjny deny przed ogólny permit, zachowując pozostałe reguły.\n\n**Sprawdzenie:** Test SSH zwiększa licznik właściwego deny, a dozwolony ruch nadal przechodzi.",
+          "id": "C"
+        },
+        {
+          "text_md": "Liczniki nowych zezwoleń rosną dla zatwierdzonych testów ICMP i DNS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Implicit deny”: ACL na wyjściu ma tylko permit tcp any host 192.0.2.10 eq 443. ICMP i DNS przestały działać. W bieżącym przypadku: Test SSH zwiększa licznik właściwego deny, a dozwolony ruch nadal przechodzi.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.acl.practice.case-02.3",
+      "revision": 1,
+      "title": "Implicit deny — weryfikacja",
+      "skills": [
+        "ccna.acl.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — ACL IPv4",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html"
+        },
+        {
+          "title": "Cisco — Refining an IP Access List",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-16-12/sec-data-acl-xe-16-12-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "ACL na wyjściu ma tylko permit tcp any host 192.0.2.10 eq 443. ICMP i DNS przestały działać.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "ACL wymaga jawnego dopuszczenia każdego rodzaju ruchu objętego polityką.\n\n**Rozpoznanie:** Niedopasowany ruch trafia w niejawne deny na końcu ACL.\n\n**Działanie:** Dodać konkretne wymagane zezwolenia przed końcem ACL zgodnie z polityką.\n\n**Sprawdzenie:** Liczniki nowych zezwoleń rosną dla zatwierdzonych testów ICMP i DNS.",
+      "card_id": "ccna.acl.practice.case-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Show ip interface potwierdza inbound ACL, a jej liczniki rosną dla ruchu klientów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły kierunek”: Klienci wchodzą przez Gi0/0. ACL blokująca ich wyjście do WAN została przypięta out na Gi0/0. W bieżącym przypadku: Liczniki nowych zezwoleń rosną dla zatwierdzonych testów ICMP i DNS.",
+          "id": "A"
+        },
+        {
+          "text_md": "Test SSH zwiększa licznik właściwego deny, a dozwolony ruch nadal przechodzi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Kolejność wpisów”: ACL ma seq 10 permit ip any any i seq 20 deny tcp any host 10.1.1.10 eq 22. SSH nadal przechodzi. W bieżącym przypadku: Liczniki nowych zezwoleń rosną dla zatwierdzonych testów ICMP i DNS.",
+          "id": "B"
+        },
+        {
+          "text_md": "Host .9 przechodzi, inny host z /24 nadal trafia w seq 20.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wstawienie wyjątku”: ACL blokuje /24 wpisem seq 20. Tylko host 10.0.4.9 ma otrzymać wyjątek; reszta wpisów ma pozostać. W bieżącym przypadku: Liczniki nowych zezwoleń rosną dla zatwierdzonych testów ICMP i DNS.",
+          "id": "C"
+        },
+        {
+          "text_md": "Liczniki nowych zezwoleń rosną dla zatwierdzonych testów ICMP i DNS.",
+          "feedback_md": "ACL wymaga jawnego dopuszczenia każdego rodzaju ruchu objętego polityką.\n\n**Rozpoznanie:** Niedopasowany ruch trafia w niejawne deny na końcu ACL.\n\n**Działanie:** Dodać konkretne wymagane zezwolenia przed końcem ACL zgodnie z polityką.\n\n**Sprawdzenie:** Liczniki nowych zezwoleń rosną dla zatwierdzonych testów ICMP i DNS.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.acl.practice.case-03.3",
+      "revision": 1,
+      "title": "Zły kierunek — weryfikacja",
+      "skills": [
+        "ccna.acl.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — ACL IPv4",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html"
+        },
+        {
+          "title": "Cisco — Refining an IP Access List",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-16-12/sec-data-acl-xe-16-12-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Klienci wchodzą przez Gi0/0. ACL blokująca ich wyjście do WAN została przypięta out na Gi0/0.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "In i out określa kierunek pakietu względem interfejsu routera.\n\n**Rozpoznanie:** ACL bada pakiety wracające do LAN zamiast wchodzących z LAN.\n\n**Działanie:** Zastosować przygotowaną politykę na Gi0/0 w kierunku in.\n\n**Sprawdzenie:** Show ip interface potwierdza inbound ACL, a jej liczniki rosną dla ruchu klientów.",
+      "card_id": "ccna.acl.practice.case-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Show ip interface potwierdza inbound ACL, a jej liczniki rosną dla ruchu klientów.",
+          "feedback_md": "In i out określa kierunek pakietu względem interfejsu routera.\n\n**Rozpoznanie:** ACL bada pakiety wracające do LAN zamiast wchodzących z LAN.\n\n**Działanie:** Zastosować przygotowaną politykę na Gi0/0 w kierunku in.\n\n**Sprawdzenie:** Show ip interface potwierdza inbound ACL, a jej liczniki rosną dla ruchu klientów.",
+          "id": "A"
+        },
+        {
+          "text_md": "Liczniki nowych zezwoleń rosną dla zatwierdzonych testów ICMP i DNS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Implicit deny”: ACL na wyjściu ma tylko permit tcp any host 192.0.2.10 eq 443. ICMP i DNS przestały działać. W bieżącym przypadku: Show ip interface potwierdza inbound ACL, a jej liczniki rosną dla ruchu klientów.",
+          "id": "B"
+        },
+        {
+          "text_md": "SYN 53000→443 zwiększa licznik poprawionego wpisu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Port źródłowy”: Reguła ma permit tcp any eq 443 host 192.0.2.20, a klient wysyła SYN z portu 53000 do portu 443 serwera. W bieżącym przypadku: Show ip interface potwierdza inbound ACL, a jej liczniki rosną dla ruchu klientów.",
+          "id": "C"
+        },
+        {
+          "text_md": "Test SSH zwiększa licznik właściwego deny, a dozwolony ruch nadal przechodzi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Kolejność wpisów”: ACL ma seq 10 permit ip any any i seq 20 deny tcp any host 10.1.1.10 eq 22. SSH nadal przechodzi. W bieżącym przypadku: Show ip interface potwierdza inbound ACL, a jej liczniki rosną dla ruchu klientów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.acl.practice.case-04.3",
+      "revision": 1,
+      "title": "Wildcard hosta — weryfikacja",
+      "skills": [
+        "ccna.acl.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — ACL IPv4",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html"
+        },
+        {
+          "title": "Cisco — Refining an IP Access List",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-16-12/sec-data-acl-xe-16-12-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Wymagane jest dopasowanie tylko 10.1.2.3. Wpis 10.1.2.3 0.0.0.255 obejmuje również inne adresy /24.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Zero w wildcard oznacza bit wymagający porównania, jeden oznacza bit ignorowany.\n\n**Rozpoznanie:** Wildcard ignoruje wszystkie bity ostatniego oktetu.\n\n**Działanie:** Użyć host 10.1.2.3 albo wildcard 0.0.0.0.\n\n**Sprawdzenie:** Test .3 pasuje do wpisu, a test .4 nie pasuje do tego konkretnego wpisu.",
+      "card_id": "ccna.acl.practice.case-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Host .9 przechodzi, inny host z /24 nadal trafia w seq 20.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wstawienie wyjątku”: ACL blokuje /24 wpisem seq 20. Tylko host 10.0.4.9 ma otrzymać wyjątek; reszta wpisów ma pozostać. W bieżącym przypadku: Test .3 pasuje do wpisu, a test .4 nie pasuje do tego konkretnego wpisu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Test .3 pasuje do wpisu, a test .4 nie pasuje do tego konkretnego wpisu.",
+          "feedback_md": "Zero w wildcard oznacza bit wymagający porównania, jeden oznacza bit ignorowany.\n\n**Rozpoznanie:** Wildcard ignoruje wszystkie bity ostatniego oktetu.\n\n**Działanie:** Użyć host 10.1.2.3 albo wildcard 0.0.0.0.\n\n**Sprawdzenie:** Test .3 pasuje do wpisu, a test .4 nie pasuje do tego konkretnego wpisu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Show ip interface potwierdza inbound ACL, a jej liczniki rosną dla ruchu klientów.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły kierunek”: Klienci wchodzą przez Gi0/0. ACL blokująca ich wyjście do WAN została przypięta out na Gi0/0. W bieżącym przypadku: Test .3 pasuje do wpisu, a test .4 nie pasuje do tego konkretnego wpisu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Liczniki nowych zezwoleń rosną dla zatwierdzonych testów ICMP i DNS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Implicit deny”: ACL na wyjściu ma tylko permit tcp any host 192.0.2.10 eq 443. ICMP i DNS przestały działać. W bieżącym przypadku: Test .3 pasuje do wpisu, a test .4 nie pasuje do tego konkretnego wpisu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.acl.practice.case-05.3",
+      "revision": 1,
+      "title": "Port źródłowy — weryfikacja",
+      "skills": [
+        "ccna.acl.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — ACL IPv4",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html"
+        },
+        {
+          "title": "Cisco — Refining an IP Access List",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-16-12/sec-data-acl-xe-16-12-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Reguła ma permit tcp any eq 443 host 192.0.2.20, a klient wysyła SYN z portu 53000 do portu 443 serwera.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Położenie operatora portu w extended ACL rozróżnia port źródłowy i docelowy.\n\n**Rozpoznanie:** Warunek eq 443 został przypisany portowi źródłowemu.\n\n**Działanie:** Umieścić eq 443 po adresie serwera docelowego.\n\n**Sprawdzenie:** SYN 53000→443 zwiększa licznik poprawionego wpisu.",
+      "card_id": "ccna.acl.practice.case-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Liczniki nowych zezwoleń rosną dla zatwierdzonych testów ICMP i DNS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Implicit deny”: ACL na wyjściu ma tylko permit tcp any host 192.0.2.10 eq 443. ICMP i DNS przestały działać. W bieżącym przypadku: SYN 53000→443 zwiększa licznik poprawionego wpisu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Test .3 pasuje do wpisu, a test .4 nie pasuje do tego konkretnego wpisu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wildcard hosta”: Wymagane jest dopasowanie tylko 10.1.2.3. Wpis 10.1.2.3 0.0.0.255 obejmuje również inne adresy /24. W bieżącym przypadku: SYN 53000→443 zwiększa licznik poprawionego wpisu.",
+          "id": "B"
+        },
+        {
+          "text_md": "SYN 53000→443 zwiększa licznik poprawionego wpisu.",
+          "feedback_md": "Położenie operatora portu w extended ACL rozróżnia port źródłowy i docelowy.\n\n**Rozpoznanie:** Warunek eq 443 został przypisany portowi źródłowemu.\n\n**Działanie:** Umieścić eq 443 po adresie serwera docelowego.\n\n**Sprawdzenie:** SYN 53000→443 zwiększa licznik poprawionego wpisu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Test SSH zwiększa licznik właściwego deny, a dozwolony ruch nadal przechodzi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Kolejność wpisów”: ACL ma seq 10 permit ip any any i seq 20 deny tcp any host 10.1.1.10 eq 22. SSH nadal przechodzi. W bieżącym przypadku: SYN 53000→443 zwiększa licznik poprawionego wpisu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.acl.practice.case-06.3",
+      "revision": 1,
+      "title": "Wstawienie wyjątku — weryfikacja",
+      "skills": [
+        "ccna.acl.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — ACL IPv4",
+          "url": "https://www.cisco.com/c/en/us/support/docs/security/ios-firewall/23602-confaccesslists.html"
+        },
+        {
+          "title": "Cisco — Refining an IP Access List",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/xe-16-12/sec-data-acl-xe-16-12-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-create-ip-al-filter.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-s/sec-data-acl-15-s-book/sec-refine-ip-al.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — ACL — kolejność, zakres i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_data_acl/configuration/15-e/sec-data-acl-15-e-book/sec-acl-seq-num.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "ACL blokuje /24 wpisem seq 20. Tylko host 10.0.4.9 ma otrzymać wyjątek; reszta wpisów ma pozostać.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Numery sekwencji pozwalają wstawić wyjątek bez kasowania całej ACL.\n\n**Rozpoznanie:** Wyjątek dodany za deny nie zostałby osiągnięty.\n\n**Działanie:** Dodać precyzyjne permit dla hosta z wolnym numerem mniejszym niż 20.\n\n**Sprawdzenie:** Host .9 przechodzi, inny host z /24 nadal trafia w seq 20.",
+      "card_id": "ccna.acl.practice.case-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Test .3 pasuje do wpisu, a test .4 nie pasuje do tego konkretnego wpisu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wildcard hosta”: Wymagane jest dopasowanie tylko 10.1.2.3. Wpis 10.1.2.3 0.0.0.255 obejmuje również inne adresy /24. W bieżącym przypadku: Host .9 przechodzi, inny host z /24 nadal trafia w seq 20.",
+          "id": "A"
+        },
+        {
+          "text_md": "Test SSH zwiększa licznik właściwego deny, a dozwolony ruch nadal przechodzi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Kolejność wpisów”: ACL ma seq 10 permit ip any any i seq 20 deny tcp any host 10.1.1.10 eq 22. SSH nadal przechodzi. W bieżącym przypadku: Host .9 przechodzi, inny host z /24 nadal trafia w seq 20.",
+          "id": "B"
+        },
+        {
+          "text_md": "SYN 53000→443 zwiększa licznik poprawionego wpisu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Port źródłowy”: Reguła ma permit tcp any eq 443 host 192.0.2.20, a klient wysyła SYN z portu 53000 do portu 443 serwera. W bieżącym przypadku: Host .9 przechodzi, inny host z /24 nadal trafia w seq 20.",
+          "id": "C"
+        },
+        {
+          "text_md": "Host .9 przechodzi, inny host z /24 nadal trafia w seq 20.",
+          "feedback_md": "Numery sekwencji pozwalają wstawić wyjątek bez kasowania całej ACL.\n\n**Rozpoznanie:** Wyjątek dodany za deny nie zostałby osiągnięty.\n\n**Działanie:** Dodać precyzyjne permit dla hosta z wolnym numerem mniejszym niż 20.\n\n**Sprawdzenie:** Host .9 przechodzi, inny host z /24 nadal trafia w seq 20.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

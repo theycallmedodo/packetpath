@@ -1,0 +1,483 @@
+{
+  "schema_version": 3,
+  "id": "encor.copp.practice-2",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "SNMP w drop class — działanie",
+      "skills": [
+        "encor.copp.case-01",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.practice.case-01.2.card",
+      "front_md": "Zapytania NMS trafiają do klasy CoPP z conform drop i exceed drop; liczniki tej klasy rosną.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Conform-action drop oznacza odrzucenie nawet ruchu mieszczącego się w limicie.\n\n**Rozpoznanie:** Polityka control-plane odrzuca także zgodny z profilem SNMP.\n\n**Działanie:** Skorygować klasyfikację zaufanego NMS i zaplanowane akcje właściwej klasy.\n\n**Sprawdzenie:** Zaufany SNMP trafia do dopuszczonej klasy i monitoring działa.",
+      "example": "Skorygować klasyfikację zaufanego NMS i zaplanowane akcje właściwej klasy."
+    },
+    {
+      "revision": 1,
+      "title": "Za niski policer — działanie",
+      "skills": [
+        "encor.copp.case-02",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.practice.case-02.2.card",
+      "front_md": "SNMP chwilowo działa, ale podczas intensywnego pollingu rośnie exceed-drop w jego klasie CoPP.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "CoPP wymaga wymiarowania do legalnego ruchu, nie tylko minimalnej liczby bit/s.\n\n**Rozpoznanie:** Polling przekracza dopuszczony profil control-plane.\n\n**Działanie:** Dopasować polling i uzasadniony limit, zachowując ochronę CPU.\n\n**Sprawdzenie:** Normalny cykl monitoringu nie generuje utraty odczytów przez exceed-drop.",
+      "example": "Dopasować polling i uzasadniony limit, zachowując ochronę CPU."
+    },
+    {
+      "revision": 1,
+      "title": "Tranzyt kontra CPU — działanie",
+      "skills": [
+        "encor.copp.case-03",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.practice.case-03.2.card",
+      "front_md": "Zwykły ruch klientów przechodzi sprzętowo, ale ping do adresu samego routera jest ograniczany przez CoPP.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "CoPP chroni control-plane, nie jest automatycznie polityką wszystkich pakietów tranzytowych.\n\n**Rozpoznanie:** Ruch do urządzenia i tranzyt przechodzą różne ścieżki przetwarzania.\n\n**Działanie:** Analizować osobno klasę control-plane i jakość tranzytu.\n\n**Sprawdzenie:** Tranzyt działa niezależnie od limitu kontrolnego ICMP do routera.",
+      "example": "Analizować osobno klasę control-plane i jakość tranzytu."
+    },
+    {
+      "revision": 1,
+      "title": "Zbyt szeroka klasa — działanie",
+      "skills": [
+        "encor.copp.case-04",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.practice.case-04.2.card",
+      "front_md": "Wcześniejsza klasa CoPP dopasowuje cały UDP, więc późniejsza klasa SNMP nie dostaje pakietów.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Kolejność i zakres dopasowań są istotne również w polityce control-plane.\n\n**Rozpoznanie:** Ogólna klasyfikacja przechwytuje ruch przed klasą szczegółową.\n\n**Działanie:** Uzgodnić kolejność i warunki klas tak, aby SNMP trafiał do właściwej.\n\n**Sprawdzenie:** Kontrolny SNMP zwiększa licznik klasy szczegółowej.",
+      "example": "Uzgodnić kolejność i warunki klas tak, aby SNMP trafiał do właściwej."
+    },
+    {
+      "revision": 1,
+      "title": "BGP pod obciążeniem — działanie",
+      "skills": [
+        "encor.copp.case-05",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.practice.case-05.2.card",
+      "front_md": "Pod atakiem na CPU rosną dropy klasy obejmującej TCP 179 i sesje BGP tracą keepalive.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Ochrona CPU musi równocześnie zachować działanie niezbędnych protokołów.\n\n**Rozpoznanie:** Legalny ruch routingu konkuruje w źle dobranej klasie ochronnej.\n\n**Działanie:** Oddzielić i wymiarować wymagany ruch kontrolny zgodnie z polityką.\n\n**Sprawdzenie:** BGP zachowuje stabilność przy ograniczonym ruchu atakującym.",
+      "example": "Oddzielić i wymiarować wymagany ruch kontrolny zgodnie z polityką."
+    },
+    {
+      "revision": 1,
+      "title": "Licznik od startu — działanie",
+      "skills": [
+        "encor.copp.case-06",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "id": "encor.copp.practice.case-06.2.card",
+      "front_md": "Klasa CoPP ma milion drops od wielu dni, ale podczas obecnego incydentu licznik nie rośnie.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "back_md": "Korelacja czasu i przyrostów jest potrzebna do przypisania winy polityce.\n\n**Rozpoznanie:** Historyczna suma nie dowodzi przyczyny bieżącej awarii.\n\n**Działanie:** Porównać przyrost w czasie konkretnego kontrolowanego testu.\n\n**Sprawdzenie:** Test ma oznaczony interwał i wykazuje lub wyklucza nowe dropy danej klasy.",
+      "example": "Porównać przyrost w czasie konkretnego kontrolowanego testu."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.copp.practice.case-01.2",
+      "revision": 1,
+      "title": "SNMP w drop class — działanie",
+      "skills": [
+        "encor.copp.case-01",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Zapytania NMS trafiają do klasy CoPP z conform drop i exceed drop; liczniki tej klasy rosną.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Conform-action drop oznacza odrzucenie nawet ruchu mieszczącego się w limicie.\n\n**Rozpoznanie:** Polityka control-plane odrzuca także zgodny z profilem SNMP.\n\n**Działanie:** Skorygować klasyfikację zaufanego NMS i zaplanowane akcje właściwej klasy.\n\n**Sprawdzenie:** Zaufany SNMP trafia do dopuszczonej klasy i monitoring działa.",
+      "card_id": "encor.copp.practice.case-01.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Analizować osobno klasę control-plane i jakość tranzytu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Tranzyt kontra CPU”: Zwykły ruch klientów przechodzi sprzętowo, ale ping do adresu samego routera jest ograniczany przez CoPP. W bieżącym przypadku: Skorygować klasyfikację zaufanego NMS i zaplanowane akcje właściwej klasy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Uzgodnić kolejność i warunki klas tak, aby SNMP trafiał do właściwej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbyt szeroka klasa”: Wcześniejsza klasa CoPP dopasowuje cały UDP, więc późniejsza klasa SNMP nie dostaje pakietów. W bieżącym przypadku: Skorygować klasyfikację zaufanego NMS i zaplanowane akcje właściwej klasy.",
+          "id": "B"
+        },
+        {
+          "text_md": "Porównać przyrost w czasie konkretnego kontrolowanego testu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Licznik od startu”: Klasa CoPP ma milion drops od wielu dni, ale podczas obecnego incydentu licznik nie rośnie. W bieżącym przypadku: Skorygować klasyfikację zaufanego NMS i zaplanowane akcje właściwej klasy.",
+          "id": "C"
+        },
+        {
+          "text_md": "Skorygować klasyfikację zaufanego NMS i zaplanowane akcje właściwej klasy.",
+          "feedback_md": "Conform-action drop oznacza odrzucenie nawet ruchu mieszczącego się w limicie.\n\n**Rozpoznanie:** Polityka control-plane odrzuca także zgodny z profilem SNMP.\n\n**Działanie:** Skorygować klasyfikację zaufanego NMS i zaplanowane akcje właściwej klasy.\n\n**Sprawdzenie:** Zaufany SNMP trafia do dopuszczonej klasy i monitoring działa.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.copp.practice.case-02.2",
+      "revision": 1,
+      "title": "Za niski policer — działanie",
+      "skills": [
+        "encor.copp.case-02",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "SNMP chwilowo działa, ale podczas intensywnego pollingu rośnie exceed-drop w jego klasie CoPP.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "CoPP wymaga wymiarowania do legalnego ruchu, nie tylko minimalnej liczby bit/s.\n\n**Rozpoznanie:** Polling przekracza dopuszczony profil control-plane.\n\n**Działanie:** Dopasować polling i uzasadniony limit, zachowując ochronę CPU.\n\n**Sprawdzenie:** Normalny cykl monitoringu nie generuje utraty odczytów przez exceed-drop.",
+      "card_id": "encor.copp.practice.case-02.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Dopasować polling i uzasadniony limit, zachowując ochronę CPU.",
+          "feedback_md": "CoPP wymaga wymiarowania do legalnego ruchu, nie tylko minimalnej liczby bit/s.\n\n**Rozpoznanie:** Polling przekracza dopuszczony profil control-plane.\n\n**Działanie:** Dopasować polling i uzasadniony limit, zachowując ochronę CPU.\n\n**Sprawdzenie:** Normalny cykl monitoringu nie generuje utraty odczytów przez exceed-drop.",
+          "id": "A"
+        },
+        {
+          "text_md": "Skorygować klasyfikację zaufanego NMS i zaplanowane akcje właściwej klasy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SNMP w drop class”: Zapytania NMS trafiają do klasy CoPP z conform drop i exceed drop; liczniki tej klasy rosną. W bieżącym przypadku: Dopasować polling i uzasadniony limit, zachowując ochronę CPU.",
+          "id": "B"
+        },
+        {
+          "text_md": "Porównać przyrost w czasie konkretnego kontrolowanego testu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Licznik od startu”: Klasa CoPP ma milion drops od wielu dni, ale podczas obecnego incydentu licznik nie rośnie. W bieżącym przypadku: Dopasować polling i uzasadniony limit, zachowując ochronę CPU.",
+          "id": "C"
+        },
+        {
+          "text_md": "Analizować osobno klasę control-plane i jakość tranzytu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Tranzyt kontra CPU”: Zwykły ruch klientów przechodzi sprzętowo, ale ping do adresu samego routera jest ograniczany przez CoPP. W bieżącym przypadku: Dopasować polling i uzasadniony limit, zachowując ochronę CPU.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.copp.practice.case-03.2",
+      "revision": 1,
+      "title": "Tranzyt kontra CPU — działanie",
+      "skills": [
+        "encor.copp.case-03",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Zwykły ruch klientów przechodzi sprzętowo, ale ping do adresu samego routera jest ograniczany przez CoPP.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "CoPP chroni control-plane, nie jest automatycznie polityką wszystkich pakietów tranzytowych.\n\n**Rozpoznanie:** Ruch do urządzenia i tranzyt przechodzą różne ścieżki przetwarzania.\n\n**Działanie:** Analizować osobno klasę control-plane i jakość tranzytu.\n\n**Sprawdzenie:** Tranzyt działa niezależnie od limitu kontrolnego ICMP do routera.",
+      "card_id": "encor.copp.practice.case-03.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Dopasować polling i uzasadniony limit, zachowując ochronę CPU.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Za niski policer”: SNMP chwilowo działa, ale podczas intensywnego pollingu rośnie exceed-drop w jego klasie CoPP. W bieżącym przypadku: Analizować osobno klasę control-plane i jakość tranzytu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Analizować osobno klasę control-plane i jakość tranzytu.",
+          "feedback_md": "CoPP chroni control-plane, nie jest automatycznie polityką wszystkich pakietów tranzytowych.\n\n**Rozpoznanie:** Ruch do urządzenia i tranzyt przechodzą różne ścieżki przetwarzania.\n\n**Działanie:** Analizować osobno klasę control-plane i jakość tranzytu.\n\n**Sprawdzenie:** Tranzyt działa niezależnie od limitu kontrolnego ICMP do routera.",
+          "id": "B"
+        },
+        {
+          "text_md": "Oddzielić i wymiarować wymagany ruch kontrolny zgodnie z polityką.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „BGP pod obciążeniem”: Pod atakiem na CPU rosną dropy klasy obejmującej TCP 179 i sesje BGP tracą keepalive. W bieżącym przypadku: Analizować osobno klasę control-plane i jakość tranzytu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Uzgodnić kolejność i warunki klas tak, aby SNMP trafiał do właściwej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbyt szeroka klasa”: Wcześniejsza klasa CoPP dopasowuje cały UDP, więc późniejsza klasa SNMP nie dostaje pakietów. W bieżącym przypadku: Analizować osobno klasę control-plane i jakość tranzytu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.copp.practice.case-04.2",
+      "revision": 1,
+      "title": "Zbyt szeroka klasa — działanie",
+      "skills": [
+        "encor.copp.case-04",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Wcześniejsza klasa CoPP dopasowuje cały UDP, więc późniejsza klasa SNMP nie dostaje pakietów.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Kolejność i zakres dopasowań są istotne również w polityce control-plane.\n\n**Rozpoznanie:** Ogólna klasyfikacja przechwytuje ruch przed klasą szczegółową.\n\n**Działanie:** Uzgodnić kolejność i warunki klas tak, aby SNMP trafiał do właściwej.\n\n**Sprawdzenie:** Kontrolny SNMP zwiększa licznik klasy szczegółowej.",
+      "card_id": "encor.copp.practice.case-04.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Skorygować klasyfikację zaufanego NMS i zaplanowane akcje właściwej klasy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SNMP w drop class”: Zapytania NMS trafiają do klasy CoPP z conform drop i exceed drop; liczniki tej klasy rosną. W bieżącym przypadku: Uzgodnić kolejność i warunki klas tak, aby SNMP trafiał do właściwej.",
+          "id": "A"
+        },
+        {
+          "text_md": "Analizować osobno klasę control-plane i jakość tranzytu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Tranzyt kontra CPU”: Zwykły ruch klientów przechodzi sprzętowo, ale ping do adresu samego routera jest ograniczany przez CoPP. W bieżącym przypadku: Uzgodnić kolejność i warunki klas tak, aby SNMP trafiał do właściwej.",
+          "id": "B"
+        },
+        {
+          "text_md": "Uzgodnić kolejność i warunki klas tak, aby SNMP trafiał do właściwej.",
+          "feedback_md": "Kolejność i zakres dopasowań są istotne również w polityce control-plane.\n\n**Rozpoznanie:** Ogólna klasyfikacja przechwytuje ruch przed klasą szczegółową.\n\n**Działanie:** Uzgodnić kolejność i warunki klas tak, aby SNMP trafiał do właściwej.\n\n**Sprawdzenie:** Kontrolny SNMP zwiększa licznik klasy szczegółowej.",
+          "id": "C"
+        },
+        {
+          "text_md": "Dopasować polling i uzasadniony limit, zachowując ochronę CPU.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Za niski policer”: SNMP chwilowo działa, ale podczas intensywnego pollingu rośnie exceed-drop w jego klasie CoPP. W bieżącym przypadku: Uzgodnić kolejność i warunki klas tak, aby SNMP trafiał do właściwej.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.copp.practice.case-05.2",
+      "revision": 1,
+      "title": "BGP pod obciążeniem — działanie",
+      "skills": [
+        "encor.copp.case-05",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Pod atakiem na CPU rosną dropy klasy obejmującej TCP 179 i sesje BGP tracą keepalive.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Ochrona CPU musi równocześnie zachować działanie niezbędnych protokołów.\n\n**Rozpoznanie:** Legalny ruch routingu konkuruje w źle dobranej klasie ochronnej.\n\n**Działanie:** Oddzielić i wymiarować wymagany ruch kontrolny zgodnie z polityką.\n\n**Sprawdzenie:** BGP zachowuje stabilność przy ograniczonym ruchu atakującym.",
+      "card_id": "encor.copp.practice.case-05.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Analizować osobno klasę control-plane i jakość tranzytu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Tranzyt kontra CPU”: Zwykły ruch klientów przechodzi sprzętowo, ale ping do adresu samego routera jest ograniczany przez CoPP. W bieżącym przypadku: Oddzielić i wymiarować wymagany ruch kontrolny zgodnie z polityką.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dopasować polling i uzasadniony limit, zachowując ochronę CPU.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Za niski policer”: SNMP chwilowo działa, ale podczas intensywnego pollingu rośnie exceed-drop w jego klasie CoPP. W bieżącym przypadku: Oddzielić i wymiarować wymagany ruch kontrolny zgodnie z polityką.",
+          "id": "B"
+        },
+        {
+          "text_md": "Skorygować klasyfikację zaufanego NMS i zaplanowane akcje właściwej klasy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SNMP w drop class”: Zapytania NMS trafiają do klasy CoPP z conform drop i exceed drop; liczniki tej klasy rosną. W bieżącym przypadku: Oddzielić i wymiarować wymagany ruch kontrolny zgodnie z polityką.",
+          "id": "C"
+        },
+        {
+          "text_md": "Oddzielić i wymiarować wymagany ruch kontrolny zgodnie z polityką.",
+          "feedback_md": "Ochrona CPU musi równocześnie zachować działanie niezbędnych protokołów.\n\n**Rozpoznanie:** Legalny ruch routingu konkuruje w źle dobranej klasie ochronnej.\n\n**Działanie:** Oddzielić i wymiarować wymagany ruch kontrolny zgodnie z polityką.\n\n**Sprawdzenie:** BGP zachowuje stabilność przy ograniczonym ruchu atakującym.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.copp.practice.case-06.2",
+      "revision": 1,
+      "title": "Licznik od startu — działanie",
+      "skills": [
+        "encor.copp.case-06",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/qos_plcshp/configuration/xe-16-11/qos-plcshp-xe-16-11-book/qos-plcshp-ctrl-pln-plc.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — CoPP — ochrona CPU i diagnostyka SNMP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-ctrl-pln-plc-0.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.2.b"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Klasa CoPP ma milion drops od wielu dni, ale podczas obecnego incydentu licznik nie rośnie.\n\nKtóre działanie najlepiej odpowiada wymaganiom tego przypadku?",
+      "hints": [
+        "Wybierz działanie usuwające wskazaną przyczynę i respektujące zakres zmiany."
+      ],
+      "explanation_md": "Korelacja czasu i przyrostów jest potrzebna do przypisania winy polityce.\n\n**Rozpoznanie:** Historyczna suma nie dowodzi przyczyny bieżącej awarii.\n\n**Działanie:** Porównać przyrost w czasie konkretnego kontrolowanego testu.\n\n**Sprawdzenie:** Test ma oznaczony interwał i wykazuje lub wyklucza nowe dropy danej klasy.",
+      "card_id": "encor.copp.practice.case-06.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Porównać przyrost w czasie konkretnego kontrolowanego testu.",
+          "feedback_md": "Korelacja czasu i przyrostów jest potrzebna do przypisania winy polityce.\n\n**Rozpoznanie:** Historyczna suma nie dowodzi przyczyny bieżącej awarii.\n\n**Działanie:** Porównać przyrost w czasie konkretnego kontrolowanego testu.\n\n**Sprawdzenie:** Test ma oznaczony interwał i wykazuje lub wyklucza nowe dropy danej klasy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Uzgodnić kolejność i warunki klas tak, aby SNMP trafiał do właściwej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbyt szeroka klasa”: Wcześniejsza klasa CoPP dopasowuje cały UDP, więc późniejsza klasa SNMP nie dostaje pakietów. W bieżącym przypadku: Porównać przyrost w czasie konkretnego kontrolowanego testu.",
+          "id": "B"
+        },
+        {
+          "text_md": "Analizować osobno klasę control-plane i jakość tranzytu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Tranzyt kontra CPU”: Zwykły ruch klientów przechodzi sprzętowo, ale ping do adresu samego routera jest ograniczany przez CoPP. W bieżącym przypadku: Porównać przyrost w czasie konkretnego kontrolowanego testu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Oddzielić i wymiarować wymagany ruch kontrolny zgodnie z polityką.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „BGP pod obciążeniem”: Pod atakiem na CPU rosną dropy klasy obejmującej TCP 179 i sesje BGP tracą keepalive. W bieżącym przypadku: Porównać przyrost w czasie konkretnego kontrolowanego testu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

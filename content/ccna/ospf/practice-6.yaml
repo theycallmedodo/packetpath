@@ -1,0 +1,959 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ospf.practice-6",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "id": "ccna.ospf.practice.compare-01.2.card",
+      "front_md": "**Zgłoszenie I**\n\nAdresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello.\n\n**Zgłoszenie II**\n\nR1 ma Gi0/0 w area 0, R2 ten sam segment w area 10. Maska, timery i uwierzytelnianie są zgodne.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Passive-interface zatrzymuje Hello na łączu między routerami. Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\n**Sprawdzenie I:** Na Gi0/0 pojawiają się Hello i oczekiwane sąsiedztwo OSPF.\n\n**Zgłoszenie II:** Routery przypisały wspólny segment do różnych obszarów. Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\n**Sprawdzenie II:** Oba końce pokazują tę samą area i tworzą sąsiedztwo.\n\n**Zależności:** Interfejs passive może ogłaszać sieć, ale nie zestawia na niej sąsiedztw. Sąsiedzi OSPF na wspólnym łączu muszą uzgodnić obszar.",
+      "example": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Ujednolicić area wspólnego segmentu zgodnie z projektem."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "id": "ccna.ospf.practice.compare-02.2.card",
+      "front_md": "**Zgłoszenie I**\n\nNa wspólnym Ethernet R1 wysyła Hello co 10 s z dead 40 s, a R2 ma 30/120. Pozostałe parametry pasują.\n\n**Zgłoszenie II**\n\nW działającym segmencie broadcast dwa routery DROTHER widzą się w 2-Way. Oba mają Full z DR i BDR.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Niezgodne timery Hello i Dead uniemożliwiają sąsiedztwo. Ustawić zgodne timery na obu końcach segmentu.\n\n**Sprawdzenie I:** Show ip ospf interface pokazuje zgodne Hello/Dead i sąsiedztwo powstaje.\n\n**Zgłoszenie II:** Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\n**Sprawdzenie II:** Pełne relacje do DR/BDR istnieją, a oczekiwane trasy są obecne.\n\n**Zależności:** Timery są elementem zgodności sąsiadów OSPF. W sieci broadcast nie każda para sąsiadów przechodzi do Full.",
+      "example": "I — Ustawić zgodne timery na obu końcach segmentu.\n\nII — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "id": "ccna.ospf.practice.compare-03.2.card",
+      "front_md": "**Zgłoszenie I**\n\nDwa routery w domenie mają router-id 1.1.1.1, a log wskazuje duplicate router ID.\n\n**Zgłoszenie II**\n\nR1 ma Full z R2. LAN 10.20.0.0/24 działa lokalnie, ale jego interfejs nie jest objęty OSPF ani redystrybucją.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Identyfikator routera OSPF nie jest unikalny. Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\n**Sprawdzenie I:** Po zastosowaniu zmiany routery mają różne RID i znika komunikat o duplikacie.\n\n**Zgłoszenie II:** Działające sąsiedztwo nie oznacza automatycznego ogłoszenia każdego LAN. Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.\n\n**Sprawdzenie II:** R2 instaluje oczekiwaną trasę OSPF do 10.20.0.0/24.\n\n**Zależności:** Router-id identyfikuje źródło informacji w OSPF i powinien być unikalny. Trzeba osobno zapewnić uczestnictwo właściwych interfejsów i ochronę LAN przed zbędnymi Hello.",
+      "example": "I — Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\nII — Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "id": "ccna.ospf.practice.compare-04.2.card",
+      "front_md": "**Zgłoszenie I**\n\nAdresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello.\n\n**Zgłoszenie II**\n\nNa wspólnym Ethernet R1 wysyła Hello co 10 s z dead 40 s, a R2 ma 30/120. Pozostałe parametry pasują.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Passive-interface zatrzymuje Hello na łączu między routerami. Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\n**Sprawdzenie I:** Na Gi0/0 pojawiają się Hello i oczekiwane sąsiedztwo OSPF.\n\n**Zgłoszenie II:** Niezgodne timery Hello i Dead uniemożliwiają sąsiedztwo. Ustawić zgodne timery na obu końcach segmentu.\n\n**Sprawdzenie II:** Show ip ospf interface pokazuje zgodne Hello/Dead i sąsiedztwo powstaje.\n\n**Zależności:** Interfejs passive może ogłaszać sieć, ale nie zestawia na niej sąsiedztw. Timery są elementem zgodności sąsiadów OSPF.",
+      "example": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Ustawić zgodne timery na obu końcach segmentu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "id": "ccna.ospf.practice.compare-05.2.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 ma Gi0/0 w area 0, R2 ten sam segment w area 10. Maska, timery i uwierzytelnianie są zgodne.\n\n**Zgłoszenie II**\n\nDwa routery w domenie mają router-id 1.1.1.1, a log wskazuje duplicate router ID.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Routery przypisały wspólny segment do różnych obszarów. Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\n**Sprawdzenie I:** Oba końce pokazują tę samą area i tworzą sąsiedztwo.\n\n**Zgłoszenie II:** Identyfikator routera OSPF nie jest unikalny. Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\n**Sprawdzenie II:** Po zastosowaniu zmiany routery mają różne RID i znika komunikat o duplikacie.\n\n**Zależności:** Sąsiedzi OSPF na wspólnym łączu muszą uzgodnić obszar. Router-id identyfikuje źródło informacji w OSPF i powinien być unikalny.",
+      "example": "I — Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\nII — Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "id": "ccna.ospf.practice.compare-06.2.card",
+      "front_md": "**Zgłoszenie I**\n\nW działającym segmencie broadcast dwa routery DROTHER widzą się w 2-Way. Oba mają Full z DR i BDR.\n\n**Zgłoszenie II**\n\nR1 ma Full z R2. LAN 10.20.0.0/24 działa lokalnie, ale jego interfejs nie jest objęty OSPF ani redystrybucją.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\n**Sprawdzenie I:** Pełne relacje do DR/BDR istnieją, a oczekiwane trasy są obecne.\n\n**Zgłoszenie II:** Działające sąsiedztwo nie oznacza automatycznego ogłoszenia każdego LAN. Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.\n\n**Sprawdzenie II:** R2 instaluje oczekiwaną trasę OSPF do 10.20.0.0/24.\n\n**Zależności:** W sieci broadcast nie każda para sąsiadów przechodzi do Full. Trzeba osobno zapewnić uczestnictwo właściwych interfejsów i ochronę LAN przed zbędnymi Hello.",
+      "example": "I — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\nII — Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "id": "ccna.ospf.practice.compare-07.2.card",
+      "front_md": "**Zgłoszenie I**\n\nAdresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello.\n\n**Zgłoszenie II**\n\nR1 ma Full z R2. LAN 10.20.0.0/24 działa lokalnie, ale jego interfejs nie jest objęty OSPF ani redystrybucją.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Passive-interface zatrzymuje Hello na łączu między routerami. Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\n**Sprawdzenie I:** Na Gi0/0 pojawiają się Hello i oczekiwane sąsiedztwo OSPF.\n\n**Zgłoszenie II:** Działające sąsiedztwo nie oznacza automatycznego ogłoszenia każdego LAN. Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.\n\n**Sprawdzenie II:** R2 instaluje oczekiwaną trasę OSPF do 10.20.0.0/24.\n\n**Zależności:** Interfejs passive może ogłaszać sieć, ale nie zestawia na niej sąsiedztw. Trzeba osobno zapewnić uczestnictwo właściwych interfejsów i ochronę LAN przed zbędnymi Hello.",
+      "example": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "id": "ccna.ospf.practice.compare-08.2.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 ma Gi0/0 w area 0, R2 ten sam segment w area 10. Maska, timery i uwierzytelnianie są zgodne.\n\n**Zgłoszenie II**\n\nW działającym segmencie broadcast dwa routery DROTHER widzą się w 2-Way. Oba mają Full z DR i BDR.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Routery przypisały wspólny segment do różnych obszarów. Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\n**Sprawdzenie I:** Oba końce pokazują tę samą area i tworzą sąsiedztwo.\n\n**Zgłoszenie II:** Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\n**Sprawdzenie II:** Pełne relacje do DR/BDR istnieją, a oczekiwane trasy są obecne.\n\n**Zależności:** Sąsiedzi OSPF na wspólnym łączu muszą uzgodnić obszar. W sieci broadcast nie każda para sąsiadów przechodzi do Full.",
+      "example": "I — Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\nII — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "id": "ccna.ospf.practice.compare-09.2.card",
+      "front_md": "**Zgłoszenie I**\n\nNa wspólnym Ethernet R1 wysyła Hello co 10 s z dead 40 s, a R2 ma 30/120. Pozostałe parametry pasują.\n\n**Zgłoszenie II**\n\nDwa routery w domenie mają router-id 1.1.1.1, a log wskazuje duplicate router ID.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Niezgodne timery Hello i Dead uniemożliwiają sąsiedztwo. Ustawić zgodne timery na obu końcach segmentu.\n\n**Sprawdzenie I:** Show ip ospf interface pokazuje zgodne Hello/Dead i sąsiedztwo powstaje.\n\n**Zgłoszenie II:** Identyfikator routera OSPF nie jest unikalny. Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\n**Sprawdzenie II:** Po zastosowaniu zmiany routery mają różne RID i znika komunikat o duplikacie.\n\n**Zależności:** Timery są elementem zgodności sąsiadów OSPF. Router-id identyfikuje źródło informacji w OSPF i powinien być unikalny.",
+      "example": "I — Ustawić zgodne timery na obu końcach segmentu.\n\nII — Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "id": "ccna.ospf.practice.compare-10.2.card",
+      "front_md": "**Zgłoszenie I**\n\nAdresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello.\n\n**Zgłoszenie II**\n\nW działającym segmencie broadcast dwa routery DROTHER widzą się w 2-Way. Oba mają Full z DR i BDR.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Passive-interface zatrzymuje Hello na łączu między routerami. Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\n**Sprawdzenie I:** Na Gi0/0 pojawiają się Hello i oczekiwane sąsiedztwo OSPF.\n\n**Zgłoszenie II:** Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\n**Sprawdzenie II:** Pełne relacje do DR/BDR istnieją, a oczekiwane trasy są obecne.\n\n**Zależności:** Interfejs passive może ogłaszać sieć, ale nie zestawia na niej sąsiedztw. W sieci broadcast nie każda para sąsiadów przechodzi do Full.",
+      "example": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ospf.practice.compare-01.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAdresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello.\n\n**Zgłoszenie II**\n\nR1 ma Gi0/0 w area 0, R2 ten sam segment w area 10. Maska, timery i uwierzytelnianie są zgodne.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Passive-interface zatrzymuje Hello na łączu między routerami. Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\n**Sprawdzenie I:** Na Gi0/0 pojawiają się Hello i oczekiwane sąsiedztwo OSPF.\n\n**Zgłoszenie II:** Routery przypisały wspólny segment do różnych obszarów. Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\n**Sprawdzenie II:** Oba końce pokazują tę samą area i tworzą sąsiedztwo.\n\n**Zależności:** Interfejs passive może ogłaszać sieć, ale nie zestawia na niej sąsiedztw. Sąsiedzi OSPF na wspólnym łączu muszą uzgodnić obszar.",
+      "card_id": "ccna.ospf.practice.compare-01.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\nII — Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Passive-interface zatrzymuje Hello na łączu między routerami. Zgłoszenie II: Routery przypisały wspólny segment do różnych obszarów.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Ustawić zgodne timery na obu końcach segmentu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Na wspólnym Ethernet R1 wysyła Hello co 10 s z dead 40 s, a R2 ma 30/120. Pozostałe parametry pasują. Dla II: Ujednolicić area wspólnego segmentu zgodnie z projektem.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Ujednolicić area wspólnego segmentu zgodnie z projektem.",
+          "feedback_md": "**Zgłoszenie I:** Passive-interface zatrzymuje Hello na łączu między routerami. Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\n**Sprawdzenie I:** Na Gi0/0 pojawiają się Hello i oczekiwane sąsiedztwo OSPF.\n\n**Zgłoszenie II:** Routery przypisały wspólny segment do różnych obszarów. Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\n**Sprawdzenie II:** Oba końce pokazują tę samą area i tworzą sąsiedztwo.\n\n**Zależności:** Interfejs passive może ogłaszać sieć, ale nie zestawia na niej sąsiedztw. Sąsiedzi OSPF na wspólnym łączu muszą uzgodnić obszar.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ustawić zgodne timery na obu końcach segmentu.\n\nII — Ujednolicić area wspólnego segmentu zgodnie z projektem.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Na wspólnym Ethernet R1 wysyła Hello co 10 s z dead 40 s, a R2 ma 30/120. Pozostałe parametry pasują. Dla I: Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ospf.practice.compare-02.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNa wspólnym Ethernet R1 wysyła Hello co 10 s z dead 40 s, a R2 ma 30/120. Pozostałe parametry pasują.\n\n**Zgłoszenie II**\n\nW działającym segmencie broadcast dwa routery DROTHER widzą się w 2-Way. Oba mają Full z DR i BDR.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Niezgodne timery Hello i Dead uniemożliwiają sąsiedztwo. Ustawić zgodne timery na obu końcach segmentu.\n\n**Sprawdzenie I:** Show ip ospf interface pokazuje zgodne Hello/Dead i sąsiedztwo powstaje.\n\n**Zgłoszenie II:** Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\n**Sprawdzenie II:** Pełne relacje do DR/BDR istnieją, a oczekiwane trasy są obecne.\n\n**Zależności:** Timery są elementem zgodności sąsiadów OSPF. W sieci broadcast nie każda para sąsiadów przechodzi do Full.",
+      "card_id": "ccna.ospf.practice.compare-02.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\nII — Ustawić zgodne timery na obu końcach segmentu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Niezgodne timery Hello i Dead uniemożliwiają sąsiedztwo. Zgłoszenie II: Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ustawić zgodne timery na obu końcach segmentu.\n\nII — Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Adresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello. Dla II: Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Adresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello. Dla I: Ustawić zgodne timery na obu końcach segmentu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ustawić zgodne timery na obu końcach segmentu.\n\nII — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.",
+          "feedback_md": "**Zgłoszenie I:** Niezgodne timery Hello i Dead uniemożliwiają sąsiedztwo. Ustawić zgodne timery na obu końcach segmentu.\n\n**Sprawdzenie I:** Show ip ospf interface pokazuje zgodne Hello/Dead i sąsiedztwo powstaje.\n\n**Zgłoszenie II:** Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\n**Sprawdzenie II:** Pełne relacje do DR/BDR istnieją, a oczekiwane trasy są obecne.\n\n**Zależności:** Timery są elementem zgodności sąsiadów OSPF. W sieci broadcast nie każda para sąsiadów przechodzi do Full.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ospf.practice.compare-03.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDwa routery w domenie mają router-id 1.1.1.1, a log wskazuje duplicate router ID.\n\n**Zgłoszenie II**\n\nR1 ma Full z R2. LAN 10.20.0.0/24 działa lokalnie, ale jego interfejs nie jest objęty OSPF ani redystrybucją.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Identyfikator routera OSPF nie jest unikalny. Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\n**Sprawdzenie I:** Po zastosowaniu zmiany routery mają różne RID i znika komunikat o duplikacie.\n\n**Zgłoszenie II:** Działające sąsiedztwo nie oznacza automatycznego ogłoszenia każdego LAN. Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.\n\n**Sprawdzenie II:** R2 instaluje oczekiwaną trasę OSPF do 10.20.0.0/24.\n\n**Zależności:** Router-id identyfikuje źródło informacji w OSPF i powinien być unikalny. Trzeba osobno zapewnić uczestnictwo właściwych interfejsów i ochronę LAN przed zbędnymi Hello.",
+      "card_id": "ccna.ospf.practice.compare-03.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\nII — Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.",
+          "feedback_md": "**Zgłoszenie I:** Identyfikator routera OSPF nie jest unikalny. Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\n**Sprawdzenie I:** Po zastosowaniu zmiany routery mają różne RID i znika komunikat o duplikacie.\n\n**Zgłoszenie II:** Działające sąsiedztwo nie oznacza automatycznego ogłoszenia każdego LAN. Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.\n\n**Sprawdzenie II:** R2 instaluje oczekiwaną trasę OSPF do 10.20.0.0/24.\n\n**Zależności:** Router-id identyfikuje źródło informacji w OSPF i powinien być unikalny. Trzeba osobno zapewnić uczestnictwo właściwych interfejsów i ochronę LAN przed zbędnymi Hello.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.\n\nII — Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Identyfikator routera OSPF nie jest unikalny. Zgłoszenie II: Działające sąsiedztwo nie oznacza automatycznego ogłoszenia każdego LAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\nII — Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Adresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello. Dla II: Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Adresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello. Dla I: Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ospf.practice.compare-04.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAdresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello.\n\n**Zgłoszenie II**\n\nNa wspólnym Ethernet R1 wysyła Hello co 10 s z dead 40 s, a R2 ma 30/120. Pozostałe parametry pasują.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Passive-interface zatrzymuje Hello na łączu między routerami. Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\n**Sprawdzenie I:** Na Gi0/0 pojawiają się Hello i oczekiwane sąsiedztwo OSPF.\n\n**Zgłoszenie II:** Niezgodne timery Hello i Dead uniemożliwiają sąsiedztwo. Ustawić zgodne timery na obu końcach segmentu.\n\n**Sprawdzenie II:** Show ip ospf interface pokazuje zgodne Hello/Dead i sąsiedztwo powstaje.\n\n**Zależności:** Interfejs passive może ogłaszać sieć, ale nie zestawia na niej sąsiedztw. Timery są elementem zgodności sąsiadów OSPF.",
+      "card_id": "ccna.ospf.practice.compare-04.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Ustawić zgodne timery na obu końcach segmentu.\n\nII — Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Passive-interface zatrzymuje Hello na łączu między routerami. Zgłoszenie II: Niezgodne timery Hello i Dead uniemożliwiają sąsiedztwo.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Ustawić zgodne timery na obu końcach segmentu.",
+          "feedback_md": "**Zgłoszenie I:** Passive-interface zatrzymuje Hello na łączu między routerami. Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\n**Sprawdzenie I:** Na Gi0/0 pojawiają się Hello i oczekiwane sąsiedztwo OSPF.\n\n**Zgłoszenie II:** Niezgodne timery Hello i Dead uniemożliwiają sąsiedztwo. Ustawić zgodne timery na obu końcach segmentu.\n\n**Sprawdzenie II:** Show ip ospf interface pokazuje zgodne Hello/Dead i sąsiedztwo powstaje.\n\n**Zależności:** Interfejs passive może ogłaszać sieć, ale nie zestawia na niej sąsiedztw. Timery są elementem zgodności sąsiadów OSPF.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Ujednolicić area wspólnego segmentu zgodnie z projektem.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 ma Gi0/0 w area 0, R2 ten sam segment w area 10. Maska, timery i uwierzytelnianie są zgodne. Dla II: Ustawić zgodne timery na obu końcach segmentu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\nII — Ustawić zgodne timery na obu końcach segmentu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 ma Gi0/0 w area 0, R2 ten sam segment w area 10. Maska, timery i uwierzytelnianie są zgodne. Dla I: Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ospf.practice.compare-05.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 ma Gi0/0 w area 0, R2 ten sam segment w area 10. Maska, timery i uwierzytelnianie są zgodne.\n\n**Zgłoszenie II**\n\nDwa routery w domenie mają router-id 1.1.1.1, a log wskazuje duplicate router ID.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Routery przypisały wspólny segment do różnych obszarów. Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\n**Sprawdzenie I:** Oba końce pokazują tę samą area i tworzą sąsiedztwo.\n\n**Zgłoszenie II:** Identyfikator routera OSPF nie jest unikalny. Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\n**Sprawdzenie II:** Po zastosowaniu zmiany routery mają różne RID i znika komunikat o duplikacie.\n\n**Zależności:** Sąsiedzi OSPF na wspólnym łączu muszą uzgodnić obszar. Router-id identyfikuje źródło informacji w OSPF i powinien być unikalny.",
+      "card_id": "ccna.ospf.practice.compare-05.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\nII — Ujednolicić area wspólnego segmentu zgodnie z projektem.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Routery przypisały wspólny segment do różnych obszarów. Zgłoszenie II: Identyfikator routera OSPF nie jest unikalny.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\nII — Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Adresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello. Dla II: Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\nII — Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.",
+          "feedback_md": "**Zgłoszenie I:** Routery przypisały wspólny segment do różnych obszarów. Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\n**Sprawdzenie I:** Oba końce pokazują tę samą area i tworzą sąsiedztwo.\n\n**Zgłoszenie II:** Identyfikator routera OSPF nie jest unikalny. Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\n**Sprawdzenie II:** Po zastosowaniu zmiany routery mają różne RID i znika komunikat o duplikacie.\n\n**Zależności:** Sąsiedzi OSPF na wspólnym łączu muszą uzgodnić obszar. Router-id identyfikuje źródło informacji w OSPF i powinien być unikalny.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Adresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello. Dla I: Ujednolicić area wspólnego segmentu zgodnie z projektem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ospf.practice.compare-06.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nW działającym segmencie broadcast dwa routery DROTHER widzą się w 2-Way. Oba mają Full z DR i BDR.\n\n**Zgłoszenie II**\n\nR1 ma Full z R2. LAN 10.20.0.0/24 działa lokalnie, ale jego interfejs nie jest objęty OSPF ani redystrybucją.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\n**Sprawdzenie I:** Pełne relacje do DR/BDR istnieją, a oczekiwane trasy są obecne.\n\n**Zgłoszenie II:** Działające sąsiedztwo nie oznacza automatycznego ogłoszenia każdego LAN. Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.\n\n**Sprawdzenie II:** R2 instaluje oczekiwaną trasę OSPF do 10.20.0.0/24.\n\n**Zależności:** W sieci broadcast nie każda para sąsiadów przechodzi do Full. Trzeba osobno zapewnić uczestnictwo właściwych interfejsów i ochronę LAN przed zbędnymi Hello.",
+      "card_id": "ccna.ospf.practice.compare-06.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.\n\nII — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Zgłoszenie II: Działające sąsiedztwo nie oznacza automatycznego ogłoszenia każdego LAN.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\nII — Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Adresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello. Dla II: Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Adresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello. Dla I: Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\nII — Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.",
+          "feedback_md": "**Zgłoszenie I:** Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\n**Sprawdzenie I:** Pełne relacje do DR/BDR istnieją, a oczekiwane trasy są obecne.\n\n**Zgłoszenie II:** Działające sąsiedztwo nie oznacza automatycznego ogłoszenia każdego LAN. Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.\n\n**Sprawdzenie II:** R2 instaluje oczekiwaną trasę OSPF do 10.20.0.0/24.\n\n**Zależności:** W sieci broadcast nie każda para sąsiadów przechodzi do Full. Trzeba osobno zapewnić uczestnictwo właściwych interfejsów i ochronę LAN przed zbędnymi Hello.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ospf.practice.compare-07.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAdresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello.\n\n**Zgłoszenie II**\n\nR1 ma Full z R2. LAN 10.20.0.0/24 działa lokalnie, ale jego interfejs nie jest objęty OSPF ani redystrybucją.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Passive-interface zatrzymuje Hello na łączu między routerami. Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\n**Sprawdzenie I:** Na Gi0/0 pojawiają się Hello i oczekiwane sąsiedztwo OSPF.\n\n**Zgłoszenie II:** Działające sąsiedztwo nie oznacza automatycznego ogłoszenia każdego LAN. Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.\n\n**Sprawdzenie II:** R2 instaluje oczekiwaną trasę OSPF do 10.20.0.0/24.\n\n**Zależności:** Interfejs passive może ogłaszać sieć, ale nie zestawia na niej sąsiedztw. Trzeba osobno zapewnić uczestnictwo właściwych interfejsów i ochronę LAN przed zbędnymi Hello.",
+      "card_id": "ccna.ospf.practice.compare-07.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.",
+          "feedback_md": "**Zgłoszenie I:** Passive-interface zatrzymuje Hello na łączu między routerami. Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\n**Sprawdzenie I:** Na Gi0/0 pojawiają się Hello i oczekiwane sąsiedztwo OSPF.\n\n**Zgłoszenie II:** Działające sąsiedztwo nie oznacza automatycznego ogłoszenia każdego LAN. Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.\n\n**Sprawdzenie II:** R2 instaluje oczekiwaną trasę OSPF do 10.20.0.0/24.\n\n**Zależności:** Interfejs passive może ogłaszać sieć, ale nie zestawia na niej sąsiedztw. Trzeba osobno zapewnić uczestnictwo właściwych interfejsów i ochronę LAN przed zbędnymi Hello.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.\n\nII — Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Passive-interface zatrzymuje Hello na łączu między routerami. Zgłoszenie II: Działające sąsiedztwo nie oznacza automatycznego ogłoszenia każdego LAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Ujednolicić area wspólnego segmentu zgodnie z projektem.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 ma Gi0/0 w area 0, R2 ten sam segment w area 10. Maska, timery i uwierzytelnianie są zgodne. Dla II: Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\nII — Włączyć OSPF dla interfejsu LAN we właściwej area i pozostawić go passive.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 ma Gi0/0 w area 0, R2 ten sam segment w area 10. Maska, timery i uwierzytelnianie są zgodne. Dla I: Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ospf.practice.compare-08.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 ma Gi0/0 w area 0, R2 ten sam segment w area 10. Maska, timery i uwierzytelnianie są zgodne.\n\n**Zgłoszenie II**\n\nW działającym segmencie broadcast dwa routery DROTHER widzą się w 2-Way. Oba mają Full z DR i BDR.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Routery przypisały wspólny segment do różnych obszarów. Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\n**Sprawdzenie I:** Oba końce pokazują tę samą area i tworzą sąsiedztwo.\n\n**Zgłoszenie II:** Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\n**Sprawdzenie II:** Pełne relacje do DR/BDR istnieją, a oczekiwane trasy są obecne.\n\n**Zależności:** Sąsiedzi OSPF na wspólnym łączu muszą uzgodnić obszar. W sieci broadcast nie każda para sąsiadów przechodzi do Full.",
+      "card_id": "ccna.ospf.practice.compare-08.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\nII — Ujednolicić area wspólnego segmentu zgodnie z projektem.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Routery przypisały wspólny segment do różnych obszarów. Zgłoszenie II: Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\nII — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.",
+          "feedback_md": "**Zgłoszenie I:** Routery przypisały wspólny segment do różnych obszarów. Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\n**Sprawdzenie I:** Oba końce pokazują tę samą area i tworzą sąsiedztwo.\n\n**Zgłoszenie II:** Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\n**Sprawdzenie II:** Pełne relacje do DR/BDR istnieją, a oczekiwane trasy są obecne.\n\n**Zależności:** Sąsiedzi OSPF na wspólnym łączu muszą uzgodnić obszar. W sieci broadcast nie każda para sąsiadów przechodzi do Full.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\nII — Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Adresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello. Dla II: Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Adresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello. Dla I: Ujednolicić area wspólnego segmentu zgodnie z projektem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ospf.practice.compare-09.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNa wspólnym Ethernet R1 wysyła Hello co 10 s z dead 40 s, a R2 ma 30/120. Pozostałe parametry pasują.\n\n**Zgłoszenie II**\n\nDwa routery w domenie mają router-id 1.1.1.1, a log wskazuje duplicate router ID.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Niezgodne timery Hello i Dead uniemożliwiają sąsiedztwo. Ustawić zgodne timery na obu końcach segmentu.\n\n**Sprawdzenie I:** Show ip ospf interface pokazuje zgodne Hello/Dead i sąsiedztwo powstaje.\n\n**Zgłoszenie II:** Identyfikator routera OSPF nie jest unikalny. Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\n**Sprawdzenie II:** Po zastosowaniu zmiany routery mają różne RID i znika komunikat o duplikacie.\n\n**Zależności:** Timery są elementem zgodności sąsiadów OSPF. Router-id identyfikuje źródło informacji w OSPF i powinien być unikalny.",
+      "card_id": "ccna.ospf.practice.compare-09.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\nII — Ustawić zgodne timery na obu końcach segmentu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Niezgodne timery Hello i Dead uniemożliwiają sąsiedztwo. Zgłoszenie II: Identyfikator routera OSPF nie jest unikalny.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ustawić zgodne timery na obu końcach segmentu.\n\nII — Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Adresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello. Dla II: Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ustawić zgodne timery na obu końcach segmentu.\n\nII — Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.",
+          "feedback_md": "**Zgłoszenie I:** Niezgodne timery Hello i Dead uniemożliwiają sąsiedztwo. Ustawić zgodne timery na obu końcach segmentu.\n\n**Sprawdzenie I:** Show ip ospf interface pokazuje zgodne Hello/Dead i sąsiedztwo powstaje.\n\n**Zgłoszenie II:** Identyfikator routera OSPF nie jest unikalny. Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.\n\n**Sprawdzenie II:** Po zastosowaniu zmiany routery mają różne RID i znika komunikat o duplikacie.\n\n**Zależności:** Timery są elementem zgodności sąsiadów OSPF. Router-id identyfikuje źródło informacji w OSPF i powinien być unikalny.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Zaplanować zmianę router-id jednego routera i wymagane odświeżenie procesu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Adresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello. Dla I: Ustawić zgodne timery na obu końcach segmentu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ospf.practice.compare-10.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — działanie",
+      "skills": [
+        "ccna.ospf.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Cisco IOS XE 17 — OSPF Configuration Guide",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr3-fwd/ospf/ospf-configuration-guide/ospf.html"
+        },
+        {
+          "title": "Cisco IOS XE 17 — Default Passive Interfaces",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-routing/b-ip-routing/m_iri-default-passive-interface.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/9237-9.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — OSPF — sąsiedztwo i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/open-shortest-path-first-ospf/13684-12.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAdresacja i area są zgodne. Gi0/0 między R1 i R2 jest passive w OSPF; brak wysyłanych Hello.\n\n**Zgłoszenie II**\n\nW działającym segmencie broadcast dwa routery DROTHER widzą się w 2-Way. Oba mają Full z DR i BDR.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Passive-interface zatrzymuje Hello na łączu między routerami. Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\n**Sprawdzenie I:** Na Gi0/0 pojawiają się Hello i oczekiwane sąsiedztwo OSPF.\n\n**Zgłoszenie II:** Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\n**Sprawdzenie II:** Pełne relacje do DR/BDR istnieją, a oczekiwane trasy są obecne.\n\n**Zależności:** Interfejs passive może ogłaszać sieć, ale nie zestawia na niej sąsiedztw. W sieci broadcast nie każda para sąsiadów przechodzi do Full.",
+      "card_id": "ccna.ospf.practice.compare-10.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\nII — Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Passive-interface zatrzymuje Hello na łączu między routerami. Zgłoszenie II: Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Ujednolicić area wspólnego segmentu zgodnie z projektem.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 ma Gi0/0 w area 0, R2 ten sam segment w area 10. Maska, timery i uwierzytelnianie są zgodne. Dla II: Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ujednolicić area wspólnego segmentu zgodnie z projektem.\n\nII — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 ma Gi0/0 w area 0, R2 ten sam segment w area 10. Maska, timery i uwierzytelnianie są zgodne. Dla I: Wyłączyć passive tylko na tym interfejsie tranzytowym.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\nII — Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.",
+          "feedback_md": "**Zgłoszenie I:** Passive-interface zatrzymuje Hello na łączu między routerami. Wyłączyć passive tylko na tym interfejsie tranzytowym.\n\n**Sprawdzenie I:** Na Gi0/0 pojawiają się Hello i oczekiwane sąsiedztwo OSPF.\n\n**Zgłoszenie II:** Dwa DROTHER nie muszą tworzyć między sobą pełnej adjacency. Pozostawić działającą relację i ocenić sąsiedztwa z DR/BDR.\n\n**Sprawdzenie II:** Pełne relacje do DR/BDR istnieją, a oczekiwane trasy są obecne.\n\n**Zależności:** Interfejs passive może ogłaszać sieć, ale nie zestawia na niej sąsiedztw. W sieci broadcast nie każda para sąsiadów przechodzi do Full.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

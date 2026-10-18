@@ -1,0 +1,465 @@
+{
+  "schema_version": 3,
+  "id": "ccna.dhcp.practice-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Brak helpera — weryfikacja",
+      "skills": [
+        "ccna.dhcp.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — DHCP: klient, relay i pula",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_config-dhcp-server-xe.html"
+        }
+      ],
+      "id": "ccna.dhcp.practice.case-01.3.card",
+      "front_md": "Serwer DHCP jest za routerem. Klient wysyła Discover w LAN; na interfejsie LAN brak relay.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Relay łączy broadcastowy segment klienta z serwerem w innej podsieci.\n\n**Rozpoznanie:** Broadcast klienta nie jest przekazywany do zdalnego serwera.\n\n**Działanie:** Dodać ip helper-address właściwego serwera na interfejsie klienta.\n\n**Sprawdzenie:** Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN.",
+      "example": "Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN."
+    },
+    {
+      "revision": 1,
+      "title": "Wyczerpana pula — weryfikacja",
+      "skills": [
+        "ccna.dhcp.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — DHCP: klient, relay i pula",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_config-dhcp-server-xe.html"
+        }
+      ],
+      "id": "ccna.dhcp.practice.case-02.3.card",
+      "front_md": "Serwer rejestruje Discover, ale wszystkie adresy właściwej puli są już wydzierżawione.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Działający transport DHCP nie wystarcza, gdy pula jest wyczerpana.\n\n**Rozpoznanie:** Brakuje wolnych adresów do zaoferowania.\n\n**Działanie:** Zapewnić dodatkową poprawną przestrzeń adresową lub odzyskać rzeczywiście nieużywane dzierżawy.\n\n**Sprawdzenie:** Serwer ma wolne adresy i przydziela nową dzierżawę.",
+      "example": "Serwer ma wolne adresy i przydziela nową dzierżawę."
+    },
+    {
+      "revision": 1,
+      "title": "Błędna brama DHCP — weryfikacja",
+      "skills": [
+        "ccna.dhcp.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — DHCP: klient, relay i pula",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_config-dhcp-server-xe.html"
+        }
+      ],
+      "id": "ccna.dhcp.practice.case-03.3.card",
+      "front_md": "Klient dostał poprawny adres /24, lecz option 3 wskazuje nieistniejący router.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "DHCP dostarcza również opcje; poprawny adres nie gwarantuje poprawnej bramy.\n\n**Rozpoznanie:** Pula przekazuje błędną bramę domyślną.\n\n**Działanie:** Poprawić default-router w puli i odnowić dzierżawę klienta.\n\n**Sprawdzenie:** Odnowiona konfiguracja klienta wskazuje działającą bramę LAN.",
+      "example": "Odnowiona konfiguracja klienta wskazuje działającą bramę LAN."
+    },
+    {
+      "revision": 1,
+      "title": "Adres infrastruktury — weryfikacja",
+      "skills": [
+        "ccna.dhcp.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — DHCP: klient, relay i pula",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_config-dhcp-server-xe.html"
+        }
+      ],
+      "id": "ccna.dhcp.practice.case-04.3.card",
+      "front_md": "Statyczna drukarka .10 działa w puli .1–.100 bez wykluczenia lub rezerwacji. Serwer może przydzielić .10 klientowi.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Adresy infrastruktury należy uwzględnić przy projektowaniu zakresu DHCP.\n\n**Rozpoznanie:** Adres statyczny nie jest chroniony przed dynamicznym przydziałem.\n\n**Działanie:** Wykluczyć statyczny adres z dynamicznej puli i rozwiązać ewentualny konflikt.\n\n**Sprawdzenie:** Nowe oferty nie zawierają .10, a drukarka zachowuje unikalny adres.",
+      "example": "Nowe oferty nie zawierają .10, a drukarka zachowuje unikalny adres."
+    },
+    {
+      "revision": 1,
+      "title": "Niepoprawny DNS — weryfikacja",
+      "skills": [
+        "ccna.dhcp.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — DHCP: klient, relay i pula",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_config-dhcp-server-xe.html"
+        }
+      ],
+      "id": "ccna.dhcp.practice.case-05.3.card",
+      "front_md": "Klient ma poprawny IP i bramę; po IP dociera do serwera. DHCP przekazał nieczynny DNS.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Parametry DHCP trzeba sprawdzać oddzielnie: adres, maska, brama i DNS.\n\n**Rozpoznanie:** Błędna opcja DNS uniemożliwia rozwiązywanie nazw.\n\n**Działanie:** Poprawić dns-server w puli i odnowić konfigurację klienta.\n\n**Sprawdzenie:** Klient pyta właściwy resolver i rozwiązuje nazwę usługi.",
+      "example": "Klient pyta właściwy resolver i rozwiązuje nazwę usługi."
+    },
+    {
+      "revision": 1,
+      "title": "Zła pula relay — weryfikacja",
+      "skills": [
+        "ccna.dhcp.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — DHCP: klient, relay i pula",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_config-dhcp-server-xe.html"
+        }
+      ],
+      "id": "ccna.dhcp.practice.case-06.3.card",
+      "front_md": "Relay ustawia giaddr 10.20.0.1, ale serwer ma tylko pulę 10.10.0.0/24.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Giaddr pozwala serwerowi wybrać pulę dla zdalnej podsieci klienta.\n\n**Rozpoznanie:** Serwer nie ma puli odpowiadającej sieci relay.\n\n**Działanie:** Utworzyć właściwą pulę 10.20.0.0/24 z poprawnymi opcjami.\n\n**Sprawdzenie:** Klient dostaje adres z 10.20.0.0/24, nie z sieci serwera.",
+      "example": "Klient dostaje adres z 10.20.0.0/24, nie z sieci serwera."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.dhcp.practice.case-01.3",
+      "revision": 1,
+      "title": "Brak helpera — weryfikacja",
+      "skills": [
+        "ccna.dhcp.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — DHCP: klient, relay i pula",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_config-dhcp-server-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Serwer DHCP jest za routerem. Klient wysyła Discover w LAN; na interfejsie LAN brak relay.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Relay łączy broadcastowy segment klienta z serwerem w innej podsieci.\n\n**Rozpoznanie:** Broadcast klienta nie jest przekazywany do zdalnego serwera.\n\n**Działanie:** Dodać ip helper-address właściwego serwera na interfejsie klienta.\n\n**Sprawdzenie:** Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN.",
+      "card_id": "ccna.dhcp.practice.case-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Klient dostaje adres z 10.20.0.0/24, nie z sieci serwera.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła pula relay”: Relay ustawia giaddr 10.20.0.1, ale serwer ma tylko pulę 10.10.0.0/24. W bieżącym przypadku: Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nowe oferty nie zawierają .10, a drukarka zachowuje unikalny adres.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Adres infrastruktury”: Statyczna drukarka .10 działa w puli .1–.100 bez wykluczenia lub rezerwacji. Serwer może przydzielić .10 klientowi. W bieżącym przypadku: Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN.",
+          "feedback_md": "Relay łączy broadcastowy segment klienta z serwerem w innej podsieci.\n\n**Rozpoznanie:** Broadcast klienta nie jest przekazywany do zdalnego serwera.\n\n**Działanie:** Dodać ip helper-address właściwego serwera na interfejsie klienta.\n\n**Sprawdzenie:** Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN.",
+          "id": "C"
+        },
+        {
+          "text_md": "Odnowiona konfiguracja klienta wskazuje działającą bramę LAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Błędna brama DHCP”: Klient dostał poprawny adres /24, lecz option 3 wskazuje nieistniejący router. W bieżącym przypadku: Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.dhcp.practice.case-02.3",
+      "revision": 1,
+      "title": "Wyczerpana pula — weryfikacja",
+      "skills": [
+        "ccna.dhcp.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — DHCP: klient, relay i pula",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_config-dhcp-server-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Serwer rejestruje Discover, ale wszystkie adresy właściwej puli są już wydzierżawione.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Działający transport DHCP nie wystarcza, gdy pula jest wyczerpana.\n\n**Rozpoznanie:** Brakuje wolnych adresów do zaoferowania.\n\n**Działanie:** Zapewnić dodatkową poprawną przestrzeń adresową lub odzyskać rzeczywiście nieużywane dzierżawy.\n\n**Sprawdzenie:** Serwer ma wolne adresy i przydziela nową dzierżawę.",
+      "card_id": "ccna.dhcp.practice.case-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak helpera”: Serwer DHCP jest za routerem. Klient wysyła Discover w LAN; na interfejsie LAN brak relay. W bieżącym przypadku: Serwer ma wolne adresy i przydziela nową dzierżawę.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nowe oferty nie zawierają .10, a drukarka zachowuje unikalny adres.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Adres infrastruktury”: Statyczna drukarka .10 działa w puli .1–.100 bez wykluczenia lub rezerwacji. Serwer może przydzielić .10 klientowi. W bieżącym przypadku: Serwer ma wolne adresy i przydziela nową dzierżawę.",
+          "id": "B"
+        },
+        {
+          "text_md": "Klient pyta właściwy resolver i rozwiązuje nazwę usługi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niepoprawny DNS”: Klient ma poprawny IP i bramę; po IP dociera do serwera. DHCP przekazał nieczynny DNS. W bieżącym przypadku: Serwer ma wolne adresy i przydziela nową dzierżawę.",
+          "id": "C"
+        },
+        {
+          "text_md": "Serwer ma wolne adresy i przydziela nową dzierżawę.",
+          "feedback_md": "Działający transport DHCP nie wystarcza, gdy pula jest wyczerpana.\n\n**Rozpoznanie:** Brakuje wolnych adresów do zaoferowania.\n\n**Działanie:** Zapewnić dodatkową poprawną przestrzeń adresową lub odzyskać rzeczywiście nieużywane dzierżawy.\n\n**Sprawdzenie:** Serwer ma wolne adresy i przydziela nową dzierżawę.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.dhcp.practice.case-03.3",
+      "revision": 1,
+      "title": "Błędna brama DHCP — weryfikacja",
+      "skills": [
+        "ccna.dhcp.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — DHCP: klient, relay i pula",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_config-dhcp-server-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Klient dostał poprawny adres /24, lecz option 3 wskazuje nieistniejący router.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "DHCP dostarcza również opcje; poprawny adres nie gwarantuje poprawnej bramy.\n\n**Rozpoznanie:** Pula przekazuje błędną bramę domyślną.\n\n**Działanie:** Poprawić default-router w puli i odnowić dzierżawę klienta.\n\n**Sprawdzenie:** Odnowiona konfiguracja klienta wskazuje działającą bramę LAN.",
+      "card_id": "ccna.dhcp.practice.case-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Odnowiona konfiguracja klienta wskazuje działającą bramę LAN.",
+          "feedback_md": "DHCP dostarcza również opcje; poprawny adres nie gwarantuje poprawnej bramy.\n\n**Rozpoznanie:** Pula przekazuje błędną bramę domyślną.\n\n**Działanie:** Poprawić default-router w puli i odnowić dzierżawę klienta.\n\n**Sprawdzenie:** Odnowiona konfiguracja klienta wskazuje działającą bramę LAN.",
+          "id": "A"
+        },
+        {
+          "text_md": "Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak helpera”: Serwer DHCP jest za routerem. Klient wysyła Discover w LAN; na interfejsie LAN brak relay. W bieżącym przypadku: Odnowiona konfiguracja klienta wskazuje działającą bramę LAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "Klient dostaje adres z 10.20.0.0/24, nie z sieci serwera.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła pula relay”: Relay ustawia giaddr 10.20.0.1, ale serwer ma tylko pulę 10.10.0.0/24. W bieżącym przypadku: Odnowiona konfiguracja klienta wskazuje działającą bramę LAN.",
+          "id": "C"
+        },
+        {
+          "text_md": "Klient pyta właściwy resolver i rozwiązuje nazwę usługi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niepoprawny DNS”: Klient ma poprawny IP i bramę; po IP dociera do serwera. DHCP przekazał nieczynny DNS. W bieżącym przypadku: Odnowiona konfiguracja klienta wskazuje działającą bramę LAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.dhcp.practice.case-04.3",
+      "revision": 1,
+      "title": "Adres infrastruktury — weryfikacja",
+      "skills": [
+        "ccna.dhcp.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — DHCP: klient, relay i pula",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_config-dhcp-server-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Statyczna drukarka .10 działa w puli .1–.100 bez wykluczenia lub rezerwacji. Serwer może przydzielić .10 klientowi.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Adresy infrastruktury należy uwzględnić przy projektowaniu zakresu DHCP.\n\n**Rozpoznanie:** Adres statyczny nie jest chroniony przed dynamicznym przydziałem.\n\n**Działanie:** Wykluczyć statyczny adres z dynamicznej puli i rozwiązać ewentualny konflikt.\n\n**Sprawdzenie:** Nowe oferty nie zawierają .10, a drukarka zachowuje unikalny adres.",
+      "card_id": "ccna.dhcp.practice.case-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Serwer ma wolne adresy i przydziela nową dzierżawę.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wyczerpana pula”: Serwer rejestruje Discover, ale wszystkie adresy właściwej puli są już wydzierżawione. W bieżącym przypadku: Nowe oferty nie zawierają .10, a drukarka zachowuje unikalny adres.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nowe oferty nie zawierają .10, a drukarka zachowuje unikalny adres.",
+          "feedback_md": "Adresy infrastruktury należy uwzględnić przy projektowaniu zakresu DHCP.\n\n**Rozpoznanie:** Adres statyczny nie jest chroniony przed dynamicznym przydziałem.\n\n**Działanie:** Wykluczyć statyczny adres z dynamicznej puli i rozwiązać ewentualny konflikt.\n\n**Sprawdzenie:** Nowe oferty nie zawierają .10, a drukarka zachowuje unikalny adres.",
+          "id": "B"
+        },
+        {
+          "text_md": "Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak helpera”: Serwer DHCP jest za routerem. Klient wysyła Discover w LAN; na interfejsie LAN brak relay. W bieżącym przypadku: Nowe oferty nie zawierają .10, a drukarka zachowuje unikalny adres.",
+          "id": "C"
+        },
+        {
+          "text_md": "Klient pyta właściwy resolver i rozwiązuje nazwę usługi.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Niepoprawny DNS”: Klient ma poprawny IP i bramę; po IP dociera do serwera. DHCP przekazał nieczynny DNS. W bieżącym przypadku: Nowe oferty nie zawierają .10, a drukarka zachowuje unikalny adres.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.dhcp.practice.case-05.3",
+      "revision": 1,
+      "title": "Niepoprawny DNS — weryfikacja",
+      "skills": [
+        "ccna.dhcp.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — DHCP: klient, relay i pula",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_config-dhcp-server-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Klient ma poprawny IP i bramę; po IP dociera do serwera. DHCP przekazał nieczynny DNS.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Parametry DHCP trzeba sprawdzać oddzielnie: adres, maska, brama i DNS.\n\n**Rozpoznanie:** Błędna opcja DNS uniemożliwia rozwiązywanie nazw.\n\n**Działanie:** Poprawić dns-server w puli i odnowić konfigurację klienta.\n\n**Sprawdzenie:** Klient pyta właściwy resolver i rozwiązuje nazwę usługi.",
+      "card_id": "ccna.dhcp.practice.case-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Serwer ma wolne adresy i przydziela nową dzierżawę.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wyczerpana pula”: Serwer rejestruje Discover, ale wszystkie adresy właściwej puli są już wydzierżawione. W bieżącym przypadku: Klient pyta właściwy resolver i rozwiązuje nazwę usługi.",
+          "id": "A"
+        },
+        {
+          "text_md": "Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak helpera”: Serwer DHCP jest za routerem. Klient wysyła Discover w LAN; na interfejsie LAN brak relay. W bieżącym przypadku: Klient pyta właściwy resolver i rozwiązuje nazwę usługi.",
+          "id": "B"
+        },
+        {
+          "text_md": "Klient pyta właściwy resolver i rozwiązuje nazwę usługi.",
+          "feedback_md": "Parametry DHCP trzeba sprawdzać oddzielnie: adres, maska, brama i DNS.\n\n**Rozpoznanie:** Błędna opcja DNS uniemożliwia rozwiązywanie nazw.\n\n**Działanie:** Poprawić dns-server w puli i odnowić konfigurację klienta.\n\n**Sprawdzenie:** Klient pyta właściwy resolver i rozwiązuje nazwę usługi.",
+          "id": "C"
+        },
+        {
+          "text_md": "Klient dostaje adres z 10.20.0.0/24, nie z sieci serwera.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zła pula relay”: Relay ustawia giaddr 10.20.0.1, ale serwer ma tylko pulę 10.10.0.0/24. W bieżącym przypadku: Klient pyta właściwy resolver i rozwiązuje nazwę usługi.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.dhcp.practice.case-06.3",
+      "revision": 1,
+      "title": "Zła pula relay — weryfikacja",
+      "skills": [
+        "ccna.dhcp.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — DHCP: klient, relay i pula",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_config-dhcp-server-xe.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Relay ustawia giaddr 10.20.0.1, ale serwer ma tylko pulę 10.10.0.0/24.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Giaddr pozwala serwerowi wybrać pulę dla zdalnej podsieci klienta.\n\n**Rozpoznanie:** Serwer nie ma puli odpowiadającej sieci relay.\n\n**Działanie:** Utworzyć właściwą pulę 10.20.0.0/24 z poprawnymi opcjami.\n\n**Sprawdzenie:** Klient dostaje adres z 10.20.0.0/24, nie z sieci serwera.",
+      "card_id": "ccna.dhcp.practice.case-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Serwer otrzymuje relayed Discover z adresem giaddr właściwego LAN.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak helpera”: Serwer DHCP jest za routerem. Klient wysyła Discover w LAN; na interfejsie LAN brak relay. W bieżącym przypadku: Klient dostaje adres z 10.20.0.0/24, nie z sieci serwera.",
+          "id": "A"
+        },
+        {
+          "text_md": "Nowe oferty nie zawierają .10, a drukarka zachowuje unikalny adres.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Adres infrastruktury”: Statyczna drukarka .10 działa w puli .1–.100 bez wykluczenia lub rezerwacji. Serwer może przydzielić .10 klientowi. W bieżącym przypadku: Klient dostaje adres z 10.20.0.0/24, nie z sieci serwera.",
+          "id": "B"
+        },
+        {
+          "text_md": "Serwer ma wolne adresy i przydziela nową dzierżawę.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Wyczerpana pula”: Serwer rejestruje Discover, ale wszystkie adresy właściwej puli są już wydzierżawione. W bieżącym przypadku: Klient dostaje adres z 10.20.0.0/24, nie z sieci serwera.",
+          "id": "C"
+        },
+        {
+          "text_md": "Klient dostaje adres z 10.20.0.0/24, nie z sieci serwera.",
+          "feedback_md": "Giaddr pozwala serwerowi wybrać pulę dla zdalnej podsieci klienta.\n\n**Rozpoznanie:** Serwer nie ma puli odpowiadającej sieci relay.\n\n**Działanie:** Utworzyć właściwą pulę 10.20.0.0/24 z poprawnymi opcjami.\n\n**Sprawdzenie:** Klient dostaje adres z 10.20.0.0/24, nie z sieci serwera.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

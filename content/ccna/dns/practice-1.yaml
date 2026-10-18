@@ -1,0 +1,483 @@
+{
+  "schema_version": 3,
+  "id": "ccna.dns.practice-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "IP działa nazwa nie — rozpoznanie",
+      "skills": [
+        "ccna.dns.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.case-01.1.card",
+      "front_md": "Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi.\n\n**Rozpoznanie:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP.\n\n**Działanie:** Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.",
+      "example": "Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP."
+    },
+    {
+      "revision": 1,
+      "title": "Stary cache — rozpoznanie",
+      "skills": [
+        "ccna.dns.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.case-02.1.card",
+      "front_md": "Rekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Zmiana rekordu nie musi natychmiast usunąć wszystkich wcześniej zapisanych odpowiedzi.\n\n**Rozpoznanie:** Resolver przechowuje ważną jeszcze odpowiedź cache.\n\n**Działanie:** Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\n**Sprawdzenie:** Po wygaśnięciu cache resolver zwraca nową wartość z autorytatywnego źródła.",
+      "example": "Resolver przechowuje ważną jeszcze odpowiedź cache."
+    },
+    {
+      "revision": 1,
+      "title": "NXDOMAIN — rozpoznanie",
+      "skills": [
+        "ccna.dns.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.case-03.1.card",
+      "front_md": "Resolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "NXDOMAIN jest odpowiedzią DNS, a nie timeoutem transportowym.\n\n**Rozpoznanie:** DNS informuje o nieistnieniu wskazanej nazwy.\n\n**Działanie:** Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\n**Sprawdzenie:** Poprawna istniejąca nazwa otrzymuje odpowiedź zamiast NXDOMAIN.",
+      "example": "DNS informuje o nieistnieniu wskazanej nazwy."
+    },
+    {
+      "revision": 1,
+      "title": "A kontra AAAA — rozpoznanie",
+      "skills": [
+        "ccna.dns.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.case-04.1.card",
+      "front_md": "Aplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "A mapuje nazwę na IPv4, AAAA na IPv6.\n\n**Rozpoznanie:** Wybrano typ rekordu dla IPv4 zamiast IPv6.\n\n**Działanie:** Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.",
+      "example": "Wybrano typ rekordu dla IPv4 zamiast IPv6."
+    },
+    {
+      "revision": 1,
+      "title": "CNAME — rozpoznanie",
+      "skills": [
+        "ccna.dns.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.case-05.1.card",
+      "front_md": "Nazwa app.example wskazuje CNAME na backend.example, a ten posiada rekord A.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "CNAME wskazuje inną nazwę i może wymagać dalszego rozwiązywania.\n\n**Rozpoznanie:** Pierwsza odpowiedź jest aliasem, nie końcowym adresem.\n\n**Działanie:** Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\n**Sprawdzenie:** Wynik końcowy zawiera adres backend.example.",
+      "example": "Pierwsza odpowiedź jest aliasem, nie końcowym adresem."
+    },
+    {
+      "revision": 1,
+      "title": "TCP dla DNS — rozpoznanie",
+      "skills": [
+        "ccna.dns.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.case-06.1.card",
+      "front_md": "Odpowiedź UDP ma bit TC; klient próbuje TCP 53, które blokuje firewall.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "DNS nie ogranicza się wyłącznie do UDP 53.\n\n**Rozpoznanie:** Polityka blokuje potrzebne przejście DNS na TCP.\n\n**Działanie:** Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\n**Sprawdzenie:** Po odpowiedzi TC klient uzyskuje pełną odpowiedź przez TCP.",
+      "example": "Polityka blokuje potrzebne przejście DNS na TCP."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.dns.practice.case-01.1",
+      "revision": 1,
+      "title": "IP działa nazwa nie — rozpoznanie",
+      "skills": [
+        "ccna.dns.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi.\n\n**Rozpoznanie:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP.\n\n**Działanie:** Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.",
+      "card_id": "ccna.dns.practice.case-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP.",
+          "feedback_md": "Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi.\n\n**Rozpoznanie:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP.\n\n**Działanie:** Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wybrano typ rekordu dla IPv4 zamiast IPv6.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „A kontra AAAA”: Aplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A. W bieżącym przypadku: Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Polityka blokuje potrzebne przejście DNS na TCP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „TCP dla DNS”: Odpowiedź UDP ma bit TC; klient próbuje TCP 53, które blokuje firewall. W bieżącym przypadku: Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP.",
+          "id": "C"
+        },
+        {
+          "text_md": "DNS informuje o nieistnieniu wskazanej nazwy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „NXDOMAIN”: Resolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa. W bieżącym przypadku: Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.dns.practice.case-02.1",
+      "revision": 1,
+      "title": "Stary cache — rozpoznanie",
+      "skills": [
+        "ccna.dns.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Rekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Zmiana rekordu nie musi natychmiast usunąć wszystkich wcześniej zapisanych odpowiedzi.\n\n**Rozpoznanie:** Resolver przechowuje ważną jeszcze odpowiedź cache.\n\n**Działanie:** Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\n**Sprawdzenie:** Po wygaśnięciu cache resolver zwraca nową wartość z autorytatywnego źródła.",
+      "card_id": "ccna.dns.practice.case-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wybrano typ rekordu dla IPv4 zamiast IPv6.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „A kontra AAAA”: Aplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A. W bieżącym przypadku: Resolver przechowuje ważną jeszcze odpowiedź cache.",
+          "id": "A"
+        },
+        {
+          "text_md": "Resolver przechowuje ważną jeszcze odpowiedź cache.",
+          "feedback_md": "Zmiana rekordu nie musi natychmiast usunąć wszystkich wcześniej zapisanych odpowiedzi.\n\n**Rozpoznanie:** Resolver przechowuje ważną jeszcze odpowiedź cache.\n\n**Działanie:** Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\n**Sprawdzenie:** Po wygaśnięciu cache resolver zwraca nową wartość z autorytatywnego źródła.",
+          "id": "B"
+        },
+        {
+          "text_md": "DNS informuje o nieistnieniu wskazanej nazwy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „NXDOMAIN”: Resolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa. W bieżącym przypadku: Resolver przechowuje ważną jeszcze odpowiedź cache.",
+          "id": "C"
+        },
+        {
+          "text_md": "Pierwsza odpowiedź jest aliasem, nie końcowym adresem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „CNAME”: Nazwa app.example wskazuje CNAME na backend.example, a ten posiada rekord A. W bieżącym przypadku: Resolver przechowuje ważną jeszcze odpowiedź cache.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.dns.practice.case-03.1",
+      "revision": 1,
+      "title": "NXDOMAIN — rozpoznanie",
+      "skills": [
+        "ccna.dns.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Resolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "NXDOMAIN jest odpowiedzią DNS, a nie timeoutem transportowym.\n\n**Rozpoznanie:** DNS informuje o nieistnieniu wskazanej nazwy.\n\n**Działanie:** Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\n**Sprawdzenie:** Poprawna istniejąca nazwa otrzymuje odpowiedź zamiast NXDOMAIN.",
+      "card_id": "ccna.dns.practice.case-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Pierwsza odpowiedź jest aliasem, nie końcowym adresem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „CNAME”: Nazwa app.example wskazuje CNAME na backend.example, a ten posiada rekord A. W bieżącym przypadku: DNS informuje o nieistnieniu wskazanej nazwy.",
+          "id": "A"
+        },
+        {
+          "text_md": "Resolver przechowuje ważną jeszcze odpowiedź cache.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Stary cache”: Rekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL. W bieżącym przypadku: DNS informuje o nieistnieniu wskazanej nazwy.",
+          "id": "B"
+        },
+        {
+          "text_md": "DNS informuje o nieistnieniu wskazanej nazwy.",
+          "feedback_md": "NXDOMAIN jest odpowiedzią DNS, a nie timeoutem transportowym.\n\n**Rozpoznanie:** DNS informuje o nieistnieniu wskazanej nazwy.\n\n**Działanie:** Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\n**Sprawdzenie:** Poprawna istniejąca nazwa otrzymuje odpowiedź zamiast NXDOMAIN.",
+          "id": "C"
+        },
+        {
+          "text_md": "Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „IP działa nazwa nie”: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. W bieżącym przypadku: DNS informuje o nieistnieniu wskazanej nazwy.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.dns.practice.case-04.1",
+      "revision": 1,
+      "title": "A kontra AAAA — rozpoznanie",
+      "skills": [
+        "ccna.dns.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Aplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "A mapuje nazwę na IPv4, AAAA na IPv6.\n\n**Rozpoznanie:** Wybrano typ rekordu dla IPv4 zamiast IPv6.\n\n**Działanie:** Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.",
+      "card_id": "ccna.dns.practice.case-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „IP działa nazwa nie”: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. W bieżącym przypadku: Wybrano typ rekordu dla IPv4 zamiast IPv6.",
+          "id": "A"
+        },
+        {
+          "text_md": "Pierwsza odpowiedź jest aliasem, nie końcowym adresem.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „CNAME”: Nazwa app.example wskazuje CNAME na backend.example, a ten posiada rekord A. W bieżącym przypadku: Wybrano typ rekordu dla IPv4 zamiast IPv6.",
+          "id": "B"
+        },
+        {
+          "text_md": "Resolver przechowuje ważną jeszcze odpowiedź cache.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Stary cache”: Rekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL. W bieżącym przypadku: Wybrano typ rekordu dla IPv4 zamiast IPv6.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wybrano typ rekordu dla IPv4 zamiast IPv6.",
+          "feedback_md": "A mapuje nazwę na IPv4, AAAA na IPv6.\n\n**Rozpoznanie:** Wybrano typ rekordu dla IPv4 zamiast IPv6.\n\n**Działanie:** Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.dns.practice.case-05.1",
+      "revision": 1,
+      "title": "CNAME — rozpoznanie",
+      "skills": [
+        "ccna.dns.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Nazwa app.example wskazuje CNAME na backend.example, a ten posiada rekord A.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "CNAME wskazuje inną nazwę i może wymagać dalszego rozwiązywania.\n\n**Rozpoznanie:** Pierwsza odpowiedź jest aliasem, nie końcowym adresem.\n\n**Działanie:** Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\n**Sprawdzenie:** Wynik końcowy zawiera adres backend.example.",
+      "card_id": "ccna.dns.practice.case-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Pierwsza odpowiedź jest aliasem, nie końcowym adresem.",
+          "feedback_md": "CNAME wskazuje inną nazwę i może wymagać dalszego rozwiązywania.\n\n**Rozpoznanie:** Pierwsza odpowiedź jest aliasem, nie końcowym adresem.\n\n**Działanie:** Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\n**Sprawdzenie:** Wynik końcowy zawiera adres backend.example.",
+          "id": "A"
+        },
+        {
+          "text_md": "DNS informuje o nieistnieniu wskazanej nazwy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „NXDOMAIN”: Resolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa. W bieżącym przypadku: Pierwsza odpowiedź jest aliasem, nie końcowym adresem.",
+          "id": "B"
+        },
+        {
+          "text_md": "Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „IP działa nazwa nie”: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. W bieżącym przypadku: Pierwsza odpowiedź jest aliasem, nie końcowym adresem.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wybrano typ rekordu dla IPv4 zamiast IPv6.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „A kontra AAAA”: Aplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A. W bieżącym przypadku: Pierwsza odpowiedź jest aliasem, nie końcowym adresem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.dns.practice.case-06.1",
+      "revision": 1,
+      "title": "TCP dla DNS — rozpoznanie",
+      "skills": [
+        "ccna.dns.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Odpowiedź UDP ma bit TC; klient próbuje TCP 53, które blokuje firewall.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "DNS nie ogranicza się wyłącznie do UDP 53.\n\n**Rozpoznanie:** Polityka blokuje potrzebne przejście DNS na TCP.\n\n**Działanie:** Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\n**Sprawdzenie:** Po odpowiedzi TC klient uzyskuje pełną odpowiedź przez TCP.",
+      "card_id": "ccna.dns.practice.case-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "DNS informuje o nieistnieniu wskazanej nazwy.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „NXDOMAIN”: Resolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa. W bieżącym przypadku: Polityka blokuje potrzebne przejście DNS na TCP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Polityka blokuje potrzebne przejście DNS na TCP.",
+          "feedback_md": "DNS nie ogranicza się wyłącznie do UDP 53.\n\n**Rozpoznanie:** Polityka blokuje potrzebne przejście DNS na TCP.\n\n**Działanie:** Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\n**Sprawdzenie:** Po odpowiedzi TC klient uzyskuje pełną odpowiedź przez TCP.",
+          "id": "B"
+        },
+        {
+          "text_md": "Wybrano typ rekordu dla IPv4 zamiast IPv6.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „A kontra AAAA”: Aplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A. W bieżącym przypadku: Polityka blokuje potrzebne przejście DNS na TCP.",
+          "id": "C"
+        },
+        {
+          "text_md": "Resolver przechowuje ważną jeszcze odpowiedź cache.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Stary cache”: Rekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL. W bieżącym przypadku: Polityka blokuje potrzebne przejście DNS na TCP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

@@ -1,0 +1,879 @@
+{
+  "schema_version": 3,
+  "id": "encor.json.practice-6",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.compare-01.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPayload ma postać {'enabled': true}. Parser JSON odrzuca go.\n\n**Zgłoszenie II**\n\nPayload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie I:** Standardowy parser JSON przyjmuje dokument.\n\n**Zgłoszenie II:** Przekazano string zamiast boolean. Użyć wartości false bez cudzysłowów.\n\n**Sprawdzenie II:** Po parsowaniu enabled jest wartością logiczną, nie tekstem.\n\n**Zależności:** Składnia literału słownika Pythona i składnia JSON nie są identyczne. Boolean false i string \"false\" mają różne typy i znaczenie.",
+      "example": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Użyć wartości false bez cudzysłowów."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.compare-02.2.card",
+      "front_md": "**Zgłoszenie I**\n\nDokument kończy obiekt zapisem \"mtu\": 1500, przed zamykającym nawiasem.\n\n**Zgłoszenie II**\n\nPole interfaces zawiera trzy obiekty w tablicy; operator szuka pojedynczego pola name bez wyboru elementu.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Standardowy JSON nie dopuszcza końcowego przecinka. Usunąć przecinek po ostatnim polu.\n\n**Sprawdzenie I:** Dokument przechodzi walidację składni standardowego JSON.\n\n**Zgłoszenie II:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie II:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.\n\n**Zależności:** JSON ma ścisłą składnię niezależną od tolerancji niektórych edytorów. Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt.",
+      "example": "I — Usunąć przecinek po ostatnim polu.\n\nII — Wybrać lub przefiltrować właściwy element tablicy."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.compare-03.2.card",
+      "front_md": "**Zgłoszenie I**\n\nJeden dokument ma \"description\": null, drugi nie ma pola description. API rozróżnia te przypadki.\n\n**Zgłoszenie II**\n\nModel oczekuje integer mtu, lecz payload zawiera \"mtu\": \"1500\".\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Jawne null nie jest tym samym co pominięty klucz. Zastosować znaczenie null i braku pola określone przez model API.\n\n**Sprawdzenie I:** Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.\n\n**Zgłoszenie II:** Wartość ma typ tekstowy zamiast liczbowego. Przekazać 1500 jako liczbę zgodnie z modelem.\n\n**Sprawdzenie II:** Walidator typu akceptuje liczbową wartość mtu.\n\n**Zależności:** JSON reprezentuje null, ale semantykę braku lub wyzerowania pola określa API. Poprawny składniowo JSON może nadal mieć niewłaściwe typy dla modelu.",
+      "example": "I — Zastosować znaczenie null i braku pola określone przez model API.\n\nII — Przekazać 1500 jako liczbę zgodnie z modelem."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.compare-04.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPayload ma postać {'enabled': true}. Parser JSON odrzuca go.\n\n**Zgłoszenie II**\n\nDokument kończy obiekt zapisem \"mtu\": 1500, przed zamykającym nawiasem.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie I:** Standardowy parser JSON przyjmuje dokument.\n\n**Zgłoszenie II:** Standardowy JSON nie dopuszcza końcowego przecinka. Usunąć przecinek po ostatnim polu.\n\n**Sprawdzenie II:** Dokument przechodzi walidację składni standardowego JSON.\n\n**Zależności:** Składnia literału słownika Pythona i składnia JSON nie są identyczne. JSON ma ścisłą składnię niezależną od tolerancji niektórych edytorów.",
+      "example": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Usunąć przecinek po ostatnim polu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.compare-05.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPayload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej.\n\n**Zgłoszenie II**\n\nJeden dokument ma \"description\": null, drugi nie ma pola description. API rozróżnia te przypadki.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Przekazano string zamiast boolean. Użyć wartości false bez cudzysłowów.\n\n**Sprawdzenie I:** Po parsowaniu enabled jest wartością logiczną, nie tekstem.\n\n**Zgłoszenie II:** Jawne null nie jest tym samym co pominięty klucz. Zastosować znaczenie null i braku pola określone przez model API.\n\n**Sprawdzenie II:** Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.\n\n**Zależności:** Boolean false i string \"false\" mają różne typy i znaczenie. JSON reprezentuje null, ale semantykę braku lub wyzerowania pola określa API.",
+      "example": "I — Użyć wartości false bez cudzysłowów.\n\nII — Zastosować znaczenie null i braku pola określone przez model API."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.compare-06.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPole interfaces zawiera trzy obiekty w tablicy; operator szuka pojedynczego pola name bez wyboru elementu.\n\n**Zgłoszenie II**\n\nModel oczekuje integer mtu, lecz payload zawiera \"mtu\": \"1500\".\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie I:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.\n\n**Zgłoszenie II:** Wartość ma typ tekstowy zamiast liczbowego. Przekazać 1500 jako liczbę zgodnie z modelem.\n\n**Sprawdzenie II:** Walidator typu akceptuje liczbową wartość mtu.\n\n**Zależności:** Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt. Poprawny składniowo JSON może nadal mieć niewłaściwe typy dla modelu.",
+      "example": "I — Wybrać lub przefiltrować właściwy element tablicy.\n\nII — Przekazać 1500 jako liczbę zgodnie z modelem."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.compare-07.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPayload ma postać {'enabled': true}. Parser JSON odrzuca go.\n\n**Zgłoszenie II**\n\nModel oczekuje integer mtu, lecz payload zawiera \"mtu\": \"1500\".\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie I:** Standardowy parser JSON przyjmuje dokument.\n\n**Zgłoszenie II:** Wartość ma typ tekstowy zamiast liczbowego. Przekazać 1500 jako liczbę zgodnie z modelem.\n\n**Sprawdzenie II:** Walidator typu akceptuje liczbową wartość mtu.\n\n**Zależności:** Składnia literału słownika Pythona i składnia JSON nie są identyczne. Poprawny składniowo JSON może nadal mieć niewłaściwe typy dla modelu.",
+      "example": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Przekazać 1500 jako liczbę zgodnie z modelem."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.compare-08.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPayload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej.\n\n**Zgłoszenie II**\n\nPole interfaces zawiera trzy obiekty w tablicy; operator szuka pojedynczego pola name bez wyboru elementu.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Przekazano string zamiast boolean. Użyć wartości false bez cudzysłowów.\n\n**Sprawdzenie I:** Po parsowaniu enabled jest wartością logiczną, nie tekstem.\n\n**Zgłoszenie II:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie II:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.\n\n**Zależności:** Boolean false i string \"false\" mają różne typy i znaczenie. Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt.",
+      "example": "I — Użyć wartości false bez cudzysłowów.\n\nII — Wybrać lub przefiltrować właściwy element tablicy."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.compare-09.2.card",
+      "front_md": "**Zgłoszenie I**\n\nDokument kończy obiekt zapisem \"mtu\": 1500, przed zamykającym nawiasem.\n\n**Zgłoszenie II**\n\nJeden dokument ma \"description\": null, drugi nie ma pola description. API rozróżnia te przypadki.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Standardowy JSON nie dopuszcza końcowego przecinka. Usunąć przecinek po ostatnim polu.\n\n**Sprawdzenie I:** Dokument przechodzi walidację składni standardowego JSON.\n\n**Zgłoszenie II:** Jawne null nie jest tym samym co pominięty klucz. Zastosować znaczenie null i braku pola określone przez model API.\n\n**Sprawdzenie II:** Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.\n\n**Zależności:** JSON ma ścisłą składnię niezależną od tolerancji niektórych edytorów. JSON reprezentuje null, ale semantykę braku lub wyzerowania pola określa API.",
+      "example": "I — Usunąć przecinek po ostatnim polu.\n\nII — Zastosować znaczenie null i braku pola określone przez model API."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "id": "encor.json.practice.compare-10.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPayload ma postać {'enabled': true}. Parser JSON odrzuca go.\n\n**Zgłoszenie II**\n\nPole interfaces zawiera trzy obiekty w tablicy; operator szuka pojedynczego pola name bez wyboru elementu.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie I:** Standardowy parser JSON przyjmuje dokument.\n\n**Zgłoszenie II:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie II:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.\n\n**Zależności:** Składnia literału słownika Pythona i składnia JSON nie są identyczne. Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt.",
+      "example": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Wybrać lub przefiltrować właściwy element tablicy."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.json.practice.compare-01.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPayload ma postać {'enabled': true}. Parser JSON odrzuca go.\n\n**Zgłoszenie II**\n\nPayload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie I:** Standardowy parser JSON przyjmuje dokument.\n\n**Zgłoszenie II:** Przekazano string zamiast boolean. Użyć wartości false bez cudzysłowów.\n\n**Sprawdzenie II:** Po parsowaniu enabled jest wartością logiczną, nie tekstem.\n\n**Zależności:** Składnia literału słownika Pythona i składnia JSON nie są identyczne. Boolean false i string \"false\" mają różne typy i znaczenie.",
+      "card_id": "encor.json.practice.compare-01.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Użyć wartości false bez cudzysłowów.\n\nII — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zgłoszenie II: Przekazano string zamiast boolean.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Usunąć przecinek po ostatnim polu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Dokument kończy obiekt zapisem \"mtu\": 1500, przed zamykającym nawiasem. Dla II: Użyć wartości false bez cudzysłowów.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Użyć wartości false bez cudzysłowów.",
+          "feedback_md": "**Zgłoszenie I:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie I:** Standardowy parser JSON przyjmuje dokument.\n\n**Zgłoszenie II:** Przekazano string zamiast boolean. Użyć wartości false bez cudzysłowów.\n\n**Sprawdzenie II:** Po parsowaniu enabled jest wartością logiczną, nie tekstem.\n\n**Zależności:** Składnia literału słownika Pythona i składnia JSON nie są identyczne. Boolean false i string \"false\" mają różne typy i znaczenie.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Usunąć przecinek po ostatnim polu.\n\nII — Użyć wartości false bez cudzysłowów.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Dokument kończy obiekt zapisem \"mtu\": 1500, przed zamykającym nawiasem. Dla I: Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.json.practice.compare-02.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDokument kończy obiekt zapisem \"mtu\": 1500, przed zamykającym nawiasem.\n\n**Zgłoszenie II**\n\nPole interfaces zawiera trzy obiekty w tablicy; operator szuka pojedynczego pola name bez wyboru elementu.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Standardowy JSON nie dopuszcza końcowego przecinka. Usunąć przecinek po ostatnim polu.\n\n**Sprawdzenie I:** Dokument przechodzi walidację składni standardowego JSON.\n\n**Zgłoszenie II:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie II:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.\n\n**Zależności:** JSON ma ścisłą składnię niezależną od tolerancji niektórych edytorów. Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt.",
+      "card_id": "encor.json.practice.compare-02.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Wybrać lub przefiltrować właściwy element tablicy.\n\nII — Usunąć przecinek po ostatnim polu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Standardowy JSON nie dopuszcza końcowego przecinka. Zgłoszenie II: Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Usunąć przecinek po ostatnim polu.\n\nII — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. Dla II: Wybrać lub przefiltrować właściwy element tablicy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Wybrać lub przefiltrować właściwy element tablicy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. Dla I: Usunąć przecinek po ostatnim polu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Usunąć przecinek po ostatnim polu.\n\nII — Wybrać lub przefiltrować właściwy element tablicy.",
+          "feedback_md": "**Zgłoszenie I:** Standardowy JSON nie dopuszcza końcowego przecinka. Usunąć przecinek po ostatnim polu.\n\n**Sprawdzenie I:** Dokument przechodzi walidację składni standardowego JSON.\n\n**Zgłoszenie II:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie II:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.\n\n**Zależności:** JSON ma ścisłą składnię niezależną od tolerancji niektórych edytorów. Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.json.practice.compare-03.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nJeden dokument ma \"description\": null, drugi nie ma pola description. API rozróżnia te przypadki.\n\n**Zgłoszenie II**\n\nModel oczekuje integer mtu, lecz payload zawiera \"mtu\": \"1500\".\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Jawne null nie jest tym samym co pominięty klucz. Zastosować znaczenie null i braku pola określone przez model API.\n\n**Sprawdzenie I:** Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.\n\n**Zgłoszenie II:** Wartość ma typ tekstowy zamiast liczbowego. Przekazać 1500 jako liczbę zgodnie z modelem.\n\n**Sprawdzenie II:** Walidator typu akceptuje liczbową wartość mtu.\n\n**Zależności:** JSON reprezentuje null, ale semantykę braku lub wyzerowania pola określa API. Poprawny składniowo JSON może nadal mieć niewłaściwe typy dla modelu.",
+      "card_id": "encor.json.practice.compare-03.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zastosować znaczenie null i braku pola określone przez model API.\n\nII — Przekazać 1500 jako liczbę zgodnie z modelem.",
+          "feedback_md": "**Zgłoszenie I:** Jawne null nie jest tym samym co pominięty klucz. Zastosować znaczenie null i braku pola określone przez model API.\n\n**Sprawdzenie I:** Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.\n\n**Zgłoszenie II:** Wartość ma typ tekstowy zamiast liczbowego. Przekazać 1500 jako liczbę zgodnie z modelem.\n\n**Sprawdzenie II:** Walidator typu akceptuje liczbową wartość mtu.\n\n**Zależności:** JSON reprezentuje null, ale semantykę braku lub wyzerowania pola określa API. Poprawny składniowo JSON może nadal mieć niewłaściwe typy dla modelu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przekazać 1500 jako liczbę zgodnie z modelem.\n\nII — Zastosować znaczenie null i braku pola określone przez model API.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Jawne null nie jest tym samym co pominięty klucz. Zgłoszenie II: Wartość ma typ tekstowy zamiast liczbowego.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zastosować znaczenie null i braku pola określone przez model API.\n\nII — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. Dla II: Przekazać 1500 jako liczbę zgodnie z modelem.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Przekazać 1500 jako liczbę zgodnie z modelem.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. Dla I: Zastosować znaczenie null i braku pola określone przez model API.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.json.practice.compare-04.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPayload ma postać {'enabled': true}. Parser JSON odrzuca go.\n\n**Zgłoszenie II**\n\nDokument kończy obiekt zapisem \"mtu\": 1500, przed zamykającym nawiasem.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie I:** Standardowy parser JSON przyjmuje dokument.\n\n**Zgłoszenie II:** Standardowy JSON nie dopuszcza końcowego przecinka. Usunąć przecinek po ostatnim polu.\n\n**Sprawdzenie II:** Dokument przechodzi walidację składni standardowego JSON.\n\n**Zależności:** Składnia literału słownika Pythona i składnia JSON nie są identyczne. JSON ma ścisłą składnię niezależną od tolerancji niektórych edytorów.",
+      "card_id": "encor.json.practice.compare-04.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Usunąć przecinek po ostatnim polu.\n\nII — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zgłoszenie II: Standardowy JSON nie dopuszcza końcowego przecinka.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Usunąć przecinek po ostatnim polu.",
+          "feedback_md": "**Zgłoszenie I:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie I:** Standardowy parser JSON przyjmuje dokument.\n\n**Zgłoszenie II:** Standardowy JSON nie dopuszcza końcowego przecinka. Usunąć przecinek po ostatnim polu.\n\n**Sprawdzenie II:** Dokument przechodzi walidację składni standardowego JSON.\n\n**Zależności:** Składnia literału słownika Pythona i składnia JSON nie są identyczne. JSON ma ścisłą składnię niezależną od tolerancji niektórych edytorów.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Użyć wartości false bez cudzysłowów.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej. Dla II: Usunąć przecinek po ostatnim polu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Użyć wartości false bez cudzysłowów.\n\nII — Usunąć przecinek po ostatnim polu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej. Dla I: Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.json.practice.compare-05.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPayload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej.\n\n**Zgłoszenie II**\n\nJeden dokument ma \"description\": null, drugi nie ma pola description. API rozróżnia te przypadki.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Przekazano string zamiast boolean. Użyć wartości false bez cudzysłowów.\n\n**Sprawdzenie I:** Po parsowaniu enabled jest wartością logiczną, nie tekstem.\n\n**Zgłoszenie II:** Jawne null nie jest tym samym co pominięty klucz. Zastosować znaczenie null i braku pola określone przez model API.\n\n**Sprawdzenie II:** Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.\n\n**Zależności:** Boolean false i string \"false\" mają różne typy i znaczenie. JSON reprezentuje null, ale semantykę braku lub wyzerowania pola określa API.",
+      "card_id": "encor.json.practice.compare-05.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zastosować znaczenie null i braku pola określone przez model API.\n\nII — Użyć wartości false bez cudzysłowów.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Przekazano string zamiast boolean. Zgłoszenie II: Jawne null nie jest tym samym co pominięty klucz.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Użyć wartości false bez cudzysłowów.\n\nII — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. Dla II: Zastosować znaczenie null i braku pola określone przez model API.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Użyć wartości false bez cudzysłowów.\n\nII — Zastosować znaczenie null i braku pola określone przez model API.",
+          "feedback_md": "**Zgłoszenie I:** Przekazano string zamiast boolean. Użyć wartości false bez cudzysłowów.\n\n**Sprawdzenie I:** Po parsowaniu enabled jest wartością logiczną, nie tekstem.\n\n**Zgłoszenie II:** Jawne null nie jest tym samym co pominięty klucz. Zastosować znaczenie null i braku pola określone przez model API.\n\n**Sprawdzenie II:** Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.\n\n**Zależności:** Boolean false i string \"false\" mają różne typy i znaczenie. JSON reprezentuje null, ale semantykę braku lub wyzerowania pola określa API.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Zastosować znaczenie null i braku pola określone przez model API.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. Dla I: Użyć wartości false bez cudzysłowów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.json.practice.compare-06.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPole interfaces zawiera trzy obiekty w tablicy; operator szuka pojedynczego pola name bez wyboru elementu.\n\n**Zgłoszenie II**\n\nModel oczekuje integer mtu, lecz payload zawiera \"mtu\": \"1500\".\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie I:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.\n\n**Zgłoszenie II:** Wartość ma typ tekstowy zamiast liczbowego. Przekazać 1500 jako liczbę zgodnie z modelem.\n\n**Sprawdzenie II:** Walidator typu akceptuje liczbową wartość mtu.\n\n**Zależności:** Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt. Poprawny składniowo JSON może nadal mieć niewłaściwe typy dla modelu.",
+      "card_id": "encor.json.practice.compare-06.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przekazać 1500 jako liczbę zgodnie z modelem.\n\nII — Wybrać lub przefiltrować właściwy element tablicy.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Zgłoszenie II: Wartość ma typ tekstowy zamiast liczbowego.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wybrać lub przefiltrować właściwy element tablicy.\n\nII — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. Dla II: Przekazać 1500 jako liczbę zgodnie z modelem.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Przekazać 1500 jako liczbę zgodnie z modelem.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. Dla I: Wybrać lub przefiltrować właściwy element tablicy.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wybrać lub przefiltrować właściwy element tablicy.\n\nII — Przekazać 1500 jako liczbę zgodnie z modelem.",
+          "feedback_md": "**Zgłoszenie I:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie I:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.\n\n**Zgłoszenie II:** Wartość ma typ tekstowy zamiast liczbowego. Przekazać 1500 jako liczbę zgodnie z modelem.\n\n**Sprawdzenie II:** Walidator typu akceptuje liczbową wartość mtu.\n\n**Zależności:** Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt. Poprawny składniowo JSON może nadal mieć niewłaściwe typy dla modelu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.json.practice.compare-07.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPayload ma postać {'enabled': true}. Parser JSON odrzuca go.\n\n**Zgłoszenie II**\n\nModel oczekuje integer mtu, lecz payload zawiera \"mtu\": \"1500\".\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie I:** Standardowy parser JSON przyjmuje dokument.\n\n**Zgłoszenie II:** Wartość ma typ tekstowy zamiast liczbowego. Przekazać 1500 jako liczbę zgodnie z modelem.\n\n**Sprawdzenie II:** Walidator typu akceptuje liczbową wartość mtu.\n\n**Zależności:** Składnia literału słownika Pythona i składnia JSON nie są identyczne. Poprawny składniowo JSON może nadal mieć niewłaściwe typy dla modelu.",
+      "card_id": "encor.json.practice.compare-07.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Przekazać 1500 jako liczbę zgodnie z modelem.",
+          "feedback_md": "**Zgłoszenie I:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie I:** Standardowy parser JSON przyjmuje dokument.\n\n**Zgłoszenie II:** Wartość ma typ tekstowy zamiast liczbowego. Przekazać 1500 jako liczbę zgodnie z modelem.\n\n**Sprawdzenie II:** Walidator typu akceptuje liczbową wartość mtu.\n\n**Zależności:** Składnia literału słownika Pythona i składnia JSON nie są identyczne. Poprawny składniowo JSON może nadal mieć niewłaściwe typy dla modelu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przekazać 1500 jako liczbę zgodnie z modelem.\n\nII — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zgłoszenie II: Wartość ma typ tekstowy zamiast liczbowego.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Użyć wartości false bez cudzysłowów.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej. Dla II: Przekazać 1500 jako liczbę zgodnie z modelem.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Użyć wartości false bez cudzysłowów.\n\nII — Przekazać 1500 jako liczbę zgodnie z modelem.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej. Dla I: Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.json.practice.compare-08.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPayload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej.\n\n**Zgłoszenie II**\n\nPole interfaces zawiera trzy obiekty w tablicy; operator szuka pojedynczego pola name bez wyboru elementu.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Przekazano string zamiast boolean. Użyć wartości false bez cudzysłowów.\n\n**Sprawdzenie I:** Po parsowaniu enabled jest wartością logiczną, nie tekstem.\n\n**Zgłoszenie II:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie II:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.\n\n**Zależności:** Boolean false i string \"false\" mają różne typy i znaczenie. Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt.",
+      "card_id": "encor.json.practice.compare-08.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Wybrać lub przefiltrować właściwy element tablicy.\n\nII — Użyć wartości false bez cudzysłowów.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Przekazano string zamiast boolean. Zgłoszenie II: Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Użyć wartości false bez cudzysłowów.\n\nII — Wybrać lub przefiltrować właściwy element tablicy.",
+          "feedback_md": "**Zgłoszenie I:** Przekazano string zamiast boolean. Użyć wartości false bez cudzysłowów.\n\n**Sprawdzenie I:** Po parsowaniu enabled jest wartością logiczną, nie tekstem.\n\n**Zgłoszenie II:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie II:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.\n\n**Zależności:** Boolean false i string \"false\" mają różne typy i znaczenie. Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Użyć wartości false bez cudzysłowów.\n\nII — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. Dla II: Wybrać lub przefiltrować właściwy element tablicy.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Wybrać lub przefiltrować właściwy element tablicy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. Dla I: Użyć wartości false bez cudzysłowów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.json.practice.compare-09.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nDokument kończy obiekt zapisem \"mtu\": 1500, przed zamykającym nawiasem.\n\n**Zgłoszenie II**\n\nJeden dokument ma \"description\": null, drugi nie ma pola description. API rozróżnia te przypadki.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Standardowy JSON nie dopuszcza końcowego przecinka. Usunąć przecinek po ostatnim polu.\n\n**Sprawdzenie I:** Dokument przechodzi walidację składni standardowego JSON.\n\n**Zgłoszenie II:** Jawne null nie jest tym samym co pominięty klucz. Zastosować znaczenie null i braku pola określone przez model API.\n\n**Sprawdzenie II:** Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.\n\n**Zależności:** JSON ma ścisłą składnię niezależną od tolerancji niektórych edytorów. JSON reprezentuje null, ale semantykę braku lub wyzerowania pola określa API.",
+      "card_id": "encor.json.practice.compare-09.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zastosować znaczenie null i braku pola określone przez model API.\n\nII — Usunąć przecinek po ostatnim polu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Standardowy JSON nie dopuszcza końcowego przecinka. Zgłoszenie II: Jawne null nie jest tym samym co pominięty klucz.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Usunąć przecinek po ostatnim polu.\n\nII — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. Dla II: Zastosować znaczenie null i braku pola określone przez model API.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Usunąć przecinek po ostatnim polu.\n\nII — Zastosować znaczenie null i braku pola określone przez model API.",
+          "feedback_md": "**Zgłoszenie I:** Standardowy JSON nie dopuszcza końcowego przecinka. Usunąć przecinek po ostatnim polu.\n\n**Sprawdzenie I:** Dokument przechodzi walidację składni standardowego JSON.\n\n**Zgłoszenie II:** Jawne null nie jest tym samym co pominięty klucz. Zastosować znaczenie null i braku pola określone przez model API.\n\n**Sprawdzenie II:** Wysłany payload wyraża zamierzoną operację zgodnie z dokumentacją API.\n\n**Zależności:** JSON ma ścisłą składnię niezależną od tolerancji niektórych edytorów. JSON reprezentuje null, ale semantykę braku lub wyzerowania pola określa API.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Zastosować znaczenie null i braku pola określone przez model API.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Payload ma postać {'enabled': true}. Parser JSON odrzuca go. Dla I: Usunąć przecinek po ostatnim polu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.json.practice.compare-10.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — działanie",
+      "skills": [
+        "encor.json.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://developer.cisco.com/codeexchange/github/repo/CiscoDevNet/netprog_basics"
+        },
+        {
+          "title": "Dokumentacja Cisco — JSON — poprawny zapis i struktury danych",
+          "url": "https://blogs.cisco.com/developer/intro-to-programmability-3"
+        },
+        {
+          "title": "JSON — RFC 8259",
+          "url": "https://www.rfc-editor.org/rfc/rfc8259"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPayload ma postać {'enabled': true}. Parser JSON odrzuca go.\n\n**Zgłoszenie II**\n\nPole interfaces zawiera trzy obiekty w tablicy; operator szuka pojedynczego pola name bez wyboru elementu.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie I:** Standardowy parser JSON przyjmuje dokument.\n\n**Zgłoszenie II:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie II:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.\n\n**Zależności:** Składnia literału słownika Pythona i składnia JSON nie są identyczne. Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt.",
+      "card_id": "encor.json.practice.compare-10.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Wybrać lub przefiltrować właściwy element tablicy.\n\nII — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zgłoszenie II: Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Użyć wartości false bez cudzysłowów.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej. Dla II: Wybrać lub przefiltrować właściwy element tablicy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Użyć wartości false bez cudzysłowów.\n\nII — Wybrać lub przefiltrować właściwy element tablicy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Payload zawiera \"enabled\": \"false\", a model oczekuje wartości logicznej. Dla I: Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\nII — Wybrać lub przefiltrować właściwy element tablicy.",
+          "feedback_md": "**Zgłoszenie I:** Nazwy pól JSON nie są zapisane w podwójnych cudzysłowach. Zapisać klucz jako \"enabled\" w poprawnym dokumencie JSON.\n\n**Sprawdzenie I:** Standardowy parser JSON przyjmuje dokument.\n\n**Zgłoszenie II:** Pole jest kolekcją rekordów, nie pojedynczym obiektem interfejsu. Wybrać lub przefiltrować właściwy element tablicy.\n\n**Sprawdzenie II:** Odczyt dotyczy dokładnie rekordu interfejsu o żądanej nazwie.\n\n**Zależności:** Składnia literału słownika Pythona i składnia JSON nie są identyczne. Nawiasy kwadratowe reprezentują tablicę, a klamrowe obiekt.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

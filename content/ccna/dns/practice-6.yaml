@@ -1,0 +1,799 @@
+{
+  "schema_version": 3,
+  "id": "ccna.dns.practice-6",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.compare-01.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPołączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem.\n\n**Zgłoszenie II**\n\nRekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie I:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.\n\n**Zgłoszenie II:** Resolver przechowuje ważną jeszcze odpowiedź cache. Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\n**Sprawdzenie II:** Po wygaśnięciu cache resolver zwraca nową wartość z autorytatywnego źródła.\n\n**Zależności:** Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi. Zmiana rekordu nie musi natychmiast usunąć wszystkich wcześniej zapisanych odpowiedzi.",
+      "example": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.compare-02.2.card",
+      "front_md": "**Zgłoszenie I**\n\nResolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa.\n\n**Zgłoszenie II**\n\nAplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** DNS informuje o nieistnieniu wskazanej nazwy. Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\n**Sprawdzenie I:** Poprawna istniejąca nazwa otrzymuje odpowiedź zamiast NXDOMAIN.\n\n**Zgłoszenie II:** Wybrano typ rekordu dla IPv4 zamiast IPv6. Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie II:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.\n\n**Zależności:** NXDOMAIN jest odpowiedzią DNS, a nie timeoutem transportowym. A mapuje nazwę na IPv4, AAAA na IPv6.",
+      "example": "I — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\nII — Zapytać o rekord AAAA właściwej nazwy."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.compare-03.2.card",
+      "front_md": "**Zgłoszenie I**\n\nNazwa app.example wskazuje CNAME na backend.example, a ten posiada rekord A.\n\n**Zgłoszenie II**\n\nOdpowiedź UDP ma bit TC; klient próbuje TCP 53, które blokuje firewall.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Pierwsza odpowiedź jest aliasem, nie końcowym adresem. Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\n**Sprawdzenie I:** Wynik końcowy zawiera adres backend.example.\n\n**Zgłoszenie II:** Polityka blokuje potrzebne przejście DNS na TCP. Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\n**Sprawdzenie II:** Po odpowiedzi TC klient uzyskuje pełną odpowiedź przez TCP.\n\n**Zależności:** CNAME wskazuje inną nazwę i może wymagać dalszego rozwiązywania. DNS nie ogranicza się wyłącznie do UDP 53.",
+      "example": "I — Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\nII — Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.compare-04.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPołączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem.\n\n**Zgłoszenie II**\n\nResolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie I:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.\n\n**Zgłoszenie II:** DNS informuje o nieistnieniu wskazanej nazwy. Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\n**Sprawdzenie II:** Poprawna istniejąca nazwa otrzymuje odpowiedź zamiast NXDOMAIN.\n\n**Zależności:** Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi. NXDOMAIN jest odpowiedzią DNS, a nie timeoutem transportowym.",
+      "example": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.compare-05.2.card",
+      "front_md": "**Zgłoszenie I**\n\nRekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL.\n\n**Zgłoszenie II**\n\nNazwa app.example wskazuje CNAME na backend.example, a ten posiada rekord A.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Resolver przechowuje ważną jeszcze odpowiedź cache. Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\n**Sprawdzenie I:** Po wygaśnięciu cache resolver zwraca nową wartość z autorytatywnego źródła.\n\n**Zgłoszenie II:** Pierwsza odpowiedź jest aliasem, nie końcowym adresem. Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\n**Sprawdzenie II:** Wynik końcowy zawiera adres backend.example.\n\n**Zależności:** Zmiana rekordu nie musi natychmiast usunąć wszystkich wcześniej zapisanych odpowiedzi. CNAME wskazuje inną nazwę i może wymagać dalszego rozwiązywania.",
+      "example": "I — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\nII — Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.compare-06.2.card",
+      "front_md": "**Zgłoszenie I**\n\nAplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A.\n\n**Zgłoszenie II**\n\nOdpowiedź UDP ma bit TC; klient próbuje TCP 53, które blokuje firewall.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrano typ rekordu dla IPv4 zamiast IPv6. Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie I:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.\n\n**Zgłoszenie II:** Polityka blokuje potrzebne przejście DNS na TCP. Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\n**Sprawdzenie II:** Po odpowiedzi TC klient uzyskuje pełną odpowiedź przez TCP.\n\n**Zależności:** A mapuje nazwę na IPv4, AAAA na IPv6. DNS nie ogranicza się wyłącznie do UDP 53.",
+      "example": "I — Zapytać o rekord AAAA właściwej nazwy.\n\nII — Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.compare-07.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPołączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem.\n\n**Zgłoszenie II**\n\nOdpowiedź UDP ma bit TC; klient próbuje TCP 53, które blokuje firewall.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie I:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.\n\n**Zgłoszenie II:** Polityka blokuje potrzebne przejście DNS na TCP. Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\n**Sprawdzenie II:** Po odpowiedzi TC klient uzyskuje pełną odpowiedź przez TCP.\n\n**Zależności:** Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi. DNS nie ogranicza się wyłącznie do UDP 53.",
+      "example": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.compare-08.2.card",
+      "front_md": "**Zgłoszenie I**\n\nRekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL.\n\n**Zgłoszenie II**\n\nAplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Resolver przechowuje ważną jeszcze odpowiedź cache. Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\n**Sprawdzenie I:** Po wygaśnięciu cache resolver zwraca nową wartość z autorytatywnego źródła.\n\n**Zgłoszenie II:** Wybrano typ rekordu dla IPv4 zamiast IPv6. Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie II:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.\n\n**Zależności:** Zmiana rekordu nie musi natychmiast usunąć wszystkich wcześniej zapisanych odpowiedzi. A mapuje nazwę na IPv4, AAAA na IPv6.",
+      "example": "I — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\nII — Zapytać o rekord AAAA właściwej nazwy."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.compare-09.2.card",
+      "front_md": "**Zgłoszenie I**\n\nResolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa.\n\n**Zgłoszenie II**\n\nNazwa app.example wskazuje CNAME na backend.example, a ten posiada rekord A.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** DNS informuje o nieistnieniu wskazanej nazwy. Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\n**Sprawdzenie I:** Poprawna istniejąca nazwa otrzymuje odpowiedź zamiast NXDOMAIN.\n\n**Zgłoszenie II:** Pierwsza odpowiedź jest aliasem, nie końcowym adresem. Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\n**Sprawdzenie II:** Wynik końcowy zawiera adres backend.example.\n\n**Zależności:** NXDOMAIN jest odpowiedzią DNS, a nie timeoutem transportowym. CNAME wskazuje inną nazwę i może wymagać dalszego rozwiązywania.",
+      "example": "I — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\nII — Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "id": "ccna.dns.practice.compare-10.2.card",
+      "front_md": "**Zgłoszenie I**\n\nPołączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem.\n\n**Zgłoszenie II**\n\nAplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie I:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.\n\n**Zgłoszenie II:** Wybrano typ rekordu dla IPv4 zamiast IPv6. Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie II:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.\n\n**Zależności:** Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi. A mapuje nazwę na IPv4, AAAA na IPv6.",
+      "example": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Zapytać o rekord AAAA właściwej nazwy."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.dns.practice.compare-01.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPołączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem.\n\n**Zgłoszenie II**\n\nRekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie I:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.\n\n**Zgłoszenie II:** Resolver przechowuje ważną jeszcze odpowiedź cache. Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\n**Sprawdzenie II:** Po wygaśnięciu cache resolver zwraca nową wartość z autorytatywnego źródła.\n\n**Zależności:** Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi. Zmiana rekordu nie musi natychmiast usunąć wszystkich wcześniej zapisanych odpowiedzi.",
+      "card_id": "ccna.dns.practice.compare-01.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\nII — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Zgłoszenie II: Resolver przechowuje ważną jeszcze odpowiedź cache.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Resolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa. Dla II: Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.",
+          "feedback_md": "**Zgłoszenie I:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie I:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.\n\n**Zgłoszenie II:** Resolver przechowuje ważną jeszcze odpowiedź cache. Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\n**Sprawdzenie II:** Po wygaśnięciu cache resolver zwraca nową wartość z autorytatywnego źródła.\n\n**Zależności:** Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi. Zmiana rekordu nie musi natychmiast usunąć wszystkich wcześniej zapisanych odpowiedzi.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\nII — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Resolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa. Dla I: Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.dns.practice.compare-02.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nResolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa.\n\n**Zgłoszenie II**\n\nAplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** DNS informuje o nieistnieniu wskazanej nazwy. Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\n**Sprawdzenie I:** Poprawna istniejąca nazwa otrzymuje odpowiedź zamiast NXDOMAIN.\n\n**Zgłoszenie II:** Wybrano typ rekordu dla IPv4 zamiast IPv6. Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie II:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.\n\n**Zależności:** NXDOMAIN jest odpowiedzią DNS, a nie timeoutem transportowym. A mapuje nazwę na IPv4, AAAA na IPv6.",
+      "card_id": "ccna.dns.practice.compare-02.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zapytać o rekord AAAA właściwej nazwy.\n\nII — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: DNS informuje o nieistnieniu wskazanej nazwy. Zgłoszenie II: Wybrano typ rekordu dla IPv4 zamiast IPv6.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\nII — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. Dla II: Zapytać o rekord AAAA właściwej nazwy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Zapytać o rekord AAAA właściwej nazwy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. Dla I: Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\nII — Zapytać o rekord AAAA właściwej nazwy.",
+          "feedback_md": "**Zgłoszenie I:** DNS informuje o nieistnieniu wskazanej nazwy. Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\n**Sprawdzenie I:** Poprawna istniejąca nazwa otrzymuje odpowiedź zamiast NXDOMAIN.\n\n**Zgłoszenie II:** Wybrano typ rekordu dla IPv4 zamiast IPv6. Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie II:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.\n\n**Zależności:** NXDOMAIN jest odpowiedzią DNS, a nie timeoutem transportowym. A mapuje nazwę na IPv4, AAAA na IPv6.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.dns.practice.compare-03.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNazwa app.example wskazuje CNAME na backend.example, a ten posiada rekord A.\n\n**Zgłoszenie II**\n\nOdpowiedź UDP ma bit TC; klient próbuje TCP 53, które blokuje firewall.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Pierwsza odpowiedź jest aliasem, nie końcowym adresem. Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\n**Sprawdzenie I:** Wynik końcowy zawiera adres backend.example.\n\n**Zgłoszenie II:** Polityka blokuje potrzebne przejście DNS na TCP. Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\n**Sprawdzenie II:** Po odpowiedzi TC klient uzyskuje pełną odpowiedź przez TCP.\n\n**Zależności:** CNAME wskazuje inną nazwę i może wymagać dalszego rozwiązywania. DNS nie ogranicza się wyłącznie do UDP 53.",
+      "card_id": "ccna.dns.practice.compare-03.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\nII — Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.",
+          "feedback_md": "**Zgłoszenie I:** Pierwsza odpowiedź jest aliasem, nie końcowym adresem. Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\n**Sprawdzenie I:** Wynik końcowy zawiera adres backend.example.\n\n**Zgłoszenie II:** Polityka blokuje potrzebne przejście DNS na TCP. Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\n**Sprawdzenie II:** Po odpowiedzi TC klient uzyskuje pełną odpowiedź przez TCP.\n\n**Zależności:** CNAME wskazuje inną nazwę i może wymagać dalszego rozwiązywania. DNS nie ogranicza się wyłącznie do UDP 53.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\nII — Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Pierwsza odpowiedź jest aliasem, nie końcowym adresem. Zgłoszenie II: Polityka blokuje potrzebne przejście DNS na TCP.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\nII — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. Dla II: Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. Dla I: Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.dns.practice.compare-04.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPołączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem.\n\n**Zgłoszenie II**\n\nResolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie I:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.\n\n**Zgłoszenie II:** DNS informuje o nieistnieniu wskazanej nazwy. Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\n**Sprawdzenie II:** Poprawna istniejąca nazwa otrzymuje odpowiedź zamiast NXDOMAIN.\n\n**Zależności:** Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi. NXDOMAIN jest odpowiedzią DNS, a nie timeoutem transportowym.",
+      "card_id": "ccna.dns.practice.compare-04.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\nII — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Zgłoszenie II: DNS informuje o nieistnieniu wskazanej nazwy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.",
+          "feedback_md": "**Zgłoszenie I:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie I:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.\n\n**Zgłoszenie II:** DNS informuje o nieistnieniu wskazanej nazwy. Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\n**Sprawdzenie II:** Poprawna istniejąca nazwa otrzymuje odpowiedź zamiast NXDOMAIN.\n\n**Zależności:** Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi. NXDOMAIN jest odpowiedzią DNS, a nie timeoutem transportowym.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Rekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL. Dla II: Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\nII — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Rekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL. Dla I: Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.dns.practice.compare-05.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL.\n\n**Zgłoszenie II**\n\nNazwa app.example wskazuje CNAME na backend.example, a ten posiada rekord A.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Resolver przechowuje ważną jeszcze odpowiedź cache. Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\n**Sprawdzenie I:** Po wygaśnięciu cache resolver zwraca nową wartość z autorytatywnego źródła.\n\n**Zgłoszenie II:** Pierwsza odpowiedź jest aliasem, nie końcowym adresem. Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\n**Sprawdzenie II:** Wynik końcowy zawiera adres backend.example.\n\n**Zależności:** Zmiana rekordu nie musi natychmiast usunąć wszystkich wcześniej zapisanych odpowiedzi. CNAME wskazuje inną nazwę i może wymagać dalszego rozwiązywania.",
+      "card_id": "ccna.dns.practice.compare-05.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\nII — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Resolver przechowuje ważną jeszcze odpowiedź cache. Zgłoszenie II: Pierwsza odpowiedź jest aliasem, nie końcowym adresem.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\nII — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. Dla II: Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\nII — Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.",
+          "feedback_md": "**Zgłoszenie I:** Resolver przechowuje ważną jeszcze odpowiedź cache. Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\n**Sprawdzenie I:** Po wygaśnięciu cache resolver zwraca nową wartość z autorytatywnego źródła.\n\n**Zgłoszenie II:** Pierwsza odpowiedź jest aliasem, nie końcowym adresem. Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\n**Sprawdzenie II:** Wynik końcowy zawiera adres backend.example.\n\n**Zależności:** Zmiana rekordu nie musi natychmiast usunąć wszystkich wcześniej zapisanych odpowiedzi. CNAME wskazuje inną nazwę i może wymagać dalszego rozwiązywania.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. Dla I: Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.dns.practice.compare-06.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nAplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A.\n\n**Zgłoszenie II**\n\nOdpowiedź UDP ma bit TC; klient próbuje TCP 53, które blokuje firewall.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrano typ rekordu dla IPv4 zamiast IPv6. Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie I:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.\n\n**Zgłoszenie II:** Polityka blokuje potrzebne przejście DNS na TCP. Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\n**Sprawdzenie II:** Po odpowiedzi TC klient uzyskuje pełną odpowiedź przez TCP.\n\n**Zależności:** A mapuje nazwę na IPv4, AAAA na IPv6. DNS nie ogranicza się wyłącznie do UDP 53.",
+      "card_id": "ccna.dns.practice.compare-06.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\nII — Zapytać o rekord AAAA właściwej nazwy.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrano typ rekordu dla IPv4 zamiast IPv6. Zgłoszenie II: Polityka blokuje potrzebne przejście DNS na TCP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zapytać o rekord AAAA właściwej nazwy.\n\nII — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. Dla II: Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. Dla I: Zapytać o rekord AAAA właściwej nazwy.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zapytać o rekord AAAA właściwej nazwy.\n\nII — Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.",
+          "feedback_md": "**Zgłoszenie I:** Wybrano typ rekordu dla IPv4 zamiast IPv6. Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie I:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.\n\n**Zgłoszenie II:** Polityka blokuje potrzebne przejście DNS na TCP. Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\n**Sprawdzenie II:** Po odpowiedzi TC klient uzyskuje pełną odpowiedź przez TCP.\n\n**Zależności:** A mapuje nazwę na IPv4, AAAA na IPv6. DNS nie ogranicza się wyłącznie do UDP 53.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.dns.practice.compare-07.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPołączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem.\n\n**Zgłoszenie II**\n\nOdpowiedź UDP ma bit TC; klient próbuje TCP 53, które blokuje firewall.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie I:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.\n\n**Zgłoszenie II:** Polityka blokuje potrzebne przejście DNS na TCP. Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\n**Sprawdzenie II:** Po odpowiedzi TC klient uzyskuje pełną odpowiedź przez TCP.\n\n**Zależności:** Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi. DNS nie ogranicza się wyłącznie do UDP 53.",
+      "card_id": "ccna.dns.practice.compare-07.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.",
+          "feedback_md": "**Zgłoszenie I:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie I:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.\n\n**Zgłoszenie II:** Polityka blokuje potrzebne przejście DNS na TCP. Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\n**Sprawdzenie II:** Po odpowiedzi TC klient uzyskuje pełną odpowiedź przez TCP.\n\n**Zależności:** Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi. DNS nie ogranicza się wyłącznie do UDP 53.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.\n\nII — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Zgłoszenie II: Polityka blokuje potrzebne przejście DNS na TCP.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Rekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL. Dla II: Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\nII — Dopuścić wymagany ruch DNS TCP do zatwierdzonego resolvera.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Rekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL. Dla I: Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.dns.practice.compare-08.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL.\n\n**Zgłoszenie II**\n\nAplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Resolver przechowuje ważną jeszcze odpowiedź cache. Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\n**Sprawdzenie I:** Po wygaśnięciu cache resolver zwraca nową wartość z autorytatywnego źródła.\n\n**Zgłoszenie II:** Wybrano typ rekordu dla IPv4 zamiast IPv6. Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie II:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.\n\n**Zależności:** Zmiana rekordu nie musi natychmiast usunąć wszystkich wcześniej zapisanych odpowiedzi. A mapuje nazwę na IPv4, AAAA na IPv6.",
+      "card_id": "ccna.dns.practice.compare-08.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zapytać o rekord AAAA właściwej nazwy.\n\nII — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Resolver przechowuje ważną jeszcze odpowiedź cache. Zgłoszenie II: Wybrano typ rekordu dla IPv4 zamiast IPv6.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\nII — Zapytać o rekord AAAA właściwej nazwy.",
+          "feedback_md": "**Zgłoszenie I:** Resolver przechowuje ważną jeszcze odpowiedź cache. Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\n**Sprawdzenie I:** Po wygaśnięciu cache resolver zwraca nową wartość z autorytatywnego źródła.\n\n**Zgłoszenie II:** Wybrano typ rekordu dla IPv4 zamiast IPv6. Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie II:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.\n\n**Zależności:** Zmiana rekordu nie musi natychmiast usunąć wszystkich wcześniej zapisanych odpowiedzi. A mapuje nazwę na IPv4, AAAA na IPv6.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\nII — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. Dla II: Zapytać o rekord AAAA właściwej nazwy.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Zapytać o rekord AAAA właściwej nazwy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. Dla I: Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.dns.practice.compare-09.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nResolver odpowiada NXDOMAIN dla nazwy, a komunikacja z nim działa.\n\n**Zgłoszenie II**\n\nNazwa app.example wskazuje CNAME na backend.example, a ten posiada rekord A.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** DNS informuje o nieistnieniu wskazanej nazwy. Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\n**Sprawdzenie I:** Poprawna istniejąca nazwa otrzymuje odpowiedź zamiast NXDOMAIN.\n\n**Zgłoszenie II:** Pierwsza odpowiedź jest aliasem, nie końcowym adresem. Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\n**Sprawdzenie II:** Wynik końcowy zawiera adres backend.example.\n\n**Zależności:** NXDOMAIN jest odpowiedzią DNS, a nie timeoutem transportowym. CNAME wskazuje inną nazwę i może wymagać dalszego rozwiązywania.",
+      "card_id": "ccna.dns.practice.compare-09.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\nII — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: DNS informuje o nieistnieniu wskazanej nazwy. Zgłoszenie II: Pierwsza odpowiedź jest aliasem, nie końcowym adresem.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\nII — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. Dla II: Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\nII — Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.",
+          "feedback_md": "**Zgłoszenie I:** DNS informuje o nieistnieniu wskazanej nazwy. Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.\n\n**Sprawdzenie I:** Poprawna istniejąca nazwa otrzymuje odpowiedź zamiast NXDOMAIN.\n\n**Zgłoszenie II:** Pierwsza odpowiedź jest aliasem, nie końcowym adresem. Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.\n\n**Sprawdzenie II:** Wynik końcowy zawiera adres backend.example.\n\n**Zależności:** NXDOMAIN jest odpowiedzią DNS, a nie timeoutem transportowym. CNAME wskazuje inną nazwę i może wymagać dalszego rozwiązywania.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Rozwiązać nazwę docelową aliasu zgodnie z łańcuchem DNS.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Połączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem. Dla I: Zweryfikować pisownię, właściwą strefę i istnienie nazwy w autorytatywnym DNS.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.dns.practice.compare-10.2",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — działanie",
+      "skills": [
+        "ccna.dns.contrast",
+        "practice.2"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_configuring_dns.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — DNS — nazwy i rozwiązywanie problemów",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipaddr_dns/configuration/xe-16-6/dns-xe-16-6-book/configuring_dns.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "4.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPołączenie do adresu usługi działa, ale zapytania do skonfigurowanego resolvera kończą się timeoutem.\n\n**Zgłoszenie II**\n\nAplikacja potrzebuje adresu IPv6, lecz operator sprawdza wyłącznie rekord A.\n\nOceń każde zgłoszenie oddzielnie. Które działanie najlepiej odpowiada wymaganiom tego przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie I:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.\n\n**Zgłoszenie II:** Wybrano typ rekordu dla IPv4 zamiast IPv6. Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie II:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.\n\n**Zależności:** Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi. A mapuje nazwę na IPv4, AAAA na IPv6.",
+      "card_id": "ccna.dns.practice.compare-10.2.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zapytać o rekord AAAA właściwej nazwy.\n\nII — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Zgłoszenie II: Wybrano typ rekordu dla IPv4 zamiast IPv6.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Rekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL. Dla II: Zapytać o rekord AAAA właściwej nazwy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Uwzględnić pozostały TTL lub kontrolowanie odświeżyć właściwy cache.\n\nII — Zapytać o rekord AAAA właściwej nazwy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Rekord zmieniono na serwerze autorytatywnym, ale resolver nadal ma poprzednią odpowiedź z niewygasłym TTL. Dla I: Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\nII — Zapytać o rekord AAAA właściwej nazwy.",
+          "feedback_md": "**Zgłoszenie I:** Problem leży na ścieżce rozwiązywania nazw, nie w samym dostępie po IP. Sprawdzić osiągalność, konfigurację i odpowiedzi wybranego DNS.\n\n**Sprawdzenie I:** Zapytanie do właściwego resolvera zwraca oczekiwany rekord.\n\n**Zgłoszenie II:** Wybrano typ rekordu dla IPv4 zamiast IPv6. Zapytać o rekord AAAA właściwej nazwy.\n\n**Sprawdzenie II:** Odpowiedź AAAA zawiera adres IPv6, jeśli taki rekord opublikowano.\n\n**Zależności:** Działanie usługi po IP pomaga oddzielić DNS od warstwy transportu usługi. A mapuje nazwę na IPv4, AAAA na IPv6.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

@@ -1,3 +1,22 @@
+# PacketPath 0.15 — rozbudowane scenariusze
+
+Baza ma **4222 zadania**: 2156 CCNA i 2066 ENCOR, w 48 działach i 561 sekcjach.
+Dodano 3214 ćwiczeń: 336 odrębnych przypadków analizowanych z czterech stron
+(rozpoznanie, działanie, weryfikacja, zależności) oraz 30 ćwiczeń pełnych komend CLI. Kolejne 1840 zadań porównuje dwa zgłoszenia
+i wymaga poprawnego rozpoznania, działania, weryfikacji lub wyjaśnienia obu.
+BGP ma 180 zadań, VLAN 144; każdy pozostały dział otrzymał 64 nowe zadania
+i ma obecnie 82 lub 100. Pełne zestawienie: `CONTENT-EXPANSION.json`.
+
+Wszystkie 168 poprzednich paczek pozostaje identycznych bajtowo. Nowe sekcje
+odblokowują się po ostatniej starej sekcji, a dotychczasowe zaliczenia i sesje
+zachowują identyfikatory i wersje. Treść jest pakowana do aplikacji i działa offline.
+Linki źródłowe wymagają internetu tylko przy otwieraniu dokumentacji zewnętrznej.
+
+Weryfikacja: `npm test`, `npm run build`, `npm run android:sync`.
+Instrukcja budowy APK: `ANDROID-Z-TELEFONU.md`.
+
+## Historia poprzednich wydań
+
 # PacketPath 0.14 — Android + Web
 
 Nowe wydanie dodaje projekt Android, trwały zapis natywny, eksport/import postępów, obsługę Wstecz i workflow APK. Instrukcja z telefonu: **ANDROID-Z-TELEFONU.md**. 1008 zadań bez zmian.

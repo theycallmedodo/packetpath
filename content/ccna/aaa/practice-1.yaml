@@ -1,0 +1,483 @@
+{
+  "schema_version": 3,
+  "id": "ccna.aaa.practice-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Reject a timeout — rozpoznanie",
+      "skills": [
+        "ccna.aaa.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.aaa.practice.case-01.1.card",
+      "front_md": "Lista metod ma group tacacs+ local. Serwer działa i zwraca jawne odrzucenie hasła; konto local nie jest użyte.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Fallback lokalny zwykle dotyczy błędu dostępności metody, a nie jawnego deny.\n\n**Rozpoznanie:** Jawne odrzucenie nie jest niedostępnością serwera AAA.\n\n**Działanie:** Poprawić dane lub politykę serwera, zamiast oczekiwać obejścia reject przez local.\n\n**Sprawdzenie:** Poprawne konto zostaje zatwierdzone przez serwer; błędne nadal jest odrzucane.",
+      "example": "Jawne odrzucenie nie jest niedostępnością serwera AAA."
+    },
+    {
+      "revision": 1,
+      "title": "Brak autoryzacji — rozpoznanie",
+      "skills": [
+        "ccna.aaa.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.aaa.practice.case-02.1.card",
+      "front_md": "Użytkownik loguje się, ale serwer odmawia wykonania konkretnej komendy.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Uwierzytelnienie tożsamości nie jest równoznaczne z autoryzacją wszystkich działań.\n\n**Rozpoznanie:** Authentication powiodło się, authorization odmówiło uprawnienia.\n\n**Działanie:** Sprawdzić profil uprawnień i regułę autoryzacji tej komendy.\n\n**Sprawdzenie:** Uprawniony użytkownik może wykonać właściwą komendę, bez zbędnego rozszerzenia praw.",
+      "example": "Authentication powiodło się, authorization odmówiło uprawnienia."
+    },
+    {
+      "revision": 1,
+      "title": "Brak accounting — rozpoznanie",
+      "skills": [
+        "ccna.aaa.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.aaa.practice.case-03.1.card",
+      "front_md": "Logowanie i polecenia działają, lecz nie powstają wymagane rekordy rozliczeniowe.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Accounting rejestruje aktywność i jest oddzielną częścią AAA.\n\n**Rozpoznanie:** Accounting nie został poprawnie włączony lub dostarczony.\n\n**Działanie:** Sprawdzić listę accounting, jej zastosowanie i dostępność odbiorcy.\n\n**Sprawdzenie:** Kontrolna sesja generuje oczekiwane rekordy start/stop lub komend.",
+      "example": "Accounting nie został poprawnie włączony lub dostarczony."
+    },
+    {
+      "revision": 1,
+      "title": "Zły shared secret — rozpoznanie",
+      "skills": [
+        "ccna.aaa.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.aaa.practice.case-04.1.card",
+      "front_md": "RADIUS odbiera pakiety od znanego NAS, lecz odrzuca je z powodu niezgodnego współdzielonego sekretu.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Adres klienta AAA i jego shared secret są częścią zaufanej relacji serwer–urządzenie.\n\n**Rozpoznanie:** Sekret skonfigurowany po obu stronach nie jest zgodny.\n\n**Działanie:** Uzgodnić sekret routera i odpowiadającego mu klienta na serwerze.\n\n**Sprawdzenie:** Serwer poprawnie weryfikuje zapytania tego NAS.",
+      "example": "Sekret skonfigurowany po obu stronach nie jest zgodny."
+    },
+    {
+      "revision": 1,
+      "title": "Inny source IP — rozpoznanie",
+      "skills": [
+        "ccna.aaa.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.aaa.practice.case-05.1.card",
+      "front_md": "Po zmianie routingu zapytania AAA wychodzą z innego adresu; serwer zgłasza unknown client.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Routing i wybór source interface wpływają na rozpoznanie klienta AAA.\n\n**Rozpoznanie:** Serwer nie rozpoznaje nowego adresu źródłowego NAS.\n\n**Działanie:** Ustalić stabilne źródło i zgodny wpis klienta po stronie AAA.\n\n**Sprawdzenie:** Serwer identyfikuje zapytania jako właściwy NAS po zaplanowanym adresie.",
+      "example": "Serwer nie rozpoznaje nowego adresu źródłowego NAS."
+    },
+    {
+      "revision": 1,
+      "title": "Ryzykowna zmiana zdalna — rozpoznanie",
+      "skills": [
+        "ccna.aaa.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "id": "ccna.aaa.practice.case-06.1.card",
+      "front_md": "Operator planuje zmienić jedyną metodę logowania przez tę samą sesję SSH, bez sprawdzonego dostępu awaryjnego.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Zmiany AAA wymagają weryfikacji nowej sesji przed porzuceniem działającego dostępu.\n\n**Rozpoznanie:** Zmiana może odciąć możliwość dalszego zarządzania.\n\n**Działanie:** Najpierw zapewnić i sprawdzić ścieżkę awaryjną, potem testować nową metodę osobną sesją.\n\n**Sprawdzenie:** Nowa sesja przechodzi poprawnie, a dostęp awaryjny pozostaje dostępny.",
+      "example": "Zmiana może odciąć możliwość dalszego zarządzania."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.aaa.practice.case-01.1",
+      "revision": 1,
+      "title": "Reject a timeout — rozpoznanie",
+      "skills": [
+        "ccna.aaa.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Lista metod ma group tacacs+ local. Serwer działa i zwraca jawne odrzucenie hasła; konto local nie jest użyte.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Fallback lokalny zwykle dotyczy błędu dostępności metody, a nie jawnego deny.\n\n**Rozpoznanie:** Jawne odrzucenie nie jest niedostępnością serwera AAA.\n\n**Działanie:** Poprawić dane lub politykę serwera, zamiast oczekiwać obejścia reject przez local.\n\n**Sprawdzenie:** Poprawne konto zostaje zatwierdzone przez serwer; błędne nadal jest odrzucane.",
+      "card_id": "ccna.aaa.practice.case-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Jawne odrzucenie nie jest niedostępnością serwera AAA.",
+          "feedback_md": "Fallback lokalny zwykle dotyczy błędu dostępności metody, a nie jawnego deny.\n\n**Rozpoznanie:** Jawne odrzucenie nie jest niedostępnością serwera AAA.\n\n**Działanie:** Poprawić dane lub politykę serwera, zamiast oczekiwać obejścia reject przez local.\n\n**Sprawdzenie:** Poprawne konto zostaje zatwierdzone przez serwer; błędne nadal jest odrzucane.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zmiana może odciąć możliwość dalszego zarządzania.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Ryzykowna zmiana zdalna”: Operator planuje zmienić jedyną metodę logowania przez tę samą sesję SSH, bez sprawdzonego dostępu awaryjnego. W bieżącym przypadku: Jawne odrzucenie nie jest niedostępnością serwera AAA.",
+          "id": "B"
+        },
+        {
+          "text_md": "Sekret skonfigurowany po obu stronach nie jest zgodny.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły shared secret”: RADIUS odbiera pakiety od znanego NAS, lecz odrzuca je z powodu niezgodnego współdzielonego sekretu. W bieżącym przypadku: Jawne odrzucenie nie jest niedostępnością serwera AAA.",
+          "id": "C"
+        },
+        {
+          "text_md": "Accounting nie został poprawnie włączony lub dostarczony.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak accounting”: Logowanie i polecenia działają, lecz nie powstają wymagane rekordy rozliczeniowe. W bieżącym przypadku: Jawne odrzucenie nie jest niedostępnością serwera AAA.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.aaa.practice.case-02.1",
+      "revision": 1,
+      "title": "Brak autoryzacji — rozpoznanie",
+      "skills": [
+        "ccna.aaa.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Użytkownik loguje się, ale serwer odmawia wykonania konkretnej komendy.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Uwierzytelnienie tożsamości nie jest równoznaczne z autoryzacją wszystkich działań.\n\n**Rozpoznanie:** Authentication powiodło się, authorization odmówiło uprawnienia.\n\n**Działanie:** Sprawdzić profil uprawnień i regułę autoryzacji tej komendy.\n\n**Sprawdzenie:** Uprawniony użytkownik może wykonać właściwą komendę, bez zbędnego rozszerzenia praw.",
+      "card_id": "ccna.aaa.practice.case-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Accounting nie został poprawnie włączony lub dostarczony.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak accounting”: Logowanie i polecenia działają, lecz nie powstają wymagane rekordy rozliczeniowe. W bieżącym przypadku: Authentication powiodło się, authorization odmówiło uprawnienia.",
+          "id": "A"
+        },
+        {
+          "text_md": "Authentication powiodło się, authorization odmówiło uprawnienia.",
+          "feedback_md": "Uwierzytelnienie tożsamości nie jest równoznaczne z autoryzacją wszystkich działań.\n\n**Rozpoznanie:** Authentication powiodło się, authorization odmówiło uprawnienia.\n\n**Działanie:** Sprawdzić profil uprawnień i regułę autoryzacji tej komendy.\n\n**Sprawdzenie:** Uprawniony użytkownik może wykonać właściwą komendę, bez zbędnego rozszerzenia praw.",
+          "id": "B"
+        },
+        {
+          "text_md": "Sekret skonfigurowany po obu stronach nie jest zgodny.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły shared secret”: RADIUS odbiera pakiety od znanego NAS, lecz odrzuca je z powodu niezgodnego współdzielonego sekretu. W bieżącym przypadku: Authentication powiodło się, authorization odmówiło uprawnienia.",
+          "id": "C"
+        },
+        {
+          "text_md": "Jawne odrzucenie nie jest niedostępnością serwera AAA.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Reject a timeout”: Lista metod ma group tacacs+ local. Serwer działa i zwraca jawne odrzucenie hasła; konto local nie jest użyte. W bieżącym przypadku: Authentication powiodło się, authorization odmówiło uprawnienia.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.aaa.practice.case-03.1",
+      "revision": 1,
+      "title": "Brak accounting — rozpoznanie",
+      "skills": [
+        "ccna.aaa.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Logowanie i polecenia działają, lecz nie powstają wymagane rekordy rozliczeniowe.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Accounting rejestruje aktywność i jest oddzielną częścią AAA.\n\n**Rozpoznanie:** Accounting nie został poprawnie włączony lub dostarczony.\n\n**Działanie:** Sprawdzić listę accounting, jej zastosowanie i dostępność odbiorcy.\n\n**Sprawdzenie:** Kontrolna sesja generuje oczekiwane rekordy start/stop lub komend.",
+      "card_id": "ccna.aaa.practice.case-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sekret skonfigurowany po obu stronach nie jest zgodny.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły shared secret”: RADIUS odbiera pakiety od znanego NAS, lecz odrzuca je z powodu niezgodnego współdzielonego sekretu. W bieżącym przypadku: Accounting nie został poprawnie włączony lub dostarczony.",
+          "id": "A"
+        },
+        {
+          "text_md": "Jawne odrzucenie nie jest niedostępnością serwera AAA.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Reject a timeout”: Lista metod ma group tacacs+ local. Serwer działa i zwraca jawne odrzucenie hasła; konto local nie jest użyte. W bieżącym przypadku: Accounting nie został poprawnie włączony lub dostarczony.",
+          "id": "B"
+        },
+        {
+          "text_md": "Accounting nie został poprawnie włączony lub dostarczony.",
+          "feedback_md": "Accounting rejestruje aktywność i jest oddzielną częścią AAA.\n\n**Rozpoznanie:** Accounting nie został poprawnie włączony lub dostarczony.\n\n**Działanie:** Sprawdzić listę accounting, jej zastosowanie i dostępność odbiorcy.\n\n**Sprawdzenie:** Kontrolna sesja generuje oczekiwane rekordy start/stop lub komend.",
+          "id": "C"
+        },
+        {
+          "text_md": "Serwer nie rozpoznaje nowego adresu źródłowego NAS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Inny source IP”: Po zmianie routingu zapytania AAA wychodzą z innego adresu; serwer zgłasza unknown client. W bieżącym przypadku: Accounting nie został poprawnie włączony lub dostarczony.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.aaa.practice.case-04.1",
+      "revision": 1,
+      "title": "Zły shared secret — rozpoznanie",
+      "skills": [
+        "ccna.aaa.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "RADIUS odbiera pakiety od znanego NAS, lecz odrzuca je z powodu niezgodnego współdzielonego sekretu.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Adres klienta AAA i jego shared secret są częścią zaufanej relacji serwer–urządzenie.\n\n**Rozpoznanie:** Sekret skonfigurowany po obu stronach nie jest zgodny.\n\n**Działanie:** Uzgodnić sekret routera i odpowiadającego mu klienta na serwerze.\n\n**Sprawdzenie:** Serwer poprawnie weryfikuje zapytania tego NAS.",
+      "card_id": "ccna.aaa.practice.case-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Authentication powiodło się, authorization odmówiło uprawnienia.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak autoryzacji”: Użytkownik loguje się, ale serwer odmawia wykonania konkretnej komendy. W bieżącym przypadku: Sekret skonfigurowany po obu stronach nie jest zgodny.",
+          "id": "A"
+        },
+        {
+          "text_md": "Accounting nie został poprawnie włączony lub dostarczony.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak accounting”: Logowanie i polecenia działają, lecz nie powstają wymagane rekordy rozliczeniowe. W bieżącym przypadku: Sekret skonfigurowany po obu stronach nie jest zgodny.",
+          "id": "B"
+        },
+        {
+          "text_md": "Zmiana może odciąć możliwość dalszego zarządzania.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Ryzykowna zmiana zdalna”: Operator planuje zmienić jedyną metodę logowania przez tę samą sesję SSH, bez sprawdzonego dostępu awaryjnego. W bieżącym przypadku: Sekret skonfigurowany po obu stronach nie jest zgodny.",
+          "id": "C"
+        },
+        {
+          "text_md": "Sekret skonfigurowany po obu stronach nie jest zgodny.",
+          "feedback_md": "Adres klienta AAA i jego shared secret są częścią zaufanej relacji serwer–urządzenie.\n\n**Rozpoznanie:** Sekret skonfigurowany po obu stronach nie jest zgodny.\n\n**Działanie:** Uzgodnić sekret routera i odpowiadającego mu klienta na serwerze.\n\n**Sprawdzenie:** Serwer poprawnie weryfikuje zapytania tego NAS.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.aaa.practice.case-05.1",
+      "revision": 1,
+      "title": "Inny source IP — rozpoznanie",
+      "skills": [
+        "ccna.aaa.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Po zmianie routingu zapytania AAA wychodzą z innego adresu; serwer zgłasza unknown client.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Routing i wybór source interface wpływają na rozpoznanie klienta AAA.\n\n**Rozpoznanie:** Serwer nie rozpoznaje nowego adresu źródłowego NAS.\n\n**Działanie:** Ustalić stabilne źródło i zgodny wpis klienta po stronie AAA.\n\n**Sprawdzenie:** Serwer identyfikuje zapytania jako właściwy NAS po zaplanowanym adresie.",
+      "card_id": "ccna.aaa.practice.case-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Serwer nie rozpoznaje nowego adresu źródłowego NAS.",
+          "feedback_md": "Routing i wybór source interface wpływają na rozpoznanie klienta AAA.\n\n**Rozpoznanie:** Serwer nie rozpoznaje nowego adresu źródłowego NAS.\n\n**Działanie:** Ustalić stabilne źródło i zgodny wpis klienta po stronie AAA.\n\n**Sprawdzenie:** Serwer identyfikuje zapytania jako właściwy NAS po zaplanowanym adresie.",
+          "id": "A"
+        },
+        {
+          "text_md": "Jawne odrzucenie nie jest niedostępnością serwera AAA.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Reject a timeout”: Lista metod ma group tacacs+ local. Serwer działa i zwraca jawne odrzucenie hasła; konto local nie jest użyte. W bieżącym przypadku: Serwer nie rozpoznaje nowego adresu źródłowego NAS.",
+          "id": "B"
+        },
+        {
+          "text_md": "Accounting nie został poprawnie włączony lub dostarczony.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak accounting”: Logowanie i polecenia działają, lecz nie powstają wymagane rekordy rozliczeniowe. W bieżącym przypadku: Serwer nie rozpoznaje nowego adresu źródłowego NAS.",
+          "id": "C"
+        },
+        {
+          "text_md": "Zmiana może odciąć możliwość dalszego zarządzania.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Ryzykowna zmiana zdalna”: Operator planuje zmienić jedyną metodę logowania przez tę samą sesję SSH, bez sprawdzonego dostępu awaryjnego. W bieżącym przypadku: Serwer nie rozpoznaje nowego adresu źródłowego NAS.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.aaa.practice.case-06.1",
+      "revision": 1,
+      "title": "Ryzykowna zmiana zdalna — rozpoznanie",
+      "skills": [
+        "ccna.aaa.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/sec_user_services/configuration/guide/convert/aaa/sec_cfg_authentifcn.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — AAA — tożsamość, uprawnienia i audyt",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/sec_usr_aaa/configuration/xe-16/sec-usr-aaa-xe-16-book.pdf"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.8"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Operator planuje zmienić jedyną metodę logowania przez tę samą sesję SSH, bez sprawdzonego dostępu awaryjnego.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Zmiany AAA wymagają weryfikacji nowej sesji przed porzuceniem działającego dostępu.\n\n**Rozpoznanie:** Zmiana może odciąć możliwość dalszego zarządzania.\n\n**Działanie:** Najpierw zapewnić i sprawdzić ścieżkę awaryjną, potem testować nową metodę osobną sesją.\n\n**Sprawdzenie:** Nowa sesja przechodzi poprawnie, a dostęp awaryjny pozostaje dostępny.",
+      "card_id": "ccna.aaa.practice.case-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Jawne odrzucenie nie jest niedostępnością serwera AAA.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Reject a timeout”: Lista metod ma group tacacs+ local. Serwer działa i zwraca jawne odrzucenie hasła; konto local nie jest użyte. W bieżącym przypadku: Zmiana może odciąć możliwość dalszego zarządzania.",
+          "id": "A"
+        },
+        {
+          "text_md": "Zmiana może odciąć możliwość dalszego zarządzania.",
+          "feedback_md": "Zmiany AAA wymagają weryfikacji nowej sesji przed porzuceniem działającego dostępu.\n\n**Rozpoznanie:** Zmiana może odciąć możliwość dalszego zarządzania.\n\n**Działanie:** Najpierw zapewnić i sprawdzić ścieżkę awaryjną, potem testować nową metodę osobną sesją.\n\n**Sprawdzenie:** Nowa sesja przechodzi poprawnie, a dostęp awaryjny pozostaje dostępny.",
+          "id": "B"
+        },
+        {
+          "text_md": "Sekret skonfigurowany po obu stronach nie jest zgodny.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zły shared secret”: RADIUS odbiera pakiety od znanego NAS, lecz odrzuca je z powodu niezgodnego współdzielonego sekretu. W bieżącym przypadku: Zmiana może odciąć możliwość dalszego zarządzania.",
+          "id": "C"
+        },
+        {
+          "text_md": "Serwer nie rozpoznaje nowego adresu źródłowego NAS.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Inny source IP”: Po zmianie routingu zapytania AAA wychodzą z innego adresu; serwer zgłasza unknown client. W bieżącym przypadku: Zmiana może odciąć możliwość dalszego zarządzania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

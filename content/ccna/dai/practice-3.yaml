@@ -1,0 +1,483 @@
+{
+  "schema_version": 3,
+  "id": "ccna.dai.practice-3",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Statyczna drukarka — weryfikacja",
+      "skills": [
+        "ccna.dai.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "id": "ccna.dai.practice.case-01.3.card",
+      "front_md": "DAI odrzuca ARP statycznej drukarki na untrusted; brak jej bindingu DHCP i brak pasującej ARP ACL.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Hosty statyczne wymagają zaplanowanego źródła zaufanych mapowań dla DAI.\n\n**Rozpoznanie:** DAI nie ma zatwierdzonego mapowania IP–MAC drukarki.\n\n**Działanie:** Dodać precyzyjny wyjątek ARP ACL lub wspierane statyczne mapowanie zgodne z platformą.\n\n**Sprawdzenie:** ARP drukarki przechodzi, a próba podszycia z innym MAC nadal jest blokowana.",
+      "example": "ARP drukarki przechodzi, a próba podszycia z innym MAC nadal jest blokowana."
+    },
+    {
+      "revision": 1,
+      "title": "Spoofing bramy — weryfikacja",
+      "skills": [
+        "ccna.dai.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "id": "ccna.dai.practice.case-02.3.card",
+      "front_md": "Na porcie klienta pojawia się ARP z IP bramy i obcym MAC; DAI zwiększa drop counter.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "DAI porównuje treść ARP z dopuszczonymi wiązaniami.\n\n**Rozpoznanie:** Klient próbuje ogłosić niezgodne powiązanie IP–MAC.\n\n**Działanie:** Pozostawić ochronę i zidentyfikować źródło podszywania.\n\n**Sprawdzenie:** Poprawny MAC bramy pozostaje w tabelach klientów, fałszywy ARP jest odrzucany.",
+      "example": "Poprawny MAC bramy pozostaje w tabelach klientów, fałszywy ARP jest odrzucany."
+    },
+    {
+      "revision": 1,
+      "title": "Brak binding po restarcie — weryfikacja",
+      "skills": [
+        "ccna.dai.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "id": "ccna.dai.practice.case-03.3.card",
+      "front_md": "Po restarcie switcha utracono dynamiczne bindingi snooping. Klienci zachowali dzierżawy, a DAI odrzuca ich ARP.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Ciągłość bazy snooping wpływa na działanie ochrony ARP.\n\n**Rozpoznanie:** Zniknęła baza, na której DAI opiera walidację klientów.\n\n**Działanie:** Odtworzyć wiązania kontrolowanym odnowieniem DHCP i wdrożyć wspierane utrwalanie bazy.\n\n**Sprawdzenie:** Wiązania wracają, a legalny ARP klientów przestaje być odrzucany.",
+      "example": "Wiązania wracają, a legalny ARP klientów przestaje być odrzucany."
+    },
+    {
+      "revision": 1,
+      "title": "Zbyt szerokie trust — weryfikacja",
+      "skills": [
+        "ccna.dai.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "id": "ccna.dai.practice.case-04.3.card",
+      "front_md": "Wszystkie porty klientów oznaczono ip arp inspection trust. Fałszywe ARP przechodzą.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Trusted w DAI jest granicą pominięcia kontroli, nie ogólnym sposobem naprawy dostępu.\n\n**Rozpoznanie:** Zaufane porty omijają inspekcję DAI.\n\n**Działanie:** Przywrócić untrusted na portach klientów i pozostawić tylko uzasadnione zaufanie infrastruktury.\n\n**Sprawdzenie:** ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu.",
+      "example": "ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu."
+    },
+    {
+      "revision": 1,
+      "title": "DAI poza VLAN — weryfikacja",
+      "skills": [
+        "ccna.dai.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "id": "ccna.dai.practice.case-05.3.card",
+      "front_md": "DAI działa dla VLAN 10, a incydent jest w VLAN 20, którego nie wpisano do konfiguracji inspekcji.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Zasięg ochrony ARP jest konfigurowany dla konkretnych VLAN.\n\n**Rozpoznanie:** VLAN incydentu nie jest objęty DAI.\n\n**Działanie:** Włączyć inspekcję dla VLAN 20 po przygotowaniu prawidłowych bindingów.\n\n**Sprawdzenie:** Show ip arp inspection potwierdza aktywną inspekcję VLAN 20.",
+      "example": "Show ip arp inspection potwierdza aktywną inspekcję VLAN 20."
+    },
+    {
+      "revision": 1,
+      "title": "ARP rate limit — weryfikacja",
+      "skills": [
+        "ccna.dai.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "id": "ccna.dai.practice.case-06.3.card",
+      "front_md": "Na porcie z DAI nastąpiła lawina ARP i zadziałał limit; log wskazuje arp-inspection jako powód err-disable.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "back_md": "Przekroczenie limitu ARP i niezgodność IP–MAC to różne przyczyny odrzucania.\n\n**Rozpoznanie:** Ochrona przed nadmiernym ARP wyłączyła port.\n\n**Działanie:** Usunąć źródło lawiny, ocenić limit i przywrócić port.\n\n**Sprawdzenie:** Tempo ARP pozostaje w uzasadnionym limicie bez ponownego err-disable.",
+      "example": "Tempo ARP pozostaje w uzasadnionym limicie bez ponownego err-disable."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.dai.practice.case-01.3",
+      "revision": 1,
+      "title": "Statyczna drukarka — weryfikacja",
+      "skills": [
+        "ccna.dai.case-01",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "DAI odrzuca ARP statycznej drukarki na untrusted; brak jej bindingu DHCP i brak pasującej ARP ACL.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Hosty statyczne wymagają zaplanowanego źródła zaufanych mapowań dla DAI.\n\n**Rozpoznanie:** DAI nie ma zatwierdzonego mapowania IP–MAC drukarki.\n\n**Działanie:** Dodać precyzyjny wyjątek ARP ACL lub wspierane statyczne mapowanie zgodne z platformą.\n\n**Sprawdzenie:** ARP drukarki przechodzi, a próba podszycia z innym MAC nadal jest blokowana.",
+      "card_id": "ccna.dai.practice.case-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbyt szerokie trust”: Wszystkie porty klientów oznaczono ip arp inspection trust. Fałszywe ARP przechodzą. W bieżącym przypadku: ARP drukarki przechodzi, a próba podszycia z innym MAC nadal jest blokowana.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wiązania wracają, a legalny ARP klientów przestaje być odrzucany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak binding po restarcie”: Po restarcie switcha utracono dynamiczne bindingi snooping. Klienci zachowali dzierżawy, a DAI odrzuca ich ARP. W bieżącym przypadku: ARP drukarki przechodzi, a próba podszycia z innym MAC nadal jest blokowana.",
+          "id": "B"
+        },
+        {
+          "text_md": "ARP drukarki przechodzi, a próba podszycia z innym MAC nadal jest blokowana.",
+          "feedback_md": "Hosty statyczne wymagają zaplanowanego źródła zaufanych mapowań dla DAI.\n\n**Rozpoznanie:** DAI nie ma zatwierdzonego mapowania IP–MAC drukarki.\n\n**Działanie:** Dodać precyzyjny wyjątek ARP ACL lub wspierane statyczne mapowanie zgodne z platformą.\n\n**Sprawdzenie:** ARP drukarki przechodzi, a próba podszycia z innym MAC nadal jest blokowana.",
+          "id": "C"
+        },
+        {
+          "text_md": "Poprawny MAC bramy pozostaje w tabelach klientów, fałszywy ARP jest odrzucany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Spoofing bramy”: Na porcie klienta pojawia się ARP z IP bramy i obcym MAC; DAI zwiększa drop counter. W bieżącym przypadku: ARP drukarki przechodzi, a próba podszycia z innym MAC nadal jest blokowana.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.dai.practice.case-02.3",
+      "revision": 1,
+      "title": "Spoofing bramy — weryfikacja",
+      "skills": [
+        "ccna.dai.case-02",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na porcie klienta pojawia się ARP z IP bramy i obcym MAC; DAI zwiększa drop counter.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "DAI porównuje treść ARP z dopuszczonymi wiązaniami.\n\n**Rozpoznanie:** Klient próbuje ogłosić niezgodne powiązanie IP–MAC.\n\n**Działanie:** Pozostawić ochronę i zidentyfikować źródło podszywania.\n\n**Sprawdzenie:** Poprawny MAC bramy pozostaje w tabelach klientów, fałszywy ARP jest odrzucany.",
+      "card_id": "ccna.dai.practice.case-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbyt szerokie trust”: Wszystkie porty klientów oznaczono ip arp inspection trust. Fałszywe ARP przechodzą. W bieżącym przypadku: Poprawny MAC bramy pozostaje w tabelach klientów, fałszywy ARP jest odrzucany.",
+          "id": "A"
+        },
+        {
+          "text_md": "Tempo ARP pozostaje w uzasadnionym limicie bez ponownego err-disable.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „ARP rate limit”: Na porcie z DAI nastąpiła lawina ARP i zadziałał limit; log wskazuje arp-inspection jako powód err-disable. W bieżącym przypadku: Poprawny MAC bramy pozostaje w tabelach klientów, fałszywy ARP jest odrzucany.",
+          "id": "B"
+        },
+        {
+          "text_md": "Show ip arp inspection potwierdza aktywną inspekcję VLAN 20.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „DAI poza VLAN”: DAI działa dla VLAN 10, a incydent jest w VLAN 20, którego nie wpisano do konfiguracji inspekcji. W bieżącym przypadku: Poprawny MAC bramy pozostaje w tabelach klientów, fałszywy ARP jest odrzucany.",
+          "id": "C"
+        },
+        {
+          "text_md": "Poprawny MAC bramy pozostaje w tabelach klientów, fałszywy ARP jest odrzucany.",
+          "feedback_md": "DAI porównuje treść ARP z dopuszczonymi wiązaniami.\n\n**Rozpoznanie:** Klient próbuje ogłosić niezgodne powiązanie IP–MAC.\n\n**Działanie:** Pozostawić ochronę i zidentyfikować źródło podszywania.\n\n**Sprawdzenie:** Poprawny MAC bramy pozostaje w tabelach klientów, fałszywy ARP jest odrzucany.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.dai.practice.case-03.3",
+      "revision": 1,
+      "title": "Brak binding po restarcie — weryfikacja",
+      "skills": [
+        "ccna.dai.case-03",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Po restarcie switcha utracono dynamiczne bindingi snooping. Klienci zachowali dzierżawy, a DAI odrzuca ich ARP.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Ciągłość bazy snooping wpływa na działanie ochrony ARP.\n\n**Rozpoznanie:** Zniknęła baza, na której DAI opiera walidację klientów.\n\n**Działanie:** Odtworzyć wiązania kontrolowanym odnowieniem DHCP i wdrożyć wspierane utrwalanie bazy.\n\n**Sprawdzenie:** Wiązania wracają, a legalny ARP klientów przestaje być odrzucany.",
+      "card_id": "ccna.dai.practice.case-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Wiązania wracają, a legalny ARP klientów przestaje być odrzucany.",
+          "feedback_md": "Ciągłość bazy snooping wpływa na działanie ochrony ARP.\n\n**Rozpoznanie:** Zniknęła baza, na której DAI opiera walidację klientów.\n\n**Działanie:** Odtworzyć wiązania kontrolowanym odnowieniem DHCP i wdrożyć wspierane utrwalanie bazy.\n\n**Sprawdzenie:** Wiązania wracają, a legalny ARP klientów przestaje być odrzucany.",
+          "id": "A"
+        },
+        {
+          "text_md": "Poprawny MAC bramy pozostaje w tabelach klientów, fałszywy ARP jest odrzucany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Spoofing bramy”: Na porcie klienta pojawia się ARP z IP bramy i obcym MAC; DAI zwiększa drop counter. W bieżącym przypadku: Wiązania wracają, a legalny ARP klientów przestaje być odrzucany.",
+          "id": "B"
+        },
+        {
+          "text_md": "ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbyt szerokie trust”: Wszystkie porty klientów oznaczono ip arp inspection trust. Fałszywe ARP przechodzą. W bieżącym przypadku: Wiązania wracają, a legalny ARP klientów przestaje być odrzucany.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tempo ARP pozostaje w uzasadnionym limicie bez ponownego err-disable.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „ARP rate limit”: Na porcie z DAI nastąpiła lawina ARP i zadziałał limit; log wskazuje arp-inspection jako powód err-disable. W bieżącym przypadku: Wiązania wracają, a legalny ARP klientów przestaje być odrzucany.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.dai.practice.case-04.3",
+      "revision": 1,
+      "title": "Zbyt szerokie trust — weryfikacja",
+      "skills": [
+        "ccna.dai.case-04",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Wszystkie porty klientów oznaczono ip arp inspection trust. Fałszywe ARP przechodzą.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Trusted w DAI jest granicą pominięcia kontroli, nie ogólnym sposobem naprawy dostępu.\n\n**Rozpoznanie:** Zaufane porty omijają inspekcję DAI.\n\n**Działanie:** Przywrócić untrusted na portach klientów i pozostawić tylko uzasadnione zaufanie infrastruktury.\n\n**Sprawdzenie:** ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu.",
+      "card_id": "ccna.dai.practice.case-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Show ip arp inspection potwierdza aktywną inspekcję VLAN 20.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „DAI poza VLAN”: DAI działa dla VLAN 10, a incydent jest w VLAN 20, którego nie wpisano do konfiguracji inspekcji. W bieżącym przypadku: ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu.",
+          "id": "A"
+        },
+        {
+          "text_md": "ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu.",
+          "feedback_md": "Trusted w DAI jest granicą pominięcia kontroli, nie ogólnym sposobem naprawy dostępu.\n\n**Rozpoznanie:** Zaufane porty omijają inspekcję DAI.\n\n**Działanie:** Przywrócić untrusted na portach klientów i pozostawić tylko uzasadnione zaufanie infrastruktury.\n\n**Sprawdzenie:** ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu.",
+          "id": "B"
+        },
+        {
+          "text_md": "ARP drukarki przechodzi, a próba podszycia z innym MAC nadal jest blokowana.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Statyczna drukarka”: DAI odrzuca ARP statycznej drukarki na untrusted; brak jej bindingu DHCP i brak pasującej ARP ACL. W bieżącym przypadku: ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tempo ARP pozostaje w uzasadnionym limicie bez ponownego err-disable.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „ARP rate limit”: Na porcie z DAI nastąpiła lawina ARP i zadziałał limit; log wskazuje arp-inspection jako powód err-disable. W bieżącym przypadku: ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.dai.practice.case-05.3",
+      "revision": 1,
+      "title": "DAI poza VLAN — weryfikacja",
+      "skills": [
+        "ccna.dai.case-05",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "DAI działa dla VLAN 10, a incydent jest w VLAN 20, którego nie wpisano do konfiguracji inspekcji.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Zasięg ochrony ARP jest konfigurowany dla konkretnych VLAN.\n\n**Rozpoznanie:** VLAN incydentu nie jest objęty DAI.\n\n**Działanie:** Włączyć inspekcję dla VLAN 20 po przygotowaniu prawidłowych bindingów.\n\n**Sprawdzenie:** Show ip arp inspection potwierdza aktywną inspekcję VLAN 20.",
+      "card_id": "ccna.dai.practice.case-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbyt szerokie trust”: Wszystkie porty klientów oznaczono ip arp inspection trust. Fałszywe ARP przechodzą. W bieżącym przypadku: Show ip arp inspection potwierdza aktywną inspekcję VLAN 20.",
+          "id": "A"
+        },
+        {
+          "text_md": "Poprawny MAC bramy pozostaje w tabelach klientów, fałszywy ARP jest odrzucany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Spoofing bramy”: Na porcie klienta pojawia się ARP z IP bramy i obcym MAC; DAI zwiększa drop counter. W bieżącym przypadku: Show ip arp inspection potwierdza aktywną inspekcję VLAN 20.",
+          "id": "B"
+        },
+        {
+          "text_md": "Show ip arp inspection potwierdza aktywną inspekcję VLAN 20.",
+          "feedback_md": "Zasięg ochrony ARP jest konfigurowany dla konkretnych VLAN.\n\n**Rozpoznanie:** VLAN incydentu nie jest objęty DAI.\n\n**Działanie:** Włączyć inspekcję dla VLAN 20 po przygotowaniu prawidłowych bindingów.\n\n**Sprawdzenie:** Show ip arp inspection potwierdza aktywną inspekcję VLAN 20.",
+          "id": "C"
+        },
+        {
+          "text_md": "Wiązania wracają, a legalny ARP klientów przestaje być odrzucany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak binding po restarcie”: Po restarcie switcha utracono dynamiczne bindingi snooping. Klienci zachowali dzierżawy, a DAI odrzuca ich ARP. W bieżącym przypadku: Show ip arp inspection potwierdza aktywną inspekcję VLAN 20.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.dai.practice.case-06.3",
+      "revision": 1,
+      "title": "ARP rate limit — weryfikacja",
+      "skills": [
+        "ccna.dai.case-06",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/configuration_guide/sec/b_1612_sec_3650_cg/configuring_dynamic_arp_inspection.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Dynamic ARP Inspection",
+          "url": "https://www.cisco.com/c/en/us/support/docs/switches/lan-switch-software/222274-troubleshoot-dynamic-arp-inspection-dai.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "5.7"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Na porcie z DAI nastąpiła lawina ARP i zadziałał limit; log wskazuje arp-inspection jako powód err-disable.\n\nKtóry wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku?",
+      "hints": [
+        "Dowód powinien dotyczyć tego samego przepływu, segmentu lub obiektu co problem."
+      ],
+      "explanation_md": "Przekroczenie limitu ARP i niezgodność IP–MAC to różne przyczyny odrzucania.\n\n**Rozpoznanie:** Ochrona przed nadmiernym ARP wyłączyła port.\n\n**Działanie:** Usunąć źródło lawiny, ocenić limit i przywrócić port.\n\n**Sprawdzenie:** Tempo ARP pozostaje w uzasadnionym limicie bez ponownego err-disable.",
+      "card_id": "ccna.dai.practice.case-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "ARP drukarki przechodzi, a próba podszycia z innym MAC nadal jest blokowana.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Statyczna drukarka”: DAI odrzuca ARP statycznej drukarki na untrusted; brak jej bindingu DHCP i brak pasującej ARP ACL. W bieżącym przypadku: Tempo ARP pozostaje w uzasadnionym limicie bez ponownego err-disable.",
+          "id": "A"
+        },
+        {
+          "text_md": "Wiązania wracają, a legalny ARP klientów przestaje być odrzucany.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak binding po restarcie”: Po restarcie switcha utracono dynamiczne bindingi snooping. Klienci zachowali dzierżawy, a DAI odrzuca ich ARP. W bieżącym przypadku: Tempo ARP pozostaje w uzasadnionym limicie bez ponownego err-disable.",
+          "id": "B"
+        },
+        {
+          "text_md": "ARP spoofing z portu klienta znów podlega walidacji i odrzuceniu.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zbyt szerokie trust”: Wszystkie porty klientów oznaczono ip arp inspection trust. Fałszywe ARP przechodzą. W bieżącym przypadku: Tempo ARP pozostaje w uzasadnionym limicie bez ponownego err-disable.",
+          "id": "C"
+        },
+        {
+          "text_md": "Tempo ARP pozostaje w uzasadnionym limicie bez ponownego err-disable.",
+          "feedback_md": "Przekroczenie limitu ARP i niezgodność IP–MAC to różne przyczyny odrzucania.\n\n**Rozpoznanie:** Ochrona przed nadmiernym ARP wyłączyła port.\n\n**Działanie:** Usunąć źródło lawiny, ocenić limit i przywrócić port.\n\n**Sprawdzenie:** Tempo ARP pozostaje w uzasadnionym limicie bez ponownego err-disable.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    }
+  ]
+}

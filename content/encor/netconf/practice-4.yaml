@@ -1,0 +1,579 @@
+{
+  "schema_version": 3,
+  "id": "encor.netconf.practice-4",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Nie ten port — zależności",
+      "skills": [
+        "encor.netconf.case-01",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.case-01.4.card",
+      "front_md": "Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF.\n\n**Rozpoznanie:** Klient nie trafia do skonfigurowanego endpointu NETCONF.\n\n**Działanie:** Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie:** Sesja wymienia komunikaty hello NETCONF.",
+      "example": "Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF."
+    },
+    {
+      "revision": 1,
+      "title": "Brak capability — zależności",
+      "skills": [
+        "encor.netconf.case-02",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.case-02.4.card",
+      "front_md": "Serwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Hello określa możliwości sesji; klient nie powinien ich zgadywać.\n\n**Rozpoznanie:** Klient zakłada niewspieraną capability.\n\n**Działanie:** Dobrać operację i datastore do faktycznie ogłoszonych capabilities.\n\n**Sprawdzenie:** Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+      "example": "Hello określa możliwości sesji; klient nie powinien ich zgadywać."
+    },
+    {
+      "revision": 1,
+      "title": "Lock zajęty — zależności",
+      "skills": [
+        "encor.netconf.case-03",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.case-03.4.card",
+      "front_md": "Lock datastore zwraca lock-denied, bo inna sesja trzyma blokadę.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Blokada koordynuje współbieżne modyfikacje konfiguracji.\n\n**Rozpoznanie:** Datastore jest zablokowany przez innego klienta.\n\n**Działanie:** Ustalić właściciela i skoordynować zwolnienie blokady bez ślepego nadpisywania.\n\n**Sprawdzenie:** Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.",
+      "example": "Blokada koordynuje współbieżne modyfikacje konfiguracji."
+    },
+    {
+      "revision": 1,
+      "title": "RPC error — zależności",
+      "skills": [
+        "encor.netconf.case-04",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.case-04.4.card",
+      "front_md": "Transport SSH działa, ale edit-config zwraca rpc-error z bad-element.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Sukces transportu nie oznacza poprawności operacji modelowanej.\n\n**Rozpoznanie:** Serwer odrzucił treść operacji zgodnie z modelem.\n\n**Działanie:** Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+      "example": "Sukces transportu nie oznacza poprawności operacji modelowanej."
+    },
+    {
+      "revision": 1,
+      "title": "Get-config a get — zależności",
+      "skills": [
+        "encor.netconf.case-05",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.case-05.4.card",
+      "front_md": "Operator potrzebuje także danych operacyjnych, lecz używa wyłącznie get-config.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.\n\n**Rozpoznanie:** Wybrano operację ograniczoną do konfiguracji.\n\n**Działanie:** Użyć wspieranej operacji odczytu obejmującej wymagany stan operacyjny.\n\n**Sprawdzenie:** Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.",
+      "example": "NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych."
+    },
+    {
+      "revision": 1,
+      "title": "Commit candidate — zależności",
+      "skills": [
+        "encor.netconf.case-06",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "id": "encor.netconf.practice.case-06.4.card",
+      "front_md": "Edit-config do candidate zakończyło się sukcesem, lecz running nie zmieniło się; commit nie wysłano.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "back_md": "Edycja candidate nie jest sama w sobie zatwierdzeniem do running.\n\n**Rozpoznanie:** Zmiana pozostaje w candidate datastore.\n\n**Działanie:** Po walidacji wykonać commit zgodnie ze wspieranymi capabilities.\n\n**Sprawdzenie:** Odczyt running potwierdza zatwierdzoną konfigurację.",
+      "example": "Edycja candidate nie jest sama w sobie zatwierdzeniem do running."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.netconf.practice.case-01.4",
+      "revision": 1,
+      "title": "Nie ten port — zależności",
+      "skills": [
+        "encor.netconf.case-01",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF.\n\n**Rozpoznanie:** Klient nie trafia do skonfigurowanego endpointu NETCONF.\n\n**Działanie:** Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie:** Sesja wymienia komunikaty hello NETCONF.",
+      "card_id": "encor.netconf.practice.case-01.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Blokada koordynuje współbieżne modyfikacje konfiguracji.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Lock zajęty”: Lock datastore zwraca lock-denied, bo inna sesja trzyma blokadę. W bieżącym przypadku: Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF.",
+          "feedback_md": "Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF.\n\n**Rozpoznanie:** Klient nie trafia do skonfigurowanego endpointu NETCONF.\n\n**Działanie:** Połączyć się z właściwym portem i subsystemem NETCONF.\n\n**Sprawdzenie:** Sesja wymienia komunikaty hello NETCONF.",
+          "id": "B"
+        },
+        {
+          "text_md": "Sukces transportu nie oznacza poprawności operacji modelowanej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „RPC error”: Transport SSH działa, ale edit-config zwraca rpc-error z bad-element. W bieżącym przypadku: Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF.",
+          "id": "C"
+        },
+        {
+          "text_md": "Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Commit candidate”: Edit-config do candidate zakończyło się sukcesem, lecz running nie zmieniło się; commit nie wysłano. W bieżącym przypadku: Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.netconf.practice.case-02.4",
+      "revision": 1,
+      "title": "Brak capability — zależności",
+      "skills": [
+        "encor.netconf.case-02",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Serwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Hello określa możliwości sesji; klient nie powinien ich zgadywać.\n\n**Rozpoznanie:** Klient zakłada niewspieraną capability.\n\n**Działanie:** Dobrać operację i datastore do faktycznie ogłoszonych capabilities.\n\n**Sprawdzenie:** Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+      "card_id": "encor.netconf.practice.case-02.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Blokada koordynuje współbieżne modyfikacje konfiguracji.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Lock zajęty”: Lock datastore zwraca lock-denied, bo inna sesja trzyma blokadę. W bieżącym przypadku: Hello określa możliwości sesji; klient nie powinien ich zgadywać.",
+          "id": "A"
+        },
+        {
+          "text_md": "NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Get-config a get”: Operator potrzebuje także danych operacyjnych, lecz używa wyłącznie get-config. W bieżącym przypadku: Hello określa możliwości sesji; klient nie powinien ich zgadywać.",
+          "id": "B"
+        },
+        {
+          "text_md": "Hello określa możliwości sesji; klient nie powinien ich zgadywać.",
+          "feedback_md": "Hello określa możliwości sesji; klient nie powinien ich zgadywać.\n\n**Rozpoznanie:** Klient zakłada niewspieraną capability.\n\n**Działanie:** Dobrać operację i datastore do faktycznie ogłoszonych capabilities.\n\n**Sprawdzenie:** Wybrany datastore jest wspierany i operacja nie kończy się błędem braku capability.",
+          "id": "C"
+        },
+        {
+          "text_md": "Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Commit candidate”: Edit-config do candidate zakończyło się sukcesem, lecz running nie zmieniło się; commit nie wysłano. W bieżącym przypadku: Hello określa możliwości sesji; klient nie powinien ich zgadywać.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.netconf.practice.case-03.4",
+      "revision": 1,
+      "title": "Lock zajęty — zależności",
+      "skills": [
+        "encor.netconf.case-03",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Lock datastore zwraca lock-denied, bo inna sesja trzyma blokadę.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Blokada koordynuje współbieżne modyfikacje konfiguracji.\n\n**Rozpoznanie:** Datastore jest zablokowany przez innego klienta.\n\n**Działanie:** Ustalić właściciela i skoordynować zwolnienie blokady bez ślepego nadpisywania.\n\n**Sprawdzenie:** Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.",
+      "card_id": "encor.netconf.practice.case-03.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Get-config a get”: Operator potrzebuje także danych operacyjnych, lecz używa wyłącznie get-config. W bieżącym przypadku: Blokada koordynuje współbieżne modyfikacje konfiguracji.",
+          "id": "A"
+        },
+        {
+          "text_md": "Sukces transportu nie oznacza poprawności operacji modelowanej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „RPC error”: Transport SSH działa, ale edit-config zwraca rpc-error z bad-element. W bieżącym przypadku: Blokada koordynuje współbieżne modyfikacje konfiguracji.",
+          "id": "B"
+        },
+        {
+          "text_md": "Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nie ten port”: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. W bieżącym przypadku: Blokada koordynuje współbieżne modyfikacje konfiguracji.",
+          "id": "C"
+        },
+        {
+          "text_md": "Blokada koordynuje współbieżne modyfikacje konfiguracji.",
+          "feedback_md": "Blokada koordynuje współbieżne modyfikacje konfiguracji.\n\n**Rozpoznanie:** Datastore jest zablokowany przez innego klienta.\n\n**Działanie:** Ustalić właściciela i skoordynować zwolnienie blokady bez ślepego nadpisywania.\n\n**Sprawdzenie:** Po legalnym zwolnieniu lock klient uzyskuje własną blokadę.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.netconf.practice.case-04.4",
+      "revision": 1,
+      "title": "RPC error — zależności",
+      "skills": [
+        "encor.netconf.case-04",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Transport SSH działa, ale edit-config zwraca rpc-error z bad-element.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Sukces transportu nie oznacza poprawności operacji modelowanej.\n\n**Rozpoznanie:** Serwer odrzucił treść operacji zgodnie z modelem.\n\n**Działanie:** Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+      "card_id": "encor.netconf.practice.case-04.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sukces transportu nie oznacza poprawności operacji modelowanej.",
+          "feedback_md": "Sukces transportu nie oznacza poprawności operacji modelowanej.\n\n**Rozpoznanie:** Serwer odrzucił treść operacji zgodnie z modelem.\n\n**Działanie:** Sprawdzić error-path, namespace i strukturę elementu względem modelu.\n\n**Sprawdzenie:** Poprawiony RPC kończy się sukcesem i odczyt potwierdza zamierzoną zmianę.",
+          "id": "A"
+        },
+        {
+          "text_md": "Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Commit candidate”: Edit-config do candidate zakończyło się sukcesem, lecz running nie zmieniło się; commit nie wysłano. W bieżącym przypadku: Sukces transportu nie oznacza poprawności operacji modelowanej.",
+          "id": "B"
+        },
+        {
+          "text_md": "Blokada koordynuje współbieżne modyfikacje konfiguracji.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Lock zajęty”: Lock datastore zwraca lock-denied, bo inna sesja trzyma blokadę. W bieżącym przypadku: Sukces transportu nie oznacza poprawności operacji modelowanej.",
+          "id": "C"
+        },
+        {
+          "text_md": "NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Get-config a get”: Operator potrzebuje także danych operacyjnych, lecz używa wyłącznie get-config. W bieżącym przypadku: Sukces transportu nie oznacza poprawności operacji modelowanej.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.netconf.practice.case-05.4",
+      "revision": 1,
+      "title": "Get-config a get — zależności",
+      "skills": [
+        "encor.netconf.case-05",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Operator potrzebuje także danych operacyjnych, lecz używa wyłącznie get-config.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.\n\n**Rozpoznanie:** Wybrano operację ograniczoną do konfiguracji.\n\n**Działanie:** Użyć wspieranej operacji odczytu obejmującej wymagany stan operacyjny.\n\n**Sprawdzenie:** Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.",
+      "card_id": "encor.netconf.practice.case-05.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nie ten port”: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. W bieżącym przypadku: NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+          "id": "A"
+        },
+        {
+          "text_md": "NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+          "feedback_md": "NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.\n\n**Rozpoznanie:** Wybrano operację ograniczoną do konfiguracji.\n\n**Działanie:** Użyć wspieranej operacji odczytu obejmującej wymagany stan operacyjny.\n\n**Sprawdzenie:** Odpowiedź zawiera żądane dane stanu, nie tylko konfigurację.",
+          "id": "B"
+        },
+        {
+          "text_md": "Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Commit candidate”: Edit-config do candidate zakończyło się sukcesem, lecz running nie zmieniło się; commit nie wysłano. W bieżącym przypadku: NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+          "id": "C"
+        },
+        {
+          "text_md": "Sukces transportu nie oznacza poprawności operacji modelowanej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „RPC error”: Transport SSH działa, ale edit-config zwraca rpc-error z bad-element. W bieżącym przypadku: NETCONF rozróżnia zakres odczytu konfiguracji i danych operacyjnych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.netconf.practice.case-06.4",
+      "revision": 1,
+      "title": "Commit candidate — zależności",
+      "skills": [
+        "encor.netconf.case-06",
+        "practice.4"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://developer.cisco.com/docs/ios-xe-voip/getting-started/"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/26x/26x-programmability-cg/netconf_protocol.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — NETCONF — sesje, możliwości i operacje",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "NETCONF — RFC 6241",
+          "url": "https://www.rfc-editor.org/rfc/rfc6241"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Edit-config do candidate zakończyło się sukcesem, lecz running nie zmieniło się; commit nie wysłano.\n\nKtóra zasada najbezpośredniej wyjaśnia opisany mechanizm?",
+      "hints": [
+        "Rozróżnij warunek konieczny od wystarczającego; uwzględnij zakres mechanizmu."
+      ],
+      "explanation_md": "Edycja candidate nie jest sama w sobie zatwierdzeniem do running.\n\n**Rozpoznanie:** Zmiana pozostaje w candidate datastore.\n\n**Działanie:** Po walidacji wykonać commit zgodnie ze wspieranymi capabilities.\n\n**Sprawdzenie:** Odczyt running potwierdza zatwierdzoną konfigurację.",
+      "card_id": "encor.netconf.practice.case-06.4.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Sukces transportu nie oznacza poprawności operacji modelowanej.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „RPC error”: Transport SSH działa, ale edit-config zwraca rpc-error z bad-element. W bieżącym przypadku: Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+          "id": "A"
+        },
+        {
+          "text_md": "Dostęp do zwykłego SSH CLI nie jest tożsamy z sesją NETCONF.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Nie ten port”: Klient próbuje NETCONF over SSH na nieaktywnym porcie 22; urządzenie udostępnia subsystem na 830. W bieżącym przypadku: Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+          "id": "B"
+        },
+        {
+          "text_md": "Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+          "feedback_md": "Edycja candidate nie jest sama w sobie zatwierdzeniem do running.\n\n**Rozpoznanie:** Zmiana pozostaje w candidate datastore.\n\n**Działanie:** Po walidacji wykonać commit zgodnie ze wspieranymi capabilities.\n\n**Sprawdzenie:** Odczyt running potwierdza zatwierdzoną konfigurację.",
+          "id": "C"
+        },
+        {
+          "text_md": "Hello określa możliwości sesji; klient nie powinien ich zgadywać.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Brak capability”: Serwer w hello nie ogłasza candidate, a klient próbuje edytować candidate datastore. W bieżącym przypadku: Edycja candidate nie jest sama w sobie zatwierdzeniem do running.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

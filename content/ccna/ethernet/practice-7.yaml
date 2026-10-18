@@ -1,0 +1,849 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ethernet.practice-7",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.ethernet.practice.compare-01.3.card",
+      "front_md": "**Zgłoszenie I**\n\nSwitch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast.\n\n**Zgłoszenie II**\n\nRamka od hosta A wchodzi przez Gi1/0/3. Switch nie miał wcześniej jego MAC.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brakuje wpisu MAC dla celu w tej domenie L2. Oczekiwać floodingu na dozwolone porty forwarding tego VLAN poza wejściowym.\n\n**Sprawdzenie I:** Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\n**Zgłoszenie II:** Switch poznaje położenie hosta z MAC źródłowego. Sprawdzić wpis dla źródłowego MAC w tabeli właściwego VLAN.\n\n**Sprawdzenie II:** MAC hosta A wskazuje Gi1/0/3.\n\n**Zależności:** Unknown unicast jest floodowany w obrębie VLAN, nie całego switcha bez ograniczeń. Uczenie MAC opiera się na adresie źródłowym ramki przychodzącej.",
+      "example": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — MAC hosta A wskazuje Gi1/0/3."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.ethernet.practice.compare-02.3.card",
+      "front_md": "**Zgłoszenie I**\n\nHost przeniesiono z portu 3 na 5; nowa ramka tego hosta przychodzi przez port 5.\n\n**Zgłoszenie II**\n\nPod ruchem rośnie licznik CRC na odbiorczym porcie miedzianym; po wymianie uszkodzonego patchcordu przyrost ustaje.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Położenie źródła zmieniło się względem starego wpisu. Pozwolić switchowi zaktualizować dynamiczny wpis i sprawdzić port 5.\n\n**Sprawdzenie I:** MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\n**Zgłoszenie II:** Warstwa fizyczna uszkadzała odbierane ramki. Wymienić wadliwy element toru i obserwować nowe przyrosty błędów.\n\n**Sprawdzenie II:** Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\n**Zależności:** Dynamiczna tabela MAC może aktualizować położenie hosta na podstawie nowych ramek. CRC sygnalizuje uszkodzone ramki, a historyczny licznik nie zeruje się sam po naprawie.",
+      "example": "I — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\nII — Przy podobnym ruchu CRC nie przybywa po naprawie kabla."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.ethernet.practice.compare-03.3.card",
+      "front_md": "**Zgłoszenie I**\n\nJeden koniec jest wymuszony half-duplex, drugi full-duplex. Ruch jest niestabilny i pojawiają się błędy.\n\n**Zgłoszenie II**\n\nHost wysyła pakiet IPv4 do innej podsieci przez router. Docelowy IP należy do serwera zdalnego.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Końce łącza używają niezgodnego duplexu. Uzgodnić poprawną autonegocjację lub zgodne parametry na obu końcach.\n\n**Sprawdzenie I:** Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\n**Zgłoszenie II:** Host potrzebuje adresu MAC lokalnej bramy, nie zdalnego serwera. Zbudować ramkę do MAC bramy przy zachowaniu docelowego IP serwera.\n\n**Sprawdzenie II:** Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.\n\n**Zależności:** Zgodność ustawień fizycznych obu końców jest warunkiem poprawnej pracy Ethernet. Nagłówek L2 opisuje lokalny skok, a IP zachowuje adres docelowego hosta.",
+      "example": "I — Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\nII — Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.ethernet.practice.compare-04.3.card",
+      "front_md": "**Zgłoszenie I**\n\nSwitch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast.\n\n**Zgłoszenie II**\n\nHost przeniesiono z portu 3 na 5; nowa ramka tego hosta przychodzi przez port 5.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brakuje wpisu MAC dla celu w tej domenie L2. Oczekiwać floodingu na dozwolone porty forwarding tego VLAN poza wejściowym.\n\n**Sprawdzenie I:** Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\n**Zgłoszenie II:** Położenie źródła zmieniło się względem starego wpisu. Pozwolić switchowi zaktualizować dynamiczny wpis i sprawdzić port 5.\n\n**Sprawdzenie II:** MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\n**Zależności:** Unknown unicast jest floodowany w obrębie VLAN, nie całego switcha bez ograniczeń. Dynamiczna tabela MAC może aktualizować położenie hosta na podstawie nowych ramek.",
+      "example": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.ethernet.practice.compare-05.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRamka od hosta A wchodzi przez Gi1/0/3. Switch nie miał wcześniej jego MAC.\n\n**Zgłoszenie II**\n\nJeden koniec jest wymuszony half-duplex, drugi full-duplex. Ruch jest niestabilny i pojawiają się błędy.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Switch poznaje położenie hosta z MAC źródłowego. Sprawdzić wpis dla źródłowego MAC w tabeli właściwego VLAN.\n\n**Sprawdzenie I:** MAC hosta A wskazuje Gi1/0/3.\n\n**Zgłoszenie II:** Końce łącza używają niezgodnego duplexu. Uzgodnić poprawną autonegocjację lub zgodne parametry na obu końcach.\n\n**Sprawdzenie II:** Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\n**Zależności:** Uczenie MAC opiera się na adresie źródłowym ramki przychodzącej. Zgodność ustawień fizycznych obu końców jest warunkiem poprawnej pracy Ethernet.",
+      "example": "I — MAC hosta A wskazuje Gi1/0/3.\n\nII — Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.ethernet.practice.compare-06.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPod ruchem rośnie licznik CRC na odbiorczym porcie miedzianym; po wymianie uszkodzonego patchcordu przyrost ustaje.\n\n**Zgłoszenie II**\n\nHost wysyła pakiet IPv4 do innej podsieci przez router. Docelowy IP należy do serwera zdalnego.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Warstwa fizyczna uszkadzała odbierane ramki. Wymienić wadliwy element toru i obserwować nowe przyrosty błędów.\n\n**Sprawdzenie I:** Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\n**Zgłoszenie II:** Host potrzebuje adresu MAC lokalnej bramy, nie zdalnego serwera. Zbudować ramkę do MAC bramy przy zachowaniu docelowego IP serwera.\n\n**Sprawdzenie II:** Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.\n\n**Zależności:** CRC sygnalizuje uszkodzone ramki, a historyczny licznik nie zeruje się sam po naprawie. Nagłówek L2 opisuje lokalny skok, a IP zachowuje adres docelowego hosta.",
+      "example": "I — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\nII — Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.ethernet.practice.compare-07.3.card",
+      "front_md": "**Zgłoszenie I**\n\nSwitch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast.\n\n**Zgłoszenie II**\n\nHost wysyła pakiet IPv4 do innej podsieci przez router. Docelowy IP należy do serwera zdalnego.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brakuje wpisu MAC dla celu w tej domenie L2. Oczekiwać floodingu na dozwolone porty forwarding tego VLAN poza wejściowym.\n\n**Sprawdzenie I:** Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\n**Zgłoszenie II:** Host potrzebuje adresu MAC lokalnej bramy, nie zdalnego serwera. Zbudować ramkę do MAC bramy przy zachowaniu docelowego IP serwera.\n\n**Sprawdzenie II:** Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.\n\n**Zależności:** Unknown unicast jest floodowany w obrębie VLAN, nie całego switcha bez ograniczeń. Nagłówek L2 opisuje lokalny skok, a IP zachowuje adres docelowego hosta.",
+      "example": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.ethernet.practice.compare-08.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRamka od hosta A wchodzi przez Gi1/0/3. Switch nie miał wcześniej jego MAC.\n\n**Zgłoszenie II**\n\nPod ruchem rośnie licznik CRC na odbiorczym porcie miedzianym; po wymianie uszkodzonego patchcordu przyrost ustaje.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Switch poznaje położenie hosta z MAC źródłowego. Sprawdzić wpis dla źródłowego MAC w tabeli właściwego VLAN.\n\n**Sprawdzenie I:** MAC hosta A wskazuje Gi1/0/3.\n\n**Zgłoszenie II:** Warstwa fizyczna uszkadzała odbierane ramki. Wymienić wadliwy element toru i obserwować nowe przyrosty błędów.\n\n**Sprawdzenie II:** Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\n**Zależności:** Uczenie MAC opiera się na adresie źródłowym ramki przychodzącej. CRC sygnalizuje uszkodzone ramki, a historyczny licznik nie zeruje się sam po naprawie.",
+      "example": "I — MAC hosta A wskazuje Gi1/0/3.\n\nII — Przy podobnym ruchu CRC nie przybywa po naprawie kabla."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.ethernet.practice.compare-09.3.card",
+      "front_md": "**Zgłoszenie I**\n\nHost przeniesiono z portu 3 na 5; nowa ramka tego hosta przychodzi przez port 5.\n\n**Zgłoszenie II**\n\nJeden koniec jest wymuszony half-duplex, drugi full-duplex. Ruch jest niestabilny i pojawiają się błędy.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Położenie źródła zmieniło się względem starego wpisu. Pozwolić switchowi zaktualizować dynamiczny wpis i sprawdzić port 5.\n\n**Sprawdzenie I:** MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\n**Zgłoszenie II:** Końce łącza używają niezgodnego duplexu. Uzgodnić poprawną autonegocjację lub zgodne parametry na obu końcach.\n\n**Sprawdzenie II:** Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\n**Zależności:** Dynamiczna tabela MAC może aktualizować położenie hosta na podstawie nowych ramek. Zgodność ustawień fizycznych obu końców jest warunkiem poprawnej pracy Ethernet.",
+      "example": "I — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\nII — Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.ethernet.practice.compare-10.3.card",
+      "front_md": "**Zgłoszenie I**\n\nSwitch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast.\n\n**Zgłoszenie II**\n\nPod ruchem rośnie licznik CRC na odbiorczym porcie miedzianym; po wymianie uszkodzonego patchcordu przyrost ustaje.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Brakuje wpisu MAC dla celu w tej domenie L2. Oczekiwać floodingu na dozwolone porty forwarding tego VLAN poza wejściowym.\n\n**Sprawdzenie I:** Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\n**Zgłoszenie II:** Warstwa fizyczna uszkadzała odbierane ramki. Wymienić wadliwy element toru i obserwować nowe przyrosty błędów.\n\n**Sprawdzenie II:** Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\n**Zależności:** Unknown unicast jest floodowany w obrębie VLAN, nie całego switcha bez ograniczeń. CRC sygnalizuje uszkodzone ramki, a historyczny licznik nie zeruje się sam po naprawie.",
+      "example": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — Przy podobnym ruchu CRC nie przybywa po naprawie kabla."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ethernet.practice.compare-01.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.13"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSwitch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast.\n\n**Zgłoszenie II**\n\nRamka od hosta A wchodzi przez Gi1/0/3. Switch nie miał wcześniej jego MAC.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brakuje wpisu MAC dla celu w tej domenie L2. Oczekiwać floodingu na dozwolone porty forwarding tego VLAN poza wejściowym.\n\n**Sprawdzenie I:** Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\n**Zgłoszenie II:** Switch poznaje położenie hosta z MAC źródłowego. Sprawdzić wpis dla źródłowego MAC w tabeli właściwego VLAN.\n\n**Sprawdzenie II:** MAC hosta A wskazuje Gi1/0/3.\n\n**Zależności:** Unknown unicast jest floodowany w obrębie VLAN, nie całego switcha bez ograniczeń. Uczenie MAC opiera się na adresie źródłowym ramki przychodzącej.",
+      "card_id": "ccna.ethernet.practice.compare-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — MAC hosta A wskazuje Gi1/0/3.\n\nII — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brakuje wpisu MAC dla celu w tej domenie L2. Zgłoszenie II: Switch poznaje położenie hosta z MAC źródłowego.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host przeniesiono z portu 3 na 5; nowa ramka tego hosta przychodzi przez port 5. Dla II: MAC hosta A wskazuje Gi1/0/3.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\nII — MAC hosta A wskazuje Gi1/0/3.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host przeniesiono z portu 3 na 5; nowa ramka tego hosta przychodzi przez port 5. Dla I: Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — MAC hosta A wskazuje Gi1/0/3.",
+          "feedback_md": "**Zgłoszenie I:** Brakuje wpisu MAC dla celu w tej domenie L2. Oczekiwać floodingu na dozwolone porty forwarding tego VLAN poza wejściowym.\n\n**Sprawdzenie I:** Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\n**Zgłoszenie II:** Switch poznaje położenie hosta z MAC źródłowego. Sprawdzić wpis dla źródłowego MAC w tabeli właściwego VLAN.\n\n**Sprawdzenie II:** MAC hosta A wskazuje Gi1/0/3.\n\n**Zależności:** Unknown unicast jest floodowany w obrębie VLAN, nie całego switcha bez ograniczeń. Uczenie MAC opiera się na adresie źródłowym ramki przychodzącej.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ethernet.practice.compare-02.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.13"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost przeniesiono z portu 3 na 5; nowa ramka tego hosta przychodzi przez port 5.\n\n**Zgłoszenie II**\n\nPod ruchem rośnie licznik CRC na odbiorczym porcie miedzianym; po wymianie uszkodzonego patchcordu przyrost ustaje.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Położenie źródła zmieniło się względem starego wpisu. Pozwolić switchowi zaktualizować dynamiczny wpis i sprawdzić port 5.\n\n**Sprawdzenie I:** MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\n**Zgłoszenie II:** Warstwa fizyczna uszkadzała odbierane ramki. Wymienić wadliwy element toru i obserwować nowe przyrosty błędów.\n\n**Sprawdzenie II:** Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\n**Zależności:** Dynamiczna tabela MAC może aktualizować położenie hosta na podstawie nowych ramek. CRC sygnalizuje uszkodzone ramki, a historyczny licznik nie zeruje się sam po naprawie.",
+      "card_id": "ccna.ethernet.practice.compare-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\nII — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.",
+          "feedback_md": "**Zgłoszenie I:** Położenie źródła zmieniło się względem starego wpisu. Pozwolić switchowi zaktualizować dynamiczny wpis i sprawdzić port 5.\n\n**Sprawdzenie I:** MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\n**Zgłoszenie II:** Warstwa fizyczna uszkadzała odbierane ramki. Wymienić wadliwy element toru i obserwować nowe przyrosty błędów.\n\n**Sprawdzenie II:** Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\n**Zależności:** Dynamiczna tabela MAC może aktualizować położenie hosta na podstawie nowych ramek. CRC sygnalizuje uszkodzone ramki, a historyczny licznik nie zeruje się sam po naprawie.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\nII — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Położenie źródła zmieniło się względem starego wpisu. Zgłoszenie II: Warstwa fizyczna uszkadzała odbierane ramki.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\nII — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Switch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast. Dla II: Przy podobnym ruchu CRC nie przybywa po naprawie kabla.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Switch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast. Dla I: MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ethernet.practice.compare-03.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.13"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nJeden koniec jest wymuszony half-duplex, drugi full-duplex. Ruch jest niestabilny i pojawiają się błędy.\n\n**Zgłoszenie II**\n\nHost wysyła pakiet IPv4 do innej podsieci przez router. Docelowy IP należy do serwera zdalnego.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Końce łącza używają niezgodnego duplexu. Uzgodnić poprawną autonegocjację lub zgodne parametry na obu końcach.\n\n**Sprawdzenie I:** Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\n**Zgłoszenie II:** Host potrzebuje adresu MAC lokalnej bramy, nie zdalnego serwera. Zbudować ramkę do MAC bramy przy zachowaniu docelowego IP serwera.\n\n**Sprawdzenie II:** Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.\n\n**Zależności:** Zgodność ustawień fizycznych obu końców jest warunkiem poprawnej pracy Ethernet. Nagłówek L2 opisuje lokalny skok, a IP zachowuje adres docelowego hosta.",
+      "card_id": "ccna.ethernet.practice.compare-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.\n\nII — Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Końce łącza używają niezgodnego duplexu. Zgłoszenie II: Host potrzebuje adresu MAC lokalnej bramy, nie zdalnego serwera.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\nII — Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.",
+          "feedback_md": "**Zgłoszenie I:** Końce łącza używają niezgodnego duplexu. Uzgodnić poprawną autonegocjację lub zgodne parametry na obu końcach.\n\n**Sprawdzenie I:** Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\n**Zgłoszenie II:** Host potrzebuje adresu MAC lokalnej bramy, nie zdalnego serwera. Zbudować ramkę do MAC bramy przy zachowaniu docelowego IP serwera.\n\n**Sprawdzenie II:** Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.\n\n**Zależności:** Zgodność ustawień fizycznych obu końców jest warunkiem poprawnej pracy Ethernet. Nagłówek L2 opisuje lokalny skok, a IP zachowuje adres docelowego hosta.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\nII — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Switch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast. Dla II: Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Switch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast. Dla I: Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ethernet.practice.compare-04.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.13"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSwitch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast.\n\n**Zgłoszenie II**\n\nHost przeniesiono z portu 3 na 5; nowa ramka tego hosta przychodzi przez port 5.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brakuje wpisu MAC dla celu w tej domenie L2. Oczekiwać floodingu na dozwolone porty forwarding tego VLAN poza wejściowym.\n\n**Sprawdzenie I:** Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\n**Zgłoszenie II:** Położenie źródła zmieniło się względem starego wpisu. Pozwolić switchowi zaktualizować dynamiczny wpis i sprawdzić port 5.\n\n**Sprawdzenie II:** MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\n**Zależności:** Unknown unicast jest floodowany w obrębie VLAN, nie całego switcha bez ograniczeń. Dynamiczna tabela MAC może aktualizować położenie hosta na podstawie nowych ramek.",
+      "card_id": "ccna.ethernet.practice.compare-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\nII — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brakuje wpisu MAC dla celu w tej domenie L2. Zgłoszenie II: Położenie źródła zmieniło się względem starego wpisu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — MAC hosta A wskazuje Gi1/0/3.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Ramka od hosta A wchodzi przez Gi1/0/3. Switch nie miał wcześniej jego MAC. Dla II: MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.",
+          "feedback_md": "**Zgłoszenie I:** Brakuje wpisu MAC dla celu w tej domenie L2. Oczekiwać floodingu na dozwolone porty forwarding tego VLAN poza wejściowym.\n\n**Sprawdzenie I:** Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\n**Zgłoszenie II:** Położenie źródła zmieniło się względem starego wpisu. Pozwolić switchowi zaktualizować dynamiczny wpis i sprawdzić port 5.\n\n**Sprawdzenie II:** MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\n**Zależności:** Unknown unicast jest floodowany w obrębie VLAN, nie całego switcha bez ograniczeń. Dynamiczna tabela MAC może aktualizować położenie hosta na podstawie nowych ramek.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — MAC hosta A wskazuje Gi1/0/3.\n\nII — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Ramka od hosta A wchodzi przez Gi1/0/3. Switch nie miał wcześniej jego MAC. Dla I: Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ethernet.practice.compare-05.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.13"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRamka od hosta A wchodzi przez Gi1/0/3. Switch nie miał wcześniej jego MAC.\n\n**Zgłoszenie II**\n\nJeden koniec jest wymuszony half-duplex, drugi full-duplex. Ruch jest niestabilny i pojawiają się błędy.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Switch poznaje położenie hosta z MAC źródłowego. Sprawdzić wpis dla źródłowego MAC w tabeli właściwego VLAN.\n\n**Sprawdzenie I:** MAC hosta A wskazuje Gi1/0/3.\n\n**Zgłoszenie II:** Końce łącza używają niezgodnego duplexu. Uzgodnić poprawną autonegocjację lub zgodne parametry na obu końcach.\n\n**Sprawdzenie II:** Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\n**Zależności:** Uczenie MAC opiera się na adresie źródłowym ramki przychodzącej. Zgodność ustawień fizycznych obu końców jest warunkiem poprawnej pracy Ethernet.",
+      "card_id": "ccna.ethernet.practice.compare-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\nII — MAC hosta A wskazuje Gi1/0/3.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Switch poznaje położenie hosta z MAC źródłowego. Zgłoszenie II: Końce łącza używają niezgodnego duplexu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — MAC hosta A wskazuje Gi1/0/3.\n\nII — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Switch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast. Dla II: Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Switch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast. Dla I: MAC hosta A wskazuje Gi1/0/3.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — MAC hosta A wskazuje Gi1/0/3.\n\nII — Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.",
+          "feedback_md": "**Zgłoszenie I:** Switch poznaje położenie hosta z MAC źródłowego. Sprawdzić wpis dla źródłowego MAC w tabeli właściwego VLAN.\n\n**Sprawdzenie I:** MAC hosta A wskazuje Gi1/0/3.\n\n**Zgłoszenie II:** Końce łącza używają niezgodnego duplexu. Uzgodnić poprawną autonegocjację lub zgodne parametry na obu końcach.\n\n**Sprawdzenie II:** Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\n**Zależności:** Uczenie MAC opiera się na adresie źródłowym ramki przychodzącej. Zgodność ustawień fizycznych obu końców jest warunkiem poprawnej pracy Ethernet.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ethernet.practice.compare-06.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.13"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPod ruchem rośnie licznik CRC na odbiorczym porcie miedzianym; po wymianie uszkodzonego patchcordu przyrost ustaje.\n\n**Zgłoszenie II**\n\nHost wysyła pakiet IPv4 do innej podsieci przez router. Docelowy IP należy do serwera zdalnego.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Warstwa fizyczna uszkadzała odbierane ramki. Wymienić wadliwy element toru i obserwować nowe przyrosty błędów.\n\n**Sprawdzenie I:** Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\n**Zgłoszenie II:** Host potrzebuje adresu MAC lokalnej bramy, nie zdalnego serwera. Zbudować ramkę do MAC bramy przy zachowaniu docelowego IP serwera.\n\n**Sprawdzenie II:** Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.\n\n**Zależności:** CRC sygnalizuje uszkodzone ramki, a historyczny licznik nie zeruje się sam po naprawie. Nagłówek L2 opisuje lokalny skok, a IP zachowuje adres docelowego hosta.",
+      "card_id": "ccna.ethernet.practice.compare-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\nII — Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.",
+          "feedback_md": "**Zgłoszenie I:** Warstwa fizyczna uszkadzała odbierane ramki. Wymienić wadliwy element toru i obserwować nowe przyrosty błędów.\n\n**Sprawdzenie I:** Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\n**Zgłoszenie II:** Host potrzebuje adresu MAC lokalnej bramy, nie zdalnego serwera. Zbudować ramkę do MAC bramy przy zachowaniu docelowego IP serwera.\n\n**Sprawdzenie II:** Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.\n\n**Zależności:** CRC sygnalizuje uszkodzone ramki, a historyczny licznik nie zeruje się sam po naprawie. Nagłówek L2 opisuje lokalny skok, a IP zachowuje adres docelowego hosta.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.\n\nII — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Warstwa fizyczna uszkadzała odbierane ramki. Zgłoszenie II: Host potrzebuje adresu MAC lokalnej bramy, nie zdalnego serwera.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\nII — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Switch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast. Dla II: Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Switch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast. Dla I: Przy podobnym ruchu CRC nie przybywa po naprawie kabla.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ethernet.practice.compare-07.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.13"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSwitch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast.\n\n**Zgłoszenie II**\n\nHost wysyła pakiet IPv4 do innej podsieci przez router. Docelowy IP należy do serwera zdalnego.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brakuje wpisu MAC dla celu w tej domenie L2. Oczekiwać floodingu na dozwolone porty forwarding tego VLAN poza wejściowym.\n\n**Sprawdzenie I:** Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\n**Zgłoszenie II:** Host potrzebuje adresu MAC lokalnej bramy, nie zdalnego serwera. Zbudować ramkę do MAC bramy przy zachowaniu docelowego IP serwera.\n\n**Sprawdzenie II:** Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.\n\n**Zależności:** Unknown unicast jest floodowany w obrębie VLAN, nie całego switcha bez ograniczeń. Nagłówek L2 opisuje lokalny skok, a IP zachowuje adres docelowego hosta.",
+      "card_id": "ccna.ethernet.practice.compare-07.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.\n\nII — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brakuje wpisu MAC dla celu w tej domenie L2. Zgłoszenie II: Host potrzebuje adresu MAC lokalnej bramy, nie zdalnego serwera.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.",
+          "feedback_md": "**Zgłoszenie I:** Brakuje wpisu MAC dla celu w tej domenie L2. Oczekiwać floodingu na dozwolone porty forwarding tego VLAN poza wejściowym.\n\n**Sprawdzenie I:** Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\n**Zgłoszenie II:** Host potrzebuje adresu MAC lokalnej bramy, nie zdalnego serwera. Zbudować ramkę do MAC bramy przy zachowaniu docelowego IP serwera.\n\n**Sprawdzenie II:** Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.\n\n**Zależności:** Unknown unicast jest floodowany w obrębie VLAN, nie całego switcha bez ograniczeń. Nagłówek L2 opisuje lokalny skok, a IP zachowuje adres docelowego hosta.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — MAC hosta A wskazuje Gi1/0/3.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Ramka od hosta A wchodzi przez Gi1/0/3. Switch nie miał wcześniej jego MAC. Dla II: Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — MAC hosta A wskazuje Gi1/0/3.\n\nII — Przechwycenie pokazuje docelowy MAC routera i docelowy IP serwera.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Ramka od hosta A wchodzi przez Gi1/0/3. Switch nie miał wcześniej jego MAC. Dla I: Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ethernet.practice.compare-08.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.13"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRamka od hosta A wchodzi przez Gi1/0/3. Switch nie miał wcześniej jego MAC.\n\n**Zgłoszenie II**\n\nPod ruchem rośnie licznik CRC na odbiorczym porcie miedzianym; po wymianie uszkodzonego patchcordu przyrost ustaje.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Switch poznaje położenie hosta z MAC źródłowego. Sprawdzić wpis dla źródłowego MAC w tabeli właściwego VLAN.\n\n**Sprawdzenie I:** MAC hosta A wskazuje Gi1/0/3.\n\n**Zgłoszenie II:** Warstwa fizyczna uszkadzała odbierane ramki. Wymienić wadliwy element toru i obserwować nowe przyrosty błędów.\n\n**Sprawdzenie II:** Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\n**Zależności:** Uczenie MAC opiera się na adresie źródłowym ramki przychodzącej. CRC sygnalizuje uszkodzone ramki, a historyczny licznik nie zeruje się sam po naprawie.",
+      "card_id": "ccna.ethernet.practice.compare-08.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\nII — MAC hosta A wskazuje Gi1/0/3.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Switch poznaje położenie hosta z MAC źródłowego. Zgłoszenie II: Warstwa fizyczna uszkadzała odbierane ramki.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — MAC hosta A wskazuje Gi1/0/3.\n\nII — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Switch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast. Dla II: Przy podobnym ruchu CRC nie przybywa po naprawie kabla.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — MAC hosta A wskazuje Gi1/0/3.\n\nII — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.",
+          "feedback_md": "**Zgłoszenie I:** Switch poznaje położenie hosta z MAC źródłowego. Sprawdzić wpis dla źródłowego MAC w tabeli właściwego VLAN.\n\n**Sprawdzenie I:** MAC hosta A wskazuje Gi1/0/3.\n\n**Zgłoszenie II:** Warstwa fizyczna uszkadzała odbierane ramki. Wymienić wadliwy element toru i obserwować nowe przyrosty błędów.\n\n**Sprawdzenie II:** Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\n**Zależności:** Uczenie MAC opiera się na adresie źródłowym ramki przychodzącej. CRC sygnalizuje uszkodzone ramki, a historyczny licznik nie zeruje się sam po naprawie.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Switch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast. Dla I: MAC hosta A wskazuje Gi1/0/3.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ethernet.practice.compare-09.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.13"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost przeniesiono z portu 3 na 5; nowa ramka tego hosta przychodzi przez port 5.\n\n**Zgłoszenie II**\n\nJeden koniec jest wymuszony half-duplex, drugi full-duplex. Ruch jest niestabilny i pojawiają się błędy.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Położenie źródła zmieniło się względem starego wpisu. Pozwolić switchowi zaktualizować dynamiczny wpis i sprawdzić port 5.\n\n**Sprawdzenie I:** MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\n**Zgłoszenie II:** Końce łącza używają niezgodnego duplexu. Uzgodnić poprawną autonegocjację lub zgodne parametry na obu końcach.\n\n**Sprawdzenie II:** Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\n**Zależności:** Dynamiczna tabela MAC może aktualizować położenie hosta na podstawie nowych ramek. Zgodność ustawień fizycznych obu końców jest warunkiem poprawnej pracy Ethernet.",
+      "card_id": "ccna.ethernet.practice.compare-09.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\nII — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Położenie źródła zmieniło się względem starego wpisu. Zgłoszenie II: Końce łącza używają niezgodnego duplexu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\nII — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Switch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast. Dla II: Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Switch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast. Dla I: MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\nII — Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.",
+          "feedback_md": "**Zgłoszenie I:** Położenie źródła zmieniło się względem starego wpisu. Pozwolić switchowi zaktualizować dynamiczny wpis i sprawdzić port 5.\n\n**Sprawdzenie I:** MAC hosta wskazuje nowy port, bez ciągłego przeskakiwania.\n\n**Zgłoszenie II:** Końce łącza używają niezgodnego duplexu. Uzgodnić poprawną autonegocjację lub zgodne parametry na obu końcach.\n\n**Sprawdzenie II:** Oba końce pokazują zgodny duplex i przestają przyrastać błędy związane z mismatch.\n\n**Zależności:** Dynamiczna tabela MAC może aktualizować położenie hosta na podstawie nowych ramek. Zgodność ustawień fizycznych obu końców jest warunkiem poprawnej pracy Ethernet.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ethernet.practice.compare-10.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "ccna.ethernet.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst2960/software/release/15-2_2_e/configuration/guide/b_1522e_2960_2960c_2960s_2960sf_2960p_cg/b_1522e_2960_2960c_2960s_2960sf_2960p_cg_chapter_011.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Ethernet, MAC i ARP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.13"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSwitch zna MAC źródłowy, ale nie zna docelowego w danym VLAN. Ramka jest unicast.\n\n**Zgłoszenie II**\n\nPod ruchem rośnie licznik CRC na odbiorczym porcie miedzianym; po wymianie uszkodzonego patchcordu przyrost ustaje.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Brakuje wpisu MAC dla celu w tej domenie L2. Oczekiwać floodingu na dozwolone porty forwarding tego VLAN poza wejściowym.\n\n**Sprawdzenie I:** Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\n**Zgłoszenie II:** Warstwa fizyczna uszkadzała odbierane ramki. Wymienić wadliwy element toru i obserwować nowe przyrosty błędów.\n\n**Sprawdzenie II:** Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\n**Zależności:** Unknown unicast jest floodowany w obrębie VLAN, nie całego switcha bez ograniczeń. CRC sygnalizuje uszkodzone ramki, a historyczny licznik nie zeruje się sam po naprawie.",
+      "card_id": "ccna.ethernet.practice.compare-10.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.",
+          "feedback_md": "**Zgłoszenie I:** Brakuje wpisu MAC dla celu w tej domenie L2. Oczekiwać floodingu na dozwolone porty forwarding tego VLAN poza wejściowym.\n\n**Sprawdzenie I:** Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\n**Zgłoszenie II:** Warstwa fizyczna uszkadzała odbierane ramki. Wymienić wadliwy element toru i obserwować nowe przyrosty błędów.\n\n**Sprawdzenie II:** Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\n**Zależności:** Unknown unicast jest floodowany w obrębie VLAN, nie całego switcha bez ograniczeń. CRC sygnalizuje uszkodzone ramki, a historyczny licznik nie zeruje się sam po naprawie.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.\n\nII — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Brakuje wpisu MAC dla celu w tej domenie L2. Zgłoszenie II: Warstwa fizyczna uszkadzała odbierane ramki.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.\n\nII — MAC hosta A wskazuje Gi1/0/3.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Ramka od hosta A wchodzi przez Gi1/0/3. Switch nie miał wcześniej jego MAC. Dla II: Przy podobnym ruchu CRC nie przybywa po naprawie kabla.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — MAC hosta A wskazuje Gi1/0/3.\n\nII — Przy podobnym ruchu CRC nie przybywa po naprawie kabla.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Ramka od hosta A wchodzi przez Gi1/0/3. Switch nie miał wcześniej jego MAC. Dla I: Ramka nie jest rozsyłana do innych VLAN, lecz tylko w odpowiedniej domenie.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

@@ -1,0 +1,1029 @@
+{
+  "schema_version": 3,
+  "id": "encor.restconf.practice-7",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.compare-01.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRESTCONF zwraca 401 dla zapytania, a TLS działa.\n\n**Zgłoszenie II**\n\nPoprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Żądanie nie ma skutecznego uwierzytelnienia. Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie I:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\n**Zgłoszenie II:** Tożsamość nie ma uprawnienia do operacji. Zweryfikować autoryzację dla tego zasobu i metody.\n\n**Sprawdzenie II:** Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\n**Zależności:** 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG. 403 rozróżnia brak autoryzacji od błędnych danych logowania.",
+      "example": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.compare-02.3.card",
+      "front_md": "**Zgłoszenie I**\n\nSerwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404.\n\n**Zgłoszenie II**\n\nPATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wskazany zasób nie jest znaleziony pod tą ścieżką. Zweryfikować URI, namespace modelu i klucze list.\n\n**Sprawdzenie I:** Poprawny URI zwraca oczekiwany istniejący zasób.\n\n**Zgłoszenie II:** Payload nie jest poprawnym dokumentem JSON. Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie II:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\n**Zależności:** Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI. Poprawność składni serializacji poprzedza walidację modelu.",
+      "example": "I — Poprawny URI zwraca oczekiwany istniejący zasób.\n\nII — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.compare-03.3.card",
+      "front_md": "**Zgłoszenie I**\n\nOperator użył PUT dla całego zasobu, przesyłając tylko część jego konfiguracji i nie uwzględniając semantyki zastąpienia.\n\n**Zgłoszenie II**\n\nKlient odrzuca HTTPS, bo nazwa serwera nie pasuje do certyfikatu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany. Dobrać wspieraną operację częściowej zmiany lub pełny poprawny payload PUT.\n\n**Sprawdzenie I:** Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\n**Zgłoszenie II:** Nie powiodła się weryfikacja tożsamości TLS. Użyć poprawnej nazwy i certyfikatu z zaufanego łańcucha.\n\n**Sprawdzenie II:** Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.\n\n**Zależności:** PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych. Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+      "example": "I — Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\nII — Połączenie HTTPS działa z włączoną weryfikacją certyfikatu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.compare-04.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRESTCONF zwraca 401 dla zapytania, a TLS działa.\n\n**Zgłoszenie II**\n\nSerwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Żądanie nie ma skutecznego uwierzytelnienia. Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie I:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\n**Zgłoszenie II:** Wskazany zasób nie jest znaleziony pod tą ścieżką. Zweryfikować URI, namespace modelu i klucze list.\n\n**Sprawdzenie II:** Poprawny URI zwraca oczekiwany istniejący zasób.\n\n**Zależności:** 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG. Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.",
+      "example": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Poprawny URI zwraca oczekiwany istniejący zasób."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.compare-05.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPoprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu.\n\n**Zgłoszenie II**\n\nOperator użył PUT dla całego zasobu, przesyłając tylko część jego konfiguracji i nie uwzględniając semantyki zastąpienia.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Tożsamość nie ma uprawnienia do operacji. Zweryfikować autoryzację dla tego zasobu i metody.\n\n**Sprawdzenie I:** Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\n**Zgłoszenie II:** Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany. Dobrać wspieraną operację częściowej zmiany lub pełny poprawny payload PUT.\n\n**Sprawdzenie II:** Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\n**Zależności:** 403 rozróżnia brak autoryzacji od błędnych danych logowania. PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.",
+      "example": "I — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\nII — Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.compare-06.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść.\n\n**Zgłoszenie II**\n\nKlient odrzuca HTTPS, bo nazwa serwera nie pasuje do certyfikatu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Payload nie jest poprawnym dokumentem JSON. Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie I:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\n**Zgłoszenie II:** Nie powiodła się weryfikacja tożsamości TLS. Użyć poprawnej nazwy i certyfikatu z zaufanego łańcucha.\n\n**Sprawdzenie II:** Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.\n\n**Zależności:** Poprawność składni serializacji poprzedza walidację modelu. Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+      "example": "I — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\nII — Połączenie HTTPS działa z włączoną weryfikacją certyfikatu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.compare-07.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRESTCONF zwraca 401 dla zapytania, a TLS działa.\n\n**Zgłoszenie II**\n\nKlient odrzuca HTTPS, bo nazwa serwera nie pasuje do certyfikatu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Żądanie nie ma skutecznego uwierzytelnienia. Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie I:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\n**Zgłoszenie II:** Nie powiodła się weryfikacja tożsamości TLS. Użyć poprawnej nazwy i certyfikatu z zaufanego łańcucha.\n\n**Sprawdzenie II:** Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.\n\n**Zależności:** 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG. Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+      "example": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Połączenie HTTPS działa z włączoną weryfikacją certyfikatu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.compare-08.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPoprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu.\n\n**Zgłoszenie II**\n\nPATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Tożsamość nie ma uprawnienia do operacji. Zweryfikować autoryzację dla tego zasobu i metody.\n\n**Sprawdzenie I:** Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\n**Zgłoszenie II:** Payload nie jest poprawnym dokumentem JSON. Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie II:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\n**Zależności:** 403 rozróżnia brak autoryzacji od błędnych danych logowania. Poprawność składni serializacji poprzedza walidację modelu.",
+      "example": "I — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\nII — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.compare-09.3.card",
+      "front_md": "**Zgłoszenie I**\n\nSerwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404.\n\n**Zgłoszenie II**\n\nOperator użył PUT dla całego zasobu, przesyłając tylko część jego konfiguracji i nie uwzględniając semantyki zastąpienia.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wskazany zasób nie jest znaleziony pod tą ścieżką. Zweryfikować URI, namespace modelu i klucze list.\n\n**Sprawdzenie I:** Poprawny URI zwraca oczekiwany istniejący zasób.\n\n**Zgłoszenie II:** Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany. Dobrać wspieraną operację częściowej zmiany lub pełny poprawny payload PUT.\n\n**Sprawdzenie II:** Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\n**Zależności:** Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI. PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.",
+      "example": "I — Poprawny URI zwraca oczekiwany istniejący zasób.\n\nII — Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "id": "encor.restconf.practice.compare-10.3.card",
+      "front_md": "**Zgłoszenie I**\n\nRESTCONF zwraca 401 dla zapytania, a TLS działa.\n\n**Zgłoszenie II**\n\nPATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Żądanie nie ma skutecznego uwierzytelnienia. Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie I:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\n**Zgłoszenie II:** Payload nie jest poprawnym dokumentem JSON. Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie II:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\n**Zależności:** 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG. Poprawność składni serializacji poprzedza walidację modelu.",
+      "example": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.restconf.practice.compare-01.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRESTCONF zwraca 401 dla zapytania, a TLS działa.\n\n**Zgłoszenie II**\n\nPoprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Żądanie nie ma skutecznego uwierzytelnienia. Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie I:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\n**Zgłoszenie II:** Tożsamość nie ma uprawnienia do operacji. Zweryfikować autoryzację dla tego zasobu i metody.\n\n**Sprawdzenie II:** Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\n**Zależności:** 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG. 403 rozróżnia brak autoryzacji od błędnych danych logowania.",
+      "card_id": "encor.restconf.practice.compare-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\nII — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Żądanie nie ma skutecznego uwierzytelnienia. Zgłoszenie II: Tożsamość nie ma uprawnienia do operacji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Poprawny URI zwraca oczekiwany istniejący zasób.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Serwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404. Dla II: Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawny URI zwraca oczekiwany istniejący zasób.\n\nII — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Serwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404. Dla I: Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+          "feedback_md": "**Zgłoszenie I:** Żądanie nie ma skutecznego uwierzytelnienia. Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie I:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\n**Zgłoszenie II:** Tożsamość nie ma uprawnienia do operacji. Zweryfikować autoryzację dla tego zasobu i metody.\n\n**Sprawdzenie II:** Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\n**Zależności:** 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG. 403 rozróżnia brak autoryzacji od błędnych danych logowania.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.restconf.practice.compare-02.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSerwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404.\n\n**Zgłoszenie II**\n\nPATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wskazany zasób nie jest znaleziony pod tą ścieżką. Zweryfikować URI, namespace modelu i klucze list.\n\n**Sprawdzenie I:** Poprawny URI zwraca oczekiwany istniejący zasób.\n\n**Zgłoszenie II:** Payload nie jest poprawnym dokumentem JSON. Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie II:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\n**Zależności:** Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI. Poprawność składni serializacji poprzedza walidację modelu.",
+      "card_id": "encor.restconf.practice.compare-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Poprawny URI zwraca oczekiwany istniejący zasób.\n\nII — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+          "feedback_md": "**Zgłoszenie I:** Wskazany zasób nie jest znaleziony pod tą ścieżką. Zweryfikować URI, namespace modelu i klucze list.\n\n**Sprawdzenie I:** Poprawny URI zwraca oczekiwany istniejący zasób.\n\n**Zgłoszenie II:** Payload nie jest poprawnym dokumentem JSON. Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie II:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\n**Zależności:** Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI. Poprawność składni serializacji poprzedza walidację modelu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\nII — Poprawny URI zwraca oczekiwany istniejący zasób.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wskazany zasób nie jest znaleziony pod tą ścieżką. Zgłoszenie II: Payload nie jest poprawnym dokumentem JSON.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawny URI zwraca oczekiwany istniejący zasób.\n\nII — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: RESTCONF zwraca 401 dla zapytania, a TLS działa. Dla II: Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: RESTCONF zwraca 401 dla zapytania, a TLS działa. Dla I: Poprawny URI zwraca oczekiwany istniejący zasób.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.restconf.practice.compare-03.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOperator użył PUT dla całego zasobu, przesyłając tylko część jego konfiguracji i nie uwzględniając semantyki zastąpienia.\n\n**Zgłoszenie II**\n\nKlient odrzuca HTTPS, bo nazwa serwera nie pasuje do certyfikatu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany. Dobrać wspieraną operację częściowej zmiany lub pełny poprawny payload PUT.\n\n**Sprawdzenie I:** Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\n**Zgłoszenie II:** Nie powiodła się weryfikacja tożsamości TLS. Użyć poprawnej nazwy i certyfikatu z zaufanego łańcucha.\n\n**Sprawdzenie II:** Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.\n\n**Zależności:** PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych. Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+      "card_id": "encor.restconf.practice.compare-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.\n\nII — Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany. Zgłoszenie II: Nie powiodła się weryfikacja tożsamości TLS.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\nII — Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.",
+          "feedback_md": "**Zgłoszenie I:** Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany. Dobrać wspieraną operację częściowej zmiany lub pełny poprawny payload PUT.\n\n**Sprawdzenie I:** Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\n**Zgłoszenie II:** Nie powiodła się weryfikacja tożsamości TLS. Użyć poprawnej nazwy i certyfikatu z zaufanego łańcucha.\n\n**Sprawdzenie II:** Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.\n\n**Zależności:** PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych. Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\nII — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: RESTCONF zwraca 401 dla zapytania, a TLS działa. Dla II: Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: RESTCONF zwraca 401 dla zapytania, a TLS działa. Dla I: Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.restconf.practice.compare-04.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRESTCONF zwraca 401 dla zapytania, a TLS działa.\n\n**Zgłoszenie II**\n\nSerwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Żądanie nie ma skutecznego uwierzytelnienia. Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie I:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\n**Zgłoszenie II:** Wskazany zasób nie jest znaleziony pod tą ścieżką. Zweryfikować URI, namespace modelu i klucze list.\n\n**Sprawdzenie II:** Poprawny URI zwraca oczekiwany istniejący zasób.\n\n**Zależności:** 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG. Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.",
+      "card_id": "encor.restconf.practice.compare-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Poprawny URI zwraca oczekiwany istniejący zasób.\n\nII — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Żądanie nie ma skutecznego uwierzytelnienia. Zgłoszenie II: Wskazany zasób nie jest znaleziony pod tą ścieżką.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Poprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu. Dla II: Poprawny URI zwraca oczekiwany istniejący zasób.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Poprawny URI zwraca oczekiwany istniejący zasób.",
+          "feedback_md": "**Zgłoszenie I:** Żądanie nie ma skutecznego uwierzytelnienia. Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie I:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\n**Zgłoszenie II:** Wskazany zasób nie jest znaleziony pod tą ścieżką. Zweryfikować URI, namespace modelu i klucze list.\n\n**Sprawdzenie II:** Poprawny URI zwraca oczekiwany istniejący zasób.\n\n**Zależności:** 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG. Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\nII — Poprawny URI zwraca oczekiwany istniejący zasób.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Poprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu. Dla I: Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.restconf.practice.compare-05.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPoprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu.\n\n**Zgłoszenie II**\n\nOperator użył PUT dla całego zasobu, przesyłając tylko część jego konfiguracji i nie uwzględniając semantyki zastąpienia.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Tożsamość nie ma uprawnienia do operacji. Zweryfikować autoryzację dla tego zasobu i metody.\n\n**Sprawdzenie I:** Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\n**Zgłoszenie II:** Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany. Dobrać wspieraną operację częściowej zmiany lub pełny poprawny payload PUT.\n\n**Sprawdzenie II:** Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\n**Zależności:** 403 rozróżnia brak autoryzacji od błędnych danych logowania. PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.",
+      "card_id": "encor.restconf.practice.compare-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\nII — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Tożsamość nie ma uprawnienia do operacji. Zgłoszenie II: Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\nII — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: RESTCONF zwraca 401 dla zapytania, a TLS działa. Dla II: Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: RESTCONF zwraca 401 dla zapytania, a TLS działa. Dla I: Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\nII — Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.",
+          "feedback_md": "**Zgłoszenie I:** Tożsamość nie ma uprawnienia do operacji. Zweryfikować autoryzację dla tego zasobu i metody.\n\n**Sprawdzenie I:** Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\n**Zgłoszenie II:** Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany. Dobrać wspieraną operację częściowej zmiany lub pełny poprawny payload PUT.\n\n**Sprawdzenie II:** Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\n**Zależności:** 403 rozróżnia brak autoryzacji od błędnych danych logowania. PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.restconf.practice.compare-06.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść.\n\n**Zgłoszenie II**\n\nKlient odrzuca HTTPS, bo nazwa serwera nie pasuje do certyfikatu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Payload nie jest poprawnym dokumentem JSON. Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie I:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\n**Zgłoszenie II:** Nie powiodła się weryfikacja tożsamości TLS. Użyć poprawnej nazwy i certyfikatu z zaufanego łańcucha.\n\n**Sprawdzenie II:** Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.\n\n**Zależności:** Poprawność składni serializacji poprzedza walidację modelu. Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+      "card_id": "encor.restconf.practice.compare-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\nII — Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.",
+          "feedback_md": "**Zgłoszenie I:** Payload nie jest poprawnym dokumentem JSON. Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie I:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\n**Zgłoszenie II:** Nie powiodła się weryfikacja tożsamości TLS. Użyć poprawnej nazwy i certyfikatu z zaufanego łańcucha.\n\n**Sprawdzenie II:** Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.\n\n**Zależności:** Poprawność składni serializacji poprzedza walidację modelu. Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.\n\nII — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Payload nie jest poprawnym dokumentem JSON. Zgłoszenie II: Nie powiodła się weryfikacja tożsamości TLS.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\nII — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: RESTCONF zwraca 401 dla zapytania, a TLS działa. Dla II: Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: RESTCONF zwraca 401 dla zapytania, a TLS działa. Dla I: Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.restconf.practice.compare-07.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRESTCONF zwraca 401 dla zapytania, a TLS działa.\n\n**Zgłoszenie II**\n\nKlient odrzuca HTTPS, bo nazwa serwera nie pasuje do certyfikatu.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Żądanie nie ma skutecznego uwierzytelnienia. Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie I:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\n**Zgłoszenie II:** Nie powiodła się weryfikacja tożsamości TLS. Użyć poprawnej nazwy i certyfikatu z zaufanego łańcucha.\n\n**Sprawdzenie II:** Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.\n\n**Zależności:** 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG. Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+      "card_id": "encor.restconf.practice.compare-07.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.\n\nII — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Żądanie nie ma skutecznego uwierzytelnienia. Zgłoszenie II: Nie powiodła się weryfikacja tożsamości TLS.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.",
+          "feedback_md": "**Zgłoszenie I:** Żądanie nie ma skutecznego uwierzytelnienia. Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie I:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\n**Zgłoszenie II:** Nie powiodła się weryfikacja tożsamości TLS. Użyć poprawnej nazwy i certyfikatu z zaufanego łańcucha.\n\n**Sprawdzenie II:** Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.\n\n**Zależności:** 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG. Wyłączenie weryfikacji nie naprawia tożsamości endpointu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Poprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu. Dla II: Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\nII — Połączenie HTTPS działa z włączoną weryfikacją certyfikatu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Poprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu. Dla I: Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.restconf.practice.compare-08.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPoprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu.\n\n**Zgłoszenie II**\n\nPATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Tożsamość nie ma uprawnienia do operacji. Zweryfikować autoryzację dla tego zasobu i metody.\n\n**Sprawdzenie I:** Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\n**Zgłoszenie II:** Payload nie jest poprawnym dokumentem JSON. Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie II:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\n**Zależności:** 403 rozróżnia brak autoryzacji od błędnych danych logowania. Poprawność składni serializacji poprzedza walidację modelu.",
+      "card_id": "encor.restconf.practice.compare-08.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\nII — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Tożsamość nie ma uprawnienia do operacji. Zgłoszenie II: Payload nie jest poprawnym dokumentem JSON.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\nII — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: RESTCONF zwraca 401 dla zapytania, a TLS działa. Dla II: Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\nII — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+          "feedback_md": "**Zgłoszenie I:** Tożsamość nie ma uprawnienia do operacji. Zweryfikować autoryzację dla tego zasobu i metody.\n\n**Sprawdzenie I:** Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\n**Zgłoszenie II:** Payload nie jest poprawnym dokumentem JSON. Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie II:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\n**Zależności:** 403 rozróżnia brak autoryzacji od błędnych danych logowania. Poprawność składni serializacji poprzedza walidację modelu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: RESTCONF zwraca 401 dla zapytania, a TLS działa. Dla I: Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.restconf.practice.compare-09.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nSerwer działa, ale GET używa błędnej ścieżki modelu i zwraca 404.\n\n**Zgłoszenie II**\n\nOperator użył PUT dla całego zasobu, przesyłając tylko część jego konfiguracji i nie uwzględniając semantyki zastąpienia.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wskazany zasób nie jest znaleziony pod tą ścieżką. Zweryfikować URI, namespace modelu i klucze list.\n\n**Sprawdzenie I:** Poprawny URI zwraca oczekiwany istniejący zasób.\n\n**Zgłoszenie II:** Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany. Dobrać wspieraną operację częściowej zmiany lub pełny poprawny payload PUT.\n\n**Sprawdzenie II:** Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\n**Zależności:** Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI. PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.",
+      "card_id": "encor.restconf.practice.compare-09.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\nII — Poprawny URI zwraca oczekiwany istniejący zasób.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wskazany zasób nie jest znaleziony pod tą ścieżką. Zgłoszenie II: Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Poprawny URI zwraca oczekiwany istniejący zasób.\n\nII — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: RESTCONF zwraca 401 dla zapytania, a TLS działa. Dla II: Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: RESTCONF zwraca 401 dla zapytania, a TLS działa. Dla I: Poprawny URI zwraca oczekiwany istniejący zasób.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Poprawny URI zwraca oczekiwany istniejący zasób.\n\nII — Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.",
+          "feedback_md": "**Zgłoszenie I:** Wskazany zasób nie jest znaleziony pod tą ścieżką. Zweryfikować URI, namespace modelu i klucze list.\n\n**Sprawdzenie I:** Poprawny URI zwraca oczekiwany istniejący zasób.\n\n**Zgłoszenie II:** Wybrano zastąpienie zasobu zamiast zamierzonej częściowej zmiany. Dobrać wspieraną operację częściowej zmiany lub pełny poprawny payload PUT.\n\n**Sprawdzenie II:** Odczyt po zmianie zachowuje wymagane pola poza zmienianym zakresem.\n\n**Zależności:** Ścieżki RESTCONF wynikają z modelu danych, nie z nazw komend CLI. PUT i PATCH mają różną semantykę, której nie można sprowadzić do samego zapisu danych.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.restconf.practice.compare-10.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "encor.restconf.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1713/b_1713_programmability_cg/m_1713_prog_restconf.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — RESTCONF — HTTP, modele i diagnostyka API",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/prog/configuration/1716/b_1716_programmability_cg/netconf-and-restconf-service-level-acls.html"
+        },
+        {
+          "title": "RESTCONF — RFC 8040",
+          "url": "https://www.rfc-editor.org/rfc/rfc8040"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.6"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.5"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "6.2"
+        },
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "5.3"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nRESTCONF zwraca 401 dla zapytania, a TLS działa.\n\n**Zgłoszenie II**\n\nPATCH zawiera JSON z przecinkiem po ostatnim polu; serwer odrzuca treść.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Żądanie nie ma skutecznego uwierzytelnienia. Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie I:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\n**Zgłoszenie II:** Payload nie jest poprawnym dokumentem JSON. Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie II:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\n**Zależności:** 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG. Poprawność składni serializacji poprzedza walidację modelu.",
+      "card_id": "encor.restconf.practice.compare-10.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+          "feedback_md": "**Zgłoszenie I:** Żądanie nie ma skutecznego uwierzytelnienia. Zweryfikować metodę i dane uwierzytelniania klienta.\n\n**Sprawdzenie I:** Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\n**Zgłoszenie II:** Payload nie jest poprawnym dokumentem JSON. Poprawić składnię i zweryfikować payload przed wysłaniem.\n\n**Sprawdzenie II:** Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\n**Zależności:** 401 wskazuje problem uwierzytelnienia, nie brak modelu YANG. Poprawność składni serializacji poprzedza walidację modelu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.\n\nII — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Żądanie nie ma skutecznego uwierzytelnienia. Zgłoszenie II: Payload nie jest poprawnym dokumentem JSON.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.\n\nII — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Poprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu. Dla II: Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Uprawniona operacja jest dopuszczona bez rozszerzania praw na zbędne zasoby.\n\nII — Parser JSON przyjmuje dokument, a serwer może zweryfikować go względem modelu.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Poprawnie zalogowane konto dostaje 403 przy próbie zmiany zasobu. Dla I: Poprawnie uwierzytelnione żądanie przechodzi do kontroli dostępu do zasobu.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

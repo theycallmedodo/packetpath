@@ -1,0 +1,483 @@
+{
+  "schema_version": 3,
+  "id": "ccna.transport.practice-1",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "SYN bez odpowiedzi — rozpoznanie",
+      "skills": [
+        "ccna.transport.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.practice.case-01.1.card",
+      "front_md": "Klient powtarza SYN, ale nie otrzymuje SYN-ACK ani RST. Nie znamy jeszcze miejsca zaniku.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Brak odpowiedzi na SYN nie rozstrzyga sam, czy winny jest serwer, ACL czy droga powrotna.\n\n**Rozpoznanie:** Handshake TCP nie został ukończony.\n\n**Działanie:** Śledzić SYN i odpowiedź w obu kierunkach, zaczynając od drogi i filtrów.\n\n**Sprawdzenie:** Przechwycenie wskazuje konkretny punkt utraty albo pojawia się pełny handshake.",
+      "example": "Handshake TCP nie został ukończony."
+    },
+    {
+      "revision": 1,
+      "title": "RST od serwera — rozpoznanie",
+      "skills": [
+        "ccna.transport.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.practice.case-02.1.card",
+      "front_md": "SYN dochodzi do hosta, a host odpowiada RST. Polityka nie generuje pośrednich resetów.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "RST różni się od cichego dropu i wskazuje aktywne odrzucenie sesji.\n\n**Rozpoznanie:** Host aktywnie odrzucił próbę sesji TCP.\n\n**Działanie:** Sprawdzić, czy usługa nasłuchuje na właściwym adresie i porcie.\n\n**Sprawdzenie:** Po uruchomieniu właściwej usługi serwer odpowiada SYN-ACK.",
+      "example": "Host aktywnie odrzucił próbę sesji TCP."
+    },
+    {
+      "revision": 1,
+      "title": "UDP bez ACK — rozpoznanie",
+      "skills": [
+        "ccna.transport.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.practice.case-03.1.card",
+      "front_md": "Aplikacja wysyła datagram UDP i nie widzi potwierdzenia transportowego, choć pakiet dotarł.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Dostarczenie datagramu UDP i potwierdzenie aplikacyjne to osobne kwestie.\n\n**Rozpoznanie:** UDP nie definiuje potwierdzeń i retransmisji takich jak TCP.\n\n**Działanie:** Weryfikować odpowiedź aplikacji albo przechwycenie odbiorcy.\n\n**Sprawdzenie:** Odbiorca widzi datagram, niezależnie od braku ACK transportowego.",
+      "example": "UDP nie definiuje potwierdzeń i retransmisji takich jak TCP."
+    },
+    {
+      "revision": 1,
+      "title": "Port efemeryczny — rozpoznanie",
+      "skills": [
+        "ccna.transport.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.practice.case-04.1.card",
+      "front_md": "Klient otwiera HTTPS z 10.0.0.5:53000 do 192.0.2.10:443.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Kierunek odpowiedzi zamienia role adresów i portów w przepływie.\n\n**Rozpoznanie:** Port klienta identyfikuje konkretną lokalną sesję.\n\n**Działanie:** Dla odpowiedzi oczekiwać źródła 443 i celu 53000 z odwróconymi adresami.\n\n**Sprawdzenie:** Pakiet odpowiedzi ma 192.0.2.10:443 → 10.0.0.5:53000.",
+      "example": "Port klienta identyfikuje konkretną lokalną sesję."
+    },
+    {
+      "revision": 1,
+      "title": "Retransmisja TCP — rozpoznanie",
+      "skills": [
+        "ccna.transport.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.practice.case-05.1.card",
+      "front_md": "W przechwyceniu TCP ponownie wysyła zakres bajtów, którego nie potwierdzono.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "TCP zapewnia niezawodność przez numery sekwencji, potwierdzenia i retransmisje.\n\n**Rozpoznanie:** Nadawca próbuje odzyskać dane uznane za utracone.\n\n**Działanie:** Sprawdzić utraty, opóźnienia ACK i drogę w obu kierunkach.\n\n**Sprawdzenie:** Po usunięciu problemu maleje liczba retransmisji przy podobnym obciążeniu.",
+      "example": "Nadawca próbuje odzyskać dane uznane za utracone."
+    },
+    {
+      "revision": 1,
+      "title": "Zero window — rozpoznanie",
+      "skills": [
+        "ccna.transport.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "id": "ccna.transport.practice.case-06.1.card",
+      "front_md": "Odbiorca TCP ogłasza window 0, a łącze ma wolną przepustowość.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "back_md": "Flow control chroni odbiorcę i nie jest tym samym co congestion control sieci.\n\n**Rozpoznanie:** Odbiorca chwilowo nie udostępnia miejsca w buforze odbiorczym.\n\n**Działanie:** Sprawdzić wydajność aplikacji odbiorczej i opróżnianie bufora.\n\n**Sprawdzenie:** Odbiorca ogłasza dodatnie okno i transmisja danych wraca.",
+      "example": "Odbiorca chwilowo nie udostępnia miejsca w buforze odbiorczym."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.transport.practice.case-01.1",
+      "revision": 1,
+      "title": "SYN bez odpowiedzi — rozpoznanie",
+      "skills": [
+        "ccna.transport.case-01",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Klient powtarza SYN, ale nie otrzymuje SYN-ACK ani RST. Nie znamy jeszcze miejsca zaniku.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Brak odpowiedzi na SYN nie rozstrzyga sam, czy winny jest serwer, ACL czy droga powrotna.\n\n**Rozpoznanie:** Handshake TCP nie został ukończony.\n\n**Działanie:** Śledzić SYN i odpowiedź w obu kierunkach, zaczynając od drogi i filtrów.\n\n**Sprawdzenie:** Przechwycenie wskazuje konkretny punkt utraty albo pojawia się pełny handshake.",
+      "card_id": "ccna.transport.practice.case-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Handshake TCP nie został ukończony.",
+          "feedback_md": "Brak odpowiedzi na SYN nie rozstrzyga sam, czy winny jest serwer, ACL czy droga powrotna.\n\n**Rozpoznanie:** Handshake TCP nie został ukończony.\n\n**Działanie:** Śledzić SYN i odpowiedź w obu kierunkach, zaczynając od drogi i filtrów.\n\n**Sprawdzenie:** Przechwycenie wskazuje konkretny punkt utraty albo pojawia się pełny handshake.",
+          "id": "A"
+        },
+        {
+          "text_md": "Host aktywnie odrzucił próbę sesji TCP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „RST od serwera”: SYN dochodzi do hosta, a host odpowiada RST. Polityka nie generuje pośrednich resetów. W bieżącym przypadku: Handshake TCP nie został ukończony.",
+          "id": "B"
+        },
+        {
+          "text_md": "UDP nie definiuje potwierdzeń i retransmisji takich jak TCP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „UDP bez ACK”: Aplikacja wysyła datagram UDP i nie widzi potwierdzenia transportowego, choć pakiet dotarł. W bieżącym przypadku: Handshake TCP nie został ukończony.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nadawca próbuje odzyskać dane uznane za utracone.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Retransmisja TCP”: W przechwyceniu TCP ponownie wysyła zakres bajtów, którego nie potwierdzono. W bieżącym przypadku: Handshake TCP nie został ukończony.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.transport.practice.case-02.1",
+      "revision": 1,
+      "title": "RST od serwera — rozpoznanie",
+      "skills": [
+        "ccna.transport.case-02",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "SYN dochodzi do hosta, a host odpowiada RST. Polityka nie generuje pośrednich resetów.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "RST różni się od cichego dropu i wskazuje aktywne odrzucenie sesji.\n\n**Rozpoznanie:** Host aktywnie odrzucił próbę sesji TCP.\n\n**Działanie:** Sprawdzić, czy usługa nasłuchuje na właściwym adresie i porcie.\n\n**Sprawdzenie:** Po uruchomieniu właściwej usługi serwer odpowiada SYN-ACK.",
+      "card_id": "ccna.transport.practice.case-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nadawca próbuje odzyskać dane uznane za utracone.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Retransmisja TCP”: W przechwyceniu TCP ponownie wysyła zakres bajtów, którego nie potwierdzono. W bieżącym przypadku: Host aktywnie odrzucił próbę sesji TCP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Host aktywnie odrzucił próbę sesji TCP.",
+          "feedback_md": "RST różni się od cichego dropu i wskazuje aktywne odrzucenie sesji.\n\n**Rozpoznanie:** Host aktywnie odrzucił próbę sesji TCP.\n\n**Działanie:** Sprawdzić, czy usługa nasłuchuje na właściwym adresie i porcie.\n\n**Sprawdzenie:** Po uruchomieniu właściwej usługi serwer odpowiada SYN-ACK.",
+          "id": "B"
+        },
+        {
+          "text_md": "Odbiorca chwilowo nie udostępnia miejsca w buforze odbiorczym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zero window”: Odbiorca TCP ogłasza window 0, a łącze ma wolną przepustowość. W bieżącym przypadku: Host aktywnie odrzucił próbę sesji TCP.",
+          "id": "C"
+        },
+        {
+          "text_md": "UDP nie definiuje potwierdzeń i retransmisji takich jak TCP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „UDP bez ACK”: Aplikacja wysyła datagram UDP i nie widzi potwierdzenia transportowego, choć pakiet dotarł. W bieżącym przypadku: Host aktywnie odrzucił próbę sesji TCP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.transport.practice.case-03.1",
+      "revision": 1,
+      "title": "UDP bez ACK — rozpoznanie",
+      "skills": [
+        "ccna.transport.case-03",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Aplikacja wysyła datagram UDP i nie widzi potwierdzenia transportowego, choć pakiet dotarł.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Dostarczenie datagramu UDP i potwierdzenie aplikacyjne to osobne kwestie.\n\n**Rozpoznanie:** UDP nie definiuje potwierdzeń i retransmisji takich jak TCP.\n\n**Działanie:** Weryfikować odpowiedź aplikacji albo przechwycenie odbiorcy.\n\n**Sprawdzenie:** Odbiorca widzi datagram, niezależnie od braku ACK transportowego.",
+      "card_id": "ccna.transport.practice.case-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Host aktywnie odrzucił próbę sesji TCP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „RST od serwera”: SYN dochodzi do hosta, a host odpowiada RST. Polityka nie generuje pośrednich resetów. W bieżącym przypadku: UDP nie definiuje potwierdzeń i retransmisji takich jak TCP.",
+          "id": "A"
+        },
+        {
+          "text_md": "Odbiorca chwilowo nie udostępnia miejsca w buforze odbiorczym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zero window”: Odbiorca TCP ogłasza window 0, a łącze ma wolną przepustowość. W bieżącym przypadku: UDP nie definiuje potwierdzeń i retransmisji takich jak TCP.",
+          "id": "B"
+        },
+        {
+          "text_md": "UDP nie definiuje potwierdzeń i retransmisji takich jak TCP.",
+          "feedback_md": "Dostarczenie datagramu UDP i potwierdzenie aplikacyjne to osobne kwestie.\n\n**Rozpoznanie:** UDP nie definiuje potwierdzeń i retransmisji takich jak TCP.\n\n**Działanie:** Weryfikować odpowiedź aplikacji albo przechwycenie odbiorcy.\n\n**Sprawdzenie:** Odbiorca widzi datagram, niezależnie od braku ACK transportowego.",
+          "id": "C"
+        },
+        {
+          "text_md": "Nadawca próbuje odzyskać dane uznane za utracone.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Retransmisja TCP”: W przechwyceniu TCP ponownie wysyła zakres bajtów, którego nie potwierdzono. W bieżącym przypadku: UDP nie definiuje potwierdzeń i retransmisji takich jak TCP.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.transport.practice.case-04.1",
+      "revision": 1,
+      "title": "Port efemeryczny — rozpoznanie",
+      "skills": [
+        "ccna.transport.case-04",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Klient otwiera HTTPS z 10.0.0.5:53000 do 192.0.2.10:443.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Kierunek odpowiedzi zamienia role adresów i portów w przepływie.\n\n**Rozpoznanie:** Port klienta identyfikuje konkretną lokalną sesję.\n\n**Działanie:** Dla odpowiedzi oczekiwać źródła 443 i celu 53000 z odwróconymi adresami.\n\n**Sprawdzenie:** Pakiet odpowiedzi ma 192.0.2.10:443 → 10.0.0.5:53000.",
+      "card_id": "ccna.transport.practice.case-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Handshake TCP nie został ukończony.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SYN bez odpowiedzi”: Klient powtarza SYN, ale nie otrzymuje SYN-ACK ani RST. Nie znamy jeszcze miejsca zaniku. W bieżącym przypadku: Port klienta identyfikuje konkretną lokalną sesję.",
+          "id": "A"
+        },
+        {
+          "text_md": "UDP nie definiuje potwierdzeń i retransmisji takich jak TCP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „UDP bez ACK”: Aplikacja wysyła datagram UDP i nie widzi potwierdzenia transportowego, choć pakiet dotarł. W bieżącym przypadku: Port klienta identyfikuje konkretną lokalną sesję.",
+          "id": "B"
+        },
+        {
+          "text_md": "Nadawca próbuje odzyskać dane uznane za utracone.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Retransmisja TCP”: W przechwyceniu TCP ponownie wysyła zakres bajtów, którego nie potwierdzono. W bieżącym przypadku: Port klienta identyfikuje konkretną lokalną sesję.",
+          "id": "C"
+        },
+        {
+          "text_md": "Port klienta identyfikuje konkretną lokalną sesję.",
+          "feedback_md": "Kierunek odpowiedzi zamienia role adresów i portów w przepływie.\n\n**Rozpoznanie:** Port klienta identyfikuje konkretną lokalną sesję.\n\n**Działanie:** Dla odpowiedzi oczekiwać źródła 443 i celu 53000 z odwróconymi adresami.\n\n**Sprawdzenie:** Pakiet odpowiedzi ma 192.0.2.10:443 → 10.0.0.5:53000.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.transport.practice.case-05.1",
+      "revision": 1,
+      "title": "Retransmisja TCP — rozpoznanie",
+      "skills": [
+        "ccna.transport.case-05",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "W przechwyceniu TCP ponownie wysyła zakres bajtów, którego nie potwierdzono.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "TCP zapewnia niezawodność przez numery sekwencji, potwierdzenia i retransmisje.\n\n**Rozpoznanie:** Nadawca próbuje odzyskać dane uznane za utracone.\n\n**Działanie:** Sprawdzić utraty, opóźnienia ACK i drogę w obu kierunkach.\n\n**Sprawdzenie:** Po usunięciu problemu maleje liczba retransmisji przy podobnym obciążeniu.",
+      "card_id": "ccna.transport.practice.case-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Nadawca próbuje odzyskać dane uznane za utracone.",
+          "feedback_md": "TCP zapewnia niezawodność przez numery sekwencji, potwierdzenia i retransmisje.\n\n**Rozpoznanie:** Nadawca próbuje odzyskać dane uznane za utracone.\n\n**Działanie:** Sprawdzić utraty, opóźnienia ACK i drogę w obu kierunkach.\n\n**Sprawdzenie:** Po usunięciu problemu maleje liczba retransmisji przy podobnym obciążeniu.",
+          "id": "A"
+        },
+        {
+          "text_md": "Odbiorca chwilowo nie udostępnia miejsca w buforze odbiorczym.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Zero window”: Odbiorca TCP ogłasza window 0, a łącze ma wolną przepustowość. W bieżącym przypadku: Nadawca próbuje odzyskać dane uznane za utracone.",
+          "id": "B"
+        },
+        {
+          "text_md": "UDP nie definiuje potwierdzeń i retransmisji takich jak TCP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „UDP bez ACK”: Aplikacja wysyła datagram UDP i nie widzi potwierdzenia transportowego, choć pakiet dotarł. W bieżącym przypadku: Nadawca próbuje odzyskać dane uznane za utracone.",
+          "id": "C"
+        },
+        {
+          "text_md": "Handshake TCP nie został ukończony.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „SYN bez odpowiedzi”: Klient powtarza SYN, ale nie otrzymuje SYN-ACK ani RST. Nie znamy jeszcze miejsca zaniku. W bieżącym przypadku: Nadawca próbuje odzyskać dane uznane za utracone.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.transport.practice.case-06.1",
+      "revision": 1,
+      "title": "Zero window — rozpoznanie",
+      "skills": [
+        "ccna.transport.case-06",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/en/US/docs/ios-xml/ios/ipapp/configuration/15-1sy/iap-tcp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — TCP i UDP — sesje i diagnostyka",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swiprout.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.5"
+        }
+      ],
+      "difficulty": 2,
+      "prompt_md": "Odbiorca TCP ogłasza window 0, a łącze ma wolną przepustowość.\n\nKtóre rozpoznanie najlepiej wyjaśnia podane obserwacje?",
+      "hints": [
+        "Oddziel stan administracyjny, transport i logikę usługi. Wykorzystaj konkretne dane z opisu."
+      ],
+      "explanation_md": "Flow control chroni odbiorcę i nie jest tym samym co congestion control sieci.\n\n**Rozpoznanie:** Odbiorca chwilowo nie udostępnia miejsca w buforze odbiorczym.\n\n**Działanie:** Sprawdzić wydajność aplikacji odbiorczej i opróżnianie bufora.\n\n**Sprawdzenie:** Odbiorca ogłasza dodatnie okno i transmisja danych wraca.",
+      "card_id": "ccna.transport.practice.case-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "Port klienta identyfikuje konkretną lokalną sesję.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „Port efemeryczny”: Klient otwiera HTTPS z 10.0.0.5:53000 do 192.0.2.10:443. W bieżącym przypadku: Odbiorca chwilowo nie udostępnia miejsca w buforze odbiorczym.",
+          "id": "A"
+        },
+        {
+          "text_md": "Odbiorca chwilowo nie udostępnia miejsca w buforze odbiorczym.",
+          "feedback_md": "Flow control chroni odbiorcę i nie jest tym samym co congestion control sieci.\n\n**Rozpoznanie:** Odbiorca chwilowo nie udostępnia miejsca w buforze odbiorczym.\n\n**Działanie:** Sprawdzić wydajność aplikacji odbiorczej i opróżnianie bufora.\n\n**Sprawdzenie:** Odbiorca ogłasza dodatnie okno i transmisja danych wraca.",
+          "id": "B"
+        },
+        {
+          "text_md": "Host aktywnie odrzucił próbę sesji TCP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „RST od serwera”: SYN dochodzi do hosta, a host odpowiada RST. Polityka nie generuje pośrednich resetów. W bieżącym przypadku: Odbiorca chwilowo nie udostępnia miejsca w buforze odbiorczym.",
+          "id": "C"
+        },
+        {
+          "text_md": "UDP nie definiuje potwierdzeń i retransmisji takich jak TCP.",
+          "feedback_md": "Ta odpowiedź odnosi się do przypadku „UDP bez ACK”: Aplikacja wysyła datagram UDP i nie widzi potwierdzenia transportowego, choć pakiet dotarł. W bieżącym przypadku: Odbiorca chwilowo nie udostępnia miejsca w buforze odbiorczym.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    }
+  ]
+}

@@ -1,0 +1,719 @@
+{
+  "schema_version": 3,
+  "id": "encor.ip-sla.practice-5",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.compare-01.1.card",
+      "front_md": "**Zgłoszenie I**\n\nOperacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów.\n\n**Zgłoszenie II**\n\nProbe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Zdefiniowany pomiar nie został aktywowany. Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie I:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.\n\n**Zgłoszenie II:** Test mierzy inny przepływ niż zamierzona usługa. Ustawić odpowiednie source-interface lub źródło operacji.\n\n**Sprawdzenie II:** Odpowiedzi wracają do oczekiwanego źródła pomiaru.\n\n**Zależności:** Definicja operacji i harmonogram jej wykonywania są oddzielne. Wynik IP SLA zależy od adresu źródłowego i jego routingu.",
+      "example": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Test mierzy inny przepływ niż zamierzona usługa."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.compare-02.1.card",
+      "front_md": "**Zgłoszenie I**\n\nEcho do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje.\n\n**Zgłoszenie II**\n\nIP SLA pokazuje timeout i track jest Down, lecz statyczna trasa nie odnosi się do tego track.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Dostępność IP nie potwierdza dostępności aplikacji. Dobrać pomiar testujący wymagany transport lub usługę.\n\n**Sprawdzenie I:** Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.\n\n**Zgłoszenie II:** Wynik pomiaru nie steruje analizowaną trasą. Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie II:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.\n\n**Zależności:** Rodzaj sondy określa, co rzeczywiście mierzymy. Pomiar, obiekt track i konsument track to osobne elementy konfiguracji.",
+      "example": "I — Dostępność IP nie potwierdza dostępności aplikacji.\n\nII — Wynik pomiaru nie steruje analizowaną trasą."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.compare-03.1.card",
+      "front_md": "**Zgłoszenie I**\n\nPojedyncze utracone probe powodują ciągłe przełączanie tras.\n\n**Zgłoszenie II**\n\nSonda primary po awarii zaczyna docierać przez backup i ponownie uznaje primary za zdrowe.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Reakcja jest zbyt czuła względem zakłóceń pomiaru. Dobrać opóźnienia track i parametry sond zgodnie z wymaganiami dostępności.\n\n**Sprawdzenie I:** Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.\n\n**Zgłoszenie II:** Test nie jest ograniczony do badanej ścieżki. Zapewnić sondzie drogę przez właściwe łącze i odpowiednie źródło.\n\n**Sprawdzenie II:** Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.\n\n**Zależności:** Histereza równoważy szybkość detekcji i stabilność przełączeń. Pomiar stanu konkretnego łącza musi rzeczywiście korzystać z tego łącza.",
+      "example": "I — Reakcja jest zbyt czuła względem zakłóceń pomiaru.\n\nII — Test nie jest ograniczony do badanej ścieżki."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.compare-04.1.card",
+      "front_md": "**Zgłoszenie I**\n\nOperacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów.\n\n**Zgłoszenie II**\n\nEcho do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Zdefiniowany pomiar nie został aktywowany. Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie I:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.\n\n**Zgłoszenie II:** Dostępność IP nie potwierdza dostępności aplikacji. Dobrać pomiar testujący wymagany transport lub usługę.\n\n**Sprawdzenie II:** Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.\n\n**Zależności:** Definicja operacji i harmonogram jej wykonywania są oddzielne. Rodzaj sondy określa, co rzeczywiście mierzymy.",
+      "example": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Dostępność IP nie potwierdza dostępności aplikacji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.compare-05.1.card",
+      "front_md": "**Zgłoszenie I**\n\nProbe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa.\n\n**Zgłoszenie II**\n\nPojedyncze utracone probe powodują ciągłe przełączanie tras.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Test mierzy inny przepływ niż zamierzona usługa. Ustawić odpowiednie source-interface lub źródło operacji.\n\n**Sprawdzenie I:** Odpowiedzi wracają do oczekiwanego źródła pomiaru.\n\n**Zgłoszenie II:** Reakcja jest zbyt czuła względem zakłóceń pomiaru. Dobrać opóźnienia track i parametry sond zgodnie z wymaganiami dostępności.\n\n**Sprawdzenie II:** Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.\n\n**Zależności:** Wynik IP SLA zależy od adresu źródłowego i jego routingu. Histereza równoważy szybkość detekcji i stabilność przełączeń.",
+      "example": "I — Test mierzy inny przepływ niż zamierzona usługa.\n\nII — Reakcja jest zbyt czuła względem zakłóceń pomiaru."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.compare-06.1.card",
+      "front_md": "**Zgłoszenie I**\n\nIP SLA pokazuje timeout i track jest Down, lecz statyczna trasa nie odnosi się do tego track.\n\n**Zgłoszenie II**\n\nSonda primary po awarii zaczyna docierać przez backup i ponownie uznaje primary za zdrowe.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wynik pomiaru nie steruje analizowaną trasą. Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie I:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.\n\n**Zgłoszenie II:** Test nie jest ograniczony do badanej ścieżki. Zapewnić sondzie drogę przez właściwe łącze i odpowiednie źródło.\n\n**Sprawdzenie II:** Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.\n\n**Zależności:** Pomiar, obiekt track i konsument track to osobne elementy konfiguracji. Pomiar stanu konkretnego łącza musi rzeczywiście korzystać z tego łącza.",
+      "example": "I — Wynik pomiaru nie steruje analizowaną trasą.\n\nII — Test nie jest ograniczony do badanej ścieżki."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.compare-07.1.card",
+      "front_md": "**Zgłoszenie I**\n\nOperacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów.\n\n**Zgłoszenie II**\n\nSonda primary po awarii zaczyna docierać przez backup i ponownie uznaje primary za zdrowe.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Zdefiniowany pomiar nie został aktywowany. Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie I:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.\n\n**Zgłoszenie II:** Test nie jest ograniczony do badanej ścieżki. Zapewnić sondzie drogę przez właściwe łącze i odpowiednie źródło.\n\n**Sprawdzenie II:** Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.\n\n**Zależności:** Definicja operacji i harmonogram jej wykonywania są oddzielne. Pomiar stanu konkretnego łącza musi rzeczywiście korzystać z tego łącza.",
+      "example": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Test nie jest ograniczony do badanej ścieżki."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.compare-08.1.card",
+      "front_md": "**Zgłoszenie I**\n\nProbe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa.\n\n**Zgłoszenie II**\n\nIP SLA pokazuje timeout i track jest Down, lecz statyczna trasa nie odnosi się do tego track.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Test mierzy inny przepływ niż zamierzona usługa. Ustawić odpowiednie source-interface lub źródło operacji.\n\n**Sprawdzenie I:** Odpowiedzi wracają do oczekiwanego źródła pomiaru.\n\n**Zgłoszenie II:** Wynik pomiaru nie steruje analizowaną trasą. Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie II:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.\n\n**Zależności:** Wynik IP SLA zależy od adresu źródłowego i jego routingu. Pomiar, obiekt track i konsument track to osobne elementy konfiguracji.",
+      "example": "I — Test mierzy inny przepływ niż zamierzona usługa.\n\nII — Wynik pomiaru nie steruje analizowaną trasą."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.compare-09.1.card",
+      "front_md": "**Zgłoszenie I**\n\nEcho do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje.\n\n**Zgłoszenie II**\n\nPojedyncze utracone probe powodują ciągłe przełączanie tras.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Dostępność IP nie potwierdza dostępności aplikacji. Dobrać pomiar testujący wymagany transport lub usługę.\n\n**Sprawdzenie I:** Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.\n\n**Zgłoszenie II:** Reakcja jest zbyt czuła względem zakłóceń pomiaru. Dobrać opóźnienia track i parametry sond zgodnie z wymaganiami dostępności.\n\n**Sprawdzenie II:** Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.\n\n**Zależności:** Rodzaj sondy określa, co rzeczywiście mierzymy. Histereza równoważy szybkość detekcji i stabilność przełączeń.",
+      "example": "I — Dostępność IP nie potwierdza dostępności aplikacji.\n\nII — Reakcja jest zbyt czuła względem zakłóceń pomiaru."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "id": "encor.ip-sla.practice.compare-10.1.card",
+      "front_md": "**Zgłoszenie I**\n\nOperacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów.\n\n**Zgłoszenie II**\n\nIP SLA pokazuje timeout i track jest Down, lecz statyczna trasa nie odnosi się do tego track.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Zdefiniowany pomiar nie został aktywowany. Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie I:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.\n\n**Zgłoszenie II:** Wynik pomiaru nie steruje analizowaną trasą. Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie II:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.\n\n**Zależności:** Definicja operacji i harmonogram jej wykonywania są oddzielne. Pomiar, obiekt track i konsument track to osobne elementy konfiguracji.",
+      "example": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Wynik pomiaru nie steruje analizowaną trasą."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ip-sla.practice.compare-01.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOperacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów.\n\n**Zgłoszenie II**\n\nProbe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Zdefiniowany pomiar nie został aktywowany. Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie I:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.\n\n**Zgłoszenie II:** Test mierzy inny przepływ niż zamierzona usługa. Ustawić odpowiednie source-interface lub źródło operacji.\n\n**Sprawdzenie II:** Odpowiedzi wracają do oczekiwanego źródła pomiaru.\n\n**Zależności:** Definicja operacji i harmonogram jej wykonywania są oddzielne. Wynik IP SLA zależy od adresu źródłowego i jego routingu.",
+      "card_id": "encor.ip-sla.practice.compare-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Test mierzy inny przepływ niż zamierzona usługa.\n\nII — Zdefiniowany pomiar nie został aktywowany.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Zdefiniowany pomiar nie został aktywowany. Zgłoszenie II: Test mierzy inny przepływ niż zamierzona usługa.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Test mierzy inny przepływ niż zamierzona usługa.",
+          "feedback_md": "**Zgłoszenie I:** Zdefiniowany pomiar nie został aktywowany. Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie I:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.\n\n**Zgłoszenie II:** Test mierzy inny przepływ niż zamierzona usługa. Ustawić odpowiednie source-interface lub źródło operacji.\n\n**Sprawdzenie II:** Odpowiedzi wracają do oczekiwanego źródła pomiaru.\n\n**Zależności:** Definicja operacji i harmonogram jej wykonywania są oddzielne. Wynik IP SLA zależy od adresu źródłowego i jego routingu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Dostępność IP nie potwierdza dostępności aplikacji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Echo do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje. Dla II: Test mierzy inny przepływ niż zamierzona usługa.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Dostępność IP nie potwierdza dostępności aplikacji.\n\nII — Test mierzy inny przepływ niż zamierzona usługa.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Echo do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje. Dla I: Zdefiniowany pomiar nie został aktywowany.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ip-sla.practice.compare-02.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nEcho do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje.\n\n**Zgłoszenie II**\n\nIP SLA pokazuje timeout i track jest Down, lecz statyczna trasa nie odnosi się do tego track.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Dostępność IP nie potwierdza dostępności aplikacji. Dobrać pomiar testujący wymagany transport lub usługę.\n\n**Sprawdzenie I:** Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.\n\n**Zgłoszenie II:** Wynik pomiaru nie steruje analizowaną trasą. Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie II:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.\n\n**Zależności:** Rodzaj sondy określa, co rzeczywiście mierzymy. Pomiar, obiekt track i konsument track to osobne elementy konfiguracji.",
+      "card_id": "encor.ip-sla.practice.compare-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Wynik pomiaru nie steruje analizowaną trasą.\n\nII — Dostępność IP nie potwierdza dostępności aplikacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Dostępność IP nie potwierdza dostępności aplikacji. Zgłoszenie II: Wynik pomiaru nie steruje analizowaną trasą.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dostępność IP nie potwierdza dostępności aplikacji.\n\nII — Zdefiniowany pomiar nie został aktywowany.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. Dla II: Wynik pomiaru nie steruje analizowaną trasą.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Dostępność IP nie potwierdza dostępności aplikacji.\n\nII — Wynik pomiaru nie steruje analizowaną trasą.",
+          "feedback_md": "**Zgłoszenie I:** Dostępność IP nie potwierdza dostępności aplikacji. Dobrać pomiar testujący wymagany transport lub usługę.\n\n**Sprawdzenie I:** Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.\n\n**Zgłoszenie II:** Wynik pomiaru nie steruje analizowaną trasą. Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie II:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.\n\n**Zależności:** Rodzaj sondy określa, co rzeczywiście mierzymy. Pomiar, obiekt track i konsument track to osobne elementy konfiguracji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Wynik pomiaru nie steruje analizowaną trasą.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. Dla I: Dostępność IP nie potwierdza dostępności aplikacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ip-sla.practice.compare-03.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPojedyncze utracone probe powodują ciągłe przełączanie tras.\n\n**Zgłoszenie II**\n\nSonda primary po awarii zaczyna docierać przez backup i ponownie uznaje primary za zdrowe.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Reakcja jest zbyt czuła względem zakłóceń pomiaru. Dobrać opóźnienia track i parametry sond zgodnie z wymaganiami dostępności.\n\n**Sprawdzenie I:** Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.\n\n**Zgłoszenie II:** Test nie jest ograniczony do badanej ścieżki. Zapewnić sondzie drogę przez właściwe łącze i odpowiednie źródło.\n\n**Sprawdzenie II:** Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.\n\n**Zależności:** Histereza równoważy szybkość detekcji i stabilność przełączeń. Pomiar stanu konkretnego łącza musi rzeczywiście korzystać z tego łącza.",
+      "card_id": "encor.ip-sla.practice.compare-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Test nie jest ograniczony do badanej ścieżki.\n\nII — Reakcja jest zbyt czuła względem zakłóceń pomiaru.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Reakcja jest zbyt czuła względem zakłóceń pomiaru. Zgłoszenie II: Test nie jest ograniczony do badanej ścieżki.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Reakcja jest zbyt czuła względem zakłóceń pomiaru.\n\nII — Zdefiniowany pomiar nie został aktywowany.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. Dla II: Test nie jest ograniczony do badanej ścieżki.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Test nie jest ograniczony do badanej ścieżki.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. Dla I: Reakcja jest zbyt czuła względem zakłóceń pomiaru.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Reakcja jest zbyt czuła względem zakłóceń pomiaru.\n\nII — Test nie jest ograniczony do badanej ścieżki.",
+          "feedback_md": "**Zgłoszenie I:** Reakcja jest zbyt czuła względem zakłóceń pomiaru. Dobrać opóźnienia track i parametry sond zgodnie z wymaganiami dostępności.\n\n**Sprawdzenie I:** Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.\n\n**Zgłoszenie II:** Test nie jest ograniczony do badanej ścieżki. Zapewnić sondzie drogę przez właściwe łącze i odpowiednie źródło.\n\n**Sprawdzenie II:** Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.\n\n**Zależności:** Histereza równoważy szybkość detekcji i stabilność przełączeń. Pomiar stanu konkretnego łącza musi rzeczywiście korzystać z tego łącza.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ip-sla.practice.compare-04.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOperacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów.\n\n**Zgłoszenie II**\n\nEcho do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Zdefiniowany pomiar nie został aktywowany. Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie I:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.\n\n**Zgłoszenie II:** Dostępność IP nie potwierdza dostępności aplikacji. Dobrać pomiar testujący wymagany transport lub usługę.\n\n**Sprawdzenie II:** Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.\n\n**Zależności:** Definicja operacji i harmonogram jej wykonywania są oddzielne. Rodzaj sondy określa, co rzeczywiście mierzymy.",
+      "card_id": "encor.ip-sla.practice.compare-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Dostępność IP nie potwierdza dostępności aplikacji.",
+          "feedback_md": "**Zgłoszenie I:** Zdefiniowany pomiar nie został aktywowany. Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie I:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.\n\n**Zgłoszenie II:** Dostępność IP nie potwierdza dostępności aplikacji. Dobrać pomiar testujący wymagany transport lub usługę.\n\n**Sprawdzenie II:** Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.\n\n**Zależności:** Definicja operacji i harmonogram jej wykonywania są oddzielne. Rodzaj sondy określa, co rzeczywiście mierzymy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dostępność IP nie potwierdza dostępności aplikacji.\n\nII — Zdefiniowany pomiar nie został aktywowany.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Zdefiniowany pomiar nie został aktywowany. Zgłoszenie II: Dostępność IP nie potwierdza dostępności aplikacji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Test mierzy inny przepływ niż zamierzona usługa.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Probe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa. Dla II: Dostępność IP nie potwierdza dostępności aplikacji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Test mierzy inny przepływ niż zamierzona usługa.\n\nII — Dostępność IP nie potwierdza dostępności aplikacji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Probe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa. Dla I: Zdefiniowany pomiar nie został aktywowany.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ip-sla.practice.compare-05.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nProbe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa.\n\n**Zgłoszenie II**\n\nPojedyncze utracone probe powodują ciągłe przełączanie tras.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Test mierzy inny przepływ niż zamierzona usługa. Ustawić odpowiednie source-interface lub źródło operacji.\n\n**Sprawdzenie I:** Odpowiedzi wracają do oczekiwanego źródła pomiaru.\n\n**Zgłoszenie II:** Reakcja jest zbyt czuła względem zakłóceń pomiaru. Dobrać opóźnienia track i parametry sond zgodnie z wymaganiami dostępności.\n\n**Sprawdzenie II:** Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.\n\n**Zależności:** Wynik IP SLA zależy od adresu źródłowego i jego routingu. Histereza równoważy szybkość detekcji i stabilność przełączeń.",
+      "card_id": "encor.ip-sla.practice.compare-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Reakcja jest zbyt czuła względem zakłóceń pomiaru.\n\nII — Test mierzy inny przepływ niż zamierzona usługa.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Test mierzy inny przepływ niż zamierzona usługa. Zgłoszenie II: Reakcja jest zbyt czuła względem zakłóceń pomiaru.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Test mierzy inny przepływ niż zamierzona usługa.\n\nII — Reakcja jest zbyt czuła względem zakłóceń pomiaru.",
+          "feedback_md": "**Zgłoszenie I:** Test mierzy inny przepływ niż zamierzona usługa. Ustawić odpowiednie source-interface lub źródło operacji.\n\n**Sprawdzenie I:** Odpowiedzi wracają do oczekiwanego źródła pomiaru.\n\n**Zgłoszenie II:** Reakcja jest zbyt czuła względem zakłóceń pomiaru. Dobrać opóźnienia track i parametry sond zgodnie z wymaganiami dostępności.\n\n**Sprawdzenie II:** Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.\n\n**Zależności:** Wynik IP SLA zależy od adresu źródłowego i jego routingu. Histereza równoważy szybkość detekcji i stabilność przełączeń.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Test mierzy inny przepływ niż zamierzona usługa.\n\nII — Zdefiniowany pomiar nie został aktywowany.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. Dla II: Reakcja jest zbyt czuła względem zakłóceń pomiaru.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Reakcja jest zbyt czuła względem zakłóceń pomiaru.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. Dla I: Test mierzy inny przepływ niż zamierzona usługa.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ip-sla.practice.compare-06.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nIP SLA pokazuje timeout i track jest Down, lecz statyczna trasa nie odnosi się do tego track.\n\n**Zgłoszenie II**\n\nSonda primary po awarii zaczyna docierać przez backup i ponownie uznaje primary za zdrowe.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wynik pomiaru nie steruje analizowaną trasą. Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie I:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.\n\n**Zgłoszenie II:** Test nie jest ograniczony do badanej ścieżki. Zapewnić sondzie drogę przez właściwe łącze i odpowiednie źródło.\n\n**Sprawdzenie II:** Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.\n\n**Zależności:** Pomiar, obiekt track i konsument track to osobne elementy konfiguracji. Pomiar stanu konkretnego łącza musi rzeczywiście korzystać z tego łącza.",
+      "card_id": "encor.ip-sla.practice.compare-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Test nie jest ograniczony do badanej ścieżki.\n\nII — Wynik pomiaru nie steruje analizowaną trasą.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wynik pomiaru nie steruje analizowaną trasą. Zgłoszenie II: Test nie jest ograniczony do badanej ścieżki.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wynik pomiaru nie steruje analizowaną trasą.\n\nII — Zdefiniowany pomiar nie został aktywowany.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. Dla II: Test nie jest ograniczony do badanej ścieżki.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wynik pomiaru nie steruje analizowaną trasą.\n\nII — Test nie jest ograniczony do badanej ścieżki.",
+          "feedback_md": "**Zgłoszenie I:** Wynik pomiaru nie steruje analizowaną trasą. Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie I:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.\n\n**Zgłoszenie II:** Test nie jest ograniczony do badanej ścieżki. Zapewnić sondzie drogę przez właściwe łącze i odpowiednie źródło.\n\n**Sprawdzenie II:** Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.\n\n**Zależności:** Pomiar, obiekt track i konsument track to osobne elementy konfiguracji. Pomiar stanu konkretnego łącza musi rzeczywiście korzystać z tego łącza.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Test nie jest ograniczony do badanej ścieżki.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. Dla I: Wynik pomiaru nie steruje analizowaną trasą.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "encor.ip-sla.practice.compare-07.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOperacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów.\n\n**Zgłoszenie II**\n\nSonda primary po awarii zaczyna docierać przez backup i ponownie uznaje primary za zdrowe.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Zdefiniowany pomiar nie został aktywowany. Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie I:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.\n\n**Zgłoszenie II:** Test nie jest ograniczony do badanej ścieżki. Zapewnić sondzie drogę przez właściwe łącze i odpowiednie źródło.\n\n**Sprawdzenie II:** Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.\n\n**Zależności:** Definicja operacji i harmonogram jej wykonywania są oddzielne. Pomiar stanu konkretnego łącza musi rzeczywiście korzystać z tego łącza.",
+      "card_id": "encor.ip-sla.practice.compare-07.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Test nie jest ograniczony do badanej ścieżki.\n\nII — Zdefiniowany pomiar nie został aktywowany.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Zdefiniowany pomiar nie został aktywowany. Zgłoszenie II: Test nie jest ograniczony do badanej ścieżki.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Test mierzy inny przepływ niż zamierzona usługa.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Probe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa. Dla II: Test nie jest ograniczony do badanej ścieżki.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Test mierzy inny przepływ niż zamierzona usługa.\n\nII — Test nie jest ograniczony do badanej ścieżki.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Probe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa. Dla I: Zdefiniowany pomiar nie został aktywowany.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Test nie jest ograniczony do badanej ścieżki.",
+          "feedback_md": "**Zgłoszenie I:** Zdefiniowany pomiar nie został aktywowany. Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie I:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.\n\n**Zgłoszenie II:** Test nie jest ograniczony do badanej ścieżki. Zapewnić sondzie drogę przez właściwe łącze i odpowiednie źródło.\n\n**Sprawdzenie II:** Sonda primary pozostaje nieudana, gdy tylko primary jest uszkodzone.\n\n**Zależności:** Definicja operacji i harmonogram jej wykonywania są oddzielne. Pomiar stanu konkretnego łącza musi rzeczywiście korzystać z tego łącza.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "encor.ip-sla.practice.compare-08.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nProbe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa.\n\n**Zgłoszenie II**\n\nIP SLA pokazuje timeout i track jest Down, lecz statyczna trasa nie odnosi się do tego track.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Test mierzy inny przepływ niż zamierzona usługa. Ustawić odpowiednie source-interface lub źródło operacji.\n\n**Sprawdzenie I:** Odpowiedzi wracają do oczekiwanego źródła pomiaru.\n\n**Zgłoszenie II:** Wynik pomiaru nie steruje analizowaną trasą. Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie II:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.\n\n**Zależności:** Wynik IP SLA zależy od adresu źródłowego i jego routingu. Pomiar, obiekt track i konsument track to osobne elementy konfiguracji.",
+      "card_id": "encor.ip-sla.practice.compare-08.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Test mierzy inny przepływ niż zamierzona usługa.\n\nII — Wynik pomiaru nie steruje analizowaną trasą.",
+          "feedback_md": "**Zgłoszenie I:** Test mierzy inny przepływ niż zamierzona usługa. Ustawić odpowiednie source-interface lub źródło operacji.\n\n**Sprawdzenie I:** Odpowiedzi wracają do oczekiwanego źródła pomiaru.\n\n**Zgłoszenie II:** Wynik pomiaru nie steruje analizowaną trasą. Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie II:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.\n\n**Zależności:** Wynik IP SLA zależy od adresu źródłowego i jego routingu. Pomiar, obiekt track i konsument track to osobne elementy konfiguracji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wynik pomiaru nie steruje analizowaną trasą.\n\nII — Test mierzy inny przepływ niż zamierzona usługa.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Test mierzy inny przepływ niż zamierzona usługa. Zgłoszenie II: Wynik pomiaru nie steruje analizowaną trasą.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Test mierzy inny przepływ niż zamierzona usługa.\n\nII — Zdefiniowany pomiar nie został aktywowany.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. Dla II: Wynik pomiaru nie steruje analizowaną trasą.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Wynik pomiaru nie steruje analizowaną trasą.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. Dla I: Test mierzy inny przepływ niż zamierzona usługa.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "encor.ip-sla.practice.compare-09.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nEcho do serwera odpowiada, lecz usługa HTTPS nie nasłuchuje.\n\n**Zgłoszenie II**\n\nPojedyncze utracone probe powodują ciągłe przełączanie tras.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Dostępność IP nie potwierdza dostępności aplikacji. Dobrać pomiar testujący wymagany transport lub usługę.\n\n**Sprawdzenie I:** Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.\n\n**Zgłoszenie II:** Reakcja jest zbyt czuła względem zakłóceń pomiaru. Dobrać opóźnienia track i parametry sond zgodnie z wymaganiami dostępności.\n\n**Sprawdzenie II:** Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.\n\n**Zależności:** Rodzaj sondy określa, co rzeczywiście mierzymy. Histereza równoważy szybkość detekcji i stabilność przełączeń.",
+      "card_id": "encor.ip-sla.practice.compare-09.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Reakcja jest zbyt czuła względem zakłóceń pomiaru.\n\nII — Dostępność IP nie potwierdza dostępności aplikacji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Dostępność IP nie potwierdza dostępności aplikacji. Zgłoszenie II: Reakcja jest zbyt czuła względem zakłóceń pomiaru.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Dostępność IP nie potwierdza dostępności aplikacji.\n\nII — Reakcja jest zbyt czuła względem zakłóceń pomiaru.",
+          "feedback_md": "**Zgłoszenie I:** Dostępność IP nie potwierdza dostępności aplikacji. Dobrać pomiar testujący wymagany transport lub usługę.\n\n**Sprawdzenie I:** Test portu lub aplikacji wykrywa awarię mimo sukcesu ICMP.\n\n**Zgłoszenie II:** Reakcja jest zbyt czuła względem zakłóceń pomiaru. Dobrać opóźnienia track i parametry sond zgodnie z wymaganiami dostępności.\n\n**Sprawdzenie II:** Krótkie zakłócenie nie przełącza trasy, a trwała awaria nadal jest wykrywana.\n\n**Zależności:** Rodzaj sondy określa, co rzeczywiście mierzymy. Histereza równoważy szybkość detekcji i stabilność przełączeń.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Dostępność IP nie potwierdza dostępności aplikacji.\n\nII — Zdefiniowany pomiar nie został aktywowany.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. Dla II: Reakcja jest zbyt czuła względem zakłóceń pomiaru.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Reakcja jest zbyt czuła względem zakłóceń pomiaru.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Operacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów. Dla I: Dostępność IP nie potwierdza dostępności aplikacji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "encor.ip-sla.practice.compare-10.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — rozpoznanie",
+      "skills": [
+        "encor.ip-sla.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — IP SLA — pomiary i diagnoza dostępności",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios/config/17-x/ip-addressing/b-ip-addressing/m_sla_icmp_echo.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "4.4"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nOperacja IP SLA istnieje, lecz nie jest uruchomiona harmonogramem i nie generuje pomiarów.\n\n**Zgłoszenie II**\n\nIP SLA pokazuje timeout i track jest Down, lecz statyczna trasa nie odnosi się do tego track.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Zdefiniowany pomiar nie został aktywowany. Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie I:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.\n\n**Zgłoszenie II:** Wynik pomiaru nie steruje analizowaną trasą. Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie II:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.\n\n**Zależności:** Definicja operacji i harmonogram jej wykonywania są oddzielne. Pomiar, obiekt track i konsument track to osobne elementy konfiguracji.",
+      "card_id": "encor.ip-sla.practice.compare-10.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Wynik pomiaru nie steruje analizowaną trasą.\n\nII — Zdefiniowany pomiar nie został aktywowany.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Zdefiniowany pomiar nie został aktywowany. Zgłoszenie II: Wynik pomiaru nie steruje analizowaną trasą.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Test mierzy inny przepływ niż zamierzona usługa.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Probe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa. Dla II: Wynik pomiaru nie steruje analizowaną trasą.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zdefiniowany pomiar nie został aktywowany.\n\nII — Wynik pomiaru nie steruje analizowaną trasą.",
+          "feedback_md": "**Zgłoszenie I:** Zdefiniowany pomiar nie został aktywowany. Uruchomić właściwą operację przez ip sla schedule.\n\n**Sprawdzenie I:** Show ip sla statistics pokazuje aktualne wykonania i wyniki.\n\n**Zgłoszenie II:** Wynik pomiaru nie steruje analizowaną trasą. Powiązać właściwy obiekt track z trasą zgodnie z projektem failover.\n\n**Sprawdzenie II:** Zmiana stanu track usuwa lub przywraca tę konkretną trasę.\n\n**Zależności:** Definicja operacji i harmonogram jej wykonywania są oddzielne. Pomiar, obiekt track i konsument track to osobne elementy konfiguracji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Test mierzy inny przepływ niż zamierzona usługa.\n\nII — Wynik pomiaru nie steruje analizowaną trasą.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Probe wychodzi z adresu, dla którego cel nie ma drogi powrotnej. Usługa z właściwego LAN działa. Dla I: Zdefiniowany pomiar nie został aktywowany.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

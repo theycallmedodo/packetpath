@@ -1,0 +1,879 @@
+{
+  "schema_version": 3,
+  "id": "ccna.ipv4.practice-7",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.practice.compare-01.3.card",
+      "front_md": "**Zgłoszenie I**\n\nHost 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26.\n\n**Zgłoszenie II**\n\nPC 10.10.1.10 ma /16 zamiast wymaganego /24. Dla zdalnego 10.10.2.20 wysyła ARP zamiast pakietu do bramy.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrano adres rozgłoszeniowy podsieci /26. Przydzielić wolny adres z zakresu 192.168.10.1–62 z maską /26.\n\n**Sprawdzenie I:** Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\n**Zgłoszenie II:** Host błędnie uznaje zdalną podsieć za lokalną. Ustawić na PC maskę 255.255.255.0 zgodnie z projektem.\n\n**Sprawdzenie II:** Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\n**Zależności:** Adres z samymi jedynkami w części hosta jest broadcastem zwykłej podsieci IPv4. Maska hosta decyduje, czy cel jest osiągany bezpośrednio, czy przez bramę.",
+      "example": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.practice.compare-02.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPC 172.16.8.10/24 ma bramę 172.16.9.1. Właściwy interfejs routera LAN ma 172.16.8.1.\n\n**Zgłoszenie II**\n\nNowy LAN potrzebuje 50 zwykłych adresów hostów. Projekt przydziela mu /27; nie używamy /31 ani specjalnych wyjątków.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Skonfigurowana brama nie leży w lokalnej podsieci hosta. Zmienić bramę PC na 172.16.8.1.\n\n**Sprawdzenie I:** Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\n**Zgłoszenie II:** Podsieć /27 oferuje tylko 30 użytecznych adresów. Przydzielić odpowiednio wyrównaną, wolną podsieć /26.\n\n**Sprawdzenie II:** Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\n**Zależności:** W typowym LAN brama hosta musi być bezpośrednio osiągalna w jego podsieci. Dla zwykłej podsieci liczba hostów wynosi 2 do liczby bitów hosta minus 2.",
+      "example": "I — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\nII — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.practice.compare-03.3.card",
+      "front_md": "**Zgłoszenie I**\n\nW jednym planie przydzielono LAN-A 10.0.0.0/25 i LAN-B 10.0.0.64/26. LAN-B musi być odrębną podsiecią.\n\n**Zgłoszenie II**\n\nDwie stacje w tym samym VLAN mają statycznie 192.168.5.20. Wpis ARP dla .20 zmienia się między ich MAC.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Zakres LAN-B zawiera się w LAN-A. Przenieść LAN-B do wolnego 10.0.0.128/26, aktualizując jego hosty i bramę.\n\n**Sprawdzenie I:** Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\n**Zgłoszenie II:** Dwa urządzenia używają tego samego adresu IPv4. Nadać jednej stacji inny, zweryfikowany wolny adres.\n\n**Sprawdzenie II:** Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.\n\n**Zależności:** Podsieci VLSM w jednym planie muszą mieć rozłączne zakresy, nie tylko różne adresy sieci. ARP wiąże IPv4 z MAC; konflikt adresów może powodować naprzemienne dostarczanie ruchu.",
+      "example": "I — Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\nII — Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.practice.compare-04.3.card",
+      "front_md": "**Zgłoszenie I**\n\nHost 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26.\n\n**Zgłoszenie II**\n\nPC 172.16.8.10/24 ma bramę 172.16.9.1. Właściwy interfejs routera LAN ma 172.16.8.1.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrano adres rozgłoszeniowy podsieci /26. Przydzielić wolny adres z zakresu 192.168.10.1–62 z maską /26.\n\n**Sprawdzenie I:** Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\n**Zgłoszenie II:** Skonfigurowana brama nie leży w lokalnej podsieci hosta. Zmienić bramę PC na 172.16.8.1.\n\n**Sprawdzenie II:** Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\n**Zależności:** Adres z samymi jedynkami w części hosta jest broadcastem zwykłej podsieci IPv4. W typowym LAN brama hosta musi być bezpośrednio osiągalna w jego podsieci.",
+      "example": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.practice.compare-05.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPC 10.10.1.10 ma /16 zamiast wymaganego /24. Dla zdalnego 10.10.2.20 wysyła ARP zamiast pakietu do bramy.\n\n**Zgłoszenie II**\n\nW jednym planie przydzielono LAN-A 10.0.0.0/25 i LAN-B 10.0.0.64/26. LAN-B musi być odrębną podsiecią.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Host błędnie uznaje zdalną podsieć za lokalną. Ustawić na PC maskę 255.255.255.0 zgodnie z projektem.\n\n**Sprawdzenie I:** Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\n**Zgłoszenie II:** Zakres LAN-B zawiera się w LAN-A. Przenieść LAN-B do wolnego 10.0.0.128/26, aktualizując jego hosty i bramę.\n\n**Sprawdzenie II:** Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\n**Zależności:** Maska hosta decyduje, czy cel jest osiągany bezpośrednio, czy przez bramę. Podsieci VLSM w jednym planie muszą mieć rozłączne zakresy, nie tylko różne adresy sieci.",
+      "example": "I — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\nII — Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.practice.compare-06.3.card",
+      "front_md": "**Zgłoszenie I**\n\nNowy LAN potrzebuje 50 zwykłych adresów hostów. Projekt przydziela mu /27; nie używamy /31 ani specjalnych wyjątków.\n\n**Zgłoszenie II**\n\nDwie stacje w tym samym VLAN mają statycznie 192.168.5.20. Wpis ARP dla .20 zmienia się między ich MAC.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Podsieć /27 oferuje tylko 30 użytecznych adresów. Przydzielić odpowiednio wyrównaną, wolną podsieć /26.\n\n**Sprawdzenie I:** Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\n**Zgłoszenie II:** Dwa urządzenia używają tego samego adresu IPv4. Nadać jednej stacji inny, zweryfikowany wolny adres.\n\n**Sprawdzenie II:** Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.\n\n**Zależności:** Dla zwykłej podsieci liczba hostów wynosi 2 do liczby bitów hosta minus 2. ARP wiąże IPv4 z MAC; konflikt adresów może powodować naprzemienne dostarczanie ruchu.",
+      "example": "I — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\nII — Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.practice.compare-07.3.card",
+      "front_md": "**Zgłoszenie I**\n\nHost 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26.\n\n**Zgłoszenie II**\n\nDwie stacje w tym samym VLAN mają statycznie 192.168.5.20. Wpis ARP dla .20 zmienia się między ich MAC.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrano adres rozgłoszeniowy podsieci /26. Przydzielić wolny adres z zakresu 192.168.10.1–62 z maską /26.\n\n**Sprawdzenie I:** Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\n**Zgłoszenie II:** Dwa urządzenia używają tego samego adresu IPv4. Nadać jednej stacji inny, zweryfikowany wolny adres.\n\n**Sprawdzenie II:** Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.\n\n**Zależności:** Adres z samymi jedynkami w części hosta jest broadcastem zwykłej podsieci IPv4. ARP wiąże IPv4 z MAC; konflikt adresów może powodować naprzemienne dostarczanie ruchu.",
+      "example": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.practice.compare-08.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPC 10.10.1.10 ma /16 zamiast wymaganego /24. Dla zdalnego 10.10.2.20 wysyła ARP zamiast pakietu do bramy.\n\n**Zgłoszenie II**\n\nNowy LAN potrzebuje 50 zwykłych adresów hostów. Projekt przydziela mu /27; nie używamy /31 ani specjalnych wyjątków.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Host błędnie uznaje zdalną podsieć za lokalną. Ustawić na PC maskę 255.255.255.0 zgodnie z projektem.\n\n**Sprawdzenie I:** Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\n**Zgłoszenie II:** Podsieć /27 oferuje tylko 30 użytecznych adresów. Przydzielić odpowiednio wyrównaną, wolną podsieć /26.\n\n**Sprawdzenie II:** Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\n**Zależności:** Maska hosta decyduje, czy cel jest osiągany bezpośrednio, czy przez bramę. Dla zwykłej podsieci liczba hostów wynosi 2 do liczby bitów hosta minus 2.",
+      "example": "I — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\nII — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.practice.compare-09.3.card",
+      "front_md": "**Zgłoszenie I**\n\nPC 172.16.8.10/24 ma bramę 172.16.9.1. Właściwy interfejs routera LAN ma 172.16.8.1.\n\n**Zgłoszenie II**\n\nW jednym planie przydzielono LAN-A 10.0.0.0/25 i LAN-B 10.0.0.64/26. LAN-B musi być odrębną podsiecią.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Skonfigurowana brama nie leży w lokalnej podsieci hosta. Zmienić bramę PC na 172.16.8.1.\n\n**Sprawdzenie I:** Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\n**Zgłoszenie II:** Zakres LAN-B zawiera się w LAN-A. Przenieść LAN-B do wolnego 10.0.0.128/26, aktualizując jego hosty i bramę.\n\n**Sprawdzenie II:** Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\n**Zależności:** W typowym LAN brama hosta musi być bezpośrednio osiągalna w jego podsieci. Podsieci VLSM w jednym planie muszą mieć rozłączne zakresy, nie tylko różne adresy sieci.",
+      "example": "I — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\nII — Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "id": "ccna.ipv4.practice.compare-10.3.card",
+      "front_md": "**Zgłoszenie I**\n\nHost 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26.\n\n**Zgłoszenie II**\n\nNowy LAN potrzebuje 50 zwykłych adresów hostów. Projekt przydziela mu /27; nie używamy /31 ani specjalnych wyjątków.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wybrano adres rozgłoszeniowy podsieci /26. Przydzielić wolny adres z zakresu 192.168.10.1–62 z maską /26.\n\n**Sprawdzenie I:** Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\n**Zgłoszenie II:** Podsieć /27 oferuje tylko 30 użytecznych adresów. Przydzielić odpowiednio wyrównaną, wolną podsieć /26.\n\n**Sprawdzenie II:** Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\n**Zależności:** Adres z samymi jedynkami w części hosta jest broadcastem zwykłej podsieci IPv4. Dla zwykłej podsieci liczba hostów wynosi 2 do liczby bitów hosta minus 2.",
+      "example": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.ipv4.practice.compare-01.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26.\n\n**Zgłoszenie II**\n\nPC 10.10.1.10 ma /16 zamiast wymaganego /24. Dla zdalnego 10.10.2.20 wysyła ARP zamiast pakietu do bramy.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrano adres rozgłoszeniowy podsieci /26. Przydzielić wolny adres z zakresu 192.168.10.1–62 z maską /26.\n\n**Sprawdzenie I:** Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\n**Zgłoszenie II:** Host błędnie uznaje zdalną podsieć za lokalną. Ustawić na PC maskę 255.255.255.0 zgodnie z projektem.\n\n**Sprawdzenie II:** Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\n**Zależności:** Adres z samymi jedynkami w części hosta jest broadcastem zwykłej podsieci IPv4. Maska hosta decyduje, czy cel jest osiągany bezpośrednio, czy przez bramę.",
+      "card_id": "ccna.ipv4.practice.compare-01.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\nII — Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrano adres rozgłoszeniowy podsieci /26. Zgłoszenie II: Host błędnie uznaje zdalną podsieć za lokalną.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: PC 172.16.8.10/24 ma bramę 172.16.9.1. Właściwy interfejs routera LAN ma 172.16.8.1. Dla II: Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\nII — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: PC 172.16.8.10/24 ma bramę 172.16.9.1. Właściwy interfejs routera LAN ma 172.16.8.1. Dla I: Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.",
+          "feedback_md": "**Zgłoszenie I:** Wybrano adres rozgłoszeniowy podsieci /26. Przydzielić wolny adres z zakresu 192.168.10.1–62 z maską /26.\n\n**Sprawdzenie I:** Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\n**Zgłoszenie II:** Host błędnie uznaje zdalną podsieć za lokalną. Ustawić na PC maskę 255.255.255.0 zgodnie z projektem.\n\n**Sprawdzenie II:** Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\n**Zależności:** Adres z samymi jedynkami w części hosta jest broadcastem zwykłej podsieci IPv4. Maska hosta decyduje, czy cel jest osiągany bezpośrednio, czy przez bramę.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ipv4.practice.compare-02.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPC 172.16.8.10/24 ma bramę 172.16.9.1. Właściwy interfejs routera LAN ma 172.16.8.1.\n\n**Zgłoszenie II**\n\nNowy LAN potrzebuje 50 zwykłych adresów hostów. Projekt przydziela mu /27; nie używamy /31 ani specjalnych wyjątków.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Skonfigurowana brama nie leży w lokalnej podsieci hosta. Zmienić bramę PC na 172.16.8.1.\n\n**Sprawdzenie I:** Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\n**Zgłoszenie II:** Podsieć /27 oferuje tylko 30 użytecznych adresów. Przydzielić odpowiednio wyrównaną, wolną podsieć /26.\n\n**Sprawdzenie II:** Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\n**Zależności:** W typowym LAN brama hosta musi być bezpośrednio osiągalna w jego podsieci. Dla zwykłej podsieci liczba hostów wynosi 2 do liczby bitów hosta minus 2.",
+      "card_id": "ccna.ipv4.practice.compare-02.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\nII — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.",
+          "feedback_md": "**Zgłoszenie I:** Skonfigurowana brama nie leży w lokalnej podsieci hosta. Zmienić bramę PC na 172.16.8.1.\n\n**Sprawdzenie I:** Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\n**Zgłoszenie II:** Podsieć /27 oferuje tylko 30 użytecznych adresów. Przydzielić odpowiednio wyrównaną, wolną podsieć /26.\n\n**Sprawdzenie II:** Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\n**Zależności:** W typowym LAN brama hosta musi być bezpośrednio osiągalna w jego podsieci. Dla zwykłej podsieci liczba hostów wynosi 2 do liczby bitów hosta minus 2.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\nII — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Skonfigurowana brama nie leży w lokalnej podsieci hosta. Zgłoszenie II: Podsieć /27 oferuje tylko 30 użytecznych adresów.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\nII — Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26. Dla II: Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26. Dla I: Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ipv4.practice.compare-03.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nW jednym planie przydzielono LAN-A 10.0.0.0/25 i LAN-B 10.0.0.64/26. LAN-B musi być odrębną podsiecią.\n\n**Zgłoszenie II**\n\nDwie stacje w tym samym VLAN mają statycznie 192.168.5.20. Wpis ARP dla .20 zmienia się między ich MAC.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Zakres LAN-B zawiera się w LAN-A. Przenieść LAN-B do wolnego 10.0.0.128/26, aktualizując jego hosty i bramę.\n\n**Sprawdzenie I:** Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\n**Zgłoszenie II:** Dwa urządzenia używają tego samego adresu IPv4. Nadać jednej stacji inny, zweryfikowany wolny adres.\n\n**Sprawdzenie II:** Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.\n\n**Zależności:** Podsieci VLSM w jednym planie muszą mieć rozłączne zakresy, nie tylko różne adresy sieci. ARP wiąże IPv4 z MAC; konflikt adresów może powodować naprzemienne dostarczanie ruchu.",
+      "card_id": "ccna.ipv4.practice.compare-03.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.\n\nII — Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Zakres LAN-B zawiera się w LAN-A. Zgłoszenie II: Dwa urządzenia używają tego samego adresu IPv4.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\nII — Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.",
+          "feedback_md": "**Zgłoszenie I:** Zakres LAN-B zawiera się w LAN-A. Przenieść LAN-B do wolnego 10.0.0.128/26, aktualizując jego hosty i bramę.\n\n**Sprawdzenie I:** Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\n**Zgłoszenie II:** Dwa urządzenia używają tego samego adresu IPv4. Nadać jednej stacji inny, zweryfikowany wolny adres.\n\n**Sprawdzenie II:** Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.\n\n**Zależności:** Podsieci VLSM w jednym planie muszą mieć rozłączne zakresy, nie tylko różne adresy sieci. ARP wiąże IPv4 z MAC; konflikt adresów może powodować naprzemienne dostarczanie ruchu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\nII — Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26. Dla II: Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26. Dla I: Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ipv4.practice.compare-04.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26.\n\n**Zgłoszenie II**\n\nPC 172.16.8.10/24 ma bramę 172.16.9.1. Właściwy interfejs routera LAN ma 172.16.8.1.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrano adres rozgłoszeniowy podsieci /26. Przydzielić wolny adres z zakresu 192.168.10.1–62 z maską /26.\n\n**Sprawdzenie I:** Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\n**Zgłoszenie II:** Skonfigurowana brama nie leży w lokalnej podsieci hosta. Zmienić bramę PC na 172.16.8.1.\n\n**Sprawdzenie II:** Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\n**Zależności:** Adres z samymi jedynkami w części hosta jest broadcastem zwykłej podsieci IPv4. W typowym LAN brama hosta musi być bezpośrednio osiągalna w jego podsieci.",
+      "card_id": "ccna.ipv4.practice.compare-04.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\nII — Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrano adres rozgłoszeniowy podsieci /26. Zgłoszenie II: Skonfigurowana brama nie leży w lokalnej podsieci hosta.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: PC 10.10.1.10 ma /16 zamiast wymaganego /24. Dla zdalnego 10.10.2.20 wysyła ARP zamiast pakietu do bramy. Dla II: Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.",
+          "feedback_md": "**Zgłoszenie I:** Wybrano adres rozgłoszeniowy podsieci /26. Przydzielić wolny adres z zakresu 192.168.10.1–62 z maską /26.\n\n**Sprawdzenie I:** Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\n**Zgłoszenie II:** Skonfigurowana brama nie leży w lokalnej podsieci hosta. Zmienić bramę PC na 172.16.8.1.\n\n**Sprawdzenie II:** Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\n**Zależności:** Adres z samymi jedynkami w części hosta jest broadcastem zwykłej podsieci IPv4. W typowym LAN brama hosta musi być bezpośrednio osiągalna w jego podsieci.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\nII — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: PC 10.10.1.10 ma /16 zamiast wymaganego /24. Dla zdalnego 10.10.2.20 wysyła ARP zamiast pakietu do bramy. Dla I: Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ipv4.practice.compare-05.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPC 10.10.1.10 ma /16 zamiast wymaganego /24. Dla zdalnego 10.10.2.20 wysyła ARP zamiast pakietu do bramy.\n\n**Zgłoszenie II**\n\nW jednym planie przydzielono LAN-A 10.0.0.0/25 i LAN-B 10.0.0.64/26. LAN-B musi być odrębną podsiecią.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Host błędnie uznaje zdalną podsieć za lokalną. Ustawić na PC maskę 255.255.255.0 zgodnie z projektem.\n\n**Sprawdzenie I:** Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\n**Zgłoszenie II:** Zakres LAN-B zawiera się w LAN-A. Przenieść LAN-B do wolnego 10.0.0.128/26, aktualizując jego hosty i bramę.\n\n**Sprawdzenie II:** Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\n**Zależności:** Maska hosta decyduje, czy cel jest osiągany bezpośrednio, czy przez bramę. Podsieci VLSM w jednym planie muszą mieć rozłączne zakresy, nie tylko różne adresy sieci.",
+      "card_id": "ccna.ipv4.practice.compare-05.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\nII — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Host błędnie uznaje zdalną podsieć za lokalną. Zgłoszenie II: Zakres LAN-B zawiera się w LAN-A.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\nII — Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26. Dla II: Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26. Dla I: Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\nII — Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.",
+          "feedback_md": "**Zgłoszenie I:** Host błędnie uznaje zdalną podsieć za lokalną. Ustawić na PC maskę 255.255.255.0 zgodnie z projektem.\n\n**Sprawdzenie I:** Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\n**Zgłoszenie II:** Zakres LAN-B zawiera się w LAN-A. Przenieść LAN-B do wolnego 10.0.0.128/26, aktualizując jego hosty i bramę.\n\n**Sprawdzenie II:** Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\n**Zależności:** Maska hosta decyduje, czy cel jest osiągany bezpośrednio, czy przez bramę. Podsieci VLSM w jednym planie muszą mieć rozłączne zakresy, nie tylko różne adresy sieci.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ipv4.practice.compare-06.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nNowy LAN potrzebuje 50 zwykłych adresów hostów. Projekt przydziela mu /27; nie używamy /31 ani specjalnych wyjątków.\n\n**Zgłoszenie II**\n\nDwie stacje w tym samym VLAN mają statycznie 192.168.5.20. Wpis ARP dla .20 zmienia się między ich MAC.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Podsieć /27 oferuje tylko 30 użytecznych adresów. Przydzielić odpowiednio wyrównaną, wolną podsieć /26.\n\n**Sprawdzenie I:** Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\n**Zgłoszenie II:** Dwa urządzenia używają tego samego adresu IPv4. Nadać jednej stacji inny, zweryfikowany wolny adres.\n\n**Sprawdzenie II:** Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.\n\n**Zależności:** Dla zwykłej podsieci liczba hostów wynosi 2 do liczby bitów hosta minus 2. ARP wiąże IPv4 z MAC; konflikt adresów może powodować naprzemienne dostarczanie ruchu.",
+      "card_id": "ccna.ipv4.practice.compare-06.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\nII — Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.",
+          "feedback_md": "**Zgłoszenie I:** Podsieć /27 oferuje tylko 30 użytecznych adresów. Przydzielić odpowiednio wyrównaną, wolną podsieć /26.\n\n**Sprawdzenie I:** Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\n**Zgłoszenie II:** Dwa urządzenia używają tego samego adresu IPv4. Nadać jednej stacji inny, zweryfikowany wolny adres.\n\n**Sprawdzenie II:** Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.\n\n**Zależności:** Dla zwykłej podsieci liczba hostów wynosi 2 do liczby bitów hosta minus 2. ARP wiąże IPv4 z MAC; konflikt adresów może powodować naprzemienne dostarczanie ruchu.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.\n\nII — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Podsieć /27 oferuje tylko 30 użytecznych adresów. Zgłoszenie II: Dwa urządzenia używają tego samego adresu IPv4.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\nII — Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26. Dla II: Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26. Dla I: Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.ipv4.practice.compare-07.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26.\n\n**Zgłoszenie II**\n\nDwie stacje w tym samym VLAN mają statycznie 192.168.5.20. Wpis ARP dla .20 zmienia się między ich MAC.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrano adres rozgłoszeniowy podsieci /26. Przydzielić wolny adres z zakresu 192.168.10.1–62 z maską /26.\n\n**Sprawdzenie I:** Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\n**Zgłoszenie II:** Dwa urządzenia używają tego samego adresu IPv4. Nadać jednej stacji inny, zweryfikowany wolny adres.\n\n**Sprawdzenie II:** Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.\n\n**Zależności:** Adres z samymi jedynkami w części hosta jest broadcastem zwykłej podsieci IPv4. ARP wiąże IPv4 z MAC; konflikt adresów może powodować naprzemienne dostarczanie ruchu.",
+      "card_id": "ccna.ipv4.practice.compare-07.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.\n\nII — Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrano adres rozgłoszeniowy podsieci /26. Zgłoszenie II: Dwa urządzenia używają tego samego adresu IPv4.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.",
+          "feedback_md": "**Zgłoszenie I:** Wybrano adres rozgłoszeniowy podsieci /26. Przydzielić wolny adres z zakresu 192.168.10.1–62 z maską /26.\n\n**Sprawdzenie I:** Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\n**Zgłoszenie II:** Dwa urządzenia używają tego samego adresu IPv4. Nadać jednej stacji inny, zweryfikowany wolny adres.\n\n**Sprawdzenie II:** Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.\n\n**Zależności:** Adres z samymi jedynkami w części hosta jest broadcastem zwykłej podsieci IPv4. ARP wiąże IPv4 z MAC; konflikt adresów może powodować naprzemienne dostarczanie ruchu.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: PC 10.10.1.10 ma /16 zamiast wymaganego /24. Dla zdalnego 10.10.2.20 wysyła ARP zamiast pakietu do bramy. Dla II: Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\nII — Po odświeżeniu ARP adres .20 stabilnie wskazuje jeden MAC, a obie stacje działają osobno.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: PC 10.10.1.10 ma /16 zamiast wymaganego /24. Dla zdalnego 10.10.2.20 wysyła ARP zamiast pakietu do bramy. Dla I: Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.ipv4.practice.compare-08.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPC 10.10.1.10 ma /16 zamiast wymaganego /24. Dla zdalnego 10.10.2.20 wysyła ARP zamiast pakietu do bramy.\n\n**Zgłoszenie II**\n\nNowy LAN potrzebuje 50 zwykłych adresów hostów. Projekt przydziela mu /27; nie używamy /31 ani specjalnych wyjątków.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Host błędnie uznaje zdalną podsieć za lokalną. Ustawić na PC maskę 255.255.255.0 zgodnie z projektem.\n\n**Sprawdzenie I:** Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\n**Zgłoszenie II:** Podsieć /27 oferuje tylko 30 użytecznych adresów. Przydzielić odpowiednio wyrównaną, wolną podsieć /26.\n\n**Sprawdzenie II:** Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\n**Zależności:** Maska hosta decyduje, czy cel jest osiągany bezpośrednio, czy przez bramę. Dla zwykłej podsieci liczba hostów wynosi 2 do liczby bitów hosta minus 2.",
+      "card_id": "ccna.ipv4.practice.compare-08.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\nII — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Host błędnie uznaje zdalną podsieć za lokalną. Zgłoszenie II: Podsieć /27 oferuje tylko 30 użytecznych adresów.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\nII — Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26. Dla II: Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\nII — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.",
+          "feedback_md": "**Zgłoszenie I:** Host błędnie uznaje zdalną podsieć za lokalną. Ustawić na PC maskę 255.255.255.0 zgodnie z projektem.\n\n**Sprawdzenie I:** Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\n**Zgłoszenie II:** Podsieć /27 oferuje tylko 30 użytecznych adresów. Przydzielić odpowiednio wyrównaną, wolną podsieć /26.\n\n**Sprawdzenie II:** Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\n**Zależności:** Maska hosta decyduje, czy cel jest osiągany bezpośrednio, czy przez bramę. Dla zwykłej podsieci liczba hostów wynosi 2 do liczby bitów hosta minus 2.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26. Dla I: Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.ipv4.practice.compare-09.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nPC 172.16.8.10/24 ma bramę 172.16.9.1. Właściwy interfejs routera LAN ma 172.16.8.1.\n\n**Zgłoszenie II**\n\nW jednym planie przydzielono LAN-A 10.0.0.0/25 i LAN-B 10.0.0.64/26. LAN-B musi być odrębną podsiecią.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Skonfigurowana brama nie leży w lokalnej podsieci hosta. Zmienić bramę PC na 172.16.8.1.\n\n**Sprawdzenie I:** Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\n**Zgłoszenie II:** Zakres LAN-B zawiera się w LAN-A. Przenieść LAN-B do wolnego 10.0.0.128/26, aktualizując jego hosty i bramę.\n\n**Sprawdzenie II:** Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\n**Zależności:** W typowym LAN brama hosta musi być bezpośrednio osiągalna w jego podsieci. Podsieci VLSM w jednym planie muszą mieć rozłączne zakresy, nie tylko różne adresy sieci.",
+      "card_id": "ccna.ipv4.practice.compare-09.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\nII — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Skonfigurowana brama nie leży w lokalnej podsieci hosta. Zgłoszenie II: Zakres LAN-B zawiera się w LAN-A.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\nII — Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26. Dla II: Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26. Dla I: Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\nII — Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.",
+          "feedback_md": "**Zgłoszenie I:** Skonfigurowana brama nie leży w lokalnej podsieci hosta. Zmienić bramę PC na 172.16.8.1.\n\n**Sprawdzenie I:** Host rozwiązuje ARP 172.16.8.1 i przesyła do tej bramy ruch poza /24.\n\n**Zgłoszenie II:** Zakres LAN-B zawiera się w LAN-A. Przenieść LAN-B do wolnego 10.0.0.128/26, aktualizując jego hosty i bramę.\n\n**Sprawdzenie II:** Zakresy A .0–.127 i B .128–.191 nie mają wspólnych adresów.\n\n**Zależności:** W typowym LAN brama hosta musi być bezpośrednio osiągalna w jego podsieci. Podsieci VLSM w jednym planie muszą mieć rozłączne zakresy, nie tylko różne adresy sieci.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.ipv4.practice.compare-10.3",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — weryfikacja",
+      "skills": [
+        "ccna.ipv4.contrast",
+        "practice.3"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — IPv4 i subnetting",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/ip-addressing/ip-addressing/m_config-ipv4-addr-0.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13790-8.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — IPv4 — VLSM i granice podsieci",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/routing-information-protocol-rip/13788-3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "1.6"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost 192.168.10.63/26 nie może zostać poprawnie przydzielony jako zwykły adres stacji w podsieci 192.168.10.0/26.\n\n**Zgłoszenie II**\n\nNowy LAN potrzebuje 50 zwykłych adresów hostów. Projekt przydziela mu /27; nie używamy /31 ani specjalnych wyjątków.\n\nOceń każde zgłoszenie oddzielnie. Który wynik najbezpośredniej potwierdza oczekiwany stan w tym przypadku? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wybrano adres rozgłoszeniowy podsieci /26. Przydzielić wolny adres z zakresu 192.168.10.1–62 z maską /26.\n\n**Sprawdzenie I:** Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\n**Zgłoszenie II:** Podsieć /27 oferuje tylko 30 użytecznych adresów. Przydzielić odpowiednio wyrównaną, wolną podsieć /26.\n\n**Sprawdzenie II:** Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\n**Zależności:** Adres z samymi jedynkami w części hosta jest broadcastem zwykłej podsieci IPv4. Dla zwykłej podsieci liczba hostów wynosi 2 do liczby bitów hosta minus 2.",
+      "card_id": "ccna.ipv4.practice.compare-10.3.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.",
+          "feedback_md": "**Zgłoszenie I:** Wybrano adres rozgłoszeniowy podsieci /26. Przydzielić wolny adres z zakresu 192.168.10.1–62 z maską /26.\n\n**Sprawdzenie I:** Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\n**Zgłoszenie II:** Podsieć /27 oferuje tylko 30 użytecznych adresów. Przydzielić odpowiednio wyrównaną, wolną podsieć /26.\n\n**Sprawdzenie II:** Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\n**Zależności:** Adres z samymi jedynkami w części hosta jest broadcastem zwykłej podsieci IPv4. Dla zwykłej podsieci liczba hostów wynosi 2 do liczby bitów hosta minus 2.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.\n\nII — Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wybrano adres rozgłoszeniowy podsieci /26. Zgłoszenie II: Podsieć /27 oferuje tylko 30 użytecznych adresów.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Adres hosta mieści się między .1 i .62, a broadcast to .63.\n\nII — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: PC 10.10.1.10 ma /16 zamiast wymaganego /24. Dla zdalnego 10.10.2.20 wysyła ARP zamiast pakietu do bramy. Dla II: Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Przy próbie do 10.10.2.20 host rozwiązuje MAC bramy, nie tego zdalnego hosta.\n\nII — Plan adresacji zapewnia 62 użyteczne adresy, co wystarcza dla 50 urządzeń.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: PC 10.10.1.10 ma /16 zamiast wymaganego /24. Dla zdalnego 10.10.2.20 wysyła ARP zamiast pakietu do bramy. Dla I: Adres hosta mieści się między .1 i .62, a broadcast to .63.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    }
+  ]
+}

@@ -1,0 +1,879 @@
+{
+  "schema_version": 3,
+  "id": "ccna.fhrp.practice-5",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.practice.compare-01.1.card",
+      "front_md": "**Zgłoszenie I**\n\nHost wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2.\n\n**Zgłoszenie II**\n\nR1 o wyższym priorytecie wrócił po awarii, lecz aktywnym pozostaje R2. Preempt jest wyłączone.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Host omija wirtualną bramę redundancji. Ustawić na hoście lub w DHCP adres wirtualny grupy.\n\n**Sprawdzenie I:** Po wyłączeniu R1 host nadal używa tego samego VIP i uzyskuje łączność przez R2.\n\n**Zgłoszenie II:** Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt. Włączyć preempt z odpowiednią zwłoką, jeżeli projekt wymaga powrotu roli do R1.\n\n**Sprawdzenie II:** Po spełnieniu warunków preempt R1 odzyskuje rolę Active.\n\n**Zależności:** Korzyść FHRP wymaga użycia adresu wirtualnego przez klientów. Priorytet i możliwość przejęcia działającej roli to różne ustawienia HSRP.",
+      "example": "I — Host omija wirtualną bramę redundancji.\n\nII — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.practice.compare-02.1.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 nadal jest Active po utracie WAN, bo jego interfejs LAN pozostaje up i nie ma trackingu.\n\n**Zgłoszenie II**\n\nR1 działa w HSRP group 10, R2 w group 20; projekt zakłada jedną grupę i wspólny VIP.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Grupa nie obserwuje awarii ścieżki poza LAN. Powiązać właściwy obiekt track ze spadkiem priorytetu wystarczającym do przełączenia.\n\n**Sprawdzenie I:** Awaria WAN obniża efektywny priorytet i zdrowy router przejmuje rolę zgodnie z preempt.\n\n**Zgłoszenie II:** Routery nie uczestniczą w tej samej grupie redundancji. Ujednolicić grupę, VIP i pozostałe parametry na wspólnym LAN.\n\n**Sprawdzenie II:** Show standby pokazuje jedną parę Active/Standby dla zamierzonej grupy.\n\n**Zależności:** FHRP samo w sobie nie sprawdza całej drogi do usług zewnętrznych. Wspólna usługa wirtualnej bramy wymaga zgodnego członkostwa grupy.",
+      "example": "I — Grupa nie obserwuje awarii ścieżki poza LAN.\n\nII — Routery nie uczestniczą w tej samej grupie redundancji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.practice.compare-03.1.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 i R2 utraciły wzajemne Hello przez uszkodzony trunk. Oba widzą swoje lokalne hosty i stają się Active.\n\n**Zgłoszenie II**\n\nPo prawidłowym przełączeniu Active adres wirtualny nie zmienił się, choć fizyczny router jest inny.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Podział domeny L2 uniemożliwia wymianę komunikatów HSRP. Przywrócić transport właściwego VLAN i komunikatów grupy między routerami.\n\n**Sprawdzenie I:** Po połączeniu domeny routery znów uzgadniają pojedynczą rolę Active.\n\n**Zgłoszenie II:** FHRP zachowuje tożsamość wirtualnej bramy. Sprawdzić rolę nowego Active i ruch przez VIP bez zmiany adresacji hostów.\n\n**Sprawdzenie II:** Hosty nadal wysyłają do dotychczasowego VIP przez nowy aktywny router.\n\n**Zależności:** Brak Hello może oznaczać awarię transportu między członkami, nie tylko awarię routera. Adres wirtualny uniezależnia konfigurację klienta od aktualnego routera obsługującego bramę.",
+      "example": "I — Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.\n\nII — FHRP zachowuje tożsamość wirtualnej bramy."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.practice.compare-04.1.card",
+      "front_md": "**Zgłoszenie I**\n\nHost wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2.\n\n**Zgłoszenie II**\n\nR1 nadal jest Active po utracie WAN, bo jego interfejs LAN pozostaje up i nie ma trackingu.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Host omija wirtualną bramę redundancji. Ustawić na hoście lub w DHCP adres wirtualny grupy.\n\n**Sprawdzenie I:** Po wyłączeniu R1 host nadal używa tego samego VIP i uzyskuje łączność przez R2.\n\n**Zgłoszenie II:** Grupa nie obserwuje awarii ścieżki poza LAN. Powiązać właściwy obiekt track ze spadkiem priorytetu wystarczającym do przełączenia.\n\n**Sprawdzenie II:** Awaria WAN obniża efektywny priorytet i zdrowy router przejmuje rolę zgodnie z preempt.\n\n**Zależności:** Korzyść FHRP wymaga użycia adresu wirtualnego przez klientów. FHRP samo w sobie nie sprawdza całej drogi do usług zewnętrznych.",
+      "example": "I — Host omija wirtualną bramę redundancji.\n\nII — Grupa nie obserwuje awarii ścieżki poza LAN."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.practice.compare-05.1.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 o wyższym priorytecie wrócił po awarii, lecz aktywnym pozostaje R2. Preempt jest wyłączone.\n\n**Zgłoszenie II**\n\nR1 i R2 utraciły wzajemne Hello przez uszkodzony trunk. Oba widzą swoje lokalne hosty i stają się Active.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt. Włączyć preempt z odpowiednią zwłoką, jeżeli projekt wymaga powrotu roli do R1.\n\n**Sprawdzenie I:** Po spełnieniu warunków preempt R1 odzyskuje rolę Active.\n\n**Zgłoszenie II:** Podział domeny L2 uniemożliwia wymianę komunikatów HSRP. Przywrócić transport właściwego VLAN i komunikatów grupy między routerami.\n\n**Sprawdzenie II:** Po połączeniu domeny routery znów uzgadniają pojedynczą rolę Active.\n\n**Zależności:** Priorytet i możliwość przejęcia działającej roli to różne ustawienia HSRP. Brak Hello może oznaczać awarię transportu między członkami, nie tylko awarię routera.",
+      "example": "I — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.\n\nII — Podział domeny L2 uniemożliwia wymianę komunikatów HSRP."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.practice.compare-06.1.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 działa w HSRP group 10, R2 w group 20; projekt zakłada jedną grupę i wspólny VIP.\n\n**Zgłoszenie II**\n\nPo prawidłowym przełączeniu Active adres wirtualny nie zmienił się, choć fizyczny router jest inny.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Routery nie uczestniczą w tej samej grupie redundancji. Ujednolicić grupę, VIP i pozostałe parametry na wspólnym LAN.\n\n**Sprawdzenie I:** Show standby pokazuje jedną parę Active/Standby dla zamierzonej grupy.\n\n**Zgłoszenie II:** FHRP zachowuje tożsamość wirtualnej bramy. Sprawdzić rolę nowego Active i ruch przez VIP bez zmiany adresacji hostów.\n\n**Sprawdzenie II:** Hosty nadal wysyłają do dotychczasowego VIP przez nowy aktywny router.\n\n**Zależności:** Wspólna usługa wirtualnej bramy wymaga zgodnego członkostwa grupy. Adres wirtualny uniezależnia konfigurację klienta od aktualnego routera obsługującego bramę.",
+      "example": "I — Routery nie uczestniczą w tej samej grupie redundancji.\n\nII — FHRP zachowuje tożsamość wirtualnej bramy."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.practice.compare-07.1.card",
+      "front_md": "**Zgłoszenie I**\n\nHost wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2.\n\n**Zgłoszenie II**\n\nPo prawidłowym przełączeniu Active adres wirtualny nie zmienił się, choć fizyczny router jest inny.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Host omija wirtualną bramę redundancji. Ustawić na hoście lub w DHCP adres wirtualny grupy.\n\n**Sprawdzenie I:** Po wyłączeniu R1 host nadal używa tego samego VIP i uzyskuje łączność przez R2.\n\n**Zgłoszenie II:** FHRP zachowuje tożsamość wirtualnej bramy. Sprawdzić rolę nowego Active i ruch przez VIP bez zmiany adresacji hostów.\n\n**Sprawdzenie II:** Hosty nadal wysyłają do dotychczasowego VIP przez nowy aktywny router.\n\n**Zależności:** Korzyść FHRP wymaga użycia adresu wirtualnego przez klientów. Adres wirtualny uniezależnia konfigurację klienta od aktualnego routera obsługującego bramę.",
+      "example": "I — Host omija wirtualną bramę redundancji.\n\nII — FHRP zachowuje tożsamość wirtualnej bramy."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.practice.compare-08.1.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 o wyższym priorytecie wrócił po awarii, lecz aktywnym pozostaje R2. Preempt jest wyłączone.\n\n**Zgłoszenie II**\n\nR1 działa w HSRP group 10, R2 w group 20; projekt zakłada jedną grupę i wspólny VIP.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt. Włączyć preempt z odpowiednią zwłoką, jeżeli projekt wymaga powrotu roli do R1.\n\n**Sprawdzenie I:** Po spełnieniu warunków preempt R1 odzyskuje rolę Active.\n\n**Zgłoszenie II:** Routery nie uczestniczą w tej samej grupie redundancji. Ujednolicić grupę, VIP i pozostałe parametry na wspólnym LAN.\n\n**Sprawdzenie II:** Show standby pokazuje jedną parę Active/Standby dla zamierzonej grupy.\n\n**Zależności:** Priorytet i możliwość przejęcia działającej roli to różne ustawienia HSRP. Wspólna usługa wirtualnej bramy wymaga zgodnego członkostwa grupy.",
+      "example": "I — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.\n\nII — Routery nie uczestniczą w tej samej grupie redundancji."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.practice.compare-09.1.card",
+      "front_md": "**Zgłoszenie I**\n\nR1 nadal jest Active po utracie WAN, bo jego interfejs LAN pozostaje up i nie ma trackingu.\n\n**Zgłoszenie II**\n\nR1 i R2 utraciły wzajemne Hello przez uszkodzony trunk. Oba widzą swoje lokalne hosty i stają się Active.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Grupa nie obserwuje awarii ścieżki poza LAN. Powiązać właściwy obiekt track ze spadkiem priorytetu wystarczającym do przełączenia.\n\n**Sprawdzenie I:** Awaria WAN obniża efektywny priorytet i zdrowy router przejmuje rolę zgodnie z preempt.\n\n**Zgłoszenie II:** Podział domeny L2 uniemożliwia wymianę komunikatów HSRP. Przywrócić transport właściwego VLAN i komunikatów grupy między routerami.\n\n**Sprawdzenie II:** Po połączeniu domeny routery znów uzgadniają pojedynczą rolę Active.\n\n**Zależności:** FHRP samo w sobie nie sprawdza całej drogi do usług zewnętrznych. Brak Hello może oznaczać awarię transportu między członkami, nie tylko awarię routera.",
+      "example": "I — Grupa nie obserwuje awarii ścieżki poza LAN.\n\nII — Podział domeny L2 uniemożliwia wymianę komunikatów HSRP."
+    },
+    {
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "id": "ccna.fhrp.practice.compare-10.1.card",
+      "front_md": "**Zgłoszenie I**\n\nHost wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2.\n\n**Zgłoszenie II**\n\nR1 działa w HSRP group 10, R2 w group 20; projekt zakłada jedną grupę i wspólny VIP.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "back_md": "**Zgłoszenie I:** Host omija wirtualną bramę redundancji. Ustawić na hoście lub w DHCP adres wirtualny grupy.\n\n**Sprawdzenie I:** Po wyłączeniu R1 host nadal używa tego samego VIP i uzyskuje łączność przez R2.\n\n**Zgłoszenie II:** Routery nie uczestniczą w tej samej grupie redundancji. Ujednolicić grupę, VIP i pozostałe parametry na wspólnym LAN.\n\n**Sprawdzenie II:** Show standby pokazuje jedną parę Active/Standby dla zamierzonej grupy.\n\n**Zależności:** Korzyść FHRP wymaga użycia adresu wirtualnego przez klientów. Wspólna usługa wirtualnej bramy wymaga zgodnego członkostwa grupy.",
+      "example": "I — Host omija wirtualną bramę redundancji.\n\nII — Routery nie uczestniczą w tej samej grupie redundancji."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.fhrp.practice.compare-01.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 1 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2.\n\n**Zgłoszenie II**\n\nR1 o wyższym priorytecie wrócił po awarii, lecz aktywnym pozostaje R2. Preempt jest wyłączone.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Host omija wirtualną bramę redundancji. Ustawić na hoście lub w DHCP adres wirtualny grupy.\n\n**Sprawdzenie I:** Po wyłączeniu R1 host nadal używa tego samego VIP i uzyskuje łączność przez R2.\n\n**Zgłoszenie II:** Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt. Włączyć preempt z odpowiednią zwłoką, jeżeli projekt wymaga powrotu roli do R1.\n\n**Sprawdzenie II:** Po spełnieniu warunków preempt R1 odzyskuje rolę Active.\n\n**Zależności:** Korzyść FHRP wymaga użycia adresu wirtualnego przez klientów. Priorytet i możliwość przejęcia działającej roli to różne ustawienia HSRP.",
+      "card_id": "ccna.fhrp.practice.compare-01.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.\n\nII — Host omija wirtualną bramę redundancji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Host omija wirtualną bramę redundancji. Zgłoszenie II: Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.",
+          "feedback_md": "**Zgłoszenie I:** Host omija wirtualną bramę redundancji. Ustawić na hoście lub w DHCP adres wirtualny grupy.\n\n**Sprawdzenie I:** Po wyłączeniu R1 host nadal używa tego samego VIP i uzyskuje łączność przez R2.\n\n**Zgłoszenie II:** Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt. Włączyć preempt z odpowiednią zwłoką, jeżeli projekt wymaga powrotu roli do R1.\n\n**Sprawdzenie II:** Po spełnieniu warunków preempt R1 odzyskuje rolę Active.\n\n**Zależności:** Korzyść FHRP wymaga użycia adresu wirtualnego przez klientów. Priorytet i możliwość przejęcia działającej roli to różne ustawienia HSRP.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — Grupa nie obserwuje awarii ścieżki poza LAN.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 nadal jest Active po utracie WAN, bo jego interfejs LAN pozostaje up i nie ma trackingu. Dla II: Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Grupa nie obserwuje awarii ścieżki poza LAN.\n\nII — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 nadal jest Active po utracie WAN, bo jego interfejs LAN pozostaje up i nie ma trackingu. Dla I: Host omija wirtualną bramę redundancji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.fhrp.practice.compare-02.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 2 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 nadal jest Active po utracie WAN, bo jego interfejs LAN pozostaje up i nie ma trackingu.\n\n**Zgłoszenie II**\n\nR1 działa w HSRP group 10, R2 w group 20; projekt zakłada jedną grupę i wspólny VIP.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Grupa nie obserwuje awarii ścieżki poza LAN. Powiązać właściwy obiekt track ze spadkiem priorytetu wystarczającym do przełączenia.\n\n**Sprawdzenie I:** Awaria WAN obniża efektywny priorytet i zdrowy router przejmuje rolę zgodnie z preempt.\n\n**Zgłoszenie II:** Routery nie uczestniczą w tej samej grupie redundancji. Ujednolicić grupę, VIP i pozostałe parametry na wspólnym LAN.\n\n**Sprawdzenie II:** Show standby pokazuje jedną parę Active/Standby dla zamierzonej grupy.\n\n**Zależności:** FHRP samo w sobie nie sprawdza całej drogi do usług zewnętrznych. Wspólna usługa wirtualnej bramy wymaga zgodnego członkostwa grupy.",
+      "card_id": "ccna.fhrp.practice.compare-02.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Routery nie uczestniczą w tej samej grupie redundancji.\n\nII — Grupa nie obserwuje awarii ścieżki poza LAN.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Grupa nie obserwuje awarii ścieżki poza LAN. Zgłoszenie II: Routery nie uczestniczą w tej samej grupie redundancji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Grupa nie obserwuje awarii ścieżki poza LAN.\n\nII — Host omija wirtualną bramę redundancji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2. Dla II: Routery nie uczestniczą w tej samej grupie redundancji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Grupa nie obserwuje awarii ścieżki poza LAN.\n\nII — Routery nie uczestniczą w tej samej grupie redundancji.",
+          "feedback_md": "**Zgłoszenie I:** Grupa nie obserwuje awarii ścieżki poza LAN. Powiązać właściwy obiekt track ze spadkiem priorytetu wystarczającym do przełączenia.\n\n**Sprawdzenie I:** Awaria WAN obniża efektywny priorytet i zdrowy router przejmuje rolę zgodnie z preempt.\n\n**Zgłoszenie II:** Routery nie uczestniczą w tej samej grupie redundancji. Ujednolicić grupę, VIP i pozostałe parametry na wspólnym LAN.\n\n**Sprawdzenie II:** Show standby pokazuje jedną parę Active/Standby dla zamierzonej grupy.\n\n**Zależności:** FHRP samo w sobie nie sprawdza całej drogi do usług zewnętrznych. Wspólna usługa wirtualnej bramy wymaga zgodnego członkostwa grupy.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — Routery nie uczestniczą w tej samej grupie redundancji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2. Dla I: Grupa nie obserwuje awarii ścieżki poza LAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.fhrp.practice.compare-03.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 3 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 i R2 utraciły wzajemne Hello przez uszkodzony trunk. Oba widzą swoje lokalne hosty i stają się Active.\n\n**Zgłoszenie II**\n\nPo prawidłowym przełączeniu Active adres wirtualny nie zmienił się, choć fizyczny router jest inny.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Podział domeny L2 uniemożliwia wymianę komunikatów HSRP. Przywrócić transport właściwego VLAN i komunikatów grupy między routerami.\n\n**Sprawdzenie I:** Po połączeniu domeny routery znów uzgadniają pojedynczą rolę Active.\n\n**Zgłoszenie II:** FHRP zachowuje tożsamość wirtualnej bramy. Sprawdzić rolę nowego Active i ruch przez VIP bez zmiany adresacji hostów.\n\n**Sprawdzenie II:** Hosty nadal wysyłają do dotychczasowego VIP przez nowy aktywny router.\n\n**Zależności:** Brak Hello może oznaczać awarię transportu między członkami, nie tylko awarię routera. Adres wirtualny uniezależnia konfigurację klienta od aktualnego routera obsługującego bramę.",
+      "card_id": "ccna.fhrp.practice.compare-03.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — FHRP zachowuje tożsamość wirtualnej bramy.\n\nII — Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Podział domeny L2 uniemożliwia wymianę komunikatów HSRP. Zgłoszenie II: FHRP zachowuje tożsamość wirtualnej bramy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.\n\nII — Host omija wirtualną bramę redundancji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2. Dla II: FHRP zachowuje tożsamość wirtualnej bramy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — FHRP zachowuje tożsamość wirtualnej bramy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2. Dla I: Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.\n\nII — FHRP zachowuje tożsamość wirtualnej bramy.",
+          "feedback_md": "**Zgłoszenie I:** Podział domeny L2 uniemożliwia wymianę komunikatów HSRP. Przywrócić transport właściwego VLAN i komunikatów grupy między routerami.\n\n**Sprawdzenie I:** Po połączeniu domeny routery znów uzgadniają pojedynczą rolę Active.\n\n**Zgłoszenie II:** FHRP zachowuje tożsamość wirtualnej bramy. Sprawdzić rolę nowego Active i ruch przez VIP bez zmiany adresacji hostów.\n\n**Sprawdzenie II:** Hosty nadal wysyłają do dotychczasowego VIP przez nowy aktywny router.\n\n**Zależności:** Brak Hello może oznaczać awarię transportu między członkami, nie tylko awarię routera. Adres wirtualny uniezależnia konfigurację klienta od aktualnego routera obsługującego bramę.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.fhrp.practice.compare-04.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 4 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2.\n\n**Zgłoszenie II**\n\nR1 nadal jest Active po utracie WAN, bo jego interfejs LAN pozostaje up i nie ma trackingu.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Host omija wirtualną bramę redundancji. Ustawić na hoście lub w DHCP adres wirtualny grupy.\n\n**Sprawdzenie I:** Po wyłączeniu R1 host nadal używa tego samego VIP i uzyskuje łączność przez R2.\n\n**Zgłoszenie II:** Grupa nie obserwuje awarii ścieżki poza LAN. Powiązać właściwy obiekt track ze spadkiem priorytetu wystarczającym do przełączenia.\n\n**Sprawdzenie II:** Awaria WAN obniża efektywny priorytet i zdrowy router przejmuje rolę zgodnie z preempt.\n\n**Zależności:** Korzyść FHRP wymaga użycia adresu wirtualnego przez klientów. FHRP samo w sobie nie sprawdza całej drogi do usług zewnętrznych.",
+      "card_id": "ccna.fhrp.practice.compare-04.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — Grupa nie obserwuje awarii ścieżki poza LAN.",
+          "feedback_md": "**Zgłoszenie I:** Host omija wirtualną bramę redundancji. Ustawić na hoście lub w DHCP adres wirtualny grupy.\n\n**Sprawdzenie I:** Po wyłączeniu R1 host nadal używa tego samego VIP i uzyskuje łączność przez R2.\n\n**Zgłoszenie II:** Grupa nie obserwuje awarii ścieżki poza LAN. Powiązać właściwy obiekt track ze spadkiem priorytetu wystarczającym do przełączenia.\n\n**Sprawdzenie II:** Awaria WAN obniża efektywny priorytet i zdrowy router przejmuje rolę zgodnie z preempt.\n\n**Zależności:** Korzyść FHRP wymaga użycia adresu wirtualnego przez klientów. FHRP samo w sobie nie sprawdza całej drogi do usług zewnętrznych.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Grupa nie obserwuje awarii ścieżki poza LAN.\n\nII — Host omija wirtualną bramę redundancji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Host omija wirtualną bramę redundancji. Zgłoszenie II: Grupa nie obserwuje awarii ścieżki poza LAN.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 o wyższym priorytecie wrócił po awarii, lecz aktywnym pozostaje R2. Preempt jest wyłączone. Dla II: Grupa nie obserwuje awarii ścieżki poza LAN.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.\n\nII — Grupa nie obserwuje awarii ścieżki poza LAN.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 o wyższym priorytecie wrócił po awarii, lecz aktywnym pozostaje R2. Preempt jest wyłączone. Dla I: Host omija wirtualną bramę redundancji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.fhrp.practice.compare-05.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 5 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 o wyższym priorytecie wrócił po awarii, lecz aktywnym pozostaje R2. Preempt jest wyłączone.\n\n**Zgłoszenie II**\n\nR1 i R2 utraciły wzajemne Hello przez uszkodzony trunk. Oba widzą swoje lokalne hosty i stają się Active.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt. Włączyć preempt z odpowiednią zwłoką, jeżeli projekt wymaga powrotu roli do R1.\n\n**Sprawdzenie I:** Po spełnieniu warunków preempt R1 odzyskuje rolę Active.\n\n**Zgłoszenie II:** Podział domeny L2 uniemożliwia wymianę komunikatów HSRP. Przywrócić transport właściwego VLAN i komunikatów grupy między routerami.\n\n**Sprawdzenie II:** Po połączeniu domeny routery znów uzgadniają pojedynczą rolę Active.\n\n**Zależności:** Priorytet i możliwość przejęcia działającej roli to różne ustawienia HSRP. Brak Hello może oznaczać awarię transportu między członkami, nie tylko awarię routera.",
+      "card_id": "ccna.fhrp.practice.compare-05.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.\n\nII — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt. Zgłoszenie II: Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.\n\nII — Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.",
+          "feedback_md": "**Zgłoszenie I:** Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt. Włączyć preempt z odpowiednią zwłoką, jeżeli projekt wymaga powrotu roli do R1.\n\n**Sprawdzenie I:** Po spełnieniu warunków preempt R1 odzyskuje rolę Active.\n\n**Zgłoszenie II:** Podział domeny L2 uniemożliwia wymianę komunikatów HSRP. Przywrócić transport właściwego VLAN i komunikatów grupy między routerami.\n\n**Sprawdzenie II:** Po połączeniu domeny routery znów uzgadniają pojedynczą rolę Active.\n\n**Zależności:** Priorytet i możliwość przejęcia działającej roli to różne ustawienia HSRP. Brak Hello może oznaczać awarię transportu między członkami, nie tylko awarię routera.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.\n\nII — Host omija wirtualną bramę redundancji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2. Dla II: Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2. Dla I: Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.fhrp.practice.compare-06.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 6 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 działa w HSRP group 10, R2 w group 20; projekt zakłada jedną grupę i wspólny VIP.\n\n**Zgłoszenie II**\n\nPo prawidłowym przełączeniu Active adres wirtualny nie zmienił się, choć fizyczny router jest inny.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Routery nie uczestniczą w tej samej grupie redundancji. Ujednolicić grupę, VIP i pozostałe parametry na wspólnym LAN.\n\n**Sprawdzenie I:** Show standby pokazuje jedną parę Active/Standby dla zamierzonej grupy.\n\n**Zgłoszenie II:** FHRP zachowuje tożsamość wirtualnej bramy. Sprawdzić rolę nowego Active i ruch przez VIP bez zmiany adresacji hostów.\n\n**Sprawdzenie II:** Hosty nadal wysyłają do dotychczasowego VIP przez nowy aktywny router.\n\n**Zależności:** Wspólna usługa wirtualnej bramy wymaga zgodnego członkostwa grupy. Adres wirtualny uniezależnia konfigurację klienta od aktualnego routera obsługującego bramę.",
+      "card_id": "ccna.fhrp.practice.compare-06.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — FHRP zachowuje tożsamość wirtualnej bramy.\n\nII — Routery nie uczestniczą w tej samej grupie redundancji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Routery nie uczestniczą w tej samej grupie redundancji. Zgłoszenie II: FHRP zachowuje tożsamość wirtualnej bramy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Routery nie uczestniczą w tej samej grupie redundancji.\n\nII — Host omija wirtualną bramę redundancji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2. Dla II: FHRP zachowuje tożsamość wirtualnej bramy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Routery nie uczestniczą w tej samej grupie redundancji.\n\nII — FHRP zachowuje tożsamość wirtualnej bramy.",
+          "feedback_md": "**Zgłoszenie I:** Routery nie uczestniczą w tej samej grupie redundancji. Ujednolicić grupę, VIP i pozostałe parametry na wspólnym LAN.\n\n**Sprawdzenie I:** Show standby pokazuje jedną parę Active/Standby dla zamierzonej grupy.\n\n**Zgłoszenie II:** FHRP zachowuje tożsamość wirtualnej bramy. Sprawdzić rolę nowego Active i ruch przez VIP bez zmiany adresacji hostów.\n\n**Sprawdzenie II:** Hosty nadal wysyłają do dotychczasowego VIP przez nowy aktywny router.\n\n**Zależności:** Wspólna usługa wirtualnej bramy wymaga zgodnego członkostwa grupy. Adres wirtualny uniezależnia konfigurację klienta od aktualnego routera obsługującego bramę.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — FHRP zachowuje tożsamość wirtualnej bramy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2. Dla I: Routery nie uczestniczą w tej samej grupie redundancji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    },
+    {
+      "id": "ccna.fhrp.practice.compare-07.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 7 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2.\n\n**Zgłoszenie II**\n\nPo prawidłowym przełączeniu Active adres wirtualny nie zmienił się, choć fizyczny router jest inny.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Host omija wirtualną bramę redundancji. Ustawić na hoście lub w DHCP adres wirtualny grupy.\n\n**Sprawdzenie I:** Po wyłączeniu R1 host nadal używa tego samego VIP i uzyskuje łączność przez R2.\n\n**Zgłoszenie II:** FHRP zachowuje tożsamość wirtualnej bramy. Sprawdzić rolę nowego Active i ruch przez VIP bez zmiany adresacji hostów.\n\n**Sprawdzenie II:** Hosty nadal wysyłają do dotychczasowego VIP przez nowy aktywny router.\n\n**Zależności:** Korzyść FHRP wymaga użycia adresu wirtualnego przez klientów. Adres wirtualny uniezależnia konfigurację klienta od aktualnego routera obsługującego bramę.",
+      "card_id": "ccna.fhrp.practice.compare-07.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — FHRP zachowuje tożsamość wirtualnej bramy.\n\nII — Host omija wirtualną bramę redundancji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Host omija wirtualną bramę redundancji. Zgłoszenie II: FHRP zachowuje tożsamość wirtualnej bramy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 o wyższym priorytecie wrócił po awarii, lecz aktywnym pozostaje R2. Preempt jest wyłączone. Dla II: FHRP zachowuje tożsamość wirtualnej bramy.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.\n\nII — FHRP zachowuje tożsamość wirtualnej bramy.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 o wyższym priorytecie wrócił po awarii, lecz aktywnym pozostaje R2. Preempt jest wyłączone. Dla I: Host omija wirtualną bramę redundancji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — FHRP zachowuje tożsamość wirtualnej bramy.",
+          "feedback_md": "**Zgłoszenie I:** Host omija wirtualną bramę redundancji. Ustawić na hoście lub w DHCP adres wirtualny grupy.\n\n**Sprawdzenie I:** Po wyłączeniu R1 host nadal używa tego samego VIP i uzyskuje łączność przez R2.\n\n**Zgłoszenie II:** FHRP zachowuje tożsamość wirtualnej bramy. Sprawdzić rolę nowego Active i ruch przez VIP bez zmiany adresacji hostów.\n\n**Sprawdzenie II:** Hosty nadal wysyłają do dotychczasowego VIP przez nowy aktywny router.\n\n**Zależności:** Korzyść FHRP wymaga użycia adresu wirtualnego przez klientów. Adres wirtualny uniezależnia konfigurację klienta od aktualnego routera obsługującego bramę.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "D"
+    },
+    {
+      "id": "ccna.fhrp.practice.compare-08.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 8 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 o wyższym priorytecie wrócił po awarii, lecz aktywnym pozostaje R2. Preempt jest wyłączone.\n\n**Zgłoszenie II**\n\nR1 działa w HSRP group 10, R2 w group 20; projekt zakłada jedną grupę i wspólny VIP.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt. Włączyć preempt z odpowiednią zwłoką, jeżeli projekt wymaga powrotu roli do R1.\n\n**Sprawdzenie I:** Po spełnieniu warunków preempt R1 odzyskuje rolę Active.\n\n**Zgłoszenie II:** Routery nie uczestniczą w tej samej grupie redundancji. Ujednolicić grupę, VIP i pozostałe parametry na wspólnym LAN.\n\n**Sprawdzenie II:** Show standby pokazuje jedną parę Active/Standby dla zamierzonej grupy.\n\n**Zależności:** Priorytet i możliwość przejęcia działającej roli to różne ustawienia HSRP. Wspólna usługa wirtualnej bramy wymaga zgodnego członkostwa grupy.",
+      "card_id": "ccna.fhrp.practice.compare-08.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.\n\nII — Routery nie uczestniczą w tej samej grupie redundancji.",
+          "feedback_md": "**Zgłoszenie I:** Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt. Włączyć preempt z odpowiednią zwłoką, jeżeli projekt wymaga powrotu roli do R1.\n\n**Sprawdzenie I:** Po spełnieniu warunków preempt R1 odzyskuje rolę Active.\n\n**Zgłoszenie II:** Routery nie uczestniczą w tej samej grupie redundancji. Ujednolicić grupę, VIP i pozostałe parametry na wspólnym LAN.\n\n**Sprawdzenie II:** Show standby pokazuje jedną parę Active/Standby dla zamierzonej grupy.\n\n**Zależności:** Priorytet i możliwość przejęcia działającej roli to różne ustawienia HSRP. Wspólna usługa wirtualnej bramy wymaga zgodnego członkostwa grupy.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Routery nie uczestniczą w tej samej grupie redundancji.\n\nII — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt. Zgłoszenie II: Routery nie uczestniczą w tej samej grupie redundancji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.\n\nII — Host omija wirtualną bramę redundancji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2. Dla II: Routery nie uczestniczą w tej samej grupie redundancji.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — Routery nie uczestniczą w tej samej grupie redundancji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2. Dla I: Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "A"
+    },
+    {
+      "id": "ccna.fhrp.practice.compare-09.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 9 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nR1 nadal jest Active po utracie WAN, bo jego interfejs LAN pozostaje up i nie ma trackingu.\n\n**Zgłoszenie II**\n\nR1 i R2 utraciły wzajemne Hello przez uszkodzony trunk. Oba widzą swoje lokalne hosty i stają się Active.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Grupa nie obserwuje awarii ścieżki poza LAN. Powiązać właściwy obiekt track ze spadkiem priorytetu wystarczającym do przełączenia.\n\n**Sprawdzenie I:** Awaria WAN obniża efektywny priorytet i zdrowy router przejmuje rolę zgodnie z preempt.\n\n**Zgłoszenie II:** Podział domeny L2 uniemożliwia wymianę komunikatów HSRP. Przywrócić transport właściwego VLAN i komunikatów grupy między routerami.\n\n**Sprawdzenie II:** Po połączeniu domeny routery znów uzgadniają pojedynczą rolę Active.\n\n**Zależności:** FHRP samo w sobie nie sprawdza całej drogi do usług zewnętrznych. Brak Hello może oznaczać awarię transportu między członkami, nie tylko awarię routera.",
+      "card_id": "ccna.fhrp.practice.compare-09.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.\n\nII — Grupa nie obserwuje awarii ścieżki poza LAN.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Grupa nie obserwuje awarii ścieżki poza LAN. Zgłoszenie II: Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Grupa nie obserwuje awarii ścieżki poza LAN.\n\nII — Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.",
+          "feedback_md": "**Zgłoszenie I:** Grupa nie obserwuje awarii ścieżki poza LAN. Powiązać właściwy obiekt track ze spadkiem priorytetu wystarczającym do przełączenia.\n\n**Sprawdzenie I:** Awaria WAN obniża efektywny priorytet i zdrowy router przejmuje rolę zgodnie z preempt.\n\n**Zgłoszenie II:** Podział domeny L2 uniemożliwia wymianę komunikatów HSRP. Przywrócić transport właściwego VLAN i komunikatów grupy między routerami.\n\n**Sprawdzenie II:** Po połączeniu domeny routery znów uzgadniają pojedynczą rolę Active.\n\n**Zależności:** FHRP samo w sobie nie sprawdza całej drogi do usług zewnętrznych. Brak Hello może oznaczać awarię transportu między członkami, nie tylko awarię routera.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Grupa nie obserwuje awarii ścieżki poza LAN.\n\nII — Host omija wirtualną bramę redundancji.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: Host wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2. Dla II: Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — Podział domeny L2 uniemożliwia wymianę komunikatów HSRP.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: Host wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2. Dla I: Grupa nie obserwuje awarii ścieżki poza LAN.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "B"
+    },
+    {
+      "id": "ccna.fhrp.practice.compare-10.1",
+      "revision": 1,
+      "title": "Dwa zgłoszenia 10 — rozpoznanie",
+      "skills": [
+        "ccna.fhrp.contrast",
+        "practice.1"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios-xml/ios/ipapp_fhrp/configuration/xe-16-12/fhp-xe-16-12-book/fhp-hsrp.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/13780-6.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — Redundancja bramy — HSRP",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/hot-standby-router-protocol-hsrp/9234-hsrpguidetoc.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "3.5"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "**Zgłoszenie I**\n\nHost wskazuje fizyczny adres R1 zamiast VIP grupy HSRP. Po awarii R1 nie korzysta z działającego R2.\n\n**Zgłoszenie II**\n\nR1 działa w HSRP group 10, R2 w group 20; projekt zakłada jedną grupę i wspólny VIP.\n\nOceń każde zgłoszenie oddzielnie. Które rozpoznanie najlepiej wyjaśnia podane obserwacje? Wybierz parę, w której **oba przypisania** są poprawne.",
+      "hints": [
+        "Nie przenoś rozpoznania z pierwszego zgłoszenia na drugie. Sprawdź osobno wszystkie warunki obu opisów."
+      ],
+      "explanation_md": "**Zgłoszenie I:** Host omija wirtualną bramę redundancji. Ustawić na hoście lub w DHCP adres wirtualny grupy.\n\n**Sprawdzenie I:** Po wyłączeniu R1 host nadal używa tego samego VIP i uzyskuje łączność przez R2.\n\n**Zgłoszenie II:** Routery nie uczestniczą w tej samej grupie redundancji. Ujednolicić grupę, VIP i pozostałe parametry na wspólnym LAN.\n\n**Sprawdzenie II:** Show standby pokazuje jedną parę Active/Standby dla zamierzonej grupy.\n\n**Zależności:** Korzyść FHRP wymaga użycia adresu wirtualnego przez klientów. Wspólna usługa wirtualnej bramy wymaga zgodnego członkostwa grupy.",
+      "card_id": "ccna.fhrp.practice.compare-10.1.card",
+      "type": "single_choice",
+      "options": [
+        {
+          "text_md": "I — Routery nie uczestniczą w tej samej grupie redundancji.\n\nII — Host omija wirtualną bramę redundancji.",
+          "feedback_md": "Zamieniono przypisania. Zgłoszenie I: Host omija wirtualną bramę redundancji. Zgłoszenie II: Routery nie uczestniczą w tej samej grupie redundancji.",
+          "id": "A"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.",
+          "feedback_md": "Pierwsze przypisanie pasuje, ale drugie dotyczy innego przypadku: R1 o wyższym priorytecie wrócił po awarii, lecz aktywnym pozostaje R2. Preempt jest wyłączone. Dla II: Routery nie uczestniczą w tej samej grupie redundancji.",
+          "id": "B"
+        },
+        {
+          "text_md": "I — Host omija wirtualną bramę redundancji.\n\nII — Routery nie uczestniczą w tej samej grupie redundancji.",
+          "feedback_md": "**Zgłoszenie I:** Host omija wirtualną bramę redundancji. Ustawić na hoście lub w DHCP adres wirtualny grupy.\n\n**Sprawdzenie I:** Po wyłączeniu R1 host nadal używa tego samego VIP i uzyskuje łączność przez R2.\n\n**Zgłoszenie II:** Routery nie uczestniczą w tej samej grupie redundancji. Ujednolicić grupę, VIP i pozostałe parametry na wspólnym LAN.\n\n**Sprawdzenie II:** Show standby pokazuje jedną parę Active/Standby dla zamierzonej grupy.\n\n**Zależności:** Korzyść FHRP wymaga użycia adresu wirtualnego przez klientów. Wspólna usługa wirtualnej bramy wymaga zgodnego członkostwa grupy.",
+          "id": "C"
+        },
+        {
+          "text_md": "I — Wyższy priorytet nie powoduje automatycznego odebrania aktywnej roli bez preempt.\n\nII — Routery nie uczestniczą w tej samej grupie redundancji.",
+          "feedback_md": "Drugie przypisanie pasuje, ale pierwsze dotyczy innego przypadku: R1 o wyższym priorytecie wrócił po awarii, lecz aktywnym pozostaje R2. Preempt jest wyłączone. Dla I: Host omija wirtualną bramę redundancji.",
+          "id": "D"
+        }
+      ],
+      "correct_option_id": "C"
+    }
+  ]
+}

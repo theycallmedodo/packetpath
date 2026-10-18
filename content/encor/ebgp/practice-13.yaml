@@ -1,0 +1,485 @@
+{
+  "schema_version": 3,
+  "id": "encor.ebgp.practice-13",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Peering bezpośredni",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.cli-01.card",
+      "front_md": "R1 ma AS 65001. Zaufany peer 192.0.2.2 należy do AS 65002. Wpisz pełne polecenia wejścia w proces i definicji peera; rozpocznij w config.",
+      "back_md": "Lokalny AS jest parametrem procesu, a zdalny AS parametrem neighbor.",
+      "example": "router bgp 65001\nneighbor 192.0.2.2 remote-as 65002"
+    },
+    {
+      "revision": 1,
+      "title": "Originowanie /24",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.cli-02.card",
+      "front_md": "Jesteś w config-router BGP. W RIB istnieje dokładna i działająca trasa 10.44.0.0/24. Wpisz pełne polecenie network z jawną maską.",
+      "back_md": "BGP network wymaga maski podsieci i dokładnej trasy w RIB.",
+      "example": "network 10.44.0.0 mask 255.255.255.0"
+    },
+    {
+      "revision": 1,
+      "title": "Lokalny weight",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.cli-03.card",
+      "front_md": "W config-router ustaw dla sąsiada 192.0.2.2 lokalny weight 200. Wpisz pełną komendę.",
+      "back_md": "Weight zmienia preferencję wyłącznie na tym routerze.",
+      "example": "neighbor 192.0.2.2 weight 200"
+    },
+    {
+      "revision": 1,
+      "title": "Źródło Loopback0",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.cli-04.card",
+      "front_md": "W config-router ustaw Loopback0 jako źródło sesji do 10.0.0.2. Podaj pełną nazwę interfejsu.",
+      "back_md": "Update-source wybiera źródło, ale nie zapewnia routingu do zdalnego loopbacku.",
+      "example": "neighbor 10.0.0.2 update-source Loopback0"
+    },
+    {
+      "revision": 1,
+      "title": "Zasięg eBGP",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.cli-05.card",
+      "front_md": "Peering do 10.0.0.2 przechodzi przez kilka skoków. Projekt wymaga TTL 5, bez TTL security. W config-router wpisz komendę multihop.",
+      "back_md": "TTL musi wystarczyć dla zaplanowanej drogi; ustawienie nie tworzy tras.",
+      "example": "neighbor 10.0.0.2 ebgp-multihop 5"
+    },
+    {
+      "revision": 1,
+      "title": "Aktywacja IPv4",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "id": "encor.ebgp.practice.cli-06.card",
+      "front_md": "Jesteś w config-router. Domyślne IPv4-unicast jest wyłączone, neighbor już istnieje. Wejdź do address-family ipv4 unicast i aktywuj 192.0.2.2.",
+      "back_md": "Rodzinę adresową aktywuje się niezależnie od definicji sąsiada.",
+      "example": "address-family ipv4 unicast\nneighbor 192.0.2.2 activate"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "encor.ebgp.practice.cli-01",
+      "revision": 1,
+      "title": "Peering bezpośredni",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "R1 ma AS 65001. Zaufany peer 192.0.2.2 należy do AS 65002. Wpisz pełne polecenia wejścia w proces i definicji peera; rozpocznij w config. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Lokalny AS jest parametrem procesu, a zdalny AS parametrem neighbor.",
+      "card_id": "encor.ebgp.practice.cli-01.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}\n{{cmd1}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "router bgp 65001"
+          ],
+          "width": 18,
+          "common_errors": {}
+        },
+        {
+          "id": "cmd1",
+          "label": "Pełna komenda 2",
+          "answer_type": "command",
+          "accepted": [
+            "neighbor 192.0.2.2 remote-as 65002"
+          ],
+          "width": 36,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.practice.cli-02",
+      "revision": 1,
+      "title": "Originowanie /24",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Jesteś w config-router BGP. W RIB istnieje dokładna i działająca trasa 10.44.0.0/24. Wpisz pełne polecenie network z jawną maską. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "BGP network wymaga maski podsieci i dokładnej trasy w RIB.",
+      "card_id": "encor.ebgp.practice.cli-02.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "network 10.44.0.0 mask 255.255.255.0"
+          ],
+          "width": 38,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.practice.cli-03",
+      "revision": 1,
+      "title": "Lokalny weight",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W config-router ustaw dla sąsiada 192.0.2.2 lokalny weight 200. Wpisz pełną komendę. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Weight zmienia preferencję wyłącznie na tym routerze.",
+      "card_id": "encor.ebgp.practice.cli-03.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "neighbor 192.0.2.2 weight 200"
+          ],
+          "width": 31,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.practice.cli-04",
+      "revision": 1,
+      "title": "Źródło Loopback0",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W config-router ustaw Loopback0 jako źródło sesji do 10.0.0.2. Podaj pełną nazwę interfejsu. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Update-source wybiera źródło, ale nie zapewnia routingu do zdalnego loopbacku.",
+      "card_id": "encor.ebgp.practice.cli-04.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "neighbor 10.0.0.2 update-source Loopback0"
+          ],
+          "width": 43,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.practice.cli-05",
+      "revision": 1,
+      "title": "Zasięg eBGP",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Peering do 10.0.0.2 przechodzi przez kilka skoków. Projekt wymaga TTL 5, bez TTL security. W config-router wpisz komendę multihop. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "TTL musi wystarczyć dla zaplanowanej drogi; ustawienie nie tworzy tras.",
+      "card_id": "encor.ebgp.practice.cli-05.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "neighbor 10.0.0.2 ebgp-multihop 5"
+          ],
+          "width": 35,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "encor.ebgp.practice.cli-06",
+      "revision": 1,
+      "title": "Aktywacja IPv4",
+      "skills": [
+        "encor.ebgp.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Dokumentacja Cisco — eBGP — sąsiedztwo i wybór trasy",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/13753-25.html"
+        },
+        {
+          "title": "Cisco — BGP case studies",
+          "url": "https://www.cisco.com/c/en/us/support/docs/ip/border-gateway-protocol-bgp/26634-bgp-toc.html"
+        },
+        {
+          "title": "Cisco — BGP command reference",
+          "url": "https://www.cisco.com/c/en/us/td/docs/ios/iproute_bgp/command/reference/irg_book/irg_bgp3.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "350-401",
+          "version": "1.2",
+          "objective": "3.2.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Jesteś w config-router. Domyślne IPv4-unicast jest wyłączone, neighbor już istnieje. Wejdź do address-family ipv4 unicast i aktywuj 192.0.2.2. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Rodzinę adresową aktywuje się niezależnie od definicji sąsiada.",
+      "card_id": "encor.ebgp.practice.cli-06.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}\n{{cmd1}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "address-family ipv4 unicast"
+          ],
+          "width": 29,
+          "common_errors": {}
+        },
+        {
+          "id": "cmd1",
+          "label": "Pełna komenda 2",
+          "answer_type": "command",
+          "accepted": [
+            "neighbor 192.0.2.2 activate"
+          ],
+          "width": 29,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,651 @@
+{
+  "schema_version": 3,
+  "id": "ccna.vlan.practice-10",
+  "revision": 1,
+  "cards": [
+    {
+      "revision": 1,
+      "title": "Voice plus data",
+      "skills": [
+        "ccna.vlan.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.cli-07.card",
+      "front_md": "W config-if portu telefonu z komputerem ustaw data VLAN 20 i voice VLAN 30. Port jest już access, oba VLAN istnieją.",
+      "back_md": "Dane i głos otrzymują osobne przypisania na obsługiwanym porcie access.",
+      "example": "switchport access vlan 20\nswitchport voice vlan 30"
+    },
+    {
+      "revision": 1,
+      "title": "Brama SVI",
+      "skills": [
+        "ccna.vlan.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.cli-08.card",
+      "front_md": "Jesteś w config-if interfejsu Vlan30. Ustaw 10.30.0.1/24 i administracyjnie podnieś SVI. Routing i aktywny VLAN są przygotowane.",
+      "back_md": "SVI wymaga adresacji i aktywności; jego stan zależy również od warstwy drugiej.",
+      "example": "ip address 10.30.0.1 255.255.255.0\nno shutdown"
+    },
+    {
+      "revision": 1,
+      "title": "Subinterfejs routera",
+      "skills": [
+        "ccna.vlan.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.cli-09.card",
+      "front_md": "W config-subif GigabitEthernet0/0.30 ustaw tag VLAN 30 i adres bramy 10.30.0.1/24. Interfejs rodzic jest up.",
+      "back_md": "Tag subinterfejsu musi odpowiadać VLAN przesyłanemu przez trunk.",
+      "example": "encapsulation dot1Q 30\nip address 10.30.0.1 255.255.255.0"
+    },
+    {
+      "revision": 1,
+      "title": "Włączenie L3",
+      "skills": [
+        "ccna.vlan.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.cli-10.card",
+      "front_md": "Switch wspiera routing między SVI. W trybie config włącz globalnie routing IPv4 jedną pełną komendą.",
+      "back_md": "Adresy SVI nie zastępują globalnego włączenia funkcji routingu.",
+      "example": "ip routing"
+    },
+    {
+      "revision": 1,
+      "title": "Sprawdzenie trunków",
+      "skills": [
+        "ccna.vlan.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.cli-11.card",
+      "front_md": "W EXEC wyświetl podsumowanie działających trunków, ich native i list allowed. Użyj klasycznej komendy show interfaces.",
+      "back_md": "Podsumowanie rozróżnia allowed, active oraz forwarding/not pruned.",
+      "example": "show interfaces trunk"
+    },
+    {
+      "revision": 1,
+      "title": "Sprawdzenie VLAN",
+      "skills": [
+        "ccna.vlan.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "id": "ccna.vlan.practice.cli-12.card",
+      "front_md": "W EXEC wyświetl zwięzłą tabelę lokalnych VLAN i portów access poleceniem show vlan.",
+      "back_md": "Baza VLAN potwierdza lokalną obecność segmentu, ale nie całą ścieżkę trunków.",
+      "example": "show vlan brief"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "ccna.vlan.practice.cli-07",
+      "revision": 1,
+      "title": "Voice plus data",
+      "skills": [
+        "ccna.vlan.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W config-if portu telefonu z komputerem ustaw data VLAN 20 i voice VLAN 30. Port jest już access, oba VLAN istnieją. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Dane i głos otrzymują osobne przypisania na obsługiwanym porcie access.",
+      "card_id": "ccna.vlan.practice.cli-07.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}\n{{cmd1}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "switchport access vlan 20"
+          ],
+          "width": 27,
+          "common_errors": {}
+        },
+        {
+          "id": "cmd1",
+          "label": "Pełna komenda 2",
+          "answer_type": "command",
+          "accepted": [
+            "switchport voice vlan 30"
+          ],
+          "width": 26,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.practice.cli-08",
+      "revision": 1,
+      "title": "Brama SVI",
+      "skills": [
+        "ccna.vlan.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Jesteś w config-if interfejsu Vlan30. Ustaw 10.30.0.1/24 i administracyjnie podnieś SVI. Routing i aktywny VLAN są przygotowane. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "SVI wymaga adresacji i aktywności; jego stan zależy również od warstwy drugiej.",
+      "card_id": "ccna.vlan.practice.cli-08.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}\n{{cmd1}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "ip address 10.30.0.1 255.255.255.0"
+          ],
+          "width": 36,
+          "common_errors": {}
+        },
+        {
+          "id": "cmd1",
+          "label": "Pełna komenda 2",
+          "answer_type": "command",
+          "accepted": [
+            "no shutdown"
+          ],
+          "width": 16,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.practice.cli-09",
+      "revision": 1,
+      "title": "Subinterfejs routera",
+      "skills": [
+        "ccna.vlan.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W config-subif GigabitEthernet0/0.30 ustaw tag VLAN 30 i adres bramy 10.30.0.1/24. Interfejs rodzic jest up. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Tag subinterfejsu musi odpowiadać VLAN przesyłanemu przez trunk.",
+      "card_id": "ccna.vlan.practice.cli-09.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}\n{{cmd1}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "encapsulation dot1Q 30"
+          ],
+          "width": 24,
+          "common_errors": {}
+        },
+        {
+          "id": "cmd1",
+          "label": "Pełna komenda 2",
+          "answer_type": "command",
+          "accepted": [
+            "ip address 10.30.0.1 255.255.255.0"
+          ],
+          "width": 36,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.practice.cli-10",
+      "revision": 1,
+      "title": "Włączenie L3",
+      "skills": [
+        "ccna.vlan.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "Switch wspiera routing między SVI. W trybie config włącz globalnie routing IPv4 jedną pełną komendą. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Adresy SVI nie zastępują globalnego włączenia funkcji routingu.",
+      "card_id": "ccna.vlan.practice.cli-10.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "ip routing"
+          ],
+          "width": 16,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.practice.cli-11",
+      "revision": 1,
+      "title": "Sprawdzenie trunków",
+      "skills": [
+        "ccna.vlan.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W EXEC wyświetl podsumowanie działających trunków, ich native i list allowed. Użyj klasycznej komendy show interfaces. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Podsumowanie rozróżnia allowed, active oraz forwarding/not pruned.",
+      "card_id": "ccna.vlan.practice.cli-11.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "show interfaces trunk"
+          ],
+          "width": 23,
+          "common_errors": {}
+        }
+      ]
+    },
+    {
+      "id": "ccna.vlan.practice.cli-12",
+      "revision": 1,
+      "title": "Sprawdzenie VLAN",
+      "skills": [
+        "ccna.vlan.cli-practice"
+      ],
+      "sources": [
+        {
+          "title": "Cisco — Configuring VLANs",
+          "url": "https://spg.xgslb-v3.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan.html"
+        },
+        {
+          "title": "Cisco — VLAN i trunk 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/c9000/lyr2-fwd/vlan/vlan-configuration-guide/configure-vlan-trunks.html"
+        },
+        {
+          "title": "Cisco — Routing Between VLANs with IEEE 802.1Q",
+          "url": "https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/lan-wan/lan-wan/m_lnsw-conf-vlan-ieee.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3650/software/release/16-12/command_reference/b_1612_3650_cr/layer_2_3_commands.html"
+        },
+        {
+          "title": "Dokumentacja Cisco — VLAN — głos, SVI i diagnostyka trunków",
+          "url": "https://www.cisco.com/c/en/us/td/docs/switches/lan/catalyst3750x_3560x/software/release/15-0_2_se/configuration/guide/3750x_cg/swint.html"
+        }
+      ],
+      "blueprint_refs": [
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.2"
+        },
+        {
+          "exam": "200-301",
+          "version": "1.1",
+          "objective": "2.1.c"
+        }
+      ],
+      "difficulty": 3,
+      "prompt_md": "W EXEC wyświetl zwięzłą tabelę lokalnych VLAN i portów access poleceniem show vlan. Wpisz pełne komendy w podanej kolejności, bez promptu urządzenia.",
+      "hints": [
+        "Zwróć uwagę na podany tryb CLI, kierunek działania i wymaganie zachowania istniejącej konfiguracji."
+      ],
+      "explanation_md": "Baza VLAN potwierdza lokalną obecność segmentu, ale nie całą ścieżkę trunków.",
+      "card_id": "ccna.vlan.practice.cli-12.card",
+      "type": "cli_fill_blank",
+      "platform": "Cisco IOS / IOS XE; składnia wskazana w zadaniu",
+      "template": "{{cmd0}}",
+      "blanks": [
+        {
+          "id": "cmd0",
+          "label": "Pełna komenda 1",
+          "answer_type": "command",
+          "accepted": [
+            "show vlan brief"
+          ],
+          "width": 17,
+          "common_errors": {}
+        }
+      ]
+    }
+  ]
+}
